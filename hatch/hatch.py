@@ -120,8 +120,8 @@ def parse_args():
         '--pairs',  metavar='FEATURE,FEATURE', nargs="+", required=True, type=str,
         help=f'Pairs of features to plot, format: feature1,feature2 (no spaces between feature names, e.g. "pos normalised","tumour depth")')
     scatterparser.add_argument(
-        '--hues',  metavar='FEATURE', type=str, nargs='+',
-        help=f'Name of features (column headings) to use for colouring dots')
+        '--hue',  metavar='FEATURE', type=str, required=False, 
+        help=f'Name of feature (column headings) to use for colouring dots')
     scatterparser.add_argument(
         '--alpha',  metavar='ALPHA', type=float, default=DEFAULT_ALPHA,
         help=f'Alpha value for plotting points (default: {DEFAULT_ALPHA})')
@@ -235,14 +235,12 @@ def scatter_plot(options, df, feature1, feature2):
     plt.suptitle('')
     # XXX this needs to be a parameter
     fig, ax = plt.subplots(figsize=(10,8))
-    #g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=hue, alpha=options.alpha, linewidth=options.linewidth)
-    g=sns.scatterplot(data=df, x=feature1, y=feature2, alpha=options.alpha, linewidth=options.linewidth)
+    g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=options.hue, alpha=options.alpha, linewidth=options.linewidth)
     g.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
     if options.nolegend:
         g.legend_.remove()
     feature1_str = feature1.replace(' ', '_')
     feature2_str = feature2.replace(' ', '_')
-    #hue_str = '' if hue is None else hue
     output_name = get_output_name(options)
     filename = Path('.'.join([output_name, feature1_str, feature2_str, 'scatter.png'])) 
     ax.set(xlabel=feature1, ylabel=feature2)
