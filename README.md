@@ -4,6 +4,11 @@
 
 This program plots tabular data from input CSV (or TSV) files. Output plots are in PNG format. 
 
+Hatch supports the following plot types:
+ * Histograms (regular and cumulative)
+ * Distributions (box plots)
+ * Scatter plots
+
 In the examples below, `$` indicates the command line prompt.
 
 # Licence
@@ -45,7 +50,6 @@ $ pip install -U /path/to/hatch
 $ pip install -U --user /path/to/hatch
 ```
 
-
 ## Building the Docker container 
 
 The file `Dockerfile` contains instructions for building a Docker container for hatch.
@@ -58,6 +62,140 @@ See below for information about running hatch within the Docker container.
 
 # General behaviour
 
+Common parameters:
+
+```
+$ hatch -h
+usage: hatch [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+             [--version] [--log LOG_FILE] [--nolegend]
+             {hist,dist,scatter} ...
+
+Generate plots of tabular data
+
+positional arguments:
+  {hist,dist,scatter}  sub-command help
+    hist               Plot histograms of columns
+    dist               Plot distributions of data
+    scatter            Plot scatter of two numerical columns in data
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --outdir DIR         Name of optional output directory.
+  --filetype FILETYPE  Type of input file
+  --name NAME          Name prefix for output files
+  --version            show program's version number and exit
+  --log LOG_FILE       record program progress in LOG_FILE
+  --nolegend           Turn off the legend in the plot
+```
+
+## Histograms
+
+Plot distributions of selected columns as histograms.
+
+```
+$ hatch hist -h
+usage: hatch hist [-h] --columns FEATURE [FEATURE ...] [--bins NUMBINS]
+                  [--cumulative] [--logy]
+                  DATA
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --columns FEATURE [FEATURE ...]
+                        Columns to plot
+  --bins NUMBINS        Number of bins for histogram (default=100)
+  --cumulative          Generate cumulative histogram
+  --logy                Use a log scale on the vertical axis
+```
+
+For example, plot histograms of selected columns of the example iris.csv dataset using 10 bins. 
+
+```
+$ hatch hist --columns sepal_length sepal_width petal_length petal_width --bins 10 -- iris.csv
+```
+
+Outputs go to:
+
+```
+iris.petal_length.histogram.png
+iris.petal_width.histogram.png
+iris.sepal_length.histogram.png
+iris.sepal_width.histogram.png
+```
+
+## Distributions
+
+```
+$ hatch dist -h
+usage: hatch dist [-h] --columns FEATURE [FEATURE ...]
+                  [--group [FEATURE [FEATURE ...]]] [--logy]
+                  DATA
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --columns FEATURE [FEATURE ...]
+                        Columns to plot
+  --group [FEATURE [FEATURE ...]]
+                        Plot distributions of of the columns where data are
+                        grouped by these features
+  --logy                Use a log scale on the vertical axis
+
+```
+
+For example, plot distributions of selected columns, grouped by their species:
+
+```
+$ hatch dist --columns sepal_length sepal_width petal_length petal_width --group species -- iris.csv
+```
+
+Outputs go to:
+
+```
+iris.petal_length.species.dist.png
+iris.petal_width.species.dist.png
+iris.sepal_length.species.dist.png
+iris.sepal_width.species.dist.png
+```
+
+## Scatter plots
+
+```
+$ hatch scatter -h
+usage: hatch scatter [-h] --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
+                     [--hue FEATURE] [--alpha ALPHA] [--linewidth WIDTH]
+                     DATA
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
+                        Pairs of features to plot, format: feature1,feature2
+                        (no spaces between feature names, e.g. "pos
+                        normalised","tumour depth")
+  --hue FEATURE         Name of feature (column headings) to use for colouring
+                        dots
+  --alpha ALPHA         Alpha value for plotting points (default: 0.3)
+  --linewidth WIDTH     Line width value for plotting points (default: 0)
+```
+
+For example, scatter plots of "sepal_length verus sepal_width", "petal_length versus petal_width" and "sepal_length versus petal_length" with hue indicating species:
+```
+hatch scatter --pairs sepal_length,sepal_width petal_length,petal_width sepal_length,petal_length --hue species -- iris.csv 
+```
+
+Outputs go to:
+```
+iris.petal_length.petal_width.scatter.png
+iris.sepal_length.petal_length.scatter.png
+iris.sepal_length.sepal_width.scatter.png
+```
 
 # Running within the Docker container
 

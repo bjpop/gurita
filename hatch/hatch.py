@@ -91,7 +91,7 @@ def parse_args():
         '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Columns to plot')
     histparser.add_argument(
-        '--bins',  metavar='BINSIZE', required=False, default=DEFAULT_BINS, type=int,
+        '--bins',  metavar='NUMBINS', required=False, default=DEFAULT_BINS, type=int,
         help=f'Number of bins for histogram (default={DEFAULT_BINS})')
     histparser.add_argument(
         '--cumulative', action='store_true',
