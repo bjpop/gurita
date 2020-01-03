@@ -6,8 +6,8 @@ This program plots tabular data from input CSV (or TSV) files. Output plots are 
 
 Hatch supports the following plot types:
  * Histograms (regular and cumulative)
- * Distributions (box plots)
- * Scatter plots
+ * Distributions (box and violin)
+ * Scatter plots (with optional hue)
 
 In the examples below, `$` indicates the command line prompt.
 
@@ -129,8 +129,8 @@ iris.sepal_width.histogram.png
 
 ```
 $ hatch dist -h
-usage: hatch dist [-h] --columns FEATURE [FEATURE ...]
-                  [--group [FEATURE [FEATURE ...]]] [--logy]
+usage: hatch dist [-h] --columns FEATURE [FEATURE ...] --group FEATURE
+                  [FEATURE ...] [--logy] [--type {box,violin}]
                   DATA
 
 positional arguments:
@@ -140,17 +140,18 @@ optional arguments:
   -h, --help            show this help message and exit
   --columns FEATURE [FEATURE ...]
                         Columns to plot
-  --group [FEATURE [FEATURE ...]]
+  --group FEATURE [FEATURE ...]
                         Plot distributions of of the columns where data are
                         grouped by these features
   --logy                Use a log scale on the vertical axis
+  --type {box,violin}   Type of plot, default(box)
 
 ```
 
-For example, plot distributions of selected columns, grouped by their species:
+For example, plot distributions of selected columns, grouped by their species, using violin plots:
 
 ```
-$ hatch dist --columns sepal_length sepal_width petal_length petal_width --group species -- iris.csv
+hatch dist --columns sepal_length sepal_width petal_length petal_width --group species --type violin -- iris.csv
 ```
 
 Outputs go to:

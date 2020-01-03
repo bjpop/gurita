@@ -30,6 +30,8 @@ DEFAULT_LINEWIDTH = 0
 DEFAULT_FILETYPE = 'CSV'
 DEFAULT_BINS = 100
 ALLOWED_FILETYPES = ['CSV', 'TSV']
+DEFAULT_DIST_PLOT_TYPE = 'box'
+ALLOWED_DISTPLOT_TYPES = ['box', 'violin']
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -107,11 +109,14 @@ def parse_args():
         '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Columns to plot')
     distparser.add_argument(
-        '--group',  metavar='FEATURE', nargs="*", required=False, type=str,
+        '--group',  metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Plot distributions of of the columns where data are grouped by these features')
     distparser.add_argument(
         '--logy', action='store_true',
         help=f'Use a log scale on the vertical axis')
+    distparser.add_argument(
+        '--type', choices=ALLOWED_DISTPLOT_TYPES, default=DEFAULT_DIST_PLOT_TYPE,
+        help=f'Type of plot, default({DEFAULT_DIST_PLOT_TYPE})')
     distparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
@@ -202,7 +207,10 @@ def plot_distributions_by(df, options, group):
             plt.clf()
             plt.suptitle('')
             fig, ax = plt.subplots(figsize=(10,8))
-            sns.boxplot(data=df, x=group, y=column) 
+            if options.type == 'box':
+                sns.boxplot(data=df, x=group, y=column) 
+            elif options.type == 'violin':
+                sns.violinplot(data=df, x=group, y=column) 
             output_name = get_output_name(options)
             group_str = group.replace(' ', '_')
             column_str = column.replace(' ', '_')
