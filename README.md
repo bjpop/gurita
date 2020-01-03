@@ -168,7 +168,8 @@ iris.sepal_width.species.dist.png
 ```
 $ hatch scatter -h
 usage: hatch scatter [-h] --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
-                     [--hue FEATURE] [--alpha ALPHA] [--linewidth WIDTH]
+                     [--hue FEATURE] [--size FEATURE] [--alpha ALPHA]
+                     [--linewidth WIDTH]
                      DATA
 
 positional arguments:
@@ -178,10 +179,9 @@ optional arguments:
   -h, --help            show this help message and exit
   --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
                         Pairs of features to plot, format: feature1,feature2
-                        (no spaces between feature names, e.g. "pos
-                        normalised","tumour depth")
   --hue FEATURE         Name of feature (column headings) to use for colouring
                         dots
+  --size FEATURE        Name of feature (column headings) to use for dot size
   --alpha ALPHA         Alpha value for plotting points (default: 0.3)
   --linewidth WIDTH     Line width value for plotting points (default: 0)
 ```

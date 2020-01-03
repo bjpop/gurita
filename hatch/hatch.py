@@ -123,10 +123,13 @@ def parse_args():
     scatterparser = subparsers.add_parser('scatter', help='Plot scatter of two numerical columns in data') 
     scatterparser.add_argument(
         '--pairs',  metavar='FEATURE,FEATURE', nargs="+", required=True, type=str,
-        help=f'Pairs of features to plot, format: feature1,feature2 (no spaces between feature names, e.g. "pos normalised","tumour depth")')
+        help=f'Pairs of features to plot, format: feature1,feature2')
     scatterparser.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature (column headings) to use for colouring dots')
+    scatterparser.add_argument(
+        '--size',  metavar='FEATURE', type=str, required=False, 
+        help=f'Name of feature (column headings) to use for dot size')
     scatterparser.add_argument(
         '--alpha',  metavar='ALPHA', type=float, default=DEFAULT_ALPHA,
         help=f'Alpha value for plotting points (default: {DEFAULT_ALPHA})')
@@ -134,6 +137,19 @@ def parse_args():
         '--linewidth',  metavar='WIDTH', type=int, default=DEFAULT_LINEWIDTH,
         help=f'Line width value for plotting points (default: {DEFAULT_LINEWIDTH})')
     scatterparser.add_argument(
+        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+
+    lineparser = subparsers.add_parser('line', help='Plot line plots of columns') 
+    lineparser.add_argument(
+        '--pairs',  metavar='FEATURE,FEATURE', nargs="+", required=True, type=str,
+        help=f'Pairs of features to plot, format: feature1,feature2')
+    lineparser.add_argument(
+        '--overlay', action='store_true', 
+        help=f'Overlay line plots on the same axes, otherwise make a separate plot for each')
+    lineparser.add_argument(
+        '--logy', action='store_true',
+        help=f'Use a log scale on the vertical axis')
+    lineparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
     return parser.parse_args()
@@ -225,6 +241,32 @@ def plot_distributions_by(df, options, group):
         else:
             logging.warn(f"Column: {column} does not exist in data, skipping")
 
+def line(options, df):
+    for pair in options.pairs:
+        pair_fields = pair.split(",") 
+        if len(pair_fields) == 2:
+            feature1, feature2 = pair_fields
+            line_plot(options, df, feature1, feature2)
+        else:
+            logging.warn(f"Badly formed feature pair: {pair}, must be feature1,feature2 (comma separated, no spaces) ")
+
+def line_plot(options, df, feature1, feature2):
+    plt.clf()
+    plt.suptitle('')
+    fig, ax = plt.subplots(figsize=(10,8))
+    sns.lineplot(data=df, x=feature1, y=feature2, estimator=None) 
+    output_name = get_output_name(options)
+    feature1_str = feature1.replace(' ', '_')
+    feature2_str = feature2.replace(' ', '_')
+    output_name = get_output_name(options)
+    filename = Path('.'.join([output_name, feature1_str, feature2_str, 'line.png'])) 
+    ax.set(xlabel=feature1, ylabel=feature2)
+    if options.logy:
+        ax.set(yscale="log")
+    plt.tight_layout()
+    plt.savefig(filename)
+    plt.close()
+
 
 def scatter(options, df):
     for pair in options.pairs:
@@ -243,7 +285,7 @@ def scatter_plot(options, df, feature1, feature2):
     plt.suptitle('')
     # XXX this needs to be a parameter
     fig, ax = plt.subplots(figsize=(10,8))
-    g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=options.hue, alpha=options.alpha, linewidth=options.linewidth)
+    g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=options.hue, alpha=options.alpha, size=options.size, linewidth=options.linewidth)
     g.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
     if options.nolegend:
         g.legend_.remove()
@@ -273,6 +315,8 @@ def main():
         distribution(options, df)
     elif options.cmd == 'scatter':
         scatter(options, df)
+    elif options.cmd == 'line':
+        line(options, df)
     logging.info("Completed")
 
 
