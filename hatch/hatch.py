@@ -152,6 +152,25 @@ def parse_args():
     lineparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
+    heatmapparser = subparsers.add_parser('heatmap', help='Plot a heatmap of two categories with numerical values') 
+    heatmapparser.add_argument(
+        '--cmap',  metavar='COLOR_MAP_NAME', type=str, 
+        help=f'Use this color map, will use Seaborn default if not specified')
+    heatmapparser.add_argument(
+        '--rows',  metavar='FEATURE', type=str, required=True,
+        help=f'Interpret this feature (column of data) as the rows of the heatmap')
+    heatmapparser.add_argument(
+        '--columns',  metavar='FEATURE', type=str, required=True,
+        help=f'Interpret this feature (column of data) as the columns of the heatmap')
+    heatmapparser.add_argument(
+        '--values',  metavar='FEATURE', type=str, required=True,
+        help=f'Interpret this feature (column of data) as the values of the heatmap')
+    heatmapparser.add_argument(
+        '--log', action='store_true',
+        help=f'Use a log scale on the numerical data')
+    heatmapparser.add_argument(
+        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+
     return parser.parse_args()
 
 
@@ -268,6 +287,19 @@ def line_plot(options, df, feature1, feature2):
     plt.close()
 
 
+def heatmap(options, df):
+    plt.clf()
+    plt.suptitle('')
+    fig, ax = plt.subplots(figsize=(10,8))
+    pivot_data = df.pivot(index=options.rows, columns=options.columns, values=options.values)
+    g=sns.heatmap(data=pivot_data, cmap=options.cmap)
+    output_name = get_output_name(options)
+    filename = Path('.'.join([output_name, options.rows, options.columns, options.values, 'heatmap.png'])) 
+    plt.tight_layout()
+    plt.savefig(filename)
+    plt.close()
+
+
 def scatter(options, df):
     for pair in options.pairs:
         pair_fields = pair.split(",") 
@@ -317,6 +349,8 @@ def main():
         scatter(options, df)
     elif options.cmd == 'line':
         line(options, df)
+    elif options.cmd == 'heatmap':
+        heatmap(options, df)
     logging.info("Completed")
 
 
