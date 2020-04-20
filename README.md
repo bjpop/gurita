@@ -8,6 +8,8 @@ Hatch supports the following plot types:
  * Histograms (regular and cumulative)
  * Distributions (box and violin)
  * Scatter plots (with optional hue)
+ * Line plots
+ * Heatmaps
 
 In the examples below, `$` indicates the command line prompt.
 
@@ -67,25 +69,30 @@ Common parameters:
 ```
 $ hatch -h
 usage: hatch [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-             [--version] [--log LOG_FILE] [--nolegend]
-             {hist,dist,scatter} ...
+             [--version] [--log LOG_FILE] [--nolegend] [--filter EXPR]
+             {hist,dist,scatter,line,heatmap} ...
 
 Generate plots of tabular data
 
 positional arguments:
-  {hist,dist,scatter}  sub-command help
-    hist               Plot histograms of columns
-    dist               Plot distributions of data
-    scatter            Plot scatter of two numerical columns in data
+  {hist,dist,scatter,line,heatmap}
+                        sub-command help
+    hist                Plot histograms of columns
+    dist                Plot distributions of data
+    scatter             Plot scatter of two numerical columns in data
+    line                Plot line plots of columns
+    heatmap             Plot a heatmap of two categories with numerical values
 
 optional arguments:
-  -h, --help           show this help message and exit
-  --outdir DIR         Name of optional output directory.
-  --filetype FILETYPE  Type of input file
-  --name NAME          Name prefix for output files
-  --version            show program's version number and exit
-  --log LOG_FILE       record program progress in LOG_FILE
-  --nolegend           Turn off the legend in the plot
+  -h, --help            show this help message and exit
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --version             show program's version number and exit
+  --log LOG_FILE        record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
 ```
 
 ## Histograms
