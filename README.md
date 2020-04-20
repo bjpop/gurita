@@ -205,6 +205,55 @@ iris.sepal_length.petal_length.scatter.png
 iris.sepal_length.sepal_width.scatter.png
 ```
 
+## Heatmaps
+
+```
+$ hatch heatmap -h
+usage: hatch heatmap [-h] [--cmap COLOR_MAP_NAME] --rows FEATURE --columns
+                     FEATURE --values FEATURE [--log]
+                     DATA
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --cmap COLOR_MAP_NAME
+                        Use this color map, will use Seaborn default if not
+                        specified
+  --rows FEATURE        Interpret this feature (column of data) as the rows of
+                        the heatmap
+  --columns FEATURE     Interpret this feature (column of data) as the columns
+                        of the heatmap
+  --values FEATURE      Interpret this feature (column of data) as the values
+                        of the heatmap
+  --log                 Use a log scale on the numerical data
+
+```
+
+For example, 
+```
+hatch heatmap --rows year --columns month --values passengers -- flights.csv
+```
+
+Output will go to:
+```
+flights.year.month.passengers.heatmap.png
+```
+
+# Filtering rows
+
+The `--filter` command line option allows you to select rows to be included in the plot (with unselected rows excluded).
+It takes a Python expression as its argument. Any rows that make the expression True are included in the plot, and all other
+rows are excluded. The syntax of the expression follows the Pandas style.
+
+In the following command we select only those rows where the value in the `species` column is not equal to `setosa` (that is we exclude all
+rows for setosa).
+
+```
+hatch --filter "data.species != 'setosa'" scatter --pairs sepal_length,sepal_width petal_length,petal_width sepal_length,petal_length --hue species -- iris.csv
+```
+
 # Running within the Docker container
 
 The following section describes how to run hatch within the Docker container. It assumes you have Docker installed on your computer and have built the container as described above. 
