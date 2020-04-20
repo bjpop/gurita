@@ -85,6 +85,9 @@ def parse_args():
     parser.add_argument(
         '--nolegend', action='store_true',
         help=f'Turn off the legend in the plot')
+    parser.add_argument(
+        '--filter', metavar='EXPR', required=False, type=str,
+        help='Filter rows: only retain rows that make this expression True')
 
     subparsers = parser.add_subparsers(help='sub-command help', dest='cmd')  
 
@@ -196,12 +199,18 @@ def init_logging(log_filename):
         logging.info('command line: %s', ' '.join(sys.argv))
 
 
+
 def read_data(options):
     if options.filetype == 'CSV':
-        df = pd.read_csv(options.data, sep=",")
+        data = pd.read_csv(options.data, sep=",")
     elif options.filetype == 'TSV':
-        df = pd.read_csv(options.data, sep="\t")
-    return df
+        data = pd.read_csv(options.data, sep="\t")
+    if options.filter:
+        try:
+            data = eval("data[ " + options.filter + "]")
+        except:
+            exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
+    return data 
 
 def get_output_name(options):
     if options.name:
