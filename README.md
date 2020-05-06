@@ -68,8 +68,10 @@ Common parameters:
 
 ```
 $ hatch -h
+$ hatch --help
 usage: hatch [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
              [--version] [--log LOG_FILE] [--nolegend] [--filter EXPR]
+             [--navalues STR]
              {hist,dist,scatter,line,heatmap} ...
 
 Generate plots of tabular data
@@ -93,6 +95,8 @@ optional arguments:
   --nolegend            Turn off the legend in the plot
   --filter EXPR         Filter rows: only retain rows that make this
                         expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
 ```
 
 ## Histograms

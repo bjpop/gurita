@@ -88,6 +88,9 @@ def parse_args():
     parser.add_argument(
         '--filter', metavar='EXPR', required=False, type=str,
         help='Filter rows: only retain rows that make this expression True')
+    parser.add_argument(
+        '--navalues', metavar='STR', required=False, type=str,
+        help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
 
     subparsers = parser.add_subparsers(help='sub-command help', dest='cmd')  
 
@@ -201,10 +204,14 @@ def init_logging(log_filename):
 
 
 def read_data(options):
+    if options.navalues:
+        na_values = options.navalues.split()
+    else:
+        na_values = None
     if options.filetype == 'CSV':
-        data = pd.read_csv(options.data, sep=",")
+        data = pd.read_csv(options.data, sep=",", keep_default_na=True, na_values=na_values)
     elif options.filetype == 'TSV':
-        data = pd.read_csv(options.data, sep="\t")
+        data = pd.read_csv(options.data, sep="\t", keep_default_na=True, na_values=na_values)
     if options.filter:
         try:
             data = eval("data[ " + options.filter + "]")
