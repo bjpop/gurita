@@ -178,6 +178,10 @@ iris.sepal_length.species.dist.png
 iris.sepal_width.species.dist.png
 ```
 
+Below is the distribution plot for sepal length grouped by species in the iris data set (iris.sepal_length.species.dist.png):
+
+<img src="images/iris.sepal_length.species.dist.png" width="500" height="400">
+
 ## Scatter plots
 
 ```
