@@ -68,10 +68,9 @@ Common parameters:
 
 ```
 $ hatch -h
-$ hatch --help
 usage: hatch [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
              [--version] [--log LOG_FILE] [--nolegend] [--filter EXPR]
-             [--navalues STR]
+             [--navalues STR] [--title STR]
              {hist,dist,scatter,line,heatmap} ...
 
 Generate plots of tabular data
@@ -97,6 +96,7 @@ optional arguments:
                         expression True
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
 ```
 
 ## Example test data

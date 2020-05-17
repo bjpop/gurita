@@ -91,6 +91,9 @@ def parse_args():
     parser.add_argument(
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
+    parser.add_argument(
+        '--title', metavar='STR', required=False, type=str,
+        help='Plot title. By default no title will be added.')
 
     subparsers = parser.add_subparsers(help='sub-command help', dest='cmd')  
 
@@ -241,6 +244,8 @@ def histogram(options, df):
             ax.set(xlabel=column, ylabel='count')
             if options.logy:
                 ax.set(yscale="log")
+            if options.title:
+                plt.title(options.title)
             plt.tight_layout()
             plt.savefig(filename)
             plt.close()
@@ -273,6 +278,8 @@ def plot_distributions_by(df, options, group):
             ax.set(xlabel=group, ylabel=column)
             if options.logy:
                 ax.set(yscale="log")
+            if options.title:
+                plt.title(options.title)
             plt.tight_layout()
             plt.savefig(filename)
             plt.close()
@@ -301,6 +308,8 @@ def line_plot(options, df, feature1, feature2):
     ax.set(xlabel=feature1, ylabel=feature2)
     if options.logy:
         ax.set(yscale="log")
+    if options.title:
+        plt.title(options.title)
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
@@ -314,6 +323,8 @@ def heatmap(options, df):
     g=sns.heatmap(data=pivot_data, cmap=options.cmap)
     output_name = get_output_name(options)
     filename = Path('.'.join([output_name, options.rows, options.columns, options.values, 'heatmap.png'])) 
+    if options.title:
+        plt.title(options.title)
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
@@ -345,6 +356,8 @@ def scatter_plot(options, df, feature1, feature2):
     output_name = get_output_name(options)
     filename = Path('.'.join([output_name, feature1_str, feature2_str, 'scatter.png'])) 
     ax.set(xlabel=feature1, ylabel=feature2)
+    if options.title:
+        plt.title(options.title)
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
