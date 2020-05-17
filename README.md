@@ -99,8 +99,14 @@ optional arguments:
                         values. Example: --navalues ". - !"
 ```
 
-In the examples below iris dataset is based on UCI Machine Learning Repository.
+## Example test data
+
+In the `data` directory in this repository we provide some sample test data for the sake of illustrating the plotting functionality of hatch.
+
+The iris dataset is from the UCI Machine Learning Repository.
 The CSV version was obtained from <a href="https://gist.github.com/curran/a08a1080b88344b0c8a7">Iris Data Set</a>, and can be found in the `data/iris.csv` file in this repository.
+
+The flights dataset is from the `seaborn-data` repository that are used in the seaborn Python library documentation. The CSV version was obtaind from <a href="https://github.com/mwaskom/seaborn-data/blob/master/flights.csv">flights data</a>, and can be found in the `data/flights.csv` file in this repository.
 
 ## Histograms
 
