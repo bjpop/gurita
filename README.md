@@ -226,7 +226,7 @@ iris.sepal_length.petal_length.scatter.png
 iris.sepal_length.sepal_width.scatter.png
 ```
 
-Below is the scatter plot for sepal length versus petal length with hue determined by species for the iris data set (ris.sepal_length.petal_length.scatter.png):
+Below is the scatter plot for sepal length versus petal length with hue determined by species for the iris data set (iris.sepal_length.petal_length.scatter.png):
 
 <img src="images/iris.sepal_length.petal_length.scatter.png" width="500" height="400">
 
@@ -265,6 +265,10 @@ Output will go to:
 ```
 flights.year.month.passengers.heatmap.png
 ```
+
+Below is a heatmap for the flights datset (flights.year.month.passengers.heatmap.png):
+
+<img src="images/flights.year.month.passengers.heatmap.png" width="500" height="400">
 
 # Filtering rows
 
