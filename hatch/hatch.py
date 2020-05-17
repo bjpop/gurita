@@ -156,6 +156,9 @@ def parse_args():
         '--logy', action='store_true',
         help=f'Use a log scale on the vertical axis')
     lineparser.add_argument(
+        '--hue',  metavar='FEATURE', type=str, required=False, 
+        help=f'Name of feature (column headings) to group data for line plot')
+    lineparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
     heatmapparser = subparsers.add_parser('heatmap', help='Plot a heatmap of two categories with numerical values') 
@@ -289,7 +292,7 @@ def line_plot(options, df, feature1, feature2):
     plt.clf()
     plt.suptitle('')
     fig, ax = plt.subplots(figsize=(10,8))
-    sns.lineplot(data=df, x=feature1, y=feature2, estimator=None) 
+    sns.lineplot(data=df, x=feature1, y=feature2, hue=options.hue) 
     output_name = get_output_name(options)
     feature1_str = feature1.replace(' ', '_')
     feature2_str = feature2.replace(' ', '_')
