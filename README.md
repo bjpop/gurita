@@ -140,7 +140,7 @@ Below is the histogram plot for sepal length in the iris data set.
 
 ![Example Iris sepal length histogram](images/iris.sepal_length.histogram.png =500x400)
 
-<img src="images/iris.sepal_length.histogram.png" width="500" height="400>
+<img src="images/iris.sepal_length.histogram.png" width="500" height="400">
 
 ## Distributions
 
