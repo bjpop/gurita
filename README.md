@@ -99,7 +99,7 @@ optional arguments:
                         values. Example: --navalues ". - !"
 ```
 
-In the examples below iris dataset is dataset is based on UCI Machine Learning Repository.
+In the examples below iris dataset is based on UCI Machine Learning Repository.
 The CSV version was obtained from <a href="https://gist.github.com/curran/a08a1080b88344b0c8a7">Iris Data Set</a>, and can be found in the `data/iris.csv` file in this repository.
 
 ## Histograms
