@@ -106,7 +106,9 @@ In the `data` directory in this repository we provide some sample test data for 
 The iris dataset is from the UCI Machine Learning Repository.
 The CSV version was obtained from <a href="https://gist.github.com/curran/a08a1080b88344b0c8a7">Iris Data Set</a>, and can be found in the `data/iris.csv` file in this repository.
 
-The flights dataset is from the `seaborn-data` repository that are used in the seaborn Python library documentation. The CSV version was obtaind from <a href="https://github.com/mwaskom/seaborn-data/blob/master/flights.csv">flights data</a>, and can be found in the `data/flights.csv` file in this repository.
+The flights dataset is from the `seaborn-data` repository that is used in the seaborn Python library documentation. The CSV version was obtaind from <a href="https://github.com/mwaskom/seaborn-data/blob/master/flights.csv">flights data</a>, and can be found in the `data/flights.csv` file in this repository.
+
+The fmri dataset is from the `seaborn-data` repository that is used in the seaborn Python library documentation. The CSV version was obtaind from <a href="https://github.com/mwaskom/seaborn-data/blob/master/fmri.csv">fmri data</a>, and can be found in the `data/fmri.csv` file in this repository.
 
 ## Histograms
 
@@ -229,6 +231,42 @@ iris.sepal_length.sepal_width.scatter.png
 Below is the scatter plot for sepal length versus petal length with hue determined by species for the iris data set (iris.sepal_length.petal_length.scatter.png):
 
 <img src="images/iris.sepal_length.petal_length.scatter.png" width="500" height="400">
+
+## Line plots
+
+```
+$ hatch line -h
+usage: hatch line [-h] --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
+                  [--overlay] [--logy] [--hue FEATURE]
+                  DATA
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
+                        Pairs of features to plot, format: feature1,feature2
+  --overlay             Overlay line plots on the same axes, otherwise make a
+                        separate plot for each
+  --logy                Use a log scale on the vertical axis
+  --hue FEATURE         Name of feature (column headings) to group data for
+                        line plot
+```
+
+For example, a line plot for the fmri dataset showing the relationship between timepoint and signal with separate lines for the event column: 
+```
+hatch hatch line --pairs timepoint,signal --hue event -- fmri.csv 
+```
+
+Outputs go to:
+```
+fmri.timepoint.signal.line.png
+```
+
+Below is the line plot for timepoint versus signal grouped by the even column (fmri.timepoint.signal.line.png):
+
+<img src="images/fmri.timepoint.signal.line.png" width="500" height="400">
 
 ## Heatmaps
 
