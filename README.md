@@ -136,7 +136,7 @@ iris.sepal_length.histogram.png
 iris.sepal_width.histogram.png
 ```
 
-Below is the histogram plot for sepal length in the iris data set. 
+Below is the histogram plot for sepal length in the iris data set (iris.sepal_length.histogram.png):
 
 <img src="images/iris.sepal_length.histogram.png" width="500" height="400">
 
