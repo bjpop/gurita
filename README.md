@@ -136,7 +136,7 @@ iris.sepal_length.histogram.png
 iris.sepal_width.histogram.png
 ```
 
-Below is the histogram plot for sepal length in the iris data set (iris.sepal_length.histogram.png):
+Below is a histogram plot for sepal length for the iris data set (iris.sepal_length.histogram.png):
 
 <img src="images/iris.sepal_length.histogram.png" width="500" height="400">
 
@@ -178,7 +178,7 @@ iris.sepal_length.species.dist.png
 iris.sepal_width.species.dist.png
 ```
 
-Below is the distribution plot for sepal length grouped by species in the iris data set (iris.sepal_length.species.dist.png):
+Below is a distribution plot for sepal length grouped by species for the iris data set (iris.sepal_length.species.dist.png):
 
 <img src="images/iris.sepal_length.species.dist.png" width="500" height="400">
 
@@ -216,6 +216,10 @@ iris.petal_length.petal_width.scatter.png
 iris.sepal_length.petal_length.scatter.png
 iris.sepal_length.sepal_width.scatter.png
 ```
+
+Below is the scatter plot for sepal length versus petal length for the iris data set (ris.sepal_length.petal_length.scatter.png):
+
+<img src="images/iris.sepal_length.petal_length.scatter.png" width="500" height="400">
 
 ## Heatmaps
 
