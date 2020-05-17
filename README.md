@@ -136,7 +136,9 @@ iris.sepal_length.histogram.png
 iris.sepal_width.histogram.png
 ```
 
-![Example Iris sepal length histogram](images/iris.sepal_length.histogram.png)
+Below is the histogram plot for sepal length in the iris data set. 
+
+![Example Iris sepal length histogram](images/iris.sepal_length.histogram.png =500x400)
 
 ## Distributions
 
