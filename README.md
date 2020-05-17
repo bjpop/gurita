@@ -136,6 +136,8 @@ iris.sepal_length.histogram.png
 iris.sepal_width.histogram.png
 ```
 
+![Example Iris sepal length histogram](images/iris.sepal_length.histogram.png)
+
 ## Distributions
 
 ```
