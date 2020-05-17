@@ -32,6 +32,8 @@ DEFAULT_BINS = 100
 ALLOWED_FILETYPES = ['CSV', 'TSV']
 DEFAULT_DIST_PLOT_TYPE = 'box'
 ALLOWED_DISTPLOT_TYPES = ['box', 'violin']
+DEFAULT_PLOT_WIDTH=10
+DEFAULT_PLOT_HEIGHT=8
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -94,6 +96,14 @@ def parse_args():
     parser.add_argument(
         '--title', metavar='STR', required=False, type=str,
         help='Plot title. By default no title will be added.')
+    parser.add_argument(
+        '--width', metavar='SIZE', required=False, type=float,
+        default=DEFAULT_PLOT_WIDTH,
+        help=f'Plot width in inches (default: {DEFAULT_PLOT_WIDTH})')
+    parser.add_argument(
+        '--height', metavar='SIZE', required=False, type=float,
+        default=DEFAULT_PLOT_HEIGHT,
+        help=f'Plot height in inches (default: {DEFAULT_PLOT_HEIGHT})')
 
     subparsers = parser.add_subparsers(help='sub-command help', dest='cmd')  
 
@@ -237,7 +247,7 @@ def histogram(options, df):
         if column in df.columns:
             plt.clf()
             plt.suptitle('')
-            fig, ax = plt.subplots(figsize=(10,8))
+            fig, ax = plt.subplots(figsize=(options.width,options.height))
             sns.distplot(df[column], hist_kws={'cumulative': options.cumulative}, kde=False, bins=options.bins) 
             output_name = get_output_name(options)
             filename = Path('.'.join([output_name, column.replace(' ', '_'), 'histogram.png']))
@@ -265,7 +275,7 @@ def plot_distributions_by(df, options, group):
         if column in df.columns:
             plt.clf()
             plt.suptitle('')
-            fig, ax = plt.subplots(figsize=(10,8))
+            fig, ax = plt.subplots(figsize=(options.width,options.height))
             if options.type == 'box':
                 sns.boxplot(data=df, x=group, y=column) 
             elif options.type == 'violin':
@@ -298,7 +308,7 @@ def line(options, df):
 def line_plot(options, df, feature1, feature2):
     plt.clf()
     plt.suptitle('')
-    fig, ax = plt.subplots(figsize=(10,8))
+    fig, ax = plt.subplots(figsize=(options.width,options.height))
     sns.lineplot(data=df, x=feature1, y=feature2, hue=options.hue) 
     output_name = get_output_name(options)
     feature1_str = feature1.replace(' ', '_')
@@ -318,7 +328,7 @@ def line_plot(options, df, feature1, feature2):
 def heatmap(options, df):
     plt.clf()
     plt.suptitle('')
-    fig, ax = plt.subplots(figsize=(10,8))
+    fig, ax = plt.subplots(figsize=(options.width,options.height))
     pivot_data = df.pivot(index=options.rows, columns=options.columns, values=options.values)
     g=sns.heatmap(data=pivot_data, cmap=options.cmap)
     output_name = get_output_name(options)
@@ -346,7 +356,7 @@ def scatter_plot(options, df, feature1, feature2):
     plt.clf()
     plt.suptitle('')
     # XXX this needs to be a parameter
-    fig, ax = plt.subplots(figsize=(10,8))
+    fig, ax = plt.subplots(figsize=(options.width,options.height))
     g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=options.hue, alpha=options.alpha, size=options.size, linewidth=options.linewidth)
     g.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
     if options.nolegend:

@@ -70,7 +70,7 @@ Common parameters:
 $ hatch -h
 usage: hatch [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
              [--version] [--log LOG_FILE] [--nolegend] [--filter EXPR]
-             [--navalues STR] [--title STR]
+             [--navalues STR] [--title STR] [--width SIZE] [--height SIZE]
              {hist,dist,scatter,line,heatmap} ...
 
 Generate plots of tabular data
@@ -97,6 +97,8 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
 ```
 
 ## Example test data
