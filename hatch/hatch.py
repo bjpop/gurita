@@ -174,6 +174,19 @@ def parse_args():
     lineparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
+    countparser = subparsers.add_parser('count', help='Plot counts of categorical values') 
+    countparser.add_argument(
+        '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
+        help=f'Columns to plot')
+    countparser.add_argument(
+        '--logy', action='store_true',
+        help=f'Use a log scale on the vertical axis')
+    countparser.add_argument(
+        '--hue',  metavar='FEATURE', type=str, required=False, 
+        help=f'Name of feature (column headings) to group data for count plot')
+    countparser.add_argument(
+        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+
     heatmapparser = subparsers.add_parser('heatmap', help='Plot a heatmap of two categories with numerical values') 
     heatmapparser.add_argument(
         '--cmap',  metavar='COLOR_MAP_NAME', type=str, 
@@ -266,11 +279,11 @@ def histogram(options, df):
 def distribution(options, df):
     for group in options.group:
         if group in df.columns:
-            plot_distributions_by(df, options, group)
+            plot_distributions_by(options, df, group)
         else:
             logging.warn(f"Column: {group} does not exist in data, skipping")
 
-def plot_distributions_by(df, options, group):
+def plot_distributions_by(options, df, group):
     for column in options.columns:
         if column in df.columns:
             plt.clf()
@@ -373,6 +386,34 @@ def scatter_plot(options, df, feature1, feature2):
     plt.close()
 
 
+def count(options, df):
+    for column in options.columns:
+        if column in df.columns:
+            plt.clf()
+            plt.suptitle('')
+            fig, ax = plt.subplots(figsize=(options.width,options.height))
+            sns.countplot(data=df, x=column, hue=options.hue) 
+            output_name = get_output_name(options)
+            column_str = column.replace(' ', '_')
+            hue_str = ''
+            if options.hue:
+                hue_str = options.hue.replace(' ', '_')
+                filename = Path('.'.join([output_name, column_str, hue_str, 'count', 'png']))
+            else:
+                filename = Path('.'.join([output_name, column_str, 'count', 'png']))
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+            ax.set(xlabel=column)
+            if options.logy:
+                ax.set(yscale="log")
+            if options.title:
+                plt.title(options.title)
+            plt.tight_layout()
+            plt.savefig(filename)
+            plt.close()
+        else:
+            logging.warn(f"Column: {column} does not exist in data, skipping")
+
+
 def make_output_directories(options):
     pass
 
@@ -393,6 +434,8 @@ def main():
         line(options, df)
     elif options.cmd == 'heatmap':
         heatmap(options, df)
+    elif options.cmd == 'count':
+        count(options, df)
     logging.info("Completed")
 
 
