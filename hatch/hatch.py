@@ -122,6 +122,9 @@ def parse_args():
         help=f'Use a log scale on the vertical axis')
     histparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+    histparser.add_argument(
+        '--xlim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        help=f'Limit x-axis range to [LOW,HIGH]')
 
     distparser = subparsers.add_parser('dist', help='Plot distributions of data') 
     distparser.add_argument(
@@ -138,6 +141,9 @@ def parse_args():
         help=f'Type of plot, default({DEFAULT_DIST_PLOT_TYPE})')
     distparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+    distparser.add_argument(
+        '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        help=f'Limit y-axis range to [LOW,HIGH]')
 
     scatterparser = subparsers.add_parser('scatter', help='Plot scatter of two numerical columns in data') 
     scatterparser.add_argument(
@@ -157,6 +163,12 @@ def parse_args():
         help=f'Line width value for plotting points (default: {DEFAULT_LINEWIDTH})')
     scatterparser.add_argument(
         'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+    scatterparser.add_argument(
+        '--xlim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        help=f'Limit x-axis range to [LOW,HIGH]')
+    scatterparser.add_argument(
+        '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        help=f'Limit y-axis range to [LOW,HIGH]')
 
     lineparser = subparsers.add_parser('line', help='Plot line plots of columns') 
     lineparser.add_argument(
@@ -269,6 +281,9 @@ def histogram(options, df):
                 ax.set(yscale="log")
             if options.title:
                 plt.title(options.title)
+            if options.xlim:
+                xlow, xhigh = options.xlim
+                plt.xlim(xlow, xhigh)
             plt.tight_layout()
             plt.savefig(filename)
             plt.close()
@@ -303,6 +318,9 @@ def plot_distributions_by(options, df, group):
                 ax.set(yscale="log")
             if options.title:
                 plt.title(options.title)
+            if options.ylim:
+                ylow, yhigh = options.ylim
+                plt.ylim(ylow, yhigh)
             plt.tight_layout()
             plt.savefig(filename)
             plt.close()
@@ -381,6 +399,12 @@ def scatter_plot(options, df, feature1, feature2):
     ax.set(xlabel=feature1, ylabel=feature2)
     if options.title:
         plt.title(options.title)
+    if options.xlim:
+        xlow, xhigh = options.xlim
+        plt.xlim(xlow, xhigh)
+    if options.ylim:
+        ylow, yhigh = options.ylim
+        plt.ylim(ylow, yhigh)
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
