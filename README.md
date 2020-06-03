@@ -64,41 +64,41 @@ See below for information about running hatch within the Docker container.
 
 # General behaviour
 
-Common parameters:
+Hatch can generate a number of differnt plot types, each of which can be selected on the command line:
 
 ```
 $ hatch -h
-usage: hatch [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-             [--version] [--log LOG_FILE] [--nolegend] [--filter EXPR]
-             [--navalues STR] [--title STR] [--width SIZE] [--height SIZE]
-             {hist,dist,scatter,line,heatmap} ...
+usage: hatch [-h] {hist,dist,scatter,line,count,heatmap} ...
 
 Generate plots of tabular data
 
-positional arguments:
-  {hist,dist,scatter,line,heatmap}
-                        sub-command help
-    hist                Plot histograms of columns
-    dist                Plot distributions of data
-    scatter             Plot scatter of two numerical columns in data
-    line                Plot line plots of columns
-    heatmap             Plot a heatmap of two categories with numerical values
-
 optional arguments:
   -h, --help            show this help message and exit
-  --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
-  --name NAME           Name prefix for output files
-  --version             show program's version number and exit
-  --log LOG_FILE        record program progress in LOG_FILE
-  --nolegend            Turn off the legend in the plot
-  --filter EXPR         Filter rows: only retain rows that make this
-                        expression True
-  --navalues STR        Treat values in this space separated list as NA
-                        values. Example: --navalues ". - !"
-  --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+
+Plot type:
+  {hist,dist,scatter,line,count,heatmap}
+                        sub-command help
+    hist                Histograms of numerical data
+    dist                Distributions of numerical data
+    scatter             Scatter plots of numerical data
+    line                Line plots of numerical data
+    count               Counts (bar plots) of categorical data
+    heatmap             Heatmap of two categories with numerical values
+
+```
+
+For example, if you want to plot a histogram, hatch can be invoked like so:
+
+```
+hatch hist ...
+```
+
+where `...` indicates the remaining arguments to the histogram plot.
+
+Help messages for each plot type can be requested with `-h` or `--help` after the plot type. For example, to get specific help about histogram plots, use:
+
+```
+hatch hist -h
 ```
 
 ## Example test data
@@ -117,9 +117,12 @@ The fmri dataset is from the `seaborn-data` repository that is used in the seabo
 Plot distributions of selected columns as histograms.
 
 ```
-$ hatch hist -h
-usage: hatch hist [-h] --columns FEATURE [FEATURE ...] [--bins NUMBINS]
-                  [--cumulative] [--logy]
+usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                  [--version] [--logfile LOG_FILE] [--nolegend]
+                  [--filter EXPR] [--navalues STR] [--title STR]
+                  [--width SIZE] [--height SIZE] --columns FEATURE
+                  [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH]
+                  [--bins NUMBINS] [--cumulative]
                   DATA
 
 positional arguments:
@@ -127,11 +130,26 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --version             show program's version number and exit
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
   --columns FEATURE [FEATURE ...]
                         Columns to plot
+  --logy                Use a log scale on the veritical axis
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
   --bins NUMBINS        Number of bins for histogram (default=100)
   --cumulative          Generate cumulative histogram
-  --logy                Use a log scale on the vertical axis
 ```
 
 For example, plot histograms of selected columns of the example iris.csv dataset using 10 bins. 
@@ -157,8 +175,12 @@ Below is a histogram plot for sepal length for the iris data set (iris.sepal_len
 
 ```
 $ hatch dist -h
-usage: hatch dist [-h] --columns FEATURE [FEATURE ...] --group FEATURE
-                  [FEATURE ...] [--logy] [--type {box,violin}]
+usage: hatch dist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                  [--version] [--logfile LOG_FILE] [--nolegend]
+                  [--filter EXPR] [--navalues STR] [--title STR]
+                  [--width SIZE] [--height SIZE] --columns FEATURE
+                  [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH] --group
+                  FEATURE [FEATURE ...] [--type {box,violin}]
                   DATA
 
 positional arguments:
@@ -166,14 +188,28 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --version             show program's version number and exit
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
   --columns FEATURE [FEATURE ...]
                         Columns to plot
+  --logy                Use a log scale on the veritical axis
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
   --group FEATURE [FEATURE ...]
                         Plot distributions of of the columns where data are
                         grouped by these features
-  --logy                Use a log scale on the vertical axis
   --type {box,violin}   Type of plot, default(box)
-
 ```
 
 For example, plot distributions of selected columns, grouped by their species, using violin plots:
@@ -199,9 +235,13 @@ Below is a distribution plot for sepal length grouped by species for the iris da
 
 ```
 $ hatch scatter -h
-usage: hatch scatter [-h] --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
-                     [--hue FEATURE] [--size FEATURE] [--alpha ALPHA]
-                     [--linewidth WIDTH]
+usage: hatch scatter [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                     [--version] [--logfile LOG_FILE] [--nolegend]
+                     [--filter EXPR] [--navalues STR] [--title STR]
+                     [--width SIZE] [--height SIZE] --xy X,Y [X,Y ...]
+                     [--logx] [--logy] [--xlim LOW HIGH LOW HIGH]
+                     [--ylim LOW HIGH LOW HIGH] [--hue FEATURE]
+                     [--size FEATURE] [--alpha ALPHA] [--linewidth WIDTH]
                      DATA
 
 positional arguments:
@@ -209,8 +249,26 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
-                        Pairs of features to plot, format: feature1,feature2
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --version             show program's version number and exit
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
+  --xy X,Y [X,Y ...]    Pairs of features to plot, format: name1,name2
+  --logx                Use a log scale on the horizontal axis
+  --logy                Use a log scale on the veritical axis
+  --xlim LOW HIGH LOW HIGH
+                        Limit horizontal axis range to [LOW,HIGH]
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
   --hue FEATURE         Name of feature (column headings) to use for colouring
                         dots
   --size FEATURE        Name of feature (column headings) to use for dot size
@@ -220,7 +278,7 @@ optional arguments:
 
 For example, scatter plots of "sepal_length verus sepal_width", "petal_length versus petal_width" and "sepal_length versus petal_length" with hue indicating species:
 ```
-hatch scatter --pairs sepal_length,sepal_width petal_length,petal_width sepal_length,petal_length --hue species -- iris.csv 
+hatch scatter --xy sepal_length,sepal_width petal_length,petal_width sepal_length,petal_length --hue species -- iris.csv 
 ```
 
 Outputs go to:
@@ -238,8 +296,12 @@ Below is the scatter plot for sepal length versus petal length with hue determin
 
 ```
 $ hatch line -h
-usage: hatch line [-h] --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
-                  [--overlay] [--logy] [--hue FEATURE]
+usage: hatch line [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                  [--version] [--logfile LOG_FILE] [--nolegend]
+                  [--filter EXPR] [--navalues STR] [--title STR]
+                  [--width SIZE] [--height SIZE] --xy X,Y [X,Y ...] [--logy]
+                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH]
+                  [--overlay] [--hue FEATURE]
                   DATA
 
 positional arguments:
@@ -247,18 +309,34 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --pairs FEATURE,FEATURE [FEATURE,FEATURE ...]
-                        Pairs of features to plot, format: feature1,feature2
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --version             show program's version number and exit
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
+  --xy X,Y [X,Y ...]    Pairs of features to plot, format: name1,name2
+  --logy                Use a log scale on the veritical axis
+  --xlim LOW HIGH LOW HIGH
+                        Limit horizontal axis range to [LOW,HIGH]
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
   --overlay             Overlay line plots on the same axes, otherwise make a
                         separate plot for each
-  --logy                Use a log scale on the vertical axis
   --hue FEATURE         Name of feature (column headings) to group data for
                         line plot
 ```
 
 For example, a line plot for the fmri dataset showing the relationship between timepoint and signal with separate lines for the event column: 
 ```
-hatch hatch line --pairs timepoint,signal --hue event -- fmri.csv 
+hatch hatch line --xy timepoint,signal --hue event -- fmri.csv 
 ```
 
 Outputs go to:
@@ -274,8 +352,11 @@ Below is the line plot for timepoint versus signal grouped by the even column (f
 
 ```
 $ hatch heatmap -h
-usage: hatch heatmap [-h] [--cmap COLOR_MAP_NAME] --rows FEATURE --columns
-                     FEATURE --values FEATURE [--log]
+usage: hatch heatmap [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                     [--version] [--logfile LOG_FILE] [--nolegend]
+                     [--filter EXPR] [--navalues STR] [--title STR]
+                     [--width SIZE] [--height SIZE] [--cmap COLOR_MAP_NAME]
+                     --rows FEATURE --columns FEATURE --values FEATURE [--log]
                      DATA
 
 positional arguments:
@@ -283,6 +364,19 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --version             show program's version number and exit
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
   --cmap COLOR_MAP_NAME
                         Use this color map, will use Seaborn default if not
                         specified
@@ -293,7 +387,6 @@ optional arguments:
   --values FEATURE      Interpret this feature (column of data) as the values
                         of the heatmap
   --log                 Use a log scale on the numerical data
-
 ```
 
 For example, 
@@ -320,7 +413,7 @@ In the following command we select only those rows where the value in the `speci
 rows for setosa).
 
 ```
-hatch --filter "data.species != 'setosa'" scatter --pairs sepal_length,sepal_width petal_length,petal_width sepal_length,petal_length --hue species -- iris.csv
+hatch scatter --filter "data['species'] != 'setosa'" --xy sepal_length,sepal_width --hue species -- iris.csv
 ```
 
 # Running within the Docker container
