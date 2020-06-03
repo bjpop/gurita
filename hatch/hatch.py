@@ -62,93 +62,103 @@ def parse_args():
     '''
     description = 'Generate plots of tabular data'
     parser = ArgumentParser(description=description)
-    parser.add_argument(
+
+    subparsers = parser.add_subparsers(title='Plot type', help='sub-command help', dest='cmd')  
+
+    #common_arguments = ArgumentParser(add_help=False)
+    common_arguments = ArgumentParser()
+    common_arguments.add_argument(
         '--outdir',  metavar='DIR', type=str,
         required=False,
         help=f'Name of optional output directory.')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--filetype',  metavar='FILETYPE', type=str,
         required=False, choices=ALLOWED_FILETYPES,
         default=DEFAULT_FILETYPE,
         help=f'Type of input file')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--name',  metavar='NAME', type=str,
         required=False, 
         help=f'Name prefix for output files')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--version',
         action='version',
         version='%(prog)s ' + PROGRAM_VERSION)
-    parser.add_argument(
-        '--log',
+    common_arguments.add_argument(
+        '--logfile',
         metavar='LOG_FILE',
         type=str,
         help='record program progress in LOG_FILE')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--nolegend', action='store_true',
         help=f'Turn off the legend in the plot')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--filter', metavar='EXPR', required=False, type=str,
         help='Filter rows: only retain rows that make this expression True')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--title', metavar='STR', required=False, type=str,
         help='Plot title. By default no title will be added.')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--width', metavar='SIZE', required=False, type=float,
         default=DEFAULT_PLOT_WIDTH,
         help=f'Plot width in inches (default: {DEFAULT_PLOT_WIDTH})')
-    parser.add_argument(
+    common_arguments.add_argument(
         '--height', metavar='SIZE', required=False, type=float,
         default=DEFAULT_PLOT_HEIGHT,
         help=f'Plot height in inches (default: {DEFAULT_PLOT_HEIGHT})')
+    common_arguments.add_argument(
+        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
-    subparsers = parser.add_subparsers(help='sub-command help', dest='cmd')  
+    xy_arguments = ArgumentParser(add_help=False)
+    xy_arguments.add_argument(
+        '--xy',  metavar='X,Y', nargs="+", required=True, type=str,
+        help=f'Pairs of features to plot, format: name1,name2')
 
-    histparser = subparsers.add_parser('hist', help='Plot histograms of columns') 
-    histparser.add_argument(
+    columns_arguments = ArgumentParser(add_help=False)
+    columns_arguments.add_argument(
         '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Columns to plot')
+
+    logx_arguments = ArgumentParser(add_help=False)
+    logx_arguments.add_argument(
+        '--logx', action='store_true',
+        help=f'Use a log scale on the horizontal axis')
+
+    logy_arguments = ArgumentParser(add_help=False)
+    logy_arguments.add_argument(
+        '--logy', action='store_true',
+        help=f'Use a log scale on the veritical axis')
+
+    xlim_arguments = ArgumentParser(add_help=False)
+    xlim_arguments.add_argument(
+        '--xlim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        help=f'Limit horizontal axis range to [LOW,HIGH]')
+
+    ylim_arguments = ArgumentParser(add_help=False)
+    ylim_arguments.add_argument(
+        '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        help=f'Limit vertical axis range to [LOW,HIGH]')
+
+    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, ylim_arguments], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUMBINS', required=False, default=DEFAULT_BINS, type=int,
         help=f'Number of bins for histogram (default={DEFAULT_BINS})')
     histparser.add_argument(
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
-    histparser.add_argument(
-        '--logy', action='store_true',
-        help=f'Use a log scale on the vertical axis')
-    histparser.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
-    histparser.add_argument(
-        '--xlim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
-        help=f'Limit x-axis range to [LOW,HIGH]')
 
-    distparser = subparsers.add_parser('dist', help='Plot distributions of data') 
-    distparser.add_argument(
-        '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
-        help=f'Columns to plot')
+    distparser = subparsers.add_parser('dist', help='Distributions of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, ylim_arguments], add_help=False) 
     distparser.add_argument(
         '--group',  metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Plot distributions of of the columns where data are grouped by these features')
     distparser.add_argument(
-        '--logy', action='store_true',
-        help=f'Use a log scale on the vertical axis')
-    distparser.add_argument(
         '--type', choices=ALLOWED_DISTPLOT_TYPES, default=DEFAULT_DIST_PLOT_TYPE,
         help=f'Type of plot, default({DEFAULT_DIST_PLOT_TYPE})')
-    distparser.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
-    distparser.add_argument(
-        '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
-        help=f'Limit y-axis range to [LOW,HIGH]')
 
-    scatterparser = subparsers.add_parser('scatter', help='Plot scatter of two numerical columns in data') 
-    scatterparser.add_argument(
-        '--pairs',  metavar='FEATURE,FEATURE', nargs="+", required=True, type=str,
-        help=f'Pairs of features to plot, format: feature1,feature2')
+    scatterparser = subparsers.add_parser('scatter', help='Scatter plots of numerical data', parents=[common_arguments, xy_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     scatterparser.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature (column headings) to use for colouring dots')
@@ -161,45 +171,21 @@ def parse_args():
     scatterparser.add_argument(
         '--linewidth',  metavar='WIDTH', type=int, default=DEFAULT_LINEWIDTH,
         help=f'Line width value for plotting points (default: {DEFAULT_LINEWIDTH})')
-    scatterparser.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
-    scatterparser.add_argument(
-        '--xlim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
-        help=f'Limit x-axis range to [LOW,HIGH]')
-    scatterparser.add_argument(
-        '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
-        help=f'Limit y-axis range to [LOW,HIGH]')
 
-    lineparser = subparsers.add_parser('line', help='Plot line plots of columns') 
-    lineparser.add_argument(
-        '--pairs',  metavar='FEATURE,FEATURE', nargs="+", required=True, type=str,
-        help=f'Pairs of features to plot, format: feature1,feature2')
+    lineparser = subparsers.add_parser('line', help='Line plots of numerical data', parents=[common_arguments, xy_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     lineparser.add_argument(
         '--overlay', action='store_true', 
         help=f'Overlay line plots on the same axes, otherwise make a separate plot for each')
     lineparser.add_argument(
-        '--logy', action='store_true',
-        help=f'Use a log scale on the vertical axis')
-    lineparser.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature (column headings) to group data for line plot')
-    lineparser.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
-    countparser = subparsers.add_parser('count', help='Plot counts of categorical values') 
-    countparser.add_argument(
-        '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
-        help=f'Columns to plot')
-    countparser.add_argument(
-        '--logy', action='store_true',
-        help=f'Use a log scale on the vertical axis')
+    countparser = subparsers.add_parser('count', help='Counts (bar plots) of categorical data', parents=[common_arguments, columns_arguments, logy_arguments], add_help=False) 
     countparser.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature (column headings) to group data for count plot')
-    countparser.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
-    heatmapparser = subparsers.add_parser('heatmap', help='Plot a heatmap of two categories with numerical values') 
+    heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments], add_help=False) 
     heatmapparser.add_argument(
         '--cmap',  metavar='COLOR_MAP_NAME', type=str, 
         help=f'Use this color map, will use Seaborn default if not specified')
@@ -215,8 +201,6 @@ def parse_args():
     heatmapparser.add_argument(
         '--log', action='store_true',
         help=f'Use a log scale on the numerical data')
-    heatmapparser.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
 
     return parser.parse_args()
 
@@ -328,7 +312,7 @@ def plot_distributions_by(options, df, group):
             logging.warn(f"Column: {column} does not exist in data, skipping")
 
 def line(options, df):
-    for pair in options.pairs:
+    for pair in options.xy:
         pair_fields = pair.split(",") 
         if len(pair_fields) == 2:
             feature1, feature2 = pair_fields
@@ -372,7 +356,7 @@ def heatmap(options, df):
 
 
 def scatter(options, df):
-    for pair in options.pairs:
+    for pair in options.xy:
         pair_fields = pair.split(",") 
         if len(pair_fields) == 2:
             feature1, feature2 = pair_fields
@@ -389,7 +373,8 @@ def scatter_plot(options, df, feature1, feature2):
     # XXX this needs to be a parameter
     fig, ax = plt.subplots(figsize=(options.width,options.height))
     g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=options.hue, alpha=options.alpha, size=options.size, linewidth=options.linewidth)
-    g.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+    if options.hue is not None:
+        g.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
     if options.nolegend:
         g.legend_.remove()
     feature1_str = feature1.replace(' ', '_')
@@ -445,7 +430,7 @@ def make_output_directories(options):
 def main():
     "Orchestrate the execution of the program"
     options = parse_args()
-    init_logging(options.log)
+    init_logging(options.logfile)
     make_output_directories(options)
     df = read_data(options)
     if options.cmd == 'hist':
