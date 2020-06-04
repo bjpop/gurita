@@ -62,6 +62,10 @@ def parse_args():
     '''
     description = 'Generate plots of tabular data'
     parser = ArgumentParser(description=description)
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version='%(prog)s ' + PROGRAM_VERSION)
 
     subparsers = parser.add_subparsers(title='Plot type', help='sub-command help', dest='cmd')  
 
@@ -80,10 +84,6 @@ def parse_args():
         '--name',  metavar='NAME', type=str,
         required=False, 
         help=f'Name prefix for output files')
-    common_arguments.add_argument(
-        '--version',
-        action='version',
-        version='%(prog)s ' + PROGRAM_VERSION)
     common_arguments.add_argument(
         '--logfile',
         metavar='LOG_FILE',
@@ -233,10 +233,14 @@ def read_data(options):
         na_values = options.navalues.split()
     else:
         na_values = None
-    if options.filetype == 'CSV':
-        data = pd.read_csv(options.data, sep=",", keep_default_na=True, na_values=na_values)
-    elif options.filetype == 'TSV':
-        data = pd.read_csv(options.data, sep="\t", keep_default_na=True, na_values=na_values)
+
+    try:
+        if options.filetype == 'CSV':
+            data = pd.read_csv(options.data, sep=",", keep_default_na=True, na_values=na_values)
+        elif options.filetype == 'TSV':
+            data = pd.read_csv(options.data, sep="\t", keep_default_na=True, na_values=na_values)
+    except IOError:
+        exit_with_error(f"Could not open file: {options.data}", EXIT_FILE_IO_ERROR)
     if options.filter:
         try:
             data = eval("data[ " + options.filter + "]")
