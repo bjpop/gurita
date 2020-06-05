@@ -117,11 +117,12 @@ The fmri dataset is from the `seaborn-data` repository that is used in the seabo
 Plot distributions of selected columns as histograms.
 
 ```
+$ hatch hist -h
 usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                  [--version] [--logfile LOG_FILE] [--nolegend]
-                  [--filter EXPR] [--navalues STR] [--title STR]
-                  [--width SIZE] [--height SIZE] --columns FEATURE
-                  [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH]
+                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                  [--navalues STR] [--title STR] [--width SIZE]
+                  [--height SIZE] --columns FEATURE [FEATURE ...] [--logy]
+                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH]
                   [--bins NUMBINS] [--cumulative]
                   DATA
 
@@ -133,7 +134,6 @@ optional arguments:
   --outdir DIR          Name of optional output directory.
   --filetype FILETYPE   Type of input file
   --name NAME           Name prefix for output files
-  --version             show program's version number and exit
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
   --filter EXPR         Filter rows: only retain rows that make this
@@ -146,6 +146,8 @@ optional arguments:
   --columns FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical axis
+  --xlim LOW HIGH LOW HIGH
+                        Limit horizontal axis range to [LOW,HIGH]
   --ylim LOW HIGH LOW HIGH
                         Limit vertical axis range to [LOW,HIGH]
   --bins NUMBINS        Number of bins for histogram (default=100)
@@ -422,13 +424,13 @@ Note that column names can be written as if they are ordinary variables, such as
 allowed by Python variables) then it can be surround in back-tick characters, as in:
 
 ```
-hatch scatter --filter '`species` != "setosa"' --xy sepal_length,sepal_width --hue species -- ../data/iris.csv
+hatch scatter --filter '`species` != "setosa"' --xy sepal_length,sepal_width --hue species -- iris.csv
 ```
 
 The query syntax also supports complex boolean expressions (essentially anything that can be expressed in Python), for example:
 
 ```
-hatch count --columns class embark_town --filter 'survived == 0 and sex == "male"' -- ../data/titanic.csv 
+hatch count --columns class embark_town --filter 'survived == 0 and sex == "male"' -- titanic.csv 
 ```
 
 # Running within the Docker container
