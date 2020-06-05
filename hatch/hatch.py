@@ -142,7 +142,7 @@ def parse_args():
         '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
         help=f'Limit vertical axis range to [LOW,HIGH]')
 
-    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, ylim_arguments, xlim_arguments], add_help=False) 
+    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUMBINS', required=False, default=DEFAULT_BINS, type=int,
         help=f'Number of bins for histogram (default={DEFAULT_BINS})')
@@ -243,7 +243,8 @@ def read_data(options):
         exit_with_error(f"Could not open file: {options.data}", EXIT_FILE_IO_ERROR)
     if options.filter:
         try:
-            data = eval("data[ " + options.filter + "]")
+            #data = eval("data[ " + options.filter + "]")
+            data = data.query(options.filter)
         except:
             exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
     return data 

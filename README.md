@@ -409,11 +409,26 @@ The `--filter` command line option allows you to select rows to be included in t
 It takes a Python expression as its argument. Any rows that make the expression True are included in the plot, and all other
 rows are excluded. The syntax of the expression follows the Pandas style.
 
+Specifically it uses the notation provided by the [pandas.DataFrame.query](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html).
+
 In the following command we select only those rows where the value in the `species` column is not equal to `setosa` (that is we exclude all
 rows for setosa).
 
 ```
-hatch scatter --filter "data['species'] != 'setosa'" --xy sepal_length,sepal_width --hue species -- iris.csv
+hatch scatter --filter 'species != "setosa"' --xy sepal_length,sepal_width --hue species -- iris.csv
+```
+
+Note that column names can be written as if they are ordinary variables, such as `species` above. However, if a column name has spaces in it (or other characters not
+allowed by Python variables) then it can be surround in back-tick characters, as in:
+
+```
+hatch scatter --filter '`species` != "setosa"' --xy sepal_length,sepal_width --hue species -- ../data/iris.csv
+```
+
+The query syntax also supports complex boolean expressions (essentially anything that can be expressed in Python), for example:
+
+```
+hatch count --columns class embark_town --filter 'survived == 0 and sex == "male"' -- ../data/titanic.csv 
 ```
 
 # Running within the Docker container
