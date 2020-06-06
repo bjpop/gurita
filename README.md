@@ -10,6 +10,7 @@ Hatch supports the following plot types:
  * Scatter plots (with optional hue)
  * Line plots
  * Heatmaps
+ * Counts (bar plots)
 
 In the examples below, `$` indicates the command line prompt.
 
@@ -349,6 +350,55 @@ fmri.timepoint.signal.line.png
 Below is the line plot for timepoint versus signal grouped by the even column (fmri.timepoint.signal.line.png):
 
 <img src="images/fmri.timepoint.signal.line.png" width="500" height="400">
+
+## Counts (bar plots) 
+
+```
+$ hatch count -h
+usage: hatch count [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                   [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                   [--navalues STR] [--title STR] [--width SIZE]
+                   [--height SIZE] --columns FEATURE [FEATURE ...] [--logy]
+                   [--hue FEATURE]
+                   DATA
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file
+  --name NAME           Name prefix for output files
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches (default: 10)
+  --height SIZE         Plot height in inches (default: 8)
+  --columns FEATURE [FEATURE ...]
+                        Columns to plot
+  --logy                Use a log scale on the veritical axis
+  --hue FEATURE         Name of feature (column headings) to group data for
+                        count plot
+```
+
+For example, a bar plot for the titanic dataset showing the counts of values in the categorical columns `class` and `embark_town` 
+```
+hatch count --columns class embark_town -- titanic.csv
+```
+
+Outputs go to:
+```
+titanic.class.count.png
+titanic.embark_town.count.png
+```
+Below is the bar plot for the `embark_town` column in the titanic dataset: 
+
+<img src="images/titanic.embark_town.count.png" width="500" height="400">
 
 ## Heatmaps
 
