@@ -102,6 +102,24 @@ Help messages for each plot type can be requested with `-h` or `--help` after th
 hatch hist -h
 ```
 
+## Input files
+
+Hatch can either read data from a named input file, or if no file is specified, then it will read input from the standard input device (stdin).
+
+For example, both of the usages below are valid:
+
+Read from a named input file:
+```
+hatch count --columns class embark_town -- titanic.csv
+```
+
+Read from stdin:
+```
+hatch count --columns class embark_town < titanic.csv
+```
+
+When reading input from a named file hatch will use the stem of the input filename as the first part of the output file name. For example, if the input filename is called `titanic.csv` then then output filename will start with `titanic`. However, this behaviour can be overridden using the `--name` command line argument, where an alternative output filename prefix can be specified. When input is read from stdin hatch will choose `plot` to be the first part of the output file name, unless an alternative is specified by `--name`.
+
 ## Example test data
 
 In the `data` directory in this repository we provide some sample test data for the sake of illustrating the plotting functionality of hatch.

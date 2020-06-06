@@ -34,6 +34,7 @@ DEFAULT_DIST_PLOT_TYPE = 'box'
 ALLOWED_DISTPLOT_TYPES = ['box', 'violin']
 DEFAULT_PLOT_WIDTH=10
 DEFAULT_PLOT_HEIGHT=8
+DEFAULT_PLOT_NAME="plot"
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -69,7 +70,6 @@ def parse_args():
 
     subparsers = parser.add_subparsers(title='Plot type', help='sub-command help', dest='cmd')  
 
-    #common_arguments = ArgumentParser(add_help=False)
     common_arguments = ArgumentParser()
     common_arguments.add_argument(
         '--outdir',  metavar='DIR', type=str,
@@ -110,7 +110,7 @@ def parse_args():
         default=DEFAULT_PLOT_HEIGHT,
         help=f'Plot height in inches (default: {DEFAULT_PLOT_HEIGHT})')
     common_arguments.add_argument(
-        'data',  metavar='DATA', type=str, help='Filepaths of input CSV/TSV file')
+        'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
     xy_arguments = ArgumentParser(add_help=False)
     xy_arguments.add_argument(
@@ -234,16 +234,18 @@ def read_data(options):
     else:
         na_values = None
 
+    sep = ","
+    if options.filetype == "TSV":
+       sep = "\t"
+    input_file = sys.stdin
+    if options.data is not None:
+        input_file = options.data
     try:
-        if options.filetype == 'CSV':
-            data = pd.read_csv(options.data, sep=",", keep_default_na=True, na_values=na_values)
-        elif options.filetype == 'TSV':
-            data = pd.read_csv(options.data, sep="\t", keep_default_na=True, na_values=na_values)
+        data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values)
     except IOError:
         exit_with_error(f"Could not open file: {options.data}", EXIT_FILE_IO_ERROR)
     if options.filter:
         try:
-            #data = eval("data[ " + options.filter + "]")
             data = data.query(options.filter)
         except:
             exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
@@ -252,8 +254,10 @@ def read_data(options):
 def get_output_name(options):
     if options.name:
         return options.name
-    else:
+    elif options.data is not None:
         return Path(options.data).stem
+    else:
+        return DEFAULT_PLOT_NAME 
         
 
 def histogram(options, df):
