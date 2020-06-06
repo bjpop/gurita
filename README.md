@@ -118,6 +118,12 @@ Read from stdin:
 hatch count --columns class embark_town < titanic.csv
 ```
 
+Reading from stdin is particularly useful for pipeline commands:
+
+```
+some_command | hatch ...
+```
+
 When reading input from a named file hatch will use the stem of the input filename as the first part of the output file name. For example, if the input filename is called `titanic.csv` then then output filename will start with `titanic`. However, this behaviour can be overridden using the `--name` command line argument, where an alternative output filename prefix can be specified. When input is read from stdin hatch will choose `plot` to be the first part of the output file name, unless an alternative is specified by `--name`.
 
 ## Example test data
