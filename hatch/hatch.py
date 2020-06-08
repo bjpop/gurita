@@ -227,7 +227,6 @@ def init_logging(log_filename):
         logging.info('command line: %s', ' '.join(sys.argv))
 
 
-
 def read_data(options):
     if options.navalues:
         na_values = options.navalues.split()
@@ -251,6 +250,7 @@ def read_data(options):
             exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
     return data 
 
+
 def get_output_name(options):
     if options.name:
         return options.name
@@ -260,200 +260,213 @@ def get_output_name(options):
         return DEFAULT_PLOT_NAME 
         
 
-def histogram(options, df):
-    for column in options.columns:
-        if column in df.columns:
-            plt.clf()
-            plt.suptitle('')
-            fig, ax = plt.subplots(figsize=(options.width,options.height))
-            sns.distplot(df[column], hist_kws={'cumulative': options.cumulative}, kde=False, bins=options.bins) 
-            output_name = get_output_name(options)
-            filename = Path('.'.join([output_name, column.replace(' ', '_'), 'histogram.png']))
-            ax.set(xlabel=column, ylabel='count')
-            if options.logy:
-                ax.set(yscale="log")
-            if options.title:
-                plt.title(options.title)
-            if options.xlim:
-                xlow, xhigh = options.xlim
-                plt.xlim(xlow, xhigh)
-            plt.tight_layout()
-            plt.savefig(filename)
-            plt.close()
-        else:
-            logging.warn(f"Column: {column} does not exist in data, skipping")
+class Plot:
+    def __init__(self, options, df):
+        self.options = options
+        self.df = df
+        self.fig = None
+        self.ax = None
+
+    # Make a plot, parameterised by plot_command which does specific actions for
+    # the particular kind of plot being performed
+    def plot(self):
+        options = self.options
+        plt.clf()
+        plt.suptitle('')
+        self.fig, self.ax = plt.subplots(figsize=(options.width, options.height))
+        self.render_data()
+        if hasattr(options, 'title') and options.title is not None:
+            plt.title(options.title)
+        if hasattr(options, 'xlim') and options.xlim is not None:
+            xlow, xhigh = options.xlim
+            plt.xlim(xlow, xhigh)
+        if hasattr(options, 'ylim') and options.ylim is not None:
+            ylow, yhigh = options.ylim
+            plt.ylim(ylow, yhigh)
+        if hasattr(options, 'logx') and options.logx:
+            self.ax.set(xscale="log")
+        if hasattr(options, 'logy') and options.logy:
+            self.ax.set(yscale="log")
+        plt.tight_layout()
+        output_filename = self.make_output_filename()
+        plt.savefig(output_filename)
+        plt.close()
+
+    def render_data(self):
+        raise NotImplementedError
+
+    def make_output_filename(self):
+        raise NotImplementedError
 
 
-def distribution(options, df):
-    for group in options.group:
-        if group in df.columns:
-            plot_distributions_by(options, df, group)
-        else:
-            logging.warn(f"Column: {group} does not exist in data, skipping")
+class Histogram(Plot):
+    def __init__(self, options, df, column):
+        super().__init__(options, df)
+        self.column = column
+    
+    def render_data(self):
+        sns.distplot(self.df[self.column], hist_kws={'cumulative': self.options.cumulative}, kde=False, bins=self.options.bins) 
+        self.ax.set(xlabel=self.column, ylabel='count')
 
-def plot_distributions_by(options, df, group):
-    for column in options.columns:
-        if column in df.columns:
-            plt.clf()
-            plt.suptitle('')
-            fig, ax = plt.subplots(figsize=(options.width,options.height))
-            if options.type == 'box':
-                sns.boxplot(data=df, x=group, y=column) 
-            elif options.type == 'violin':
-                sns.violinplot(data=df, x=group, y=column) 
-            output_name = get_output_name(options)
-            group_str = group.replace(' ', '_')
-            column_str = column.replace(' ', '_')
-            filename = Path('.'.join([output_name, column_str, group_str, 'dist', 'png']))
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-            ax.set(xlabel=group, ylabel=column)
-            if options.logy:
-                ax.set(yscale="log")
-            if options.title:
-                plt.title(options.title)
-            if options.ylim:
-                ylow, yhigh = options.ylim
-                plt.ylim(ylow, yhigh)
-            plt.tight_layout()
-            plt.savefig(filename)
-            plt.close()
-        else:
-            logging.warn(f"Column: {column} does not exist in data, skipping")
-
-def line(options, df):
-    for pair in options.xy:
-        pair_fields = pair.split(",") 
-        if len(pair_fields) == 2:
-            feature1, feature2 = pair_fields
-            line_plot(options, df, feature1, feature2)
-        else:
-            logging.warn(f"Badly formed feature pair: {pair}, must be feature1,feature2 (comma separated, no spaces) ")
-
-def line_plot(options, df, feature1, feature2):
-    plt.clf()
-    plt.suptitle('')
-    fig, ax = plt.subplots(figsize=(options.width,options.height))
-    sns.lineplot(data=df, x=feature1, y=feature2, hue=options.hue) 
-    output_name = get_output_name(options)
-    feature1_str = feature1.replace(' ', '_')
-    feature2_str = feature2.replace(' ', '_')
-    output_name = get_output_name(options)
-    filename = Path('.'.join([output_name, feature1_str, feature2_str, 'line.png'])) 
-    ax.set(xlabel=feature1, ylabel=feature2)
-    if options.logy:
-        ax.set(yscale="log")
-    if options.title:
-        plt.title(options.title)
-    plt.tight_layout()
-    plt.savefig(filename)
-    plt.close()
+    def make_output_filename(self):
+        output_name = get_output_name(self.options)
+        return Path('.'.join([output_name, self.column.replace(' ', '_'), 'histogram.png']))
 
 
-def heatmap(options, df):
-    plt.clf()
-    plt.suptitle('')
-    fig, ax = plt.subplots(figsize=(options.width,options.height))
-    pivot_data = df.pivot(index=options.rows, columns=options.columns, values=options.values)
-    g=sns.heatmap(data=pivot_data, cmap=options.cmap)
-    output_name = get_output_name(options)
-    filename = Path('.'.join([output_name, options.rows, options.columns, options.values, 'heatmap.png'])) 
-    if options.title:
-        plt.title(options.title)
-    plt.tight_layout()
-    plt.savefig(filename)
-    plt.close()
+class Distribution(Plot):
+    def __init__(self, options, df, group, column):
+        super().__init__(options, df)
+        self.group = group 
+        self.column = column
+
+    def render_data(self):
+        if self.options.type == 'box':
+            sns.boxplot(data=self.df, x=self.group, y=self.column) 
+        elif self.options.type == 'violin':
+            sns.violinplot(data=self.df, x=self.group, y=self.column) 
+        self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
+        self.ax.set(xlabel=self.group, ylabel=self.column)
+
+    def make_output_filename(self):
+        output_name = get_output_name(self.options)
+        group_str = self.group.replace(' ', '_')
+        column_str = self.column.replace(' ', '_')
+        return Path('.'.join([output_name, column_str, group_str, 'dist', 'png']))
 
 
-def scatter(options, df):
-    for pair in options.xy:
-        pair_fields = pair.split(",") 
-        if len(pair_fields) == 2:
-            feature1, feature2 = pair_fields
-            scatter_plot(options, df, feature1, feature2)
-        else:
-            logging.warn(f"Badly formed feature pair: {pair}, must be feature1,feature2 (comma separated, no spaces) ")
+class Line(Plot):
+    def __init__(self, options, df, feature1, feature2):
+        super().__init__(options, df)
+        self.feature1 = feature1
+        self.feature2 = feature2
+
+    def render_data(self):
+        sns.lineplot(data=self.df, x=self.feature1, y=self.feature2, hue=self.options.hue) 
+        self.ax.set(xlabel=self.feature1, ylabel=self.feature2)
+
+    def make_output_filename(self):
+        feature1_str = self.feature1.replace(' ', '_')
+        feature2_str = self.feature2.replace(' ', '_')
+        output_name = get_output_name(self.options)
+        return Path('.'.join([output_name, feature1_str, feature2_str, 'line.png'])) 
+
            
+class Scatter(Plot):
+    def __init__(self, options, df, feature1, feature2):
+        super().__init__(options, df)
+        self.feature1 = feature1
+        self.feature2 = feature2
 
-def scatter_plot(options, df, feature1, feature2):
-    alpha = options.alpha
-    linewidth = options.linewidth
-    plt.clf()
-    plt.suptitle('')
-    # XXX this needs to be a parameter
-    fig, ax = plt.subplots(figsize=(options.width,options.height))
-    g=sns.scatterplot(data=df, x=feature1, y=feature2, hue=options.hue, alpha=options.alpha, size=options.size, linewidth=options.linewidth)
-    if options.hue is not None:
-        g.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
-    if options.nolegend:
-        g.legend_.remove()
-    feature1_str = feature1.replace(' ', '_')
-    feature2_str = feature2.replace(' ', '_')
-    output_name = get_output_name(options)
-    filename = Path('.'.join([output_name, feature1_str, feature2_str, 'scatter.png'])) 
-    ax.set(xlabel=feature1, ylabel=feature2)
-    if options.title:
-        plt.title(options.title)
-    if options.xlim:
-        xlow, xhigh = options.xlim
-        plt.xlim(xlow, xhigh)
-    if options.ylim:
-        ylow, yhigh = options.ylim
-        plt.ylim(ylow, yhigh)
-    plt.tight_layout()
-    plt.savefig(filename)
-    plt.close()
+    def render_data(self):
+        graph=sns.scatterplot(data=self.df, x=self.feature1, y=self.feature2, hue=self.options.hue,
+                          alpha=self.options.alpha, size=self.options.size, linewidth=self.options.linewidth)
+        self.ax.set(xlabel=self.feature1, ylabel=self.feature2)
+        if self.options.hue is not None:
+            graph.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+        if self.options.nolegend:
+            graph.legend_.remove()
+
+    def make_output_filename(self):
+        feature1_str = self.feature1.replace(' ', '_')
+        feature2_str = self.feature2.replace(' ', '_')
+        output_name = get_output_name(self.options)
+        return Path('.'.join([output_name, feature1_str, feature2_str, 'scatter.png'])) 
 
 
-def count(options, df):
-    for column in options.columns:
-        if column in df.columns:
-            plt.clf()
-            plt.suptitle('')
-            fig, ax = plt.subplots(figsize=(options.width,options.height))
-            sns.countplot(data=df, x=column, hue=options.hue) 
-            output_name = get_output_name(options)
-            column_str = column.replace(' ', '_')
-            hue_str = ''
-            if options.hue:
-                hue_str = options.hue.replace(' ', '_')
-                filename = Path('.'.join([output_name, column_str, hue_str, 'count', 'png']))
-            else:
-                filename = Path('.'.join([output_name, column_str, 'count', 'png']))
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-            ax.set(xlabel=column)
-            if options.logy:
-                ax.set(yscale="log")
-            if options.title:
-                plt.title(options.title)
-            plt.tight_layout()
-            plt.savefig(filename)
-            plt.close()
+class Heatmap(Plot):
+    def __init__(self, options, df):
+        super().__init__(options, df)
+
+    def render_data(self):
+        pivot_data = self.df.pivot(index=self.options.rows, columns=self.options.columns, values=self.options.values)
+        sns.heatmap(data=pivot_data, cmap=self.options.cmap)
+
+    def make_output_filename(self):
+        output_name = get_output_name(self.options)
+        return Path('.'.join([output_name, self.options.rows, self.options.columns, self.options.values, 'heatmap.png'])) 
+
+
+class Count(Plot):
+    def __init__(self, options, df, column):
+        super().__init__(options, df)
+        self.column = column
+
+    def render_data(self):
+        sns.countplot(data=self.df, x=self.column, hue=self.options.hue) 
+        self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
+        self.ax.set(xlabel=self.column)
+
+    def make_output_filename(self):
+        output_name = get_output_name(self.options)
+        column_str = self.column.replace(' ', '_')
+        hue_str = ''
+        if self.options.hue:
+            hue_str = self.options.hue.replace(' ', '_')
+            filename = Path('.'.join([output_name, column_str, hue_str, 'count', 'png']))
         else:
-            logging.warn(f"Column: {column} does not exist in data, skipping")
+            filename = Path('.'.join([output_name, column_str, 'count', 'png']))
+        return filename
+
+
 
 
 def make_output_directories(options):
     pass
 
 
+def plot_by_xy(options, df, plotter):
+    for pair in options.xy:
+        pair_fields = pair.split(",") 
+        if len(pair_fields) == 2:
+            feature1, feature2 = pair_fields
+            if feature1 in df.columns and feature2 in df.columns:
+                plotter(options, df, feature1, feature2).plot() 
+            else:
+                logging.warn(f"One or both of the columns {feature1} and {feature2} does not exist in data, skipping")
+        else:
+            logging.warn(f"Badly formed feature pair: {pair}, must be feature1,feature2 (comma separated, no spaces) ")
+
+
+def plot_heatmap(options, df):
+    Heatmap(options, df).plot()
+
+
+def plot_distribution(options, df):
+    for group in options.group:
+        if group in df.columns:
+            for column in options.columns:
+                if column in df.columns:
+                    Distribution(options, df, group, column).plot()
+                else:
+                    logging.warn(f"Column: {column} does not exist in data, skipping")
+        else:
+            logging.warn(f"Column: {group} does not exist in data, skipping")
+
+
+def plot_by_column(options, df, plotter):
+    for column in options.columns:
+        if column in df.columns:
+            plotter(options, df, column).plot()
+        else:
+            logging.warn(f"Column: {column} does not exist in data, skipping")
+
 def main():
-    "Orchestrate the execution of the program"
     options = parse_args()
     init_logging(options.logfile)
     make_output_directories(options)
     df = read_data(options)
     if options.cmd == 'hist':
-        histogram(options, df)
+        plot_by_column(options, df, Histogram)
     elif options.cmd == 'dist':
-        distribution(options, df)
+        plot_distribution(options, df)
     elif options.cmd == 'scatter':
-        scatter(options, df)
+        plot_by_xy(options, df, Scatter)
     elif options.cmd == 'line':
-        line(options, df)
+        plot_by_xy(options, df, Line)
     elif options.cmd == 'heatmap':
-        heatmap(options, df)
+        Heatmap(options, df).plot()
     elif options.cmd == 'count':
-        count(options, df)
+        plot_by_column(options, df, Count)
     logging.info("Completed")
 
 
