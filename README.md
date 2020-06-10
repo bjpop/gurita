@@ -552,7 +552,6 @@ optional arguments:
 
 For example, 
 ```
-hatch heatmap --rows year --columns month --values passengers -- flights.csv
 hatch pca --columns sepal_length sepal_width petal_length petal_width --hue species --dotalpha 0.8 iris.csv
 ```
 
