@@ -19,16 +19,20 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 from pathlib import Path
+from sklearn.preprocessing import StandardScaler
+import sklearn.decomposition as sk_decomp 
+from sklearn.impute import SimpleImputer
 
 
 EXIT_FILE_IO_ERROR = 1
 EXIT_COMMAND_LINE_ERROR = 2
 PROGRAM_NAME = "hatch"
 
-DEFAULT_ALPHA = 0.3
+DEFAULT_ALPHA = 0.5
 DEFAULT_LINEWIDTH = 0
 DEFAULT_FILETYPE = 'CSV'
 DEFAULT_BINS = 100
+DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
 DEFAULT_DIST_PLOT_TYPE = 'box'
 ALLOWED_DISTPLOT_TYPES = ['box', 'violin']
@@ -79,7 +83,7 @@ def parse_args():
         '--filetype',  metavar='FILETYPE', type=str,
         required=False, choices=ALLOWED_FILETYPES,
         default=DEFAULT_FILETYPE,
-        help=f'Type of input file')
+        help=f'Type of input file. Allowed values: %(choices)s. Default: %(default)s.')
     common_arguments.add_argument(
         '--name',  metavar='NAME', type=str,
         required=False, 
@@ -104,11 +108,17 @@ def parse_args():
     common_arguments.add_argument(
         '--width', metavar='SIZE', required=False, type=float,
         default=DEFAULT_PLOT_WIDTH,
-        help=f'Plot width in inches (default: {DEFAULT_PLOT_WIDTH})')
+        help=f'Plot width in inches. Default: %(default)s')
     common_arguments.add_argument(
         '--height', metavar='SIZE', required=False, type=float,
         default=DEFAULT_PLOT_HEIGHT,
-        help=f'Plot height in inches (default: {DEFAULT_PLOT_HEIGHT})')
+        help=f'Plot height in inches. Default: %(default)s')
+    common_arguments.add_argument(
+        '--xlabel', metavar='STR', required=False, type=str,
+        help=f'Label for horizontal (X) axis')
+    common_arguments.add_argument(
+        '--ylabel', metavar='STR', required=False, type=str,
+        help=f'Label for vertical (Y) axis')
     common_arguments.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
@@ -125,12 +135,12 @@ def parse_args():
     logx_arguments = ArgumentParser(add_help=False)
     logx_arguments.add_argument(
         '--logx', action='store_true',
-        help=f'Use a log scale on the horizontal axis')
+        help=f'Use a log scale on the horizontal (X) axis')
 
     logy_arguments = ArgumentParser(add_help=False)
     logy_arguments.add_argument(
         '--logy', action='store_true',
-        help=f'Use a log scale on the veritical axis')
+        help=f'Use a log scale on the veritical (Y) axis')
 
     xlim_arguments = ArgumentParser(add_help=False)
     xlim_arguments.add_argument(
@@ -142,10 +152,37 @@ def parse_args():
         '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
         help=f'Limit vertical axis range to [LOW,HIGH]')
 
+    hue_arguments = ArgumentParser(add_help=False)
+    hue_arguments.add_argument(
+        '--hue',  metavar='FEATURE', type=str, required=False, 
+        help=f'Name of feature (column headings) to use for colouring the plotted data')
+
+    dotsize_arguments = ArgumentParser(add_help=False)
+    dotsize_arguments.add_argument(
+        '--dotsize',  metavar='FEATURE', type=str, required=False, 
+        help=f'Name of feature (column headings) to use for plotted point size')
+
+    dotalpha_arguments = ArgumentParser(add_help=False)
+    dotalpha_arguments.add_argument(
+        '--dotalpha',  metavar='ALPHA', type=float, default=DEFAULT_ALPHA,
+        help=f'Alpha value for plotted points. Default: %(default)s')
+
+    dotlinewidth_arguments = ArgumentParser(add_help=False)
+    dotlinewidth_arguments.add_argument(
+        '--dotlinewidth',  metavar='WIDTH', type=int, default=DEFAULT_LINEWIDTH,
+        help=f'Line width value for plotted points. Default: %(default)s')
+
+    pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[common_arguments, columns_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
+    pcaparser.add_argument(
+        '--missing',  metavar='STRATEGY', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
+        help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
+
+    scatterparser = subparsers.add_parser('scatter', help='Scatter plots of numerical data', parents=[common_arguments, xy_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
+
     histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUMBINS', required=False, default=DEFAULT_BINS, type=int,
-        help=f'Number of bins for histogram (default={DEFAULT_BINS})')
+        help=f'Number of bins for histogram. Default: %(default)s')
     histparser.add_argument(
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
@@ -156,21 +193,7 @@ def parse_args():
         help=f'Plot distributions of of the columns where data are grouped by these features')
     distparser.add_argument(
         '--type', choices=ALLOWED_DISTPLOT_TYPES, default=DEFAULT_DIST_PLOT_TYPE,
-        help=f'Type of plot, default({DEFAULT_DIST_PLOT_TYPE})')
-
-    scatterparser = subparsers.add_parser('scatter', help='Scatter plots of numerical data', parents=[common_arguments, xy_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
-    scatterparser.add_argument(
-        '--hue',  metavar='FEATURE', type=str, required=False, 
-        help=f'Name of feature (column headings) to use for colouring dots')
-    scatterparser.add_argument(
-        '--size',  metavar='FEATURE', type=str, required=False, 
-        help=f'Name of feature (column headings) to use for dot size')
-    scatterparser.add_argument(
-        '--alpha',  metavar='ALPHA', type=float, default=DEFAULT_ALPHA,
-        help=f'Alpha value for plotting points (default: {DEFAULT_ALPHA})')
-    scatterparser.add_argument(
-        '--linewidth',  metavar='WIDTH', type=int, default=DEFAULT_LINEWIDTH,
-        help=f'Line width value for plotting points (default: {DEFAULT_LINEWIDTH})')
+        help=f'Type of plot. Default: %(default)s')
 
     lineparser = subparsers.add_parser('line', help='Line plots of numerical data', parents=[common_arguments, xy_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     lineparser.add_argument(
@@ -277,6 +300,10 @@ class Plot:
         self.render_data()
         if hasattr(options, 'title') and options.title is not None:
             plt.title(options.title)
+        if hasattr(options, 'xlabel') and options.xlabel is not None:
+            self.ax.set(xlabel=options.xlabel)
+        if hasattr(options, 'ylabel') and options.ylabel is not None:
+            self.ax.set(ylabel=options.ylabel)
         if hasattr(options, 'xlim') and options.xlim is not None:
             xlow, xhigh = options.xlim
             plt.xlim(xlow, xhigh)
@@ -359,7 +386,7 @@ class Scatter(Plot):
 
     def render_data(self):
         graph=sns.scatterplot(data=self.df, x=self.feature1, y=self.feature2, hue=self.options.hue,
-                          alpha=self.options.alpha, size=self.options.size, linewidth=self.options.linewidth)
+                          alpha=self.options.dotalpha, size=self.options.dotsize, linewidth=self.options.dotlinewidth)
         self.ax.set(xlabel=self.feature1, ylabel=self.feature2)
         if self.options.hue is not None:
             graph.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
@@ -371,6 +398,52 @@ class Scatter(Plot):
         feature2_str = self.feature2.replace(' ', '_')
         output_name = get_output_name(self.options)
         return Path('.'.join([output_name, feature1_str, feature2_str, 'scatter.png'])) 
+
+
+class PCA(Plot):
+    def __init__(self, options, df):
+        super().__init__(options, df)
+
+    def render_data(self):
+        column_names = self.options.columns
+        # Build a dataframe with the columns that we are interested in
+        selected_columns = self.df[column_names]
+        # Handle rows in the data that have missing values
+        if self.options.missing == 'drop':
+            selected_columns = selected_columns.dropna()
+        elif self.options.missing == 'imputemean':
+            imputer = SimpleImputer(strategy='mean')
+            selected_columns = imputer.fit_transform(selected_columns)
+        elif self.options.missing == 'imputemedian':
+            imputer = SimpleImputer(strategy='median')
+            selected_columns = imputer.fit_transform(selected_columns)
+        elif self.options.missing == 'imputemostfrequent':
+            imputer = SimpleImputer(strategy='most_frequent')
+            selected_columns = imputer.fit_transform(selected_columns)
+        # Standardize features by removing the mean and scaling to unit variance 
+        scaler = StandardScaler()
+        standardized_data = scaler.fit_transform(selected_columns)
+        # Perform PCA on the standardized data
+        pca = sk_decomp.PCA(n_components=2)
+        pca_transform = pca.fit_transform(standardized_data)
+        # Build a new dataframe for the PCA transformed data, adding columnd headings for the 2 components
+        first_two_components = pd.DataFrame(data = pca_transform, columns = ['principal component 1', 'principal component 2'])
+        # Optionally select a column to use for colouring the dots in the plot
+        if self.options.hue is not None:
+            hue_column = self.df[self.options.hue]
+            first_two_components = first_two_components.join(hue_column)
+        # Generate a scatter plot for the PCA transformed data
+        graph=sns.scatterplot(data=first_two_components, x='principal component 1', y='principal component 2', hue=self.options.hue,
+                          alpha=self.options.dotalpha, size=self.options.dotsize, linewidth=self.options.dotlinewidth)
+        self.ax.set(xlabel='principal component 1', ylabel='principal component 2')
+        if self.options.hue is not None:
+            graph.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+        if self.options.nolegend:
+            graph.legend_.remove()
+
+    def make_output_filename(self):
+        output_name = get_output_name(self.options)
+        return Path('.'.join([output_name, 'pca.png'])) 
 
 
 class Heatmap(Plot):
@@ -406,8 +479,6 @@ class Count(Plot):
         else:
             filename = Path('.'.join([output_name, column_str, 'count', 'png']))
         return filename
-
-
 
 
 def make_output_directories(options):
@@ -450,6 +521,7 @@ def plot_by_column(options, df, plotter):
         else:
             logging.warn(f"Column: {column} does not exist in data, skipping")
 
+
 def main():
     options = parse_args()
     init_logging(options.logfile)
@@ -467,6 +539,8 @@ def main():
         Heatmap(options, df).plot()
     elif options.cmd == 'count':
         plot_by_column(options, df, Count)
+    elif options.cmd == 'pca':
+        PCA(options, df).plot()
     logging.info("Completed")
 
 

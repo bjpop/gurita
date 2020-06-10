@@ -7,10 +7,11 @@ This program plots tabular data from input CSV (or TSV) files. Output plots are 
 Hatch supports the following plot types:
  * Histograms (regular and cumulative)
  * Distributions (box and violin)
- * Scatter plots (with optional hue)
+ * Scatter plots
  * Line plots
  * Heatmaps
  * Counts (bar plots)
+ * Principal components analysis (PCA)
 
 In the examples below, `$` indicates the command line prompt.
 
@@ -69,23 +70,24 @@ Hatch can generate a number of differnt plot types, each of which can be selecte
 
 ```
 $ hatch -h
-usage: hatch [-h] {hist,dist,scatter,line,count,heatmap} ...
+usage: hatch [-h] [-v] {pca,scatter,hist,dist,line,count,heatmap} ...
 
 Generate plots of tabular data
 
 optional arguments:
   -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
 
 Plot type:
-  {hist,dist,scatter,line,count,heatmap}
+  {pca,scatter,hist,dist,line,count,heatmap}
                         sub-command help
+    pca                 Principal components analysis
+    scatter             Scatter plots of numerical data
     hist                Histograms of numerical data
     dist                Distributions of numerical data
-    scatter             Scatter plots of numerical data
     line                Line plots of numerical data
     count               Counts (bar plots) of categorical data
     heatmap             Heatmap of two categories with numerical values
-
 ```
 
 For example, if you want to plot a histogram, hatch can be invoked like so:
@@ -105,6 +107,8 @@ hatch hist -h
 ## Input files
 
 Hatch can either read data from a named input file, or if no file is specified, then it will read input from the standard input device (stdin).
+The input file type must be either CSV or TSV. By default hatch will assume the data is in CSV format, but you can change the format with the `--filetype` argument, and choose TSV instead.
+Hatch requires that the first row of the input file is the column headings.
 
 For example, both of the usages below are valid:
 
@@ -146,10 +150,10 @@ $ hatch hist -h
 usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
                   [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                   [--navalues STR] [--title STR] [--width SIZE]
-                  [--height SIZE] --columns FEATURE [FEATURE ...] [--logy]
-                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH]
-                  [--bins NUMBINS] [--cumulative]
-                  DATA
+                  [--height SIZE] [--xlabel STR] [--ylabel STR] --columns
+                  FEATURE [FEATURE ...] [--logy] [--xlim LOW HIGH LOW HIGH]
+                  [--ylim LOW HIGH LOW HIGH] [--bins NUMBINS] [--cumulative]
+                  [DATA]
 
 positional arguments:
   DATA                  Filepaths of input CSV/TSV file
@@ -157,7 +161,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
   --name NAME           Name prefix for output files
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
@@ -166,16 +171,18 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
   --columns FEATURE [FEATURE ...]
                         Columns to plot
-  --logy                Use a log scale on the veritical axis
+  --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
                         Limit horizontal axis range to [LOW,HIGH]
   --ylim LOW HIGH LOW HIGH
                         Limit vertical axis range to [LOW,HIGH]
-  --bins NUMBINS        Number of bins for histogram (default=100)
+  --bins NUMBINS        Number of bins for histogram. Default: 100
   --cumulative          Generate cumulative histogram
 ```
 
@@ -203,12 +210,12 @@ Below is a histogram plot for sepal length for the iris data set (iris.sepal_len
 ```
 $ hatch dist -h
 usage: hatch dist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                  [--version] [--logfile LOG_FILE] [--nolegend]
-                  [--filter EXPR] [--navalues STR] [--title STR]
-                  [--width SIZE] [--height SIZE] --columns FEATURE
-                  [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH] --group
-                  FEATURE [FEATURE ...] [--type {box,violin}]
-                  DATA
+                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                  [--navalues STR] [--title STR] [--width SIZE]
+                  [--height SIZE] [--xlabel STR] [--ylabel STR] --columns
+                  FEATURE [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH]
+                  --group FEATURE [FEATURE ...] [--type {box,violin}]
+                  [DATA]
 
 positional arguments:
   DATA                  Filepaths of input CSV/TSV file
@@ -216,9 +223,9 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
   --name NAME           Name prefix for output files
-  --version             show program's version number and exit
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
   --filter EXPR         Filter rows: only retain rows that make this
@@ -226,17 +233,19 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
   --columns FEATURE [FEATURE ...]
                         Columns to plot
-  --logy                Use a log scale on the veritical axis
+  --logy                Use a log scale on the veritical (Y) axis
   --ylim LOW HIGH LOW HIGH
                         Limit vertical axis range to [LOW,HIGH]
   --group FEATURE [FEATURE ...]
                         Plot distributions of of the columns where data are
                         grouped by these features
-  --type {box,violin}   Type of plot, default(box)
+  --type {box,violin}   Type of plot. Default: box
 ```
 
 For example, plot distributions of selected columns, grouped by their species, using violin plots:
@@ -263,13 +272,14 @@ Below is a distribution plot for sepal length grouped by species for the iris da
 ```
 $ hatch scatter -h
 usage: hatch scatter [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                     [--version] [--logfile LOG_FILE] [--nolegend]
-                     [--filter EXPR] [--navalues STR] [--title STR]
-                     [--width SIZE] [--height SIZE] --xy X,Y [X,Y ...]
-                     [--logx] [--logy] [--xlim LOW HIGH LOW HIGH]
+                     [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                     [--navalues STR] [--title STR] [--width SIZE]
+                     [--height SIZE] [--xlabel STR] [--ylabel STR] --xy X,Y
+                     [X,Y ...] [--logx] [--logy] [--xlim LOW HIGH LOW HIGH]
                      [--ylim LOW HIGH LOW HIGH] [--hue FEATURE]
-                     [--size FEATURE] [--alpha ALPHA] [--linewidth WIDTH]
-                     DATA
+                     [--dotsize FEATURE] [--dotalpha ALPHA]
+                     [--dotlinewidth WIDTH]
+                     [DATA]
 
 positional arguments:
   DATA                  Filepaths of input CSV/TSV file
@@ -277,9 +287,9 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
   --name NAME           Name prefix for output files
-  --version             show program's version number and exit
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
   --filter EXPR         Filter rows: only retain rows that make this
@@ -287,20 +297,23 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
   --xy X,Y [X,Y ...]    Pairs of features to plot, format: name1,name2
-  --logx                Use a log scale on the horizontal axis
-  --logy                Use a log scale on the veritical axis
+  --logx                Use a log scale on the horizontal (X) axis
+  --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
                         Limit horizontal axis range to [LOW,HIGH]
   --ylim LOW HIGH LOW HIGH
                         Limit vertical axis range to [LOW,HIGH]
   --hue FEATURE         Name of feature (column headings) to use for colouring
-                        dots
-  --size FEATURE        Name of feature (column headings) to use for dot size
-  --alpha ALPHA         Alpha value for plotting points (default: 0.3)
-  --linewidth WIDTH     Line width value for plotting points (default: 0)
+                        the plotted data
+  --dotsize FEATURE     Name of feature (column headings) to use for plotted
+                        point size
+  --dotalpha ALPHA      Alpha value for plotted points. Default: 0.5
+  --dotlinewidth WIDTH  Line width value for plotted points. Default: 0
 ```
 
 For example, scatter plots of "sepal_length verus sepal_width", "petal_length versus petal_width" and "sepal_length versus petal_length" with hue indicating species:
@@ -324,12 +337,12 @@ Below is the scatter plot for sepal length versus petal length with hue determin
 ```
 $ hatch line -h
 usage: hatch line [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                  [--version] [--logfile LOG_FILE] [--nolegend]
-                  [--filter EXPR] [--navalues STR] [--title STR]
-                  [--width SIZE] [--height SIZE] --xy X,Y [X,Y ...] [--logy]
-                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH]
-                  [--overlay] [--hue FEATURE]
-                  DATA
+                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                  [--navalues STR] [--title STR] [--width SIZE]
+                  [--height SIZE] [--xlabel STR] [--ylabel STR] --xy X,Y
+                  [X,Y ...] [--logy] [--xlim LOW HIGH LOW HIGH]
+                  [--ylim LOW HIGH LOW HIGH] [--overlay] [--hue FEATURE]
+                  [DATA]
 
 positional arguments:
   DATA                  Filepaths of input CSV/TSV file
@@ -337,9 +350,9 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
   --name NAME           Name prefix for output files
-  --version             show program's version number and exit
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
   --filter EXPR         Filter rows: only retain rows that make this
@@ -347,10 +360,12 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
   --xy X,Y [X,Y ...]    Pairs of features to plot, format: name1,name2
-  --logy                Use a log scale on the veritical axis
+  --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
                         Limit horizontal axis range to [LOW,HIGH]
   --ylim LOW HIGH LOW HIGH
@@ -382,9 +397,9 @@ $ hatch count -h
 usage: hatch count [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
                    [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                    [--navalues STR] [--title STR] [--width SIZE]
-                   [--height SIZE] --columns FEATURE [FEATURE ...] [--logy]
-                   [--hue FEATURE]
-                   DATA
+                   [--height SIZE] [--xlabel STR] [--ylabel STR] --columns
+                   FEATURE [FEATURE ...] [--logy] [--hue FEATURE]
+                   [DATA]
 
 positional arguments:
   DATA                  Filepaths of input CSV/TSV file
@@ -392,7 +407,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
   --name NAME           Name prefix for output files
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
@@ -401,11 +417,13 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
   --columns FEATURE [FEATURE ...]
                         Columns to plot
-  --logy                Use a log scale on the veritical axis
+  --logy                Use a log scale on the veritical (Y) axis
   --hue FEATURE         Name of feature (column headings) to group data for
                         count plot
 ```
@@ -429,11 +447,12 @@ Below is the bar plot for the `embark_town` column in the titanic dataset:
 ```
 $ hatch heatmap -h
 usage: hatch heatmap [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                     [--version] [--logfile LOG_FILE] [--nolegend]
-                     [--filter EXPR] [--navalues STR] [--title STR]
-                     [--width SIZE] [--height SIZE] [--cmap COLOR_MAP_NAME]
-                     --rows FEATURE --columns FEATURE --values FEATURE [--log]
-                     DATA
+                     [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                     [--navalues STR] [--title STR] [--width SIZE]
+                     [--height SIZE] [--xlabel STR] [--ylabel STR]
+                     [--cmap COLOR_MAP_NAME] --rows FEATURE --columns FEATURE
+                     --values FEATURE [--log]
+                     [DATA]
 
 positional arguments:
   DATA                  Filepaths of input CSV/TSV file
@@ -441,9 +460,9 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
   --name NAME           Name prefix for output files
-  --version             show program's version number and exit
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
   --filter EXPR         Filter rows: only retain rows that make this
@@ -451,8 +470,10 @@ optional arguments:
   --navalues STR        Treat values in this space separated list as NA
                         values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
-  --width SIZE          Plot width in inches (default: 10)
-  --height SIZE         Plot height in inches (default: 8)
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
   --cmap COLOR_MAP_NAME
                         Use this color map, will use Seaborn default if not
                         specified
@@ -478,6 +499,71 @@ flights.year.month.passengers.heatmap.png
 Below is a heatmap for the flights datset (flights.year.month.passengers.heatmap.png):
 
 <img src="images/flights.year.month.passengers.heatmap.png" width="500" height="400">
+
+## Principal components analysis (PCA)
+
+```
+$ hatch pca -h
+usage: hatch pca [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
+                 [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
+                 [--navalues STR] [--title STR] [--width SIZE] [--height SIZE]
+                 [--xlabel STR] [--ylabel STR] --columns FEATURE [FEATURE ...]
+                 [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH]
+                 [--hue FEATURE] [--dotsize FEATURE] [--dotalpha ALPHA]
+                 [--dotlinewidth WIDTH] [--missing STRATEGY]
+                 [DATA]
+
+positional arguments:
+  DATA                  Filepaths of input CSV/TSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --outdir DIR          Name of optional output directory.
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
+                        CSV.
+  --name NAME           Name prefix for output files
+  --logfile LOG_FILE    record program progress in LOG_FILE
+  --nolegend            Turn off the legend in the plot
+  --filter EXPR         Filter rows: only retain rows that make this
+                        expression True
+  --navalues STR        Treat values in this space separated list as NA
+                        values. Example: --navalues ". - !"
+  --title STR           Plot title. By default no title will be added.
+  --width SIZE          Plot width in inches. Default: 10
+  --height SIZE         Plot height in inches. Default: 8
+  --xlabel STR          Label for horizontal (X) axis
+  --ylabel STR          Label for vertical (Y) axis
+  --columns FEATURE [FEATURE ...]
+                        Columns to plot
+  --xlim LOW HIGH LOW HIGH
+                        Limit horizontal axis range to [LOW,HIGH]
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
+  --hue FEATURE         Name of feature (column headings) to use for colouring
+                        the plotted data
+  --dotsize FEATURE     Name of feature (column headings) to use for plotted
+                        point size
+  --dotalpha ALPHA      Alpha value for plotted points. Default: 0.5
+  --dotlinewidth WIDTH  Line width value for plotted points. Default: 0
+  --missing STRATEGY    How to deal with rows that contain missing data.
+                        Allowed values: drop, imputemean, imputemedian,
+                        imputemostfrequent. Default: drop.
+```
+
+For example, 
+```
+hatch heatmap --rows year --columns month --values passengers -- flights.csv
+hatch pca --columns sepal_length sepal_width petal_length petal_width --hue species --dotalpha 0.8 iris.csv
+```
+
+Output will go to:
+```
+iris.pca.png
+```
+
+Below is a PCA plot for the iris datset (iris.pca.png):
+
+<img src="images/iris.pca.png" width="500" height="400">
 
 # Filtering rows
 
