@@ -13,6 +13,8 @@ Hatch supports the following plot types:
  * Counts (bar plots)
  * Principal components analysis (PCA)
 
+Hatch requires Python 3.6 or greater and relies heavily on the following libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [pandas](https://pandas.pydata.org/), [seaborn](https://seaborn.pydata.org/) (and hence [matplotlib](https://matplotlib.org/)), [scikit-learn](https://scikit-learn.org/).
+
 In the examples below, `$` indicates the command line prompt.
 
 # Licence
