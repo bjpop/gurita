@@ -82,8 +82,7 @@ def parse_args():
     common_arguments.add_argument(
         '--filetype',  metavar='FILETYPE', type=str,
         required=False, choices=ALLOWED_FILETYPES,
-        default=DEFAULT_FILETYPE,
-        help=f'Type of input file. Allowed values: %(choices)s. Default: %(default)s.')
+        help=f'Type of input file. Allowed values: %(choices)s. Otherwise inferred from filename extension.')
     common_arguments.add_argument(
         '--name',  metavar='NAME', type=str,
         required=False, 
@@ -119,6 +118,12 @@ def parse_args():
     common_arguments.add_argument(
         '--ylabel', metavar='STR', required=False, type=str,
         help=f'Label for vertical (Y) axis')
+    common_arguments.add_argument(
+        '--noxticklabels', action='store_true',
+        help=f'Turn of horizontal (X) axis tick labels')
+    common_arguments.add_argument(
+        '--noyticklabels', action='store_true',
+        help=f'Turn of veritcal (Y) axis tick labels')
     common_arguments.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
@@ -207,6 +212,9 @@ def parse_args():
     countparser.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature (column headings) to group data for count plot')
+    countparser.add_argument(
+        '--sorted',  action='store_true', 
+        help=f'Display horizontal (X) axis values in sorted order of count')
 
     heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments], add_help=False) 
     heatmapparser.add_argument(
@@ -256,12 +264,24 @@ def read_data(options):
     else:
         na_values = None
 
-    sep = ","
-    if options.filetype == "TSV":
-       sep = "\t"
-    input_file = sys.stdin
     if options.data is not None:
         input_file = options.data
+        maybe_filetype = get_filetype_from_extension(input_file)
+        if options.filetype == 'TSV':
+            sep = "\t"
+        elif options.filetype == 'CSV':
+            sep = ','
+        elif maybe_filetype == 'TSV':
+            sep = "\t"
+        elif maybe_filetype == 'CSV':
+            sep = "\t"
+        else: 
+            exit_with_error(f'Cannot deduce input file type: {input_file}. Either rename file or use the --filetype flag', EXIT_FILE_IO_ERROR)
+    else:
+        input_file = sys.stdin
+        sep = ","
+        if options.filetype == "TSV":
+           sep = "\t"
     try:
         data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values)
     except IOError:
@@ -273,6 +293,15 @@ def read_data(options):
             exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
     return data 
 
+
+def get_filetype_from_extension(filename):
+    path = Path(filename)
+    if path.suffix.upper() == '.TSV':
+        return 'TSV'
+    elif path.suffix.upper() == '.CSV':
+        return 'CSV'
+    else:
+        return None
 
 def get_output_name(options):
     if options.name:
@@ -314,6 +343,12 @@ class Plot:
             self.ax.set(xscale="log")
         if hasattr(options, 'logy') and options.logy:
             self.ax.set(yscale="log")
+        if hasattr(options, 'noxticklabels') and options.noxticklabels:
+            self.ax.set(xticks=[])
+            self.ax.set(xticklabels=[])
+        if hasattr(options, 'noyticklabels') and options.noyticklabels:
+            self.ax.set(yticks=[])
+            self.ax.set(yticklabels=[])
         plt.tight_layout()
         output_filename = self.make_output_filename()
         plt.savefig(output_filename)
@@ -465,7 +500,11 @@ class Count(Plot):
         self.column = column
 
     def render_data(self):
-        sns.countplot(data=self.df, x=self.column, hue=self.options.hue) 
+        if self.options.sorted:
+            order_index = self.df[self.column].value_counts().index
+        else:
+            order_index = None
+        sns.countplot(data=self.df, x=self.column, hue=self.options.hue, order=order_index) 
         self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
         self.ax.set(xlabel=self.column)
 
@@ -515,6 +554,7 @@ def plot_distribution(options, df):
 
 
 def plot_by_column(options, df, plotter):
+    #df = df.dropna()
     for column in options.columns:
         if column in df.columns:
             plotter(options, df, column).plot()
