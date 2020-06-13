@@ -274,7 +274,7 @@ def read_data(options):
         elif maybe_filetype == 'TSV':
             sep = "\t"
         elif maybe_filetype == 'CSV':
-            sep = "\t"
+            sep = ","
         else: 
             exit_with_error(f'Cannot deduce input file type: {input_file}. Either rename file or use the --filetype flag', EXIT_FILE_IO_ERROR)
     else:
