@@ -222,13 +222,13 @@ def parse_args():
         help=f'Use this color map, will use Seaborn default if not specified')
     heatmapparser.add_argument(
         '--rows',  metavar='FEATURE', type=str, required=True,
-        help=f'Interpret this feature (column of data) as the rows of the heatmap')
+        help=f'Interpret this feature (column of data) as the row labels of the heatmap')
     heatmapparser.add_argument(
-        '--columns',  metavar='FEATURE', type=str, required=True,
-        help=f'Interpret this feature (column of data) as the columns of the heatmap')
-    heatmapparser.add_argument(
-        '--values',  metavar='FEATURE', type=str, required=True,
-        help=f'Interpret this feature (column of data) as the values of the heatmap')
+        '--columns',  nargs='+', metavar='FEATURE', type=str, required=True,
+        help=f'Interpret these features (columns of data) as the columns of the heatmap')
+    #heatmapparser.add_argument(
+    #    '--values',  metavar='FEATURE', type=str, required=True,
+    #    help=f'Interpret this feature (column of data) as the values of the heatmap')
     heatmapparser.add_argument(
         '--log', action='store_true',
         help=f'Use a log scale on the numerical data')
@@ -486,12 +486,16 @@ class Heatmap(Plot):
         super().__init__(options, df)
 
     def render_data(self):
-        pivot_data = self.df.pivot(index=self.options.rows, columns=self.options.columns, values=self.options.values)
-        sns.heatmap(data=pivot_data, cmap=self.options.cmap)
+        self.df.set_index(self.options.rows, inplace=True)
+        column_names = self.options.columns
+        # Build a dataframe with the columns that we are interested in
+        selected_columns = self.df[column_names]
+        sns.heatmap(data=selected_columns, cmap=self.options.cmap)
+        #sns.clustermap(data=pivot_data, cmap=self.options.cmap)
 
     def make_output_filename(self):
         output_name = get_output_name(self.options)
-        return Path('.'.join([output_name, self.options.rows, self.options.columns, self.options.values, 'heatmap.png'])) 
+        return Path('.'.join([output_name, 'heatmap.png'])) 
 
 
 class Count(Plot):
