@@ -134,6 +134,25 @@ some_command | hatch ...
 
 When reading input from a named file hatch will use the stem of the input filename as the first part of the output file name. For example, if the input filename is called `titanic.csv` then then output filename will start with `titanic`. However, this behaviour can be overridden using the `--name` command line argument, where an alternative output filename prefix can be specified. When input is read from stdin hatch will choose `plot` to be the first part of the output file name, unless an alternative is specified by `--name`.
 
+## Output files
+
+Hatch produces PNG (graphics) files as its output. A single plot command may produce one or more such files, depending on how hatch is used. By default hatch names the output files based on the following information:
+ * The prefix of the input data file name (this can be overridden).
+ * The name(s) of the columns that have been selected for plotting.
+ * Optionally the names of columns that have been selected for grouping or colouring.
+ * The type of plot being produced.
+
+For example, the following command:
+
+```
+hatch dist --columns sepal_length --group species -- iris.csv
+```
+produces an output file called `iris.sepal_length.species.box.png` by default, because:
+ * `iris` is the prefix of the name of the input file `iris.csv`
+ * `sepal_length` is the column that has been selected for plotting
+ * `species` is the column that has been selected for grouping
+ * `box` is the type of plot
+
 ## Example test data
 
 In the `data` directory in this repository we provide some sample test data for the sake of illustrating the plotting functionality of hatch.
