@@ -2,9 +2,11 @@
 
 # Overview 
 
-This program plots tabular data from input CSV (or TSV) files. Output plots are in PNG format. 
+Hatch is a program for plotting tabular data on the command line. It takes input from CSV or TSV files and produces high-quality plots in PNG files as output. 
 
-Hatch supports the following plot types:
+It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.
+
+The following plot types are provided:
  * Histograms (regular and cumulative)
  * Distributions (box, violin, strip, swarm and boxen)
  * Scatter plots
@@ -13,21 +15,23 @@ Hatch supports the following plot types:
  * Counts (bar plots)
  * Principal components analysis (PCA)
 
-It also supports filtering of rows and dynamic creation of new columns.
+It also supports expressive row filtering and dynamic creation of new columns calculated from existing input data.
 
-Hatch requires Python 3.6 or greater and relies heavily on the following libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [pandas](https://pandas.pydata.org/), [seaborn](https://seaborn.pydata.org/) (and hence [matplotlib](https://matplotlib.org/)), [scikit-learn](https://scikit-learn.org/).
-
-In the examples below, `$` indicates the command line prompt.
+Hatch plots are highly customisable, however for most cases sensible defaults are applied.
 
 # Licence
 
 This program is released as open source software under the terms of [MIT License](https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE).
 
-# Installing
+# Installing and requirements
+
+Hatch requires Python 3.6 or greater and relies heavily on the following libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [pandas](https://pandas.pydata.org/), [seaborn](https://seaborn.pydata.org/) (and hence [matplotlib](https://matplotlib.org/)), [scikit-learn](https://scikit-learn.org/).
 
 You can install hatch directly from the source code or build and run it from within Docker container.
 
 ## Installing directly from source code
+
+In the examples below, `$` indicates the command line prompt.
 
 Clone this repository: 
 ```
@@ -174,7 +178,7 @@ In the `data` directory in this repository we provide some sample test data for 
  * <a href="https://github.com/mwaskom/seaborn-data/blob/master/fmri.csv">frmi.csv</a>
  * <a href="https://github.com/mwaskom/seaborn-data/blob/master/titanic.csv">titanic.csv</a>
 
-## Histograms
+# Histograms
 
 Plot distributions of selected columns as histograms.
 
@@ -260,7 +264,7 @@ Below is a histogram plot for sepal length for the iris data set (iris.sepal_len
 
 <img src="images/iris.sepal_length.histogram.png" width="500" height="400">
 
-## Distributions
+# Distribution plots
 
 Plot distributions of numerical columns, optionally grouped by categorical columns.
 
@@ -351,7 +355,7 @@ Below is a violin distribution plot for sepal length grouped by species for the 
 
 <img src="images/iris.sepal_length.species.violin.png" width="500" height="400">
 
-## Scatter plots
+# Scatter plots
 
 ```
 $ hatch scatter -h
@@ -416,7 +420,7 @@ Below is the scatter plot for sepal length versus petal length with hue determin
 
 <img src="images/iris.sepal_length.petal_length.scatter.png" width="500" height="400">
 
-## Line plots
+# Line plots
 
 ```
 $ hatch line -h
@@ -474,7 +478,7 @@ Below is the line plot for timepoint versus signal grouped by the even column (f
 
 <img src="images/fmri.timepoint.signal.line.png" width="500" height="400">
 
-## Counts (bar plots) 
+# Counts (bar plots) 
 
 ```
 $ hatch count -h
@@ -526,7 +530,7 @@ Below is the bar plot for the `embark_town` column in the titanic dataset:
 
 <img src="images/titanic.embark_town.count.png" width="500" height="400">
 
-## Heatmaps
+# Heatmaps
 
 ```
 $ hatch heatmap -h
@@ -584,7 +588,7 @@ Below is a heatmap for the flights datset (flights.year.month.passengers.heatmap
 
 <img src="images/flights.year.month.passengers.heatmap.png" width="500" height="400">
 
-## Principal components analysis (PCA)
+# Principal components analysis (PCA)
 
 ```
 $ hatch pca -h
