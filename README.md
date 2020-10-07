@@ -184,7 +184,7 @@ Plot distributions of selected columns as histograms.
 
 ### Simple example:
 ```
-hatch hist --columns age -- ../data/titanic.csv
+hatch hist --columns age -- titanic.csv
 ```
 
 ### Key options 
