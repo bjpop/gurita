@@ -189,7 +189,7 @@ hatch hist --cols age -- titanic.csv
 
 ### Key options 
 ```
-  --cols FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
@@ -203,13 +203,12 @@ hatch hist --cols age -- titanic.csv
 ### Full options 
 ```
 $ hatch hist -h
-usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--prefix NAME]
-                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
-                  [--eval EXPR [EXPR ...]] [--navalues STR] [--title STR]
-                  [--width SIZE] [--height SIZE] [--xlabel STR] [--ylabel STR]
-                  [--noxticklabels] [--noyticklabels] --cols FEATURE
-                  [FEATURE ...] [--logy] [--xlim LOW HIGH LOW HIGH]
-                  [--ylim LOW HIGH LOW HIGH] [--bins NUMBINS] [--cumulative]
+usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--prefix NAME] [--logfile LOG_FILE]
+                  [--nolegend] [--filter EXPR] [--eval EXPR [EXPR ...]] [--navalues STR]
+                  [--title STR] [--width SIZE] [--height SIZE] [--xlabel STR] [--ylabel STR]
+                  [--noxticklabels] [--noyticklabels] --cols FEATURE [FEATURE ...] [--logy]
+                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH] [--bins NUMBINS]
+                  [--cumulative]
                   [DATA]
 
 positional arguments:
@@ -218,17 +217,16 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Otherwise
-                        inferred from filename extension.
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Otherwise inferred from
+                        filename extension.
   --prefix NAME         Name prefix for output files
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
-  --filter EXPR         Filter rows: only retain rows that make this expression
-                        True
+  --filter EXPR         Filter rows: only retain rows that make this expression True
   --eval EXPR [EXPR ...]
                         Construct new columns based on an expression
-  --navalues STR        Treat values in this space separated list as NA values.
-                        Example: --navalues ". - !"
+  --navalues STR        Treat values in this space separated list as NA values. Example: --navalues
+                        ". - !"
   --title STR           Plot title. By default no title will be added.
   --width SIZE          Plot width in inches. Default: 10
   --height SIZE         Plot height in inches. Default: 8
@@ -236,7 +234,7 @@ optional arguments:
   --ylabel STR          Label for vertical (Y) axis
   --noxticklabels       Turn of horizontal (X) axis tick labels
   --noyticklabels       Turn of veritcal (Y) axis tick labels
-  --cols FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
