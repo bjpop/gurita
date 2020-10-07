@@ -266,14 +266,39 @@ Below is a histogram plot for sepal length for the iris data set (iris.sepal_len
 
 ## Distributions
 
+Plot distributions of numerical columns, optionally grouped by categorical columns.
+
+### Simple example
+
+```
+hatch dist --cols passengers --groups month -- flights.csv 
+```
+
+### Key options
+
+```
+  --cols FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+                        Columns to plot
+  --logy                Use a log scale on the veritical (Y) axis
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
+  --groups FEATURE [FEATURE ...], -g FEATURE [FEATURE ...]
+                        Plot distributions of of the columns where data are optionally grouped by
+                        these features
+  --type {box,violin,boxen,swarm,strip}
+                        Type of plot. Default: box
+```
+
+### Full options
+
 ```
 $ hatch dist -h
-usage: hatch dist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
-                  [--navalues STR] [--title STR] [--width SIZE]
-                  [--height SIZE] [--xlabel STR] [--ylabel STR] --cols
-                  FEATURE [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH]
-                  --groups FEATURE [FEATURE ...] [--type {box,violin}]
+usage: hatch dist [-h] [--outdir DIR] [--filetype FILETYPE] [--prefix NAME] [--logfile LOG_FILE]
+                  [--nolegend] [--filter EXPR] [--eval EXPR [EXPR ...]] [--navalues STR]
+                  [--title STR] [--width SIZE] [--height SIZE] [--xlabel STR] [--ylabel STR]
+                  [--noxticklabels] [--noyticklabels] --cols FEATURE [FEATURE ...] [--logy]
+                  [--ylim LOW HIGH LOW HIGH] [--groups FEATURE [FEATURE ...]]
+                  [--type {box,violin,boxen,swarm,strip}]
                   [DATA]
 
 positional arguments:
@@ -282,29 +307,33 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
-                        CSV.
-  --name NAME           Name prefix for output files
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Otherwise inferred from
+                        filename extension.
+  --prefix NAME         Name prefix for output files
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
-  --filter EXPR         Filter rows: only retain rows that make this
-                        expression True
-  --navalues STR        Treat values in this space separated list as NA
-                        values. Example: --navalues ". - !"
+  --filter EXPR         Filter rows: only retain rows that make this expression True
+  --eval EXPR [EXPR ...]
+                        Construct new columns based on an expression
+  --navalues STR        Treat values in this space separated list as NA values. Example: --navalues
+                        ". - !"
   --title STR           Plot title. By default no title will be added.
   --width SIZE          Plot width in inches. Default: 10
   --height SIZE         Plot height in inches. Default: 8
   --xlabel STR          Label for horizontal (X) axis
   --ylabel STR          Label for vertical (Y) axis
-  --cols FEATURE [FEATURE ...]
+  --noxticklabels       Turn of horizontal (X) axis tick labels
+  --noyticklabels       Turn of veritcal (Y) axis tick labels
+  --cols FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --ylim LOW HIGH LOW HIGH
                         Limit vertical axis range to [LOW,HIGH]
-  --groups FEATURE [FEATURE ...]
-                        Plot distributions of of the columns where data are
-                        grouped by these features
-  --type {box,violin}   Type of plot. Default: box
+  --groups FEATURE [FEATURE ...], -g FEATURE [FEATURE ...]
+                        Plot distributions of of the columns where data are optionally grouped by
+                        these features
+  --type {box,violin,boxen,swarm,strip}
+                        Type of plot. Default: box
 ```
 
 For example, plot distributions of selected columns, grouped by their species, using violin plots:
@@ -316,15 +345,15 @@ hatch dist --cols sepal_length sepal_width petal_length petal_width --groups spe
 Outputs go to:
 
 ```
-iris.petal_length.species.dist.png
-iris.petal_width.species.dist.png
-iris.sepal_length.species.dist.png
-iris.sepal_width.species.dist.png
+iris.petal_length.species.violin.png
+iris.petal_width.species.violin.png
+iris.sepal_length.species.violin.png
+iris.sepal_width.species.violin.png
 ```
 
-Below is a distribution plot for sepal length grouped by species for the iris data set (iris.sepal_length.species.dist.png):
+Below is a violin distribution plot for sepal length grouped by species for the iris data set (iris.sepal_length.species.violin.png):
 
-<img src="images/iris.sepal_length.species.dist.png" width="500" height="400">
+<img src="images/iris.sepal_length.species.violin.png" width="500" height="400">
 
 ## Scatter plots
 
