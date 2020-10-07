@@ -137,7 +137,7 @@ def parse_args():
 
     columns_arguments = ArgumentParser(add_help=False)
     columns_arguments.add_argument(
-        '--columns',  metavar='FEATURE', nargs="+", required=True, type=str,
+        '--cols', '-c', metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Columns to plot')
 
     logx_arguments = ArgumentParser(add_help=False)
@@ -197,7 +197,7 @@ def parse_args():
 
     distparser = subparsers.add_parser('dist', help='Distributions of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, ylim_arguments], add_help=False) 
     distparser.add_argument(
-        '--group',  metavar='FEATURE', nargs="+", required=False, type=str,
+        '--groups',  '-g', metavar='FEATURE', nargs="+", required=False, type=str,
         help=f'Plot distributions of of the columns where data are optionally grouped by these features')
     distparser.add_argument(
         '--type', choices=ALLOWED_DISTPLOT_TYPES, default=DEFAULT_DIST_PLOT_TYPE,
@@ -227,7 +227,7 @@ def parse_args():
         '--rows',  metavar='FEATURE', type=str, required=True,
         help=f'Interpret this feature (column of data) as the row labels of the heatmap')
     heatmapparser.add_argument(
-        '--columns',  nargs='+', metavar='FEATURE', type=str, required=True,
+        '--cols',  '-c', nargs='+', metavar='FEATURE', type=str, required=True,
         help=f'Interpret these features (columns of data) as the columns of the heatmap')
     #heatmapparser.add_argument(
     #    '--values',  metavar='FEATURE', type=str, required=True,
@@ -460,7 +460,7 @@ class PCA(Plot):
         super().__init__(options, df)
 
     def render_data(self):
-        column_names = self.options.columns
+        column_names = self.options.cols
         # Build a dataframe with the columns that we are interested in
         selected_columns = self.df[column_names]
         # Handle rows in the data that have missing values
@@ -507,7 +507,7 @@ class Heatmap(Plot):
 
     def render_data(self):
         self.df.set_index(self.options.rows, inplace=True)
-        column_names = self.options.columns
+        column_names = self.options.cols
         # Build a dataframe with the columns that we are interested in
         selected_columns = self.df[column_names]
         sns.heatmap(data=selected_columns, cmap=self.options.cmap)
@@ -566,10 +566,10 @@ def plot_heatmap(options, df):
 
 
 def plot_distribution(options, df):
-    for column in options.columns:
+    for column in options.cols:
         if column in df.columns:
-            if options.group:
-                for group in options.group:
+            if options.groups:
+                for group in options.groups:
                     if group in df.columns:
                         Distribution(options, df, group, column).plot()
                     else:
@@ -578,22 +578,10 @@ def plot_distribution(options, df):
                 Distribution(options, df, None, column).plot() 
         else:
             logging.warn(f"Column: {column} does not exist in data, skipping")
-'''
-    for group in options.group:
-        if group in df.columns:
-            for column in options.columns:
-                if column in df.columns:
-                    Distribution(options, df, group, column).plot()
-                else:
-                    logging.warn(f"Column: {column} does not exist in data, skipping")
-        else:
-            logging.warn(f"Column: {group} does not exist in data, skipping")
-'''
 
 
 def plot_by_column(options, df, plotter):
-    #df = df.dropna()
-    for column in options.columns:
+    for column in options.cols:
         if column in df.columns:
             plotter(options, df, column).plot()
         else:

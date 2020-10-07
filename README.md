@@ -97,7 +97,7 @@ Plot type:
 As a simple example, if you want to plot a histogram of the `passengers` column from the file `flights.csv` you can run the following command:
 
 ```
-hatch hist --columns passengers -- flights.csv 
+hatch hist --cols passengers -- flights.csv 
 ```
 
 In general, each type of plot accepts optional arguments that control its behaviour. Some of these are common across all plot types, and some are limited to specific plot types.
@@ -118,12 +118,12 @@ For example, both of the usages below are valid:
 
 Read from a named input file:
 ```
-hatch count --columns class embark_town -- titanic.csv
+hatch count --cols class embark_town -- titanic.csv
 ```
 
 Read from stdin:
 ```
-hatch count --columns class embark_town < titanic.csv
+hatch count --cols class embark_town < titanic.csv
 ```
 
 Reading from stdin is particularly useful for pipeline commands:
@@ -145,7 +145,7 @@ Hatch produces PNG (graphics) files as its output. A single plot command may pro
 For example, the following command:
 
 ```
-hatch dist --columns sepal_length --group species -- iris.csv
+hatch dist --cols sepal_length --groups species -- iris.csv
 ```
 produces an output file called `iris.sepal_length.species.box.png` by default, because:
  * `iris` is the prefix of the name of the input file `iris.csv`
@@ -156,13 +156,13 @@ produces an output file called `iris.sepal_length.species.box.png` by default, b
 If the input data is read from the standard input (stdin) instead of a named file, then the prefix of the output defaults to `plot`. For example, the following command:
 
 ```
-hatch dist --columns sepal_length --group species < iris.csv
+hatch dist --cols sepal_length --groups species < iris.csv
 ```
 produces an output file called `plot.sepal_length.species.box.png` because the input data is read (redirected) from stdin.
 
 The output prefix can be overridden with the `--prefix` command line option (regardless of whether the input comes from a named file or from stdin). For example:
 ```
-hatch dist --columns sepal_length --group species --prefix flower < iris.csv
+hatch dist --cols sepal_length --groups species --prefix flower < iris.csv
 ```
 produces an output file called `flower.sepal_length.species.box.png`.
 
@@ -184,12 +184,12 @@ Plot distributions of selected columns as histograms.
 
 ### Simple example:
 ```
-hatch hist --columns age -- titanic.csv
+hatch hist --cols age -- titanic.csv
 ```
 
 ### Key options 
 ```
-  --columns FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
@@ -207,7 +207,7 @@ usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--prefix NAME]
                   [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                   [--eval EXPR [EXPR ...]] [--navalues STR] [--title STR]
                   [--width SIZE] [--height SIZE] [--xlabel STR] [--ylabel STR]
-                  [--noxticklabels] [--noyticklabels] --columns FEATURE
+                  [--noxticklabels] [--noyticklabels] --cols FEATURE
                   [FEATURE ...] [--logy] [--xlim LOW HIGH LOW HIGH]
                   [--ylim LOW HIGH LOW HIGH] [--bins NUMBINS] [--cumulative]
                   [DATA]
@@ -236,7 +236,7 @@ optional arguments:
   --ylabel STR          Label for vertical (Y) axis
   --noxticklabels       Turn of horizontal (X) axis tick labels
   --noyticklabels       Turn of veritcal (Y) axis tick labels
-  --columns FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --xlim LOW HIGH LOW HIGH
@@ -250,7 +250,7 @@ optional arguments:
 For example, plot histograms of selected columns of the example iris.csv dataset using 10 bins. 
 
 ```
-$ hatch hist --columns sepal_length sepal_width petal_length petal_width --bins 10 -- iris.csv
+$ hatch hist --cols sepal_length sepal_width petal_length petal_width --bins 10 -- iris.csv
 ```
 
 Outputs go to:
@@ -273,9 +273,9 @@ $ hatch dist -h
 usage: hatch dist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
                   [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                   [--navalues STR] [--title STR] [--width SIZE]
-                  [--height SIZE] [--xlabel STR] [--ylabel STR] --columns
+                  [--height SIZE] [--xlabel STR] [--ylabel STR] --cols
                   FEATURE [FEATURE ...] [--logy] [--ylim LOW HIGH LOW HIGH]
-                  --group FEATURE [FEATURE ...] [--type {box,violin}]
+                  --groups FEATURE [FEATURE ...] [--type {box,violin}]
                   [DATA]
 
 positional arguments:
@@ -298,12 +298,12 @@ optional arguments:
   --height SIZE         Plot height in inches. Default: 8
   --xlabel STR          Label for horizontal (X) axis
   --ylabel STR          Label for vertical (Y) axis
-  --columns FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --ylim LOW HIGH LOW HIGH
                         Limit vertical axis range to [LOW,HIGH]
-  --group FEATURE [FEATURE ...]
+  --groups FEATURE [FEATURE ...]
                         Plot distributions of of the columns where data are
                         grouped by these features
   --type {box,violin}   Type of plot. Default: box
@@ -312,7 +312,7 @@ optional arguments:
 For example, plot distributions of selected columns, grouped by their species, using violin plots:
 
 ```
-hatch dist --columns sepal_length sepal_width petal_length petal_width --group species --type violin -- iris.csv
+hatch dist --cols sepal_length sepal_width petal_length petal_width --groups species --type violin -- iris.csv
 ```
 
 Outputs go to:
@@ -458,7 +458,7 @@ $ hatch count -h
 usage: hatch count [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
                    [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                    [--navalues STR] [--title STR] [--width SIZE]
-                   [--height SIZE] [--xlabel STR] [--ylabel STR] --columns
+                   [--height SIZE] [--xlabel STR] [--ylabel STR] --cols
                    FEATURE [FEATURE ...] [--logy] [--hue FEATURE]
                    [DATA]
 
@@ -482,7 +482,7 @@ optional arguments:
   --height SIZE         Plot height in inches. Default: 8
   --xlabel STR          Label for horizontal (X) axis
   --ylabel STR          Label for vertical (Y) axis
-  --columns FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
   --hue FEATURE         Name of feature (column headings) to group data for
@@ -491,7 +491,7 @@ optional arguments:
 
 For example, a bar plot for the titanic dataset showing the counts of values in the categorical columns `class` and `embark_town` 
 ```
-hatch count --columns class embark_town -- titanic.csv
+hatch count --cols class embark_town -- titanic.csv
 ```
 
 Outputs go to:
@@ -511,7 +511,7 @@ usage: hatch heatmap [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
                      [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                      [--navalues STR] [--title STR] [--width SIZE]
                      [--height SIZE] [--xlabel STR] [--ylabel STR]
-                     [--cmap COLOR_MAP_NAME] --rows FEATURE --columns FEATURE
+                     [--cmap COLOR_MAP_NAME] --rows FEATURE --cols FEATURE
                      --values FEATURE [--log]
                      [DATA]
 
@@ -540,7 +540,7 @@ optional arguments:
                         specified
   --rows FEATURE        Interpret this feature (column of data) as the rows of
                         the heatmap
-  --columns FEATURE     Interpret this feature (column of data) as the columns
+  --cols FEATURE     Interpret this feature (column of data) as the columns
                         of the heatmap
   --values FEATURE      Interpret this feature (column of data) as the values
                         of the heatmap
@@ -549,7 +549,7 @@ optional arguments:
 
 For example, 
 ```
-hatch heatmap --rows year --columns month --values passengers -- flights.csv
+hatch heatmap --rows year --cols month --values passengers -- flights.csv
 ```
 
 Output will go to:
@@ -568,7 +568,7 @@ $ hatch pca -h
 usage: hatch pca [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
                  [--navalues STR] [--title STR] [--width SIZE] [--height SIZE]
-                 [--xlabel STR] [--ylabel STR] --columns FEATURE [FEATURE ...]
+                 [--xlabel STR] [--ylabel STR] --cols FEATURE [FEATURE ...]
                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH]
                  [--hue FEATURE] [--dotsize FEATURE] [--dotalpha ALPHA]
                  [--dotlinewidth WIDTH] [--missing STRATEGY]
@@ -594,7 +594,7 @@ optional arguments:
   --height SIZE         Plot height in inches. Default: 8
   --xlabel STR          Label for horizontal (X) axis
   --ylabel STR          Label for vertical (Y) axis
-  --columns FEATURE [FEATURE ...]
+  --cols FEATURE [FEATURE ...]
                         Columns to plot
   --xlim LOW HIGH LOW HIGH
                         Limit horizontal axis range to [LOW,HIGH]
@@ -613,7 +613,7 @@ optional arguments:
 
 For example, 
 ```
-hatch pca --columns sepal_length sepal_width petal_length petal_width --hue species --dotalpha 0.8 iris.csv
+hatch pca --cols sepal_length sepal_width petal_length petal_width --hue species --dotalpha 0.8 iris.csv
 ```
 
 Output will go to:
@@ -650,7 +650,7 @@ hatch scatter --filter '`species` != "setosa"' --xy sepal_length,sepal_width --h
 The query syntax also supports complex boolean expressions (essentially anything that can be expressed in Python), for example:
 
 ```
-hatch count --columns class embark_town --filter 'survived == 0 and sex == "male"' -- titanic.csv 
+hatch count --cols class embark_town --filter 'survived == 0 and sex == "male"' -- titanic.csv 
 ```
 
 # Creating new columns dynamically
@@ -658,10 +658,10 @@ hatch count --columns class embark_town --filter 'survived == 0 and sex == "male
 The `--eval` command line option allows you to create new columns dynamically. These new columns can be used subsequently in the plot.
 
 For example, you can create a new column called `petal_area` by multiplying the values in the `petal_length` and `petal_width` columns (row wise). This new column
-is added to the data. In the command below the new `petal_area` column is created and then subsquently selected for plotting in the `--columns` option.
+is added to the data. In the command below the new `petal_area` column is created and then subsquently selected for plotting in the `--cols` option.
 
 ```
-hatch hist --eval 'petal_area = petal_length * petal_width' --columns petal_area -- iris.csv
+hatch hist --eval 'petal_area = petal_length * petal_width' --cols petal_area -- iris.csv
 ```
 The output is a file called `iris.petal_area.histogram.png`. 
 
@@ -669,7 +669,7 @@ The `--eval` command line option accepts one or more expressions to evaluate. Th
 In the contrived example below, two new columns are created. First, `x` is created, being equal to `petal_length + 1` and then `y` is created, being equal to `x * 2`:
 
 ```
-hatch hist --eval 'x = petal_length + 1' 'y = x * 2' --columns y -- iris.csv
+hatch hist --eval 'x = petal_length + 1' 'y = x * 2' --cols y -- iris.csv
 ```
 
 # Running within the Docker container
