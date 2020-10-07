@@ -13,7 +13,7 @@ Hatch supports the following plot types:
  * Counts (bar plots)
  * Principal components analysis (PCA)
 
-It also supports filtering of rows using Python expressions and dynamic creation of new columns.
+It also supports filtering of rows and dynamic creation of new columns.
 
 Hatch requires Python 3.6 or greater and relies heavily on the following libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [pandas](https://pandas.pydata.org/), [seaborn](https://seaborn.pydata.org/) (and hence [matplotlib](https://matplotlib.org/)), [scikit-learn](https://scikit-learn.org/).
 
@@ -594,6 +594,25 @@ The query syntax also supports complex boolean expressions (essentially anything
 
 ```
 hatch count --columns class embark_town --filter 'survived == 0 and sex == "male"' -- titanic.csv 
+```
+
+# Creating new columns dynamically
+
+The `--eval` command line option allows you to create new columns dynamically. These new columns can be used subsequently in the plot.
+
+For example, you can create a new column called `petal_area` by multiplying the values in the `petal_length` and `petal_width` columns (row wise). This new column
+is added to the data. In the command below the new `petal_area` column is created and then subsquently selected for plotting in the `--columns` option.
+
+```
+hatch hist --eval 'petal_area = petal_length * petal_width' --columns petal_area -- iris.csv
+```
+The output is a file called `iris.petal_area.histogram.png`. 
+
+The `--eval` command line option accepts one or more expressions to evaluate. This allows you to create multiple new columns, and they can refer to each other.
+In the contrived example below, two new columns are created. First, `x` is created, being equal to `petal_length + 1` and then `y` is created, being equal to `x * 2`:
+
+```
+hatch hist --eval 'x = petal_length + 1' 'y = x * 2' --columns y -- iris.csv
 ```
 
 # Running within the Docker container
