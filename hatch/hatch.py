@@ -84,7 +84,7 @@ def parse_args():
         required=False, choices=ALLOWED_FILETYPES,
         help=f'Type of input file. Allowed values: %(choices)s. Otherwise inferred from filename extension.')
     common_arguments.add_argument(
-        '--name',  metavar='NAME', type=str,
+        '--prefix',  metavar='NAME', type=str,
         required=False, 
         help=f'Name prefix for output files')
     common_arguments.add_argument(
@@ -313,8 +313,8 @@ def get_filetype_from_extension(filename):
         return None
 
 def get_output_name(options):
-    if options.name:
-        return options.name
+    if options.prefix:
+        return options.prefix
     elif options.data is not None:
         return Path(options.data).stem
     else:

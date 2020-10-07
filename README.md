@@ -153,6 +153,20 @@ produces an output file called `iris.sepal_length.species.box.png` by default, b
  * `species` is the column that has been selected for grouping
  * `box` is the type of plot
 
+If the input data is read from the standard input (stdin) instead of a named file, then the prefix of the output defaults to `plot`. For example, the following command:
+
+```
+hatch dist --columns sepal_length --group species < iris.csv
+```
+produces an output file called `plot.sepal_length.species.box.png` because the input data is read (redirected) from stdin.
+
+The output prefix can be overridden with the `--prefix` command line option (regardless of whether the input comes from a named file or from stdin). For example:
+```
+hatch dist --columns sepal_length --group species --prefix flower < iris.csv
+```
+produces an output file called `flower.sepal_length.species.box.png`.
+
+
 ## Example test data
 
 In the `data` directory in this repository we provide some sample test data for the sake of illustrating the plotting functionality of hatch.
