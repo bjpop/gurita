@@ -100,7 +100,7 @@ As a simple example, if you want to plot a histogram of the `passengers` column 
 hatch hist --cols passengers -- flights.csv 
 ```
 
-In general, each type of plot accepts optional arguments that control its behaviour. Some of these are common across all plot types, and some are limited to specific plot types.
+Each type of plot accepts optional arguments that control its behaviour. Some of these are common across all plot types, and some are limited to specific plot types.
 
 Help messages for each plot type can be requested with `-h` or `--help` after the plot type. For example, to get specific help about histogram plots, use:
 
@@ -114,7 +114,7 @@ Hatch can either read data from a named input file, or if no file is specified, 
 The input file type must be either CSV or TSV. By default hatch will assume the data is in CSV format, but you can change the format with the `--filetype` argument, and choose TSV instead.
 Hatch requires that the first row of the input file is the column headings.
 
-For example, both of the usages below are valid:
+Both of the usages below are valid
 
 Read from a named input file:
 ```
@@ -132,14 +132,12 @@ Reading from stdin is particularly useful for pipeline commands:
 some_command | hatch ...
 ```
 
-When reading input from a named file hatch will use the stem of the input filename as the first part of the output file name. For example, if the input filename is called `titanic.csv` then then output filename will start with `titanic`. However, this behaviour can be overridden using the `--name` command line argument, where an alternative output filename prefix can be specified. When input is read from stdin hatch will choose `plot` to be the first part of the output file name, unless an alternative is specified by `--name`.
-
 ## Output files
 
 Hatch produces PNG (graphics) files as its output. A single plot command may produce one or more such files, depending on how hatch is used. By default hatch names the output files based on the following information:
  * The prefix of the input data file name (this can be overridden).
  * The name(s) of the columns that have been selected for plotting.
- * Optionally the names of columns that have been selected for grouping or colouring.
+ * Optionally the names of columns that have been selected for grouping.
  * The type of plot being produced.
 
 For example, the following command:
@@ -169,14 +167,12 @@ produces an output file called `flower.sepal_length.species.box.png`.
 
 ## Example test data
 
-In the `data` directory in this repository we provide some sample test data for the sake of illustrating the plotting functionality of hatch.
+In the `data` directory in this repository we provide some sample test data for the sake of illustrating the plotting functionality of hatch. These data sets have been obtained from the <a href="https://github.com/mwaskom/seaborn-data">seaborn-data</a> repository that is used in the seaborn Python library documentation.
 
-The iris dataset is from the UCI Machine Learning Repository.
-The CSV version was obtained from <a href="https://gist.github.com/curran/a08a1080b88344b0c8a7">Iris Data Set</a>, and can be found in the `data/iris.csv` file in this repository.
-
-The flights dataset is from the `seaborn-data` repository that is used in the seaborn Python library documentation. The CSV version was obtaind from <a href="https://github.com/mwaskom/seaborn-data/blob/master/flights.csv">flights data</a>, and can be found in the `data/flights.csv` file in this repository.
-
-The fmri dataset is from the `seaborn-data` repository that is used in the seaborn Python library documentation. The CSV version was obtaind from <a href="https://github.com/mwaskom/seaborn-data/blob/master/fmri.csv">fmri data</a>, and can be found in the `data/fmri.csv` file in this repository.
+ * <a href="https://github.com/mwaskom/seaborn-data/blob/master/iris.csv">iris.csv</a>
+ * <a href="https://github.com/mwaskom/seaborn-data/blob/master/flights.csv">flights.csv</a>
+ * <a href="https://github.com/mwaskom/seaborn-data/blob/master/fmri.csv">frmi.csv</a>
+ * <a href="https://github.com/mwaskom/seaborn-data/blob/master/titanic.csv">titanic.csv</a>
 
 ## Histograms
 
