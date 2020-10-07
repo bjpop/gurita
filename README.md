@@ -6,12 +6,14 @@ This program plots tabular data from input CSV (or TSV) files. Output plots are 
 
 Hatch supports the following plot types:
  * Histograms (regular and cumulative)
- * Distributions (box and violin)
+ * Distributions (box, violin, strip, swarm and boxen)
  * Scatter plots
  * Line plots
  * Heatmaps
  * Counts (bar plots)
  * Principal components analysis (PCA)
+
+It also supports filtering of rows using Python expressions and dynamic creation of new columns.
 
 Hatch requires Python 3.6 or greater and relies heavily on the following libraries: [NumPy](https://numpy.org/), [SciPy](https://www.scipy.org/), [pandas](https://pandas.pydata.org/), [seaborn](https://seaborn.pydata.org/) (and hence [matplotlib](https://matplotlib.org/)), [scikit-learn](https://scikit-learn.org/).
 
@@ -92,13 +94,13 @@ Plot type:
     heatmap             Heatmap of two categories with numerical values
 ```
 
-For example, if you want to plot a histogram, hatch can be invoked like so:
+As a simple example, if you want to plot a histogram of the `passengers` column from the file `flights.csv` you can run the following command:
 
 ```
-hatch hist ...
+hatch hist --columns passengers -- flights.csv 
 ```
 
-where `...` indicates the remaining arguments to the histogram plot.
+In general, each type of plot accepts optional arguments that control its behaviour. Some of these are common across all plot types, and some are limited to specific plot types.
 
 Help messages for each plot type can be requested with `-h` or `--help` after the plot type. For example, to get specific help about histogram plots, use:
 

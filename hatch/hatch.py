@@ -35,7 +35,7 @@ DEFAULT_BINS = 100
 DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
 DEFAULT_DIST_PLOT_TYPE = 'box'
-ALLOWED_DISTPLOT_TYPES = ['box', 'violin']
+ALLOWED_DISTPLOT_TYPES = ['box', 'violin', 'boxen', 'swarm', 'strip']
 DEFAULT_PLOT_WIDTH=10
 DEFAULT_PLOT_HEIGHT=8
 DEFAULT_PLOT_NAME="plot"
@@ -98,6 +98,9 @@ def parse_args():
     common_arguments.add_argument(
         '--filter', metavar='EXPR', required=False, type=str,
         help='Filter rows: only retain rows that make this expression True')
+    common_arguments.add_argument(
+        '--eval', metavar='EXPR', required=False, type=str, nargs="+",
+        help='Construct new columns based on an expression')
     common_arguments.add_argument(
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
@@ -194,8 +197,8 @@ def parse_args():
 
     distparser = subparsers.add_parser('dist', help='Distributions of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, ylim_arguments], add_help=False) 
     distparser.add_argument(
-        '--group',  metavar='FEATURE', nargs="+", required=True, type=str,
-        help=f'Plot distributions of of the columns where data are grouped by these features')
+        '--group',  metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'Plot distributions of of the columns where data are optionally grouped by these features')
     distparser.add_argument(
         '--type', choices=ALLOWED_DISTPLOT_TYPES, default=DEFAULT_DIST_PLOT_TYPE,
         help=f'Type of plot. Default: %(default)s')
@@ -286,6 +289,12 @@ def read_data(options):
         data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values)
     except IOError:
         exit_with_error(f"Could not open file: {options.data}", EXIT_FILE_IO_ERROR)
+    if options.eval:
+        try:
+            eval_str = '\n'.join(options.eval)
+            data = data.eval(eval_str)
+        except:
+            exit_with_error(f"Bad eval expression: {options.eval}", EXIT_COMMAND_LINE_ERROR)
     if options.filter:
         try:
             data = data.query(options.filter)
@@ -380,20 +389,31 @@ class Distribution(Plot):
         super().__init__(options, df)
         self.group = group 
         self.column = column
+        self.type = options.type
 
     def render_data(self):
-        if self.options.type == 'box':
+        if self.type == 'box':
             sns.boxplot(data=self.df, x=self.group, y=self.column) 
-        elif self.options.type == 'violin':
+        elif self.type == 'violin':
             sns.violinplot(data=self.df, x=self.group, y=self.column) 
+        elif self.type == 'boxen':
+            sns.boxenplot(data=self.df, x=self.group, y=self.column) 
+        elif self.type == 'strip':
+            sns.stripplot(data=self.df, x=self.group, y=self.column) 
+        elif self.type == 'swarm':
+            sns.swarmplot(data=self.df, x=self.group, y=self.column) 
         self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
         self.ax.set(xlabel=self.group, ylabel=self.column)
 
     def make_output_filename(self):
         output_name = get_output_name(self.options)
-        group_str = self.group.replace(' ', '_')
         column_str = self.column.replace(' ', '_')
-        return Path('.'.join([output_name, column_str, group_str, 'dist', 'png']))
+        type_str = self.options.type
+        if self.group is not None:
+            group_str = self.group.replace(' ', '_')
+            return Path('.'.join([output_name, column_str, group_str, type_str, 'png']))
+        else:
+            return Path('.'.join([output_name, column_str, type_str, 'png']))
 
 
 class Line(Plot):
@@ -546,6 +566,19 @@ def plot_heatmap(options, df):
 
 
 def plot_distribution(options, df):
+    for column in options.columns:
+        if column in df.columns:
+            if options.group:
+                for group in options.group:
+                    if group in df.columns:
+                        Distribution(options, df, group, column).plot()
+                    else:
+                        logging.warn(f"Column: {group} does not exist in data, skipping")
+            else:
+                Distribution(options, df, None, column).plot() 
+        else:
+            logging.warn(f"Column: {column} does not exist in data, skipping")
+'''
     for group in options.group:
         if group in df.columns:
             for column in options.columns:
@@ -555,6 +588,7 @@ def plot_distribution(options, df):
                     logging.warn(f"Column: {column} does not exist in data, skipping")
         else:
             logging.warn(f"Column: {group} does not exist in data, skipping")
+'''
 
 
 def plot_by_column(options, df, plotter):
