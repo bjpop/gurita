@@ -182,14 +182,30 @@ The fmri dataset is from the `seaborn-data` repository that is used in the seabo
 
 Plot distributions of selected columns as histograms.
 
+### Simple example:
+```
+hatch hist --columns age -- ../data/titanic.csv
+```
+
+### Key options 
+```
+  --columns FEATURE [FEATURE ...]
+                        Columns to plot
+  --logy                Use a log scale on the veritical (Y) axis
+  --xlim LOW HIGH LOW HIGH
+                        Limit horizontal axis range to [LOW,HIGH]
+  --ylim LOW HIGH LOW HIGH
+                        Limit vertical axis range to [LOW,HIGH]
+  --bins NUMBINS        Number of bins for histogram. Default: 100
+  --cumulative          Generate cumulative histogram
+```
+
+### Full options 
 ```
 $ hatch hist -h
-usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--name NAME]
-                  [--logfile LOG_FILE] [--nolegend] [--filter EXPR]
-                  [--navalues STR] [--title STR] [--width SIZE]
-                  [--height SIZE] [--xlabel STR] [--ylabel STR] --columns
-                  FEATURE [FEATURE ...] [--logy] [--xlim LOW HIGH LOW HIGH]
-                  [--ylim LOW HIGH LOW HIGH] [--bins NUMBINS] [--cumulative]
+usage: hatch hist [-h] [--outdir DIR] [--filetype FILETYPE] [--prefix NAME] [--logfile LOG_FILE] [--nolegend] [--filter EXPR] [--eval EXPR [EXPR ...]] [--navalues STR]
+                  [--title STR] [--width SIZE] [--height SIZE] [--xlabel STR] [--ylabel STR] [--noxticklabels] [--noyticklabels] --columns FEATURE [FEATURE ...] [--logy]
+                  [--xlim LOW HIGH LOW HIGH] [--ylim LOW HIGH LOW HIGH] [--bins NUMBINS] [--cumulative]
                   [DATA]
 
 positional arguments:
@@ -198,20 +214,21 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --outdir DIR          Name of optional output directory.
-  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Default:
-                        CSV.
-  --name NAME           Name prefix for output files
+  --filetype FILETYPE   Type of input file. Allowed values: CSV, TSV. Otherwise inferred from filename extension.
+  --prefix NAME         Name prefix for output files
   --logfile LOG_FILE    record program progress in LOG_FILE
   --nolegend            Turn off the legend in the plot
-  --filter EXPR         Filter rows: only retain rows that make this
-                        expression True
-  --navalues STR        Treat values in this space separated list as NA
-                        values. Example: --navalues ". - !"
+  --filter EXPR         Filter rows: only retain rows that make this expression True
+  --eval EXPR [EXPR ...]
+                        Construct new columns based on an expression
+  --navalues STR        Treat values in this space separated list as NA values. Example: --navalues ". - !"
   --title STR           Plot title. By default no title will be added.
   --width SIZE          Plot width in inches. Default: 10
   --height SIZE         Plot height in inches. Default: 8
   --xlabel STR          Label for horizontal (X) axis
   --ylabel STR          Label for vertical (Y) axis
+  --noxticklabels       Turn of horizontal (X) axis tick labels
+  --noyticklabels       Turn of veritcal (Y) axis tick labels
   --columns FEATURE [FEATURE ...]
                         Columns to plot
   --logy                Use a log scale on the veritical (Y) axis
