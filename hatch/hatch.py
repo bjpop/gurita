@@ -128,6 +128,9 @@ def parse_args():
         '--noyticklabels', action='store_true',
         help=f'Turn of veritcal (Y) axis tick labels')
     common_arguments.add_argument(
+        '--category', metavar='STR', required=False, type=str, nargs="+",
+        help=f'Force the interpretation of the listed columns as categorical types')
+    common_arguments.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
     xy_arguments = ArgumentParser(add_help=False)
@@ -286,7 +289,10 @@ def read_data(options):
         if options.filetype == "TSV":
            sep = "\t"
     try:
-        data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values)
+        dtype = None
+        if options.category:
+            dtype = { column : 'category' for column in options.category }
+        data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
     except IOError:
         exit_with_error(f"Could not open file: {options.data}", EXIT_FILE_IO_ERROR)
     if options.eval:
