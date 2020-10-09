@@ -60,6 +60,7 @@ def exit_with_error(message, exit_status):
     sys.exit(exit_status)
 
 
+
 def parse_args():
     '''Parse command line arguments.
     Returns Options object with command line argument values as attributes.
@@ -94,6 +95,7 @@ def parse_args():
         help='record program progress in LOG_FILE')
     common_arguments.add_argument(
         '--nolegend', action='store_true',
+        default=False,
         help=f'Turn off the legend in the plot')
     common_arguments.add_argument(
         '--filter', metavar='EXPR', required=False, type=str,
@@ -142,6 +144,16 @@ def parse_args():
     columns_arguments.add_argument(
         '--cols', '-c', metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Columns to plot')
+
+    numerical_arguments = ArgumentParser(add_help=False)
+    numerical_arguments.add_argument(
+        '--num', '-n', metavar='FEATURE', nargs="+", required=True, type=str,
+        help=f'Numerical column to plot')
+
+    cat_arguments = ArgumentParser(add_help=False)
+    cat_arguments.add_argument(
+        '--cat', '-c', metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'First level category to group data')
 
     logx_arguments = ArgumentParser(add_help=False)
     logx_arguments.add_argument(
@@ -198,13 +210,16 @@ def parse_args():
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
 
-    distparser = subparsers.add_parser('dist', help='Distributions of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, ylim_arguments], add_help=False) 
-    distparser.add_argument(
-        '--groups',  '-g', metavar='FEATURE', nargs="+", required=False, type=str,
-        help=f'Plot distributions of of the columns where data are optionally grouped by these features')
-    distparser.add_argument(
-        '--type', choices=ALLOWED_DISTPLOT_TYPES, default=DEFAULT_DIST_PLOT_TYPE,
-        help=f'Type of plot. Default: %(default)s')
+    def make_dist_parser(subparsers, kind, help):
+        return subparsers.add_parser(kind, help=help, 
+                parents=[common_arguments, numerical_arguments, cat_arguments, hue_arguments, logy_arguments, ylim_arguments], add_help=False) 
+
+
+    boxparser = make_dist_parser(subparsers, 'box', help='Box plot of numerical column, optionally grouped by categorical columns')
+    violinparser = make_dist_parser(subparsers, 'violin', help='Violin plot of numerical column, optionally grouped by categorical columns')
+    swarmparser = make_dist_parser(subparsers, 'swarm', help='Swarm plot of numerical column, optionally grouped by categorical columns')
+    stripparser = make_dist_parser(subparsers, 'strip', help='Strip plot of numerical column, optionally grouped by categorical columns')
+    boxenparser = make_dist_parser(subparsers, 'boxen', help='Boxen plot of numerical column, optionally grouped by categorical columns')
 
     lineparser = subparsers.add_parser('line', help='Line plots of numerical data', parents=[common_arguments, xy_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     lineparser.add_argument(
@@ -339,9 +354,10 @@ class Plot:
     def plot(self):
         options = self.options
         plt.clf()
-        plt.suptitle('')
-        self.fig, self.ax = plt.subplots(figsize=(options.width, options.height))
+        #plt.suptitle('')
+        #self.fig, self.ax = plt.subplots(figsize=(options.width, options.height))
         self.render_data()
+        '''
         if hasattr(options, 'title') and options.title is not None:
             plt.title(options.title)
         if hasattr(options, 'xlabel') and options.xlabel is not None:
@@ -364,6 +380,7 @@ class Plot:
         if hasattr(options, 'noyticklabels') and options.noyticklabels:
             self.ax.set(yticks=[])
             self.ax.set(yticklabels=[])
+        '''
         plt.tight_layout()
         output_filename = self.make_output_filename()
         plt.savefig(output_filename)
@@ -391,35 +408,32 @@ class Histogram(Plot):
 
 
 class Distribution(Plot):
-    def __init__(self, options, df, group, column):
+    def __init__(self, kind, options, df, numerical_column, categorical_column=None):
         super().__init__(options, df)
-        self.group = group 
-        self.column = column
-        self.type = options.type
+        self.numerical = numerical_column 
+        self.category = categorical_column 
+        self.kind = kind
 
     def render_data(self):
-        if self.type == 'box':
-            sns.boxplot(data=self.df, x=self.group, y=self.column) 
-        elif self.type == 'violin':
-            sns.violinplot(data=self.df, x=self.group, y=self.column) 
-        elif self.type == 'boxen':
-            sns.boxenplot(data=self.df, x=self.group, y=self.column) 
-        elif self.type == 'strip':
-            sns.stripplot(data=self.df, x=self.group, y=self.column) 
-        elif self.type == 'swarm':
-            sns.swarmplot(data=self.df, x=self.group, y=self.column) 
-        self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
-        self.ax.set(xlabel=self.group, ylabel=self.column)
+        aspect = 1
+        if self.options.width > 0:
+            aspect = self.options.width / self.options.height
+        graph = sns.catplot(kind=self.kind, data=self.df, x=self.category, y=self.numerical, height=self.options.height, aspect=aspect, hue=self.options.hue, legend=False)
+        # legend_out parameter does not appear to work well with tight_layout, so
+        # we adjust the legend manually
+        if (not self.options.nolegend) and self.options.hue is not None:
+            plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
+        graph.set_xticklabels(rotation=90)
 
     def make_output_filename(self):
         output_name = get_output_name(self.options)
-        column_str = self.column.replace(' ', '_')
-        type_str = self.options.type
-        if self.group is not None:
-            group_str = self.group.replace(' ', '_')
-            return Path('.'.join([output_name, column_str, group_str, type_str, 'png']))
+        numerical_str = self.numerical.replace(' ', '_')
+        type_str = self.kind 
+        if self.category is not None:
+            cat_str = self.category.replace(' ', '_')
+            return Path('.'.join([output_name, numerical_str, cat_str, type_str, 'png']))
         else:
-            return Path('.'.join([output_name, column_str, type_str, 'png']))
+            return Path('.'.join([output_name, numerical_str, type_str, 'png']))
 
 
 class Line(Plot):
@@ -570,18 +584,18 @@ def plot_by_xy(options, df, plotter):
 def plot_heatmap(options, df):
     Heatmap(options, df).plot()
 
-
-def plot_distribution(options, df):
-    for column in options.cols:
-        if column in df.columns:
-            if options.groups:
-                for group in options.groups:
-                    if group in df.columns:
-                        Distribution(options, df, group, column).plot()
+def plot_distribution(options, plot_type, df):
+    # XXX check numerical and categorical columns have the right type
+    for numerical_column in options.num:
+        if numerical_column in df.columns:
+            if options.cat:
+                for categorical_column1 in options.cat:
+                    if categorical_column1 in df.columns:
+                        Distribution(plot_type, options, df, numerical_column, categorical_column1).plot()
                     else:
                         logging.warn(f"Column: {group} does not exist in data, skipping")
             else:
-                Distribution(options, df, None, column).plot() 
+                Distribution(plot_type, options, df, numerical_column).plot() 
         else:
             logging.warn(f"Column: {column} does not exist in data, skipping")
 
@@ -601,8 +615,16 @@ def main():
     df = read_data(options)
     if options.cmd == 'hist':
         plot_by_column(options, df, Histogram)
-    elif options.cmd == 'dist':
-        plot_distribution(options, df)
+    elif options.cmd == 'box':
+        plot_distribution(options, 'box', df)
+    elif options.cmd == 'violin':
+        plot_distribution(options, 'violin', df)
+    elif options.cmd == 'swarm':
+        plot_distribution(options, 'swarm', df)
+    elif options.cmd == 'strip':
+        plot_distribution(options, 'strip', df)
+    elif options.cmd == 'boxen':
+        plot_distribution(options, 'boxen', df)
     elif options.cmd == 'scatter':
         plot_by_xy(options, df, Scatter)
     elif options.cmd == 'line':
@@ -613,6 +635,8 @@ def main():
         plot_by_column(options, df, Count)
     elif options.cmd == 'pca':
         PCA(options, df).plot()
+    else:
+        logging.error(f"Unrecognised plot type: {options.cmd}")
     logging.info("Completed")
 
 
