@@ -22,6 +22,7 @@ from pathlib import Path
 from sklearn.preprocessing import StandardScaler
 import sklearn.decomposition as sk_decomp 
 from sklearn.impute import SimpleImputer
+import itertools as iter
 
 
 EXIT_FILE_IO_ERROR = 1
@@ -36,9 +37,10 @@ DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
 DEFAULT_DIST_PLOT_TYPE = 'box'
 ALLOWED_DISTPLOT_TYPES = ['box', 'violin', 'boxen', 'swarm', 'strip']
-DEFAULT_PLOT_WIDTH=10
-DEFAULT_PLOT_HEIGHT=8
-DEFAULT_PLOT_NAME="plot"
+DEFAULT_PLOT_WIDTH = 10
+DEFAULT_PLOT_HEIGHT = 8
+DEFAULT_PLOT_NAME = "plot"
+DEFAULT_ORIENTATION = "v"
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -129,9 +131,9 @@ def parse_args():
     common_arguments.add_argument(
         '--noyticklabels', action='store_true',
         help=f'Turn of veritcal (Y) axis tick labels')
-    common_arguments.add_argument(
-        '--category', metavar='STR', required=False, type=str, nargs="+",
-        help=f'Force the interpretation of the listed columns as categorical types')
+    #common_arguments.add_argument(
+    #    '--category', metavar='STR', required=False, type=str, nargs="+",
+    #    help=f'Force the interpretation of the listed columns as categorical types')
     common_arguments.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
@@ -153,7 +155,27 @@ def parse_args():
     cat_arguments = ArgumentParser(add_help=False)
     cat_arguments.add_argument(
         '--cat', '-c', metavar='FEATURE', nargs="+", required=False, type=str,
-        help=f'First level category to group data')
+        help=f'Categorical feature (column heading) to group data')
+
+    hue_arguments = ArgumentParser(add_help=False)
+    hue_arguments.add_argument(
+        '--hue',  metavar='FEATURE', nargs="+", type=str, required=False, 
+        help=f'Name of feature (column heading) to use for colouring the plotted data')
+
+    facet_arguments = ArgumentParser(add_help=False)
+    facet_arguments.add_argument(
+        '--facet', '-f',  metavar='FEATURE', nargs="+", type=str, required=False, 
+        help=f'Name of feature (column heading) to use for colouring the plotted data')
+
+    order_arguments = ArgumentParser(add_help=False)
+    order_arguments.add_argument(
+        '--order', metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'Order to display categorical (--cat, -c) values')
+
+    orient_arguments = ArgumentParser(add_help=False)
+    orient_arguments.add_argument(
+        '--orient', choices=['v', 'h'], required=False, default=DEFAULT_ORIENTATION,
+        help=f'Orientation of plot. Allowed values: %(choices)s. Default: %(default)s.')
 
     logx_arguments = ArgumentParser(add_help=False)
     logx_arguments.add_argument(
@@ -175,10 +197,6 @@ def parse_args():
         '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
         help=f'Limit vertical axis range to [LOW,HIGH]')
 
-    hue_arguments = ArgumentParser(add_help=False)
-    hue_arguments.add_argument(
-        '--hue',  metavar='FEATURE', type=str, required=False, 
-        help=f'Name of feature (column headings) to use for colouring the plotted data')
 
     dotsize_arguments = ArgumentParser(add_help=False)
     dotsize_arguments.add_argument(
@@ -212,7 +230,7 @@ def parse_args():
 
     def make_dist_parser(subparsers, kind, help):
         return subparsers.add_parser(kind, help=help, 
-                parents=[common_arguments, numerical_arguments, cat_arguments, hue_arguments, logy_arguments, ylim_arguments], add_help=False) 
+                parents=[common_arguments, numerical_arguments, cat_arguments, hue_arguments, facet_arguments, order_arguments, orient_arguments, logy_arguments, ylim_arguments], add_help=False) 
 
 
     boxparser = make_dist_parser(subparsers, 'box', help='Box plot of numerical column, optionally grouped by categorical columns')
@@ -305,8 +323,8 @@ def read_data(options):
            sep = "\t"
     try:
         dtype = None
-        if options.category:
-            dtype = { column : 'category' for column in options.category }
+        #if options.category:
+        #   dtype = { column : 'category' for column in options.category }
         data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
     except IOError:
         exit_with_error(f"Could not open file: {options.data}", EXIT_FILE_IO_ERROR)
@@ -408,22 +426,37 @@ class Histogram(Plot):
 
 
 class Distribution(Plot):
-    def __init__(self, kind, options, df, numerical_column, categorical_column=None):
+    def __init__(self, kind, options, df, numerical_column, categorical_column, hue_column, facet_column):
         super().__init__(options, df)
         self.numerical = numerical_column 
         self.category = categorical_column 
+        self.facet = facet_column
+        self.hue = hue_column
         self.kind = kind
 
     def render_data(self):
         aspect = 1
         if self.options.width > 0:
             aspect = self.options.width / self.options.height
-        graph = sns.catplot(kind=self.kind, data=self.df, x=self.category, y=self.numerical, height=self.options.height, aspect=aspect, hue=self.options.hue, legend=False)
+        row_field = None
+        col_field = None
+        if self.options.orient == 'h':
+            x_field = self.numerical
+            y_field = self.category
+            if self.facet is not None:
+                row_field = self.facet
+        elif self.options.orient == 'v':
+            x_field = self.category
+            y_field = self.numerical
+            if self.facet is not None:
+                col_field = self.facet
+        graph = sns.catplot(kind=self.kind, data=self.df, x=x_field, y=y_field, col=col_field, row=row_field, height=self.options.height, aspect=aspect, hue=self.hue, legend=False, order=self.options.order, orient=self.options.orient)
         # legend_out parameter does not appear to work well with tight_layout, so
         # we adjust the legend manually
         if (not self.options.nolegend) and self.options.hue is not None:
             plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
-        graph.set_xticklabels(rotation=90)
+        if self.options.orient == 'v':
+            graph.set_xticklabels(rotation=90)
 
     def make_output_filename(self):
         output_name = get_output_name(self.options)
@@ -584,20 +617,33 @@ def plot_by_xy(options, df, plotter):
 def plot_heatmap(options, df):
     Heatmap(options, df).plot()
 
+
+    for numerical_column in options.num:
+        for categorical_column in options.cat:
+            for facet_column in options.facet:
+                Distribution(plot_type, options, df, numerical_column, categorical_column, facet_column).plot()
+
 def plot_distribution(options, plot_type, df):
     # XXX check numerical and categorical columns have the right type
-    for numerical_column in options.num:
-        if numerical_column in df.columns:
-            if options.cat:
-                for categorical_column1 in options.cat:
-                    if categorical_column1 in df.columns:
-                        Distribution(plot_type, options, df, numerical_column, categorical_column1).plot()
-                    else:
-                        logging.warn(f"Column: {group} does not exist in data, skipping")
-            else:
-                Distribution(plot_type, options, df, numerical_column).plot() 
-        else:
-            logging.warn(f"Column: {column} does not exist in data, skipping")
+    num_fields = options.num if options.num is not None else []
+    cat_fields = options.cat if options.cat is not None else [None]
+    hue_fields = options.hue if options.hue is not None else [None]
+    facet_fields  = options.facet if options.facet is not None else [None]
+    args = iter.product(num_fields, cat_fields, hue_fields, facet_fields)
+    for (num, cat, hue, facet) in args:
+        if num is not None and num not in df.columns:
+            logging.warn(f"{num} is not a column heading, skipping")
+            continue
+        if cat is not None and cat not in df.columns:
+            logging.warn(f"{cat} is not a column heading, skipping")
+            continue
+        if hue is not None and hue not in df.columns:
+            logging.warn(f"{hue} is not a column heading, skipping")
+            continue
+        if facet is not None and facet not in df.columns:
+            logging.warn(f"{facet} is not a column heading, skipping")
+            continue
+        Distribution(plot_type, options, df, num, cat, hue, facet).plot()
 
 
 def plot_by_column(options, df, plotter):
