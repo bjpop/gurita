@@ -459,15 +459,13 @@ class Distribution(Plot):
             graph.set_xticklabels(rotation=90)
 
     def make_output_filename(self):
-        output_name = get_output_name(self.options)
-        numerical_str = self.numerical.replace(' ', '_')
-        type_str = self.kind 
-        if self.category is not None:
-            cat_str = self.category.replace(' ', '_')
-            return Path('.'.join([output_name, numerical_str, cat_str, type_str, 'png']))
-        else:
-            return Path('.'.join([output_name, numerical_str, type_str, 'png']))
-
+        output_name = [get_output_name(self.options)]
+        numerical_str = [self.numerical.replace(' ', '_')]
+        cat_str = [self.category.replace(' ', '_')] if self.category is not None else []
+        hue_str = [self.hue.replace(' ', '_')] if self.hue is not None else []
+        facet_str = [self.facet.replace(' ', '_')] if self.facet is not None else []
+        type_str = [self.kind]
+        return Path('.'.join(output_name + numerical_str + cat_str + hue_str + facet_str + type_str) + '.png')
 
 class Line(Plot):
     def __init__(self, options, df, feature1, feature2):
