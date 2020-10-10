@@ -147,15 +147,15 @@ def parse_args():
         '--cols', '-c', metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Columns to plot')
 
-    numerical_arguments = ArgumentParser(add_help=False)
-    numerical_arguments.add_argument(
-        '--num', '-n', metavar='FEATURE', nargs="+", required=True, type=str,
-        help=f'Numerical column to plot')
+    x_arguments = ArgumentParser(add_help=False)
+    x_arguments.add_argument(
+        '-x', '--xaxis', metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'Feature to plot along the X axis')
 
-    cat_arguments = ArgumentParser(add_help=False)
-    cat_arguments.add_argument(
-        '--cat', '-c', metavar='FEATURE', nargs="+", required=False, type=str,
-        help=f'Categorical feature (column heading) to group data')
+    y_arguments = ArgumentParser(add_help=False)
+    y_arguments.add_argument(
+        '-y', '--yaxis', metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'Feature to plot along the Y axis')
 
     hue_arguments = ArgumentParser(add_help=False)
     hue_arguments.add_argument(
@@ -170,7 +170,12 @@ def parse_args():
     order_arguments = ArgumentParser(add_help=False)
     order_arguments.add_argument(
         '--order', metavar='FEATURE', nargs="+", required=False, type=str,
-        help=f'Order to display categorical (--cat, -c) values')
+        help=f'Order to display categorical values')
+
+    hue_order_arguments = ArgumentParser(add_help=False)
+    hue_order_arguments.add_argument(
+        '--hueorder', metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'Order to display categorical values selected for hue')
 
     orient_arguments = ArgumentParser(add_help=False)
     orient_arguments.add_argument(
@@ -228,16 +233,16 @@ def parse_args():
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
 
-    def make_dist_parser(subparsers, kind, help):
+    def make_catplot_parser(kind, help):
         return subparsers.add_parser(kind, help=help, 
-                parents=[common_arguments, numerical_arguments, cat_arguments, hue_arguments, facet_arguments, order_arguments, orient_arguments, logy_arguments, ylim_arguments], add_help=False) 
+                parents=[common_arguments, y_arguments, x_arguments, hue_arguments, facet_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
 
 
-    boxparser = make_dist_parser(subparsers, 'box', help='Box plot of numerical column, optionally grouped by categorical columns')
-    violinparser = make_dist_parser(subparsers, 'violin', help='Violin plot of numerical column, optionally grouped by categorical columns')
-    swarmparser = make_dist_parser(subparsers, 'swarm', help='Swarm plot of numerical column, optionally grouped by categorical columns')
-    stripparser = make_dist_parser(subparsers, 'strip', help='Strip plot of numerical column, optionally grouped by categorical columns')
-    boxenparser = make_dist_parser(subparsers, 'boxen', help='Boxen plot of numerical column, optionally grouped by categorical columns')
+    boxparser = make_catplot_parser('box', help='Box plot of numerical column, optionally grouped by categorical columns')
+    violinparser = make_catplot_parser('violin', help='Violin plot of numerical column, optionally grouped by categorical columns')
+    swarmparser = make_catplot_parser('swarm', help='Swarm plot of numerical column, optionally grouped by categorical columns')
+    stripparser = make_catplot_parser('strip', help='Strip plot of numerical column, optionally grouped by categorical columns')
+    boxenparser = make_catplot_parser('boxen', help='Boxen plot of numerical column, optionally grouped by categorical columns')
 
     lineparser = subparsers.add_parser('line', help='Line plots of numerical data', parents=[common_arguments, xy_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     lineparser.add_argument(
@@ -247,6 +252,11 @@ def parse_args():
         '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature (column headings) to group data for line plot')
 
+    countparser = make_catplot_parser('count', help='Count plot of categorical column')
+    barparser = make_catplot_parser('bar', help='Bar plot of categorical column')
+    pointparser = make_catplot_parser('point', help='Point plot of numerical column, optionally grouped by categorical columns')
+
+    '''
     countparser = subparsers.add_parser('count', help='Counts (bar plots) of categorical data', parents=[common_arguments, columns_arguments, logy_arguments], add_help=False) 
     countparser.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
@@ -254,6 +264,7 @@ def parse_args():
     countparser.add_argument(
         '--sorted',  action='store_true', 
         help=f'Display horizontal (X) axis values in sorted order of count')
+    '''
 
     heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments], add_help=False) 
     heatmapparser.add_argument(
@@ -375,23 +386,21 @@ class Plot:
         #plt.suptitle('')
         #self.fig, self.ax = plt.subplots(figsize=(options.width, options.height))
         self.render_data()
-        '''
         if hasattr(options, 'title') and options.title is not None:
             plt.title(options.title)
+        '''
         if hasattr(options, 'xlabel') and options.xlabel is not None:
             self.ax.set(xlabel=options.xlabel)
         if hasattr(options, 'ylabel') and options.ylabel is not None:
             self.ax.set(ylabel=options.ylabel)
+        '''
         if hasattr(options, 'xlim') and options.xlim is not None:
             xlow, xhigh = options.xlim
             plt.xlim(xlow, xhigh)
         if hasattr(options, 'ylim') and options.ylim is not None:
             ylow, yhigh = options.ylim
             plt.ylim(ylow, yhigh)
-        if hasattr(options, 'logx') and options.logx:
-            self.ax.set(xscale="log")
-        if hasattr(options, 'logy') and options.logy:
-            self.ax.set(yscale="log")
+        '''
         if hasattr(options, 'noxticklabels') and options.noxticklabels:
             self.ax.set(xticks=[])
             self.ax.set(xticklabels=[])
@@ -425,11 +434,13 @@ class Histogram(Plot):
         return Path('.'.join([output_name, self.column.replace(' ', '_'), 'histogram.png']))
 
 
-class Distribution(Plot):
-    def __init__(self, kind, options, df, numerical_column, categorical_column, hue_column, facet_column):
+# Cat plots call the catlplot interface in Seaborn, and thus share common
+# functionality https://seaborn.pydata.org/tutorial/categorical.html
+class Catplot(Plot):
+    def __init__(self, kind, options, df, y_column, x_column, hue_column, facet_column):
         super().__init__(options, df)
-        self.numerical = numerical_column 
-        self.category = categorical_column 
+        self.yaxis = y_column 
+        self.xaxis = x_column 
         self.facet = facet_column
         self.hue = hue_column
         self.kind = kind
@@ -441,18 +452,18 @@ class Distribution(Plot):
         row_field = None
         col_field = None
         if self.options.orient == 'h':
-            x_field = self.numerical
-            y_field = self.category
             if self.facet is not None:
                 row_field = self.facet
         elif self.options.orient == 'v':
-            x_field = self.category
-            y_field = self.numerical
             if self.facet is not None:
                 col_field = self.facet
-        graph = sns.catplot(kind=self.kind, data=self.df, x=x_field, y=y_field, col=col_field, row=row_field, height=self.options.height, aspect=aspect, hue=self.hue, legend=False, order=self.options.order, orient=self.options.orient)
+        graph = sns.catplot(kind=self.kind, data=self.df, x=self.xaxis, y=self.yaxis, col=col_field, row=row_field, height=self.options.height, aspect=aspect, hue=self.hue, legend=False, order=self.options.order, hue_order=self.options.hueorder, orient=self.options.orient)
         # legend_out parameter does not appear to work well with tight_layout, so
         # we adjust the legend manually
+        if self.options.logx:
+            graph.set(xscale="log")
+        if self.options.logy:
+            graph.set(yscale="log")
         if (not self.options.nolegend) and self.options.hue is not None:
             plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
         if self.options.orient == 'v':
@@ -460,12 +471,12 @@ class Distribution(Plot):
 
     def make_output_filename(self):
         output_name = [get_output_name(self.options)]
-        numerical_str = [self.numerical.replace(' ', '_')]
-        cat_str = [self.category.replace(' ', '_')] if self.category is not None else []
+        y_str = [self.yaxis.replace(' ', '_')] if self.yaxis is not None else []
+        x_str = [self.xaxis.replace(' ', '_')] if self.xaxis is not None else []
         hue_str = [self.hue.replace(' ', '_')] if self.hue is not None else []
         facet_str = [self.facet.replace(' ', '_')] if self.facet is not None else []
         type_str = [self.kind]
-        return Path('.'.join(output_name + numerical_str + cat_str + hue_str + facet_str + type_str) + '.png')
+        return Path('.'.join(output_name + y_str + x_str + hue_str + facet_str + type_str) + '.png')
 
 class Line(Plot):
     def __init__(self, options, df, feature1, feature2):
@@ -616,24 +627,19 @@ def plot_heatmap(options, df):
     Heatmap(options, df).plot()
 
 
-    for numerical_column in options.num:
-        for categorical_column in options.cat:
-            for facet_column in options.facet:
-                Distribution(plot_type, options, df, numerical_column, categorical_column, facet_column).plot()
-
-def plot_distribution(options, plot_type, df):
+def plot_catplot(options, plot_type, df):
     # XXX check numerical and categorical columns have the right type
-    num_fields = options.num if options.num is not None else []
-    cat_fields = options.cat if options.cat is not None else [None]
+    y_fields = options.yaxis if options.yaxis is not None else [None]
+    x_fields = options.xaxis if options.xaxis is not None else [None]
     hue_fields = options.hue if options.hue is not None else [None]
     facet_fields  = options.facet if options.facet is not None else [None]
-    args = iter.product(num_fields, cat_fields, hue_fields, facet_fields)
-    for (num, cat, hue, facet) in args:
-        if num is not None and num not in df.columns:
-            logging.warn(f"{num} is not a column heading, skipping")
+    args = iter.product(y_fields, x_fields, hue_fields, facet_fields)
+    for (y, x, hue, facet) in args:
+        if y is not None and y not in df.columns:
+            logging.warn(f"{y} is not a column heading, skipping")
             continue
-        if cat is not None and cat not in df.columns:
-            logging.warn(f"{cat} is not a column heading, skipping")
+        if x is not None and x not in df.columns:
+            logging.warn(f"{x} is not a column heading, skipping")
             continue
         if hue is not None and hue not in df.columns:
             logging.warn(f"{hue} is not a column heading, skipping")
@@ -641,7 +647,7 @@ def plot_distribution(options, plot_type, df):
         if facet is not None and facet not in df.columns:
             logging.warn(f"{facet} is not a column heading, skipping")
             continue
-        Distribution(plot_type, options, df, num, cat, hue, facet).plot()
+        Catplot(plot_type, options, df, y, x, hue, facet).plot()
 
 
 def plot_by_column(options, df, plotter):
@@ -659,24 +665,14 @@ def main():
     df = read_data(options)
     if options.cmd == 'hist':
         plot_by_column(options, df, Histogram)
-    elif options.cmd == 'box':
-        plot_distribution(options, 'box', df)
-    elif options.cmd == 'violin':
-        plot_distribution(options, 'violin', df)
-    elif options.cmd == 'swarm':
-        plot_distribution(options, 'swarm', df)
-    elif options.cmd == 'strip':
-        plot_distribution(options, 'strip', df)
-    elif options.cmd == 'boxen':
-        plot_distribution(options, 'boxen', df)
+    if options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
+        plot_catplot(options, options.cmd, df)
     elif options.cmd == 'scatter':
         plot_by_xy(options, df, Scatter)
     elif options.cmd == 'line':
         plot_by_xy(options, df, Line)
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
-    elif options.cmd == 'count':
-        plot_by_column(options, df, Count)
     elif options.cmd == 'pca':
         PCA(options, df).plot()
     else:
