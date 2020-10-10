@@ -233,6 +233,8 @@ def parse_args():
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
 
+    info_parser = subparsers.add_parser('info', help="Display summary information about the data", parents=[common_arguments], add_help=False)
+
     def make_catplot_parser(kind, help):
         return subparsers.add_parser(kind, help=help, 
                 parents=[common_arguments, y_arguments, x_arguments, hue_arguments, facet_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
@@ -658,6 +660,12 @@ def plot_by_column(options, df, plotter):
             logging.warn(f"Column: {column} does not exist in data, skipping")
 
 
+def display_info(df):
+    pd.set_option('display.max_columns', None)
+    print(df.describe(include='all'))
+    rows, cols = df.shape 
+    print(f"rows: {rows}, cols: {cols}")
+
 def main():
     options = parse_args()
     init_logging(options.logfile)
@@ -675,6 +683,8 @@ def main():
         Heatmap(options, df).plot()
     elif options.cmd == 'pca':
         PCA(options, df).plot()
+    elif options.cmd == 'info':
+        display_info(df)
     else:
         logging.error(f"Unrecognised plot type: {options.cmd}")
     logging.info("Completed")
