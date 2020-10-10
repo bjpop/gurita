@@ -169,10 +169,15 @@ def parse_args():
         '--hue',  metavar='FEATURE', nargs="+", type=str, required=False, 
         help=f'Name of feature (column heading) to use for colouring the plotted data')
 
-    facet_arguments = ArgumentParser(add_help=False)
-    facet_arguments.add_argument(
-        '--facet', '-f',  metavar='FEATURE', nargs="+", type=str, required=False, 
-        help=f'Name of feature (column heading) to use for colouring the plotted data')
+    row_arguments = ArgumentParser(add_help=False)
+    row_arguments.add_argument(
+        '--row', '-r',  metavar='FEATURE', nargs="+", type=str, required=False, 
+        help=f'Name of feature (column heading) to use for facet rows')
+
+    col_arguments = ArgumentParser(add_help=False)
+    col_arguments.add_argument(
+        '--col', '-c',  metavar='FEATURE', nargs="+", type=str, required=False, 
+        help=f'Name of feature (column heading) to use for facet columns')
 
     order_arguments = ArgumentParser(add_help=False)
     order_arguments.add_argument(
@@ -244,7 +249,7 @@ def parse_args():
 
     def make_catplot_parser(kind, help):
         return subparsers.add_parser(kind, help=help, 
-                parents=[common_arguments, y_arguments, x_arguments, hue_arguments, facet_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
+                parents=[common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
 
 
     boxparser = make_catplot_parser('box', help='Box plot of numerical column, optionally grouped by categorical columns')
@@ -442,16 +447,19 @@ class Histogram(Plot):
         output_name = get_output_name(self.options)
         return Path('.'.join([output_name, self.column.replace(' ', '_'), 'histogram.png']))
 
+def output_field(field):
+    return [field.replace(' ', '_')] if field is not None else []
 
 # Cat plots call the catlplot interface in Seaborn, and thus share common
 # functionality https://seaborn.pydata.org/tutorial/categorical.html
 class Catplot(Plot):
-    def __init__(self, kind, options, df, y_column, x_column, hue_column, facet_column):
+    def __init__(self, kind, options, df, y, x, hue, row, col):
         super().__init__(options, df)
-        self.yaxis = y_column 
-        self.xaxis = x_column 
-        self.facet = facet_column
-        self.hue = hue_column
+        self.yaxis = y
+        self.xaxis = x
+        self.row = row
+        self.col = col
+        self.hue = hue
         self.kind = kind
 
     def render_data(self):
@@ -460,13 +468,7 @@ class Catplot(Plot):
             aspect = self.options.width / self.options.height
         row_field = None
         col_field = None
-        if self.options.orient == 'h':
-            if self.facet is not None:
-                row_field = self.facet
-        elif self.options.orient == 'v':
-            if self.facet is not None:
-                col_field = self.facet
-        graph = sns.catplot(kind=self.kind, data=self.df, x=self.xaxis, y=self.yaxis, col=col_field, row=row_field, height=self.options.height, aspect=aspect, hue=self.hue, legend=False, order=self.options.order, hue_order=self.options.hueorder, orient=self.options.orient)
+        graph = sns.catplot(kind=self.kind, data=self.df, x=self.xaxis, y=self.yaxis, col=self.col, row=self.row, height=self.options.height, aspect=aspect, hue=self.hue, legend=False, order=self.options.order, hue_order=self.options.hueorder, orient=self.options.orient)
         # legend_out parameter does not appear to work well with tight_layout, so
         # we adjust the legend manually
         if self.options.logx:
@@ -480,12 +482,13 @@ class Catplot(Plot):
 
     def make_output_filename(self):
         output_name = [get_output_name(self.options)]
-        y_str = [self.yaxis.replace(' ', '_')] if self.yaxis is not None else []
-        x_str = [self.xaxis.replace(' ', '_')] if self.xaxis is not None else []
-        hue_str = [self.hue.replace(' ', '_')] if self.hue is not None else []
-        facet_str = [self.facet.replace(' ', '_')] if self.facet is not None else []
+        y_str = output_field(self.yaxis)
+        x_str = output_field(self.xaxis)
+        hue_str = output_field(self.hue)
+        row_str = output_field(self.row)
+        col_str = output_field(self.col)
         type_str = [self.kind]
-        return Path('.'.join(output_name + y_str + x_str + hue_str + facet_str + type_str) + '.png')
+        return Path('.'.join(output_name + y_str + x_str + hue_str + row_str + col_str + type_str) + '.png')
 
 class Line(Plot):
     def __init__(self, options, df, feature1, feature2):
@@ -641,9 +644,10 @@ def plot_catplot(options, plot_type, df):
     y_fields = options.yaxis if options.yaxis is not None else [None]
     x_fields = options.xaxis if options.xaxis is not None else [None]
     hue_fields = options.hue if options.hue is not None else [None]
-    facet_fields  = options.facet if options.facet is not None else [None]
-    args = iter.product(y_fields, x_fields, hue_fields, facet_fields)
-    for (y, x, hue, facet) in args:
+    row_fields  = options.row if options.row is not None else [None]
+    col_fields  = options.col if options.col is not None else [None]
+    args = iter.product(y_fields, x_fields, hue_fields, row_fields, col_fields)
+    for (y, x, hue, row, col) in args:
         if y is not None and y not in df.columns:
             logging.warn(f"{y} is not a column heading, skipping")
             continue
@@ -653,10 +657,13 @@ def plot_catplot(options, plot_type, df):
         if hue is not None and hue not in df.columns:
             logging.warn(f"{hue} is not a column heading, skipping")
             continue
-        if facet is not None and facet not in df.columns:
-            logging.warn(f"{facet} is not a column heading, skipping")
+        if row is not None and row not in df.columns:
+            logging.warn(f"{row} is not a column heading, skipping")
             continue
-        Catplot(plot_type, options, df, y, x, hue, facet).plot()
+        if col is not None and col not in df.columns:
+            logging.warn(f"{col} is not a column heading, skipping")
+            continue
+        Catplot(plot_type, options, df, y, x, hue, row, col).plot()
 
 
 def plot_by_column(options, df, plotter):
