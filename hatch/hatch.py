@@ -100,6 +100,10 @@ def parse_args():
         default=False,
         help=f'Print summary information about the data set')
     common_arguments.add_argument(
+        '--verbose', action='store_true',
+        default=False,
+        help=f'Print information about the progress of the program')
+    common_arguments.add_argument(
         '--save', '-s', metavar='FILEPATH', required=False, type=str, 
         help=f'Save the data set to a CSV file after running filter and eval commands')
     common_arguments.add_argument(
@@ -426,6 +430,8 @@ class Plot:
         output_filename = self.make_output_filename()
         plt.savefig(output_filename)
         plt.close()
+        if self.options.verbose:
+            print(f"Graph written to {output_filename}")
 
     def render_data(self):
         raise NotImplementedError
@@ -680,8 +686,10 @@ def display_info(df):
     rows, cols = df.shape 
     print(f"rows: {rows}, cols: {cols}")
 
-def save(filepath, df):
-    df.to_csv(filepath, header=True, index=False)
+def save(options, df):
+    df.to_csv(options.save, header=True, index=False)
+    if options.verbose:
+        print(f"Data written to {options.save}")
 
 def main():
     options = parse_args()
@@ -691,7 +699,7 @@ def main():
     if options.info:
         display_info(df)
     if options.save:
-        save(options.save, df)
+        save(options, df)
     if options.cmd == 'hist':
         plot_by_column(options, df, Histogram)
     if options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
