@@ -96,6 +96,13 @@ def parse_args():
         type=str,
         help='record program progress in LOG_FILE')
     common_arguments.add_argument(
+        '--info', '-i', action='store_true',
+        default=False,
+        help=f'Print summary information about the data set')
+    common_arguments.add_argument(
+        '--save', '-s', metavar='FILEPATH', required=False, type=str, 
+        help=f'Save the data set to a CSV file after running filter and eval commands')
+    common_arguments.add_argument(
         '--nolegend', action='store_true',
         default=False,
         help=f'Turn off the legend in the plot')
@@ -233,7 +240,7 @@ def parse_args():
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
 
-    info_parser = subparsers.add_parser('info', help="Display summary information about the data", parents=[common_arguments], add_help=False)
+    noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[common_arguments], add_help=False)
 
     def make_catplot_parser(kind, help):
         return subparsers.add_parser(kind, help=help, 
@@ -666,11 +673,18 @@ def display_info(df):
     rows, cols = df.shape 
     print(f"rows: {rows}, cols: {cols}")
 
+def save(filepath, df):
+    df.to_csv(filepath, header=True, index=False)
+
 def main():
     options = parse_args()
     init_logging(options.logfile)
     make_output_directories(options)
     df = read_data(options)
+    if options.info:
+        display_info(df)
+    if options.save:
+        save(options.save, df)
     if options.cmd == 'hist':
         plot_by_column(options, df, Histogram)
     if options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
@@ -683,8 +697,8 @@ def main():
         Heatmap(options, df).plot()
     elif options.cmd == 'pca':
         PCA(options, df).plot()
-    elif options.cmd == 'info':
-        display_info(df)
+    elif options.cmd == 'noplot':
+        pass
     else:
         logging.error(f"Unrecognised plot type: {options.cmd}")
     logging.info("Completed")
