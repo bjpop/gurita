@@ -37,8 +37,8 @@ DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
 DEFAULT_DIST_PLOT_TYPE = 'box'
 ALLOWED_DISTPLOT_TYPES = ['box', 'violin', 'boxen', 'swarm', 'strip']
-DEFAULT_PLOT_WIDTH = 10
-DEFAULT_PLOT_HEIGHT = 10 
+DEFAULT_PLOT_WIDTH = 8 
+DEFAULT_PLOT_HEIGHT = 8 
 DEFAULT_PLOT_NAME = "plot"
 DEFAULT_ORIENTATION = "v"
 
@@ -60,7 +60,6 @@ def exit_with_error(message, exit_status):
     logging.error(message)
     print("{} ERROR: {}, exiting".format(PROGRAM_NAME, message), file=sys.stderr)
     sys.exit(exit_status)
-
 
 
 def parse_args():
@@ -250,26 +249,25 @@ def parse_args():
 
     noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[common_arguments], add_help=False)
 
-    def make_catplot_parser(kind, help):
+    def facet_parser(kind, help):
         return subparsers.add_parser(kind, help=help, 
                 parents=[common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
-
-
-    boxparser = make_catplot_parser('box', help='Box plot of numerical feature, optionally grouped by categorical features')
-    violinparser = make_catplot_parser('violin', help='Violin plot of numerical feature, optionally grouped by categorical features')
-    swarmparser = make_catplot_parser('swarm', help='Swarm plot of numerical feature, optionally grouped by categorical features')
-    stripparser = make_catplot_parser('strip', help='Strip plot of numerical feature, optionally grouped by categorical features')
-    boxenparser = make_catplot_parser('boxen', help='Boxen plot of numerical feature, optionally grouped by categorical features')
-    countparser = make_catplot_parser('count', help='Count plot of categorical feature')
-    barparser = make_catplot_parser('bar', help='Bar plot of categorical feature')
-    pointparser = make_catplot_parser('point', help='Point plot of numerical feature, optionally grouped by categorical features')
 
     def make_relplot_parser(kind, help):
         return subparsers.add_parser(kind, help=help, 
                 parents=[common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
 
-    scatterparser = make_relplot_parser('scatter', help='Scatter plot of two numerical features')
-    lineparser = make_relplot_parser('line', help='Line plot of numerical feature')
+    boxparser = facet_parser('box', help='Box plot of numerical feature, optionally grouped by categorical features')
+    violinparser = facet_parser('violin', help='Violin plot of numerical feature, optionally grouped by categorical features')
+    swarmparser = facet_parser('swarm', help='Swarm plot of numerical feature, optionally grouped by categorical features')
+    stripparser = facet_parser('strip', help='Strip plot of numerical feature, optionally grouped by categorical features')
+    boxenparser = facet_parser('boxen', help='Boxen plot of numerical feature, optionally grouped by categorical features')
+    countparser = facet_parser('count', help='Count plot of categorical feature')
+    barparser = facet_parser('bar', help='Bar plot of categorical feature')
+    pointparser = facet_parser('point', help='Point plot of numerical feature, optionally grouped by categorical features')
+
+    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features')
+    lineparser = facet_parser('line', help='Line plot of numerical feature')
 
     #scatterparser = subparsers.add_parser('scatter', help='Scatter plots of numerical data', parents=[common_arguments, xy_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
 
@@ -448,98 +446,20 @@ class Histogram(Plot):
 
 
 class Facetplot(object):
-    def __init__(self, kind, options, df, y, x, hue, row, col):
+    def __init__(self, kind, options, df, x, y, hue, row, col):
         self.options = options
         self.df = df
-        self.yaxis = y
-        self.xaxis = x
+        self.kind = kind
+        self.x = x
+        self.y = y
+        self.hue = hue
         self.row = row
         self.col = col
-        self.hue = hue
-        self.kind = kind
-
-    def plot(self):
-        raise NotImplementedError
-
-    def make_output_filename(self):
-        output_name = [get_output_name(self.options)]
-        y_str = output_field(self.yaxis)
-        x_str = output_field(self.xaxis)
-        hue_str = output_field(self.hue)
-        row_str = output_field(self.row)
-        col_str = output_field(self.col)
-        type_str = [self.kind]
-        return Path('.'.join(output_name + y_str + x_str +
-                             hue_str + row_str + col_str +
-                             type_str) + '.png')
-
-def output_field(field):
-    return [field.replace(' ', '_')] if field is not None else []
-
-# Catplots call the catlplot interface in Seaborn, and thus share common
-# functionality https://seaborn.pydata.org/tutorial/categorical.html
-class Catplot(Facetplot):
-    def __init__(self, kind, options, df, y, x, hue, row, col):
-        super().__init__(kind, options, df, y, x, hue, row, col)
 
     def plot(self):
         options = self.options
         plt.clf()
-        aspect = 1
-        if self.options.width > 0:
-            aspect = self.options.width / self.options.height
-        facet_kws = { 'legend_out': True }
-        graph = sns.catplot(kind=self.kind, data=self.df,
-                x=self.xaxis, y=self.yaxis, col=self.col, row=self.row,
-                height=self.options.height, aspect=aspect, hue=self.hue,
-                order=self.options.order, hue_order=self.options.hueorder,
-                orient=self.options.orient, facet_kws=facet_kws)
-        # legend_out parameter does not appear to work well with tight_layout, so
-        # we adjust the legend manually
-        if self.options.logx:
-            graph.set(xscale="log")
-        if self.options.logy:
-            graph.set(yscale="log")
-        if hasattr(options, 'title') and options.title is not None:
-            plt.title(options.title)
-        if hasattr(options, 'xlim') and options.xlim is not None:
-            xlow, xhigh = options.xlim
-            plt.xlim(xlow, xhigh)
-        if hasattr(options, 'ylim') and options.ylim is not None:
-            ylow, yhigh = options.ylim
-            plt.ylim(ylow, yhigh)
-        output_filename = self.make_output_filename()
-        plt.savefig(output_filename, bbox_inches='tight')
-        plt.close()
-        if options.verbose:
-            print(f"Graph written to {output_filename}")
-
-
-# Relplots call the relplot interface in Seaborn, and thus share common
-# functionality https://seaborn.pydata.org/tutorial/relational.html 
-class Relplot(Facetplot):
-    def __init__(self, kind, options, df, y, x, hue, row, col):
-        super().__init__(kind, options, df, y, x, hue, row, col)
-        self.options = options
-        self.df = df
-        self.yaxis = y
-        self.xaxis = x
-        self.row = row
-        self.col = col
-        self.hue = hue
-        self.kind = kind
-
-    def plot(self):
-        options = self.options
-        plt.clf()
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
-        facet_kws = { 'legend_out': True }
-        graph = sns.relplot(kind=self.kind, data=self.df,
-                x=self.xaxis, y=self.yaxis, col=self.col, row=self.row,
-                height=options.height, aspect=aspect, hue=self.hue,
-                hue_order=options.hueorder, facet_kws=facet_kws)
+        graph = self.make_graph()
         if options.logx:
             graph.set(xscale="log")
         if options.logy:
@@ -557,6 +477,63 @@ class Relplot(Facetplot):
         plt.close()
         if options.verbose:
             print(f"Graph written to {output_filename}")
+
+    def make_graph(self):
+        raise NotImplementedError
+
+    def make_output_filename(self):
+        options = self.options
+        output_name = [get_output_name(options)]
+        y_str = output_field(self.y)
+        x_str = output_field(self.x)
+        hue_str = output_field(self.hue)
+        row_str = output_field(self.row)
+        col_str = output_field(self.col)
+        type_str = [self.kind]
+        return Path('.'.join(output_name + y_str + x_str +
+                             hue_str + row_str + col_str +
+                             type_str) + '.png')
+
+def output_field(field):
+    return [field.replace(' ', '_')] if field is not None else []
+
+# Catplots call the catlplot interface in Seaborn, and thus share common
+# functionality https://seaborn.pydata.org/tutorial/categorical.html
+class Catplot(Facetplot):
+    def __init__(self, kind, options, df, x, y, hue, row, col):
+        super().__init__(kind, options, df, x, y, hue, row, col)
+
+    def make_graph(self):
+        options = self.options
+        facet_kws = { 'legend_out': True }
+        aspect = 1
+        if options.width > 0:
+            aspect = options.width / options.height
+        graph = sns.catplot(kind=self.kind, data=self.df,
+                x=self.x, y=self.y, col=self.col, row=self.row,
+                height=options.height, aspect=aspect, hue=self.hue,
+                order=options.order, hue_order=options.hueorder,
+                orient=options.orient, facet_kws=facet_kws)
+        return graph
+
+
+# Relplots call the relplot interface in Seaborn, and thus share common
+# functionality https://seaborn.pydata.org/tutorial/relational.html 
+class Relplot(Facetplot):
+    def __init__(self, kind, options, df, x, y, hue, row, col):
+        super().__init__(kind, options, df, x, y, hue, row, col)
+
+    def make_graph(self):
+        options = self.options
+        aspect = 1
+        if options.width > 0:
+            aspect = options.width / options.height
+        facet_kws = { 'legend_out': True }
+        graph = sns.relplot(kind=self.kind, data=self.df,
+                x=self.x, y=self.y, col=self.col, row=self.row,
+                height=options.height, aspect=aspect, hue=self.hue,
+                hue_order=options.hueorder, facet_kws=facet_kws)
+        return graph
 
 '''
 class Scatter(Plot):
@@ -645,35 +622,8 @@ class Heatmap(Plot):
         return Path('.'.join([output_name, 'heatmap.png'])) 
 
 
-class Count(Plot):
-    def __init__(self, options, df, column):
-        super().__init__(options, df)
-        self.column = column
-
-    def render_data(self):
-        if self.options.sorted:
-            order_index = self.df[self.column].value_counts().index
-        else:
-            order_index = None
-        sns.countplot(data=self.df, x=self.column, hue=self.options.hue, order=order_index) 
-        self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=90)
-        self.ax.set(xlabel=self.column)
-
-    def make_output_filename(self):
-        output_name = get_output_name(self.options)
-        column_str = self.column.replace(' ', '_')
-        hue_str = ''
-        if self.options.hue:
-            hue_str = self.options.hue.replace(' ', '_')
-            filename = Path('.'.join([output_name, column_str, hue_str, 'count', 'png']))
-        else:
-            filename = Path('.'.join([output_name, column_str, 'count', 'png']))
-        return filename
-
-
 def make_output_directories(options):
     pass
-
 
 def plot_by_xy(options, df, plotter):
     for pair in options.xy:
@@ -692,20 +642,20 @@ def plot_heatmap(options, df):
     Heatmap(options, df).plot()
 
 
-def plot_catplot(options, plot_type, df):
+def facet_plot(options, plot_type, df, plotfun):
     # XXX check numerical and categorical columns have the right type
     y_fields = options.yaxis if options.yaxis is not None else [None]
     x_fields = options.xaxis if options.xaxis is not None else [None]
     hue_fields = options.hue if options.hue is not None else [None]
     row_fields  = options.row if options.row is not None else [None]
     col_fields  = options.col if options.col is not None else [None]
-    args = iter.product(y_fields, x_fields, hue_fields, row_fields, col_fields)
-    for (y, x, hue, row, col) in args:
-        if y is not None and y not in df.columns:
-            logging.warn(f"{y} is not a column heading, skipping")
-            continue
+    args = iter.product(x_fields, y_fields, hue_fields, row_fields, col_fields)
+    for (x, y, hue, row, col) in args:
         if x is not None and x not in df.columns:
             logging.warn(f"{x} is not a column heading, skipping")
+            continue
+        if y is not None and y not in df.columns:
+            logging.warn(f"{y} is not a column heading, skipping")
             continue
         if hue is not None and hue not in df.columns:
             logging.warn(f"{hue} is not a column heading, skipping")
@@ -716,35 +666,7 @@ def plot_catplot(options, plot_type, df):
         if col is not None and col not in df.columns:
             logging.warn(f"{col} is not a column heading, skipping")
             continue
-        Catplot(plot_type, options, df, y, x, hue, row, col).plot()
-
-
-def plot_relplot(options, plot_type, df):
-    # XXX check numerical and categorical columns have the right type
-    y_fields = options.yaxis if options.yaxis is not None else [None]
-    x_fields = options.xaxis if options.xaxis is not None else [None]
-    hue_fields = options.hue if options.hue is not None else [None]
-    row_fields  = options.row if options.row is not None else [None]
-    col_fields  = options.col if options.col is not None else [None]
-    args = iter.product(y_fields, x_fields, hue_fields, row_fields, col_fields)
-    for (y, x, hue, row, col) in args:
-        if y is not None and y not in df.columns:
-            logging.warn(f"{y} is not a column heading, skipping")
-            continue
-        if x is not None and x not in df.columns:
-            logging.warn(f"{x} is not a column heading, skipping")
-            continue
-        if hue is not None and hue not in df.columns:
-            logging.warn(f"{hue} is not a column heading, skipping")
-            continue
-        if row is not None and row not in df.columns:
-            logging.warn(f"{row} is not a column heading, skipping")
-            continue
-        if col is not None and col not in df.columns:
-            logging.warn(f"{col} is not a column heading, skipping")
-            continue
-        Relplot(plot_type, options, df, y, x, hue, row, col).plot()
-
+        plotfun(plot_type, options, df, x, y, hue, row, col).plot()
 
 def plot_by_column(options, df, plotter):
     for column in options.cols:
@@ -752,7 +674,6 @@ def plot_by_column(options, df, plotter):
             plotter(options, df, column).plot()
         else:
             logging.warn(f"Column: {column} does not exist in data, skipping")
-
 
 def display_info(df):
     pd.set_option('display.max_columns', None)
@@ -777,13 +698,9 @@ def main():
     if options.cmd == 'hist':
         plot_by_column(options, df, Histogram)
     elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
-        plot_catplot(options, options.cmd, df)
+        facet_plot(options, options.cmd, df, Catplot)
     elif options.cmd in ['scatter', 'line']:
-        plot_relplot(options, options.cmd, df)
-    #elif options.cmd == 'scatter':
-    #    plot_by_xy(options, df, Scatter)
-    #elif options.cmd == 'line':
-    #    plot_by_xy(options, df, Line)
+        facet_plot(options, options.cmd, df, Relplot)
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
     elif options.cmd == 'pca':
