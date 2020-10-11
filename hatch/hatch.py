@@ -116,6 +116,9 @@ def parse_args():
         '--eval', metavar='EXPR', required=False, type=str, nargs="+",
         help='Construct new data columns based on an expression')
     common_arguments.add_argument(
+        '--sample', metavar='NUM', required=False, type=int,
+        help='Sample NUM rows from the input data')
+    common_arguments.add_argument(
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
     common_arguments.add_argument(
@@ -365,6 +368,8 @@ def read_data(options):
             data = data.query(options.filter)
         except:
             exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
+    if options.sample:
+        data = data.sample(n = options.sample)
     return data 
 
 
