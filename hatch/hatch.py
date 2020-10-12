@@ -260,13 +260,10 @@ def parse_args():
 
     noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[common_arguments], add_help=False)
 
-    def facet_parser(kind, help):
+    def facet_parser(kind, help, additional_parents=[]):
         return subparsers.add_parser(kind, help=help, 
-                parents=[common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
+                parents=additional_parents + [common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
 
-    def make_relplot_parser(kind, help):
-        return subparsers.add_parser(kind, help=help, 
-                parents=[common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
 
     boxparser = facet_parser('box', help='Box plot of numerical feature, optionally grouped by categorical features')
     violinparser = facet_parser('violin', help='Violin plot of numerical feature, optionally grouped by categorical features')
@@ -277,7 +274,7 @@ def parse_args():
     barparser = facet_parser('bar', help='Bar plot of categorical feature')
     pointparser = facet_parser('point', help='Point plot of numerical feature, optionally grouped by categorical features')
 
-    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features')
+    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features', additional_parents=[dotsize_arguments, dotalpha_arguments])
     lineparser = facet_parser('line', help='Line plot of numerical feature')
 
     #scatterparser = subparsers.add_parser('scatter', help='Scatter plots of numerical data', parents=[common_arguments, xy_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
@@ -459,7 +456,7 @@ class Histogram(Plot):
 
 
 class Facetplot(object):
-    def __init__(self, kind, options, df, x, y, hue, row, col):
+    def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
         self.options = options
         self.df = df
         self.kind = kind
@@ -468,11 +465,12 @@ class Facetplot(object):
         self.hue = hue
         self.row = row
         self.col = col
+        self.kwargs = kwargs
 
     def plot(self):
         options = self.options
         plt.clf()
-        graph = self.make_graph()
+        graph = self.make_graph(self.kwargs)
         if options.logx:
             graph.set(xscale="log")
         if options.logy:
@@ -513,8 +511,8 @@ def output_field(field):
 # Catplots call the catlplot interface in Seaborn, and thus share common
 # functionality https://seaborn.pydata.org/tutorial/categorical.html
 class Catplot(Facetplot):
-    def __init__(self, kind, options, df, x, y, hue, row, col):
-        super().__init__(kind, options, df, x, y, hue, row, col)
+    def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
+        super().__init__(kind, options, df, x, y, hue, row, col, kwargs)
 
     def make_graph(self):
         options = self.options
@@ -526,17 +524,17 @@ class Catplot(Facetplot):
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
                 order=options.order, hue_order=options.hueorder,
-                orient=options.orient, facet_kws=facet_kws)
+                orient=options.orient, facet_kws=facet_kws, **kwargs)
         return graph
 
 
 # Relplots call the relplot interface in Seaborn, and thus share common
 # functionality https://seaborn.pydata.org/tutorial/relational.html 
 class Relplot(Facetplot):
-    def __init__(self, kind, options, df, x, y, hue, row, col):
-        super().__init__(kind, options, df, x, y, hue, row, col)
+    def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
+        super().__init__(kind, options, df, x, y, hue, row, col, kwargs)
 
-    def make_graph(self):
+    def make_graph(self, kwargs):
         options = self.options
         aspect = 1
         if options.width > 0:
@@ -545,7 +543,7 @@ class Relplot(Facetplot):
         graph = sns.relplot(kind=self.kind, data=self.df,
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
-                hue_order=options.hueorder, facet_kws=facet_kws)
+                hue_order=options.hueorder, facet_kws=facet_kws, **kwargs)
         return graph
 
 '''
@@ -655,7 +653,7 @@ def plot_heatmap(options, df):
     Heatmap(options, df).plot()
 
 
-def facet_plot(options, plot_type, df, plotfun):
+def facet_plot(options, plot_type, df, plotfun, kwargs):
     # XXX check numerical and categorical columns have the right type
     y_fields = options.yaxis if options.yaxis is not None else [None]
     x_fields = options.xaxis if options.xaxis is not None else [None]
@@ -679,7 +677,7 @@ def facet_plot(options, plot_type, df, plotfun):
         if col is not None and col not in df.columns:
             logging.warn(f"{col} is not a column heading, skipping")
             continue
-        plotfun(plot_type, options, df, x, y, hue, row, col).plot()
+        plotfun(plot_type, options, df, x, y, hue, row, col, kwargs).plot()
 
 def plot_by_column(options, df, plotter):
     for column in options.cols:
@@ -706,6 +704,7 @@ def main():
     init_logging(options.logfile)
     make_output_directories(options)
     df = read_data(options)
+    kwargs = {}
     if options.info:
         display_info(df)
     if options.save:
@@ -713,9 +712,12 @@ def main():
     if options.cmd == 'hist':
         plot_by_column(options, df, Histogram)
     elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
-        facet_plot(options, options.cmd, df, Catplot)
-    elif options.cmd in ['scatter', 'line']:
-        facet_plot(options, options.cmd, df, Relplot)
+        facet_plot(options, options.cmd, df, Catplot, kwargs)
+    elif options.cmd == 'line':
+        facet_plot(options, options.cmd, df, Relplot, kwargs)
+    elif options.cmd == 'scatter':
+        kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha }
+        facet_plot(options, options.cmd, df, Relplot, kwargs)
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
     elif options.cmd == 'pca':
