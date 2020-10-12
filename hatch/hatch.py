@@ -158,11 +158,6 @@ def parse_args():
     common_arguments.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
-    xy_arguments = ArgumentParser(add_help=False)
-    xy_arguments.add_argument(
-        '--xy',  metavar='X,Y', nargs="+", required=True, type=str,
-        help=f'Pairs of features to plot, format: name1,name2')
-
     columns_arguments = ArgumentParser(add_help=False)
     columns_arguments.add_argument(
         '--cols', '-c', metavar='FEATURE', nargs="+", required=True, type=str,
@@ -228,7 +223,6 @@ def parse_args():
         '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
         help=f'Limit vertical axis range to [LOW,HIGH]')
 
-
     dotsize_arguments = ArgumentParser(add_help=False)
     dotsize_arguments.add_argument(
         '--dotsize',  metavar='FEATURE', type=str, required=False, 
@@ -244,13 +238,17 @@ def parse_args():
         '--dotlinewidth',  metavar='WIDTH', type=int, default=DEFAULT_LINEWIDTH,
         help=f'Line width value for plotted points. Default: %(default)s')
 
+    colwrap_arguments = ArgumentParser(add_help=False)
+    colwrap_arguments.add_argument(
+        '--colwrap',  metavar='INT', type=int, required=False, 
+        help=f'Wrap the facet column at this width, to span multiple rows.')
+
     pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[common_arguments, columns_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
     pcaparser.add_argument(
         '--missing',  metavar='STRATEGY', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
         help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
 
-
-    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, columns_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
+    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_arguments, y_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUMBINS', required=False, default=DEFAULT_BINS, type=int,
         help=f'Number of bins for histogram. Default: %(default)s')
@@ -262,7 +260,7 @@ def parse_args():
 
     def facet_parser(kind, help, additional_parents=[]):
         return subparsers.add_parser(kind, help=help, 
-                parents=additional_parents + [common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
+                parents=additional_parents + [common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments, colwrap_arguments], add_help=False) 
 
 
     boxparser = facet_parser('box', help='Box plot of numerical feature, optionally grouped by categorical features')
@@ -273,21 +271,8 @@ def parse_args():
     countparser = facet_parser('count', help='Count plot of categorical feature')
     barparser = facet_parser('bar', help='Bar plot of categorical feature')
     pointparser = facet_parser('point', help='Point plot of numerical feature, optionally grouped by categorical features')
-
-    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features', additional_parents=[dotsize_arguments, dotalpha_arguments])
+    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features', additional_parents=[dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments])
     lineparser = facet_parser('line', help='Line plot of numerical feature')
-
-    #scatterparser = subparsers.add_parser('scatter', help='Scatter plots of numerical data', parents=[common_arguments, xy_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
-
-    '''
-    lineparser = subparsers.add_parser('line', help='Line plots of numerical data', parents=[common_arguments, xy_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
-    lineparser.add_argument(
-        '--overlay', action='store_true', 
-        help=f'Overlay line plots on the same axes, otherwise make a separate plot for each')
-    lineparser.add_argument(
-        '--hue',  metavar='FEATURE', type=str, required=False, 
-        help=f'Name of feature (column headings) to group data for line plot')
-    '''
 
     heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments], add_help=False) 
     heatmapparser.add_argument(
@@ -442,17 +427,21 @@ class Plot:
 
 
 class Histogram(Plot):
-    def __init__(self, options, df, column):
+    def __init__(self, options, df, x, y):
         super().__init__(options, df)
-        self.column = column
+        self.x = x 
+        self.y = y
     
     def render_data(self):
-        sns.distplot(self.df[self.column], hist_kws={'cumulative': self.options.cumulative}, kde=False, bins=self.options.bins) 
-        self.ax.set(xlabel=self.column, ylabel='count')
+        sns.histplot(data=self.df, x=self.x, y=self.y, bins=self.options.bins,
+                cumulative=self.options.cumulative)
 
     def make_output_filename(self):
         output_name = get_output_name(self.options)
-        return Path('.'.join([output_name, self.column.replace(' ', '_'), 'histogram.png']))
+        if self.x is not None:
+            return Path('.'.join([output_name, self.x.replace(' ', '_'), 'histogram.png']))
+        elif self.y is not None:
+            return Path('.'.join([output_name, self.y.replace(' ', '_'), 'histogram.png']))
 
 
 class Facetplot(object):
@@ -524,7 +513,7 @@ class Catplot(Facetplot):
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
                 order=options.order, hue_order=options.hueorder,
-                orient=options.orient, facet_kws=facet_kws, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         return graph
 
 
@@ -543,31 +532,8 @@ class Relplot(Facetplot):
         graph = sns.relplot(kind=self.kind, data=self.df,
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
-                hue_order=options.hueorder, facet_kws=facet_kws, **kwargs)
+                hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         return graph
-
-'''
-class Scatter(Plot):
-    def __init__(self, options, df, feature1, feature2):
-        super().__init__(options, df)
-        self.feature1 = feature1
-        self.feature2 = feature2
-
-    def render_data(self):
-        graph=sns.scatterplot(data=self.df, x=self.feature1, y=self.feature2, hue=self.options.hue,
-                          alpha=self.options.dotalpha, size=self.options.dotsize, linewidth=self.options.dotlinewidth)
-        self.ax.set(xlabel=self.feature1, ylabel=self.feature2)
-        if self.options.hue is not None:
-            graph.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0)
-        if self.options.nolegend:
-            graph.legend_.remove()
-
-    def make_output_filename(self):
-        feature1_str = self.feature1.replace(' ', '_')
-        feature2_str = self.feature2.replace(' ', '_')
-        output_name = get_output_name(self.options)
-        return Path('.'.join([output_name, feature1_str, feature2_str, 'scatter.png'])) 
-'''
 
 
 class PCA(Plot):
@@ -636,22 +602,6 @@ class Heatmap(Plot):
 def make_output_directories(options):
     pass
 
-def plot_by_xy(options, df, plotter):
-    for pair in options.xy:
-        pair_fields = pair.split(",") 
-        if len(pair_fields) == 2:
-            feature1, feature2 = pair_fields
-            if feature1 in df.columns and feature2 in df.columns:
-                plotter(options, df, feature1, feature2).plot() 
-            else:
-                logging.warn(f"One or both of the columns {feature1} and {feature2} does not exist in data, skipping")
-        else:
-            logging.warn(f"Badly formed feature pair: {pair}, must be feature1,feature2 (comma separated, no spaces) ")
-
-
-def plot_heatmap(options, df):
-    Heatmap(options, df).plot()
-
 
 def facet_plot(options, plot_type, df, plotfun, kwargs):
     # XXX check numerical and categorical columns have the right type
@@ -663,28 +613,36 @@ def facet_plot(options, plot_type, df, plotfun, kwargs):
     args = iter.product(x_fields, y_fields, hue_fields, row_fields, col_fields)
     for (x, y, hue, row, col) in args:
         if x is not None and x not in df.columns:
-            logging.warn(f"{x} is not a column heading, skipping")
+            logging.warn(f"{x} is not an attribute of the data set, skipping")
             continue
         if y is not None and y not in df.columns:
-            logging.warn(f"{y} is not a column heading, skipping")
+            logging.warn(f"{y} is not an attribute of the data set, skipping")
             continue
         if hue is not None and hue not in df.columns:
-            logging.warn(f"{hue} is not a column heading, skipping")
+            logging.warn(f"{hue} is not an attribute of the data set, skipping")
             continue
         if row is not None and row not in df.columns:
-            logging.warn(f"{row} is not a column heading, skipping")
+            logging.warn(f"{row} is not an attribute of the data set, skipping")
             continue
         if col is not None and col not in df.columns:
-            logging.warn(f"{col} is not a column heading, skipping")
+            logging.warn(f"{col} is not an attribute of the data set, skipping")
             continue
         plotfun(plot_type, options, df, x, y, hue, row, col, kwargs).plot()
 
-def plot_by_column(options, df, plotter):
-    for column in options.cols:
-        if column in df.columns:
-            plotter(options, df, column).plot()
-        else:
-            logging.warn(f"Column: {column} does not exist in data, skipping")
+def plot_by_x_y(options, df, plotfun):
+    if options.xaxis:
+        for x in options.xaxis:
+            if x in df.columns:
+                plotfun(options, df, x=x, y=None).plot()
+            else:
+                logging.warn(f"{x} is not an attribute of the data set, skipping")
+    if options.yaxis:
+        for y in options.yaxis:
+            if y in df.columns:
+                plotfun(options, df, x=None, y=y).plot()
+            else:
+                logging.warn(f"{y} is not an attribute of the data set, skipping")
+
 
 def display_info(df):
     pd.set_option('display.max_columns', None)
@@ -710,13 +668,13 @@ def main():
     if options.save:
         save(options, df)
     if options.cmd == 'hist':
-        plot_by_column(options, df, Histogram)
+        plot_by_x_y(options, df, Histogram)
     elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
         facet_plot(options, options.cmd, df, Catplot, kwargs)
     elif options.cmd == 'line':
         facet_plot(options, options.cmd, df, Relplot, kwargs)
     elif options.cmd == 'scatter':
-        kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha }
+        kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha, 'linewidth': options.dotlinewidth }
         facet_plot(options, options.cmd, df, Relplot, kwargs)
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
