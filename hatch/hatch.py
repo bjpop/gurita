@@ -158,10 +158,10 @@ def parse_args():
     common_arguments.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
-    columns_arguments = ArgumentParser(add_help=False)
-    columns_arguments.add_argument(
-        '--cols', '-c', metavar='FEATURE', nargs="+", required=True, type=str,
-        help=f'Columns to plot')
+    features_arguments = ArgumentParser(add_help=False)
+    features_arguments.add_argument(
+        '--features', metavar='FEATURE', nargs="+", required=True, type=str,
+        help=f'Features to use in the PCA')
 
     x_arguments = ArgumentParser(add_help=False)
     x_arguments.add_argument(
@@ -243,7 +243,7 @@ def parse_args():
         '--colwrap',  metavar='INT', type=int, required=False, 
         help=f'Wrap the facet column at this width, to span multiple rows.')
 
-    pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[common_arguments, columns_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
+    pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[common_arguments, features_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
     pcaparser.add_argument(
         '--missing',  metavar='STRATEGY', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
         help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
@@ -541,9 +541,9 @@ class PCA(Plot):
         super().__init__(options, df)
 
     def render_data(self):
-        column_names = self.options.cols
+        feature_names = self.options.cols
         # Build a dataframe with the columns that we are interested in
-        selected_columns = self.df[column_names]
+        selected_columns = self.df[feature_names]
         # Handle rows in the data that have missing values
         if self.options.missing == 'drop':
             selected_columns = selected_columns.dropna()
