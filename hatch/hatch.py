@@ -42,6 +42,7 @@ DEFAULT_PLOT_HEIGHT = 8
 DEFAULT_PLOT_NAME = "plot"
 DEFAULT_ORIENTATION = "v"
 DEFAULT_STYLE = "darkgrid"
+DEFAULT_CONTEXT = "notebook"
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -122,6 +123,9 @@ def parse_args():
     common_arguments.add_argument(
         '--style', choices=['darkgrid', 'whitegrid', 'dark', 'white', 'ticks'], required=False, default=DEFAULT_STYLE,
         help=f'Aesthetic style of plot. Allowed values: %(choices)s. Default: %(default)s.')
+    common_arguments.add_argument(
+        '--context', choices=['paper', 'notebook', 'talk', 'poster'], required=False, default=DEFAULT_CONTEXT,
+        help=f'Aesthetic context of plot. Allowed values: %(choices)s. Default: %(default)s.')
     common_arguments.add_argument(
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
@@ -698,6 +702,7 @@ def save(options, df):
 def main():
     options = parse_args()
     sns.set_style(options.style)
+    sns.set_context(options.context)
     init_logging(options.logfile)
     make_output_directories(options)
     df = read_data(options)
