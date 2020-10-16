@@ -32,7 +32,6 @@ PROGRAM_NAME = "hatch"
 DEFAULT_ALPHA = 0.5
 DEFAULT_LINEWIDTH = 0
 DEFAULT_FILETYPE = 'CSV'
-DEFAULT_BINS = 100
 DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
 DEFAULT_DIST_PLOT_TYPE = 'box'
@@ -215,12 +214,12 @@ def parse_args():
 
     xlim_arguments = ArgumentParser(add_help=False)
     xlim_arguments.add_argument(
-        '--xlim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        '--xlim',  metavar='BOUND', nargs=2, required=False, type=float,
         help=f'Limit horizontal axis range to [LOW,HIGH]')
 
     ylim_arguments = ArgumentParser(add_help=False)
     ylim_arguments.add_argument(
-        '--ylim',  metavar='LOW HIGH', nargs=2, required=False, type=float,
+        '--ylim',  metavar='BOUND', nargs=2, required=False, type=float,
         help=f'Limit vertical axis range to [LOW,HIGH]')
 
     dotsize_arguments = ArgumentParser(add_help=False)
@@ -250,8 +249,8 @@ def parse_args():
 
     histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_arguments, y_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     histparser.add_argument(
-        '--bins',  metavar='NUMBINS', required=False, default=DEFAULT_BINS, type=int,
-        help=f'Number of bins for histogram. Default: %(default)s')
+        '--bins',  metavar='NUMBINS', required=False, type=int,
+        help=f'Number of bins for histogram.')
     histparser.add_argument(
         '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
@@ -433,7 +432,11 @@ class Histogram(Plot):
         self.y = y
     
     def render_data(self):
-        sns.histplot(data=self.df, x=self.x, y=self.y, bins=self.options.bins,
+        if self.options.bins:
+            sns.histplot(data=self.df, x=self.x, y=self.y, bins=self.options.bins,
+                cumulative=self.options.cumulative)
+        else:
+            sns.histplot(data=self.df, x=self.x, y=self.y,
                 cumulative=self.options.cumulative)
 
     def make_output_filename(self):
@@ -478,7 +481,7 @@ class Facetplot(object):
         if options.verbose:
             print(f"Graph written to {output_filename}")
 
-    def make_graph(self):
+    def make_graph(self, kwargs):
         raise NotImplementedError
 
     def make_output_filename(self):
@@ -503,7 +506,7 @@ class Catplot(Facetplot):
     def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
         super().__init__(kind, options, df, x, y, hue, row, col, kwargs)
 
-    def make_graph(self):
+    def make_graph(self, kwargs):
         options = self.options
         facet_kws = { 'legend_out': True }
         aspect = 1
