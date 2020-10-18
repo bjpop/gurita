@@ -1,9 +1,51 @@
 Count 
-***********
+*****
 
 Count plots show the frequency of values in categorical features using bars.
 
+.. code-block:: bash
+
+    hatch count <arguments> 
+
 Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="count"`` option.
+
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help 
+     - :ref:`count_help`
+   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - select feature for the X axis 
+     - :ref:`count_feature_selection`
+   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]`` 
+     - select feature for the Y axis 
+     - :ref:`count_feature_selection`
+   * - ``--order FEATURE [FEATURE ...]`` 
+     - order of the plotted columns  
+     - :ref:`count_order`
+   * - ``--hue FEATURE [FEATURE ...]`` 
+     - group features by hue 
+     - :ref:`count_hue`
+   * - ``--hueorder FEATURE [FEATURE ...]`` 
+     - order of hue features
+     - :ref:`Hue order <count_hueorder>`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`count_log`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`count_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`count_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`count_range`
 
 Simple example
 ==============
@@ -22,6 +64,8 @@ The output of the above command is written to ``tips.tip.histogram.png``:
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file 
 
+.. _count_help:
+
 Getting help
 ============
 
@@ -31,6 +75,8 @@ arguments:
 .. code-block:: bash
 
     hatch count -h
+
+.. _count_feature_selection:
 
 Selecting features to plot
 ==========================
@@ -82,6 +128,8 @@ horizontally instead of vertically:
 
 You may use both ``-x FEATURE [FEATURE ...]`` and ``-y FEATURE [FEATURE ...]`` in the same command line. 
 
+.. _count_order:
+
 Controlling the order of the plotted columns
 ============================================
 
@@ -103,6 +151,8 @@ In the following example the counts of the ``embark_town`` feature are displayed
        :height: 600px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, with specific order 
+
+.. _count_hue:
 
 Grouping features with hue 
 ==========================
@@ -128,6 +178,8 @@ In the following example the counts of the ``embark_town`` feature are grouped b
 
 You can specify more than one feature to group by; hatch will generate a separate count plot for every ``hue`` feature specified.
 
+.. _count_hueorder:
+
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
 This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
 
@@ -142,6 +194,8 @@ In the following example the ``class`` values are displayed in the order of ``Fi
        :height: 600px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+
+.. _count_log:
 
 Log scale of counts
 ===================
@@ -162,6 +216,8 @@ data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument shou
 .. code-block:: bash
 
     hatch count -x embark_town --logy -- titanic.csv  
+
+.. _count_range:
 
 Range limits
 ============

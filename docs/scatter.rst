@@ -1,9 +1,61 @@
 Scatter
-*********
+*******
 
 Scatter plots show the relationship between two numerical features as a scatter of data points.
 
+.. code-block:: bash
+
+    hatch scatter <arguments>
+
 Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html/>`_ library function, using the ``kind="scatter"`` option.
+
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help
+     - :ref:`scatter_help`
+   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - select feature for the X axis
+     - :ref:`scatter_feature_selection`
+   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+     - select feature for the Y axis
+     - :ref:`scatter_feature_selection`
+   * - ``--hue FEATURE [FEATURE ...]``
+     - group features by hue
+     - :ref:`scatter_hue`
+   * - ``--hueorder FEATURE [FEATURE ...]``
+     - order of hue features
+     - :ref:`Hue order <scatter_hueorder>`
+   * - ``--dotsize FEATURE``
+     - scale the size of plotted dots based on a feature 
+     - :ref:`scatter_dotsize`
+   * - ``--dotalpha ALPHA``
+     - alpha value for plotted points, default: 0.5  
+     - :ref:`scatter_dotalpha_linewidth`
+   * - ``--dotlinewidth WIDTH``
+     - line width value for plotted points, default: 0
+     - :ref:`scatter_dotalpha_linewidth`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`scatter_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`scatter_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`scatter_range`
+   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+     - feature to use for facet rows 
+     - :ref:`scatter_facets`
+   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+     - feature to use for facet columns 
+     - :ref:`scatter_facets`
+
 
 Simple example
 ==============
@@ -22,6 +74,8 @@ The output of the above command is written to ```tips.tip.total_bill.scatter.png
        :align: center
        :alt: Scatter plot comparing tip to total_bill in the tips.csv file 
 
+.. _scatter_help:
+
 Getting help
 ============
 
@@ -31,6 +85,8 @@ arguments:
 .. code-block:: bash
 
     hatch scatter -h
+
+.. _scatter_feature_selection:
 
 Selecting features to plot
 ==========================
@@ -44,6 +100,8 @@ Scatter plots can be plotted for two numerical features, one on each of the axes
 
 You may specifiy multiple numerical features for ``-x`` and ``-y``. 
 Hatch will generate a separate plot for each combination of the features. 
+
+.. _scatter_hue:
 
 Colouring data points with hue 
 ==============================
@@ -83,8 +141,12 @@ argument:
 
 You can specify more than one feature to colour by; hatch will generate a separate scatter plot for every ``hue`` feature specified.
 
+.. _scatter_hueorder:
+
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
 This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
+
+.. _scatter_dotsize:
 
 Scaling dot size
 ================
@@ -107,6 +169,8 @@ in ``tips.csv``:
        :height: 600px
        :align: center
        :alt: Scatter plot comparing tip and total_bill with dot size scaled by size 
+
+.. _scatter_dotalpha_linewidth:
 
 Dot alpha transparency and border linewidth
 ===========================================
@@ -131,6 +195,8 @@ In the following example, the dot alpha is set to 1 and the boder line width is 
        :align: center
        :alt: Scatter plot comparing tip and total_bill with dot alpha set to 1 and dot line width set to 1
 
+.. _scatter_log:
+
 Log scale of numerical distribution 
 ===================================
 
@@ -149,6 +215,8 @@ For example, you can display a log scale scatter plot for the ``age`` feature gr
 .. code-block:: bash
 
     hatch scatter -y age -x class --logy -- titanic.csv 
+
+.. _scatter_range:
 
 Range limits
 ============
@@ -170,6 +238,8 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. code-block:: bash
 
     hatch scatter -y age -x class --ylim 10 30 -- titanic.csv
+
+.. _scatter_facets:
 
 Facets
 ======

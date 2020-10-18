@@ -3,7 +3,35 @@ Histogram
 
 Plot distributions of selected numerical or categorical features as histograms.
 
+.. code-block:: bash
+
+    hatch hist <arguments> 
+
 Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generated/seaborn.histplot.html/>`_ library function.
+
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help 
+     - :ref:`hist_help`
+   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - select feature for the X axis 
+     - :ref:`hist_feature_selection`
+   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]`` 
+     - select feature for the Y axis 
+     - :ref:`hist_feature_selection`
+   * - ``--bins NUM``
+     - number of bins 
+     - :ref:`hist_bins`
+   * - ``--cumulative``
+     - plot a cumulative histogram 
+     - :ref:`hist_cumulative`
+
 
 Simple example
 ==============
@@ -22,6 +50,8 @@ The output of the above command is written to ``tips.tip.histogram.png``:
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set
 
+.. _hist_help:
+
 Getting help
 ============
 
@@ -31,6 +61,8 @@ arguments:
 .. code-block:: bash
 
     hatch hist -h
+
+.. _hist_feature_selection:
 
 Selecting features to plot
 ==========================
@@ -85,6 +117,8 @@ horizontally instead of vertically:
 
 You may use both ``-x FEATURE [FEATURE ...]`` and ``-y FEATURE [FEATURE ...]`` in the same command line. 
 
+.. _hist_bins:
+
 Controlling the number of bins used
 ===================================
 
@@ -103,6 +137,8 @@ argument like so:
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using 10 bins
+
+.. _hist_cumulative:
 
 Cumulative histograms 
 =====================

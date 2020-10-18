@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Hatch!
-*****************
+Hatch: a command line plotting tool
+***********************************
 
 Hatch is a command line tool for visualising data.
 
@@ -32,7 +32,7 @@ The following plot types are provided:
 
 It also supports expressive :doc:`row filtering <filter/>` and :doc:`dynamic computation of new columns <eval/>`.
 
-Hatch is implemented in `Python <http://www.python.org/>`_ and makes extensive use of the `Pandas <https://pandas.pydata.org/>`_ and `Seaborn <https://seaborn.pydata.org/>`_ libraries for data processing and plot generation.
+Hatch is implemented in `Python <http://www.python.org/>`_ and makes extensive use of the `Pandas <https://pandas.pydata.org/>`_, `Seaborn <https://seaborn.pydata.org/>`_, and `Scikit-learn <https://scikit-learn.org/>`_ libraries for data processing and plot generation.
 
 Hatch plots are highly customisable, however for most cases sensible defaults are applied.
 
@@ -67,9 +67,16 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    :hidden:
 
    self
+   license
    installation 
-   general_behaviour 
    example_input_data
+
+.. toctree::
+   :caption: General behaviour 
+   :hidden:
+
+   command_line_syntax 
+   input_output 
 
 .. toctree::
    :caption: Plot types 
@@ -95,8 +102,9 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    :maxdepth: 1
    :caption: Data maniupulation 
 
-   filtering_rows 
-   eval_columns 
+   filter 
+   eval 
+   sample
 
 .. toctree::
    :hidden:
@@ -110,8 +118,7 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    :maxdepth: 1
    :caption: Plot aesthetics 
 
-   style 
-   context 
+   aesthetics 
 
 .. toctree::
    :hidden:
