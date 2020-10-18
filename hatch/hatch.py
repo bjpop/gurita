@@ -83,7 +83,7 @@ def parse_args():
         required=False,
         help=f'Name of optional output directory.')
     common_arguments.add_argument(
-        '--filetype',  metavar='FILETYPE', type=str,
+        '--filetype',  type=str,
         required=False, choices=ALLOWED_FILETYPES,
         help=f'Type of input file. Allowed values: %(choices)s. Otherwise inferred from filename extension.')
     common_arguments.add_argument(
@@ -249,7 +249,7 @@ def parse_args():
 
     histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_arguments, y_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
     histparser.add_argument(
-        '--bins',  metavar='NUMBINS', required=False, type=int,
+        '--bins',  metavar='NUM', required=False, type=int,
         help=f'Number of bins for histogram.')
     histparser.add_argument(
         '--cumulative', action='store_true',
