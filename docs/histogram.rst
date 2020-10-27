@@ -19,10 +19,10 @@ Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help 
      - :ref:`hist_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+   * - ``-x FEATURE, --xaxis FEATURE``
      - select feature for the X axis 
      - :ref:`hist_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]`` 
+   * - ``-y FEATURE, --yaxis FEATURE`` 
      - select feature for the Y axis 
      - :ref:`hist_feature_selection`
    * - ``--bins NUM``
@@ -32,6 +32,8 @@ Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generate
      - plot a cumulative histogram 
      - :ref:`hist_cumulative`
 
+
+.. _hist_example:
 
 Simple example
 ==============
@@ -69,41 +71,28 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
                         Feature to plot along the X axis
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -y FEATURE, --yaxis FEATURE
                         Feature to plot along the Y axis
 
 Histograms can be plotted for both numerical features and for categorical features. Numerical data is binned
 and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
 column for each categorical value in the specified feature.
 
-You can select the feature that you want to plot as a histogram using the ``-x`` (``--xargs``) or ``-y`` (``--yargs``)
+You can select the feature that you want to plot as a histogram using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
 arguments.
 
-If ``-x`` (``--xargs``) is chosen the histogram columns will be plotted vertically.
+If ``-x`` (``--xaxis``) is chosen the histogram columns will be plotted vertically.
 
-If ``-y`` (``--yargs``) is chosen the histogram columns will be plotted horizontally.
+If ``-y`` (``--yaxis``) is chosen the histogram columns will be plotted horizontally.
 
-In both cases you can specify more than one feature to plot; hatch will generate a separate histogram plot for
-every feature specified.
+.. note::
 
-The following command will generate separate histogram plots for ``total_bill``, ``tip`` and ``day``:
+    You may not use both ``-x FEATURE`` and ``-y FEATURE`` in the same command line for histogram plots.
 
-.. code-block:: bash
-
-    hatch hist -x total_bill tip day -- tips.csv
-
-The outputs of the above command will be saved in the following 3 files:
-
-.. code-block:: bash
-
-    tips.total_bill.histogram.png
-    tips.tip.histogram.png
-    tips.day.histogram.png
-
-Selecting the ``tip`` feature using the ``-y`` argument causes the histogram bars to be plotted
-horizontally instead of vertically:
+See :ref:`the example <hist_example>` above for a vertical axis plot.
+For comparison, the following command uses ``-y tip`` to plot a histogram of ``tip`` horizontally:
 
 .. code-block:: bash
 
@@ -115,7 +104,6 @@ horizontally instead of vertically:
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set
 
-You may use both ``-x FEATURE [FEATURE ...]`` and ``-y FEATURE [FEATURE ...]`` in the same command line. 
 
 .. _hist_bins:
 

@@ -1,11 +1,14 @@
 Scatter
 *******
 
-Scatter plots show the relationship between two numerical features as a scatter of data points.
+Scatter plots show the relationship between two features as a scatter of data points.
 
 .. code-block:: bash
 
     hatch scatter <arguments>
+
+When one of the two features being compared is a categorical value the scatter plot is similar to
+:doc:`strip plot <strip/>`.
 
 Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html/>`_ library function, using the ``kind="scatter"`` option.
 
@@ -19,13 +22,13 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``-h``
      - display help
      - :ref:`scatter_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+   * - ``-x FEATURE, --xaxis FEATURE``
      - select feature for the X axis
      - :ref:`scatter_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+   * - ``-y FEATURE, --yaxis FEATURE``
      - select feature for the Y axis
      - :ref:`scatter_feature_selection`
-   * - ``--hue FEATURE [FEATURE ...]``
+   * - ``--hue FEATURE``
      - group features by hue
      - :ref:`scatter_hue`
    * - ``--hueorder FEATURE [FEATURE ...]``
@@ -49,13 +52,17 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`scatter_range`
-   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+   * - ``-r FEATURE, --row FEATURE``
      - feature to use for facet rows 
      - :ref:`scatter_facets`
-   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+   * - ``-c FEATURE, --col FEATURE``
      - feature to use for facet columns 
      - :ref:`scatter_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`scatter_facets`
 
+.. _scatter_example:
 
 Simple example
 ==============
@@ -66,7 +73,7 @@ Scatter plot of the ``tip`` numerical feature compared to the ``total_bill`` num
 
     hatch scatter -x total_bill -y tip -- tips.csv 
 
-The output of the above command is written to ```tips.tip.total_bill.scatter.png`:
+The output of the above command is written to ``tips.tip.total_bill.scatter.png``:
 
 .. image:: ../images/tips.tip.total_bill.scatter.png
        :width: 600px
@@ -93,13 +100,26 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
-Scatter plots can be plotted for two numerical features, one on each of the axes.
+Scatter plots can be plotted for two numerical features as illustrated in the :ref:`example above <scatter_example>`, one on each of the axes.
 
-You may specifiy multiple numerical features for ``-x`` and ``-y``. 
-Hatch will generate a separate plot for each combination of the features. 
+Scatter plots can also be used to compare a numerical feature against a categorical feature. In the example below, the numerical ``tip`` feature is compared with the categorical ``day`` feature in the ``tips.csv`` dataset:
+
+.. code-block::
+
+    hatch scatter -x day -y tip -- tips.csv
+
+.. image:: ../images/tips.tip.day.scatter.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Scatter plot comparing tip to day in the tips.csv file 
+
+It should be noted that :doc:`strip plots <strip/>` achieve a similar result as above, and may be preferable over scatter plots when comparing numerical and categorical data. 
+
+Swapping ``-x`` and ``-y`` in the above command would result in a horizontal plot instead of a vertical plot.
 
 .. _scatter_hue:
 
@@ -108,7 +128,7 @@ Colouring data points with hue
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The data points can be coloured by an additional numerical or categorical feature with the ``--hue`` argument.
 
@@ -139,12 +159,9 @@ argument:
        :align: center
        :alt: Scatter plot comparing tip and total_bill coloured by size 
 
-You can specify more than one feature to colour by; hatch will generate a separate scatter plot for every ``hue`` feature specified.
-
 .. _scatter_hueorder:
 
-By default the order of the columns within each hue group is determined from their occurrence in the input data. 
-This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
+By default the order of the columns within each hue group is determined from their occurrence in the input data. This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
 
 .. _scatter_dotsize:
 
@@ -207,14 +224,9 @@ Log scale of numerical distribution
 
 The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
 
-It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
-
-For example, you can display a log scale scatter plot for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical distribution:
-
 .. code-block:: bash
 
-    hatch scatter -y age -x class --logy -- titanic.csv 
+    hatch scatter -x total_bill -y tip --logy -- tips.csv 
 
 .. _scatter_range:
 
@@ -228,16 +240,10 @@ Range limits
 
 The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
-It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--ylim`` should be used when numerical features are selected with ``-y``.
-
-For example, you can display range-limited range for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so.
-Note carefully that the numerical 
-data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument should be used to range-limit the distribution: 
 
 .. code-block:: bash
 
-    hatch scatter -y age -x class --ylim 10 30 -- titanic.csv
+    hatch scatter -x total_bill -y tip --xlim 20 40  -- tips.csv 
 
 .. _scatter_facets:
 
@@ -246,8 +252,9 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ -r FEATURE, --row FEATURE  
+ -c FEATURE, --col FEATURE
+ --colwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is
 further categorised by up to 2 more categorical features.

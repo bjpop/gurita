@@ -1,11 +1,58 @@
 Box 
-*********
+***
 
 Box (or box-and-whisker) plots show the distribution of values in a numerical feature optionally grouped by categorical features.
+The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate points.
+
+.. code-block:: bash
+
+    hatch box <arguments>
 
 Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="box"`` option.
 
-The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate points.
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help
+     - :ref:`box_help`
+   * - ``-x FEATURE, --xaxis FEATURE``
+     - select feature for the X axis
+     - :ref:`box_feature_selection`
+   * - ``-y FEATURE, --yaxis FEATURE``
+     - select feature for the Y axis
+     - :ref:`box_feature_selection`
+   * - ``--orient {v,h}``
+     - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
+     - :ref:`Box orientation <box_orient>`
+   * - ``--hue FEATURE``
+     - group features by hue
+     - :ref:`box_hue`
+   * - ``--hueorder FEATURE [FEATURE ...]``
+     - order of hue features
+     - :ref:`Hue order <box_hueorder>`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`box_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`box_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`box_range`
+   * - ``--row FEATURE, -r FEATURE``
+     - feature to use for facet rows 
+     - :ref:`box_facets`
+   * - ``--col FEATURE, -c FEATURE``
+     - feature to use for facet columns 
+     - :ref:`box_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`box_facets`
 
 Similar functionality to box plots are provided by:
 
@@ -31,7 +78,6 @@ The output of the above command is written to ``titanic.age.box.png``:
        :align: center
        :alt: Box plot showing the distribution of age for the titanic data set
 
-
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
 
@@ -47,6 +93,8 @@ The output of the above command is written to ``titanic.age.class.box.png``:
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set
 
+.. _box_help:
+
 Getting help
 ============
 
@@ -57,13 +105,15 @@ arguments:
 
     hatch box -h
 
+.. _box_feature_selection:
+
 Selecting features to plot
 ==========================
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
 Box plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -71,6 +121,8 @@ If no categorical feature is specified, a single column box plot will be generat
 the distribution of the numerical feature.
 
 .. note:: 
+
+    .. _box_orient:
 
     By default the orientation of the box plot is vertical. In this scenario
     the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
@@ -94,25 +146,7 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
-You may specifiy multiple numerical features and multiple categorical features in the same command.
-Hatch will generate a separate plot for each combination of numerical and categorical feature
-specified. For example, the following command specifies two numerical values and three categorical
-values from the ``tips.csv`` data set to generate a total of six plots (2 times 3):
-
-.. code-block:: bash
-
-    hatch box -x sex smoker day -y tip total_bill -- tips.csv
-
-The following output files are created by the above command.
-
-.. code-block:: bash
-
-    tips.tip.sex.box.png
-    tips.total_bill.sex.box.png
-    tips.tip.smoker.box.png
-    tips.total_bill.smoker.box.png
-    tips.tip.day.box.png
-    tips.total_bill.day.box.png
+.. _box_order:
 
 Controlling the order of the plotted box columns
 ================================================
@@ -136,12 +170,14 @@ In the following example the box columns of the ``class`` feature are displayed 
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+.. _box_hue:
+
 Grouping features with hue 
 ==========================
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -157,8 +193,7 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
-
-You can specify more than one feature to group by; hatch will generate a separate box plot for every ``hue`` feature specified.
+.. _box_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
 This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
@@ -173,7 +208,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex 
 
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
@@ -186,7 +221,9 @@ the order of both the ``class`` and ``sex`` categorical features:
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex 
+
+.. _box_log:
 
 Log scale of numerical distribution 
 ===================================
@@ -206,6 +243,8 @@ For example, you can display a log scale box plot for the ``age`` feature groupe
 .. code-block:: bash
 
     hatch box -y age -x class --logy -- titanic.csv 
+
+.. _box_range:
 
 Range limits
 ============
@@ -228,13 +267,16 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     hatch box -y age -x class --ylim 10 30 -- titanic.csv
 
+.. _box_facets:
+
 Facets
 ======
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row FEATURE, -r FEATURE
+ --col FEATURE, -c FEATURE
+ --colwrap INT
 
 Box plots can be further divided into facets, generating a matrix of box plots, where a numerical value is
 further categorised by up to 2 more categorical features.

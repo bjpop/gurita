@@ -25,7 +25,7 @@ Each type of plot accepts optional arguments that control its behaviour. Some of
 Getting help
 ============
 
-The ``-h`` or ``--help`` command line arguments give an overview of hatch's command line syntax:
+The ``-h`` or ``--help`` command line arguments give an overview of Hatch's command line syntax:
 
 .. code-block:: bash
 
@@ -119,7 +119,7 @@ The following command line options apply generally across most of the plotting s
      - output a summary of the input data set (including types, an simple statistics where possible)
      - :ref:`info` 
    * - ``--verbose``
-     - turn on verbose output mode, this will cause hatch to be more chatty about its behaviour, and in particular it will print the name of any output file created 
+     - turn on verbose output mode, this will cause Hatch to be more chatty about its behaviour, and in particular it will print the name of any output file created 
      - :ref:`verbose` 
    * - ``--save FILEPATH, -s FILEPATH``
      - Save the data set to a CSV file after running ``filter``, ``eval`` and ``sample`` commands

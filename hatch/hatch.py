@@ -34,14 +34,13 @@ DEFAULT_LINEWIDTH = 0
 DEFAULT_FILETYPE = 'CSV'
 DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
-DEFAULT_DIST_PLOT_TYPE = 'box'
-ALLOWED_DISTPLOT_TYPES = ['box', 'violin', 'boxen', 'swarm', 'strip']
 DEFAULT_PLOT_WIDTH = 8 
 DEFAULT_PLOT_HEIGHT = 8 
 DEFAULT_PLOT_NAME = "plot"
 DEFAULT_ORIENTATION = "v"
 DEFAULT_STYLE = "darkgrid"
 DEFAULT_CONTEXT = "notebook"
+DEFAULT_CORR_METHOD = "pearson"
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -78,83 +77,84 @@ def parse_args():
     subparsers = parser.add_subparsers(title='Plot type', help='sub-command help', dest='cmd')  
 
     common_arguments = ArgumentParser()
-    common_arguments.add_argument(
+    common_arguments_group = common_arguments.add_argument_group('common arguments', 'arguments that are provided across all hatch sub-commands') 
+    common_arguments_group.add_argument(
         '--outdir',  metavar='DIR', type=str,
         required=False,
         help=f'Name of optional output directory.')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--filetype',  type=str,
         required=False, choices=ALLOWED_FILETYPES,
         help=f'Type of input file. Allowed values: %(choices)s. Otherwise inferred from filename extension.')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--prefix',  metavar='NAME', type=str,
         required=False, 
         help=f'Name prefix for output files')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--logfile',
         metavar='LOG_FILE',
         type=str,
         help='record program progress in LOG_FILE')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--info', '-i', action='store_true',
         default=False,
         help=f'Print summary information about the data set')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--verbose', action='store_true',
         default=False,
         help=f'Print information about the progress of the program')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--save', '-s', metavar='FILEPATH', required=False, type=str, 
         help=f'Save the data set to a CSV file after running filter and eval commands')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--nolegend', action='store_true',
         default=False,
         help=f'Turn off the legend in the plot')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--filter', metavar='EXPR', required=False, type=str,
         help='Filter rows: only retain rows that make this expression True')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--eval', metavar='EXPR', required=False, type=str, nargs="+",
         help='Construct new data columns based on an expression')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--sample', metavar='NUM', required=False, type=int,
         help='Sample NUM rows from the input data')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--style', choices=['darkgrid', 'whitegrid', 'dark', 'white', 'ticks'], required=False, default=DEFAULT_STYLE,
         help=f'Aesthetic style of plot. Allowed values: %(choices)s. Default: %(default)s.')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--context', choices=['paper', 'notebook', 'talk', 'poster'], required=False, default=DEFAULT_CONTEXT,
         help=f'Aesthetic context of plot. Allowed values: %(choices)s. Default: %(default)s.')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--title', metavar='STR', required=False, type=str,
         help='Plot title. By default no title will be added.')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--width', metavar='SIZE', required=False, type=float,
         default=DEFAULT_PLOT_WIDTH,
         help=f'Plot width in inches. Default: %(default)s')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--height', metavar='SIZE', required=False, type=float,
         default=DEFAULT_PLOT_HEIGHT,
         help=f'Plot height in inches. Default: %(default)s')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--xlabel', metavar='STR', required=False, type=str,
         help=f'Label for horizontal (X) axis')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--ylabel', metavar='STR', required=False, type=str,
         help=f'Label for vertical (Y) axis')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--noxticklabels', action='store_true',
         help=f'Turn of horizontal (X) axis tick labels')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         '--noyticklabels', action='store_true',
         help=f'Turn of veritcal (Y) axis tick labels')
-    #common_arguments.add_argument(
+    #common_arguments_group.add_argument(
     #    '--category', metavar='STR', required=False, type=str, nargs="+",
     #    help=f'Force the interpretation of the listed columns as categorical types')
-    common_arguments.add_argument(
+    common_arguments_group.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepaths of input CSV/TSV file')
 
     features_arguments = ArgumentParser(add_help=False)
@@ -162,29 +162,29 @@ def parse_args():
         '--features', metavar='FEATURE', nargs="+", required=True, type=str,
         help=f'Features to use in the PCA')
 
-    x_arguments = ArgumentParser(add_help=False)
-    x_arguments.add_argument(
-        '-x', '--xaxis', metavar='FEATURE', nargs="+", required=False, type=str,
+    x_argument = ArgumentParser(add_help=False)
+    x_argument.add_argument(
+        '-x', '--xaxis', metavar='FEATURE', required=False, type=str,
         help=f'Feature to plot along the X axis')
 
-    y_arguments = ArgumentParser(add_help=False)
-    y_arguments.add_argument(
-        '-y', '--yaxis', metavar='FEATURE', nargs="+", required=False, type=str,
+    y_argument = ArgumentParser(add_help=False)
+    y_argument.add_argument(
+        '-y', '--yaxis', metavar='FEATURE', required=False, type=str,
         help=f'Feature to plot along the Y axis')
 
-    hue_arguments = ArgumentParser(add_help=False)
-    hue_arguments.add_argument(
-        '--hue',  metavar='FEATURE', nargs="+", type=str, required=False, 
+    hue_argument = ArgumentParser(add_help=False)
+    hue_argument.add_argument(
+        '--hue',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature to use for colouring the plotted data')
 
-    row_arguments = ArgumentParser(add_help=False)
-    row_arguments.add_argument(
-        '--row', '-r',  metavar='FEATURE', nargs="+", type=str, required=False, 
+    row_argument = ArgumentParser(add_help=False)
+    row_argument.add_argument(
+        '-r', '--row', metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature to use for facet rows')
 
-    col_arguments = ArgumentParser(add_help=False)
-    col_arguments.add_argument(
-        '--col', '-c',  metavar='FEATURE', nargs="+", type=str, required=False, 
+    col_argument = ArgumentParser(add_help=False)
+    col_argument.add_argument(
+        '-c', '--col', metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature to use for facet columns')
 
     order_arguments = ArgumentParser(add_help=False)
@@ -197,57 +197,61 @@ def parse_args():
         '--hueorder', metavar='FEATURE', nargs="+", required=False, type=str,
         help=f'Order to display categorical values selected for hue')
 
-    orient_arguments = ArgumentParser(add_help=False)
-    orient_arguments.add_argument(
+    orient_argument = ArgumentParser(add_help=False)
+    orient_argument.add_argument(
         '--orient', choices=['v', 'h'], required=False, default=DEFAULT_ORIENTATION,
         help=f'Orientation of plot. Allowed values: %(choices)s. Default: %(default)s.')
 
-    logx_arguments = ArgumentParser(add_help=False)
-    logx_arguments.add_argument(
+    logx_argument = ArgumentParser(add_help=False)
+    logx_argument.add_argument(
         '--logx', action='store_true',
         help=f'Use a log scale on the horizontal (X) axis')
 
-    logy_arguments = ArgumentParser(add_help=False)
-    logy_arguments.add_argument(
+    logy_argument = ArgumentParser(add_help=False)
+    logy_argument.add_argument(
         '--logy', action='store_true',
         help=f'Use a log scale on the veritical (Y) axis')
 
-    xlim_arguments = ArgumentParser(add_help=False)
-    xlim_arguments.add_argument(
+    xlim_argument = ArgumentParser(add_help=False)
+    xlim_argument.add_argument(
         '--xlim',  metavar='BOUND', nargs=2, required=False, type=float,
         help=f'Limit horizontal axis range to [LOW,HIGH]')
 
-    ylim_arguments = ArgumentParser(add_help=False)
-    ylim_arguments.add_argument(
+    ylim_argument = ArgumentParser(add_help=False)
+    ylim_argument.add_argument(
         '--ylim',  metavar='BOUND', nargs=2, required=False, type=float,
         help=f'Limit vertical axis range to [LOW,HIGH]')
 
-    dotsize_arguments = ArgumentParser(add_help=False)
-    dotsize_arguments.add_argument(
+    dotsize_argument = ArgumentParser(add_help=False)
+    dotsize_argument.add_argument(
         '--dotsize',  metavar='FEATURE', type=str, required=False, 
         help=f'Name of feature to use for plotted point size')
 
-    dotalpha_arguments = ArgumentParser(add_help=False)
-    dotalpha_arguments.add_argument(
+    dotalpha_argument = ArgumentParser(add_help=False)
+    dotalpha_argument.add_argument(
         '--dotalpha',  metavar='ALPHA', type=float, default=DEFAULT_ALPHA,
         help=f'Alpha value for plotted points. Default: %(default)s')
 
-    dotlinewidth_arguments = ArgumentParser(add_help=False)
-    dotlinewidth_arguments.add_argument(
+    dotlinewidth_argument = ArgumentParser(add_help=False)
+    dotlinewidth_argument.add_argument(
         '--dotlinewidth',  metavar='WIDTH', type=int, default=DEFAULT_LINEWIDTH,
         help=f'Line width value for plotted points. Default: %(default)s')
 
-    colwrap_arguments = ArgumentParser(add_help=False)
-    colwrap_arguments.add_argument(
+    colwrap_argument = ArgumentParser(add_help=False)
+    colwrap_argument.add_argument(
         '--colwrap',  metavar='INT', type=int, required=False, 
         help=f'Wrap the facet column at this width, to span multiple rows.')
 
-    pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[common_arguments, features_arguments, xlim_arguments, ylim_arguments, hue_arguments, dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments], add_help=False) 
+    corrparser = subparsers.add_parser('corr', help='Correlation between two numerical features', parents=[x_argument, y_argument], add_help=False)
+    corrparser.add_argument('--method', required=False, default=DEFAULT_CORR_METHOD, choices=['pearson', 'kendall', 'spearman'],
+        help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
+
+    pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[common_arguments, features_arguments, xlim_argument, ylim_argument, hue_argument, dotsize_argument, dotalpha_argument, dotlinewidth_argument], add_help=False) 
     pcaparser.add_argument(
-        '--missing',  metavar='STRATEGY', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
+        '--missing', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
         help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
 
-    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_arguments, y_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments], add_help=False) 
+    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_argument, y_argument, logx_argument, logy_argument, xlim_argument, ylim_argument], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUM', required=False, type=int,
         help=f'Number of bins for histogram.')
@@ -259,7 +263,7 @@ def parse_args():
 
     def facet_parser(kind, help, additional_parents=[]):
         return subparsers.add_parser(kind, help=help, 
-                parents=additional_parents + [common_arguments, y_arguments, x_arguments, hue_arguments, row_arguments, col_arguments, order_arguments, hue_order_arguments, orient_arguments, logx_arguments, logy_arguments, xlim_arguments, ylim_arguments, colwrap_arguments], add_help=False) 
+                parents=additional_parents + [common_arguments, y_argument, x_argument, hue_argument, row_argument, col_argument, order_arguments, hue_order_arguments, orient_argument, logx_argument, logy_argument, xlim_argument, ylim_argument, colwrap_argument], add_help=False) 
 
 
     boxparser = facet_parser('box', help='Box plot of numerical feature, optionally grouped by categorical features')
@@ -270,22 +274,16 @@ def parse_args():
     countparser = facet_parser('count', help='Count plot of categorical feature')
     barparser = facet_parser('bar', help='Bar plot of categorical feature')
     pointparser = facet_parser('point', help='Point plot of numerical feature, optionally grouped by categorical features')
-    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features', additional_parents=[dotsize_arguments, dotalpha_arguments, dotlinewidth_arguments])
+    scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument])
     lineparser = facet_parser('line', help='Line plot of numerical feature')
 
-    heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments], add_help=False) 
+    heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments, y_argument, x_argument], add_help=False) 
+    heatmapparser.add_argument(
+        '-v', '--val', metavar='FEATURE', nargs="+", required=False, type=str,
+        help=f'Interpret this feature (column of data) as the values of the heatmap')
     heatmapparser.add_argument(
         '--cmap',  metavar='COLOR_MAP_NAME', type=str, 
         help=f'Use this color map, will use Seaborn default if not specified')
-    heatmapparser.add_argument(
-        '--rows',  metavar='FEATURE', type=str, required=True,
-        help=f'Interpret this feature (column of data) as the row labels of the heatmap')
-    heatmapparser.add_argument(
-        '--cols',  '-c', nargs='+', metavar='FEATURE', type=str, required=True,
-        help=f'Interpret these features (columns of data) as the columns of the heatmap')
-    #heatmapparser.add_argument(
-    #    '--values',  metavar='FEATURE', type=str, required=True,
-    #    help=f'Interpret this feature (column of data) as the values of the heatmap')
     heatmapparser.add_argument(
         '--log', action='store_true',
         help=f'Use a log scale on the numerical data')
@@ -426,10 +424,10 @@ class Plot:
 
 
 class Histogram(Plot):
-    def __init__(self, options, df, x, y):
+    def __init__(self, options, df):
         super().__init__(options, df)
-        self.x = x 
-        self.y = y
+        self.x = options.xaxis
+        self.y = options.yaxis
     
     def render_data(self):
         if self.options.bins:
@@ -448,15 +446,15 @@ class Histogram(Plot):
 
 
 class Facetplot(object):
-    def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
+    def __init__(self, kind, options, df, kwargs):
         self.options = options
         self.df = df
         self.kind = kind
-        self.x = x
-        self.y = y
-        self.hue = hue
-        self.row = row
-        self.col = col
+        self.x = options.xaxis
+        self.y = options.yaxis
+        self.hue = options.hue
+        self.row = options.row
+        self.col = options.col
         self.kwargs = kwargs
 
     def plot(self):
@@ -503,8 +501,8 @@ def output_field(field):
 # Catplots call the catlplot interface in Seaborn, and thus share common
 # functionality https://seaborn.pydata.org/tutorial/categorical.html
 class Catplot(Facetplot):
-    def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
-        super().__init__(kind, options, df, x, y, hue, row, col, kwargs)
+    def __init__(self, kind, options, df, kwargs):
+        super().__init__(kind, options, df, kwargs)
 
     def make_graph(self, kwargs):
         options = self.options
@@ -523,8 +521,8 @@ class Catplot(Facetplot):
 # Relplots call the relplot interface in Seaborn, and thus share common
 # functionality https://seaborn.pydata.org/tutorial/relational.html 
 class Relplot(Facetplot):
-    def __init__(self, kind, options, df, x, y, hue, row, col, kwargs):
-        super().__init__(kind, options, df, x, y, hue, row, col, kwargs)
+    def __init__(self, kind, options, df, kwargs):
+        super().__init__(kind, options, df, kwargs)
 
     def make_graph(self, kwargs):
         options = self.options
@@ -586,65 +584,87 @@ class PCA(Plot):
 
 
 class Heatmap(Plot):
-    def __init__(self, options, df):
+    def __init__(self, options, df, x, y, val):
         super().__init__(options, df)
+        self.x = x
+        self.y = y
+        self.val = val
 
     def render_data(self):
-        self.df.set_index(self.options.rows, inplace=True)
-        column_names = self.options.cols
-        # Build a dataframe with the columns that we are interested in
-        selected_columns = self.df[column_names]
-        sns.heatmap(data=selected_columns, cmap=self.options.cmap)
+        pivot_data = self.df.pivot(index=self.y, columns=self.x, values=self.val)
+        sns.heatmap(data=pivot_data, cmap=self.options.cmap)
         #sns.clustermap(data=pivot_data, cmap=self.options.cmap)
 
     def make_output_filename(self):
-        output_name = get_output_name(self.options)
-        return Path('.'.join([output_name, 'heatmap.png'])) 
+        options = self.options
+        output_name = [get_output_name(options)]
+        x_str = output_field(self.x)
+        y_str = output_field(self.y)
+        val_str = output_field(self.val)
+        type_str = ['heatmap']
+        return Path('.'.join(output_name + x_str + y_str + val_str + type_str) + '.png')
 
 
 def make_output_directories(options):
     pass
 
 
-def facet_plot(options, plot_type, df, plotfun, kwargs):
-    # XXX check numerical and categorical columns have the right type
+def heatmap_plot(options, df):
     y_fields = options.yaxis if options.yaxis is not None else [None]
     x_fields = options.xaxis if options.xaxis is not None else [None]
-    hue_fields = options.hue if options.hue is not None else [None]
-    row_fields  = options.row if options.row is not None else [None]
-    col_fields  = options.col if options.col is not None else [None]
-    args = iter.product(x_fields, y_fields, hue_fields, row_fields, col_fields)
-    for (x, y, hue, row, col) in args:
+    v_fields = options.val if options.val is not None else [None]
+    args = iter.product(x_fields, y_fields, v_fields)
+    for (x, y, val) in args:
         if x is not None and x not in df.columns:
             logging.warn(f"{x} is not an attribute of the data set, skipping")
             continue
         if y is not None and y not in df.columns:
             logging.warn(f"{y} is not an attribute of the data set, skipping")
             continue
-        if hue is not None and hue not in df.columns:
-            logging.warn(f"{hue} is not an attribute of the data set, skipping")
+        if val is not None and val not in df.columns:
+            logging.warn(f"{val} is not an attribute of the data set, skipping")
             continue
-        if row is not None and row not in df.columns:
-            logging.warn(f"{row} is not an attribute of the data set, skipping")
-            continue
-        if col is not None and col not in df.columns:
-            logging.warn(f"{col} is not an attribute of the data set, skipping")
-            continue
-        plotfun(plot_type, options, df, x, y, hue, row, col, kwargs).plot()
+        Heatmap(options, df, x, y, val).plot()
 
-def plot_by_x_y(options, df, plotfun):
-    if options.xaxis:
-        for x in options.xaxis:
-            if x in df.columns:
-                plotfun(options, df, x=x, y=None).plot()
-            else:
-                logging.warn(f"{x} is not an attribute of the data set, skipping")
-    if options.yaxis:
-        for y in options.yaxis:
-            if y in df.columns:
-                plotfun(options, df, x=None, y=y).plot()
-            else:
-                logging.warn(f"{y} is not an attribute of the data set, skipping")
+#def facet_plot(options, plot_type, df, plotfun, kwargs):
+#    # XXX check numerical and categorical columns have the right type
+#    y_fields = options.yaxis if options.yaxis is not None else [None]
+#    x_fields = options.xaxis if options.xaxis is not None else [None]
+#    hue_fields = options.hue if options.hue is not None else [None]
+#    row_fields  = options.row if options.row is not None else [None]
+#    col_fields  = options.col if options.col is not None else [None]
+#    args = iter.product(x_fields, y_fields, hue_fields, row_fields, col_fields)
+#    for (x, y, hue, row, col) in args:
+#        if x is not None and x not in df.columns:
+#            logging.warn(f"{x} is not an attribute of the data set, skipping")
+#            continue
+#        if y is not None and y not in df.columns:
+#            logging.warn(f"{y} is not an attribute of the data set, skipping")
+#            continue
+#        if hue is not None and hue not in df.columns:
+#            logging.warn(f"{hue} is not an attribute of the data set, skipping")
+#            continue
+#        if row is not None and row not in df.columns:
+#            logging.warn(f"{row} is not an attribute of the data set, skipping")
+#            continue
+#        if col is not None and col not in df.columns:
+#            logging.warn(f"{col} is not an attribute of the data set, skipping")
+#            continue
+#        plotfun(plot_type, options, df, x, y, hue, row, col, kwargs).plot()
+
+#def plot_by_x_y(options, df, plotfun):
+#    if options.xaxis:
+#        for x in options.xaxis:
+#            if x in df.columns:
+#                plotfun(options, df, x=x, y=None).plot()
+#            else:
+#                logging.warn(f"{x} is not an attribute of the data set, skipping")
+#    if options.yaxis:
+#        for y in options.yaxis:
+#            if y in df.columns:
+#                plotfun(options, df, x=None, y=y).plot()
+#            else:
+#                logging.warn(f"{y} is not an attribute of the data set, skipping")
 
 
 def display_info(df):
@@ -671,16 +691,32 @@ def main():
     if options.save:
         save(options, df)
     if options.cmd == 'hist':
-        plot_by_x_y(options, df, Histogram)
-    elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'count', 'bar', 'point']:
-        facet_plot(options, options.cmd, df, Catplot, kwargs)
+        if options.xaxis is not None and options.yaxis is not None:
+            exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a histogram", EXIT_COMMAND_LINE_ERROR)
+        elif options.xaxis is not None:
+            Histogram(options, df).plot()
+        elif options.yaxis is not None:
+            Histogram(options, df).plot()
+        else:
+            exit_with_error("A histogram requires either -x (--xaxis) or -y (--yaxis) to be specified", EXIT_COMMAND_LINE_ERROR)
+    if options.cmd == 'count':
+        if options.xaxis is not None and options.yaxis is not None:
+            exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a count plot", EXIT_COMMAND_LINE_ERROR)
+        elif options.xaxis is not None:
+            Catplot(options.cmd, options, df, kwargs).plot()
+        elif options.yaxis is not None:
+            Catplot(options.cmd, options, df, kwargs).plot()
+        else:
+            exit_with_error("A count plot requires either -x (--xaxis) or -y (--yaxis) to be specified", EXIT_COMMAND_LINE_ERROR)
+    elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'bar', 'point']:
+        Catplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'line':
-        facet_plot(options, options.cmd, df, Relplot, kwargs)
+        Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'scatter':
         kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha, 'linewidth': options.dotlinewidth }
-        facet_plot(options, options.cmd, df, Relplot, kwargs)
+        Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'heatmap':
-        Heatmap(options, df).plot()
+        heatmap_plot(options, df)
     elif options.cmd == 'pca':
         PCA(options, df).plot()
     elif options.cmd == 'noplot':

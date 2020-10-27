@@ -19,16 +19,16 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help 
      - :ref:`count_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+   * - ``-x FEATURE, --xaxis FEATURE``
      - select feature for the X axis 
      - :ref:`count_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]`` 
+   * - ``-y FEATURE, --yaxis FEATURE`` 
      - select feature for the Y axis 
      - :ref:`count_feature_selection`
    * - ``--order FEATURE [FEATURE ...]`` 
      - order of the plotted columns  
      - :ref:`count_order`
-   * - ``--hue FEATURE [FEATURE ...]`` 
+   * - ``--hue FEATURE`` 
      - group features by hue 
      - :ref:`count_hue`
    * - ``--hueorder FEATURE [FEATURE ...]`` 
@@ -46,6 +46,17 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`count_range`
+   * - ``--row FEATURE, -r FEATURE``
+     - feature to use for facet rows
+     - :ref:`count_facets`
+   * - ``--col FEATURE, -c FEATURE``
+     - feature to use for facet columns
+     - :ref:`count_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`count_facets`
+
+.. _count_example:
 
 Simple example
 ==============
@@ -56,7 +67,7 @@ Plot a count of the ``embark_town`` categorical feature from the ``titanic.csv``
 
     hatch count -x embark_town -- titanic.csv
 
-The output of the above command is written to ``tips.tip.histogram.png``:
+The output of the above command is written to ``titanic.embark_town.count.png``:
 
 .. image:: ../images/titanic.embark_town.count.png
        :width: 600px
@@ -83,38 +94,27 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
-Count plots can be plotted for categorical features (note if a numerical feature is selected it will be treated as categorical, which may
-not give expected behaviour).
+Count plots can be plotted for categorical features.
 
-You can select the feature that you want to plot as a count using the ``-x`` (``--xargs``) or ``-y`` (``--yargs``)
+.. note::
+
+    If a numerical feature is selected for a count plot it will be treated as categorical, which may
+    not give expected behaviour.
+
+    You may not use both ``-x FEATURE`` and ``-y FEATURE`` in the same command line for count plots.
+
+You can select the feature that you want to plot as a count using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
 arguments.
 
-If ``-x`` (``--xargs``) is chosen the count columns will be plotted vertically.
+If ``-x`` (``--xaxis``) is chosen the count columns will be plotted vertically.
 
-If ``-y`` (``--yargs``) is chosen the count columns will be plotted horizontally.
+If ``-y`` (``--yaxis``) is chosen the count columns will be plotted horizontally.
 
-In both cases you can specify more than one feature to plot; hatch will generate a separate count plot for
-every feature specified.
-
-The following command will generate separate histogram plots for ``sex``, ``class`` and ``embark_town``:
-
-.. code-block:: bash
-
-    hatch count -x sex class embark_town -- titanic.csv 
-
-The outputs of the above command will be saved in the following 3 files:
-
-.. code-block:: bash
-
-    titanic.sex.count.png
-    titanic.class.count.png
-    titanic.embark_town.count.png 
-
-Selecting a feature using the ``-y`` argument causes the count bars to be plotted
-horizontally instead of vertically:
+See :ref:`the example <count_example>` above for a vertical axis plot.
+For comparison, the following command uses ``-y embark_town`` to plot a histogram of ``embark_town`` horizontally:
 
 .. code-block:: bash
 
@@ -126,7 +126,7 @@ horizontally instead of vertically:
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, plotted horizontally
 
-You may use both ``-x FEATURE [FEATURE ...]`` and ``-y FEATURE [FEATURE ...]`` in the same command line. 
+
 
 .. _count_order:
 
@@ -159,7 +159,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The feature being counted can be grouped based on another categorical feature using the ``--hue`` argument.
 
@@ -174,9 +174,6 @@ In the following example the counts of the ``embark_town`` feature are grouped b
        :height: 600px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature 
-
-
-You can specify more than one feature to group by; hatch will generate a separate count plot for every ``hue`` feature specified.
 
 .. _count_hueorder:
 
@@ -194,6 +191,20 @@ In the following example the ``class`` values are displayed in the order of ``Fi
        :height: 600px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+
+It is possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls the order of both 
+the ``embark_town`` and ``class`` categorical features:
+
+.. code-block:: bash
+
+    hatch count -x embark_town --hue class --order Cherbourg Queenstown Southampton \
+                --hueorder First Second Third -- titanic.csv
+
+.. image:: ../images/titanic.embark_town.class.count.order.hueorder.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Count plot of embark_town showing grouping on town and on class, where the order of values is specified 
 
 .. _count_log:
 
@@ -238,3 +249,19 @@ data is displayed on the X-axis (``-x``), therefore the ``--ylim`` argument shou
 .. code-block:: bash
 
     hatch count -x embark_town --ylim 100 300 -- titanic.csv
+
+.. _count_facets:
+
+Facets
+======
+
+.. code-block:: 
+
+ -r FEATURE, --row FEATURE
+ -c FEATURE, --col FEATURE
+ --colwrap INT
+
+
+Count plots can be further divided into facets, generating a matrix of count plots. 
+
+See the :doc:`facet documentation <facets/>` for more information on this feature.

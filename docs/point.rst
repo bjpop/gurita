@@ -1,36 +1,92 @@
-Point plot
-**********
+Point
+*****
 
-Plot distributions of selected numerical or categorical features as histograms.
+Point plots show the point estimates of the central tendency (mean) of numerical features with error bars. 
 
-Plots are based on Seaborn's `histplot <https://seaborn.pydata.org/generated/seaborn.histplot.html/>`_ library function.
+.. code-block:: bash
+
+    hatch point <arguments>
+
+Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="point"`` option.
+
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help
+     - :ref:`point_help`
+   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - select feature for the X axis
+     - :ref:`point_feature_selection`
+   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+     - select feature for the Y axis
+     - :ref:`point_feature_selection`
+   * - ``--orient {v,h}``
+     - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
+     - :ref:`Box orientation <point_orient>`
+   * - ``--hue FEATURE [FEATURE ...]``
+     - group features by hue
+     - :ref:`point_hue`
+   * - ``--hueorder FEATURE [FEATURE ...]``
+     - order of hue features
+     - :ref:`Hue order <point_hueorder>`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`point_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`point_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`point_range`
+   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+     - feature to use for facet rows 
+     - :ref:`point_facets`
+   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+     - feature to use for facet columns 
+     - :ref:`point_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`point_facets`
+
+Similar functionality to point plots are provided by:
+
+ * :doc:`Bar plots <boxen/>` 
 
 Simple example
 ==============
 
-Plot a histogram of the ``tip`` amount from the ``tips.csv`` input file:
+Point plot showing the mean ``age`` for passengers on the titanic by passenger ``class``:
 
 .. code-block:: bash
 
-    hatch hist -x tip -- tips.csv
+    hatch point -y age -x class -- titanic.csv 
 
-The output of the above command is written to ``tips.tip.histogram.png``:
+The output of the above command is written to ``titanic.age.class.point.png``:
 
-.. image:: ../images/tips.tip.histogram.png
+.. image:: ../images/titanic.age.class.point.png
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram plot showing the distribution of tip amounts for the tips data set
+       :alt: Point plot showing the distribution of age for each class in the titanic data set
+
+.. _point_help:
 
 Getting help
 ============
 
-The full set of command line arguments for histograms can be obtained with the ``-h`` or ``--help``
+The full set of command line arguments for point plots can be obtained with the ``-h`` or ``--help``
 arguments:
 
 .. code-block:: bash
 
-    hatch hist -h
+    hatch point -h
+
+.. _point_feature_selection:
 
 Selecting features to plot
 ==========================
@@ -38,88 +94,194 @@ Selecting features to plot
 .. code-block:: 
 
   -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-                        Feature to plot along the X axis
   -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
-                        Feature to plot along the Y axis
 
-Histograms can be plotted for both numerical features and for categorical features. Numerical data is binned
-and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
-column for each categorical value in the specified feature.
+Point plots can be plotted for numerical features and optionally grouped by categorical features.
 
-You can select the feature that you want to plot as a histogram using the ``-x`` (``--xargs``) or ``-y`` (``--yargs``)
-arguments.
+If no categorical feature is specified, a single column point plot will be generated showing
+the distribution of the numerical feature.
 
-If ``-x`` (``--xargs``) is chosen the histogram columns will be plotted vertically.
+.. note:: 
 
-If ``-y`` (``--yargs``) is chosen the histogram columns will be plotted horizontally.
+    .. _point_orient:
 
-In both cases you can specify more than one feature to plot; hatch will generate a separate histogram plot for
-every feature specified.
+    By default the orientation of the point plot is vertical. In this scenario
+    the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
+    by ``-x``.
+    
+    However, the orientation of the point plot can be made horizontal using the ``--orient h`` argument.
+    In this case the sense of the X and Y axes are swapped from the default, and thus
+    the numerical feature is specified by ``-x``, and the (optional) categorical feature is specified
+    by ``-y``.
 
-The following command will generate separate histogram plots for ``total_bill``, ``tip`` and ``day``:
-
-.. code-block:: bash
-
-    hatch hist -x total_bill tip day -- tips.csv
-
-The outputs of the above command will be saved in the following 3 files:
+In the following example the distribution of ``age`` is shown for each value in the ``class`` feature,
+where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    tips.total_bill.histogram.png
-    tips.tip.histogram.png
-    tips.day.histogram.png
+    hatch point -x age -y class --orient h -- titanic.csv
 
-Selecting the ``tip`` feature using the ``-y`` argument causes the histogram bars to be plotted
-horizontally instead of vertically:
-
-.. code-block:: bash
-
-    hatch hist -y tip -- tips.csv
-
-.. image:: ../images/tips.tip.histogram.y.png
+.. image:: ../images/titanic.class.age.point.horizontal.png
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram plot showing the distribution of tip amounts for the tips data set
+       :alt: Point plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
-You may use both ``-x FEATURE [FEATURE ...]`` and ``-y FEATURE [FEATURE ...]`` in the same command line. 
-
-Controlling the number of bins used
-===================================
-
-By default hatch will try to automatically pick an appropriate number of bins for the
-selected feature.
-
-However, this can be overridden by specifying the required number of bins to use with the ``--bins`` 
-argument like so:
+You may specifiy multiple numerical features and multiple categorical features in the same command.
+Hatch will generate a separate plot for each combination of numerical and categorical feature
+specified. For example, the following command specifies two numerical values and three categorical
+values from the ``tips.csv`` data set to generate a total of six plots (2 times 3):
 
 .. code-block:: bash
 
-    hatch hist -x tip --bins 5 -- tips.csv
+    hatch point -x sex smoker day -y tip total_bill -- tips.csv
 
-.. image:: ../images/tips.tip.histogram.bins10.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using 10 bins
+The following output files are created by the above command.
 
-Cumulative histograms 
-=====================
+.. code-block:: bash
+
+    tips.tip.sex.point.png
+    tips.total_bill.sex.point.png
+    tips.tip.smoker.point.png
+    tips.total_bill.smoker.point.png
+    tips.tip.day.point.png
+    tips.total_bill.day.point.png
+
+.. _point_order:
+
+Controlling the order of the plotted point columns
+==================================================
 
 .. code-block:: 
 
-  --cumulative          Generate cumulative histogram
+    --order FEATURE [FEATURE ...]
 
-Cumulative histograms can be plotted with the ``--cumulative`` argument.  
+By default the order of the categorical features displayed in the point plot is determined from their occurrence in the input data.
+This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
+
+In the following example the point columns of the ``class`` feature are displayed in the order of ``First``, ``Second``, ``Third``:
 
 .. code-block:: bash
 
-    hatch hist -x tip --cumulative -- tips.csv
+    hatch point -y age -x class --order First Second Third -- titanic.csv
 
-.. image:: ../images/tips.tip.histogram.cumulative.png
+.. image:: ../images/titanic.age.class.point.order.png
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram plot showing the distribution of tip amounts for the tips data set in cumulative style
+       :alt: Point plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+.. _point_hue:
+
+Grouping features with hue 
+==========================
+
+.. code-block:: 
+
+  --hue FEATURE [FEATURE ...]
+
+The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
+
+In the following example the distribution of ``age`` is shown for each value in the ``class`` feature, and further sub-divided by the ``sex`` feature:
+
+.. code-block:: bash
+
+    hatch point -y age -x class --hue sex -- titanic.csv
+
+.. image:: ../images/titanic.age.class.sex.point.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Point plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
+
+You can specify more than one feature to group by; hatch will generate a separate point plot for every ``hue`` feature specified.
+
+.. _point_hueorder:
+
+By default the order of the columns within each hue group is determined from their occurrence in the input data. 
+This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
+
+In the following example the ``sex`` values are displayed in the order of ``female``, ``male``: 
+
+.. code-block:: bash
+
+    hatch point -y age -x class --hue sex --hueorder female male -- titanic.csv
+
+.. image:: ../images/titanic.age.class.sex.point.hueorder.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+
+It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
+the order of both the ``class`` and ``sex`` categorical features:
+
+.. code-block:: bash
+
+    hatch point -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+
+.. image:: ../images/titanic.age.class.sex.point.order.hueorder.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+
+.. _point_log:
+
+Log scale of numerical distribution 
+===================================
+
+.. code-block:: 
+
+  --logx
+  --logy
+
+The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
+
+It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
+conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
+
+For example, you can display a log scale point plot for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical distribution:
+
+.. code-block:: bash
+
+    hatch point -y age -x class --logy -- titanic.csv 
+
+.. _point_range:
+
+Range limits
+============
+
+.. code-block:: 
+
+  --xlim LOW HIGH 
+  --ylim LOW HIGH
+
+The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
+
+It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical features are selected with ``-x``, and
+conversely, ``--ylim`` should be used when numerical features are selected with ``-y``.
+
+For example, you can display range-limited range for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so.
+Note carefully that the numerical 
+data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument should be used to range-limit the distribution: 
+
+.. code-block:: bash
+
+    hatch point -y age -x class --ylim 10 30 -- titanic.csv
+
+.. _point_facets:
+
+Facets
+======
+
+.. code-block:: 
+
+ --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
+ --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --colwrap INT
+
+Point plots can be further divided into facets, generating a matrix of point plots, where a numerical value is
+further categorised by up to 2 more categorical features.
+
+See the :doc:`facet documentation <facets/>` for more information on this feature.

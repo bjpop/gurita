@@ -3,7 +3,55 @@ Violin
 
 Violin plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 
+.. code-block:: bash
+
+    hatch violin <arguments>
+
 Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="violin"`` option.
+
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help
+     - :ref:`violin_help`
+   * - ``-x FEATURE, --xaxis FEATURE``
+     - select feature for the X axis
+     - :ref:`violin_feature_selection`
+   * - ``-y FEATURE, --yaxis FEATURE``
+     - select feature for the Y axis
+     - :ref:`violin_feature_selection`
+   * - ``--orient {v,h}``
+     - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
+     - :ref:`Box orientation <violin_orient>`
+   * - ``--hue FEATURE``
+     - group features by hue
+     - :ref:`violin_hue`
+   * - ``--hueorder FEATURE [FEATURE ...]``
+     - order of hue features
+     - :ref:`Hue order <violin_hueorder>`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`violin_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`violin_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`violin_range`
+   * - ``--row FEATURE, -r FEATURE``
+     - feature to use for facet rows 
+     - :ref:`violin_facets`
+   * - ``--col FEATURE, -c FEATURE``
+     - feature to use for facet columns 
+     - :ref:`violin_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`violin_facets`
 
 Similar functionality to violin plots are provided by:
 
@@ -29,7 +77,6 @@ The output of the above command is written to ``titanic.age.violin.png``:
        :align: center
        :alt: Violin plot showing the distribution of age for the titanic data set
 
-
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
 
@@ -45,6 +92,8 @@ The output of the above command is written to ``titanic.age.class.violin.png``:
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set
 
+.. _violin_help:
+
 Getting help
 ============
 
@@ -55,13 +104,15 @@ arguments:
 
     hatch violin -h
 
+.. _violin_feature_selection:
+
 Selecting features to plot
 ==========================
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
 Violin plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -69,6 +120,8 @@ If no categorical feature is specified, a single column violin plot will be gene
 the distribution of the numerical feature.
 
 .. note:: 
+
+    .. _violin_orient:
 
     By default the orientation of the violin plot is vertical. In this scenario
     the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
@@ -92,25 +145,7 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
-You may specifiy multiple numerical features and multiple categorical features in the same command.
-Hatch will generate a separate plot for each combination of numerical and categorical feature
-specified. For example, the following command specifies two numerical values and three categorical
-values from the ``tips.csv`` data set to generate a total of six plots (2 times 3):
-
-.. code-block:: bash
-
-    hatch violin -x sex smoker day -y tip total_bill -- tips.csv
-
-The following output files are created by the above command.
-
-.. code-block:: bash
-
-    tips.tip.sex.violin.png
-    tips.total_bill.sex.violin.png
-    tips.tip.smoker.violin.png
-    tips.total_bill.smoker.violin.png
-    tips.tip.day.violin.png
-    tips.total_bill.day.violin.png
+.. _violin_order:
 
 Controlling the order of the plotted violin columns
 ===================================================
@@ -134,12 +169,14 @@ In the following example the violin columns of the ``class`` feature are display
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+.. _violin_hue:
+
 Grouping features with hue 
 ==========================
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -155,8 +192,9 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
-
 You can specify more than one feature to group by; hatch will generate a separate violin plot for every ``hue`` feature specified.
+
+.. _violin_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
 This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
@@ -171,7 +209,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the order of sex specified
 
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
@@ -184,7 +222,9 @@ the order of both the ``class`` and ``sex`` categorical features:
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the order of class and sex specified
+
+.. _violin_log:
 
 Log scale of numerical distribution 
 ===================================
@@ -204,6 +244,8 @@ For example, you can display a log scale violin plot for the ``age`` feature gro
 .. code-block:: bash
 
     hatch violin -y age -x class --logy -- titanic.csv 
+
+.. _violin_range:
 
 Range limits
 ============
@@ -226,13 +268,16 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     hatch violin -y age -x class --ylim 10 30 -- titanic.csv
 
+.. _violin_facets:
+
 Facets
 ======
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row FEATURE, -r FEATURE
+ --col FEATURE, -c FEATURE
+ --colwrap INT
 
 Violin plots can be further divided into facets, generating a matrix of violin plots, where a numerical value is
 further categorised by up to 2 more categorical features.

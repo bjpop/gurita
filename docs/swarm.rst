@@ -3,12 +3,61 @@ Swarm
 
 Swarm plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 
+.. code-block:: bash
+
+    hatch swarm <arguments>
+
 Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="swarm"`` option.
+
+.. list-table::
+   :widths: 1 2 1
+   :header-rows: 1
+
+   * - Argument
+     - Description
+     - Reference
+   * - ``-h``
+     - display help
+     - :ref:`swarm_help`
+   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - select feature for the X axis
+     - :ref:`swarm_feature_selection`
+   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+     - select feature for the Y axis
+     - :ref:`swarm_feature_selection`
+   * - ``--orient {v,h}``
+     - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
+     - :ref:`Box orientation <swarm_orient>`
+   * - ``--hue FEATURE [FEATURE ...]``
+     - group features by hue
+     - :ref:`swarm_hue`
+   * - ``--hueorder FEATURE [FEATURE ...]``
+     - order of hue features
+     - :ref:`Hue order <swarm_hueorder>`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`swarm_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`swarm_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`swarm_range`
+   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+     - feature to use for facet rows 
+     - :ref:`swarm_facets`
+   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+     - feature to use for facet columns 
+     - :ref:`swarm_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`swarm_facets`
+
 
 Similar functionality to swarm plots are provided by:
 
  * :doc:`Box plots <box/>`
- * :doc:`Swarm plots <swarm/>`
+ * :doc:`Violin plots <violin/>`
  * :doc:`Strip plots <strip/>` 
  * :doc:`Boxen plots <boxen/>` 
 
@@ -45,6 +94,8 @@ The output of the above command is written to ``titanic.age.class.swarm.png``:
        :align: center
        :alt: Swarm plot showing the distribution of age for each class in the titanic data set
 
+.. _swarm_help:
+
 Getting help
 ============
 
@@ -54,6 +105,8 @@ arguments:
 .. code-block:: bash
 
     hatch swarm -h
+
+.. _swarm_feature_selection:
 
 Selecting features to plot
 ==========================
@@ -69,6 +122,8 @@ If no categorical feature is specified, a single column swarm plot will be gener
 the distribution of the numerical feature.
 
 .. note:: 
+
+    .. _swarm_orient:
 
     By default the orientation of the swarm plot is vertical. In this scenario
     the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
@@ -112,6 +167,8 @@ The following output files are created by the above command.
     tips.tip.day.swarm.png
     tips.total_bill.day.swarm.png
 
+.. _swarm_order:
+
 Controlling the order of the plotted swarm columns
 ==================================================
 
@@ -134,6 +191,8 @@ In the following example the swarm columns of the ``class`` feature are displaye
        :align: center
        :alt: Swarm plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+.. _swarm_hue:
+
 Grouping features with hue 
 ==========================
 
@@ -155,8 +214,9 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
-
 You can specify more than one feature to group by; hatch will generate a separate swarm plot for every ``hue`` feature specified.
+
+.. _swarm_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
 This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
@@ -186,6 +246,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
 
+.. _swarm_log:
+
 Log scale of numerical distribution 
 ===================================
 
@@ -204,6 +266,8 @@ For example, you can display a log scale swarm plot for the ``age`` feature grou
 .. code-block:: bash
 
     hatch swarm -y age -x class --logy -- titanic.csv 
+
+.. _swarm_range:
 
 Range limits
 ============
@@ -226,6 +290,8 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     hatch swarm -y age -x class --ylim 10 30 -- titanic.csv
 
+.. _swarm_facets:
+
 Facets
 ======
 
@@ -233,6 +299,7 @@ Facets
 
  --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
  --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --colwrap INT
 
 Swarm plots can be further divided into facets, generating a matrix of swarm plots, where a numerical value is
 further categorised by up to 2 more categorical features.

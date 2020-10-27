@@ -6,25 +6,33 @@ Input and output
 Input files
 ===========
 
-Hatch can read data from a named input file, or if no file is specified, then it will read input from the standard input device (stdin).
+Hatch can read data from a named input file or the standard input device (stdin). 
 
-The example below illustrates reading input from a named file. Note the use of double-dash ``--`` just before the file name. The double-dash indicates the end of the regular command line arguments, and tells hatch that the following arugment is the input file name:
-
-.. code-block:: bash
-
-    hatch count --x class embark_town -- titanic.csv
-
-Read from stdin:
+The example below illustrates reading input from a named file. This command produces a :doc:`count plot <count/>` for the ``class`` feature in the ``titantic.csv`` dataset:
 
 .. code-block:: bash
 
-    hatch count --cols class embark_town < titanic.csv
+    hatch count -x class titanic.csv
 
-Reading from stdin is particularly useful for pipeline commands:
+In some instances it is useful to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch provides a double-dash ``--``
+marker to be used for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
 
 .. code-block:: bash
 
-    some_command | hatch ...
+    hatch count -x class -- titanic.csv
+
+If no input file name is provided, Hatch will read from stdin instead. For example you can
+redirect input from a file on the Unix command line:
+
+.. code-block:: bash
+
+    hatch count -x class < titanic.csv
+
+Reading from stdin is particularly useful when you want to use Hatch as part of a command pipeline: 
+
+.. code-block:: bash
+
+    example_command | hatch count -x class
 
 .. _filetype:
 
@@ -33,12 +41,12 @@ File type
 
 The input file type must be either CSV or TSV. The first row of the input file must be column headings.
 
-By default hatch will assume the data is in CSV format, but you can change the format with the ``--filetype TSV`` argument, and choose TSV instead.
+By default Hatch will assume the data is in CSV format, but you can change the format with the ``--filetype TSV`` argument, and choose TSV instead.
 
 Output files
 ============
 
-Hatch produces PNG (graphics) files as its output. A single plot command may produce one or more such files, depending on how hatch is used. By default hatch names the output files based on the following information:
+Hatch produces PNG (graphics) files as its output. A single plot command may produce one or more such files, depending on how Hatch is used. By default Hatch names the output files based on the following information:
 
  * The prefix of the input data file name (this can be overridden).
  * The name(s) of the columns that have been selected for plotting.

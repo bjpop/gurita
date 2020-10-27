@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Hatch: a command line plotting tool
-***********************************
+Hatch: a command line plotting and analytics tool
+*************************************************
 
-Hatch is a command line tool for visualising data.
+Hatch is a command line tool for analysing and visualising data.
 
 It takes input from tabular data in CSV or TSV format and produces high-quality plots (charts, graphs) as output.
 
@@ -15,6 +15,8 @@ It is designed to be fast and convenient, and is particularly suited to data exp
 The following plot types are provided:
 
  * :doc:`Histogram <histogram/>`
+ * :doc:`Count <count/>`
+ * :doc:`Scatter <scatter/>`
  * Distributions
 
      * :doc:`Box <violin/>`
@@ -22,12 +24,14 @@ The following plot types are provided:
      * :doc:`Swarm <swarm/>`
      * :doc:`Strip <strip/>`
      * :doc:`Boxen <boxen/>`
+
+ * Central tendency: 
+
+     * :doc:`Point <point/>`
+     * :doc:`Bar <bar/>`
     
- * :doc:`Scatter <scatter/>`
  * :doc:`Line <line/>`
  * :doc:`Heatmap <heatmap/>`
- * :doc:`Bar <bar/>`
- * :doc:`Count <count/>`
  * :doc:`Principal components analysis (PCA) <pca/>`
 
 It also supports expressive :doc:`row filtering <filter/>` and :doc:`dynamic computation of new columns <eval/>`.
@@ -39,7 +43,7 @@ Hatch plots are highly customisable, however for most cases sensible defaults ar
 Example command 
 ---------------
 
-The following hatch command generates a box plot of data from a file called ``iris.csv``, the Y-axis
+The following Hatch command generates a box plot of data from a file called ``iris.csv``, the Y-axis
 represents the ``sepal_length`` numerical feature, and the X-axis is grouped by the ``species`` feature.
 The goal of this plot is to show the distribution of sepal length of the three different species of iris
 flowers contained in the data set.
@@ -90,8 +94,8 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    swarm
    strip
    boxen
-   bar
    point
+   bar
    line
    heatmap
    pca
