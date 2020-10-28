@@ -16,7 +16,7 @@ This program is released as open source software under the terms of [MIT License
 
 # Documentation
 
-Please consult the [Hatch documentation](https://hatch.readthedocs.io/en/latest/index.html) for detailed information about installing and using Hatch.
+Please consult the [Hatch Documentation](https://hatch.readthedocs.io/en/latest/index.html) for detailed information about installation and usage.
 
 # Authors
 
