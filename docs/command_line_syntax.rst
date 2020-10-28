@@ -13,10 +13,10 @@ As a simple example, if you want to plot a histogram of the ``passengers`` colum
 
 .. code-block:: bash
 
-    hatch hist -x passengers -- flights.csv 
+    hatch hist -x passengers flights.csv 
 
 In the above example ``hist`` selects the histogram plot type, ``-x passengers`` specifies that the ``passengers`` feature in the data set should be plotted on the X-axis
-and ``-- flights.csv`` specifies that the input data set should be read from the file ``flights.csv``. See :doc:`input_output` for more information about input and output files.
+and ``flights.csv`` specifies that the input data set should be read from the file ``flights.csv``. See :doc:`input_output` for more information about input and output files.
 
 Each type of plot accepts optional arguments that control its behaviour. Some of these are common across all plot types, and some are limited to specific plot types.
 
@@ -100,6 +100,12 @@ The following command line options apply generally across most of the plotting s
    * - ``--filetype {CSV,TSV}``
      - specify the type of input file, allowed values are ``CSV`` (default) and ``TSV``
      - :ref:`filetype`
+   * - ``-o FILE, --out FILE``
+     - save output plot to FILE (and override the default file name) 
+     - :ref:`out`
+   * - ``--format {png,jpg,pdf,svg}``
+     - file format to use for saved plots, allowed values are ``png`` (default) and ``jpg``, ``pdf``, ``svg``
+     - :ref:`format`
    * - ``--prefix NAME``
      - use NAME as the prefix of the output file (default is to use the prefix of the input data file name)
      - :ref:`prefix`
@@ -157,3 +163,6 @@ The following command line options apply generally across most of the plotting s
    * - ``--context {paper,notebook,talk,poster}``
      - Aesthetic context of plot. Allowed values: paper, notebook, talk, poster.  Default: notebook.
      - :ref:`context` 
+   * - ``--show``
+     - display an interactive plot window instead of saving the plot to a file 
+     - :ref:`show <show>` 

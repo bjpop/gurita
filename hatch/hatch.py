@@ -34,6 +34,7 @@ DEFAULT_LINEWIDTH = 0
 DEFAULT_FILETYPE = 'CSV'
 DEFAULT_PCA_MISSING = 'drop'
 ALLOWED_FILETYPES = ['CSV', 'TSV']
+ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
 DEFAULT_PLOT_WIDTH = 8 
 DEFAULT_PLOT_HEIGHT = 8 
 DEFAULT_PLOT_NAME = "plot"
@@ -41,6 +42,7 @@ DEFAULT_ORIENTATION = "v"
 DEFAULT_STYLE = "darkgrid"
 DEFAULT_CONTEXT = "notebook"
 DEFAULT_CORR_METHOD = "pearson"
+DEFAULT_PLOT_FORMAT = plt.rcParams["savefig.format"] 
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -79,9 +81,17 @@ def parse_args():
     common_arguments = ArgumentParser()
     common_arguments_group = common_arguments.add_argument_group('common arguments', 'arguments that are provided across all hatch sub-commands') 
     common_arguments_group.add_argument(
-        '--outdir',  metavar='DIR', type=str,
+        '-o', '--out', metavar='FILE', type=str,
         required=False,
-        help=f'Name of optional output directory.')
+        help=f'Use this filename when saving the plot (override the default output filename)')
+    #common_arguments_group.add_argument(
+    #    '--outdir',  metavar='DIR', type=str,
+    #    required=False,
+    #    help=f'Name of optional output directory.')
+    common_arguments_group.add_argument(
+        '--format',  type=str,
+        choices=ALLOWED_PLOT_FORMATS, default=DEFAULT_PLOT_FORMAT,
+        help=f'Graphic file format to use for saved plots. Allowed values: %(choices)s. Default: %(default)s.')
     common_arguments_group.add_argument(
         '--filetype',  type=str,
         required=False, choices=ALLOWED_FILETYPES,
@@ -99,6 +109,10 @@ def parse_args():
         '--info', '-i', action='store_true',
         default=False,
         help=f'Print summary information about the data set')
+    common_arguments_group.add_argument(
+        '--show', action='store_true',
+        default=False,
+        help=f'Show an interactive plot window instead of saving to a file')
     common_arguments_group.add_argument(
         '--verbose', action='store_true',
         default=False,
@@ -387,7 +401,6 @@ class Plot:
 
     def plot(self):
         options = self.options
-        plt.clf()
         plt.suptitle('')
         self.fig, self.ax = plt.subplots(figsize=(options.width, options.height))
         self.render_data()
@@ -409,12 +422,15 @@ class Plot:
         if hasattr(options, 'noyticklabels') and options.noyticklabels:
             self.ax.set(yticks=[])
             self.ax.set(yticklabels=[])
-        plt.tight_layout()
-        output_filename = self.make_output_filename()
-        plt.savefig(output_filename)
+        #plt.tight_layout()
+        if options.show:
+            plt.show()
+        else:
+           output_filename = self.make_output_filename()
+           plt.savefig(output_filename, bbox_inches='tight', format=self.options.format)
+           if self.options.verbose:
+               print(f"Graph written to {output_filename}")
         plt.close()
-        if self.options.verbose:
-            print(f"Graph written to {output_filename}")
 
     def render_data(self):
         raise NotImplementedError
@@ -438,11 +454,15 @@ class Histogram(Plot):
                 cumulative=self.options.cumulative)
 
     def make_output_filename(self):
-        output_name = get_output_name(self.options)
-        if self.x is not None:
-            return Path('.'.join([output_name, self.x.replace(' ', '_'), 'histogram.png']))
-        elif self.y is not None:
-            return Path('.'.join([output_name, self.y.replace(' ', '_'), 'histogram.png']))
+        if self.options.out:
+            return self.options.out
+        else:
+            extension = self.options.format
+            output_name = get_output_name(self.options)
+            if self.x is not None:
+                return Path('.'.join([output_name, self.x.replace(' ', '_'), 'histogram', extension]))
+            elif self.y is not None:
+                return Path('.'.join([output_name, self.y.replace(' ', '_'), 'histogram', extension]))
 
 
 class Facetplot(object):
@@ -459,7 +479,6 @@ class Facetplot(object):
 
     def plot(self):
         options = self.options
-        plt.clf()
         graph = self.make_graph(self.kwargs)
         if options.logx:
             graph.set(xscale="log")
@@ -473,27 +492,34 @@ class Facetplot(object):
         if hasattr(options, 'ylim') and options.ylim is not None:
             ylow, yhigh = options.ylim
             plt.ylim(ylow, yhigh)
-        output_filename = self.make_output_filename()
-        plt.savefig(output_filename, bbox_inches='tight')
-        plt.close()
-        if options.verbose:
-            print(f"Graph written to {output_filename}")
+        if options.show:
+            plt.show()
+        else:
+           output_filename = self.make_output_filename()
+           plt.savefig(output_filename, bbox_inches='tight', format=self.options.format)
+           if self.options.verbose:
+               print(f"Graph written to {output_filename}")
+        plt.close() 
 
     def make_graph(self, kwargs):
         raise NotImplementedError
 
     def make_output_filename(self):
         options = self.options
-        output_name = [get_output_name(options)]
-        y_str = output_field(self.y)
-        x_str = output_field(self.x)
-        hue_str = output_field(self.hue)
-        row_str = output_field(self.row)
-        col_str = output_field(self.col)
-        type_str = [self.kind]
-        return Path('.'.join(output_name + y_str + x_str +
-                             hue_str + row_str + col_str +
-                             type_str) + '.png')
+        if options.out:
+            return options.out
+        else:
+            extension = [options.format]
+            output_name = [get_output_name(options)]
+            y_str = output_field(self.y)
+            x_str = output_field(self.x)
+            hue_str = output_field(self.hue)
+            row_str = output_field(self.row)
+            col_str = output_field(self.col)
+            type_str = [self.kind]
+            return Path('.'.join(output_name + y_str + x_str +
+                                 hue_str + row_str + col_str +
+                                 type_str + extension))
 
 def output_field(field):
     return [field.replace(' ', '_')] if field is not None else []
@@ -579,8 +605,12 @@ class PCA(Plot):
             graph.legend_.remove()
 
     def make_output_filename(self):
-        output_name = get_output_name(self.options)
-        return Path('.'.join([output_name, 'pca.png'])) 
+        if self.options.out:
+            return self.options.out
+        else:
+            extension = self.options.format
+            output_name = get_output_name(self.options)
+            return Path('.'.join([output_name, 'pca', extension])) 
 
 
 class Heatmap(Plot):
@@ -597,12 +627,16 @@ class Heatmap(Plot):
 
     def make_output_filename(self):
         options = self.options
-        output_name = [get_output_name(options)]
-        x_str = output_field(self.x)
-        y_str = output_field(self.y)
-        val_str = output_field(self.val)
-        type_str = ['heatmap']
-        return Path('.'.join(output_name + x_str + y_str + val_str + type_str) + '.png')
+        if options.out:
+            return options.out
+        else:
+            extension = [options.format]
+            output_name = [get_output_name(options)]
+            x_str = output_field(self.x)
+            y_str = output_field(self.y)
+            val_str = output_field(self.val)
+            type_str = ['heatmap']
+            return Path('.'.join(output_name + x_str + y_str + val_str + type_str + extension))
 
 
 def make_output_directories(options):
@@ -699,7 +733,7 @@ def main():
             Histogram(options, df).plot()
         else:
             exit_with_error("A histogram requires either -x (--xaxis) or -y (--yaxis) to be specified", EXIT_COMMAND_LINE_ERROR)
-    if options.cmd == 'count':
+    elif options.cmd == 'count':
         if options.xaxis is not None and options.yaxis is not None:
             exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a count plot", EXIT_COMMAND_LINE_ERROR)
         elif options.xaxis is not None:
