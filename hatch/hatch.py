@@ -23,6 +23,7 @@ from sklearn.preprocessing import StandardScaler
 import sklearn.decomposition as sk_decomp 
 from sklearn.impute import SimpleImputer
 import itertools as iter
+import math
 
 
 EXIT_FILE_IO_ERROR = 1
@@ -76,7 +77,7 @@ def parse_args():
         action='version',
         version='%(prog)s ' + PROGRAM_VERSION)
 
-    subparsers = parser.add_subparsers(title='Plot type', help='sub-command help', dest='cmd')  
+    subparsers = parser.add_subparsers(title='Sub command', help='sub-command help', dest='cmd')  
 
     common_arguments = ArgumentParser()
     common_arguments_group = common_arguments.add_argument_group('common arguments', 'arguments that are provided across all hatch sub-commands') 
@@ -131,8 +132,8 @@ def parse_args():
         '--eval', metavar='EXPR', required=False, type=str, nargs="+",
         help='Construct new data columns based on an expression')
     common_arguments_group.add_argument(
-        '--sample', metavar='NUM', required=False, type=int,
-        help='Sample NUM rows from the input data')
+        '--sample', metavar='NUM', required=False, type=float,
+        help='Sample rows from the input data, if NUM >= 1 then sample NUM rows, if 0 <= NUM < 1, then sample NUM fraction of rows')
     common_arguments_group.add_argument(
         '--style', choices=['darkgrid', 'whitegrid', 'dark', 'white', 'ticks'], required=False, default=DEFAULT_STYLE,
         help=f'Aesthetic style of plot. Allowed values: %(choices)s. Default: %(default)s.')
@@ -369,8 +370,13 @@ def read_data(options):
             data = data.query(options.filter)
         except:
             exit_with_error(f"Bad filter expression: {options.filter}", EXIT_COMMAND_LINE_ERROR)
-    if options.sample:
-        data = data.sample(n = options.sample)
+    if options.sample is not None:
+        if options.sample >= 1:
+            data = data.sample(n = math.trunc(options.sample))
+        elif 0 < options.sample < 1:
+            data = data.sample(frac = options.sample)
+        else:
+            exit_with_error(f"Sample argument {options.sample} out of range. Must be > 0", EXIT_COMMAND_LINE_ERROR)
     return data 
 
 
@@ -568,7 +574,7 @@ class PCA(Plot):
         super().__init__(options, df)
 
     def render_data(self):
-        feature_names = self.options.cols
+        feature_names = self.options.features
         # Build a dataframe with the columns that we are interested in
         selected_columns = self.df[feature_names]
         # Handle rows in the data that have missing values
