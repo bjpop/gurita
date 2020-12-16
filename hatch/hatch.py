@@ -166,6 +166,9 @@ def parse_args():
     common_arguments_group.add_argument(
         '--noyticklabels', action='store_true',
         help=f'Turn of veritcal (Y) axis tick labels')
+    common_arguments_group.add_argument(
+        '--rotxticklabels', metavar='ANGLE', required=False, type=float, 
+        help=f'Rotate X axis tick labels by ANGLE')
     #common_arguments_group.add_argument(
     #    '--category', metavar='STR', required=False, type=str, nargs="+",
     #    help=f'Force the interpretation of the listed columns as categorical types')
@@ -428,6 +431,12 @@ class Plot:
         if hasattr(options, 'noyticklabels') and options.noyticklabels:
             self.ax.set(yticks=[])
             self.ax.set(yticklabels=[])
+        if hasattr(options, 'rotxticklabels') and options.rotxticklabels is not None:
+            self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=options.rotxticklabels)
+        if options.logy:
+            self.ax.set(yscale="log")
+        if options.logx:
+            self.ax.set(xscale="log")
         #plt.tight_layout()
         if options.show:
             plt.show()
@@ -498,6 +507,9 @@ class Facetplot(object):
         if hasattr(options, 'ylim') and options.ylim is not None:
             ylow, yhigh = options.ylim
             plt.ylim(ylow, yhigh)
+        if hasattr(options, 'rotxticklabels') and options.rotxticklabels is not None:
+            for ax in graph.axes.ravel():
+                ax.set_xticklabels(ax.get_xticklabels(), rotation=options.rotxticklabels)
         if options.show:
             plt.show()
         else:
