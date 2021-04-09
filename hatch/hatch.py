@@ -297,7 +297,7 @@ def parse_args():
 
     heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[common_arguments, y_argument, x_argument], add_help=False) 
     heatmapparser.add_argument(
-        '-v', '--val', metavar='FEATURE', nargs="+", required=False, type=str,
+        '-v', '--val', metavar='FEATURE', required=True, type=str,
         help=f'Interpret this feature (column of data) as the values of the heatmap')
     heatmapparser.add_argument(
         '--cmap',  metavar='COLOR_MAP_NAME', type=str, 
@@ -329,6 +329,8 @@ def init_logging(log_filename):
                             datefmt='%m-%d-%Y %H:%M:%S')
         logging.info('program started')
         logging.info('command line: %s', ' '.join(sys.argv))
+    else:
+        logging.basicConfig(level=logging.CRITICAL)
 
 
 def read_data(options):
@@ -632,11 +634,18 @@ class PCA(Plot):
 
 
 class Heatmap(Plot):
-    def __init__(self, options, df, x, y, val):
+    def __init__(self, options, df):
+        if options.xaxis not in df.columns:
+            exit_with_error(f"{options.xaxis} is not an attribute of the data set", EXIT_COMMAND_LINE_ERROR)
+        if options.yaxis not in df.columns:
+            exit_with_error(f"{options.yaxis} is not an attribute of the data set", EXIT_COMMAND_LINE_ERROR)
+
+        if options.val not in df.columns:
+            exit_with_error(f"{options.val} is not an attribute of the data set", EXIT_COMMAND_LINE_ERROR)
         super().__init__(options, df)
-        self.x = x
-        self.y = y
-        self.val = val
+        self.x = options.xaxis 
+        self.y = options.yaxis 
+        self.val = options.val 
 
     def render_data(self):
         pivot_data = self.df.pivot(index=self.y, columns=self.x, values=self.val)
@@ -659,64 +668,6 @@ class Heatmap(Plot):
 
 def make_output_directories(options):
     pass
-
-
-def heatmap_plot(options, df):
-    y_fields = options.yaxis if options.yaxis is not None else [None]
-    x_fields = options.xaxis if options.xaxis is not None else [None]
-    v_fields = options.val if options.val is not None else [None]
-    args = iter.product(x_fields, y_fields, v_fields)
-    for (x, y, val) in args:
-        if x is not None and x not in df.columns:
-            logging.warn(f"{x} is not an attribute of the data set, skipping")
-            continue
-        if y is not None and y not in df.columns:
-            logging.warn(f"{y} is not an attribute of the data set, skipping")
-            continue
-        if val is not None and val not in df.columns:
-            logging.warn(f"{val} is not an attribute of the data set, skipping")
-            continue
-        Heatmap(options, df, x, y, val).plot()
-
-#def facet_plot(options, plot_type, df, plotfun, kwargs):
-#    # XXX check numerical and categorical columns have the right type
-#    y_fields = options.yaxis if options.yaxis is not None else [None]
-#    x_fields = options.xaxis if options.xaxis is not None else [None]
-#    hue_fields = options.hue if options.hue is not None else [None]
-#    row_fields  = options.row if options.row is not None else [None]
-#    col_fields  = options.col if options.col is not None else [None]
-#    args = iter.product(x_fields, y_fields, hue_fields, row_fields, col_fields)
-#    for (x, y, hue, row, col) in args:
-#        if x is not None and x not in df.columns:
-#            logging.warn(f"{x} is not an attribute of the data set, skipping")
-#            continue
-#        if y is not None and y not in df.columns:
-#            logging.warn(f"{y} is not an attribute of the data set, skipping")
-#            continue
-#        if hue is not None and hue not in df.columns:
-#            logging.warn(f"{hue} is not an attribute of the data set, skipping")
-#            continue
-#        if row is not None and row not in df.columns:
-#            logging.warn(f"{row} is not an attribute of the data set, skipping")
-#            continue
-#        if col is not None and col not in df.columns:
-#            logging.warn(f"{col} is not an attribute of the data set, skipping")
-#            continue
-#        plotfun(plot_type, options, df, x, y, hue, row, col, kwargs).plot()
-
-#def plot_by_x_y(options, df, plotfun):
-#    if options.xaxis:
-#        for x in options.xaxis:
-#            if x in df.columns:
-#                plotfun(options, df, x=x, y=None).plot()
-#            else:
-#                logging.warn(f"{x} is not an attribute of the data set, skipping")
-#    if options.yaxis:
-#        for y in options.yaxis:
-#            if y in df.columns:
-#                plotfun(options, df, x=None, y=y).plot()
-#            else:
-#                logging.warn(f"{y} is not an attribute of the data set, skipping")
 
 
 def display_info(df):
@@ -768,7 +719,7 @@ def main():
         kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha, 'linewidth': options.dotlinewidth }
         Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'heatmap':
-        heatmap_plot(options, df)
+        Heatmap(options, df).plot()
     elif options.cmd == 'pca':
         PCA(options, df).plot()
     elif options.cmd == 'noplot':
