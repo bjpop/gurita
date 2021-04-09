@@ -433,9 +433,9 @@ class Plot:
             self.ax.set(yticklabels=[])
         if hasattr(options, 'rotxticklabels') and options.rotxticklabels is not None:
             self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=options.rotxticklabels)
-        if options.logy:
+        if hasattr(options, 'logy') and options.logy:
             self.ax.set(yscale="log")
-        if options.logx:
+        if hasattr(options, 'logx') and options.logx:
             self.ax.set(xscale="log")
         #plt.tight_layout()
         if options.show:
