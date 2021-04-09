@@ -44,6 +44,7 @@ DEFAULT_STYLE = "darkgrid"
 DEFAULT_CONTEXT = "notebook"
 DEFAULT_CORR_METHOD = "pearson"
 DEFAULT_PLOT_FORMAT = plt.rcParams["savefig.format"] 
+DEFAULT_DENDRO_RATIO = 0.1
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -305,6 +306,30 @@ def parse_args():
     heatmapparser.add_argument(
         '--log', action='store_true',
         help=f'Use a log scale on the numerical data')
+
+    clustmapparser = subparsers.add_parser('clustmap', help='Clustered heatmap of two categories with numerical values', parents=[common_arguments, y_argument, x_argument], add_help=False) 
+    clustmapparser.add_argument(
+        '-v', '--val', metavar='FEATURE', required=True, type=str,
+        help=f'Interpret this feature (column of data) as the values of the heatmap')
+    clustmapparser.add_argument(
+        '--cmap',  metavar='COLOR_MAP_NAME', type=str, 
+        help=f'Use this color map, will use Seaborn default if not specified')
+    clustmapparser.add_argument(
+        '--log', action='store_true',
+        help=f'Use a log scale on the numerical data')
+    clustmapparser.add_argument(
+        '--dendroratio', metavar='NUM', type=float, default=DEFAULT_DENDRO_RATIO,
+        help=f'Ratio of the figure size devoted to the dendrogram. Default: %(default)s.')
+    clustmapparser.add_argument('--rowclust', dest='rowclust', action='store_true',
+        help='Cluster by rows (default).')
+    clustmapparser.add_argument('--no-rowclust', dest='rowclust', action='store_false',
+        help='Do not cluster by rows')
+    clustmapparser.set_defaults(rowclust=True)
+    clustmapparser.add_argument('--colclust', dest='colclust', action='store_true',
+        help='Cluster by columns (default).')
+    clustmapparser.add_argument('--no-colclust', dest='colclust', action='store_false',
+        help='Do not cluster by columns')
+    clustmapparser.set_defaults(colclust=True)
 
     return parser.parse_args()
 
@@ -650,7 +675,6 @@ class Heatmap(Plot):
     def render_data(self):
         pivot_data = self.df.pivot(index=self.y, columns=self.x, values=self.val)
         sns.heatmap(data=pivot_data, cmap=self.options.cmap)
-        #sns.clustermap(data=pivot_data, cmap=self.options.cmap)
 
     def make_output_filename(self):
         options = self.options
@@ -665,6 +689,41 @@ class Heatmap(Plot):
             type_str = ['heatmap']
             return Path('.'.join(output_name + x_str + y_str + val_str + type_str + extension))
 
+
+class Clustermap(Plot):
+    def __init__(self, options, df):
+        if options.xaxis not in df.columns:
+            exit_with_error(f"{options.xaxis} is not an attribute of the data set", EXIT_COMMAND_LINE_ERROR)
+        if options.yaxis not in df.columns:
+            exit_with_error(f"{options.yaxis} is not an attribute of the data set", EXIT_COMMAND_LINE_ERROR)
+
+        if options.val not in df.columns:
+            exit_with_error(f"{options.val} is not an attribute of the data set", EXIT_COMMAND_LINE_ERROR)
+        super().__init__(options, df)
+        self.x = options.xaxis 
+        self.y = options.yaxis 
+        self.val = options.val 
+
+    def render_data(self):
+        options = self.options
+        pivot_data = self.df.pivot(index=self.y, columns=self.x, values=self.val)
+        figsize = (options.width, options.height)
+        sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
+            dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
+            col_cluster=options.colclust)
+
+    def make_output_filename(self):
+        options = self.options
+        if options.out:
+            return options.out
+        else:
+            extension = [options.format]
+            output_name = [get_output_name(options)]
+            x_str = output_field(self.x)
+            y_str = output_field(self.y)
+            val_str = output_field(self.val)
+            type_str = ['clustermap']
+            return Path('.'.join(output_name + x_str + y_str + val_str + type_str + extension))
 
 def make_output_directories(options):
     pass
@@ -720,6 +779,8 @@ def main():
         Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
+    elif options.cmd == 'clustmap':
+        Clustermap(options, df).plot()
     elif options.cmd == 'pca':
         PCA(options, df).plot()
     elif options.cmd == 'noplot':
