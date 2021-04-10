@@ -307,7 +307,7 @@ def parse_args():
         '--log', action='store_true',
         help=f'Use a log scale on the numerical data')
 
-    clustmapparser = subparsers.add_parser('clustmap', help='Clustered heatmap of two categories with numerical values', parents=[common_arguments, y_argument, x_argument], add_help=False) 
+    clustmapparser = subparsers.add_parser('clustermap', help='Clustered heatmap of two categories with numerical values', parents=[common_arguments, y_argument, x_argument], add_help=False) 
     clustmapparser.add_argument(
         '-v', '--val', metavar='FEATURE', required=True, type=str,
         help=f'Interpret this feature (column of data) as the values of the heatmap')
@@ -329,6 +329,15 @@ def parse_args():
         help='Cluster by columns (default).')
     clustmapparser.add_argument('--no-colclust', dest='colclust', action='store_false',
         help='Do not cluster by columns')
+    cluster_normalise_group = clustmapparser.add_mutually_exclusive_group()
+    cluster_normalise_group.add_argument('--zscore', required=False, choices=['y', 'x'],
+        help='Normalise either across rows (y) or down columns (x) using z-score. Allowed values: %(choices)s.')
+    cluster_normalise_group.add_argument('--stdscale', required=False, choices=['y', 'x'],
+        help='Normalise either across rows (y) or down columns (x) by subtracting the minimum and dividing by the maximum. Allowed values: %(choices)s.')
+    clustmapparser.add_argument('--method', required=False, choices=['single', 'complete', 'average', 'weighted', 'centroid', 'median', 'ward'], default='average',
+        help='Linkage method to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
+    clustmapparser.add_argument('--metric', required=False, choices=['braycurtis', 'canberra', 'chebyshev', 'cityblock', 'correlation', 'cosine', 'dice', 'euclidean', 'hamming', 'jaccard', 'jensenshannon', 'kulsinski', 'mahalanobis', 'matching', 'minkowski', 'rogerstanimoto', 'russellrao', 'seuclidean', 'sokalmichener', 'sokalsneath', 'sqeuclidean', 'yule'], default='euclidean',
+        help='Distance metric to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
     clustmapparser.set_defaults(colclust=True)
 
     return parser.parse_args()
@@ -708,9 +717,39 @@ class Clustermap(Plot):
         options = self.options
         pivot_data = self.df.pivot(index=self.y, columns=self.x, values=self.val)
         figsize = (options.width, options.height)
-        sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
-            dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
-            col_cluster=options.colclust)
+        z_score = None
+        if options.zscore == 'y':
+            z_score = 0
+        elif options.zscore == 'x':
+            z_score = 1
+        standard_scale = None
+        if options.stdscale == 'y':
+            standard_scale = 0
+        elif options.zscore == 'x':
+            standard_scale = 1
+        xticklabels = True
+        if options.noxticklabels:
+            xticklabels = False
+        yticklabels = True
+        if options.noyticklabels:
+            yticklabels = False
+        # clustermap does not allow both zscore and standard_scale to be specified at the
+        # same time, even if only one is None. 
+        if standard_scale is not None:
+            sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
+                dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
+                col_cluster=options.colclust, yticklabels=yticklabels, xticklabels=xticklabels,
+                standard_scale=standard_scale, method=options.method, metric=options.metric)
+        elif z_score is not None:
+            sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
+                dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
+                col_cluster=options.colclust, z_score=z_score, yticklabels=yticklabels,
+                xticklabels=xticklabels, method=options.method, metric=options.metric)
+        else:
+            sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
+                dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
+                col_cluster=options.colclust, yticklabels=yticklabels, xticklabels=xticklabels,
+                method=options.method, metric=options.metric)
 
     def make_output_filename(self):
         options = self.options
@@ -779,7 +818,7 @@ def main():
         Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
-    elif options.cmd == 'clustmap':
+    elif options.cmd == 'clustermap':
         Clustermap(options, df).plot()
     elif options.cmd == 'pca':
         PCA(options, df).plot()
