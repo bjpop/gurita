@@ -571,6 +571,8 @@ class Displot(Facetplot):
         aspect = 1
         if options.bins:
             kwargs['bins'] = options.bins
+        if options.binwidth:
+            kwargs['binwidth'] = options.binwidth
         if options.width > 0:
             aspect = options.width / options.height
         graph = sns.displot(kind=self.kind, data=self.df,

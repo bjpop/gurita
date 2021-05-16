@@ -28,6 +28,9 @@ Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generate
    * - ``--bins NUM``
      - number of bins 
      - :ref:`hist_bins`
+   * - ``--binwidth NUM``
+     - width of bins, overrides ``--bins`` 
+     - :ref:`hist_binwidth`
    * - ``--cumulative``
      - plot a cumulative histogram 
      - :ref:`hist_cumulative`
@@ -128,6 +131,29 @@ argument like so:
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using 10 bins
+
+.. _hist_binwidth:
+
+Controlling the width of bins 
+=============================
+
+By default hatch will try to automatically pick an appropriate bin width for the
+selected feature.
+
+However, this can be overridden by specifying the required bin width to use with the ``--binwidth`` 
+argument like so:
+
+.. code-block:: bash
+
+    hatch hist -x tip --binwidth 3 -- tips.csv
+
+.. image:: ../images/tips.tip.hist.binwidth3.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using bins of width 3
+
+Note that ``--binwidth`` overrides the ``--bins`` parameter.
 
 .. _hist_cumulative:
 
