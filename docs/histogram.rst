@@ -133,9 +133,7 @@ If ``-x`` (``--xaxis``) is chosen the histogram columns will be plotted vertical
 
 If ``-y`` (``--yaxis``) is chosen the histogram columns will be plotted horizontally.
 
-.. note::
-
-    You may not use both ``-x FEATURE`` and ``-y FEATURE`` in the same command line for histogram plots.
+If both ``-x`` and ``-y`` are both specified then a heatmap will be plotted.
 
 See :ref:`the example <hist_example>` above for a vertical axis plot.
 For comparison, the following command uses ``-y tip`` to plot a histogram of ``tip`` horizontally:
@@ -150,6 +148,26 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set
 
+.. _hist_bivariate:
+
+Histogram of two features (bivariate heatmaps)
+==============================================
+
+Bivariate histograms (two features) can be plotted by specifying both ``-x`` and ``-y``.
+
+In the following example the distribution of ``tip`` is compared to the distribution of ``total_bill``. The result is shown as a heatmap:
+
+.. code-block:: bash
+
+    hatch hist -x tip -y total_bill -- tips.csv 
+
+.. image:: ../images/tips.total_bill.tip.hist.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip against total_bill 
+
+Bivariate histograms also work with categorical variables and combinations of numerical and categorical variables.
 
 .. _hist_bins:
 
