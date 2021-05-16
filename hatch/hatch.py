@@ -45,6 +45,7 @@ DEFAULT_CONTEXT = "notebook"
 DEFAULT_CORR_METHOD = "pearson"
 DEFAULT_PLOT_FORMAT = plt.rcParams["savefig.format"] 
 DEFAULT_DENDRO_RATIO = 0.1
+DEFAULT_HIST_MULTIPLE = "layer"
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -194,7 +195,7 @@ def parse_args():
     hue_argument = ArgumentParser(add_help=False)
     hue_argument.add_argument(
         '--hue',  metavar='FEATURE', type=str, required=False, 
-        help=f'Name of feature to use for colouring the plotted data')
+        help=f'Name of feature to use for colouring/grouping the plotted data')
 
     row_argument = ArgumentParser(add_help=False)
     row_argument.add_argument(
@@ -283,6 +284,10 @@ def parse_args():
     histparser.add_argument(
        '--kde', action='store_true',
         help=f'Plot a kernel density estimate for the distribution and show as a line')
+    histparser.add_argument(
+        '--multiple', required=False, choices=['layer', 'dodge', 'stack', 'fill'],
+        default=DEFAULT_HIST_MULTIPLE,
+        help=f"How to display overlapping subsets of data. Allowed values: %(choices)s. Default: %(default)s.")
 
     noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[common_arguments], add_help=False)
 
@@ -575,6 +580,8 @@ class Displot(Facetplot):
             kwargs['binwidth'] = options.binwidth
         if options.width > 0:
             aspect = options.width / options.height
+        if options.multiple:
+            kwargs['multiple'] = options.multiple
         graph = sns.displot(kind=self.kind, data=self.df,
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,

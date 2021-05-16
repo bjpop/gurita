@@ -34,6 +34,9 @@ Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generate
    * - ``--cumulative``
      - plot a cumulative histogram 
      - :ref:`hist_cumulative`
+   * - ``--hue FEATURE``
+     - group features by hue
+     - :ref:`hist_hue`
    * - ``--kde``
      - overlay a kernel density estimate (kde) as a line 
      - :ref:`hist_kde`
@@ -196,6 +199,70 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set in cumulative style
+
+.. _hist_hue:
+
+Show distributions of categorical subsets using hue
+===================================================
+
+.. code-block:: 
+
+  --hue FEATURE
+
+The distribution of categorical subsets of the data can be shown with the ``--hue`` argument.
+
+In the following example the distribution of distribution of the ``tip`` feature
+is divided into two subsets based on the categorical ``smoker`` feature. Each
+subset is plotted as its own histogram, layered on top of each other:
+
+.. code-block:: bash
+
+    hatch hist -x tip --hue smoker -- tips.csv  
+
+.. image:: ../images/tips.tip.smoker.hist.layer.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature 
+
+The default behaviour is to layer overlapping histograms on top of each other, as demonstrated in the above plot.
+
+.. _hist_multiple:
+
+The ``--multiple`` parameter lets you choose alternative ways to show overlapping histograms. The example below shows the
+two histograms stacked on top of each other:
+
+.. code-block:: bash
+
+    hatch hist -x tip --hue smoker --multiple stack -- tips.csv  
+
+.. image:: ../images/tips.tip.smoker.hist.stack.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms stacked
+
+The ``--multiple`` paramter supports the following values: ``layer`` (default), ``stack``, ``dodge``, and ``fill``.
+
+.. code-block:: bash
+
+    hatch hist -x tip --hue smoker --multiple dodge -- tips.csv  
+
+.. image:: ../images/tips.tip.smoker.hist.dodge.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms side-by-side 
+
+.. code-block:: bash
+
+    hatch hist -x tip --hue smoker --multiple fill -- tips.csv  
+
+.. image:: ../images/tips.tip.smoker.hist.fill.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms filled to proportions 
 
 .. _hist_kde:
 
