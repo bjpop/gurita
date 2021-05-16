@@ -44,9 +44,9 @@ Plot a histogram of the ``tip`` amount from the ``tips.csv`` input file:
 
     hatch hist -x tip -- tips.csv
 
-The output of the above command is written to ``tips.tip.histogram.png``:
+The output of the above command is written to ``tips.tip.hist.png``:
 
-.. image:: ../images/tips.tip.histogram.png
+.. image:: ../images/tips.tip.hist.png
        :width: 600px
        :height: 600px
        :align: center
@@ -98,7 +98,7 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
 
     hatch hist -y tip -- tips.csv
 
-.. image:: ../images/tips.tip.histogram.y.png
+.. image:: ../images/tips.tip.hist.y.png
        :width: 600px
        :height: 600px
        :align: center
@@ -120,7 +120,7 @@ argument like so:
 
     hatch hist -x tip --bins 5 -- tips.csv
 
-.. image:: ../images/tips.tip.histogram.bins10.png
+.. image:: ../images/tips.tip.hist.bins5.png
        :width: 600px
        :height: 600px
        :align: center
@@ -141,7 +141,7 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
 
     hatch hist -x tip --cumulative -- tips.csv
 
-.. image:: ../images/tips.tip.histogram.cumulative.png
+.. image:: ../images/tips.tip.hist.cumulative.png
        :width: 600px
        :height: 600px
        :align: center

@@ -270,12 +270,12 @@ def parse_args():
         '--missing', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
         help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
 
-    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_argument, y_argument, logx_argument, logy_argument, xlim_argument, ylim_argument], add_help=False) 
+    histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[common_arguments, x_argument, y_argument, logx_argument, logy_argument, xlim_argument, ylim_argument, hue_argument, hue_order_arguments, row_argument, col_argument, colwrap_argument], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUM', required=False, type=int,
         help=f'Number of bins for histogram.')
     histparser.add_argument(
-        '--cumulative', action='store_true',
+       '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
 
     noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[common_arguments], add_help=False)
@@ -489,7 +489,7 @@ class Plot:
     def make_output_filename(self):
         raise NotImplementedError
 
-
+'''
 class Histogram(Plot):
     def __init__(self, options, df):
         super().__init__(options, df)
@@ -514,6 +514,7 @@ class Histogram(Plot):
                 return Path('.'.join([output_name, self.x.replace(' ', '_'), 'histogram', extension]))
             elif self.y is not None:
                 return Path('.'.join([output_name, self.y.replace(' ', '_'), 'histogram', extension]))
+'''
 
 
 class Facetplot(object):
@@ -577,6 +578,38 @@ class Facetplot(object):
 
 def output_field(field):
     return [field.replace(' ', '_')] if field is not None else []
+
+# Displots call the displot interface in Seaborn, and thus share common
+# functionality https://seaborn.pydata.org/generated/seaborn.displot.html 
+class Displot(Facetplot):
+    def __init__(self, kind, options, df, kwargs):
+        super().__init__(kind, options, df, kwargs)
+        #self.x = options.xaxis
+        #self.y = options.yaxis
+    
+#    def render_data(self):
+#        if self.options.bins:
+#            sns.histplot(data=self.df, x=self.x, y=self.y, bins=self.options.bins,
+#                cumulative=self.options.cumulative)
+#        else:
+#            sns.histplot(data=self.df, x=self.x, y=self.y,
+#                cumulative=self.options.cumulative)
+
+    def make_graph(self, kwargs):
+        options = self.options
+        facet_kws = { 'legend_out': True }
+        aspect = 1
+        if options.bins:
+            kwargs['bins'] = options.bins
+        if options.width > 0:
+            aspect = options.width / options.height
+        graph = sns.displot(kind=self.kind, data=self.df,
+                x=self.x, y=self.y, col=self.col, row=self.row,
+                height=options.height, aspect=aspect, hue=self.hue,
+                hue_order=options.hueorder,
+                facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+        return graph
+
 
 # Catplots call the catlplot interface in Seaborn, and thus share common
 # functionality https://seaborn.pydata.org/tutorial/categorical.html
@@ -792,14 +825,14 @@ def main():
     if options.save:
         save(options, df)
     if options.cmd == 'hist':
-        if options.xaxis is not None and options.yaxis is not None:
-            exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a histogram", EXIT_COMMAND_LINE_ERROR)
-        elif options.xaxis is not None:
-            Histogram(options, df).plot()
-        elif options.yaxis is not None:
-            Histogram(options, df).plot()
-        else:
-            exit_with_error("A histogram requires either -x (--xaxis) or -y (--yaxis) to be specified", EXIT_COMMAND_LINE_ERROR)
+        Displot(options.cmd, options, df, kwargs).plot()
+        #if options.xaxis is not None and options.yaxis is not None:
+        #    exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a histogram", EXIT_COMMAND_LINE_ERROR)
+        #    Histogram(options, df).plot()
+        #elif options.yaxis is not None:
+        #    Histogram(options, df).plot()
+        #else:
+        #    exit_with_error("A histogram requires either -x (--xaxis) or -y (--yaxis) to be specified", EXIT_COMMAND_LINE_ERROR)
     elif options.cmd == 'count':
         if options.xaxis is not None and options.yaxis is not None:
             exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a count plot", EXIT_COMMAND_LINE_ERROR)

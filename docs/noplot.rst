@@ -1,9 +1,11 @@
 No plot
 *******
 
-Plot distributions of selected numerical or categorical features as histograms.
+Do not generate a plot as output.
 
-Plots are based on Seaborn's `histplot <https://seaborn.pydata.org/generated/seaborn.histplot.html/>`_ library function.
+This is used when you want to perform some transformation of the input data and save the result without generating a plot.
+
+For example, you may want to filter the rows of the data and save the filtered data to a file.
 
 Simple example
 ==============
