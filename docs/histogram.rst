@@ -218,6 +218,7 @@ A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimat
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a kernel density overlaid as a line 
 
+.. _hist_log:
 
 Log scale of X and Y axes 
 =========================
@@ -271,7 +272,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
     hatch hist -x tip --col day -- tips.csv 
 
 .. image:: ../images/tips.tip.hist.col.day.png
-       :width: 600px
+       :width: 1200px
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a column for each day 
