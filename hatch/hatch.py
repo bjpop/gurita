@@ -489,33 +489,6 @@ class Plot:
     def make_output_filename(self):
         raise NotImplementedError
 
-'''
-class Histogram(Plot):
-    def __init__(self, options, df):
-        super().__init__(options, df)
-        self.x = options.xaxis
-        self.y = options.yaxis
-    
-    def render_data(self):
-        if self.options.bins:
-            sns.histplot(data=self.df, x=self.x, y=self.y, bins=self.options.bins,
-                cumulative=self.options.cumulative)
-        else:
-            sns.histplot(data=self.df, x=self.x, y=self.y,
-                cumulative=self.options.cumulative)
-
-    def make_output_filename(self):
-        if self.options.out:
-            return self.options.out
-        else:
-            extension = self.options.format
-            output_name = get_output_name(self.options)
-            if self.x is not None:
-                return Path('.'.join([output_name, self.x.replace(' ', '_'), 'histogram', extension]))
-            elif self.y is not None:
-                return Path('.'.join([output_name, self.y.replace(' ', '_'), 'histogram', extension]))
-'''
-
 
 class Facetplot(object):
     def __init__(self, kind, options, df, kwargs):
@@ -584,16 +557,7 @@ def output_field(field):
 class Displot(Facetplot):
     def __init__(self, kind, options, df, kwargs):
         super().__init__(kind, options, df, kwargs)
-        #self.x = options.xaxis
-        #self.y = options.yaxis
     
-#    def render_data(self):
-#        if self.options.bins:
-#            sns.histplot(data=self.df, x=self.x, y=self.y, bins=self.options.bins,
-#                cumulative=self.options.cumulative)
-#        else:
-#            sns.histplot(data=self.df, x=self.x, y=self.y,
-#                cumulative=self.options.cumulative)
 
     def make_graph(self, kwargs):
         options = self.options
@@ -606,6 +570,7 @@ class Displot(Facetplot):
         graph = sns.displot(kind=self.kind, data=self.df,
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
+                cumulative=options.cumulative,
                 hue_order=options.hueorder,
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         return graph
@@ -826,13 +791,6 @@ def main():
         save(options, df)
     if options.cmd == 'hist':
         Displot(options.cmd, options, df, kwargs).plot()
-        #if options.xaxis is not None and options.yaxis is not None:
-        #    exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a histogram", EXIT_COMMAND_LINE_ERROR)
-        #    Histogram(options, df).plot()
-        #elif options.yaxis is not None:
-        #    Histogram(options, df).plot()
-        #else:
-        #    exit_with_error("A histogram requires either -x (--xaxis) or -y (--yaxis) to be specified", EXIT_COMMAND_LINE_ERROR)
     elif options.cmd == 'count':
         if options.xaxis is not None and options.yaxis is not None:
             exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a count plot", EXIT_COMMAND_LINE_ERROR)
