@@ -43,6 +43,9 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--dotlinewidth WIDTH``
      - line width value for plotted points, default: 0
      - :ref:`scatter_dotalpha_linewidth`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`scatter_log`
    * - ``--logy``
      - log scale Y axis 
      - :ref:`scatter_log`
@@ -214,8 +217,8 @@ In the following example, the dot alpha is set to 1 and the boder line width is 
 
 .. _scatter_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale of X and Y axes 
+=========================
 
 .. code-block:: 
 

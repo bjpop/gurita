@@ -37,6 +37,27 @@ Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generate
    * - ``--kde``
      - overlay a kernel density estimate (kde) as a line 
      - :ref:`hist_kde`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`hist_log`
+   * - ``--logy``
+     - log scale Y axis 
+     - :ref:`hist_log`
+   * - ``--xlim BOUND BOUND``
+     - range limit X axis 
+     - :ref:`hist_range`
+   * - ``--ylim BOUND BOUND``
+     - range limit Y axis 
+     - :ref:`hist_range`
+   * - ``-r FEATURE, --row FEATURE``
+     - feature to use for facet rows 
+     - :ref:`hist_facets`
+   * - ``-c FEATURE, --col FEATURE``
+     - feature to use for facet columns 
+     - :ref:`hist_facets`
+   * - ``--colwrap INT``
+     - wrap the facet column at this width, to span multiple rows
+     - :ref:`hist_facets`
 
 
 .. _hist_example:
@@ -197,3 +218,60 @@ A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimat
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a kernel density overlaid as a line 
 
+
+Log scale of X and Y axes 
+=========================
+
+.. code-block:: 
+
+  --logx
+  --logy
+
+The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``.
+
+.. code-block:: bash
+
+    hatch hist -x tip --logy -- tips.csv 
+
+.. _hist_range:
+
+Range limits
+============
+
+.. code-block:: 
+
+  --xlim LOW HIGH 
+  --ylim LOW HIGH
+
+The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
+
+
+.. code-block:: bash
+
+    hatch hist -x tip --xlim 3 8 -- tips.csv 
+
+.. _hist_facets:
+
+Facets
+======
+
+.. code-block:: 
+
+ -r FEATURE, --row FEATURE  
+ -c FEATURE, --col FEATURE
+ --colwrap INT
+
+Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is
+further categorised by up to 2 more categorical features.
+
+See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+.. code-block:: bash
+
+    hatch hist -x tip --col day -- tips.csv 
+
+.. image:: ../images/tips.tip.hist.col.day.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a column for each day 
