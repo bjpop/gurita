@@ -31,6 +31,9 @@ Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generate
    * - ``--cumulative``
      - plot a cumulative histogram 
      - :ref:`hist_cumulative`
+   * - ``--kde``
+     - overlay a kernel density estimate (kde) as a line 
+     - :ref:`kde`
 
 
 .. _hist_example:
@@ -146,4 +149,23 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set in cumulative style
+
+Kernel density estimate
+=======================
+
+.. code-block:: 
+
+  --kde                 Plot a kernel density estimate for the distribution and show as a line 
+
+A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimation>`_ can be plotted with the ``--kde`` argument.   
+
+.. code-block:: bash
+
+    hatch hist -x tip --kde -- tips.csv
+
+.. image:: ../images/tips.tip.hist.kde.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a kernel density overlaid as a line 
 

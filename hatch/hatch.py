@@ -275,8 +275,14 @@ def parse_args():
         '--bins',  metavar='NUM', required=False, type=int,
         help=f'Number of bins for histogram.')
     histparser.add_argument(
+        '--binwidth',  metavar='NUM', required=False, type=float,
+        help=f'Width of histogram bins, overrides "--bins".')
+    histparser.add_argument(
        '--cumulative', action='store_true',
         help=f'Generate cumulative histogram')
+    histparser.add_argument(
+       '--kde', action='store_true',
+        help=f'Plot a kernel density estimate for the distribution and show as a line')
 
     noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[common_arguments], add_help=False)
 
@@ -571,7 +577,7 @@ class Displot(Facetplot):
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
                 cumulative=options.cumulative,
-                hue_order=options.hueorder,
+                hue_order=options.hueorder, kde=options.kde,
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         return graph
 
