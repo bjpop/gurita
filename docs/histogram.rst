@@ -272,6 +272,4 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
     hatch hist -x tip --col day -- tips.csv 
 
 .. image:: ../images/tips.tip.hist.col.day.png
-       :width: 600px 
-       :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a column for each day 
