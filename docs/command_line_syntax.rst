@@ -35,9 +35,7 @@ The usage message is displayed as follows:
 
 .. code-block:: text 
 
-    usage: hatch [-h] [-v]
-                 {pca,hist,noplot,box,violin,swarm,strip,boxen,count,bar,point,scatter,line,heatmap}
-                 ...
+    usage: hatch [-h] [-v] {corr,pca,hist,noplot,box,violin,swarm,strip,boxen,count,bar,point,scatter,line,heatmap,clustermap} ...
     
     Generate plots of tabular data
     
@@ -45,30 +43,25 @@ The usage message is displayed as follows:
       -h, --help            show this help message and exit
       -v, --version         show program's version number and exit
     
-    Plot type:
-      {pca,hist,noplot,box,violin,swarm,strip,boxen,count,bar,point,scatter,line,heatmap}
+    Sub command:
+      {corr,pca,hist,noplot,box,violin,swarm,strip,boxen,count,bar,point,scatter,line,heatmap,clustermap}
                             sub-command help
+        corr                Correlation between two numerical features
         pca                 Principal components analysis
         hist                Histograms of numerical data
-        noplot              Do not generate a plot, but run filter and eval
-                            commands
-        box                 Box plot of numerical feature, optionally grouped by
-                            categorical features
-        violin              Violin plot of numerical feature, optionally grouped
-                            by categorical features
-        swarm               Swarm plot of numerical feature, optionally grouped
-                            by categorical features
-        strip               Strip plot of numerical feature, optionally grouped
-                            by categorical features
-        boxen               Boxen plot of numerical feature, optionally grouped
-                            by categorical features
+        noplot              Do not generate a plot, but run filter and eval commands
+        box                 Box plot of numerical feature, optionally grouped by categorical features
+        violin              Violin plot of numerical feature, optionally grouped by categorical features
+        swarm               Swarm plot of numerical feature, optionally grouped by categorical features
+        strip               Strip plot of numerical feature, optionally grouped by categorical features
+        boxen               Boxen plot of numerical feature, optionally grouped by categorical features
         count               Count plot of categorical feature
         bar                 Bar plot of categorical feature
-        point               Point plot of numerical feature, optionally grouped
-                            by categorical features
+        point               Point plot of numerical feature, optionally grouped by categorical features
         scatter             Scatter plot of two numerical features
         line                Line plot of numerical feature
         heatmap             Heatmap of two categories with numerical values
+        clustermap          Clustered heatmap of two categories with numerical values
 
 Help information for each sub-command can be requested with ``-h`` or ``--help``
 after the sub-command name. For example, to get specific help about histogram plots, use:
