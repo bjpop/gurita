@@ -3,7 +3,9 @@ Installation
 
 Hatch requires Python 3.6 or greater and relies heavily on the following libraries: `NumPy <https://numpy.org/>`_, `SciPy <https://www.scipy.org/>`_, `Pandas <https://pandas.pydata.org/>`_, `Seaborn <https://seaborn.pydata.org/>`_ (and hence `Matplotlib <https://matplotlib.org/>`_), `Scikit-learn <https://scikit-learn.org/>`_.
 
-You can install hatch directly from the source code or build and run it from within Docker container.
+You can install hatch :ref:`directly from source <install_src>` code or build and :ref:`run it from within Docker container <build_docker>`.
+
+.. _install_src:
 
 Installing directly from source code
 ====================================
@@ -43,6 +45,8 @@ Hatch can be installed using ``pip`` in a variety of ways:
 .. code-block:: bash
 
     pip install -U --user /path/to/hatch
+
+.. _build_docker:
 
 Building the Docker container
 =============================
