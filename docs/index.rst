@@ -50,7 +50,7 @@ flowers contained in the data set.
 
 .. code-block:: bash
 
-   hatch box -x species -y sepal_length -- iris.csv
+   hatch box -x species -y sepal_length iris.csv
 
 The above command generates an output file called ``iris.sepal_length.species.box.png`` that
 contains the following box plot:
