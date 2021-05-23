@@ -836,6 +836,8 @@ class Clustermap(Plot):
             return Path('.'.join(output_name + x_str + y_str + val_str + type_str + extension))
 
 def correlation(df, options):
+    if options.xaxis is None or options.yaxis is None:
+        exit_with_error(f'Correlation requires both -x (--xaxis) and -y (--yaxis) to be supplied', EXIT_COMMAND_LINE_ERROR)
     if options.method == 'pearson':
         coeff, p_value = scipy.stats.pearsonr(df[options.xaxis], df[options.yaxis])
     elif options.method == 'spearman':
