@@ -13,12 +13,20 @@ import numpy as np
 from itertools import combinations
 import math
 import scipy
+import hatch.utils as utils
 
 
 def norm_test(df, options):
-    k2, p_value = scipy.stats.normaltest(df[options.xaxis]) 
-    print("statistic","p-value")
-    print(f"{k2},{p_value}")
+    if options.features is not None:
+        features = options.features
+        utils.check_df_has_features(df, features)
+    else:
+        numeric_df = df.select_dtypes(include=np.number)
+        features = list(numeric_df.columns)
+    print("feature,statistic,p-value")
+    for f in features:
+        k2, p_value = scipy.stats.normaltest(df[f]) 
+        print(f"{f},{k2},{p_value}")
 
 
 def correlation(df, options):
@@ -31,6 +39,7 @@ def correlation(df, options):
         corr_fun = scipy.stats.kendalltau
     if options.features is not None:
         features = options.features
+        utils.check_df_has_features(df, features)
     else:
         numeric_df = df.select_dtypes(include=np.number)
         features = list(numeric_df.columns)
