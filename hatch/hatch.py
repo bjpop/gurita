@@ -39,7 +39,7 @@ ALLOWED_FILETYPES = ['CSV', 'TSV']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
 DEFAULT_PLOT_WIDTH = 8 
 DEFAULT_PLOT_HEIGHT = 8 
-DEFAULT_PLOT_NAME = "plot"
+DEFAULT_OUTPUT_NAME = "hatch"
 DEFAULT_ORIENTATION = "v"
 DEFAULT_STYLE = "darkgrid"
 DEFAULT_CONTEXT = "notebook"
@@ -86,7 +86,7 @@ def parse_args():
     io_common_arguments_group.add_argument(
         '-o', '--out', metavar='FILE', type=str,
         required=False,
-        help=f'Use this filename when saving the plot (override the default output filename)')
+        help=f'Use this filename when saving output to file (override the default output filename)')
     io_common_arguments_group.add_argument(
         '--filetype',  type=str,
         required=False, choices=ALLOWED_FILETYPES,
@@ -101,7 +101,7 @@ def parse_args():
         help='Filter rows: only retain rows that make this expression True')
     io_common_arguments_group.add_argument(
         '--features', metavar='FEATURE', nargs="+", required=False, type=str,
-        help=f'Select only these features (columns) for consideration')
+        help=f'Select only these features (columns)')
     io_common_arguments_group.add_argument(
         '--eval', metavar='EXPR', required=False, type=str, nargs="+",
         help='Construct new data columns based on an expression')
@@ -116,6 +116,10 @@ def parse_args():
         '--navalues', metavar='STR', required=False, type=str,
         help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
     io_common_arguments_group.add_argument(
+        '--prefix',  metavar='NAME', type=str,
+        required=False, 
+        help=f'Name prefix for output file')
+    io_common_arguments_group.add_argument(
         'data',  metavar='DATA', type=str, nargs='?', help='Filepath of input CSV/TSV file')
 
     # Common command line arguments for plotting sub-commands
@@ -126,10 +130,6 @@ def parse_args():
         '--format',  type=str,
         choices=ALLOWED_PLOT_FORMATS, default=DEFAULT_PLOT_FORMAT,
         help=f'Graphic file format to use for saved plots. Allowed values: %(choices)s. Default: %(default)s.')
-    plot_common_arguments_group.add_argument(
-        '--prefix',  metavar='NAME', type=str,
-        required=False, 
-        help=f'Name prefix for output files')
     plot_common_arguments_group.add_argument(
         '--show', action='store_true',
         default=False,
@@ -254,12 +254,8 @@ def parse_args():
     # Subcommands 
 
     subparsers_description = """
-    Statistics commands:
-
-    corr                Correlation between two numerical features
-    info                Show summary information about features in the input data set
-
-    Plotting commands: 
+    Plotting: 
+    ---------
 
     bar                 Bar plot of categorical feature
     box                 Box plot of numerical feature
@@ -275,28 +271,32 @@ def parse_args():
     strip               Strip plot of numerical feature
     swarm               Swarm plot of numerical feature
     violin              Violin plot of numerical feature
+
+    Data manipulation:
+    ------------------
+
+    trans               Tranform the input data and save the result to a new file
+
+    Statistics:
+    -----------
+
+    corr                Correlation between two numerical features
+    info                Show summary information about features in the input data set
     """
 
-    #subparsers = parser.add_subparsers(title='Sub command', help='sub-command help', dest='cmd', description=subparsers_description)  
     subparsers = parser.add_subparsers(title='Sub command', help=argparse.SUPPRESS, dest='cmd', description=subparsers_description)  
 
-    #def facet_parser(kind, help, additional_parents=[]):
     def facet_parser(kind, help='', additional_parents=[]):
-        #return subparsers.add_parser(kind, help=help, 
         return subparsers.add_parser(kind,
                 parents=[io_common_arguments, plot_common_arguments, y_argument, x_argument, hue_argument, row_argument, col_argument,
                          order_arguments, hue_order_arguments, orient_argument, logx_argument, logy_argument, xlim_argument, ylim_argument, colwrap_argument] + additional_parents, add_help=False) 
 
-    #barparser = facet_parser('bar', help='Bar plot of categorical feature')
     barparser = facet_parser('bar')
 
-    #boxparser = facet_parser('box', help='Box plot of numerical feature, optionally grouped by categorical features')
     boxparser = facet_parser('box')
 
-    #boxenparser = facet_parser('boxen', help='Boxen plot of numerical feature, optionally grouped by categorical features')
     boxenparser = facet_parser('boxen')
 
-    # clustmapparser = subparsers.add_parser('clustermap', help='Clustered heatmap of two categories with numerical values', parents=[io_common_arguments, plot_common_arguments, y_argument, x_argument], add_help=False) 
     clustmapparser = subparsers.add_parser('clustermap', parents=[io_common_arguments, plot_common_arguments, y_argument, x_argument], add_help=False) 
     clustmapparser.add_argument(
         '-v', '--val', metavar='FEATURE', required=True, type=str,
@@ -330,15 +330,12 @@ def parse_args():
         help='Distance metric to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
     clustmapparser.set_defaults(colclust=True)
 
-    #corrparser = subparsers.add_parser('corr', help='Correlation between two numerical features', parents=[x_argument, y_argument], add_help=False)
     corrparser = subparsers.add_parser('corr', parents=[x_argument, y_argument], add_help=False)
     corrparser.add_argument('--method', required=False, default=DEFAULT_CORR_METHOD, choices=['pearson', 'kendall', 'spearman'],
         help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
 
-    #countparser = facet_parser('count', help='Count plot of categorical feature')
     countparser = facet_parser('count')
 
-    #heatmapparser = subparsers.add_parser('heatmap', help='Heatmap of two categories with numerical values', parents=[io_common_arguments, plot_common_arguments, y_argument, x_argument], add_help=False) 
     heatmapparser = subparsers.add_parser('heatmap', parents=[io_common_arguments, plot_common_arguments, y_argument, x_argument], add_help=False) 
     heatmapparser.add_argument(
         '-v', '--val', metavar='FEATURE', required=True, type=str,
@@ -350,7 +347,6 @@ def parse_args():
         '--log', action='store_true',
         help=f'Use a log scale on the numerical data')
 
-    # histparser = subparsers.add_parser('hist', help='Histograms of numerical data', parents=[io_common_arguments, plot_common_arguments, x_argument, y_argument, logx_argument, logy_argument, xlim_argument, ylim_argument, hue_argument, hue_order_arguments, row_argument, col_argument, colwrap_argument], add_help=False) 
     histparser = subparsers.add_parser('hist', parents=[io_common_arguments, plot_common_arguments, x_argument, y_argument, logx_argument, logy_argument, xlim_argument, ylim_argument, hue_argument, hue_order_arguments, row_argument, col_argument, colwrap_argument], add_help=False) 
     histparser.add_argument(
         '--bins',  metavar='NUM', required=False, type=int,
@@ -368,34 +364,26 @@ def parse_args():
         '--multiple', required=False, choices=['layer', 'dodge', 'stack', 'fill'],
         help=f"How to display overlapping subsets of data. Allowed values: %(choices)s.")
 
-    #infoparser = subparsers.add_parser('info', help='Print summary information about fields in the input data set', parents=[io_common_arguments], add_help=False)
     infoparser = subparsers.add_parser('info', parents=[io_common_arguments], add_help=False)
 
-    #lineparser = facet_parser('line', help='Line plot of numerical feature')
     lineparser = facet_parser('line')
 
-    #noplot_parser = subparsers.add_parser('noplot', help="Do not generate a plot, but run filter and eval commands", parents=[io_common_arguments], add_help=False)
-    noplot_parser = subparsers.add_parser('noplot', parents=[io_common_arguments], add_help=False)
 
-    #pcaparser = subparsers.add_parser('pca', help='Principal components analysis', parents=[io_common_arguments, plot_common_arguments, xlim_argument, ylim_argument, hue_argument, dotsize_argument, dotalpha_argument, dotlinewidth_argument], add_help=False) 
     pcaparser = subparsers.add_parser('pca', parents=[io_common_arguments, plot_common_arguments, xlim_argument, ylim_argument, hue_argument, dotsize_argument, dotalpha_argument, dotlinewidth_argument], add_help=False) 
     pcaparser.add_argument(
         '--missing', required=False, default=DEFAULT_PCA_MISSING, choices=['drop', 'imputemean', 'imputemedian', 'imputemostfrequent'],
         help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
 
-    #pointparser = facet_parser('point', help='Point plot of numerical feature, optionally grouped by categorical features')
     pointparser = facet_parser('point')
 
-    #scatterparser = facet_parser('scatter', help='Scatter plot of two numerical features', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument])
     scatterparser = facet_parser('scatter', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument])
 
-    #stripparser = facet_parser('strip', help='Strip plot of numerical feature, optionally grouped by categorical features')
     stripparser = facet_parser('strip')
 
     swarmparser = facet_parser('swarm')
-    #swarmparser = facet_parser('swarm', help='Swarm plot of numerical feature, optionally grouped by categorical features')
 
-    #violinparser = facet_parser('violin', help='Violin plot of numerical feature, optionally grouped by categorical features')
+    trans_parser = subparsers.add_parser('trans', parents=[io_common_arguments], add_help=False)
+
     violinparser = facet_parser('violin')
 
     return parser.parse_args()
@@ -506,7 +494,7 @@ def get_output_name(options):
     elif options.data is not None:
         return Path(options.data).stem
     else:
-        return DEFAULT_PLOT_NAME 
+        return DEFAULT_OUTPUT_NAME 
         
 
 class Plot:
@@ -851,17 +839,23 @@ def display_info(df, options):
     print(f"rows: {rows}, cols: {cols}")
 
 def save(options, df):
-    df.to_csv(options.save, header=True, index=False)
+    if options.out:
+        output_filename = options.out
+    else:
+        output_name = get_output_name(options)
+        output_filename = Path('.'.join([output_name, "trans", "csv"]))
+    df.to_csv(output_filename, header=True, index=False)
     if options.verbose:
-        print(f"Data written to {options.save}")
+        print(f"Data saved to {output_filename}")
 
 def main():
     options = parse_args()
     init_logging(options.logfile)
+    # read and transform the input data (apply filters, sampling etc)
     df = read_data(options)
-    #if options.save:
-    #    save(options, df)
-    if options.cmd == 'info':
+    if options.cmd == 'trans':
+        save(options, df)
+    elif options.cmd == 'info':
         display_info(df, options)
     else:
         # plotting commands go here

@@ -121,7 +121,7 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    :maxdepth: 1
    :caption: Data maniupulation 
 
-   save 
+   transform 
    features
    filter 
    eval 

@@ -1,12 +1,11 @@
-Box 
-***
+Transform and save data
+***********************
 
-Box (or box-and-whisker) plots show the distribution of values in a numerical feature optionally grouped by categorical features.
-The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate points.
+Hatch allows you to transform your input data and then save the result to a file.
 
 .. code-block:: bash
 
-    hatch box <arguments>
+    hatch trans <arguments>
 
 Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="box"`` option.
 
