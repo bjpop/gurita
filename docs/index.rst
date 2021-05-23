@@ -8,7 +8,7 @@ Hatch: a command line plotting and data analytics tool
 
 Hatch is a command line tool for analysing and visualising data.
 
-It takes input from tabular data in CSV or TSV format and produces high-quality plots (charts, graphs) as output.
+It takes input from tabular data in CSV or TSV format. Outputs are high-quality plots, or statistical calculations.
 
 It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.
 
@@ -32,13 +32,19 @@ The following plot types are provided:
     
  * :doc:`Line <line/>`
  * :doc:`Heatmap <heatmap/>`
+ * :doc:`Clustermap <clustermap/>`
  * :doc:`Principal components analysis (PCA) <pca/>`
 
-It also supports expressive :doc:`row filtering <filter/>` and :doc:`dynamic computation of new columns <eval/>`.
+Hatch plots are highly customisable, however for most cases sensible defaults are applied.
+
+The following statistical tests are provided:
+
+ * :doc:`Correlation <correlation/>`
+
+It also supports expressive :doc:`row filtering <filter/>`, :doc:`column selection <features/>`, and :doc:`dynamic computation of new columns <eval/>`.
 
 Hatch is implemented in `Python <http://www.python.org/>`_ and makes extensive use of the `Pandas <https://pandas.pydata.org/>`_, `Seaborn <https://seaborn.pydata.org/>`_, and `Scikit-learn <https://scikit-learn.org/>`_ libraries for data processing and plot generation.
 
-Hatch plots are highly customisable, however for most cases sensible defaults are applied.
 
 Example command 
 ---------------
@@ -116,6 +122,7 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    :caption: Data maniupulation 
 
    save 
+   features
    filter 
    eval 
    sample
