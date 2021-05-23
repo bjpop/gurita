@@ -79,29 +79,29 @@ If you do not specify an output file name, Hatch will choose an appropriate file
 
  * The prefix of the input data file name (this can be overridden).
  * The name(s) of the columns that have been selected for plotting.
- * Optionally the names of columns that have been selected for grouping.
+ * Optionally the names of columns that have been selected for grouping (for example by using ``--hue`` where applicable).
  * The type of plot being produced.
 
 For example, the following command:
 
 .. code-block:: bash
 
-    hatch dist --cols sepal_length --groups species -- iris.csv
+    hatch hist -x sepal_length --hue species iris.csv
 
-automatically produces an output file called ``iris.sepal_length.species.box.png`` by default, because:
+automatically produces an output file called ``iris.sepal_length.species.hist.png`` by default, because:
 
  * ``iris`` is the prefix of the name of the input file `iris.csv`
  * ``sepal_length`` is the column that has been selected for plotting
- * ``species`` is the column that has been selected for grouping
- * ``box`` is the type of plot
+ * ``species`` is the column that has been selected for grouping via the ``--hue`` argument
+ * ``hist`` is the type of plot (a histogram)
 
 If the input data is read from the standard input (stdin) instead of a named file, then the prefix of the output defaults to ``plot``. For example, the following command:
 
 .. code-block:: bash
 
-    hatch dist --cols sepal_length --groups species < iris.csv
+    hatch hist -x sepal_length --hue species < iris.csv 
 
-produces an output file called ``plot.sepal_length.species.box.png`` because the input data is read (redirected) from stdin.
+produces an output file called ``plot.sepal_length.species.hist.png`` because the input data is read (redirected) from stdin.
 
 .. _prefix:
 
@@ -112,9 +112,9 @@ The output prefix can be overridden with the ``--prefix`` command line option (r
 
 .. code-block:: bash
 
-    hatch dist --cols sepal_length --groups species --prefix flower < iris.csv
+    hatch hist -x sepal_length --hue species --prefix flower < iris.csv
 
-produces an output file called ``flower.sepal_length.species.box.png``.
+produces an output file called ``flower.sepal_length.species.hist.png``.
 
 .. _format:
 
@@ -134,11 +134,6 @@ For example, the following command saves the output plot in ``svg`` format, to a
     If you do not specify an output file name, Hatch will choose one for you. This includes the addition of a file name suffix indicating the type of graphics format used (``png``, ``pdf``, ``svg``, or ``jpg``). 
 
     If you use ``-o`` (or ``--out``) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
-
-.. _outdir:
-
-Output directory
-================
 
 .. _save:
 

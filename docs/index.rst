@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Hatch: a command line plotting and analytics tool
-*************************************************
+Hatch: a command line plotting and data analytics tool
+******************************************************
 
 Hatch is a command line tool for analysing and visualising data.
 
@@ -83,7 +83,7 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    input_output 
 
 .. toctree::
-   :caption: Plot types 
+   :caption: Plotting 
    :hidden:
 
    histogram 
@@ -98,17 +98,28 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
    bar
    line
    heatmap
+   clustermap
    pca
-   noplot
+
+ 
+.. toctree::
+   :caption: Statistics 
+   :hidden:
+
+   info 
+   correlation 
+
 
 .. toctree::
    :hidden:
    :maxdepth: 1
    :caption: Data maniupulation 
 
+   save 
    filter 
    eval 
    sample
+
 
 .. toctree::
    :hidden:

@@ -87,9 +87,6 @@ The following command line options apply generally across most of the plotting s
    * - ``-h, --help``
      - generate a help message
      - :ref:`help`
-   * - ``--outdir DIR``
-     - write output files to the DIR directory (default is the current working directory)
-     - :ref:`outdir`
    * - ``--filetype {CSV,TSV}``
      - specify the type of input file, allowed values are ``CSV`` (default) and ``TSV``
      - :ref:`filetype`
