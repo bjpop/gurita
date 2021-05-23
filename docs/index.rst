@@ -40,6 +40,7 @@ Hatch plots are highly customisable, however for most cases sensible defaults ar
 The following statistical tests are provided:
 
  * :doc:`Correlation <correlation/>`
+ * :doc:`Normality test <normal_test/>`
 
 It also supports expressive :doc:`row filtering <filter/>`, :doc:`column selection <features/>`, and :doc:`dynamic computation of new columns <eval/>`.
 
@@ -114,6 +115,7 @@ Hatch is open source software and is licensed under the terms of the `MIT licens
 
    info 
    correlation 
+   normal_test
 
 
 .. toctree::

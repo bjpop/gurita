@@ -47,6 +47,7 @@ DEFAULT_CONTEXT = "notebook"
 DEFAULT_CORR_METHOD = "pearson"
 DEFAULT_PLOT_FORMAT = plt.rcParams["savefig.format"] 
 DEFAULT_DENDRO_RATIO = 0.1
+DEFAULT_ISNORM_NANPOLICY = 'propagate'
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
@@ -286,6 +287,7 @@ def parse_args():
 
     corr                Correlation between two numerical features
     info                Show summary information about features in the input data set
+    normtest            Test whether a numerical feature differs from a normal distribution (small p-value => feature not from normal distribution)
     """
 
     subparsers = parser.add_subparsers(title='Sub command', help=argparse.SUPPRESS, dest='cmd', description=subparsers_description)  
@@ -370,8 +372,11 @@ def parse_args():
 
     infoparser = subparsers.add_parser('info', parents=[io_common_arguments], add_help=False)
 
-    lineparser = facet_parser('line')
+    isnormparser = subparsers.add_parser('normtest', parents=[io_common_arguments, x_argument], add_help=False)
+    isnormparser.add_argument('--nanpolicy', required=False, default=DEFAULT_ISNORM_NANPOLICY, choices=['propagate', 'raise', 'omit'],
+        help=f'Method for nan propagation. Allowed values: %(choices)s. Default: %(default)s. Propagate retains the nan. Raise throws an error. Omit discards nan values')
 
+    lineparser = facet_parser('line')
 
     pcaparser = subparsers.add_parser('pca', parents=[io_common_arguments, plot_common_arguments, xlim_argument, ylim_argument, hue_argument, dotsize_argument, dotalpha_argument, dotlinewidth_argument], add_help=False) 
     pcaparser.add_argument(
@@ -835,6 +840,11 @@ class Clustermap(Plot):
             type_str = ['clustermap']
             return Path('.'.join(output_name + x_str + y_str + val_str + type_str + extension))
 
+def norm_test(df, options):
+    k2, p_value = scipy.stats.normaltest(df[options.xaxis]) 
+    print("statistic","p-value")
+    print(f"{k2},{p_value}")
+
 def correlation(df, options):
     if options.xaxis is None or options.yaxis is None:
         exit_with_error(f'Correlation requires both -x (--xaxis) and -y (--yaxis) to be supplied', EXIT_COMMAND_LINE_ERROR)
@@ -879,6 +889,8 @@ def main():
         display_info(df, options)
     elif options.cmd == 'corr':
         correlation(df, options)
+    elif options.cmd == 'normtest':
+        norm_test(df, options)
     elif options.cmd in PLOT_COMMANDS:
         # plotting commands go here
         kwargs = {}
