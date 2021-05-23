@@ -1,6 +1,6 @@
 '''
 Module      : Main
-Description : The main entry point for the program.
+Description : Plotting for Hatch
 Copyright   : (c) Bernie Pope, 16 Oct 2019 
 License     : MIT 
 Maintainer  : bjpope@unimelb.edu.au 
