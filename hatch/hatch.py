@@ -25,6 +25,7 @@ from sklearn.impute import SimpleImputer
 import itertools as iter
 import math
 import numpy as np
+import scipy
 
 
 EXIT_FILE_IO_ERROR = 1
@@ -168,8 +169,11 @@ def parse_args():
         '--noyticklabels', action='store_true',
         help=f'Turn of veritcal (Y) axis tick labels')
     plot_common_arguments_group.add_argument(
-        '--rotxticklabels', metavar='ANGLE', required=False, type=float, 
+        '--rotxticklabels', metavar='ANGLE', required=False, type=float,
         help=f'Rotate X axis tick labels by ANGLE')
+    plot_common_arguments_group.add_argument(
+        '--rotyticklabels', metavar='ANGLE', required=False, type=float,
+        help=f'Rotate Y axis tick labels by ANGLE')
 
     x_argument = argparse.ArgumentParser(add_help=False)
     x_argument.add_argument(
@@ -330,7 +334,7 @@ def parse_args():
         help='Distance metric to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
     clustmapparser.set_defaults(colclust=True)
 
-    corrparser = subparsers.add_parser('corr', parents=[x_argument, y_argument], add_help=False)
+    corrparser = subparsers.add_parser('corr', parents=[io_common_arguments, x_argument, y_argument], add_help=False)
     corrparser.add_argument('--method', required=False, default=DEFAULT_CORR_METHOD, choices=['pearson', 'kendall', 'spearman'],
         help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
 
@@ -529,6 +533,8 @@ class Plot:
             self.ax.set(yticklabels=[])
         if hasattr(options, 'rotxticklabels') and options.rotxticklabels is not None:
             self.ax.set_xticklabels(self.ax.get_xticklabels(), rotation=options.rotxticklabels)
+        if hasattr(options, 'rotyticklabels') and options.rotyticklabels is not None:
+            self.ax.set_yticklabels(self.ax.get_yticklabels(), rotation=options.rotyticklabels)
         if hasattr(options, 'logy') and options.logy:
             self.ax.set(yscale="log")
         if hasattr(options, 'logx') and options.logx:
@@ -829,6 +835,16 @@ class Clustermap(Plot):
             type_str = ['clustermap']
             return Path('.'.join(output_name + x_str + y_str + val_str + type_str + extension))
 
+def correlation(df, options):
+    if options.method == 'pearson':
+        coeff, p_value = scipy.stats.pearsonr(df[options.xaxis], df[options.yaxis])
+    elif options.method == 'spearman':
+        coeff, p_value = scipy.stats.spearmanr(df[options.xaxis], df[options.yaxis])
+    elif options.method == 'kendall':
+        coeff, p_value = scipy.stats.kendalltau(df[options.xaxis], df[options.yaxis])
+    print("method,coefficient,p-value")
+    print(f"{options.method},{coeff},{p_value}")
+
 def display_info(df, options):
     rows, cols = df.shape 
     pd.set_option('display.max_columns', None)
@@ -848,6 +864,8 @@ def save(options, df):
     if options.verbose:
         print(f"Data saved to {output_filename}")
 
+PLOT_COMMANDS = ['hist', 'count', 'box', 'violin', 'swarm', 'strip', 'boxen', 'bar', 'point', 'line', 'scatter', 'heatmap', 'clustermap', 'pca']
+
 def main():
     options = parse_args()
     init_logging(options.logfile)
@@ -857,7 +875,9 @@ def main():
         save(options, df)
     elif options.cmd == 'info':
         display_info(df, options)
-    else:
+    elif options.cmd == 'corr':
+        correlation(df, options)
+    elif options.cmd in PLOT_COMMANDS:
         # plotting commands go here
         kwargs = {}
         sns.set_style(options.style)
@@ -886,10 +906,8 @@ def main():
             Clustermap(options, df).plot()
         elif options.cmd == 'pca':
             PCA(options, df).plot()
-        elif options.cmd == 'noplot':
-            pass
-        else:
-            logging.error(f"Unrecognised plot type: {options.cmd}")
+    else:
+        exit_with_error(f"Unrecognised plot type: {options.cmd}", EXIT_COMMAND_LINE_ERROR)
     logging.info("Completed")
 
 
