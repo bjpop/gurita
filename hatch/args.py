@@ -19,8 +19,7 @@ def parse_args():
     Returns Options object with command line argument values as attributes.
     Will exit the program on a command line error.
     '''
-    description = 'Generate plots of tabular data'
-    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, usage='hatch [-v] [-h] command <arguments>')
     parser.add_argument(
         '-v', '--version',
         action='version',
