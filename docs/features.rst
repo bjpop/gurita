@@ -1,3 +1,2 @@
-Filtering rows
-**************
-
+Feature selection
+*****************
