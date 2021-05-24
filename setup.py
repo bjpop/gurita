@@ -23,5 +23,5 @@ setup(
     description=('Plot taular data on the comand line.'),
     long_description=(LONG_DESCRIPTION),
     install_requires=["numpy==1.18.2", "scipy==1.4.1", "pandas==0.25.2",
-        "seaborn==0.11.0", "matplotlib==3.3.2", "numexpr==2.7.1", "scikit-learn==0.23.1"]
+        "seaborn==0.11.1", "matplotlib==3.3.2", "numexpr==2.7.1", "scikit-learn==0.23.1"]
 )
