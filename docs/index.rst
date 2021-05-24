@@ -8,7 +8,7 @@ Hatch: a command line plotting and data analytics tool
 
 Hatch is a command line tool for analysing and visualising data.
 
-It takes input from tabular data in CSV or TSV format. Outputs are high-quality plots, or statistical calculations.
+It takes input from tabular data in CSV or TSV format. Outputs are high-quality plots or statistical calculations.
 
 It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.
 
@@ -46,7 +46,6 @@ It also supports expressive :doc:`row filtering <filter/>`, :doc:`column selecti
 
 Hatch is implemented in `Python <http://www.python.org/>`_ and makes extensive use of the `Pandas <https://pandas.pydata.org/>`_, `Seaborn <https://seaborn.pydata.org/>`_, and `Scikit-learn <https://scikit-learn.org/>`_ libraries for data processing and plot generation.
 
-
 Example command 
 ---------------
 
@@ -67,6 +66,16 @@ contains the following box plot:
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of sepal length by species for the iris data set
+
+The input file ``iris.csv`` 5 columns and contains 150 data rows and one heading row. The first five lines of the file are as follows:
+
+.. code-block:: bash
+
+    sepal_length,sepal_width,petal_length,petal_width,species
+    5.1,3.5,1.4,0.2,setosa
+    4.9,3.0,1.4,0.2,setosa
+    4.7,3.2,1.3,0.2,setosa
+    4.6,3.1,1.5,0.2,setosa
 
 License
 -------
