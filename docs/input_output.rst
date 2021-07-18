@@ -43,14 +43,10 @@ The input file type must be either CSV or TSV. The first row of the input file m
 
 By default Hatch will assume the data is in CSV format, but you can change the format with the ``--filetype TSV`` argument, and choose TSV instead.
 
-Output plots 
+Output files 
 ============
 
-For plotting commands, Hatch's default behaviour is to save the resulting image to a file.
-
-.. _show:
-
-However, if you supply the ``--show`` option, Hatch will instead display an interactive plot window.
+Hatch's default behaviour for plotting commands is to save the resulting image to a file.
 
 For example, the following command generates a count plot of the ``class`` feature from the input file ``titanic.csv`` and saves the resulting plot to a file called ``titanic.class.count.png``:
 
@@ -58,7 +54,14 @@ For example, the following command generates a count plot of the ``class`` featu
 
     hatch count -x class titanic.csv
 
-Whereas, if we modify the command to use ``--show``, as follows, Hatch will display the plot immediately in an interactive window, and it will not automatically save the plot to a file:
+Interactive plots
+-----------------
+
+.. _show:
+
+The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
+
+We can modify the above command with ``--show`` like so:
 
 .. code-block:: bash
 
@@ -121,9 +124,9 @@ produces an output file called ``flower.sepal_length.species.hist.png``.
 Output plot graphics file format 
 --------------------------------
 
-By default Hatch will save output plots in the ``png`` file format. However, this can be overridden with the ``--format {png,jpg,pdf,svg}`` option.
+By default Hatch will save output plots in the PNG file format. However, this can be overridden with the ``--format {png,jpg,pdf,svg}`` option.
 
-For example, the following command saves the output plot in ``svg`` format, to a file called ``titanic.class.count.svg``:
+For example, the following command saves the output plot in SVG format, to a file called ``titanic.class.count.svg``:
 
 .. code-block:: bash
 

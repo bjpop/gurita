@@ -7,18 +7,18 @@ The command line syntax for Hatch follows the pattern:
 
     hatch <subcommand> <arguments>
 
-where ``subcommand`` selects the plot type (e.g. ``hist``) and ``arguments`` controls the behaviour of the plot and specifies input data.
+where ``subcommand`` selects the plot or analysis type (e.g. ``hist``) and ``arguments`` controls the behaviour of the subcommand and specifies input data.
 
-As a simple example, if you want to plot a histogram of the ``passengers`` column from the file ``flights.csv`` you can run the following command:
+As a simple example, the following command plots a histogram of the ``passengers`` column from the file ``flights.csv``:
 
 .. code-block:: bash
 
     hatch hist -x passengers flights.csv 
 
-In the above example ``hist`` selects the histogram plot type, ``-x passengers`` specifies that the ``passengers`` feature in the data set should be plotted on the X-axis
+In the above example ``hist`` is the subcommand that selects the histogram plot type, ``-x passengers`` specifies that the ``passengers`` feature in the data set should be plotted on the X-axis
 and ``flights.csv`` specifies that the input data set should be read from the file ``flights.csv``. See :doc:`input_output` for more information about input and output files.
 
-Each type of plot accepts optional arguments that control its behaviour. Some of these are common across all plot types, and some are limited to specific plot types.
+Each subcommand accepts optional arguments that control its behaviour. Some of these are common across all subcommands, and some are subcommand specific. 
 
 .. _help:
 
@@ -34,6 +34,9 @@ The ``-h`` or ``--help`` command line arguments give an overview of Hatch's comm
 The usage message is displayed as follows:
 
 .. code-block:: text 
+
+
+    hatch -h
 
     usage: hatch [-v] [-h] command <arguments>
     
@@ -76,7 +79,7 @@ The usage message is displayed as follows:
 
 
 Help information for each sub-command can be requested with ``-h`` or ``--help``
-after the sub-command name. For example, to get specific help about histogram plots, use:
+after the sub-command name. For example, to get specific help about histograms, use:
 
 .. code-block:: bash
 
@@ -85,9 +88,7 @@ after the sub-command name. For example, to get specific help about histogram pl
 Common arguments
 ================
 
-Hatch provides a number of command line arguments that operate over most types of plots.
-
-The following command line options apply generally across most of the plotting sub-commands: 
+The following command line options apply generally across most subcommands: 
 
 .. list-table:: 
    :widths: 1 2 1
