@@ -38,6 +38,7 @@ def parse_args():
         help=f'Type of input file. Allowed values: %(choices)s. Otherwise inferred from filename extension.')
     io_common_arguments_group.add_argument(
         '--logfile',
+        required=False,
         metavar='LOG_FILE',
         type=str,
         help='record program progress in LOG_FILE')

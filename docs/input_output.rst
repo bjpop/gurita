@@ -155,7 +155,7 @@ from the input file ``iris.csv``, and saves the result to ``iris.trans.csv`` (pr
 
     hatch trans --sample 100 iris.csv
 
-The default output file name can be overridden with `-o` (`--out`) like so: 
+The default output file name can be overridden with ``-o`` (``--out``) like so: 
 
 .. code-block:: bash
 
@@ -167,6 +167,15 @@ Logging progress
 ================
 
 .. _info:
+
+The optional ``--logfile <filename>`` option causes Hatch to record a timestamped log of program progress to a file. Logging information includes the command line used to invoke the program and key program events.
+The log file can be useful for debugging Hatch's behaviour.
+
+In the following example we add logging to a plotting command, such that the output log data is written to a file called ``hatch.log``:
+
+.. code-block:: bash
+
+   hatch count -x class --logfile hatch.log titanic.csv
 
 Input data summary
 ==================

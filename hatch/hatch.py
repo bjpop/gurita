@@ -36,7 +36,7 @@ def init_logging(log_filename):
     '''
     if log_filename is not None:
         logging.basicConfig(filename=log_filename,
-                            level=logging.DEBUG,
+                            level=logging.INFO,
                             filemode='w',
                             format='%(asctime)s %(levelname)s - %(message)s',
                             datefmt='%m-%d-%Y %H:%M:%S')
