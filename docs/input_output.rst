@@ -257,7 +257,7 @@ the ``titanic.csv`` file.
 Summary information for transformed input data 
 ----------------------------------------------
 
-The ``--info`` option also works on input data that as been :doc:`transformed <transform/>` using one of Hatch's data manipulation options.
+The ``--info`` option also works on input data that as been transformed using one of Hatch's :doc:`data manipulation options <transform/>`.
 In this case the data summary is provided after that transformations have been performed.
 
 For example, you may only want to see summary information for a subset of featres. This can be achieved with the ``--features`` option
@@ -287,12 +287,28 @@ The output of the above command is as follows:
     
     rows: 891, cols: 2
 
-
+Similarly it is possible to get summary information for data after ``--filter``, ``--eval``, and ``--sample`` have been applied to the data.
+In all cases the summary shows that state of the data after the transformations have been applied.
 
 .. _verbose:
 
 Verbose execution
 =================
+
+By default Hatch does not display any messages on the standard output during normal program execution. This can be overridden with 
+the ``--verbose`` option which causes Hatch to become more chatty. In particular, when generating any output files, the verbose
+mode will cause Hatch to specify the names of any files it has created. This is useful when you want to immediately open the file
+for further inspection.
+
+.. code-block:: bash
+
+    hatch count -x class --verbose titanic.csv 
+
+The outut of the above command is:
+
+.. code-block:: text 
+
+    Plot written to titanic.class.count.png
 
 .. _navalues:
 
