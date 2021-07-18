@@ -55,4 +55,4 @@ def display_info(df, options):
     if options.features is not None:
         df = df[options.features]
     print(df.describe(include='all'))
-    print(f"rows: {rows}, cols: {cols}")
+    print(f"\nrows: {rows}, cols: {cols}")

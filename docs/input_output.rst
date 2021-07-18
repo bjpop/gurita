@@ -182,7 +182,6 @@ Input data summary
 
 Hatch will provide a summary table of features in the input data when the ``--info`` option is given. By default all features in the input data are sumarised:
 
-
 .. code-block:: bash
 
    hatch info titanic.csv
@@ -229,6 +228,7 @@ The output for the file ``titanic.csv`` is as follows:
     50%      NaN  
     75%      NaN  
     max      NaN  
+
     rows: 891, cols: 15
 
 The summary includes the following information:
@@ -253,6 +253,41 @@ For numerical features:
 
 The number of rows and columns in the input data is shown at the end. In this case there are 891 rows and 15 columns in
 the ``titanic.csv`` file.
+
+Summary information for transformed input data 
+----------------------------------------------
+
+The ``--info`` option also works on input data that as been :doc:`transformed <transform/>` using one of Hatch's data manipulation options.
+In this case the data summary is provided after that transformations have been performed.
+
+For example, you may only want to see summary information for a subset of featres. This can be achieved with the ``--features`` option
+
+The following commmand only shows summary information for the ``age`` and ``class`` features in the file ``titanic.csv``:
+
+.. code-block:: bash
+
+    hatch info --features age class -- titanic.csv
+
+The output of the above command is as follows:
+
+.. code-block:: text
+
+                   age  class
+    count   714.000000    891
+    unique         NaN      3
+    top            NaN  Third
+    freq           NaN    491
+    mean     29.699118    NaN
+    std      14.526497    NaN
+    min       0.420000    NaN
+    25%      20.125000    NaN
+    50%      28.000000    NaN
+    75%      38.000000    NaN
+    max      80.000000    NaN
+    
+    rows: 891, cols: 2
+
+
 
 .. _verbose:
 
