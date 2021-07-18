@@ -258,7 +258,7 @@ Summary information for transformed input data
 ----------------------------------------------
 
 The ``--info`` option also works on input data that as been transformed using one of Hatch's :doc:`data manipulation options <transform/>`.
-In this case the data summary is provided after that transformations have been performed.
+In this case the data summary is provided after those transformations have been performed.
 
 For example, you may only want to see summary information for a subset of featres. This can be achieved with the ``--features`` option
 
