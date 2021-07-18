@@ -54,18 +54,6 @@ For example, the following command generates a count plot of the ``class`` featu
 
     hatch count -x class titanic.csv
 
-Interactive plots
------------------
-
-.. _show:
-
-The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
-
-We can modify the above command with ``--show`` like so:
-
-.. code-block:: bash
-
-    hatch count -x class --show titanic.csv
 
 Output plot file name
 ---------------------
@@ -137,6 +125,19 @@ For example, the following command saves the output plot in SVG format, to a fil
     If you do not specify an output file name, Hatch will choose one for you. This includes the addition of a file name suffix indicating the type of graphics format used (``png``, ``pdf``, ``svg``, or ``jpg``). 
 
     If you use ``-o`` (or ``--out``) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
+
+.. _show:
+
+Interactive plots
+=================
+
+The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
+
+We can modify the above command with ``--show`` like so:
+
+.. code-block:: bash
+
+    hatch count -x class --show titanic.csv
 
 .. _save:
 
