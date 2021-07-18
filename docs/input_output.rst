@@ -149,12 +149,17 @@ Hatch supports a number of data manipulation options, such as :doc:`row filterin
 These manipulations are optionally performed prior to plotting or computing statistics.
 
 However, it is also possible to apply these transformations and save the result back to a new file. This is achieved with the :doc:`trans` command. For example, the following command randomly samples 100 rows
-from the input file ``iris.csv``, and saves the result to ``iris.sample100.csv`` (preserving the header row):
+from the input file ``iris.csv``, and saves the result to ``iris.trans.csv`` (preserving the header row):
+
+.. code-block:: bash
+
+    hatch trans --sample 100 iris.csv
+
+The default output file name can be overridden with `-o` (`--out`) like so: 
 
 .. code-block:: bash
 
     hatch trans --sample 100 -o iris.sample100.csv iris.csv
-
 
 .. _log:
 

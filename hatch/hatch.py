@@ -12,6 +12,7 @@ A plotting and data analytics program for the command line
 import sys
 import logging
 import os
+import math
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -114,7 +115,7 @@ def save(options, df):
     if options.out:
         output_filename = options.out
     else:
-        output_name = get_output_name(options)
+        output_name = utils.get_output_name(options)
         output_filename = Path('.'.join([output_name, "trans", "csv"]))
     df.to_csv(output_filename, header=True, index=False)
     if options.verbose:
