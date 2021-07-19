@@ -1,3 +1,5 @@
+.. _info: 
+
 Summarising input data
 **********************
 
@@ -7,277 +9,114 @@ Input data can be summarised with the ``info`` command
 
     hatch info <arguments>
 
-Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="box"`` option.
-
-.. list-table::
-   :widths: 1 2 1
-   :header-rows: 1
-
-   * - Argument
-     - Description
-     - Reference
-   * - ``-h``
-     - display help
-     - :ref:`box_help`
-   * - ``-x FEATURE, --xaxis FEATURE``
-     - select feature for the X axis
-     - :ref:`box_feature_selection`
-   * - ``-y FEATURE, --yaxis FEATURE``
-     - select feature for the Y axis
-     - :ref:`box_feature_selection`
-   * - ``--orient {v,h}``
-     - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
-     - :ref:`Box orientation <box_orient>`
-   * - ``--hue FEATURE``
-     - group features by hue
-     - :ref:`box_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
-     - order of hue features
-     - :ref:`Hue order <box_hueorder>`
-   * - ``--logy``
-     - log scale Y axis 
-     - :ref:`box_log`
-   * - ``--xlim BOUND BOUND``
-     - range limit X axis 
-     - :ref:`box_range`
-   * - ``--ylim BOUND BOUND``
-     - range limit Y axis 
-     - :ref:`box_range`
-   * - ``--row FEATURE, -r FEATURE``
-     - feature to use for facet rows 
-     - :ref:`box_facets`
-   * - ``--col FEATURE, -c FEATURE``
-     - feature to use for facet columns 
-     - :ref:`box_facets`
-   * - ``--colwrap INT``
-     - wrap the facet column at this width, to span multiple rows
-     - :ref:`box_facets`
-
-Similar functionality to box plots are provided by:
-
- * :doc:`Violin plots <violin/>`
- * :doc:`Swarm plots <swarm/>`
- * :doc:`Strip plots <strip/>` 
- * :doc:`Boxen plots <boxen/>` 
-
-Simple example
-==============
-
-Box plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
+This produces a summary table of features in the input data. By default all features in the 
+input data are sumarised, although this can be changed by :doc:`transforming the data first <info_trans/>`.
 
 .. code-block:: bash
 
-    hatch box -y age -- titanic.csv 
+   hatch info titanic.csv
 
-The output of the above command is written to ``titanic.age.box.png``:
+The output for the file ``titanic.csv`` is as follows:
 
-.. image:: ../images/titanic.age.box.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for the titanic data set
+.. code-block:: text
 
-The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
-
-.. code-block:: bash
-
-    hatch box -y age -x class -- titanic.csv 
-
-The output of the above command is written to ``titanic.age.class.box.png``:
-
-.. image:: ../images/titanic.age.class.box.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set
-
-.. _box_help:
-
-Getting help
-============
-
-The full set of command line arguments for box plots can be obtained with the ``-h`` or ``--help``
-arguments:
-
-.. code-block:: bash
-
-    hatch box -h
-
-.. _box_feature_selection:
-
-Selecting features to plot
-==========================
-
-.. code-block:: 
-
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
-
-Box plots can be plotted for numerical features and optionally grouped by categorical features.
-
-If no categorical feature is specified, a single column box plot will be generated showing
-the distribution of the numerical feature.
-
-.. note:: 
-
-    .. _box_orient:
-
-    By default the orientation of the box plot is vertical. In this scenario
-    the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
-    by ``-x``.
+              survived      pclass   sex         age       sibsp       parch  \
+    count   891.000000  891.000000   891  714.000000  891.000000  891.000000   
+    unique         NaN         NaN     2         NaN         NaN         NaN   
+    top            NaN         NaN  male         NaN         NaN         NaN   
+    freq           NaN         NaN   577         NaN         NaN         NaN   
+    mean      0.383838    2.308642   NaN   29.699118    0.523008    0.381594   
+    std       0.486592    0.836071   NaN   14.526497    1.102743    0.806057   
+    min       0.000000    1.000000   NaN    0.420000    0.000000    0.000000   
+    25%       0.000000    2.000000   NaN   20.125000    0.000000    0.000000   
+    50%       0.000000    3.000000   NaN   28.000000    0.000000    0.000000   
+    75%       1.000000    3.000000   NaN   38.000000    1.000000    0.000000   
+    max       1.000000    3.000000   NaN   80.000000    8.000000    6.000000   
     
-    However, the orientation of the box plot can be made horizontal using the ``--orient h`` argument.
-    In this case the sense of the X and Y axes are swapped from the default, and thus
-    the numerical feature is specified by ``-x``, and the (optional) categorical feature is specified
-    by ``-y``.
+                  fare embarked  class  who adult_male deck  embark_town alive  \
+    count   891.000000      889    891  891        891  203          889   891   
+    unique         NaN        3      3    3          2    7            3     2   
+    top            NaN        S  Third  man       True    C  Southampton    no   
+    freq           NaN      644    491  537        537   59          644   549   
+    mean     32.204208      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    std      49.693429      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    min       0.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    25%       7.910400      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    50%      14.454200      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    75%      31.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    max     512.329200      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+    
+           alone  
+    count    891  
+    unique     2  
+    top     True  
+    freq     537  
+    mean     NaN  
+    std      NaN  
+    min      NaN  
+    25%      NaN  
+    50%      NaN  
+    75%      NaN  
+    max      NaN  
 
-In the following example the distribution of ``age`` is shown for each value in the ``class`` feature,
-where the boxes are plotted horizontally:
+    rows: 891, cols: 15
 
-.. code-block:: bash
+The summary includes the following information:
 
-    hatch box -x age -y class --orient h -- titanic.csv
+* count: the number of non-empty data values observed for the feature
 
-.. image:: ../images/titanic.class.age.box.horizontal.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set, shown horizontally
+For categorical features:
 
-.. _box_order:
+* unique: the number of unique values observed for the feature 
+* top: the most frequently observed value
+* freq: the frequency (count) of the most frequently observed value
 
-Controlling the order of the plotted box columns
-================================================
+For numerical features:
 
-.. code-block:: 
+* mean: the mean (average)
+* std: the standard deviation
+* min: the minimum observed value
+* 25%: the 25th percentile
+* 50%: the 50th percentile
+* 75%: the 75th percentile
+* max: the maximum observed value
 
-    --order FEATURE [FEATURE ...]
+The number of rows and columns in the input data is shown at the end. In this case there are 891 rows and 15 columns in
+the ``titanic.csv`` file.
 
-By default the order of the categorical features displayed in the box plot is determined from their occurrence in the input data.
-This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
 
-In the following example the box columns of the ``class`` feature are displayed in the order of ``First``, ``Second``, ``Third``:
+.. _info_trans: 
 
-.. code-block:: bash
+Summary information for transformed input data 
+----------------------------------------------
 
-    hatch box -y age -x class --order First Second Third -- titanic.csv
+The ``--info`` option also works on input data that as been transformed using one of Hatch's :doc:`data manipulation options <transform/>`.
+In this case the data summary is provided after those transformations have been performed.
 
-.. image:: ../images/titanic.age.class.box.order.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order
-
-.. _box_hue:
-
-Grouping features with hue 
-==========================
-
-.. code-block:: 
-
-  --hue FEATURE
-
-The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
-
-In the following example the distribution of ``age`` is shown for each value in the ``class`` feature, and further sub-divided by the ``sex`` feature:
-
-.. code-block:: bash
-
-    hatch box -y age -x class --hue sex -- titanic.csv
-
-.. image:: ../images/titanic.age.class.sex.box.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
-
-.. _box_hueorder:
-
-By default the order of the columns within each hue group is determined from their occurrence in the input data. 
-This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
-
-In the following example the ``sex`` values are displayed in the order of ``female``, ``male``: 
+As an example, The following commmand only shows summary information for the ``age`` and ``class`` features in the file ``titanic.csv``:
 
 .. code-block:: bash
 
-    hatch box -y age -x class --hue sex --hueorder female male -- titanic.csv
+    hatch info --features age class -- titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.box.hueorder.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex 
+The output of the above command is as follows:
 
-It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
-the order of both the ``class`` and ``sex`` categorical features:
+.. code-block:: text
 
-.. code-block:: bash
+                   age  class
+    count   714.000000    891
+    unique         NaN      3
+    top            NaN  Third
+    freq           NaN    491
+    mean     29.699118    NaN
+    std      14.526497    NaN
+    min       0.420000    NaN
+    25%      20.125000    NaN
+    50%      28.000000    NaN
+    75%      38.000000    NaN
+    max      80.000000    NaN
+    
+    rows: 891, cols: 2
 
-    hatch box -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
-
-.. image:: ../images/titanic.age.class.sex.box.order.hueorder.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex 
-
-.. _box_log:
-
-Log scale of numerical distribution 
-===================================
-
-.. code-block:: 
-
-  --logx
-  --logy
-
-The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
-
-It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
-
-For example, you can display a log scale box plot for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical distribution:
-
-.. code-block:: bash
-
-    hatch box -y age -x class --logy -- titanic.csv 
-
-.. _box_range:
-
-Range limits
-============
-
-.. code-block:: 
-
-  --xlim LOW HIGH 
-  --ylim LOW HIGH
-
-The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
-
-It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--ylim`` should be used when numerical features are selected with ``-y``.
-
-For example, you can display range-limited range for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so.
-Note carefully that the numerical 
-data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument should be used to range-limit the distribution: 
-
-.. code-block:: bash
-
-    hatch box -y age -x class --ylim 10 30 -- titanic.csv
-
-.. _box_facets:
-
-Facets
-======
-
-.. code-block:: 
-
- --row FEATURE, -r FEATURE
- --col FEATURE, -c FEATURE
- --colwrap INT
-
-Box plots can be further divided into facets, generating a matrix of box plots, where a numerical value is
-further categorised by up to 2 more categorical features.
-
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+Similarly it is possible to get summary information for data after ``--filter``, ``--eval``, and ``--sample`` have been applied to the data.
+In all cases the summary shows that state of the data after the transformations have been applied.
