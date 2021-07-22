@@ -39,6 +39,10 @@ def do_plot(df, options):
         else:
             utils.exit_with_error("A count plot requires either -x (--xaxis) or -y (--yaxis) to be specified", const.EXIT_COMMAND_LINE_ERROR)
     elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'bar', 'point']:
+        if 'nojoin' in options and options.nojoin is not None:
+            kwargs = {'join': False} 
+        else:
+            kwargs = {'join': True} 
         Catplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'line':
         Relplot(options.cmd, options, df, kwargs).plot()

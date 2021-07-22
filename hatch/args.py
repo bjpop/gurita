@@ -328,6 +328,9 @@ def parse_args():
         help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
 
     pointparser = facet_parser('point')
+    pointparser.add_argument(
+        '--nojoin', action='store_true', required=False, 
+        help=f'Do not connect point estimates by a line')
 
     scatterparser = facet_parser('scatter', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument])
 
