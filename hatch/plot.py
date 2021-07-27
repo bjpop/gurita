@@ -133,6 +133,10 @@ class Facetplot(object):
             graph.set(yscale="log")
         if hasattr(options, 'title') and options.title is not None:
             plt.title(options.title)
+        if hasattr(options, 'xlabel') and options.xlabel is not None:
+            graph.set(xlabel=options.xlabel)
+        if hasattr(options, 'ylabel') and options.ylabel is not None:
+            graph.set(ylabel=options.ylabel)
         if hasattr(options, 'xlim') and options.xlim is not None:
             xlow, xhigh = options.xlim
             plt.xlim(xlow, xhigh)
