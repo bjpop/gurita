@@ -1,3 +1,5 @@
+![hatch logo](docs/hatch_logo_small.png)
+
 # Hatch: a command line plotting and analytics tool
 
 Hatch is a command line tool for analysing and visualising data.
