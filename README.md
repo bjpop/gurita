@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/hatch_logo_small.png" width="160" alt="logo">
+  <img src="docs/hatch_logo_small.png" width="100" alt="logo">
 </p>
 
 # Hatch: a command line plotting and analytics tool
