@@ -1,4 +1,6 @@
-![hatch logo](docs/hatch_logo_small.png)
+<p align="center">
+  <img src="docs/hatch_logo_small.png" width="160" alt="logo">
+</p>
 
 # Hatch: a command line plotting and analytics tool
 
