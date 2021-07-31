@@ -8,6 +8,8 @@ Input files
 
 Hatch can read data from a named input file or the standard input device (stdin). 
 
+When reading input from a file, the name of the file must the last argument on the command line.
+
 The example below illustrates reading input from a named file. This command produces a :doc:`count plot <count/>` for the ``class`` feature in the ``titantic.csv`` dataset:
 
 .. code-block:: bash
