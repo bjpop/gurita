@@ -14,12 +14,8 @@ The example below illustrates reading input from a named file. This command prod
 
     hatch count -x class titanic.csv
 
-In some instances it is useful to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch provides a double-dash ``--``
-marker to be used for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
-
-.. code-block:: bash
-
-    hatch count -x class -- titanic.csv
+Input from standard input device (stdin)
+========================================
 
 If no input file name is provided, Hatch will read from stdin instead. For example you can
 redirect input from a file on the Unix command line:
@@ -34,14 +30,27 @@ Reading from stdin is particularly useful when you want to use Hatch as part of 
 
     example_command | hatch count -x class
 
+End of options marker (double dash)
+===================================
+
+In some instances it is useful to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch provides a double-dash ``--``
+marker to be used for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
+
+.. code-block:: bash
+
+    hatch count -x class -- titanic.csv
+
 .. _filetype:
 
 Input file type
 ---------------
 
-The input file type must be either CSV or TSV. The first row of the input file must be column headings.
+The input file format must be either `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_. The first row of the input file must be column headings.
 
-By default Hatch will assume the data is in CSV format, but you can change the format with the ``--filetype TSV`` argument, and choose TSV instead.
+When reading input from a named file (and not from stdin) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
+``--filetype <type>`` option. 
+
+If Hatch cannot determine the input file type from the filename extension, or the input is read from stdin, then you must specify the input file format using the ``--filetype <type>`` option, where ``<type>`` must be one of ``CSV`` or ``TSV``.
 
 Output files 
 ============
