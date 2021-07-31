@@ -15,7 +15,7 @@ The example below illustrates reading input from a named file. This command prod
     hatch count -x class titanic.csv
 
 Input from standard input device (stdin)
-========================================
+----------------------------------------
 
 If no input file name is provided, Hatch will read from stdin instead. For example you can
 redirect input from a file on the Unix command line:
@@ -31,7 +31,7 @@ Reading from stdin is particularly useful when you want to use Hatch as part of 
     example_command | hatch count -x class
 
 End of options marker (double dash)
-===================================
+-----------------------------------
 
 In some instances it is useful to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch provides a double-dash ``--``
 marker to be used for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
