@@ -141,6 +141,8 @@ def main():
             plot.do_plot(df, options)
         except TypeError as e:
             utils.exit_with_error(str(e), const.EXIT_COMMAND_LINE_ERROR)
+        except ValueError as e:
+            utils.exit_with_error("Cannot generate plot, perhaps data is empty?", const.EXIT_COMMAND_LINE_ERROR)
     else:
         utils.exit_with_error(f"Unrecognised plot type: {options.cmd}", const.EXIT_COMMAND_LINE_ERROR)
     logging.info("Completed")
