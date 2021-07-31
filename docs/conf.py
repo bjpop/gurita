@@ -54,3 +54,4 @@ html_show_copyright = False
 html_static_path = ['_static']
 html_css_files = ["css/custom.css"]
 html_logo = "_static/hatch_logo_small.png" 
+logo_only = True
