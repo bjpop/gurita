@@ -21,6 +21,17 @@ Python notation.
 
 You can refer to column headings (feature names) in the input data by name, join multiple sub-expressions together using logical operators ``and`` ``or`` and ``not``, and group sub-expressions with parentheses. 
 
+Quoting feature names with spaces
+---------------------------------
+
+Features (column names) that contain spaces must be surrounded in back-tick quotes:
+
+.. code-block:: bash
+
+    hatch hist --filter '`top score` > 1000' -x time game.csv 
+
+In the above example, the feature (column name) ``top score`` must be surrounded in back-tick quotes because it contains a whitespace character.
+
 Filtering on numerical features 
 -------------------------------
 
@@ -64,14 +75,36 @@ Boolean features can be negated with ``not``:
 
 .. code-block:: bash
  
-    hatch hist --filter 'not adult_male' -x age --show titanic.csv
+    hatch hist --filter 'not adult_male' -x age titanic.csv
 
 In the example above, a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``adult_male`` is ``False``.
 
+Comparing features
+------------------
+
+Filter expressions can compare values from different columns, assuming they have a compatible type (for example, numerical features may only be compared to other numerical features, and so forth).
+
+.. code-block:: bash
+
+   hatch hist --filter 'sepal_length > petal_length' -x sepal_width iris.csv
+
+In the example above, a histogram will be generated for the ``sepal_width`` column in ``iris.csv``, but only for rows where the numerical feature ``sepal_length`` is greater than the numerical feature ``petal_length``.
 
 Compound filter expressions
 ---------------------------
 
+Multiple filtering crtieria can be combined into one filter expression by combining sub-expressions with boolean operators ``and`` and ``or``.
 
-Comparing features
-------------------
+.. code-block:: bash
+
+    hatch hist --filter 'smoker == "No" and total_bill > 10' -x tip tips.csv
+
+In the example above, a histogram will be generated for the ``tip`` column in ``tips.csv``, but only for rows where the categorical feature ``smoker`` is ``"No"`` and the numerical feature ``total_bill`` is greater than 10.
+
+If needed, parentheses can be used to group sub-expressions:
+
+.. code-block:: bash
+
+   hatch hist --filter 'smoker == "No" and (total_bill > 10 or day == "Sun")' -x tip tips.csv
+
+In the above example, the sub-expression inside the parentheses is evaluated first, before the outer sub-expression.
