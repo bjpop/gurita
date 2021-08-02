@@ -9,7 +9,8 @@ Example:
 
    hatch hist --filter 'embark_town == "Cherbourg"' -x age titanic.csv
 
-In the example above, a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``embark_town`` is equal to the string ``"Cherbourg"``. 
+In the example above, the string ``'embark_town == "Cherbourg"'`` specifies the filtering expression. Note that the whole expression is inside quotes; this is necessary to ensure that the whole expression is passed as a single entity
+to Hatch. In this case a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``embark_town`` is equal to the string ``"Cherbourg"``. 
 
 Columns can be referred to by their name, such as ``embark_town``. Literal categorical values are written as strings inside quotation marks, such as ``"Cherbourg"``.
 
