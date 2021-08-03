@@ -124,28 +124,28 @@ def save(options, df):
 PLOT_COMMANDS = ['hist', 'count', 'box', 'violin', 'swarm', 'strip', 'boxen', 'bar', 'point', 'line', 'scatter', 'heatmap', 'clustermap', 'pca']
 
 def main():
-    options = args.parse_args()
-    init_logging(options.logfile)
-    # read and transform the input data (apply filters, sampling etc)
-    df = read_data(options)
-    if options.cmd == 'trans':
-        save(options, df)
-    elif options.cmd == 'info':
-        stats.display_info(df, options)
-    elif options.cmd == 'corr':
-        stats.correlation(df, options)
-    elif options.cmd == 'normtest':
-        stats.norm_test(df, options)
-    elif options.cmd in const.PLOT_COMMANDS:
-        try:
+    try:
+        options = args.parse_args()
+        init_logging(options.logfile)
+        # read and transform the input data (apply filters, sampling etc)
+        df = read_data(options)
+        if options.cmd == 'trans':
+            save(options, df)
+        elif options.cmd == 'info':
+            stats.display_info(df, options)
+        elif options.cmd == 'corr':
+            stats.correlation(df, options)
+        elif options.cmd == 'normtest':
+            stats.norm_test(df, options)
+        elif options.cmd in const.PLOT_COMMANDS:
             plot.do_plot(df, options)
-        except TypeError as e:
-            utils.exit_with_error(str(e), const.EXIT_COMMAND_LINE_ERROR)
-        except ValueError as e:
-            utils.exit_with_error("Cannot generate plot, perhaps data is empty?", const.EXIT_COMMAND_LINE_ERROR)
-    else:
-        utils.exit_with_error(f"Unrecognised plot type: {options.cmd}", const.EXIT_COMMAND_LINE_ERROR)
-    logging.info("Completed")
+        else:
+            utils.exit_with_error(f"Unrecognised plot type: {options.cmd}", const.EXIT_COMMAND_LINE_ERROR)
+        logging.info("Completed")
+    except TypeError as e:
+        utils.exit_with_error(str(e), const.EXIT_COMMAND_LINE_ERROR)
+    except ValueError as e:
+        utils.exit_with_error("Cannot generate plot, perhaps data is empty?", const.EXIT_COMMAND_LINE_ERROR)
 
 
 # If this script is run from the command line then call the main function.
