@@ -241,6 +241,14 @@ class Relplot(Facetplot):
                 x=self.x, y=self.y, col=self.col, row=self.row,
                 height=options.height, aspect=aspect, hue=self.hue,
                 hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+        if options.vlines is not None:
+            for ax in graph.axes.ravel():
+                for pos in options.vlines:
+                    ax.axvline(pos)
+        if options.hlines is not None:
+            for ax in graph.axes.ravel():
+                for pos in options.hlines:
+                    ax.axhline(pos)
         return graph
 
 

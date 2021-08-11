@@ -333,6 +333,9 @@ def parse_args():
         help=f'Do not connect point estimates by a line')
 
     scatterparser = facet_parser('scatter', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument])
+    scatterparser.add_argument( '--vlines',  metavar='AXIS_LOCATION', required=False, type=float, nargs="+", help=f'Draw vertical lines on the plot at specified axes locations')
+    scatterparser.add_argument( '--hlines',  metavar='AXIS_LOCATION', required=False, type=float, nargs="+", help=f'Draw horizontal lines on the plot at specified axes locations')
+
 
     stripparser = facet_parser('strip')
 
