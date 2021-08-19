@@ -92,7 +92,10 @@ def read_data(options):
     # optionally randomly sample the rows of data
     if options.sample is not None:
         if options.sample >= 1:
-            data = data.sample(n = math.trunc(options.sample))
+            # clamp the sample size to be within the number of rows in the table
+            # the sample method returns an empty result otherwise
+            sample_size = min(math.trunc(options.sample), len(data.index))
+            data = data.sample(n = sample_size)
         elif 0 < options.sample < 1:
             data = data.sample(frac = options.sample)
         else:
