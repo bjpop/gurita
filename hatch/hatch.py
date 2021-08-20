@@ -140,6 +140,8 @@ def main():
             stats.correlation(df, options)
         elif options.cmd == 'normtest':
             stats.norm_test(df, options)
+        elif options.cmd == 'stdev':
+            stats.stdev(df, options)
         elif options.cmd in const.PLOT_COMMANDS:
             plot.do_plot(df, options)
         else:

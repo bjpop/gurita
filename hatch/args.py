@@ -232,6 +232,7 @@ def parse_args():
     corr                Correlation between numerical features
     info                Show summary information about features in the input data set
     normtest            Test whether numerical features differ from a normal distribution 
+    stdev               Compute the standard deviation of numerical features
     """
 
     subparsers = parser.add_subparsers(title='Sub command', help=argparse.SUPPRESS, dest='cmd', description=subparsers_description)  
@@ -317,8 +318,12 @@ def parse_args():
     infoparser = subparsers.add_parser('info', parents=[io_common_arguments], add_help=False)
 
     isnormparser = subparsers.add_parser('normtest', parents=[io_common_arguments], add_help=False)
+
+    # XXX maybe this nanpolicy needs to be more general?
     isnormparser.add_argument('--nanpolicy', required=False, default=const.DEFAULT_ISNORM_NANPOLICY, choices=const.ALLOWED_ISNORM_NAN_POLICIES,
         help=f'Method for nan propagation. Allowed values: %(choices)s. Default: %(default)s. Propagate retains the nan. Raise throws an error. Omit discards nan values')
+
+    stdevparser = subparsers.add_parser('stdev', parents=[io_common_arguments], add_help=False)
 
     lineparser = facet_parser('line')
 

@@ -15,7 +15,6 @@ import math
 import scipy
 import hatch.utils as utils
 
-
 def norm_test(df, options):
     if options.features is not None:
         features = options.features
@@ -27,6 +26,21 @@ def norm_test(df, options):
     for f in features:
         k2, p_value = scipy.stats.normaltest(df[f]) 
         print(f"{f},{k2},{p_value}")
+
+# XXX we should bundle various summary stats together, so you can ask for a bunch of them at once,
+# rather than one at a time
+
+def stdev(df, options):
+    if options.features is not None:
+        features = options.features
+        utils.check_df_has_features(df, features)
+    else:
+        numeric_df = df.select_dtypes(include=np.number)
+        features = list(numeric_df.columns)
+    print("feature,stdev")
+    for f in features:
+        val = df[f].std()
+        print(f"{f},{val}")
 
 
 def correlation(df, options):
@@ -56,3 +70,5 @@ def display_info(df, options):
         df = df[options.features]
     print(df.describe(include='all'))
     print(f"\nrows: {rows}, cols: {cols}")
+
+
