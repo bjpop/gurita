@@ -61,7 +61,7 @@ If Hatch cannot determine the input file type from the filename extension, or th
 Output files 
 ============
 
-Hatch's default behaviour for plotting commands is to save the resulting image to a file.
+Hatch's default behaviour for plotting commands is to save the resulting image to a file (but it can also do interactive plots, see :ref:`the show command <show>`).
 
 For example, the following command generates a count plot of the ``class`` feature from the input file ``titanic.csv`` and saves the resulting plot to a file called ``titanic.class.count.png``:
 
