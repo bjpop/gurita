@@ -9,19 +9,6 @@ Heatmap showing the relationship between two categorical features and a numerica
 
 Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/generated/seaborn.heatmap.html/>`_ library function.
 
-
-  -h, --help            show this help message and exit
-  -y FEATURE, --yaxis FEATURE
-                        Feature to plot along the Y axis
-  -x FEATURE, --xaxis FEATURE
-                        Feature to plot along the X axis
-  -v FEATURE, --val FEATURE
-                        Interpret this feature (column of data) as the values of the heatmap
-  --cmap COLOR_MAP_NAME
-                        Use this color map, will use Seaborn default if not specified
-  --log                 Use a log scale on the numerical data
-
-
 .. list-table::
    :widths: 1 2 1
    :header-rows: 1
