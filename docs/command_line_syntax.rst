@@ -85,6 +85,13 @@ after the sub-command name. For example, to get specific help about histograms, 
 
     hatch hist -h
 
+.. _version:
+
+Version number
+==============
+
+The ``--version`` (``-v``) command line argument causes Hatch to print its version number.
+
 Common arguments
 ================
 
