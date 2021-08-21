@@ -171,7 +171,7 @@ Interactive plots
 
 The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
 
-We can modify the above command with ``--show`` like so:
+This is illustrated below:
 
 .. code-block:: bash
 
