@@ -132,11 +132,11 @@ def main():
         init_logging(options.logfile)
         # read and transform the input data (apply filters, sampling etc)
         df = read_data(options)
-        if options.cmd == 'trans':
+        if options.cmd == 'transform':
             save(options, df)
         elif options.cmd == 'info':
             stats.display_info(df, options)
-        elif options.cmd == 'corr':
+        elif options.cmd == 'correlation':
             stats.correlation(df, options)
         elif options.cmd == 'normtest':
             stats.norm_test(df, options)

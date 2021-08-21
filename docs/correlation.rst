@@ -1,7 +1,7 @@
 Correlation
 ***********
 
-Compute the correlation between two numerical fields using the ``corr`` command.
+Compute the correlation between two numerical fields using the ``correlation`` command.
 
 .. code-block:: bash
 

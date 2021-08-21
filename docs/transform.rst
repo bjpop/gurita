@@ -7,7 +7,7 @@ Hatch allows you to transform your input data and then save the result to a file
 
 .. code-block:: bash
 
-    hatch trans <arguments>
+    hatch transform <arguments>
 
 Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="box"`` option.
 

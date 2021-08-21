@@ -67,12 +67,12 @@ The usage message is displayed as follows:
           Data manipulation:
           ------------------
     
-          trans               Tranform the input data and save the result to a new file
+          transform           Tranform the input data and save the result to a new file
     
           Statistics:
           -----------
     
-          corr                Correlation between numerical features
+          correlation         Correlation between numerical features
           info                Show summary information about features in the input data set
           normtest            Test whether numerical features differ from a normal distribution
 

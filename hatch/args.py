@@ -224,12 +224,12 @@ def parse_args():
     Data manipulation:
     ------------------
 
-    trans               Tranform the input data and save the result to a new file
+    transform           Tranform the input data and save the result to a new file
 
     Statistics:
     -----------
 
-    corr                Correlation between numerical features
+    correlation         Correlation between numerical features
     info                Show summary information about features in the input data set
     normtest            Test whether numerical features differ from a normal distribution 
     stdev               Compute the standard deviation of numerical features
@@ -281,7 +281,7 @@ def parse_args():
         help='Distance metric to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
     clustmapparser.set_defaults(colclust=True)
 
-    corrparser = subparsers.add_parser('corr', parents=[io_common_arguments], add_help=False)
+    corrparser = subparsers.add_parser('correlation', parents=[io_common_arguments], add_help=False)
     corrparser.add_argument('--method', required=False, default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
         help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
 
@@ -346,7 +346,7 @@ def parse_args():
 
     swarmparser = facet_parser('swarm')
 
-    trans_parser = subparsers.add_parser('trans', parents=[io_common_arguments], add_help=False)
+    trans_parser = subparsers.add_parser('transform', parents=[io_common_arguments], add_help=False)
 
     violinparser = facet_parser('violin')
 
