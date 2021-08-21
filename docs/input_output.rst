@@ -1,6 +1,8 @@
 Input and output
 *****************
 
+Hatch works on tabular input data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
+
 .. _input_files:
 
 Input files
@@ -52,7 +54,9 @@ The input file format must be either `CSV (comma separated values) <https://en.w
 When reading input from a named file (and not from stdin) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
 ``--filetype <type>`` option. 
 
-If Hatch cannot determine the input file type from the filename extension, or the input is read from stdin, then you must specify the input file format using the ``--filetype <type>`` option, where ``<type>`` must be one of ``CSV`` or ``TSV``.
+When reading input from stdin, Hatch will assume that the data is in CSV format unless you tell it otherwise.
+
+If Hatch cannot determine the input file type from the filename extension, or the input is read from stdin and is not in CSV format, then you must specify the input file format using the ``--filetype <type>`` option, where ``<type>`` must be one of ``CSV`` or ``TSV``.
 
 Output files 
 ============
