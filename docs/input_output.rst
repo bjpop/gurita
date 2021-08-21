@@ -62,8 +62,8 @@ Reading from stdin is particularly useful when you want to use Hatch as part of 
 End of options marker (double dash)
 -----------------------------------
 
-In some instances it is useful (or necessary) to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch provides a double-dash ``--``
-marker to be used for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
+In some instances it is useful (or necessary) to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch uses a double-dash ``--``
+marker for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
 
 .. code-block:: bash
 
