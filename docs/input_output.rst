@@ -1,7 +1,30 @@
 Input and output
 *****************
 
-Hatch works on tabular input data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
+Hatch works on tabular input data in a single `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
+
+Rows in the input file are considered to be "observations" (or cases) and columns are considered to be "features". 
+That is, each row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
+The names of the features are given in the first row of the input file (the heading row).
+
+Below is a small example of the kind of input data accepted by Hatch. In this case it is in CSV format with five columns and four rows.
+Note that the first row is a header, containing the names of each feature (column) in the dataset. The remaining three rows are observations,
+where each observation has a value associated with each feature. 
+
+
+.. code-block:: bash
+
+    sepal_length,sepal_width,petal_length,petal_width,species
+    5.1,3.5,1.4,0.2,setosa
+    4.9,3.0,1.4,0.2,setosa
+    4.7,3.2,1.3,0.2,setosa
+
+.. note::
+
+   Hatch requires that the input data is **rectangular** in shape. In other words, every row must contain the same number of columns.
+   Missing values are allowed, and are indicated by leaving a particular column blank (empty) on a given row; nonetheless the column
+   must still be present.
+
 
 .. _input_files:
 
