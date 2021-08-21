@@ -1,9 +1,11 @@
 Input and output
 *****************
 
-Hatch works on tabular input data in a single `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
+Hatch works on tabular input data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
 
-Rows in the input file are considered to be "observations" (or cases) and columns are considered to be "features". 
+Input data is read from a single named input file or from the standard input device (stdin).
+
+Rows in the input file are considered to be "observations" (or cases) and columns are considered to be "features" (or variables). 
 That is, each row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
 The names of the features are given in the first row of the input file (the heading row).
 
