@@ -146,6 +146,12 @@ class Facetplot(object):
         if hasattr(options, 'rotxticklabels') and options.rotxticklabels is not None:
             for ax in graph.axes.ravel():
                 ax.set_xticklabels(ax.get_xticklabels(), rotation=options.rotxticklabels)
+        if hasattr(options, 'noxticklabels') and options.noxticklabels:
+            graph.set(xticks=[])
+            graph.set(xticklabels=[])
+        if hasattr(options, 'noyticklabels') and options.noyticklabels:
+            graph.set(yticks=[])
+            graph.set(yticklabels=[])
         if options.show:
             plt.show()
         else:
