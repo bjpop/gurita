@@ -3,7 +3,7 @@ License
 
 Hatch is open source software licensed under the terms of the `MIT license <https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE>`_. 
 
-Copyright 19 Sep 2019 Bernie Pope
+Copyright Bernie Pope: 19 Sep 2019 - present day
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
