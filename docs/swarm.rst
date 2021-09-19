@@ -7,7 +7,7 @@ Swarm plots show the distribution of values in a numerical feature optionally gr
 
     hatch swarm <arguments>
 
-Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="swarm"`` option.
+Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="swarm"`` option.
 
 .. list-table::
    :widths: 1 2 1
@@ -60,6 +60,11 @@ Similar functionality to swarm plots are provided by:
  * :doc:`Violin plots <violin/>`
  * :doc:`Strip plots <strip/>` 
  * :doc:`Boxen plots <boxen/>` 
+
+.. warning::
+   Swarm plots can be slow to render on input data sets with large numbers of points. 
+   In cases where the swarm plot is too slow to render, consider using a :doc:`strip plot<strip/>` 
+   instead.
 
 Simple example
 ==============
@@ -147,26 +152,6 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Swarm plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
-You may specifiy multiple numerical features and multiple categorical features in the same command.
-Hatch will generate a separate plot for each combination of numerical and categorical feature
-specified. For example, the following command specifies two numerical values and three categorical
-values from the ``tips.csv`` data set to generate a total of six plots (2 times 3):
-
-.. code-block:: bash
-
-    hatch swarm -x sex smoker day -y tip total_bill -- tips.csv
-
-The following output files are created by the above command.
-
-.. code-block:: bash
-
-    tips.tip.sex.swarm.png
-    tips.total_bill.sex.swarm.png
-    tips.tip.smoker.swarm.png
-    tips.total_bill.smoker.swarm.png
-    tips.tip.day.swarm.png
-    tips.total_bill.day.swarm.png
-
 .. _swarm_order:
 
 Controlling the order of the plotted swarm columns
@@ -213,8 +198,6 @@ In the following example the distribution of ``age`` is shown for each value in 
        :height: 600px
        :align: center
        :alt: Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
-
-You can specify more than one feature to group by; hatch will generate a separate swarm plot for every ``hue`` feature specified.
 
 .. _swarm_hueorder:
 

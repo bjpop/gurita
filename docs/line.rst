@@ -9,7 +9,7 @@ If multiple Y values are provided for each X value then the plot will show an es
 
     hatch line <arguments>
 
-line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="line"`` option.
+Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="line"`` option.
 
 .. list-table::
    :widths: 1 2 1
@@ -93,9 +93,6 @@ Selecting features to plot
 
 Line plots show an indepdent numerical feature on the X axis and a depdendent numerical feature on the Y axis.
 
-You may specifiy multiple numerical features for both X and Y. 
-Hatch will generate a separate plot for each combination of those features. 
-
 .. _line_hue:
 
 Grouping features with hue 
@@ -118,9 +115,6 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
        :height: 600px
        :align: center
        :alt: Line plot where signal is plotted against timepoint for the two different classes of the event feature  in the fmri.csv dataset.
-
-
-You can specify more than one feature to group by; hatch will generate a separate line plot for every ``hue`` feature specified.
 
 .. _line_hueorder:
 

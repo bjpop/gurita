@@ -7,7 +7,7 @@ Violin plots show the distribution of values in a numerical feature optionally g
 
     hatch violin <arguments>
 
-Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="violin"`` option.
+Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="violin"`` option.
 
 .. list-table::
    :widths: 1 2 1
@@ -191,8 +191,6 @@ In the following example the distribution of ``age`` is shown for each value in 
        :height: 600px
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
-
-You can specify more than one feature to group by; hatch will generate a separate violin plot for every ``hue`` feature specified.
 
 .. _violin_hueorder:
 

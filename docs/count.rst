@@ -7,7 +7,7 @@ Count plots show the frequency of values in categorical features using bars.
 
     hatch count <arguments> 
 
-Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="count"`` option.
+Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="count"`` option.
 
 .. list-table::
    :widths: 1 2 1

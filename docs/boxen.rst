@@ -7,7 +7,7 @@ Boxen plots show the distribution of values in a numerical feature optionally gr
 
     hatch boxen <arguments>
 
-Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="boxen"`` option.
+Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="boxen"`` option.
 
 .. list-table::
    :widths: 1 2 1
@@ -145,26 +145,6 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Boxen plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
-You may specifiy multiple numerical features and multiple categorical features in the same command.
-Hatch will generate a separate plot for each combination of numerical and categorical feature
-specified. For example, the following command specifies two numerical values and three categorical
-values from the ``tips.csv`` data set to generate a total of six plots (2 times 3):
-
-.. code-block:: bash
-
-    hatch boxen -x sex smoker day -y tip total_bill -- tips.csv
-
-The following output files are created by the above command.
-
-.. code-block:: bash
-
-    tips.tip.sex.boxen.png
-    tips.total_bill.sex.boxen.png
-    tips.tip.smoker.boxen.png
-    tips.total_bill.smoker.boxen.png
-    tips.tip.day.boxen.png
-    tips.total_bill.day.boxen.png
-
 .. _boxen_order:
 
 Controlling the order of the plotted boxen columns
@@ -211,8 +191,6 @@ In the following example the distribution of ``age`` is shown for each value in 
        :height: 600px
        :align: center
        :alt: Boxen plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
-
-You can specify more than one feature to group by; hatch will generate a separate boxen plot for every ``hue`` feature specified.
 
 .. _boxen_hueorder:
 

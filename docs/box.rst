@@ -8,7 +8,7 @@ The distribution of a numerical feature is displayed using the inter-quartile ra
 
     hatch box <arguments>
 
-Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="box"`` option.
+Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="box"`` option.
 
 .. list-table::
    :widths: 1 2 1

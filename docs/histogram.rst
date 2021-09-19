@@ -7,7 +7,7 @@ Plot distributions of selected numerical or categorical features as histograms.
 
     hatch hist <arguments> 
 
-Histograms are based on Seaborn's `histplot <https://seaborn.pydata.org/generated/seaborn.histplot.html/>`_ library function.
+Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated/seaborn.displot.html>`_ library function, using the ``kind="hist"`` option.
 
 .. list-table::
    :widths: 1 2 1

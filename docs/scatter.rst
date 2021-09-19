@@ -10,7 +10,7 @@ Scatter plots show the relationship between two features as a scatter of data po
 When one of the two features being compared is a categorical value the scatter plot is similar to
 :doc:`strip plot <strip/>`.
 
-Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html/>`_ library function, using the ``kind="scatter"`` option.
+Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html>`_ library function, using the ``kind="scatter"`` option.
 
 .. list-table::
    :widths: 1 2 1

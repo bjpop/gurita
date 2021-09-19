@@ -100,9 +100,6 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
        :align: center
        :alt: Heatmap plot where signal is plotted against timepoint for the two different classes of the event feature  in the fmri.csv dataset.
 
-
-You can specify more than one feature to group by; hatch will generate a separate heatmap plot for every ``hue`` feature specified.
-
 .. _heatmap_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 

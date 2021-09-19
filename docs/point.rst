@@ -7,7 +7,7 @@ Point plots show the point estimates of the central tendency (mean) of numerical
 
     hatch point <arguments>
 
-Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html/>`_ library function, using the ``kind="point"`` option.
+Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="point"`` option.
 
 .. list-table::
    :widths: 1 2 1
@@ -127,26 +127,6 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Point plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
-You may specifiy multiple numerical features and multiple categorical features in the same command.
-Hatch will generate a separate plot for each combination of numerical and categorical feature
-specified. For example, the following command specifies two numerical values and three categorical
-values from the ``tips.csv`` data set to generate a total of six plots (2 times 3):
-
-.. code-block:: bash
-
-    hatch point -x sex smoker day -y tip total_bill -- tips.csv
-
-The following output files are created by the above command.
-
-.. code-block:: bash
-
-    tips.tip.sex.point.png
-    tips.total_bill.sex.point.png
-    tips.tip.smoker.point.png
-    tips.total_bill.smoker.point.png
-    tips.tip.day.point.png
-    tips.total_bill.day.point.png
-
 .. _point_order:
 
 Controlling the order of the plotted point columns
@@ -193,8 +173,6 @@ In the following example the distribution of ``age`` is shown for each value in 
        :height: 600px
        :align: center
        :alt: Point plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
-
-You can specify more than one feature to group by; hatch will generate a separate point plot for every ``hue`` feature specified.
 
 .. _point_hueorder:
 
