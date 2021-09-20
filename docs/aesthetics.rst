@@ -73,14 +73,14 @@ No y axis tick labels
 
     --noyticklabels
 
-.. _style:
+.. _plotstyle:
 
 Style
 =====
 
 .. code-block:: text 
 
-    --style {darkgrid,whitegrid,dark,white,ticks}
+    --plotstyle {darkgrid,whitegrid,dark,white,ticks}
 
 .. _context:
 

@@ -94,6 +94,7 @@ For example, the following command generates a count plot of the ``class`` featu
 
     hatch count -x class titanic.csv
 
+.. _out:
 
 Output plot file name
 ---------------------

@@ -29,6 +29,9 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--orient {v,h}``
      - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
      - :ref:`Box orientation <box_orient>`
+   * - ``--order FEATURE [FEATURE ..]``
+     - control the order of the plotted columns
+     - :ref:`Box order <box_order>`
    * - ``--hue FEATURE``
      - group features by hue
      - :ref:`box_hue`
@@ -188,7 +191,7 @@ In the following example the distribution of ``age`` is shown for each value in 
     hatch box -y age -x class --hue sex -- titanic.csv
 
 .. image:: ../images/titanic.age.class.sex.box.png
-       :width: 600px
+       :width: 700px
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
@@ -205,7 +208,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
     hatch box -y age -x class --hue sex --hueorder female male -- titanic.csv
 
 .. image:: ../images/titanic.age.class.sex.box.hueorder.png
-       :width: 600px
+       :width: 700px
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex 
@@ -218,7 +221,7 @@ the order of both the ``class`` and ``sex`` categorical features:
     hatch box -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
 
 .. image:: ../images/titanic.age.class.sex.box.order.hueorder.png
-       :width: 600px
+       :width: 700px
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex 

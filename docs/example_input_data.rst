@@ -7,4 +7,4 @@ In the ``data`` directory in this repository we provide some example input data 
  * `flights.csv <https://github.com/mwaskom/seaborn-data/blob/master/flights.csv/>`_
  * `fmri.csv <https://github.com/mwaskom/seaborn-data/blob/master/fmri.csv/>`_
  * `titanic.csv <https://github.com/mwaskom/seaborn-data/blob/master/titanic.csv>`_
- * `tips.csv <https://github.com/mwaskom/seaborn-data/blob/master/titanic.csv>`_
+ * `tips.csv <https://github.com/mwaskom/seaborn-data/blob/master/tips.csv>`_

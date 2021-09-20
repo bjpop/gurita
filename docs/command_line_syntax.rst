@@ -167,9 +167,9 @@ The following command line options apply generally across most subcommands:
    * - ``--nolegend``
      - turn off the plot legend (only relevant for plots that generate a legend by default)
      - :ref:`nolegend` 
-   * - ``--style {darkgrid,whitegrid,dark,white,ticks}``
+   * - ``--plotstyle {darkgrid,whitegrid,dark,white,ticks}``
      - Aesthetic style of plot. Allowed values: darkgrid, whitegrid, dark, white, ticks. Default: darkgrid.
-     - :ref:`style` 
+     - :ref:`plotstyle` 
    * - ``--context {paper,notebook,talk,poster}``
      - Aesthetic context of plot. Allowed values: paper, notebook, talk, poster.  Default: notebook.
      - :ref:`context` 

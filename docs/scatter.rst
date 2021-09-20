@@ -34,6 +34,9 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--hueorder FEATURE [FEATURE ...]``
      - order of hue features
      - :ref:`Hue order <scatter_hueorder>`
+   * - ``--dotstyle FEATURE``
+     - name of categorical feature to use for plotted dot marker style
+     - :ref:`Dot style <scatter_dotstyle>`
    * - ``--dotsize FEATURE``
      - scale the size of plotted dots based on a feature 
      - :ref:`scatter_dotsize`
@@ -143,7 +146,7 @@ coloured by their corresponding categorical ``day`` value:
     hatch scatter -x total_bill -y tip --hue day -- tips.csv 
 
 .. image:: ../images/tips.tip.total_bill.day.scatter.png
-       :width: 600px
+       :width: 700px
        :height: 600px
        :align: center
        :alt: Scatter plot comparing tip and total_bill coloured by day 
@@ -157,19 +160,48 @@ argument:
     hatch scatter -x total_bill -y tip --hue size -- tips.csv 
 
 .. image:: ../images/tips.tip.total_bill.size.scatter.png
-       :width: 600px
+       :width: 700px
        :height: 600px
        :align: center
        :alt: Scatter plot comparing tip and total_bill coloured by size 
 
 .. _scatter_hueorder:
 
-By default the order of the columns within each hue group is determined from their occurrence in the input data. This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of columns within each hue group, based on their values. 
+For categorical hue groups, the order displayed in the legend is determined from their occurrence in the input data. This can be overridden with the ``--hueorder`` argument, which allows you to specify the exact ordering of 
+the hue groups in the legend.
+
+.. _scatter_dotstyle:
+
+Dot style based on categorical feature
+======================================
+
+.. code-block:: 
+
+    --dotstyle FEATURE 
+
+By default dots in scatter plots are drawn as circles.
+
+The ``--dotstyle`` argument lets you change the shape of dots based on a categorical feature.
+
+.. code-block:: bash
+
+    hatch scatter -x total_bill -y tip --hue day --dotstyle sex -- tips.csv
+
+.. image:: ../images/tips.tip.total_bill.scatter.dotstyle.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical feature 
+
+In the above example the hue of dots is determined by the ``day`` feature and the dot marker style is determined by the ``sex`` feature. In this case ``male`` dots use a cross marker and ``female`` dots use a circle marker.
+
+It is acceptable for both the ``--hue`` and ``--dotstyle`` arguments to be based on the same (categorical) feature in the data set. In such cases both the colour and marker shape will vary with 
+the underlying feature.
 
 .. _scatter_dotsize:
 
-Scaling dot size
-================
+Scaling dot size base on feature
+================================
 
 .. code-block:: 
 

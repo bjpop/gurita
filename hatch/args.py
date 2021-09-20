@@ -85,7 +85,7 @@ def parse_args():
         default=False,
         help=f'Turn off the legend in the plot')
     plot_common_arguments_group.add_argument(
-        '--style', choices=const.ALLOWED_STYLES, required=False, default=const.DEFAULT_STYLE,
+        '--plotstyle', choices=const.ALLOWED_STYLES, required=False, default=const.DEFAULT_STYLE,
         help=f'Aesthetic style of plot. Allowed values: %(choices)s. Default: %(default)s.')
     plot_common_arguments_group.add_argument(
         '--context', choices=const.ALLOWED_CONTEXTS, required=False, default=const.DEFAULT_CONTEXT,
@@ -195,10 +195,20 @@ def parse_args():
         '--dotlinewidth',  metavar='WIDTH', type=int, default=const.DEFAULT_LINEWIDTH,
         help=f'Line width value for plotted points. Default: %(default)s')
 
+    dotstyle_argument = argparse.ArgumentParser(add_help=False)
+    dotstyle_argument.add_argument(
+        '--dotstyle', metavar='FEATURE', type=str, required=False, 
+        help=f'Name of categorical feature to use for plotted dot marker style')
+
     colwrap_argument = argparse.ArgumentParser(add_help=False)
     colwrap_argument.add_argument(
         '--colwrap',  metavar='INT', type=int, required=False, 
         help=f'Wrap the facet column at this width, to span multiple rows.')
+
+    dodge_argument = argparse.ArgumentParser(add_help=False)
+    dodge_argument.add_argument(
+        '--dodge', action='store_true', required=False,
+        help=f'Separate hue levels along the categorical axis (when --hue is used)')
 
     # Subcommands 
 
@@ -337,14 +347,16 @@ def parse_args():
         '--nojoin', action='store_true', required=False, 
         help=f'Do not connect point estimates by a line')
 
-    scatterparser = facet_parser('scatter', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument])
+    scatterparser = facet_parser('scatter', additional_parents=[dotsize_argument, dotalpha_argument, dotlinewidth_argument, dotstyle_argument])
+
+    # Maybe vlines and hlines can be given for any plot?
     scatterparser.add_argument( '--vlines',  metavar='AXIS_LOCATION', required=False, type=float, nargs="+", help=f'Draw vertical lines on the plot at specified axes locations')
     scatterparser.add_argument( '--hlines',  metavar='AXIS_LOCATION', required=False, type=float, nargs="+", help=f'Draw horizontal lines on the plot at specified axes locations')
 
 
-    stripparser = facet_parser('strip')
+    stripparser = facet_parser('strip', additional_parents=[dodge_argument])
 
-    swarmparser = facet_parser('swarm')
+    swarmparser = facet_parser('swarm', additional_parents=[dodge_argument])
 
     trans_parser = subparsers.add_parser('transform', parents=[io_common_arguments], add_help=False)
 

@@ -19,18 +19,21 @@ Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help
      - :ref:`swarm_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+   * - ``-x FEATURE, --xaxis FEATURE``
      - select feature for the X axis
      - :ref:`swarm_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+   * - ``-y FEATURE, --yaxis FEATURE``
      - select feature for the Y axis
      - :ref:`swarm_feature_selection`
    * - ``--orient {v,h}``
      - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
      - :ref:`Box orientation <swarm_orient>`
-   * - ``--hue FEATURE [FEATURE ...]``
+   * - ``--hue FEATURE``
      - group features by hue
      - :ref:`swarm_hue`
+   * - ``--dodge``
+     - separate hue levels along the categorical axis
+     - :ref:`dodge <swarm_dodge>`
    * - ``--hueorder FEATURE [FEATURE ...]``
      - order of hue features
      - :ref:`Hue order <swarm_hueorder>`
@@ -43,10 +46,10 @@ Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`swarm_range`
-   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+   * - ``--row FEATURE, -r FEATURE``
      - feature to use for facet rows 
      - :ref:`swarm_facets`
-   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+   * - ``--col FEATURE, -c FEATURE``
      - feature to use for facet columns 
      - :ref:`swarm_facets`
    * - ``--colwrap INT``
@@ -82,7 +85,6 @@ The output of the above command is written to ``titanic.age.swarm.png``:
        :height: 600px
        :align: center
        :alt: Swarm plot showing the distribution of age for the titanic data set
-
 
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
@@ -198,6 +200,23 @@ In the following example the distribution of ``age`` is shown for each value in 
        :height: 600px
        :align: center
        :alt: Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
+
+.. _swarm_dodge:
+
+As the previous example demonstrates, when ``--hue`` is used, by default all hue levels are shown mixed together in the same swarm.
+However, you might want to show each hue level in its own swarm. This can be achieved with the ``--dodge`` command.
+
+The ``--dodge`` argument will separate hue levels along the categorical axis, rather than mix them together:
+
+.. code-block:: bash
+
+    hatch swarm -y age -x class --hue sex --dodge -- titanic.csv
+
+.. image:: ../images/titanic.age.class.sex.swarm.dodge.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the sex data separated into swarms 
 
 .. _swarm_hueorder:
 

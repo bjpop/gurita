@@ -25,7 +25,7 @@ import hatch.constants as const
 def do_plot(df, options):
     # plotting commands go here
     kwargs = {}
-    sns.set_style(options.style)
+    sns.set_style(options.plotstyle)
     sns.set_context(options.context)
     if options.cmd == 'hist':
         Displot(options.cmd, options, df, kwargs).plot()
@@ -39,13 +39,16 @@ def do_plot(df, options):
         else:
             utils.exit_with_error("A count plot requires either -x (--xaxis) or -y (--yaxis) to be specified", const.EXIT_COMMAND_LINE_ERROR)
     elif options.cmd in ['box', 'violin', 'swarm', 'strip', 'boxen', 'bar', 'point']:
+        kwargs = {}
         if 'nojoin' in options:
-            kwargs = {'join': False} 
+            kwargs['join'] = False 
+        if 'dodge' in options:
+            kwargs['dodge'] = options.dodge
         Catplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'line':
         Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'scatter':
-        kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha, 'linewidth': options.dotlinewidth }
+        kwargs = { 'size': options.dotsize, 'alpha': options.dotalpha, 'linewidth': options.dotlinewidth, 'style': options.dotstyle }
         Relplot(options.cmd, options, df, kwargs).plot()
     elif options.cmd == 'heatmap':
         Heatmap(options, df).plot()
