@@ -11,16 +11,26 @@ A plotting and data analytics program for the command line
 
 import sys
 import logging
-import os
-import math
-from pathlib import Path
-import numpy as np
 import pandas as pd
 import hatch.args as args
 import hatch.utils as utils
-import hatch.plot as plot
 import hatch.constants as const
-import hatch.stats as stats
+import hatch.box_plot
+import hatch.boxen_plot
+import hatch.violin_plot
+import hatch.swarm_plot
+import hatch.strip_plot
+import hatch.bar_plot
+import hatch.point_plot
+import hatch.scatter_plot
+import hatch.histogram_plot
+import hatch.count_plot
+import hatch.line_plot
+import hatch.filter_rows
+import hatch.sample_rows
+import hatch.out
+import hatch.pca
+import hatch.eval
 
 def init_logging(log_filename):
     '''If the log_filename is defined, then
@@ -46,6 +56,20 @@ def init_logging(log_filename):
         logging.basicConfig(level=logging.CRITICAL)
 
 
+def read_data(commands):
+    input_file = sys.stdin
+    sep = ","
+    na_values = None
+    try:
+        dtype = None
+        #if options.category:
+        #   dtype = { column : 'category' for column in options.category }
+        data = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
+        return data
+    except IOError:
+        utils.exit_with_error(f"Could not open file: {options.data}", const.EXIT_FILE_IO_ERROR)
+
+'''
 def read_data(options):
     if options.navalues:
         na_values = options.navalues.split()
@@ -113,44 +137,36 @@ def read_data(options):
         else:
             data = data[options.features]
     return data 
+'''
 
-def save(options, df):
-    if options.out:
-        output_filename = options.out
-    else:
-        output_name = utils.get_output_name(options)
-        output_filename = Path('.'.join([output_name, "trans", "csv"]))
-    df.to_csv(output_filename, header=True, index=False)
-    if options.verbose:
-        print(f"Data saved to {output_filename}")
+COMMAND_MAP = {
+    "box": hatch.box_plot.BoxPlot,
+    "boxen": hatch.boxen_plot.BoxenPlot,
+    "violin": hatch.violin_plot.ViolinPlot,
+    "swarm": hatch.swarm_plot.SwarmPlot,
+    "strip": hatch.strip_plot.StripPlot,
+    "bar": hatch.bar_plot.BarPlot,
+    "point": hatch.point_plot.PointPlot,
+    "scatter": hatch.scatter_plot.ScatterPlot,
+    "histogram": hatch.histogram_plot.HistogramPlot,
+    "count": hatch.count_plot.CountPlot,
+    "line": hatch.line_plot.LinePlot,
+    "filter": hatch.filter_rows.FilterRows,
+    "sample": hatch.sample_rows.SampleRows,
+    "pca": hatch.pca.PCA,
+    "stdout": hatch.out.Stdout,
+    "out": hatch.out.Out,
+    "eval": hatch.eval.Eval,
+}
 
-PLOT_COMMANDS = ['hist', 'count', 'box', 'violin', 'swarm', 'strip', 'boxen', 'bar', 'point', 'line', 'scatter', 'heatmap', 'clustermap', 'pca']
 
 def main():
-    try:
-        options = args.parse_args()
-        init_logging(options.logfile)
-        # read and transform the input data (apply filters, sampling etc)
-        df = read_data(options)
-        if options.cmd == 'transform':
-            save(options, df)
-        elif options.cmd == 'info':
-            stats.display_info(df, options)
-        elif options.cmd == 'correlation':
-            stats.correlation(df, options)
-        elif options.cmd == 'normtest':
-            stats.norm_test(df, options)
-        elif options.cmd == 'stdev':
-            stats.stdev(df, options)
-        elif options.cmd in const.PLOT_COMMANDS:
-            plot.do_plot(df, options)
-        else:
-            utils.exit_with_error(f"Unrecognised plot type: {options.cmd}", const.EXIT_COMMAND_LINE_ERROR)
-        logging.info("Completed")
-    except TypeError as e:
-        utils.exit_with_error(str(e), const.EXIT_COMMAND_LINE_ERROR)
-    except ValueError as e:
-        utils.exit_with_error("Cannot generate plot, perhaps data is empty?", const.EXIT_COMMAND_LINE_ERROR)
+    commands = args.parse_commandline(COMMAND_MAP)
+    df = read_data(commands)
+    for command in commands:
+        df = command.run(df)
+    logging.info("Completed")
+    exit(0)
 
 
 # If this script is run from the command line then call the main function.

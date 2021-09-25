@@ -23,8 +23,10 @@ EXIT_COMMAND_LINE_ERROR = 2
 # default constants
 DEFAULT_ALPHA = 0.5
 DEFAULT_LINEWIDTH = 0
-DEFAULT_FILETYPE = 'CSV'
+DEFAULT_FILETYPE = 'csv'
 DEFAULT_PCA_MISSING = 'drop'
+DEFAULT_PCA_PREFIX = 'pc'
+DEFAULT_PCA_N_COMPONENTS = 2 
 DEFAULT_PLOT_WIDTH = 8 
 DEFAULT_PLOT_HEIGHT = 8 
 DEFAULT_OUTPUT_NAME = "hatch"
@@ -37,8 +39,9 @@ DEFAULT_DENDRO_RATIO = 0.1
 DEFAULT_ISNORM_NANPOLICY = 'propagate'
 DEFAULT_CLUSTERMAP_METHOD = 'average'
 DEFAULT_CLUSTERMAP_METRIC = 'euclidean' 
+DEFAULT_NA = ''
 
-ALLOWED_FILETYPES = ['CSV', 'TSV']
+ALLOWED_FILETYPES = ['csv', 'tsv']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
 ALLOWED_STYLES = ['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']
 ALLOWED_CONTEXTS = ['paper', 'notebook', 'talk', 'poster'] 

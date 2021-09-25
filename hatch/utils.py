@@ -50,10 +50,24 @@ def get_filetype_from_extension(filename):
 def get_output_name(options):
     if options.prefix:
         return options.prefix
-    elif options.data is not None:
-        return Path(options.data).stem
+    elif options.file is not None:
+        return options.file 
     else:
         return const.DEFAULT_OUTPUT_NAME
 
 def output_field(field):
     return [field.replace(' ', '_')] if field is not None else []
+
+
+def make_unique_numbered_filepath(path):
+    stem = path.stem
+    ext = path.suffix 
+
+    print((stem, ext))
+    counter = 1
+
+    while path.exists():
+        path = Path(stem + "_" + str(counter) + ext)
+        counter += 1
+
+    return path
