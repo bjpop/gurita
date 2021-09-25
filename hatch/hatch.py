@@ -28,9 +28,10 @@ import hatch.count_plot
 import hatch.line_plot
 import hatch.filter_rows
 import hatch.sample_rows
-import hatch.out
+import hatch.output
 import hatch.pca
 import hatch.eval
+import hatch.info
 
 def init_logging(log_filename):
     '''If the log_filename is defined, then
@@ -154,9 +155,10 @@ COMMAND_MAP = {
     "filter": hatch.filter_rows.FilterRows,
     "sample": hatch.sample_rows.SampleRows,
     "pca": hatch.pca.PCA,
-    "stdout": hatch.out.Stdout,
-    "out": hatch.out.Out,
+    "stdout": hatch.output.Stdout,
+    "out": hatch.output.Out,
     "eval": hatch.eval.Eval,
+    "info": hatch.info.Info,
 }
 
 
