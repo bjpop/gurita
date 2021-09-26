@@ -38,7 +38,8 @@ class Info(CommandBase, name="info"):
                     valid_features.append(f)
                 else:
                     invalid_features.append(f)
-            print(df[valid_features].describe(include='all'))
+            if valid_features:
+                print(df[valid_features].describe(include='all'))
             if invalid_features:
                 print("\nThe following requested features are not in the data:")
                 print("\n".join(invalid_features))
