@@ -10,10 +10,20 @@ Portability : POSIX
 import argparse
 import hatch.utils as utils
 import hatch.constants as const
+from hatch.command_base import CommandBase
 
-class Eval:
+class Eval(CommandBase, name="eval"):
+    description = "Compute new columns for each row based on existing columns with an expression."
+    category = "transformation" 
+    
     def __init__(self):
         self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(add_help=True)
+        parser.add_argument('expr', metavar='EXPR', type=str, nargs="+",
+            help='Construct new data columns based on an expression')
+        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -23,10 +33,3 @@ class Eval:
         except:
             utils.exit_with_error(f"Bad eval expression: {options.expr}", const.EXIT_COMMAND_LINE_ERROR)
         return df
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
-        parser.add_argument('expr', metavar='EXPR', type=str, nargs="+",
-            help='Construct new data columns based on an expression')
-        # XXX Catch exceptions here
-        self.options = parser.parse_args(args)

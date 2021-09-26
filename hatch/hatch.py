@@ -32,6 +32,7 @@ import hatch.output
 import hatch.pca
 import hatch.eval
 import hatch.info
+from hatch.command_base import CommandBase
 
 def init_logging(log_filename):
     '''If the log_filename is defined, then
@@ -140,33 +141,15 @@ def read_data(options):
     return data 
 '''
 
-COMMAND_MAP = {
-    "box": hatch.box_plot.BoxPlot,
-    "boxen": hatch.boxen_plot.BoxenPlot,
-    "violin": hatch.violin_plot.ViolinPlot,
-    "swarm": hatch.swarm_plot.SwarmPlot,
-    "strip": hatch.strip_plot.StripPlot,
-    "bar": hatch.bar_plot.BarPlot,
-    "point": hatch.point_plot.PointPlot,
-    "scatter": hatch.scatter_plot.ScatterPlot,
-    "histogram": hatch.histogram_plot.HistogramPlot,
-    "count": hatch.count_plot.CountPlot,
-    "line": hatch.line_plot.LinePlot,
-    "filter": hatch.filter_rows.FilterRows,
-    "sample": hatch.sample_rows.SampleRows,
-    "pca": hatch.pca.PCA,
-    "stdout": hatch.output.Stdout,
-    "out": hatch.output.Out,
-    "eval": hatch.eval.Eval,
-    "info": hatch.info.Info,
-}
-
 
 def main():
-    commands = args.parse_commandline(COMMAND_MAP)
+    commands = args.parse_commandline()
     df = read_data(commands)
     for command in commands:
-        df = command.run(df)
+        try:
+            df = command.run(df)
+        except ValueError as e:
+            utils.exit_with_error(f"Error: {str(e)}", const.EXIT_COMMAND_LINE_ERROR)
     logging.info("Completed")
     exit(0)
 

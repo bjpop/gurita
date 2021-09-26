@@ -15,81 +15,67 @@ from pathlib import Path
 import itertools
 import hatch.constants as const
 import hatch.utils as utils
+from hatch.command_base import CommandBase
 
 # the special characer used to separate commainds in a chain
 SUBCOMMAND_SEPARATOR = "+"
 
-USAGE_MESSAGE = '''Hatch is a data analytics and plotting program.
+USAGE_HEADER = '''Hatch is a data analytics and plotting program.
 
 Display a help message or the version number and exit:
 
     hatch [-h|--help] [-v|--version]
 
-Display the help message for a subcommand and exit:
+Display the help message for a command and exit:
 
-    hatch subcommand -h
+    hatch command -h
 
-Run a single subcommand with optional arguments:
+Run a single command with optional arguments:
 
-    hatch subcommand <args>
+    hatch command <args>
 
-Run a chain of subcommands from left to right:
+Run a chain of commands from left to right, each separated by '+' character:
 
-    hatch subcommand <args> + ... + subcommand <args>
-
-Available subcommands:
-
-    Input / output
-    --------------
-
-    in                  Read data from a named file
-    out                 Save data to a named file
-    stdout              Print data to the standard output (stdout)
-
-    Plotting: 
-    ---------
-
-    bar                 Bar plot of categorical feature
-    box                 Box plot of numerical feature
-    boxen               Boxen plot of numerical feature
-    clustermap          Clustered heatmap of two numerical features 
-    count               Count plot of categorical feature
-    heatmap             Heatmap of two numerical features 
-    hist                Histogram of numerical or categorical feature 
-    line                Line plot of numerical feature
-    point               Point plot of numerical feature
-    scatter             Scatter plot of two numerical features
-    strip               Strip plot of numerical feature
-    swarm               Swarm plot of numerical feature
-    violin              Violin plot of numerical feature
-
-    Transformation:
-    ---------------
-
-    filter              filter rows with a logical expression
-    sample              randomly sample rows
-    eval                compute new columns for each row based on existing columns
-    features            select columns (features) to retain by name and discard the rest 
-
-    Data reduction:
-    ------------------
-
-    pca                 Principal component analysis (PCA)
-
-    Statistics:
-    -----------
-
-    correlation         Correlation between numerical features
-    info                Show summary information about features in the input data set
-    normtest            Test whether numerical features differ from a normal distribution 
-    stdev               Compute the standard deviation of numerical features
+    hatch command_1 <args> + ... + command_n <args>
 '''
 
 def display_usage():
-    print(USAGE_MESSAGE)
+    print(USAGE_HEADER)
+    display_commands()
+
+JUSTIFY_WIDTH = 20
+
+def display_commands():
+    category_map = {cat : [] for cat in const.COMMAND_CATEGORIES}
+    # Group any commands that are not in the standard categories into 'other'
+    category_map['other'] = []
+
+    for this_name, this_command in CommandBase.command_map.items():
+        this_category = this_command.category
+        this_description = this_command.description
+
+        if this_category in category_map:
+            category_map[this_category].append((this_name, this_description))
+        else:
+            category_map['other'].append((this_name, this_description))
+
+    print("Available commands:")
+    print()
+
+    for this_category in const.COMMAND_CATEGORIES:
+        print(f"    {this_category}")
+        print(f"    {'-' * len(this_category)}")
+        print()
+        for this_name, this_description in sorted(category_map[this_category], key=lambda pair: pair[0]):
+            print(f"    {this_name.ljust(JUSTIFY_WIDTH, ' ')}{this_description}")
+        print()
+        if category_map['other']:
+            for this_name, this_description in sorted(category_map['other'], key=lambda pair: pair[0]):
+                print(f"{    this_name.ljust(JUSTIFY_WIDTH, ' ')}{this_description}")
+            print()
 
 def display_version():
-    pring("version")
+    print(f"{const.PROGRAM_NAME} {const.PROGRAM_VERSION}")
 
 
 '''
@@ -106,16 +92,19 @@ Command line syntax is:
     Example:
 
     hatch filter 'size >= 10' + \
-          pca -f size class type age pos + \
+          pca -n 3 + \
           cluster -f pc1 pc2 + \
-          scatter -x pc1 -y pc2 --hue chrom < data.csv
+          scatter -x pc1 -y pc2 --hue cluster1 < data.csv
 '''
 
 # split list into non-empty sublists based on seperator
 def split_list(this_list, sep):
    return [list(group) for is_sep, group in itertools.groupby(this_list, lambda word: word == sep) if not is_sep]
 
-def parse_commandline(command_map):
+
+def parse_commandline():
+    command_map = CommandBase.command_map
+
     fields = sys.argv[1:]
 
     if len(fields) >= 1:
@@ -134,7 +123,7 @@ def parse_commandline(command_map):
                 command_name = command_fields[0]
                 command_args = command_fields[1:]
             if command_name in command_map:
-                # this could raise a parse error, need to handle it here
+                x = command_map[command_name]
                 this_command = command_map[command_name]()
                 this_command.parse_args(command_args)
                 result.append(this_command)

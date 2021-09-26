@@ -16,11 +16,28 @@ from sklearn.impute import SimpleImputer
 import numpy as np
 import argparse
 import hatch.constants as const
+from hatch.command_base import CommandBase
 
-class PCA:
+class PCA(CommandBase, name="pca"):
+    description = "Principal component analysis (PCA)."
+    category = "transformation"
+
     def __init__(self):
         self.options = None
 
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(add_help=True)
+        parser.add_argument(
+            '--missing', required=False, default=const.DEFAULT_PCA_MISSING, choices=const.ALLOWED_PCA_MISSING,
+            help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
+        parser.add_argument(
+            '--pcaprefix', required=False, default=const.DEFAULT_PCA_PREFIX,
+            help=f'Column label prefix for principal component axes. Default: %(default)s.')
+        parser.add_argument(
+            '-n', '--ncomps', type=int, required=False, default=const.DEFAULT_PCA_N_COMPONENTS,
+            help=f'Number of principal components to generate. Default: %(default)s.')
+        self.options = parser.parse_args(args)
+    
     def run(self, df):
         # select only numeric features for the PCA
         numeric_df = df.select_dtypes(include=np.number)
@@ -47,19 +64,3 @@ class PCA:
         new_column_headers = [self.options.pcaprefix + str(n) for n in range(1, self.options.ncomps + 1)]
         pca_components = pd.DataFrame(data = pca_transform, columns = new_column_headers)
         return df.join(pca_components)
-
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
-        parser.add_argument(
-            '--missing', required=False, default=const.DEFAULT_PCA_MISSING, choices=const.ALLOWED_PCA_MISSING,
-            help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
-            '--pcaprefix', required=False, default=const.DEFAULT_PCA_PREFIX,
-            help=f'Column label prefix for principal component axes. Default: %(default)s.')
-        parser.add_argument(
-            '-n', '--ncomps', type=int, required=False, default=const.DEFAULT_PCA_N_COMPONENTS,
-            help=f'Number of principal components to generate. Default: %(default)s.')
-
-        # XXX Catch exceptions here
-        self.options = parser.parse_args(args)

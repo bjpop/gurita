@@ -12,9 +12,7 @@ import matplotlib.pyplot as plt
 
 PROGRAM_NAME = "hatch"
 
-PLOT_COMMANDS = ['hist', 'count', 'box', 'violin', 'swarm',
-        'strip', 'boxen', 'bar', 'point', 'line', 'scatter',
-        'heatmap', 'clustermap', 'pca']
+COMMAND_CATEGORIES = ["input/output", "plotting", "transformation", "statistics"]
 
 # exit status values
 EXIT_FILE_IO_ERROR = 1

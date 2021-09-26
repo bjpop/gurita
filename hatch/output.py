@@ -12,10 +12,18 @@ import sys
 import hatch.io_arguments as io_args
 import hatch.utils as utils
 from pathlib import Path
+from hatch.command_base import CommandBase
 
-class Stdout:
+class Stdout(CommandBase, name="stdout"):
+    description = "Print the current dataset to the standard output."
+    category = "input/output"
+    
     def __init__(self):
         self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(parents=[io_args.file_format, io_args.na], add_help=False)
+        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -24,18 +32,20 @@ class Stdout:
             sep = "\t"
         elif options.format == 'csv':
             sep = ','
-        df.to_csv(sys.stdout, sep=sep, index=False)
+        df.to_csv(sys.stdout, sep=sep, na_rep=options.na, index=False)
         return df
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(parents=[io_args.file_format, io_args.na], add_help=False)
+class Out(CommandBase, name="out"):
+    name = "out" 
+    description = "Write the current dataset to a file"
+    category = "input/output"
 
-        # XXX Catch exceptions here
-        self.options = parser.parse_args(args)
-
-class Out:
     def __init__(self):
         self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(parents=[io_args.io_arguments, io_args.file_format, io_args.na], add_help=False)
+        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -50,13 +60,6 @@ class Out:
         output_name = make_output_filename(options) 
         df.to_csv(output_name, sep=sep, na_rep=options.na, index=False)
         return df
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(parents=[io_args.io_arguments, io_args.file_format, io_args.na], add_help=False)
-
-        # XXX Catch exceptions here
-        self.options = parser.parse_args(args)
-
 
 def make_output_filename(options):
     if options.file is not None:

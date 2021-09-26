@@ -8,10 +8,20 @@ Portability : POSIX
 '''
 
 import argparse
+from hatch.command_base import CommandBase
 
-class FilterRows:
+class FilterRows(CommandBase, name="filter"):
+    description = "Filter rows with a logical expression."
+    category = "transformation"
+
     def __init__(self):
         self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(add_help=True)
+        parser.add_argument('expr', metavar='EXPR', type=str,
+            help='Filter rows: only retain rows that make this expression True')
+        self.options = parser.parse_args(args)
 
     def run(self, df):
         try:
@@ -19,10 +29,3 @@ class FilterRows:
         except:
             utils.exit_with_error(f"Bad filter expression: {options.filter}", const.EXIT_COMMAND_LINE_ERROR)
         return df
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
-        parser.add_argument('expr', metavar='EXPR', type=str,
-            help='Filter rows: only retain rows that make this expression True')
-        # XXX Catch exceptions here
-        self.options = parser.parse_args(args)

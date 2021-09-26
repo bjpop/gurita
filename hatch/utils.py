@@ -62,12 +62,8 @@ def output_field(field):
 def make_unique_numbered_filepath(path):
     stem = path.stem
     ext = path.suffix 
-
-    print((stem, ext))
     counter = 1
-
     while path.exists():
         path = Path(stem + "_" + str(counter) + ext)
         counter += 1
-
     return path

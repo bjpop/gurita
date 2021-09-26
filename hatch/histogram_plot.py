@@ -7,16 +7,41 @@ Maintainer  : bjpope@unimelb.edu.au
 Portability : POSIX
 '''
 
+import argparse
 import seaborn as sns
 import hatch.render_plot as render_plot
 import hatch.io_arguments as io_args 
 import hatch.plot_arguments as plot_args 
 import hatch.constants as const
-import argparse
+from hatch.command_base import CommandBase
 
-class HistogramPlot:
-    def __init__(self):
-        self.options = None
+class HistogramPlot(CommandBase, name="histogram"):
+    description = "Histogram of numerical or categorical feature."
+    category = "plotting"
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(parents=[
+               io_args.io_arguments, plot_args.plot_arguments,
+               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
+               plot_args.order, plot_args.hue_order, plot_args.orient,
+               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
+           add_help=False)
+        parser.add_argument(
+            '--multiple', required=False, choices=const.ALLOWED_HIST_MULTIPLES,
+            help=f"How to display overlapping subsets of data in a histogram. Allowed values: %(choices)s.")
+        parser.add_argument(
+            '--bins', metavar='NUM', required=False, type=int,
+            help=f'Number of histogram bins.')
+        parser.add_argument(
+            '--binwidth', metavar='NUM', required=False, type=float,
+            help=f'Width of histogram bins, overrides "--bins".')
+        parser.add_argument(
+            '--cumulative', action='store_true',
+            help=f'Generate cumulative histogram')
+        parser.add_argument(
+           '--kde', action='store_true',
+            help=f'Plot a kernel density estimate for the histogram and show as a line')
+        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -41,31 +66,5 @@ class HistogramPlot:
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
-        render_plot.facet_plot(options, graph, 'histogram')
+        render_plot.facet_plot(options, graph, self.name)
         return df
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(parents=[
-               io_args.io_arguments, plot_args.plot_arguments,
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
-           add_help=False)
-        parser.add_argument(
-            '--multiple', required=False, choices=const.ALLOWED_HIST_MULTIPLES,
-            help=f"How to display overlapping subsets of data in a histogram. Allowed values: %(choices)s.")
-        parser.add_argument(
-            '--bins', metavar='NUM', required=False, type=int,
-            help=f'Number of histogram bins.')
-        parser.add_argument(
-            '--binwidth', metavar='NUM', required=False, type=float,
-            help=f'Width of histogram bins, overrides "--bins".')
-        parser.add_argument(
-            '--cumulative', action='store_true',
-            help=f'Generate cumulative histogram')
-        parser.add_argument(
-           '--kde', action='store_true',
-            help=f'Plot a kernel density estimate for the histogram and show as a line')
-
-        # XXX Catch exceptions here
-        self.options = parser.parse_args(args)
