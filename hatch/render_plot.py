@@ -53,9 +53,9 @@ def facet_plot(options, graph, kind):
     plt.close() 
 
 def make_output_filename(options, kind):
-    if options.file is not None:
+    if options.out is not None:
         # don't try to make this unique, just use what user specified, they may want to overwrite the old file
-        return Path(options.file)
+        return Path(options.out)
     else:
         extension = [options.format]
         output_name = [utils.get_output_name(options)]

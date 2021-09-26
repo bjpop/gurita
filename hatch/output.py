@@ -45,7 +45,12 @@ class Out(CommandBase, name="out"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(parents=[io_args.io_arguments, io_args.file_format, io_args.na], add_help=False)
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
+            parents=[io_args.file_format, io_args.na], add_help=True)
+        parser.add_argument('out', metavar='FILE', type=str, nargs='?',
+            help=f'Write output to a file. Use filename if provided, otherwise a filename will be automatically chosen.')
+        parser.add_argument('--prefix',  metavar='NAME', type=str, required=False, help=f'Prefix for output file')
+
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -63,9 +68,9 @@ class Out(CommandBase, name="out"):
         return df
 
 def make_output_filename(options):
-    if options.file is not None:
+    if options.out is not None:
         # don't try to make this unique, just use what user specified, they may want to overwrite the old file
-        return Path(options.file)
+        return Path(options.out)
     else:
         extension = [options.format]
         output_name = [utils.get_output_name(options)]

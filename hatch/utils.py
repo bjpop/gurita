@@ -50,8 +50,8 @@ def get_filetype_from_extension(filename):
 def get_output_name(options):
     if options.prefix:
         return options.prefix
-    elif options.file is not None:
-        return options.file 
+    elif options.out is not None:
+        return options.out
     else:
         return const.DEFAULT_OUTPUT_NAME
 

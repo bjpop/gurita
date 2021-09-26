@@ -12,8 +12,9 @@ import hatch.constants as const
 
 io_arguments = argparse.ArgumentParser()
 io_arguments_group = io_arguments.add_argument_group('Input and Output', 'input/output related arguments that are provided across all hatch sub-commands') 
+
 io_arguments_group.add_argument(
-    '-f', '--file', metavar='FILE', type=str, nargs='?', required=False,
+    '-o', '--out', metavar='FILE', type=str, nargs='?', required=False,
     help=f'Write output to a file. Use filename if provided, otherwise a filename will be automatically chosen.')
 
 io_arguments_group.add_argument(
