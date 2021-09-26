@@ -24,7 +24,8 @@ class CountPlot(CommandBase, name="count"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(parents=[
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
+            parents=[
                io_args.io_arguments, plot_args.plot_arguments,
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,

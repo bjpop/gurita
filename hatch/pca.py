@@ -26,7 +26,7 @@ class PCA(CommandBase, name="pca"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
             '--missing', required=False, default=const.DEFAULT_PCA_MISSING, choices=const.ALLOWED_PCA_MISSING,
             help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')

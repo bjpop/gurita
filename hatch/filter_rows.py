@@ -18,7 +18,7 @@ class FilterRows(CommandBase, name="filter"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument('expr', metavar='EXPR', type=str,
             help='Filter rows: only retain rows that make this expression True')
         self.options = parser.parse_args(args)

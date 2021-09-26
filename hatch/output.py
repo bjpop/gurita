@@ -22,7 +22,8 @@ class Stdout(CommandBase, name="stdout"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(parents=[io_args.file_format, io_args.na], add_help=False)
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
+            parents=[io_args.file_format, io_args.na], add_help=False)
         self.options = parser.parse_args(args)
 
     def run(self, df):

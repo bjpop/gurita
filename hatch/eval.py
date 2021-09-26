@@ -20,7 +20,7 @@ class Eval(CommandBase, name="eval"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument('expr', metavar='EXPR', type=str, nargs="+",
             help='Construct new data columns based on an expression')
         self.options = parser.parse_args(args)

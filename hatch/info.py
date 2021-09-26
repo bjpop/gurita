@@ -19,7 +19,7 @@ class Info(CommandBase, name="info"):
         self.options = None
 
     def parse_args(self, args):
-        parser = argparse.ArgumentParser(add_help=True)
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         self.options = parser.parse_args(args)
 
     def run(self, df):
