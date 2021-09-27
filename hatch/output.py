@@ -15,7 +15,7 @@ from pathlib import Path
 from hatch.command_base import CommandBase
 
 class Stdout(CommandBase, name="stdout"):
-    description = "Print the current dataset to the standard output."
+    description = "Print the current dataset to the standard output in CSV/TSV format."
     category = "input/output"
     
     def __init__(self):
@@ -23,7 +23,7 @@ class Stdout(CommandBase, name="stdout"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_format, io_args.na], add_help=False)
+            parents=[io_args.file_format, io_args.na], add_help=True)
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -37,8 +37,7 @@ class Stdout(CommandBase, name="stdout"):
         return df
 
 class Out(CommandBase, name="out"):
-    name = "out" 
-    description = "Write the current dataset to a file"
+    description = "Write the current dataset to a file in CSV/TSV format."
     category = "input/output"
 
     def __init__(self):

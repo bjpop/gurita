@@ -12,6 +12,7 @@ A plotting and data analytics program for the command line
 import sys
 import logging
 import pandas as pd
+from hatch.command_base import CommandBase
 import hatch.args as args
 import hatch.utils as utils
 import hatch.constants as const
@@ -29,10 +30,11 @@ import hatch.line_plot
 import hatch.filter_rows
 import hatch.sample_rows
 import hatch.output
+import hatch.input
 import hatch.pca
 import hatch.eval
 import hatch.info
-from hatch.command_base import CommandBase
+import hatch.columns
 
 def init_logging(log_filename):
     '''If the log_filename is defined, then
@@ -141,10 +143,36 @@ def read_data(options):
     return data 
 '''
 
+def is_first_command_input(commands):
+    if len(commands) > 0:
+        first_command = commands[0]
+        type_first_command = type(first_command)
+        return (type_first_command is hatch.input.In) or (type_first_command is hatch.input.Stdin)
+    else:
+        return False
+
+def is_last_command_transform(commands):
+    if len(commands) > 0:
+        return commands[-1].category == 'transformation'
+    else:
+        return False
 
 def main():
+    df = None
     commands = args.parse_commandline()
-    df = read_data(commands)
+    if not is_first_command_input(commands):
+        # If the first command is not an explict read of input data
+        # either from stdin or a file then we add an implicit read from 
+        # stdin to the command stream
+        stdin_reader = hatch.input.Stdin()
+        stdin_reader.parse_args([])
+        commands = [stdin_reader] + commands
+    if is_last_command_transform(commands):
+        # If the last command is a data transformation command then
+        # we add an implicit print to stdout to the command stream
+        stdout_writer = hatch.output.Stdout()
+        stdout_writer.parse_args([])
+        commands = commands + [stdout_writer]
     for command in commands:
         try:
             df = command.run(df)

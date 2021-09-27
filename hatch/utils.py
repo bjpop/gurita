@@ -22,6 +22,16 @@ def check_df_has_features(df, features):
         exit_with_error(f"Feature(s) not in data: {feature_str}",
                 const.EXIT_COMMAND_LINE_ERROR)
 
+def validate_columns(df, columns):
+    valid_columns = []
+    invalid_columns = []
+    for f in columns:
+        if f in df:
+           valid_columns.append(f)
+        else:
+           invalid_columns.append(f)
+    return valid_columns, invalid_columns
+
 
 def exit_with_error(message, exit_status):
     '''Print an error message to stderr, prefixed by the program name and 'ERROR'.

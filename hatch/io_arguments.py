@@ -31,3 +31,8 @@ na = argparse.ArgumentParser(add_help=False)
 na.add_argument(
     '--na', metavar='STR', type=str, required=False, default=const.DEFAULT_NA,
     help=f'Use STR as NA indicator when writing data to CSV or TSV file. Default: "%(default)s."')
+
+navalues = argparse.ArgumentParser(add_help=False)
+navalues.add_argument(
+    '--navalues', metavar='STR', required=False, type=str,
+    help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
