@@ -15,7 +15,7 @@ import hatch.plot_arguments as plot_args
 from hatch.command_base import CommandBase
 
 class BoxenPlot(CommandBase, name="boxen"):
-    description = "Show distrbution of numerical feature using boxes for quantiles, optionally grouped by categorical features."
+    description = "Show distrbution of numerical column using boxes for quantiles, optionally grouped by categorical columns."
     category = "plotting"
 
     def __init__(self):

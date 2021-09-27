@@ -15,7 +15,7 @@ import argparse
 from hatch.command_base import CommandBase
 
 class StripPlot(CommandBase, name="strip"):
-    description = "Show distrbution of numerical feature using dotted strip, optionally grouped by categorical features."
+    description = "Show distrbution of numerical column using dotted strip, optionally grouped by categorical columns."
     category = "plotting"
 
     def __init__(self):

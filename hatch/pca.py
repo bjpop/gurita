@@ -39,7 +39,7 @@ class PCA(CommandBase, name="pca"):
         self.options = parser.parse_args(args)
     
     def run(self, df):
-        # select only numeric features for the PCA
+        # select only numeric columns for the PCA
         numeric_df = df.select_dtypes(include=np.number)
 
         # Handle rows in the data that have missing values
@@ -54,7 +54,7 @@ class PCA(CommandBase, name="pca"):
         elif self.options.missing == 'imputemostfrequent':
             imputer = SimpleImputer(strategy='most_frequent')
             numeric_df = imputer.fit_transform(numeric_df)
-        # Standardize features by removing the mean and scaling to unit variance 
+        # Standardize columns by removing the mean and scaling to unit variance 
         scaler = StandardScaler()
         standardized_data = scaler.fit_transform(numeric_df)
         # Perform PCA on the standardized data

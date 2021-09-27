@@ -15,7 +15,7 @@ import argparse
 from hatch.command_base import CommandBase
 
 class SwarmPlot(CommandBase, name="swarm"):
-    description = "Show distrbution of numerical feature using dot swarm, optionally grouped by categorical features."
+    description = "Show distrbution of numerical column using dot swarm, optionally grouped by categorical columns."
     category = "plotting"
 
     def __init__(self):

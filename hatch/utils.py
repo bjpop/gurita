@@ -12,14 +12,14 @@ import logging
 from pathlib import Path
 import hatch.constants as const
 
-def check_df_has_features(df, features):
-    bad_features = set()
-    for f in features:
+def check_df_has_columns(df, columns):
+    bad_columns = set()
+    for f in columns:
         if f not in df.columns:
-            bad_features.add(f)
-    if bad_features:
-        feature_str = ", ".join(bad_features)
-        exit_with_error(f"Feature(s) not in data: {feature_str}",
+            bad_columns.add(f)
+    if bad_columns:
+        column_str = ", ".join(bad_columns)
+        exit_with_error(f"Feature(s) not in data: {column_str}",
                 const.EXIT_COMMAND_LINE_ERROR)
 
 def validate_columns(df, columns):

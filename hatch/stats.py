@@ -7,68 +7,108 @@ Maintainer  : bjpope@unimelb.edu.au
 Portability : POSIX
 '''
 
+import argparse
 import logging
 import pandas as pd
 import numpy as np
 from itertools import combinations
 import math
 import scipy
+from hatch.command_base import CommandBase
 import hatch.utils as utils
+import hatch.constants as const
 
-def norm_test(df, options):
-    if options.features is not None:
-        features = options.features
-        utils.check_df_has_features(df, features)
-    else:
-        numeric_df = df.select_dtypes(include=np.number)
-        features = list(numeric_df.columns)
-    print("feature,statistic,p-value")
-    for f in features:
-        k2, p_value = scipy.stats.normaltest(df[f]) 
-        print(f"{f},{k2},{p_value}")
+class IsNorm(CommandBase, name="isnorm"):
+    description = "Test whether numerical features differ from a normal distribution"
+    category = "information"
+
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+        help=f'Select only these columns (columns)')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
+        if options.columns is not None:
+            columns = options.columns
+            valid_columns, invalid_columns = utils.validate_columns(df, columns)
+        else:
+            numeric_df = df.select_dtypes(include=np.number)
+            valid_columns = list(numeric_df.columns)
+        if valid_columns:
+            print("column,statistic,p-value")
+            for f in valid_columns:
+                k2, p_value = scipy.stats.normaltest(df[f]) 
+                print(f"{f},{k2},{p_value}")
+        else:
+            print(f"\n{self.name} command: no valid columns were specified in the data")
+        if invalid_columns:
+            print(f"\n{self.name} command: following requested columns are not in the data:")
+            print("\n".join(invalid_columns))
+        return df
+
+
+class Correlation(CommandBase, name="correlation"):
+    description = "Test for pairwise correlation between numerical columns." 
+    category = "information"
+
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+        help=f'Select only these columns (columns)')
+        parser.add_argument('--method', required=False, default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
+        help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
+
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
+        if options.method == 'pearson':
+            corr_fun = scipy.stats.pearsonr
+        elif options.method == 'spearman':
+            corr_fun = scipy.stats.spearmanr
+        elif options.method == 'kendall':
+            corr_fun = scipy.stats.kendalltau
+        if options.columns is not None:
+            columns = options.columns
+            valid_columns, invalid_columns = utils.validate_columns(df, columns)
+        else:
+            numeric_df = df.select_dtypes(include=np.number)
+            valid_columns = list(numeric_df.columns)
+            invalid_columns = []
+        if valid_columns:
+            print("column1,column2,coefficient,p-value")
+            for f1, f2 in combinations(valid_columns, 2): 
+               coeff, p_value = corr_fun(df[f1], df[f2])
+               print(f"{f1},{f2},{coeff},{p_value}")
+        else:
+            print(f"{self.name} command: no valid columns were specified in the data")
+        if invalid_columns:
+            print(f"{self.name} command: following requested columns are not in the data:")
+            print("\n".join(invalid_columns))
+        return df
+
 
 # XXX we should bundle various summary stats together, so you can ask for a bunch of them at once,
 # rather than one at a time
 
 def stdev(df, options):
-    if options.features is not None:
-        features = options.features
-        utils.check_df_has_features(df, features)
+    if options.columns is not None:
+        columns = options.columns
+        utils.check_df_has_columns(df, columns)
     else:
         numeric_df = df.select_dtypes(include=np.number)
-        features = list(numeric_df.columns)
-    print("feature,stdev")
-    for f in features:
+        columns = list(numeric_df.columns)
+    print("column,stdev")
+    for f in columns:
         val = df[f].std()
         print(f"{f},{val}")
-
-
-def correlation(df, options):
-    print("feature1,feature2,coefficient,p-value")
-    if options.method == 'pearson':
-        corr_fun = scipy.stats.pearsonr
-    elif options.method == 'spearman':
-        corr_fun = scipy.stats.spearmanr
-    elif options.method == 'kendall':
-        corr_fun = scipy.stats.kendalltau
-    if options.features is not None:
-        features = options.features
-        utils.check_df_has_features(df, features)
-    else:
-        numeric_df = df.select_dtypes(include=np.number)
-        features = list(numeric_df.columns)
-    for f1, f2 in combinations(features, 2): 
-       coeff, p_value = corr_fun(df[f1], df[f2])
-       print(f"{f1},{f2},{coeff},{p_value}")
-
-
-def display_info(df, options):
-    rows, cols = df.shape 
-    pd.set_option('display.max_columns', None)
-    # optionally select only certain columns to display
-    if options.features is not None:
-        df = df[options.features]
-    print(df.describe(include='all'))
-    print(f"\nrows: {rows}, cols: {cols}")
-
-

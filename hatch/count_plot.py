@@ -17,7 +17,7 @@ import hatch.utils as utils
 from hatch.command_base import CommandBase
 
 class CountPlot(CommandBase, name="count"):
-    description = "Show count of categorical features using bars."
+    description = "Show count of categorical columns using bars."
     category = "plotting"
 
     def __init__(self):

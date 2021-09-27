@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 PROGRAM_NAME = "hatch"
 
-COMMAND_CATEGORIES = ["input/output", "plotting", "transformation", "statistics"]
+COMMAND_CATEGORIES = ["input/output", "plotting", "transformation", "information"]
 
 # exit status values
 EXIT_FILE_IO_ERROR = 1

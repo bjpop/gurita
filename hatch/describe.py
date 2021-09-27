@@ -1,6 +1,6 @@
 '''
-Module      : columns 
-Description : Select (retain) a subset of columns from the dataset by name, and drop all the others
+Module      : describe 
+Description : Display summary information about the columns in the current data frame 
 Copyright   : (c) Bernie Pope, 16 Oct 2019 
 License     : MIT 
 Maintainer  : bjpope@unimelb.edu.au 
@@ -12,9 +12,9 @@ import pandas as pd
 from hatch.command_base import CommandBase
 import hatch.utils as utils
 
-class Columns(CommandBase, name="columns"):
-    description = "Select a subset of columns by name from the dataset, and remove the non-selected ones" 
-    category = "transformation"
+class Describe(CommandBase, name="describe"):
+    description = "Show summary information about columns in the input data set."
+    category = "information"
     
     def __init__(self):
         self.options = None
@@ -22,20 +22,22 @@ class Columns(CommandBase, name="columns"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
-        help=f'Select only these named columns')
+            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+        help=f'Select only these columns (columns)')
         self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
-        if options.columns is not None:
+        rows, cols = df.shape
+        pd.set_option('display.max_columns', None)
+        if options.columns:
             columns = options.columns
             valid_columns, invalid_columns = utils.validate_columns(df, columns)
             if valid_columns:
-                df = df[valid_columns]
-            else:
-                print("\ncolumns command: no valid columns were specified, so the data set was unchanged")
+                print(df[valid_columns].describe(include='all'))
             if invalid_columns:
-                print("columns command: following requested columns are not in the data, and could not be selected:")
+                print(f"\n{self.name} command: following requested columns are not in the data:")
                 print("\n".join(invalid_columns))
+        else:
+            print(df.describe(include='all'))
         return df

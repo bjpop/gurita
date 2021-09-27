@@ -15,7 +15,7 @@ import argparse
 from hatch.command_base import CommandBase
 
 class ScatterPlot(CommandBase, name="scatter"):
-    description = "Scatter plot of two numerical features."
+    description = "Scatter plot of two numerical columns."
     category = "plotting"
 
     def __init__(self):

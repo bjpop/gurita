@@ -15,7 +15,7 @@ import hatch.plot_arguments as plot_args
 from hatch.command_base import CommandBase
 
 class ViolinPlot(CommandBase, name="violin"):
-    description = "Show distrbution of numerical feature using violin, optionally grouped by categorical features."
+    description = "Show distrbution of numerical column using violin, optionally grouped by categorical columns."
     category = "plotting"
 
     def __init__(self):

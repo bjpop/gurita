@@ -22,7 +22,7 @@ class Stdin(CommandBase, name="stdin"):
     def __init__(self):
         self.options = None
 
-    def parse_args(self, args):
+    def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.file_format, io_args.na, io_args.navalues], add_help=True)
         self.options = parser.parse_args(args)
@@ -49,7 +49,7 @@ class In(CommandBase, name="in"):
     def __init__(self):
         self.options = None
 
-    def parse_args(self, args):
+    def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.file_format, io_args.na, io_args.navalues], add_help=True)
         parser.add_argument('input_file', metavar='FILE', type=str, 
