@@ -19,8 +19,8 @@ import hatch.utils as utils
 import hatch.constants as const
 
 class IsNorm(CommandBase, name="isnorm"):
-    description = "Test whether numerical features differ from a normal distribution"
-    category = "information"
+    description = "Test whether numerical features differ from a normal distribution."
+    category = "summary information"
 
     def __init__(self):
         self.options = None
@@ -55,7 +55,7 @@ class IsNorm(CommandBase, name="isnorm"):
 
 class Correlation(CommandBase, name="correlation"):
     description = "Test for pairwise correlation between numerical columns." 
-    category = "information"
+    category = "summary information"
 
     def __init__(self):
         self.options = None

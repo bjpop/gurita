@@ -21,7 +21,7 @@ class Stdout(CommandBase, name="stdout"):
     def __init__(self):
         self.options = None
 
-    def parse_args(self, args):
+    def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.file_format, io_args.na], add_help=True)
         self.options = parser.parse_args(args)
@@ -43,7 +43,7 @@ class Out(CommandBase, name="out"):
     def __init__(self):
         self.options = None
 
-    def parse_args(self, args):
+    def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.file_format, io_args.na], add_help=True)
         parser.add_argument('out', metavar='FILE', type=str, nargs='?',

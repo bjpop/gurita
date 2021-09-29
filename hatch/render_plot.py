@@ -13,10 +13,10 @@ from pathlib import Path
 import hatch.utils as utils
 import seaborn as sns
 
-def facet_plot(options, graph, kind):
-    if options.logx:
+def render_plot(options, graph, kind):
+    if hasattr(options, "logx") and options.logx:
         graph.set(xscale="log")
-    if options.logy:
+    if hasattr(options, "logy") and options.logy: 
         graph.set(yscale="log")
     if hasattr(options, 'title') and options.title is not None:
         plt.title(options.title)
@@ -59,11 +59,11 @@ def make_output_filename(options, kind):
     else:
         extension = [options.format]
         output_name = [utils.get_output_name(options)]
-        y_str = utils.output_field(options.yaxis)
-        x_str = utils.output_field(options.xaxis)
-        hue_str = utils.output_field(options.hue)
-        row_str = utils.output_field(options.row)
-        col_str = utils.output_field(options.col)
+        y_str = utils.output_field(options, 'yaxis')
+        x_str = utils.output_field(options, 'xaxis')
+        hue_str = utils.output_field(options, 'hue')
+        row_str = utils.output_field(options, 'row')
+        col_str = utils.output_field(options, 'col')
         path = Path('.'.join(output_name + x_str + y_str +
                              hue_str + row_str + col_str +
                              [kind] + extension))

@@ -11,10 +11,11 @@ import argparse
 import pandas as pd
 from hatch.command_base import CommandBase
 import hatch.utils as utils
+from hatch.constants import PROGRAM_NAME
 
 class Describe(CommandBase, name="describe"):
     description = "Show summary information about columns in the input data set."
-    category = "information"
+    category = "summary information"
     
     def __init__(self):
         self.options = None
@@ -36,7 +37,7 @@ class Describe(CommandBase, name="describe"):
             if valid_columns:
                 print(df[valid_columns].describe(include='all'))
             if invalid_columns:
-                print(f"\n{self.name} command: following requested columns are not in the data:")
+                print(f"{PROGRAM_NAME} {self.name} WARNING: the following requested columns are not in the data:")
                 print("\n".join(invalid_columns))
         else:
             print(df.describe(include='all'))

@@ -66,5 +66,5 @@ class HistogramPlot(CommandBase, name="histogram"):
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
-        render_plot.facet_plot(options, graph, self.name)
+        render_plot.render_plot(options, graph, self.name)
         return df

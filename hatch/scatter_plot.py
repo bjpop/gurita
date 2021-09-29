@@ -53,5 +53,5 @@ class ScatterPlot(CommandBase, name="scatter"):
             for ax in graph.axes.ravel():
                 for pos in options.hlines:
                     ax.axhline(pos)
-        render_plot.facet_plot(options, graph, self.name)
+        render_plot.render_plot(options, graph, self.name)
         return df

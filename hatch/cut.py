@@ -11,9 +11,10 @@ import argparse
 import pandas as pd
 from hatch.command_base import CommandBase
 import hatch.utils as utils
+from hatch.constants import PROGRAM_NAME
 
 class Cut(CommandBase, name="cut"):
-    description = "Select a subset of columns by name from the dataset, and remove the non-selected ones." 
+    description = "Select a subset of columns by name from the dataset and remove the non-selected ones." 
     category = "transformation"
     
     def __init__(self):
@@ -34,8 +35,10 @@ class Cut(CommandBase, name="cut"):
             if valid_columns:
                 df = df[valid_columns]
             else:
-                print(f"\n{self.name} command: no valid columns were specified, so the data set was unchanged")
+                print(f"{PROGRAM_NAME} {self.name} WARNING: no valid columns were specified")
+                # return None as the result, we should stop here 
+                df = None 
             if invalid_columns:
-                print(f"\n{self.name} command: following requested columns are not in the data, and could not be selected:")
+                print(f"{PROGRAM_NAME} {self.name} WARNING: the following requested columns are not in the data, and could not be selected:")
                 print("\n".join(invalid_columns))
         return df

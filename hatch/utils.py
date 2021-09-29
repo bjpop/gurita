@@ -65,8 +65,11 @@ def get_output_name(options):
     else:
         return const.DEFAULT_OUTPUT_NAME
 
-def output_field(field):
-    return [field.replace(' ', '_')] if field is not None else []
+def output_field(options, field):
+    if hasattr(options, field) and getattr(options, field) is not None:
+        return [getattr(options, field).replace(' ', '_')]
+    else:
+        return [] 
 
 
 def make_unique_numbered_filepath(path):

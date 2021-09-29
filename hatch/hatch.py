@@ -27,6 +27,8 @@ import hatch.scatter_plot
 import hatch.histogram_plot
 import hatch.count_plot
 import hatch.line_plot
+import hatch.heatmap
+import hatch.clustermap
 import hatch.filter_rows
 import hatch.sample_rows
 import hatch.output
@@ -98,6 +100,8 @@ def main():
             df = command.run(df)
         except ValueError as e:
             utils.exit_with_error(f"Error: {str(e)}", const.EXIT_COMMAND_LINE_ERROR)
+        if df is None:
+            break
     logging.info("Completed")
     exit(0)
 

@@ -44,5 +44,5 @@ class BarPlot(CommandBase, name="bar"):
                 height=options.height, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
-        render_plot.facet_plot(options, graph, self.name)
+        render_plot.render_plot(options, graph, self.name)
         return df
