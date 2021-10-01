@@ -38,6 +38,8 @@ DEFAULT_ISNORM_NANPOLICY = 'propagate'
 DEFAULT_CLUSTERMAP_METHOD = 'average'
 DEFAULT_CLUSTERMAP_METRIC = 'euclidean' 
 DEFAULT_NA = ''
+DEFAULT_MELT_VALNAME = "value"
+DEFAULT_MELT_VARNAME = "variable"
 
 ALLOWED_FILETYPES = ['csv', 'tsv']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']

@@ -38,8 +38,9 @@ import hatch.eval
 import hatch.describe
 import hatch.cut
 import hatch.stats
+import hatch.reshape
 
-def init_logging(log_filename):
+def init_logging(log_filename=None):
     '''If the log_filename is defined, then
     initialise the logging facility, and write log statement
     indicating the program has started, and also write out the
@@ -53,7 +54,8 @@ def init_logging(log_filename):
     '''
     if log_filename is not None:
         logging.basicConfig(filename=log_filename,
-                            level=logging.INFO,
+                            #level=logging.INFO,
+                            level=logging.CRITICAL,
                             filemode='w',
                             format='%(asctime)s %(levelname)s - %(message)s',
                             datefmt='%m-%d-%Y %H:%M:%S')
@@ -82,6 +84,7 @@ def is_last_command_transform(commands):
 def main():
     df = None
     commands = args.parse_commandline()
+    init_logging()
     if not is_first_command_input(commands):
         # If the first command is not an explict read of input data
         # either from stdin or a file then we add an implicit read from 

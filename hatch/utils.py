@@ -32,6 +32,20 @@ def validate_columns(df, columns):
            invalid_columns.append(f)
     return valid_columns, invalid_columns
 
+def validate_columns_error(df, columns):
+    valid_columns = []
+    invalid_columns = []
+    for f in columns:
+        if f in df:
+           valid_columns.append(f)
+        else:
+           invalid_columns.append(f)
+    if invalid_columns:
+        bad_columns_str = ', '.join(invalid_columns)
+        exit_with_error(f"The following requested columns are not in the data: {bad_columns_str}", const.EXIT_COMMAND_LINE_ERROR)
+    else:
+        return valid_columns, invalid_columns
+
 
 def exit_with_error(message, exit_status):
     '''Print an error message to stderr, prefixed by the program name and 'ERROR'.
