@@ -42,7 +42,6 @@ class Melt(CommandBase, name="melt"):
             utils.validate_columns_error(df, options.ids)
         if options.vals:
             utils.validate_columns_error(df, options.vals)
-        print(options.valname)
         df = df.melt(id_vars=options.ids, value_vars=options.vals, var_name=options.varname, value_name=options.valname)
         return df
 

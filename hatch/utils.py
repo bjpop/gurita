@@ -44,7 +44,7 @@ def validate_columns_error(df, columns):
         bad_columns_str = ', '.join(invalid_columns)
         exit_with_error(f"The following requested columns are not in the data: {bad_columns_str}", const.EXIT_COMMAND_LINE_ERROR)
     else:
-        return valid_columns, invalid_columns
+        return valid_columns 
 
 
 def exit_with_error(message, exit_status):

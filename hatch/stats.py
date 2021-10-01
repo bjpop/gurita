@@ -53,9 +53,9 @@ class IsNorm(CommandBase, name="isnorm"):
         return df
 
 
-class Correlation(CommandBase, name="correlation"):
+class Correlation(CommandBase, name="corr"):
     description = "Test for pairwise correlation between numerical columns." 
-    category = "summary information"
+    category = "transformation"
 
     def __init__(self):
         self.options = None
@@ -72,29 +72,11 @@ class Correlation(CommandBase, name="correlation"):
 
     def run(self, df):
         options = self.options
-        if options.method == 'pearson':
-            corr_fun = scipy.stats.pearsonr
-        elif options.method == 'spearman':
-            corr_fun = scipy.stats.spearmanr
-        elif options.method == 'kendall':
-            corr_fun = scipy.stats.kendalltau
         if options.columns is not None:
-            columns = options.columns
-            valid_columns, invalid_columns = utils.validate_columns(df, columns)
-        else:
-            numeric_df = df.select_dtypes(include=np.number)
-            valid_columns = list(numeric_df.columns)
-            invalid_columns = []
-        if valid_columns:
-            print("column1,column2,coefficient,p-value")
-            for f1, f2 in combinations(valid_columns, 2): 
-               coeff, p_value = corr_fun(df[f1], df[f2])
-               print(f"{f1},{f2},{coeff},{p_value}")
-        else:
-            print(f"{self.name} command: no valid columns were specified in the data")
-        if invalid_columns:
-            print(f"{self.name} command: following requested columns are not in the data:")
-            print("\n".join(invalid_columns))
+            valid_columns = utils.validate_columns_error(df, options.columns)
+            if valid_columns:
+                df = df[valid_columns]
+        df = df.corr(method=options.method).reset_index()
         return df
 
 
