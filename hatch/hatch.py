@@ -52,7 +52,7 @@ def is_first_command_input(commands):
     if len(commands) > 0:
         first_command = commands[0]
         type_first_command = type(first_command)
-        return (type_first_command is hatch.input.In) or (type_first_command is hatch.input.Stdin)
+        return (type_first_command is hatch.io.In) or (type_first_command is hatch.io.Stdin)
     else:
         return False
 
@@ -72,13 +72,13 @@ def main():
         # If the first command is not an explict read of input data
         # either from stdin or a file then we add an implicit read from 
         # stdin to the command stream
-        stdin_reader = hatch.input.Stdin()
+        stdin_reader = hatch.io.Stdin()
         stdin_reader.parse_args()
         commands = [stdin_reader] + commands
     if is_last_command_transform(commands):
         # If the last command is a data transformation command then
         # we add an implicit print to stdout to the command stream
-        stdout_writer = hatch.output.Stdout()
+        stdout_writer = hatch.io.Stdout()
         stdout_writer.parse_args()
         commands = commands + [stdout_writer]
     for command in commands:
