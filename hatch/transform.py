@@ -268,3 +268,18 @@ class Head(CommandBase, name="head"):
     def run(self, df):
         return df.head(self.options.num)
     
+
+#class Transpose(CommandBase, name="transpose"):
+#    description = "Transpose the data." 
+#    category = "transformation"
+#    
+#    def __init__(self):
+#        self.options = None
+#
+#    def parse_args(self, args):
+#        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+#        self.options = parser.parse_args(args)
+#
+#    def run(self, df):
+#        return df.transpose().reset_index()
+    
