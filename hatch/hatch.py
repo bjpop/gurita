@@ -16,19 +16,7 @@ from hatch.command_base import CommandBase
 import hatch.args as args
 import hatch.utils as utils
 import hatch.constants as const
-import hatch.box_plot
-import hatch.boxen_plot
-import hatch.violin_plot
-import hatch.swarm_plot
-import hatch.strip_plot
-import hatch.bar_plot
-import hatch.point_plot
-import hatch.scatter_plot
-import hatch.histogram_plot
-import hatch.count_plot
-import hatch.line_plot
-import hatch.heatmap
-import hatch.clustermap
+import hatch.plot
 import hatch.filter_rows
 import hatch.sample_rows
 import hatch.output
