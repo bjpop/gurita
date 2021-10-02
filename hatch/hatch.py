@@ -17,17 +17,11 @@ import hatch.args as args
 import hatch.utils as utils
 import hatch.constants as const
 import hatch.plot
-import hatch.filter_rows
-import hatch.sample_rows
-import hatch.output
-import hatch.input
+import hatch.transform
+import hatch.io
 import hatch.pca
-import hatch.eval
 import hatch.describe
-import hatch.cut
 import hatch.stats
-import hatch.reshape
-import hatch.sort
 
 def init_logging(log_filename=None):
     '''If the log_filename is defined, then

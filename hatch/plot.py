@@ -213,6 +213,7 @@ class Clustermap(CommandBase, name="clustermap"):
         render_plot.render_plot(options, graph, self.name)
         return df
 
+
 class Heatmap(CommandBase, name="heatmap"):
     description = "Heatmap of two categorical columns." 
     category = "plotting"
@@ -381,6 +382,7 @@ class PointPlot(CommandBase, name="point"):
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
+
 
 class ScatterPlot(CommandBase, name="scatter"):
     description = "Scatter plot of two numerical columns."
