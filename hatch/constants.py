@@ -43,6 +43,8 @@ DEFAULT_MELT_VARNAME = "variable"
 DEFAULT_SORT_NAPOS = "last"
 # use ascending order by default
 DEFAULT_SORT_ORDER = "a"
+DEFAULT_TAIL_NUM = 5
+DEFAULT_HEAD_NUM = 5
 
 ALLOWED_FILETYPES = ['csv', 'tsv']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']

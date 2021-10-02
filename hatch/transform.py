@@ -230,3 +230,41 @@ class Sort(CommandBase, name="sort"):
 def get_sort_ordering(columns, order):
     pairs = zip(columns, chain(order, repeat(const.DEFAULT_SORT_ORDER)))
     return [code == const.DEFAULT_SORT_ORDER for (col, code) in pairs]
+
+
+class Tail(CommandBase, name="tail"):
+    description = "Select the last N rows in the data." 
+    category = "transformation"
+    
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-n', '--num', metavar='NUM', nargs="?", type=int, required=False,
+            default=const.DEFAULT_TAIL_NUM,
+            help=f'Number of trailing rows to select. If NUM is negative then select all rows except the first NUM rows')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        return df.tail(self.options.num)
+    
+class Head(CommandBase, name="head"):
+    description = "Select the first N rows in the data." 
+    category = "transformation"
+    
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-n', '--num', metavar='NUM', nargs="?", type=int, required=False,
+            default=const.DEFAULT_TAIL_NUM,
+            help=f'Number of leading rows to select. If NUM is negative then select all rows except the last NUM rows')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        return df.head(self.options.num)
+    
