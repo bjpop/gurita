@@ -73,9 +73,8 @@ class Correlation(CommandBase, name="corr"):
     def run(self, df):
         options = self.options
         if options.columns is not None:
-            valid_columns = utils.validate_columns_error(df, options.columns)
-            if valid_columns:
-                df = df[valid_columns]
+            utils.validate_columns_error(df, options.columns)
+            df = df[valid_columns]
         df = df.corr(method=options.method).reset_index()
         return df
 

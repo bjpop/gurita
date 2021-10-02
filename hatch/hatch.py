@@ -39,6 +39,7 @@ import hatch.describe
 import hatch.cut
 import hatch.stats
 import hatch.reshape
+import hatch.sort
 
 def init_logging(log_filename=None):
     '''If the log_filename is defined, then

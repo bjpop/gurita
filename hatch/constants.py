@@ -40,6 +40,9 @@ DEFAULT_CLUSTERMAP_METRIC = 'euclidean'
 DEFAULT_NA = ''
 DEFAULT_MELT_VALNAME = "value"
 DEFAULT_MELT_VARNAME = "variable"
+DEFAULT_SORT_NAPOS = "last"
+# use ascending order by default
+DEFAULT_SORT_ORDER = "a"
 
 ALLOWED_FILETYPES = ['csv', 'tsv']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -52,6 +55,9 @@ ALLOWED_CORR_METHODS = ['pearson', 'kendall', 'spearman']
 ALLOWED_HIST_MULTIPLES = ['layer', 'dodge', 'stack', 'fill']
 ALLOWED_ISNORM_NAN_POLICIES = ['propagate', 'raise', 'omit']
 ALLOWED_PCA_MISSING = ['drop', 'imputemean', 'imputemedian', 'imputemostfrequent']
+ALLOWED_SORT_NAPOS = ['first', 'last']
+# a = ascend, d = descend
+ALLOWED_SORT_ORDER = ['a', 'd']
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
