@@ -543,9 +543,9 @@ class CountPlot(CommandBase, name="count"):
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
            add_help=False)
         options = parser.parse_args(args)
-        if self.options.xaxis is not None and self.options.yaxis is not None:
+        if options.xaxis is not None and options.yaxis is not None:
             utils.exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a count plot", const.EXIT_COMMAND_LINE_ERROR)
-        if self.options.xaxis is None and self.options.yaxis is None:
+        if options.xaxis is None and options.yaxis is None:
             utils.exit_with_error("A count plot requires either -x (--xaxis) OR -y (--yaxis) to be specified", const.EXIT_COMMAND_LINE_ERROR)
         self.options = options
 
