@@ -18,7 +18,7 @@ import hatch.io_arguments as io_args
 import hatch.plot_arguments as plot_args
 
 class Heatmap(CommandBase, name="heatmap"):
-    description = "Heatmap of two categorical features associated with a numerical value" 
+    description = "Heatmap of two categorical columns." 
     category = "plotting"
 
     def __init__(self):

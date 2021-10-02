@@ -14,7 +14,7 @@ import hatch.constants as const
 import hatch.utils as utils
 
 class Melt(CommandBase, name="melt"):
-    description = "Reshape a wide format dataset into a long format dataset. Opposite of pivot."
+    description = "Reshape a wide format dataset into a long format dataset."
     category = "transformation"
 
     def __init__(self):
@@ -47,7 +47,7 @@ class Melt(CommandBase, name="melt"):
 
 
 class Pivot(CommandBase, name="pivot"):
-    description = "Reshape a long format dataset into a wide format dataset. Opposite of melt."
+    description = "Reshape a long format dataset into a wide format dataset."
     category = "transformation"
 
     def __init__(self):

@@ -13,7 +13,7 @@ import hatch.constants as const
 from hatch.command_base import CommandBase
 
 class Eval(CommandBase, name="eval"):
-    description = "Compute new columns for each row based on existing columns with an expression."
+    description = "Compute new columns for each row with an expression."
     category = "transformation" 
     
     def __init__(self):

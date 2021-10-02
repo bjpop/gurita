@@ -14,7 +14,7 @@ import hatch.utils as utils
 from hatch.constants import PROGRAM_NAME
 
 class Describe(CommandBase, name="describe"):
-    description = "Show summary information about columns in the input data set."
+    description = "Show summary information about the input data set."
     category = "summary information"
     
     def __init__(self):

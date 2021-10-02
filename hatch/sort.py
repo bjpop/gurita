@@ -39,7 +39,6 @@ class Sort(CommandBase, name="sort"):
     def run(self, df):
         options = self.options
         ordering = get_ordering(options.columns, options.order)
-        print(ordering)
         utils.validate_columns_error(df, options.columns)
         df = df.sort_values(by=options.columns, na_position=options.napos, ascending=ordering)
         return df

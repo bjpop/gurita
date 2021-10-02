@@ -14,7 +14,7 @@ import hatch.utils as utils
 from hatch.constants import PROGRAM_NAME
 
 class Cut(CommandBase, name="cut"):
-    description = "Select a subset of columns by name from the dataset and remove the non-selected ones." 
+    description = "Select a subset of columns by name." 
     category = "transformation"
     
     def __init__(self):

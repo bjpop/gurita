@@ -15,7 +15,7 @@ import hatch.plot_arguments as plot_args
 from hatch.command_base import CommandBase
 
 class BoxPlot(CommandBase, name="box"):
-    description = "Show distrbution of numerical column using box-and-whiskers, optionally grouped by categorical columns."
+    description = "Plot distrbution of numerical column using box-and-whiskers."
     category = "plotting"
 
     def __init__(self):

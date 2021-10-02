@@ -54,7 +54,7 @@ class IsNorm(CommandBase, name="isnorm"):
 
 
 class Correlation(CommandBase, name="corr"):
-    description = "Test for pairwise correlation between numerical columns." 
+    description = "Pairwise correlation between numerical columns." 
     category = "transformation"
 
     def __init__(self):
