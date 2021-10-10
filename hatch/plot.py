@@ -64,7 +64,8 @@ class BoxPlot(CommandBase, name="box"):
             parents=[io_args.io_arguments, plot_args.plot_arguments,
                 plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                 plot_args.order, plot_args.hue_order, plot_args.orient,
-                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
+                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
+                plot_args.strip, plot_args.nooutliers],
            add_help=False)
         self.options = parser.parse_args(args)
 
@@ -81,7 +82,10 @@ class BoxPlot(CommandBase, name="box"):
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
                 height=options.height, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
+                showfliers=not(options.nooutliers),
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+        if options.strip:
+            graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black")
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -98,7 +102,8 @@ class BoxenPlot(CommandBase, name="boxen"):
             parents=[io_args.io_arguments, plot_args.plot_arguments,
                 plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                 plot_args.order, plot_args.hue_order, plot_args.orient,
-                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
+                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
+                plot_args.strip, plot_args.nooutliers],
            add_help=False)
         self.options = parser.parse_args(args)
 
@@ -115,7 +120,10 @@ class BoxenPlot(CommandBase, name="boxen"):
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
                 height=options.height, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
+                showfliers=not(options.nooutliers),
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+        if options.strip:
+            graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black")
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -507,7 +515,8 @@ class ViolinPlot(CommandBase, name="violin"):
             parents=[io_args.io_arguments, plot_args.plot_arguments,
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
+               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
+               plot_args.strip],
             add_help=False)
         self.options = parser.parse_args(args)
 
@@ -525,6 +534,8 @@ class ViolinPlot(CommandBase, name="violin"):
                 height=options.height, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+        if options.strip:
+            graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black")
         render_plot.render_plot(options, graph, self.name) 
         return df
 
