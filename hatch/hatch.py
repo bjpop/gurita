@@ -22,6 +22,7 @@ import hatch.io
 import hatch.pca
 import hatch.describe
 import hatch.stats
+import hatch.cluster
 
 def init_logging(log_filename=None):
     '''If the log_filename is defined, then
