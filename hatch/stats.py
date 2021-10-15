@@ -34,22 +34,20 @@ class IsNorm(CommandBase, name="isnorm"):
 
     def run(self, df):
         options = self.options
+        selected_columns = df
+
         if options.columns is not None:
-            columns = options.columns
-            valid_columns, invalid_columns = utils.validate_columns(df, columns)
-        else:
-            numeric_df = df.select_dtypes(include=np.number)
-            valid_columns = list(numeric_df.columns)
-        if valid_columns:
+            utils.validate_columns_error(df, options.columns)
+            selected_columns = df[options.columns]
+
+        numeric_df = selected_columns.select_dtypes(include=np.number)
+        numeric_column_names = list(numeric_df.columns)
+
+        if numeric_column_names:
             print("column,statistic,p-value")
-            for f in valid_columns:
+            for f in numeric_column_names:
                 k2, p_value = scipy.stats.normaltest(df[f]) 
                 print(f"{f},{k2},{p_value}")
-        else:
-            print(f"\n{self.name} command: no valid columns were specified in the data")
-        if invalid_columns:
-            print(f"\n{self.name} command: following requested columns are not in the data:")
-            print("\n".join(invalid_columns))
         return df
 
 
@@ -74,7 +72,7 @@ class Correlation(CommandBase, name="corr"):
         options = self.options
         if options.columns is not None:
             utils.validate_columns_error(df, options.columns)
-            df = df[valid_columns]
+            df = df[options.columns]
         df = df.corr(method=options.method).reset_index()
         return df
 
