@@ -64,5 +64,7 @@ class Pretty(CommandBase, name="pretty"):
         selected_df = df
         if options.columns:
             utils.validate_columns_error(df, options.columns)
-        print(selected_df.to_string(columns=options.columns, header=True, max_rows=options.maxrows, max_cols=options.maxcols, show_dimensions=True, index=False))
+        print(selected_df.to_string(columns=options.columns, header=True, max_rows=options.maxrows, max_cols=options.maxcols, show_dimensions=False, index=False))
+        nrows, ncols = df.shape
+        print(f"\n[{nrows} rows x {ncols} columns]")
         return df

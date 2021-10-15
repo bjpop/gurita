@@ -242,9 +242,9 @@ class Tail(CommandBase, name="tail"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-n', '--num', metavar='NUM', nargs="?", type=int, required=False,
+            'num', metavar='NUM', type=int, nargs='?', 
             default=const.DEFAULT_TAIL_NUM,
-            help=f'Number of trailing rows to select. If NUM is negative then select all rows except the first NUM rows')
+            help=f'Number of trailing rows to select. If NUM is negative then select all rows except the first NUM rows. Default: %(default)s.')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -260,9 +260,9 @@ class Head(CommandBase, name="head"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-n', '--num', metavar='NUM', nargs="?", type=int, required=False,
+            'num', metavar='NUM', type=int, nargs='?',
             default=const.DEFAULT_TAIL_NUM,
-            help=f'Number of leading rows to select. If NUM is negative then select all rows except the last NUM rows')
+            help=f'Number of leading rows to select. If NUM is negative then select all rows except the last NUM rows. Default: %(default)s.')
         self.options = parser.parse_args(args)
 
     def run(self, df):
