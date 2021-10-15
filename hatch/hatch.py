@@ -20,7 +20,7 @@ import hatch.plot
 import hatch.transform
 import hatch.io
 import hatch.pca
-import hatch.describe
+import hatch.info
 import hatch.stats
 import hatch.cluster
 
@@ -58,39 +58,57 @@ def is_first_command_input(commands):
         return False
 
 
-def is_last_command_transform(commands):
+def is_last_command_transform_or_input(commands):
     if len(commands) > 0:
-        return commands[-1].category == 'transformation'
+        last_command = commands[-1]
+        type_last_command = type(last_command)
+        return (last_command.category == 'transformation') or (type_last_command is hatch.io.In) or (type_last_command is hatch.io.Stdin)
     else:
         return False
 
+# stdin may only be used at most once, and only at the beginning of the command sequence
+def stdin_used_safely(commands):
+    count = 0
+    for command in commands:
+        if type(command) is hatch.io.Stdin:
+            count += 1
+    if count == 0:
+        return True
+    elif count == 1:
+        return type(commands[0] is hatch.io.Stdin)
+    else:
+        return False
 
 def main():
     df = None
-    commands = args.parse_commandline()
+    original_commands = args.parse_commandline()
+    new_commands = original_commands
     init_logging()
-    if not is_first_command_input(commands):
+    if not is_first_command_input(original_commands):
         # If the first command is not an explict read of input data
         # either from stdin or a file then we add an implicit read from 
         # stdin to the command stream
         stdin_reader = hatch.io.Stdin()
         stdin_reader.parse_args()
-        commands = [stdin_reader] + commands
-    if is_last_command_transform(commands):
-        # If the last command is a data transformation command then
+        new_commands = [stdin_reader] + new_commands 
+    if (len(original_commands) == 0) or is_last_command_transform_or_input(original_commands):
+        # If the last command is a data transformation command or an input command then
         # we add an implicit print to stdout to the command stream
         stdout_writer = hatch.io.Stdout()
         stdout_writer.parse_args()
-        commands = commands + [stdout_writer]
-    for command in commands:
-        try:
-            df = command.run(df)
-        except ValueError as e:
-            utils.exit_with_error(f"Error: {str(e)}", const.EXIT_COMMAND_LINE_ERROR)
-        if df is None:
-            break
-    logging.info("Completed")
-    exit(0)
+        new_commands = new_commands + [stdout_writer]
+    if not stdin_used_safely(new_commands):
+        utils.exit_with_error(f"stdin may only be used at most once, and only as the first command", const.EXIT_COMMAND_LINE_ERROR)
+    else:
+        for command in new_commands:
+            try:
+                df = command.run(df)
+            except ValueError as e:
+                utils.exit_with_error(f"Error: {str(e)}", const.EXIT_COMMAND_LINE_ERROR)
+            if df is None:
+                break
+        logging.info("Completed")
+        exit(0)
 
 
 # If this script is run from the command line then call the main function.

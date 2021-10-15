@@ -14,6 +14,7 @@ from pathlib import Path
 from hatch.command_base import CommandBase
 import hatch.io_arguments as io_args
 import hatch.utils as utils
+import hatch.constants as const
 
 
 class Stdin(CommandBase, name="stdin"):
@@ -54,8 +55,7 @@ class In(CommandBase, name="in"):
     def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.file_format, io_args.na, io_args.navalues], add_help=True)
-        parser.add_argument('-f', '--file',  metavar='FILE', type=str, dest='input_file',
-            help=f'Read input from a named file.')
+        parser.add_argument('input', metavar='FILE', type=str, help=f'Read input from a named file.')
         self.options = parser.parse_args(args)
 
     def run(self, _df_ignore):
@@ -65,7 +65,7 @@ class In(CommandBase, name="in"):
         else:
             na_values = None
         sep = None
-        maybe_filetype = utils.get_filetype_from_extension(options.input_file)
+        maybe_filetype = utils.get_filetype_from_extension(options.input)
         if options.format == 'TSV':
             sep = "\t"
         elif options.format == 'CSV':
@@ -78,9 +78,9 @@ class In(CommandBase, name="in"):
             dtype = None
             #if options.category:
             #   dtype = { column : 'category' for column in options.category }
-            df = pd.read_csv(options.input_file, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
+            df = pd.read_csv(options.input, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
         except IOError:
-            utils.exit_with_error(f"Could not open or read from file: {options.input_file}", const.EXIT_FILE_IO_ERROR)
+            utils.exit_with_error(f"Could not open or read from file: {options.input}", const.EXIT_FILE_IO_ERROR)
         return df
 
 

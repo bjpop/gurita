@@ -17,6 +17,7 @@ import numpy as np
 import argparse
 import hatch.constants as const
 from hatch.command_base import CommandBase
+import hatch.utils as utils
 
 class PCA(CommandBase, name="pca"):
     description = "Principal component analysis (PCA)."
@@ -27,6 +28,9 @@ class PCA(CommandBase, name="pca"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            help=f'Select only these named columns')
         parser.add_argument(
             '--missing', required=False, default=const.DEFAULT_PCA_MISSING, choices=const.ALLOWED_PCA_MISSING,
             help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
@@ -39,6 +43,13 @@ class PCA(CommandBase, name="pca"):
         self.options = parser.parse_args(args)
     
     def run(self, df):
+        options = self.options
+        if options.columns is not None:
+            columns = options.columns
+            valid_columns = utils.validate_columns_error(df, columns)
+            if valid_columns:
+                df = df[valid_columns]
+
         # select only numeric columns for the PCA
         numeric_df = df.select_dtypes(include=np.number)
 

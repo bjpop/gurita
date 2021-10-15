@@ -130,7 +130,6 @@ def parse_commandline():
             else:
                 utils.exit_with_error(f"Unrecognised subcommand: {command_name}", const.EXIT_COMMAND_LINE_ERROR)
         return result 
-
     else:
-        display_usage()
-        exit(0)
+        # An empty command line is ok
+        return []

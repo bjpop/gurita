@@ -16,6 +16,7 @@ import numpy as np
 import argparse
 import hatch.constants as const
 from hatch.command_base import CommandBase
+import hatch.utils as utils
 
 class KMeans(CommandBase, name="kmeans"):
     description = "k-means clustering"
@@ -27,6 +28,9 @@ class KMeans(CommandBase, name="kmeans"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            help=f'Select only these named columns')
+        parser.add_argument(
             '--clusterprefix', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
             help=f'Column label prefix for cluster axes. Default: %(default)s.')
         parser.add_argument(
@@ -36,14 +40,23 @@ class KMeans(CommandBase, name="kmeans"):
     
     def run(self, df):
         options = self.options
-        # select only numeric columns for the PCA
-        numeric_df = df.select_dtypes(include=np.number)
+        selected_df = df
+
+        if options.columns is not None:
+            columns = options.columns
+            utils.validate_columns_error(df, columns)
+            selected_df = selected_df[columns]
+
+        # select only numeric columns for the cluster 
+        numeric_df = selected_df.select_dtypes(include=np.number)
+
+        # XXX do we need to dropna?
+
         # Cluster the standardized data
         kmeans = skcluster.KMeans(n_clusters=options.nclusters)
         kmeans_transform = kmeans.fit_predict(numeric_df)
-        new_column_headers = [self.options.clusterprefix] 
-        cluster_columns = pd.DataFrame(data = kmeans_transform, columns = new_column_headers)
-        return df.join(cluster_columns)
+        df[self.options.clusterprefix] = pd.Series(kmeans_transform, index=df.index)
+        return df
 
 
 class GMM(CommandBase, name="gmm"):
@@ -56,6 +69,9 @@ class GMM(CommandBase, name="gmm"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            help=f'Select only these named columns')
+        parser.add_argument(
             '--clusterprefix', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
             help=f'Column label prefix for cluster axes. Default: %(default)s.')
         parser.add_argument(
@@ -65,15 +81,23 @@ class GMM(CommandBase, name="gmm"):
             '--maxiter', type=int, required=False, default=const.DEFAULT_GMM_MAX_ITER,
             help=f'Number of expectation maximisation iterations to perform. Default: %(default)s.')
         self.options = parser.parse_args(args)
+
     
     def run(self, df):
         options = self.options
-        # select only numeric columns for the PCA
-        numeric_df = df.select_dtypes(include=np.number)
-        # Perform PCA on the standardized data
+        selected_df = df
+
+        if options.columns is not None:
+            columns = options.columns
+            utils.validate_columns_error(df, columns)
+            selected_df = selected_df[columns]
+
+        # select only numeric columns for the cluster 
+        numeric_df = selected_df.select_dtypes(include=np.number)
+
+        # XXX do we need to dropna?
+
         gmm = GaussianMixture(n_components=options.nclusters, max_iter=options.maxiter)
         gmm_transform = gmm.fit_predict(numeric_df)
-        # Build a new dataframe for the PCA transformed data, adding column headings for the new components
-        new_column_headers = [self.options.clusterprefix] 
-        cluster_columns = pd.DataFrame(data = gmm_transform, columns = new_column_headers)
-        return df.join(cluster_columns)
+        df[self.options.clusterprefix] = pd.Series(gmm_transform, index=df.index)
+        return df
