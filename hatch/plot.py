@@ -276,8 +276,8 @@ class HistogramPlot(CommandBase, name="histogram"):
             '--multiple', required=False, choices=const.ALLOWED_HIST_MULTIPLES,
             help=f"How to display overlapping subsets of data in a histogram. Allowed values: %(choices)s.")
         parser.add_argument(
-            '--bins', metavar='NUM', required=False, type=int,
-            help=f'Number of histogram bins.')
+            '--bins', metavar='NUM', required=False, type=int, default=const.DEFAULT_HISTOGRAM_BINS,
+            help=f'Number of histogram bins. Default: %(default)s.')
         parser.add_argument(
             '--binwidth', metavar='NUM', required=False, type=float,
             help=f'Width of histogram bins, overrides "--bins".')
@@ -306,11 +306,20 @@ class HistogramPlot(CommandBase, name="histogram"):
             kwargs['multiple'] = options.multiple
         if options.kde:
             kwargs['kde'] = options.kde
+        log_axes = [False, False]
+        if options.logx:
+            log_axes[0] = True
+            del options.logx
+        if options.logy:
+            log_axes[1] = True 
+            del options.logy
+        kwargs['log_scale'] = tuple(log_axes) 
         graph = sns.displot(kind='hist', data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
                 height=options.height, aspect=aspect, hue=options.hue,
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
+                #facet_kws=facet_kws, col_wrap=options.colwrap, log_scale=True, **kwargs)
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
