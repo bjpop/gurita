@@ -51,16 +51,16 @@ def make_plot_arguments(default_width=const.DEFAULT_PLOT_WIDTH, default_height=c
         '--ylabel', metavar='STR', required=False, type=str,
         help=f'Label for vertical (Y) axis.')
     plot_arguments_group.add_argument(
-        '--noxticklabels', action='store_true',
+        '--nxtl', '--noxticklabels', action='store_true',
         help=f'Turn of horizontal (X) axis tick labels.')
     plot_arguments_group.add_argument(
-        '--noyticklabels', action='store_true',
+        '--nytl', '--noyticklabels', action='store_true',
         help=f'Turn of veritcal (Y) axis tick labels.')
     plot_arguments_group.add_argument(
-        '--rotxticklabels', metavar='ANGLE', required=False, type=float,
+        '--rxtl', '--rotxticklabels', metavar='ANGLE', required=False, type=float,
         help=f'Rotate X axis tick labels by ANGLE.')
     plot_arguments_group.add_argument(
-        '--rotyticklabels', metavar='ANGLE', required=False, type=float,
+        '--rytl', '--rotyticklabels', metavar='ANGLE', required=False, type=float,
         help=f'Rotate Y axis tick labels by ANGLE.')
 
     return plot_arguments

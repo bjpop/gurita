@@ -30,13 +30,16 @@ def render_plot(options, graph, kind):
     if hasattr(options, 'ylim') and options.ylim is not None:
         ylow, yhigh = options.ylim
         plt.ylim(ylow, yhigh)
-    if hasattr(options, 'rotxticklabels') and options.rotxticklabels is not None:
+    if hasattr(options, 'rxtl') and options.rxtl is not None:
         for ax in graph.axes.ravel():
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=options.rotxticklabels)
-    if hasattr(options, 'noxticklabels') and options.noxticklabels:
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=options.rxtl)
+    if hasattr(options, 'rytl') and options.rytl is not None:
+        for ax in graph.axes.ravel():
+            ax.set_yticklabels(ax.get_yticklabels(), rotation=options.rytl)
+    if hasattr(options, 'nxtl') and options.nxtl:
         graph.set(xticks=[])
         graph.set(xticklabels=[])
-    if hasattr(options, 'noyticklabels') and options.noyticklabels:
+    if hasattr(options, 'nytl') and options.nytl:
         graph.set(yticks=[])
         graph.set(yticklabels=[])
     if options.show:
