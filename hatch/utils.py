@@ -12,6 +12,20 @@ import logging
 from pathlib import Path
 import hatch.constants as const
 
+
+# convert cm measurement to inches
+def plot_dimensions_inches(width, height):
+    width_inches = cm_to_inches(width)
+    height_inches = cm_to_inches(height)
+    aspect = 1
+    if width > 0:
+         aspect = width / height
+    return width_inches, height_inches, aspect
+
+# convert cm measurement to inches
+def cm_to_inches(cm):
+    return cm * 0.393701
+
 def check_df_has_columns(df, columns):
     bad_columns = set()
     for f in columns:

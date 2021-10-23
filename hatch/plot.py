@@ -16,6 +16,46 @@ import hatch.render_plot as render_plot
 import hatch.io_arguments as io_args 
 import hatch.plot_arguments as plot_args 
 import hatch.constants as const
+import hatch.utils as utils
+
+
+class PairPlot(CommandBase, name="pair"):
+    description = "Pair plot of numerical features."
+    category = "plotting"
+
+    def __init__(self):
+        pass
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
+            parents=[io_args.io_arguments,
+                plot_args.make_plot_arguments(const.DEFAULT_PAIR_PLOT_WIDTH, const.DEFAULT_PAIR_PLOT_HEIGHT),
+                plot_args.hue, plot_args.hue_order],
+                add_help=False)
+        parser.add_argument(
+            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+            help=f'Select only these columns (columns)')
+        parser.add_argument(
+            '--kind',  type=str,
+            choices=const.ALLOWED_PAIRPLOT_KINDS, default=const.DEFAULT_PAIR_PLOT_KIND,
+            help=f'Kind of plot to use. Allowed values: %(choices)s. Default: %(default)s.')
+        parser.add_argument(
+            '--corner', action='store_true',
+            default=False,
+            help=f'Only plot the lower triangle of comparisons')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
+        _width_inches, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
+        sns.set_style(options.plotstyle)
+        sns.set_context(options.context)
+        kwargs = {}
+        graph = sns.pairplot(data=df, height=height_inches, aspect=aspect,
+                vars=options.columns, kind=options.kind, hue=options.hue, hue_order=options.hueorder,
+                corner=options.corner, **kwargs)
+        render_plot.render_plot(options, graph, self.name)
+        return df
 
 
 class BarPlot(CommandBase, name="bar"):
@@ -27,7 +67,7 @@ class BarPlot(CommandBase, name="bar"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
             plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
             plot_args.order, plot_args.hue_order, plot_args.orient,
             plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
@@ -40,12 +80,10 @@ class BarPlot(CommandBase, name="bar"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
@@ -61,7 +99,7 @@ class BoxPlot(CommandBase, name="box"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                 plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                 plot_args.order, plot_args.hue_order, plot_args.orient,
                 plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
@@ -75,12 +113,10 @@ class BoxPlot(CommandBase, name="box"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 showfliers=not(options.nooutliers),
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
@@ -99,7 +135,7 @@ class BoxenPlot(CommandBase, name="boxen"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                 plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                 plot_args.order, plot_args.hue_order, plot_args.orient,
                 plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
@@ -113,12 +149,10 @@ class BoxenPlot(CommandBase, name="boxen"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 showfliers=not(options.nooutliers),
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
@@ -137,7 +171,7 @@ class Clustermap(CommandBase, name="clustermap"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-                     parents=[io_args.io_arguments, plot_args.plot_arguments,
+                     parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                          plot_args.x_argument, plot_args.y_argument], add_help=False)
         parser.add_argument(
             '-v', '--val', metavar='FEATURE', required=True, type=str,
@@ -184,7 +218,8 @@ class Clustermap(CommandBase, name="clustermap"):
         self.y = options.yaxis
         self.val = options.val
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
-        figsize = (options.width, options.height)
+        width_inches, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
+        figsize = (width_inches, height_inches)
         z_score = None
         if options.zscore == 'y':
             z_score = 0
@@ -231,7 +266,7 @@ class Heatmap(CommandBase, name="heatmap"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-                     parents=[io_args.io_arguments, plot_args.plot_arguments,
+                     parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                          plot_args.x_argument, plot_args.y_argument], add_help=False)
         parser.add_argument(
             '-v', '--val', metavar='FEATURE', required=True, type=str,
@@ -267,7 +302,7 @@ class HistogramPlot(CommandBase, name="histogram"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
@@ -295,13 +330,11 @@ class HistogramPlot(CommandBase, name="histogram"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         if options.bins:
             kwargs['bins'] = options.bins
         if options.binwidth:
             kwargs['binwidth'] = options.binwidth
-        if options.width > 0:
-            aspect = options.width / options.height
         if options.multiple:
             kwargs['multiple'] = options.multiple
         if options.kde:
@@ -316,7 +349,7 @@ class HistogramPlot(CommandBase, name="histogram"):
         kwargs['log_scale'] = tuple(log_axes) 
         graph = sns.displot(kind='hist', data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
                 #facet_kws=facet_kws, col_wrap=options.colwrap, log_scale=True, **kwargs)
@@ -334,7 +367,7 @@ class LinePlot(CommandBase, name="line"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
@@ -346,14 +379,12 @@ class LinePlot(CommandBase, name="line"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
         facet_kws = { 'legend_out': True }
         kwargs = {}
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.relplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         if options.vlines is not None:
             for ax in graph.axes.ravel():
@@ -376,7 +407,7 @@ class PointPlot(CommandBase, name="point"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
@@ -389,12 +420,10 @@ class PointPlot(CommandBase, name="point"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
@@ -410,7 +439,7 @@ class ScatterPlot(CommandBase, name="scatter"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[ io_args.io_arguments, plot_args.plot_arguments,
+            parents=[ io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
@@ -423,14 +452,12 @@ class ScatterPlot(CommandBase, name="scatter"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         facet_kws = { 'legend_out': True }
         kwargs = {}
         graph = sns.relplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         if options.vlines is not None:
             for ax in graph.axes.ravel():
@@ -453,7 +480,7 @@ class StripPlot(CommandBase, name="strip"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
@@ -466,12 +493,10 @@ class StripPlot(CommandBase, name="strip"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
@@ -487,7 +512,7 @@ class SwarmPlot(CommandBase, name="swarm"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
@@ -500,12 +525,10 @@ class SwarmPlot(CommandBase, name="swarm"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
@@ -521,7 +544,7 @@ class ViolinPlot(CommandBase, name="violin"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.plot_arguments,
+            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
@@ -535,12 +558,10 @@ class ViolinPlot(CommandBase, name="violin"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         if options.strip:
@@ -559,7 +580,7 @@ class CountPlot(CommandBase, name="count"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[
-               io_args.io_arguments, plot_args.plot_arguments,
+               io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
@@ -577,12 +598,10 @@ class CountPlot(CommandBase, name="count"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        aspect = 1
-        if options.width > 0:
-            aspect = options.width / options.height
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
-                height=options.height, aspect=aspect, hue=options.hue,
+                height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)

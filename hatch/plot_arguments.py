@@ -10,56 +10,60 @@ Portability : POSIX
 import argparse
 import hatch.constants as const
 
-plot_arguments = argparse.ArgumentParser(add_help=False)
-plot_arguments_group = plot_arguments.add_argument_group('Plotting', 'arguments that are provided across all hatch plotting sub-commands')
+def make_plot_arguments(default_width=const.DEFAULT_PLOT_WIDTH, default_height=const.DEFAULT_PLOT_HEIGHT):
 
-plot_arguments_group.add_argument(
-    '--format',  type=str,
-    choices=const.ALLOWED_PLOT_FORMATS, default=const.DEFAULT_PLOT_FORMAT,
-    help=f'Graphic file format to use for saved plots. Allowed values: %(choices)s. Default: %(default)s.')
-plot_arguments_group.add_argument(
-    '--show', action='store_true',
-    default=False,
-    help=f'Show an interactive plot window instead of saving to a file.')
-plot_arguments_group.add_argument(
-    '--nolegend', action='store_true',
-    default=False,
-    help=f'Turn off the legend in the plot.')
-plot_arguments_group.add_argument(
-    '--plotstyle', choices=const.ALLOWED_STYLES, required=False, default=const.DEFAULT_STYLE,
-    help=f'Aesthetic style of plot. Allowed values: %(choices)s. Default: %(default)s.')
-plot_arguments_group.add_argument(
-    '--context', choices=const.ALLOWED_CONTEXTS, required=False, default=const.DEFAULT_CONTEXT,
-    help=f'Aesthetic context of plot. Allowed values: %(choices)s. Default: %(default)s.')
-plot_arguments_group.add_argument(
-    '--title', metavar='STR', required=False, type=str,
-    help='Plot title. By default no title will be added.')
-plot_arguments_group.add_argument(
-    '--width', metavar='SIZE', required=False, type=float,
-    default=const.DEFAULT_PLOT_WIDTH,
-    help=f'Plot width in inches. Default: %(default)s.')
-plot_arguments_group.add_argument(
-    '--height', metavar='SIZE', required=False, type=float,
-    default=const.DEFAULT_PLOT_HEIGHT,
-    help=f'Plot height in inches. Default: %(default)s.')
-plot_arguments_group.add_argument(
-    '--xlabel', metavar='STR', required=False, type=str,
-    help=f'Label for horizontal (X) axis.')
-plot_arguments_group.add_argument(
-    '--ylabel', metavar='STR', required=False, type=str,
-    help=f'Label for vertical (Y) axis.')
-plot_arguments_group.add_argument(
-    '--noxticklabels', action='store_true',
-    help=f'Turn of horizontal (X) axis tick labels.')
-plot_arguments_group.add_argument(
-    '--noyticklabels', action='store_true',
-    help=f'Turn of veritcal (Y) axis tick labels.')
-plot_arguments_group.add_argument(
-    '--rotxticklabels', metavar='ANGLE', required=False, type=float,
-    help=f'Rotate X axis tick labels by ANGLE.')
-plot_arguments_group.add_argument(
-    '--rotyticklabels', metavar='ANGLE', required=False, type=float,
-    help=f'Rotate Y axis tick labels by ANGLE.')
+    plot_arguments = argparse.ArgumentParser(add_help=False)
+    plot_arguments_group = plot_arguments.add_argument_group('Plotting', 'arguments that are provided across all hatch plotting sub-commands')
+    
+    plot_arguments_group.add_argument(
+        '--format',  type=str,
+        choices=const.ALLOWED_PLOT_FORMATS, default=const.DEFAULT_PLOT_FORMAT,
+        help=f'Graphic file format to use for saved plots. Allowed values: %(choices)s. Default: %(default)s.')
+    plot_arguments_group.add_argument(
+        '--show', action='store_true',
+        default=False,
+        help=f'Show an interactive plot window instead of saving to a file.')
+    plot_arguments_group.add_argument(
+        '--nolegend', action='store_true',
+        default=False,
+        help=f'Turn off the legend in the plot.')
+    plot_arguments_group.add_argument(
+        '--plotstyle', choices=const.ALLOWED_STYLES, required=False, default=const.DEFAULT_STYLE,
+        help=f'Aesthetic style of plot. Allowed values: %(choices)s. Default: %(default)s.')
+    plot_arguments_group.add_argument(
+        '--context', choices=const.ALLOWED_CONTEXTS, required=False, default=const.DEFAULT_CONTEXT,
+        help=f'Aesthetic context of plot. Allowed values: %(choices)s. Default: %(default)s.')
+    plot_arguments_group.add_argument(
+        '--title', metavar='STR', required=False, type=str,
+        help='Plot title. By default no title will be added.')
+    plot_arguments_group.add_argument(
+        '--width', metavar='SIZE', required=False, type=float,
+        default=default_width,
+        help=f'Plot width in cm. Default: %(default)s.')
+    plot_arguments_group.add_argument(
+        '--height', metavar='SIZE', required=False, type=float,
+        default=default_height,
+        help=f'Plot height in cm. Default: %(default)s.')
+    plot_arguments_group.add_argument(
+        '--xlabel', metavar='STR', required=False, type=str,
+        help=f'Label for horizontal (X) axis.')
+    plot_arguments_group.add_argument(
+        '--ylabel', metavar='STR', required=False, type=str,
+        help=f'Label for vertical (Y) axis.')
+    plot_arguments_group.add_argument(
+        '--noxticklabels', action='store_true',
+        help=f'Turn of horizontal (X) axis tick labels.')
+    plot_arguments_group.add_argument(
+        '--noyticklabels', action='store_true',
+        help=f'Turn of veritcal (Y) axis tick labels.')
+    plot_arguments_group.add_argument(
+        '--rotxticklabels', metavar='ANGLE', required=False, type=float,
+        help=f'Rotate X axis tick labels by ANGLE.')
+    plot_arguments_group.add_argument(
+        '--rotyticklabels', metavar='ANGLE', required=False, type=float,
+        help=f'Rotate Y axis tick labels by ANGLE.')
+
+    return plot_arguments
 
 x_argument = argparse.ArgumentParser(add_help=False)
 x_argument.add_argument(
