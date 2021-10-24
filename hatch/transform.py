@@ -334,6 +334,7 @@ class Zscore(CommandBase, name="zscore"):
         if options.columns is not None:
             utils.validate_columns_error(df, options.columns)
             selected_df = df[options.columns]
+
         # select only the numeric columns
         selected_df = selected_df.select_dtypes(include=np.number)
         selected_columns = selected_df.columns

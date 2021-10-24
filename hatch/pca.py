@@ -32,9 +32,6 @@ class PCA(CommandBase, name="pca"):
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         parser.add_argument(
-            '--missing', required=False, default=const.DEFAULT_PCA_MISSING, choices=const.ALLOWED_PCA_MISSING,
-            help=f'How to deal with rows that contain missing data. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
             '--pcaprefix', required=False, default=const.DEFAULT_PCA_PREFIX,
             help=f'Column label prefix for principal component axes. Default: %(default)s.')
         parser.add_argument(
@@ -44,32 +41,28 @@ class PCA(CommandBase, name="pca"):
     
     def run(self, df):
         options = self.options
+        selected_df = df
+
         if options.columns is not None:
             utils.validate_columns_error(df, options.columns)
-            df = df[options.columns]
+            selected_df = df[options.columns]
 
         # select only numeric columns for the PCA
-        numeric_df = df.select_dtypes(include=np.number)
+        selected_df = selected_df.select_dtypes(include=np.number)
 
-        # Handle rows in the data that have missing values
-        if self.options.missing == 'drop':
-            numeric_df = numeric_df.dropna()
-        elif self.options.missing == 'imputemean':
-            imputer = SimpleImputer(strategy='mean')
-            numeric_df = imputer.fit_transform(numeric_df)
-        elif self.options.missing == 'imputemedian':
-            imputer = SimpleImputer(strategy='median')
-            numeric_df = imputer.fit_transform(numeric_df)
-        elif self.options.missing == 'imputemostfrequent':
-            imputer = SimpleImputer(strategy='most_frequent')
-            numeric_df = imputer.fit_transform(numeric_df)
+        # drop rows with missing values in any column 
+        selected_df = selected_df.dropna()
+
         # Standardize columns by removing the mean and scaling to unit variance 
         scaler = StandardScaler()
-        standardized_data = scaler.fit_transform(numeric_df)
+        standardized_data = scaler.fit_transform(selected_df)
+
         # Perform PCA on the standardized data
         pca = sk_decomp.PCA(n_components=self.options.ncomps)
         pca_transform = pca.fit_transform(standardized_data)
+
         # Build a new dataframe for the PCA transformed data, adding column headings for the new components
         new_column_headers = [self.options.pcaprefix + str(n) for n in range(1, self.options.ncomps + 1)]
-        pca_components = pd.DataFrame(data = pca_transform, columns = new_column_headers)
+        pca_components = pd.DataFrame(data=pca_transform, columns=new_column_headers, index=selected_df.index)
+
         return df.join(pca_components)
