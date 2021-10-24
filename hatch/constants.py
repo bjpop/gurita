@@ -55,6 +55,8 @@ DEFAULT_PRETTY_MAX_ROWS = 10
 DEFAULT_PRETTY_MAX_COLS = 10
 DEFAULT_HISTOGRAM_BINS = 10 
 DEFAULT_PAIR_PLOT_KIND = 'scatter'
+DEFAULT_DROPNA_AXIS = 'rows'
+DEFAULT_DROPNA_HOW = 'any'
 
 ALLOWED_FILETYPES = ['csv', 'tsv']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -71,6 +73,9 @@ ALLOWED_SORT_NAPOS = ['first', 'last']
 # a = ascend, d = descend
 ALLOWED_SORT_ORDER = ['a', 'd']
 ALLOWED_PAIRPLOT_KINDS = ['scatter', 'kde', 'hist', 'reg']
+ALLOWED_DROPNA_AXIS = ['rows', 'columns']
+ALLOWED_DROPNA_HOW = ['any', 'all']
+
 
 try:
     PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version

@@ -27,7 +27,7 @@ class Cut(CommandBase, name="cut"):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
-        help=f'Select only these named columns')
+            help=f'Select only these named columns')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -267,6 +267,43 @@ class Head(CommandBase, name="head"):
 
     def run(self, df):
         return df.head(self.options.num)
+
+
+class DropNa(CommandBase, name="dropna"):
+    description = "Drop rows or columns containing missing values (NA)" 
+    category = "transformation"
+    
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '--axis', metavar='AXIS', type=str, choices=const.ALLOWED_DROPNA_AXIS, required=False,
+            default=const.DEFAULT_DROPNA_AXIS,
+            help=f'Choose to drop either rows or columns. Allowed values: %(choices)s. Default: %(default)s.')
+        parser.add_argument(
+            '--how', metavar='METHOD', type=str, choices=const.ALLOWED_DROPNA_HOW, required=False,
+            default=const.DEFAULT_DROPNA_HOW,
+            help=f'Require at least one NA or all NA in rows/columns to be dropped. Allowed values: %(choices)s. Default: %(default)s.')
+        parser.add_argument(
+            '--thresh', metavar='N', type=int, required=False, 
+            help=f'Keep only those rows/columns with at least N non-NA values')
+        parser.add_argument(
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            help=f'Select only these named columns. Only applies if --axis is "rows"')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
+        if options.axis == 'rows':
+            axis = 'index'
+            subset = options.columns
+        else:
+            axis = options.axis
+            subset = None
+        return df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
+    
     
 
 #class Transpose(CommandBase, name="transpose"):
