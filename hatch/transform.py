@@ -15,8 +15,6 @@ from hatch.command_base import CommandBase
 import hatch.utils as utils
 from hatch.constants import PROGRAM_NAME
 import hatch.constants as const
-from scipy import stats
-import numpy as np
 
 class Cut(CommandBase, name="cut"):
     description = "Select a subset of columns by name." 
@@ -308,46 +306,6 @@ class DropNa(CommandBase, name="dropna"):
             subset = None
         df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
         return df
-    
-    
-class Zscore(CommandBase, name="zscore"):
-    description = "Compute Z-score for numerical columns"
-    category = "transformation"
-    
-    def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
-            help=f'Select only these named columns. Only applies if --axis is "rows"')
-        parser.add_argument(
-            '--zsuffix', required=False, default=const.DEFAULT_ZSCORE_SUFFIX,
-            help=f'Column label suffix for new z-score axes. Default: %(default)s.')
-        self.options = parser.parse_args(args)
-
-    def run(self, df):
-        options = self.options
-        selected_df = df
-        # optionally choose user specified columns
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
-
-        # select only the numeric columns
-        selected_df = selected_df.select_dtypes(include=np.number)
-        selected_columns = selected_df.columns
-        # process each column in turn, computing z-score, adding new columns to the df 
-        # we do each column separately so that we can handle NAs independently in each column
-        for column in selected_columns:
-            this_column = df[column]
-            this_notna = this_column.dropna()
-            this_z = stats.zscore(this_notna)
-            new_column = column + self.options.zsuffix
-            df[new_column] = pd.Series(data=this_z, index=this_notna.index).reindex(df.index)
-        return df
-
 
 #class Transpose(CommandBase, name="transpose"):
 #    description = "Transpose the data." 
