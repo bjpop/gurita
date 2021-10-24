@@ -76,7 +76,6 @@ class Correlation(CommandBase, name="corr"):
         help=f'Select only these columns (columns)')
         parser.add_argument('--method', required=False, default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
         help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
-
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -84,8 +83,9 @@ class Correlation(CommandBase, name="corr"):
         if options.columns is not None:
             utils.validate_columns_error(df, options.columns)
             df = df[options.columns]
-        df = df.corr(method=options.method).reset_index()
-        return df
+        corr_df_wide = df.corr(method=options.method).reset_index()
+        corr_df_long = pd.melt(corr_df_wide, id_vars='index')
+        return corr_df_long.rename(columns={"index": "col1", "variable": "col2", "value": "corr"})
 
 
 # XXX we should bundle various summary stats together, so you can ask for a bunch of them at once,

@@ -266,8 +266,13 @@ class Heatmap(CommandBase, name="heatmap"):
 
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-                     parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-                         plot_args.x_argument, plot_args.y_argument], add_help=False)
+                     parents=[io_args.io_arguments, plot_args.make_plot_arguments()], add_help=False)
+        parser.add_argument(
+            '-x', '--xaxis', metavar='FEATURE', required=True, type=str,
+            help=f'Feature to plot along the X axis.')
+        parser.add_argument(
+            '-y', '--yaxis', metavar='FEATURE', required=True, type=str,
+            help=f'Feature to plot along the Y axis.')
         parser.add_argument(
             '-v', '--val', metavar='FEATURE', required=True, type=str,
             help=f'Interpret this feature (column of data) as the values of the heatmap')
