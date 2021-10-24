@@ -45,10 +45,8 @@ class PCA(CommandBase, name="pca"):
     def run(self, df):
         options = self.options
         if options.columns is not None:
-            columns = options.columns
-            valid_columns = utils.validate_columns_error(df, columns)
-            if valid_columns:
-                df = df[valid_columns]
+            utils.validate_columns_error(df, options.columns)
+            df = df[options.columns]
 
         # select only numeric columns for the PCA
         numeric_df = df.select_dtypes(include=np.number)
