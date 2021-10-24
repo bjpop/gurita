@@ -31,7 +31,7 @@ class KMeans(CommandBase, name="kmeans"):
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         parser.add_argument(
-            '--clusterprefix', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
+            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
             help=f'Column label prefix for cluster axes. Default: %(default)s.')
         parser.add_argument(
             '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_KMEANS_N_CLUSTERS,
@@ -43,19 +43,19 @@ class KMeans(CommandBase, name="kmeans"):
         selected_df = df
 
         if options.columns is not None:
-            columns = options.columns
-            utils.validate_columns_error(df, columns)
-            selected_df = selected_df[columns]
+            utils.validate_columns_error(df, options.columns)
+            selected_df = df[options.columns]
 
         # select only numeric columns for the cluster 
-        numeric_df = selected_df.select_dtypes(include=np.number)
+        selected_df = selected_df.select_dtypes(include=np.number)
 
-        # XXX do we need to dropna?
+        # drop rows with missing values in any column
+        selected_df = selected_df.dropna()
 
         # Cluster the standardized data
         kmeans = skcluster.KMeans(n_clusters=options.nclusters)
-        kmeans_transform = kmeans.fit_predict(numeric_df)
-        df[self.options.clusterprefix] = pd.Series(kmeans_transform, index=df.index)
+        kmeans_transform = kmeans.fit_predict(selected_df)
+        df[self.options.newcol] = pd.Series(kmeans_transform, index=selected_df.index, dtype=pd.Int64Dtype()).reindex(df.index).astype('category')
         return df
 
 
@@ -72,7 +72,7 @@ class GMM(CommandBase, name="gmm"):
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         parser.add_argument(
-            '--clusterprefix', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
+            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
             help=f'Column label prefix for cluster axes. Default: %(default)s.')
         parser.add_argument(
             '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_GMM_N_CLUSTERS,
@@ -88,16 +88,17 @@ class GMM(CommandBase, name="gmm"):
         selected_df = df
 
         if options.columns is not None:
-            columns = options.columns
-            utils.validate_columns_error(df, columns)
-            selected_df = selected_df[columns]
+            utils.validate_columns_error(df, options.columns)
+            selected_df = df[options.columns]
 
         # select only numeric columns for the cluster 
-        numeric_df = selected_df.select_dtypes(include=np.number)
+        selected_df = selected_df.select_dtypes(include=np.number)
 
-        # XXX do we need to dropna?
+        # drop rows with missing values in any column
+        selected_df = selected_df.dropna()
 
         gmm = GaussianMixture(n_components=options.nclusters, max_iter=options.maxiter)
-        gmm_transform = gmm.fit_predict(numeric_df)
-        df[self.options.clusterprefix] = pd.Series(gmm_transform, index=df.index)
+        gmm_transform = gmm.fit_predict(selected_df)
+
+        df[self.options.newcol] = pd.Series(gmm_transform, index=selected_df.index, dtype=pd.Int64Dtype()).reindex(df.index).astype('category')
         return df
