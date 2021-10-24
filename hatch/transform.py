@@ -306,7 +306,7 @@ class DropNa(CommandBase, name="dropna"):
         else:
             axis = options.axis
             subset = None
-        df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset).reset_index(drop=True)
+        df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
         return df
     
     
