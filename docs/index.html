@@ -135,7 +135,7 @@ and complex tasks are possible.</p>
 <p>Hatch is implemented in <a class="reference external" href="http://www.python.org/">Python</a> and makes extensive use of the <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a>, and <a class="reference external" href="https://scikit-learn.org/">Scikit-learn</a> libraries for data processing and plot generation.</p>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>The following examples use the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset as input. The file contains 150 data rows (plus one heading row) and 5 columns.
+<p>The following examples use the <a class="reference external" href="https://github.com/mwaskom/seaborn-data/blob/master/iris.csv/">iris.csv</a> dataset as input. The file contains 150 data rows (plus one heading row) and 5 columns.
 A pretty display of the first and last 5 rows of the data can be viewed using the <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">pretty</span></code> command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> cat iris.csv <span class="p">|</span> hatch pretty
  sepal_length  sepal_width  petal_length  petal_width   species
@@ -171,14 +171,14 @@ contains the following box plot:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + sample <span class="m">0</span>.9 + pca + scatter -x pc1 -y pc2 --hue species
 </pre></div>
 </div>
-<p>Input is read from the file called <cite>iris.csv</cite> on standard input and data is passed from left to right in the chain.
+<p>Input is read from the file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> on standard input and data is passed from left to right in the chain.
 Commands can modify the data as it is passed along.</p>
 <p>In this example there are 4 commands that are executed in the following order:</p>
 <ol class="arabic simple">
-<li><p>The <cite>filter</cite> command selects all rows where <cite>species</cite> is not equal to <cite>virginica</cite>.</p></li>
-<li><p>The filtered rows are then passed to the <cite>sample</cite> command which randomly selects 90% of the remaining rows.</p></li>
-<li><p>The sampled rows are then passed to the <cite>pca</cite> command which performs principal component analysis (PCA) as a data reduction step, yielding two extra columns in the data called <cite>pc1</cite> and <cite>pc2</cite>.</p></li>
-<li><p>Finally the pca-transformed data is passed to the <cite>scatter</cite> command which generates a scatter plot of <cite>pc1</cite> and <cite>pc2</cite> (the first two principal components).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">filter</span></code> command selects all rows where <code class="docutils literal notranslate"><span class="pre">species</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p></li>
+<li><p>The filtered rows are then passed to the <code class="docutils literal notranslate"><span class="pre">sample</span></code> command which randomly selects 90% of the remaining rows.</p></li>
+<li><p>The sampled rows are then passed to the <code class="docutils literal notranslate"><span class="pre">pca</span></code> command which performs principal component analysis (PCA) as a data reduction step, yielding two extra columns in the data called <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code>.</p></li>
+<li><p>Finally the pca-transformed data is passed to the <cite>scatter</cite> command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components).</p></li>
 </ol>
 <a class="reference internal image-reference" href="_images/iris.pc1.pc2.species.pca.scatter.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="_images/iris.pc1.pc2.species.pca.scatter.png" style="width: 700px; height: 600px;" /></a>
 </section>
