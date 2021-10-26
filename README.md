@@ -14,7 +14,7 @@ It is designed to be fast and convenient, and is particularly suited to data exp
 Hatch commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
 and complex tasks are possible.
 
-Hatch is implemented in [Python](http://www.python.org/) and makes extensive use of the [Pandas](https://pandas.pydata.org/>), [Seaborn](https://seaborn.pydata.org/>), and [Scikit-learn](https://scikit-learn.org/) libraries for data processing and plot generation.
+Hatch is implemented in [Python](http://www.python.org/) and makes extensive use of the [Pandas](https://pandas.pydata.org/), [Seaborn](https://seaborn.pydata.org/), and [Scikit-learn](https://scikit-learn.org/) libraries for data processing and plot generation.
 
 # Licence
 
