@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summarising input data &mdash; hatch  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Correlation" href="correlation.html" />
+    <link rel="prev" title="Principal Component Analysis (PCA)" href="pca.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> hatch
+            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Summarising input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#summary-information-for-transformed-input-data">Summary information for transformed input data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_test.html">Test for normality</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data maniupulation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transform.html">Transform and save data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filtering rows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Computing new columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_requests.html">Feature requests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hatch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Summarising input data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/info.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="summarising-input-data">
+<span id="info"></span><h1>Summarising input data<a class="headerlink" href="#summarising-input-data" title="Permalink to this headline"></a></h1>
+<p>Input data can be summarised with the <code class="docutils literal notranslate"><span class="pre">info</span></code> command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info &lt;arguments&gt;
+</pre></div>
+</div>
+<p>This produces a summary table of features in the input data. By default all features in the
+input data are sumarised, although this can be changed by <span class="xref std std-doc">transforming the data first</span>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info titanic.csv
+</pre></div>
+</div>
+<p>The output for the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch  \
+count   891.000000  891.000000   891  714.000000  891.000000  891.000000
+unique         NaN         NaN     2         NaN         NaN         NaN
+top            NaN         NaN  male         NaN         NaN         NaN
+freq           NaN         NaN   577         NaN         NaN         NaN
+mean      0.383838    2.308642   NaN   29.699118    0.523008    0.381594
+std       0.486592    0.836071   NaN   14.526497    1.102743    0.806057
+min       0.000000    1.000000   NaN    0.420000    0.000000    0.000000
+25%       0.000000    2.000000   NaN   20.125000    0.000000    0.000000
+50%       0.000000    3.000000   NaN   28.000000    0.000000    0.000000
+75%       1.000000    3.000000   NaN   38.000000    1.000000    0.000000
+max       1.000000    3.000000   NaN   80.000000    8.000000    6.000000
+
+              fare embarked  class  who adult_male deck  embark_town alive  \
+count   891.000000      889    891  891        891  203          889   891
+unique         NaN        3      3    3          2    7            3     2
+top            NaN        S  Third  man       True    C  Southampton    no
+freq           NaN      644    491  537        537   59          644   549
+mean     32.204208      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+std      49.693429      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+min       0.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+25%       7.910400      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+50%      14.454200      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+75%      31.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+max     512.329200      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+
+       alone
+count    891
+unique     2
+top     True
+freq     537
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+
+rows: 891, cols: 15
+</pre></div>
+</div>
+<p>The summary includes the following information:</p>
+<ul class="simple">
+<li><p>count: the number of non-empty data values observed for the feature</p></li>
+</ul>
+<p>For categorical features:</p>
+<ul class="simple">
+<li><p>unique: the number of unique values observed for the feature</p></li>
+<li><p>top: the most frequently observed value</p></li>
+<li><p>freq: the frequency (count) of the most frequently observed value</p></li>
+</ul>
+<p>For numerical features:</p>
+<ul class="simple">
+<li><p>mean: the mean (average)</p></li>
+<li><p>std: the standard deviation</p></li>
+<li><p>min: the minimum observed value</p></li>
+<li><p>25%: the 25th percentile</p></li>
+<li><p>50%: the 50th percentile</p></li>
+<li><p>75%: the 75th percentile</p></li>
+<li><p>max: the maximum observed value</p></li>
+</ul>
+<p>The number of rows and columns in the input data is shown at the end. In this case there are 891 rows and 15 columns in
+the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file.</p>
+<section id="summary-information-for-transformed-input-data">
+<span id="info-trans"></span><h2>Summary information for transformed input data<a class="headerlink" href="#summary-information-for-transformed-input-data" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--info</span></code> option also works on input data that as been transformed using one of Hatch’s <a class="reference internal" href="transform.html"><span class="doc">data manipulation options</span></a>.
+In this case the data summary is provided after those transformations have been performed.</p>
+<p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> features in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info --features age class -- titanic.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>               age  class
+count   714.000000    891
+unique         NaN      3
+top            NaN  Third
+freq           NaN    491
+mean     29.699118    NaN
+std      14.526497    NaN
+min       0.420000    NaN
+25%      20.125000    NaN
+50%      28.000000    NaN
+75%      38.000000    NaN
+max      80.000000    NaN
+
+rows: 891, cols: 2
+</pre></div>
+</div>
+<p>Similarly it is possible to get summary information for data after <code class="docutils literal notranslate"><span class="pre">--filter</span></code>, <code class="docutils literal notranslate"><span class="pre">--eval</span></code>, and <code class="docutils literal notranslate"><span class="pre">--sample</span></code> have been applied to the data.
+In all cases the summary shows that state of the data after the transformations have been applied.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pca.html" class="btn btn-neutral float-left" title="Principal Component Analysis (PCA)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="correlation.html" class="btn btn-neutral float-right" title="Correlation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

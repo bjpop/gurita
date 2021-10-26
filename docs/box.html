@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Box &mdash; hatch  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Violin" href="violin.html" />
+    <link rel="prev" title="Scatter" href="scatter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> hatch
+            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Box</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-example">Simple example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selecting-features-to-plot">Selecting features to plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controlling-the-order-of-the-plotted-box-columns">Controlling the order of the plotted box columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#grouping-features-with-hue">Grouping features with hue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#log-scale-of-numerical-distribution">Log scale of numerical distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#range-limits">Range limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#facets">Facets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="info.html">Summarising input data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_test.html">Test for normality</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data maniupulation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transform.html">Transform and save data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filtering rows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Computing new columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_requests.html">Feature requests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hatch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Box</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/box.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="box">
+<h1>Box<a class="headerlink" href="#box" title="Permalink to this headline"></a></h1>
+<p>Box (or box-and-whisker) plots show the distribution of values in a numerical feature optionally grouped by categorical features.
+The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate points.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box &lt;arguments&gt;
+</pre></div>
+</div>
+<p>Box plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;box&quot;</span></code> option.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 50%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></td>
+<td><p>display help</p></td>
+<td><p><a class="reference internal" href="transform.html#box-help"><span class="std std-ref">Getting help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE,</span> <span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></td>
+<td><p>select feature for the X axis</p></td>
+<td><p><a class="reference internal" href="transform.html#box-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE,</span> <span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></td>
+<td><p>select feature for the Y axis</p></td>
+<td><p><a class="reference internal" href="transform.html#box-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">{v,h}</span></code></p></td>
+<td><p>Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.</p></td>
+<td><p><a class="reference internal" href="transform.html#box-orient"><span class="std std-ref">Box orientation</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--order</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">..]</span></code></p></td>
+<td><p>control the order of the plotted columns</p></td>
+<td><p><a class="reference internal" href="transform.html#box-order"><span class="std std-ref">Box order</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
+<td><p>group features by hue</p></td>
+<td><p><a class="reference internal" href="transform.html#box-hue"><span class="std std-ref">Grouping features with hue</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<td><p>order of hue features</p></td>
+<td><p><a class="reference internal" href="transform.html#box-hueorder"><span class="std std-ref">Hue order</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logy</span></code></p></td>
+<td><p>log scale Y axis</p></td>
+<td><p><a class="reference internal" href="transform.html#box-log"><span class="std std-ref">Log scale of numerical distribution</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--xlim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
+<td><p>range limit X axis</p></td>
+<td><p><a class="reference internal" href="transform.html#box-range"><span class="std std-ref">Range limits</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--ylim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
+<td><p>range limit Y axis</p></td>
+<td><p><a class="reference internal" href="transform.html#box-range"><span class="std std-ref">Range limits</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE,</span> <span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></td>
+<td><p>feature to use for facet rows</p></td>
+<td><p><a class="reference internal" href="transform.html#box-facets"><span class="std std-ref">Facets</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE,</span> <span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></td>
+<td><p>feature to use for facet columns</p></td>
+<td><p><a class="reference internal" href="transform.html#box-facets"><span class="std std-ref">Facets</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
+<td><p>wrap the facet column at this width, to span multiple rows</p></td>
+<td><p><a class="reference internal" href="transform.html#box-facets"><span class="std std-ref">Facets</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<p>Similar functionality to box plots are provided by:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="violin.html"><span class="doc">Violin plots</span></a></p></li>
+<li><p><a class="reference internal" href="swarm.html"><span class="doc">Swarm plots</span></a></p></li>
+<li><p><a class="reference internal" href="strip.html"><span class="doc">Strip plots</span></a></p></li>
+<li><p><a class="reference internal" href="boxen.html"><span class="doc">Boxen plots</span></a></p></li>
+</ul>
+</div></blockquote>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>Box plot of the <code class="docutils literal notranslate"><span class="pre">age</span></code> numerical feature from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -- titanic.csv
+</pre></div>
+</div>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">titanic.age.box.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/titanic.age.box.png"><img alt="Box plot showing the distribution of age for the titanic data set" class="align-center" src="_images/titanic.age.box.png" style="width: 600px; height: 600px;" /></a>
+<p>The plotted numerical feature can be divided into groups based on a categorical feature.
+In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class -- titanic.csv
+</pre></div>
+</div>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">titanic.age.class.box.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/titanic.age.class.box.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set" class="align-center" src="_images/titanic.age.class.box.png" style="width: 600px; height: 600px;" /></a>
+</section>
+<section id="getting-help">
+<span id="box-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for box plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -h
+</pre></div>
+</div>
+</section>
+<section id="selecting-features-to-plot">
+<span id="box-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+</pre></div>
+</div>
+<p>Box plots can be plotted for numerical features and optionally grouped by categorical features.</p>
+<p>If no categorical feature is specified, a single column box plot will be generated showing
+the distribution of the numerical feature.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p id="box-orient">By default the orientation of the box plot is vertical. In this scenario
+the numerical feature is specified by <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and the (optional) categorical feature is specified
+by <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p>
+<p>However, the orientation of the box plot can be made horizontal using the <code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">h</span></code> argument.
+In this case the sense of the X and Y axes are swapped from the default, and thus
+the numerical feature is specified by <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and the (optional) categorical feature is specified
+by <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+</div>
+<p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature,
+where the boxes are plotted horizontally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -x age -y class --orient h -- titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/titanic.class.age.box.horizontal.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/titanic.class.age.box.horizontal.png" style="width: 600px; height: 600px;" /></a>
+</section>
+<section id="controlling-the-order-of-the-plotted-box-columns">
+<span id="box-order"></span><h2>Controlling the order of the plotted box columns<a class="headerlink" href="#controlling-the-order-of-the-plotted-box-columns" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">order</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>By default the order of the categorical features displayed in the box plot is determined from their occurrence in the input data.
+This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--order</span></code> argument, which allows you to specify the exact ordering of columns based on their values.</p>
+<p>In the following example the box columns of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature are displayed in the order of <code class="docutils literal notranslate"><span class="pre">First</span></code>, <code class="docutils literal notranslate"><span class="pre">Second</span></code>, <code class="docutils literal notranslate"><span class="pre">Third</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --order First Second Third -- titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/titanic.age.class.box.order.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/titanic.age.class.box.order.png" style="width: 600px; height: 600px;" /></a>
+</section>
+<section id="grouping-features-with-hue">
+<span id="box-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
+</pre></div>
+</div>
+<p>The data can be further grouped by an additional categorical feature with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --hue sex -- titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/titanic.age.class.sex.box.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/titanic.age.class.sex.box.png" style="width: 700px; height: 600px;" /></a>
+<p id="box-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
+This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
+<p>In the following example the <code class="docutils literal notranslate"><span class="pre">sex</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">female</span></code>, <code class="docutils literal notranslate"><span class="pre">male</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --hue sex --hueorder female male -- titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/titanic.age.class.sex.box.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex" class="align-center" src="_images/titanic.age.class.sex.box.hueorder.png" style="width: 700px; height: 600px;" /></a>
+<p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
+the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical features:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/titanic.age.class.sex.box.order.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex" class="align-center" src="_images/titanic.age.class.sex.box.order.hueorder.png" style="width: 700px; height: 600px;" /></a>
+</section>
+<section id="log-scale-of-numerical-distribution">
+<span id="box-log"></span><h2>Log scale of numerical distribution<a class="headerlink" href="#log-scale-of-numerical-distribution" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">logx</span>
+<span class="o">--</span><span class="n">logy</span>
+</pre></div>
+</div>
+<p>The distribution of numerical values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
+<p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<p>For example, you can display a log scale box plot for the <code class="docutils literal notranslate"><span class="pre">age</span></code> feature grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the numerical distribution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --logy -- titanic.csv
+</pre></div>
+</div>
+</section>
+<section id="range-limits">
+<span id="box-range"></span><h2>Range limits<a class="headerlink" href="#range-limits" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">xlim</span> <span class="n">LOW</span> <span class="n">HIGH</span>
+<span class="o">--</span><span class="n">ylim</span> <span class="n">LOW</span> <span class="n">HIGH</span>
+</pre></div>
+</div>
+<p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.</p>
+<p>It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">age</span></code> feature grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so.
+Note carefully that the numerical
+data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the distribution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> -- titanic.csv
+</pre></div>
+</div>
+</section>
+<section id="facets">
+<span id="box-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span>
+<span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span>
+<span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
+</pre></div>
+</div>
+<p>Box plots can be further divided into facets, generating a matrix of box plots, where a numerical value is
+further categorised by up to 2 more categorical features.</p>
+<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scatter.html" class="btn btn-neutral float-left" title="Scatter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="violin.html" class="btn btn-neutral float-right" title="Violin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input and output &mdash; hatch  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Histogram" href="histogram.html" />
+    <link rel="prev" title="Command line syntax" href="command_line_syntax.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> hatch
+            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#input-files">Input files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-from-standard-input-device-stdin">Input from standard input device (stdin)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#end-of-options-marker-double-dash">End of options marker (double dash)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-file-type">Input file type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#output-files">Output files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-plot-file-name">Output plot file name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-prefix">Output prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-plot-graphics-file-format">Output plot graphics file format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-plots">Interactive plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transforming-input-data-and-saving-to-a-file">Transforming input data and saving to a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging-progress">Logging progress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verbose-execution">Verbose execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#na-values">NA values</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="info.html">Summarising input data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="normal_test.html">Test for normality</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data maniupulation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="transform.html">Transform and save data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Feature selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filtering rows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Computing new columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_requests.html">Feature requests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hatch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Input and output</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/input_output.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input-and-output">
+<h1>Input and output<a class="headerlink" href="#input-and-output" title="Permalink to this headline"></a></h1>
+<p>Hatch works on tabular input data in <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV (comma separated values)</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV (tab separated values)</a> format.</p>
+<p>Input data is read from a single named input file or from the standard input device (stdin).</p>
+<p>Rows in the input file are considered to be “observations” (or cases) and columns are considered to be “features” (or variables).
+That is, each row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
+The names of the features are given in the first row of the input file (the heading row).</p>
+<p>Below is a small example of the kind of input data accepted by Hatch. In this case it is in CSV format with five columns and four rows.
+Note that the first row is a header, containing the names of each feature (column) in the dataset. The remaining three rows are observations,
+where each observation has a value associated with each feature.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<span class="m">5</span>.1,3.5,1.4,0.2,setosa
+<span class="m">4</span>.9,3.0,1.4,0.2,setosa
+<span class="m">4</span>.7,3.2,1.3,0.2,setosa
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hatch requires that the input data is <strong>rectangular</strong> in shape. In other words, every row must contain the same number of columns.
+Missing values are allowed, and are indicated by leaving a particular column blank (empty) on a given row; nonetheless the column
+must still be present.</p>
+</div>
+<section id="input-files">
+<span id="id1"></span><h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline"></a></h2>
+<p>Hatch can read data from a named input file or the standard input device (stdin).</p>
+<p>When reading input from a file, the name of the file must the last argument on the command line.</p>
+<p>The example below illustrates reading input from a named file. This command produces a <a class="reference internal" href="count.html"><span class="doc">count plot</span></a> for the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> dataset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class titanic.csv
+</pre></div>
+</div>
+<section id="input-from-standard-input-device-stdin">
+<h3>Input from standard input device (stdin)<a class="headerlink" href="#input-from-standard-input-device-stdin" title="Permalink to this headline"></a></h3>
+<p>If no input file name is provided, Hatch will read from stdin instead. For example you can
+redirect input from a file on the Unix command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class &lt; titanic.csv
+</pre></div>
+</div>
+<p>Reading from stdin is particularly useful when you want to use Hatch as part of a command pipeline:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example_command <span class="p">|</span> hatch count -x class
+</pre></div>
+</div>
+</section>
+<section id="end-of-options-marker-double-dash">
+<h3>End of options marker (double dash)<a class="headerlink" href="#end-of-options-marker-double-dash" title="Permalink to this headline"></a></h3>
+<p>In some instances it is useful (or necessary) to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch uses a double-dash <code class="docutils literal notranslate"><span class="pre">--</span></code>
+marker for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class -- titanic.csv
+</pre></div>
+</div>
+</section>
+<section id="input-file-type">
+<span id="filetype"></span><h3>Input file type<a class="headerlink" href="#input-file-type" title="Permalink to this headline"></a></h3>
+<p>The input file format must be either <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV (comma separated values)</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV (tab separated values)</a>. The first row of the input file must be column headings.</p>
+<p>When reading input from a named file (and not from stdin) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
+<code class="docutils literal notranslate"><span class="pre">--filetype</span> <span class="pre">&lt;type&gt;</span></code> option.</p>
+<p>When reading input from stdin, Hatch will assume that the data is in CSV format unless you tell it otherwise.</p>
+<p>If Hatch cannot determine the input file type from the filename extension, or the input is read from stdin and is not in CSV format, then you must specify the input file format using the <code class="docutils literal notranslate"><span class="pre">--filetype</span> <span class="pre">&lt;type&gt;</span></code> option, where <code class="docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code> must be one of <code class="docutils literal notranslate"><span class="pre">CSV</span></code> or <code class="docutils literal notranslate"><span class="pre">TSV</span></code>.</p>
+</section>
+</section>
+<section id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline"></a></h2>
+<p>Hatch’s default behaviour for plotting commands is to save the resulting image to a file (but it can also do interactive plots, see <a class="reference internal" href="#show"><span class="std std-ref">the show command</span></a>).</p>
+<p>For example, the following command generates a count plot of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature from the input file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> and saves the resulting plot to a file called <code class="docutils literal notranslate"><span class="pre">titanic.class.count.png</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class titanic.csv
+</pre></div>
+</div>
+<section id="output-plot-file-name">
+<span id="out"></span><h3>Output plot file name<a class="headerlink" href="#output-plot-file-name" title="Permalink to this headline"></a></h3>
+<p>When saving a plot to a file, you can specify the name of the file to use with the <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">&lt;filename&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--out</span> <span class="pre">&lt;filename&gt;</span></code> option.</p>
+<p>For example, the following command saves the output plot to a file called <code class="docutils literal notranslate"><span class="pre">example.png</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class -o example.png titanic.csv
+</pre></div>
+</div>
+<p>If you do not specify an output file name, Hatch will choose an appropriate file name based on various input parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The prefix of the input data file name (this can be overridden).</p></li>
+<li><p>The name(s) of the columns that have been selected for plotting.</p></li>
+<li><p>Optionally the names of columns that have been selected for grouping (for example by using <code class="docutils literal notranslate"><span class="pre">--hue</span></code> where applicable).</p></li>
+<li><p>The type of plot being produced.</p></li>
+</ul>
+</div></blockquote>
+<p>For example, the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x sepal_length --hue species iris.csv
+</pre></div>
+</div>
+<p>automatically produces an output file called <code class="docutils literal notranslate"><span class="pre">iris.sepal_length.species.hist.png</span></code> by default, because:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">iris</span></code> is the prefix of the name of the input file <cite>iris.csv</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is the column that has been selected for plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">species</span></code> is the column that has been selected for grouping via the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hist</span></code> is the type of plot (a histogram)</p></li>
+</ul>
+</div></blockquote>
+<p>If the input data is read from the standard input (stdin) instead of a named file, then the prefix of the output defaults to <code class="docutils literal notranslate"><span class="pre">plot</span></code>. For example, the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x sepal_length --hue species &lt; iris.csv
+</pre></div>
+</div>
+<p>produces an output file called <code class="docutils literal notranslate"><span class="pre">plot.sepal_length.species.hist.png</span></code> because the input data is read (redirected) from stdin.</p>
+</section>
+<section id="output-prefix">
+<span id="prefix"></span><h3>Output prefix<a class="headerlink" href="#output-prefix" title="Permalink to this headline"></a></h3>
+<p>The output prefix can be overridden with the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> command line option (regardless of whether the input comes from a named file or from stdin). For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x sepal_length --hue species --prefix flower &lt; iris.csv
+</pre></div>
+</div>
+<p>produces an output file called <code class="docutils literal notranslate"><span class="pre">flower.sepal_length.species.hist.png</span></code>.</p>
+</section>
+<section id="output-plot-graphics-file-format">
+<span id="format"></span><h3>Output plot graphics file format<a class="headerlink" href="#output-plot-graphics-file-format" title="Permalink to this headline"></a></h3>
+<p>By default Hatch will save output plots in the PNG file format. However, this can be overridden with the <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">{png,jpg,pdf,svg}</span></code> option.</p>
+<p>For example, the following command saves the output plot in SVG format, to a file called <code class="docutils literal notranslate"><span class="pre">titanic.class.count.svg</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class --format svg titanic.csv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not specify an output file name, Hatch will choose one for you. This includes the addition of a file name suffix indicating the type of graphics format used (<code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">svg</span></code>, or <code class="docutils literal notranslate"><span class="pre">jpg</span></code>).</p>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--out</span></code>) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option (otherwise the default <code class="docutils literal notranslate"><span class="pre">png</span></code> type is used).</p>
+</div>
+</section>
+</section>
+<section id="interactive-plots">
+<span id="show"></span><h2>Interactive plots<a class="headerlink" href="#interactive-plots" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--show</span></code> option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.</p>
+<p>This is illustrated below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class --show titanic.csv
+</pre></div>
+</div>
+</section>
+<section id="transforming-input-data-and-saving-to-a-file">
+<span id="save"></span><h2>Transforming input data and saving to a file<a class="headerlink" href="#transforming-input-data-and-saving-to-a-file" title="Permalink to this headline"></a></h2>
+<p>Hatch supports a number of data manipulation options, such as <a class="reference internal" href="filter.html"><span class="doc">row filtering</span></a>, <a class="reference internal" href="sample.html"><span class="doc">random sampling</span></a>, <a class="reference internal" href="features.html"><span class="doc">feature selection</span></a>, and <a class="reference internal" href="eval.html"><span class="doc">computation of new columns</span></a>.</p>
+<p>These manipulations are optionally performed prior to plotting or computing statistics.</p>
+<p>However, it is also possible to apply these transformations and save the result back to a new file. This is achieved with the <a class="reference internal" href="transform.html"><span class="doc">transform</span></a> command. For example, the following command randomly samples 100 rows
+from the input file <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, and saves the result to <code class="docutils literal notranslate"><span class="pre">iris.trans.csv</span></code> (preserving the header row):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch transform --sample <span class="m">100</span> iris.csv
+</pre></div>
+</div>
+<p>The default output file name can be overridden with <code class="docutils literal notranslate"><span class="pre">-o</span></code> (<code class="docutils literal notranslate"><span class="pre">--out</span></code>) like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch transform --sample <span class="m">100</span> -o iris.sample100.csv iris.csv
+</pre></div>
+</div>
+</section>
+<section id="logging-progress">
+<span id="log"></span><h2>Logging progress<a class="headerlink" href="#logging-progress" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--logfile</span> <span class="pre">&lt;filename&gt;</span></code> option causes Hatch to record a timestamped log of program progress to a file. Logging information includes the command line used to invoke the program and key program events.
+The log file can be useful for debugging Hatch’s behaviour.</p>
+<p>In the following example we add logging to a plotting command, such that the output log data is written to a file called <code class="docutils literal notranslate"><span class="pre">hatch.log</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class --logfile hatch.log titanic.csv
+</pre></div>
+</div>
+</section>
+<section id="verbose-execution">
+<span id="verbose"></span><h2>Verbose execution<a class="headerlink" href="#verbose-execution" title="Permalink to this headline"></a></h2>
+<p>By default Hatch does not display any messages on the standard output during normal program execution. This can be overridden with
+the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option which causes Hatch to become more chatty. In particular, when generating any output files, the verbose
+mode will cause Hatch to specify the names of any files it has created. This is useful when you want to immediately open the file
+for further inspection.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class --verbose titanic.csv
+</pre></div>
+</div>
+<p>The outut of the above command is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Plot written to titanic.class.count.png
+</pre></div>
+</div>
+</section>
+<section id="na-values">
+<span id="navalues"></span><h2>NA values<a class="headerlink" href="#na-values" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="command_line_syntax.html" class="btn btn-neutral float-left" title="Command line syntax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="histogram.html" class="btn btn-neutral float-right" title="Histogram" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
