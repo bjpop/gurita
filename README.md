@@ -4,13 +4,15 @@
 
 # Hatch: a command line plotting and analytics tool
 
-Hatch is a command line tool for analysing and visualising data.
+Hatch is a command line tool for analysing and visualising data taking input from tabular data in CSV or TSV format.
 
-It takes input from tabular data in CSV or TSV format and produces high-quality plots (charts, graphs) as output.
+At its core, Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
+Additionally, Hatch allows commands to be chained together into flexible analysis pipelines.
 
 It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.
 
-Hatch plots are highly customisable, however for most cases sensible defaults are applied.
+Hatch commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
+and complex tasks are possible.
 
 Hatch is implemented in [Python](http://www.python.org/) and makes extensive use of the [Pandas](https://pandas.pydata.org/>), [Seaborn](https://seaborn.pydata.org/>), and [Scikit-learn](https://scikit-learn.org/) libraries for data processing and plot generation.
 
@@ -20,7 +22,7 @@ This program is released as open source software under the terms of [MIT License
 
 # Documentation
 
-Please consult the [Hatch Documentation](https://hatch.readthedocs.io/en/latest/index.html) for detailed information about installation and usage.
+Please consult the [Hatch Documentation](https://bjpop.github.io/hatch/index.html) for detailed information about installation and usage.
 
 # Authors
 
