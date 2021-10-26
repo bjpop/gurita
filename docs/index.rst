@@ -21,26 +21,8 @@ Hatch is implemented in `Python <http://www.python.org/>`_ and makes extensive u
 Simple example
 --------------
 
-The following Hatch command generates a box plot of data from a file called ``iris.csv``, the Y-axis
-represents the ``sepal_length`` numerical feature, and the X-axis is grouped by the ``species`` categorical feature.
-The goal of this plot is to show the distribution of sepal length of the three different species of iris
-flowers contained in the data set.
-
-.. code-block:: bash
-
-   cat iris.csv | hatch box -x species -y sepal_length
-
-The above command generates an output file called ``hatch.species.sepal_length.box.png`` that
-contains the following box plot:
-
-.. image:: ../images/iris.sepal_length.species.box.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Box plot showing the distribution of sepal length by species for the iris data set
-
-The input file ``iris.csv`` 150 data rows, one heading row, and 5 columns. A pretty sample of the data can be viewed
-using the ``hatch pretty`` command:
+The following examples use the ``iris.csv`` dataset as input. The file contains 150 data rows (plus one heading row) and 5 columns.
+A pretty display of the first and last 5 rows of the data can be viewed using the ``hatch pretty`` command:
 
 .. code-block:: bash
 
@@ -60,6 +42,25 @@ using the ``hatch pretty`` command:
 
   [150 rows x 5 columns]
 
+The following Hatch command generates a box plot of data from a file called ``iris.csv``, the Y-axis
+represents the ``sepal_length`` numerical feature, and the X-axis is grouped by the ``species`` categorical feature.
+The goal of this plot is to show the distribution of sepal length of the three different species of iris
+flowers contained in the data set.
+
+.. code-block:: bash
+
+   cat iris.csv | hatch box -x species -y sepal_length
+
+The above command generates an output file called ``hatch.species.sepal_length.box.png`` that
+contains the following box plot:
+
+.. image:: ../images/iris.sepal_length.species.box.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Box plot showing the distribution of sepal length by species for the iris data set
+
+
 Advanced example
 ----------------
 
@@ -67,14 +68,23 @@ The following example illustrates Hatch's ability to chain commands together:
 
 .. code-block:: bash
 
-    cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2
+    cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
 
-Input is read from the file called `iris.csv` on standard input. Data is passed from left to right in the chain.
-The `filter` command selects all rows where `species` is not equal to `virginica`.
-The filtered rows are then passed to the `sample` command which randomly selects 90% of the remaining rows.
-The sampled rows are then passed to the `pca` command which performs principal component analysis (PCA) as a data
-reduction step, yielding two extra columns in the data called `pc1` and `pc2`. Finally the pca-transformed
-data is passed to the `scatter` command which generates a scatter plot of `pc1` and `pc2` (the first two principal components).
+Input is read from the file called `iris.csv` on standard input and data is passed from left to right in the chain.
+Commands can modify the data as it is passed along.
+
+In this example there are 4 commands that are executed in the following order:
+
+1. The `filter` command selects all rows where `species` is not equal to `virginica`.
+2. The filtered rows are then passed to the `sample` command which randomly selects 90% of the remaining rows.
+3. The sampled rows are then passed to the `pca` command which performs principal component analysis (PCA) as a data reduction step, yielding two extra columns in the data called `pc1` and `pc2`.
+4. Finally the pca-transformed data is passed to the `scatter` command which generates a scatter plot of `pc1` and `pc2` (the first two principal components).
+
+.. image:: ../images/iris.pc1.pc2.species.pca.scatter.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset 
 
 License
 -------
