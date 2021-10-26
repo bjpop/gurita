@@ -3,62 +3,34 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Hatch: a command line plotting and data analytics tool
+Hatch: a command line data analytics and plotting tool
 ******************************************************
 
-Hatch is a command line tool for analysing and visualising data.
+Hatch is a command line tool for analysing and visualising data taking input from tabular data in CSV or TSV format.
 
-It takes input from tabular data in CSV or TSV format. Outputs are high-quality plots or statistical calculations.
+At its core, Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
+Additionally, Hatch allows commands to be chained together into flexible analysis pipelines.
 
 It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.
 
-The following plot types are provided:
-
- * :doc:`Histogram <histogram/>`
- * :doc:`Count <count/>`
- * :doc:`Scatter <scatter/>`
- * Distributions
-
-     * :doc:`Box <violin/>`
-     * :doc:`Violin <violin/>`
-     * :doc:`Swarm <swarm/>`
-     * :doc:`Strip <strip/>`
-     * :doc:`Boxen <boxen/>`
-
- * Central tendency: 
-
-     * :doc:`Point <point/>`
-     * :doc:`Bar <bar/>`
-    
- * :doc:`Line <line/>`
- * :doc:`Heatmap <heatmap/>`
- * :doc:`Clustermap <clustermap/>`
- * :doc:`Principal components analysis (PCA) <pca/>`
-
-Hatch plots are highly customisable, however for most cases sensible defaults are applied.
-
-The following statistical tests are provided:
-
- * :doc:`Correlation <correlation/>`
- * :doc:`Normality test <normal_test/>`
-
-It also supports expressive :doc:`row filtering <filter/>`, :doc:`column selection <features/>`, and :doc:`dynamic computation of new columns <eval/>`.
+Hatch commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
+and complex tasks are possible.
 
 Hatch is implemented in `Python <http://www.python.org/>`_ and makes extensive use of the `Pandas <https://pandas.pydata.org/>`_, `Seaborn <https://seaborn.pydata.org/>`_, and `Scikit-learn <https://scikit-learn.org/>`_ libraries for data processing and plot generation.
 
-Example command 
----------------
+Simple example
+--------------
 
 The following Hatch command generates a box plot of data from a file called ``iris.csv``, the Y-axis
-represents the ``sepal_length`` numerical feature, and the X-axis is grouped by the ``species`` feature.
+represents the ``sepal_length`` numerical feature, and the X-axis is grouped by the ``species`` categorical feature.
 The goal of this plot is to show the distribution of sepal length of the three different species of iris
 flowers contained in the data set.
 
 .. code-block:: bash
 
-   hatch box -x species -y sepal_length iris.csv
+   cat iris.csv | hatch box -x species -y sepal_length
 
-The above command generates an output file called ``iris.sepal_length.species.box.png`` that
+The above command generates an output file called ``hatch.species.sepal_length.box.png`` that
 contains the following box plot:
 
 .. image:: ../images/iris.sepal_length.species.box.png
@@ -67,15 +39,42 @@ contains the following box plot:
        :align: center
        :alt: Box plot showing the distribution of sepal length by species for the iris data set
 
-The input file ``iris.csv`` 5 columns and contains 150 data rows and one heading row. The first five lines of the file are as follows:
+The input file ``iris.csv`` 150 data rows, one heading row, and 5 columns. A pretty sample of the data can be viewed
+using the ``hatch pretty`` command:
 
 .. code-block:: bash
 
-    sepal_length,sepal_width,petal_length,petal_width,species
-    5.1,3.5,1.4,0.2,setosa
-    4.9,3.0,1.4,0.2,setosa
-    4.7,3.2,1.3,0.2,setosa
-    4.6,3.1,1.5,0.2,setosa
+   cat iris.csv | hatch pretty
+   sepal_length  sepal_width  petal_length  petal_width   species
+            5.1          3.5           1.4          0.2    setosa
+            4.9          3.0           1.4          0.2    setosa
+            4.7          3.2           1.3          0.2    setosa
+            4.6          3.1           1.5          0.2    setosa
+            5.0          3.6           1.4          0.2    setosa
+  ...                    ...           ...          ...       ...
+            6.7          3.0           5.2          2.3 virginica
+            6.3          2.5           5.0          1.9 virginica
+            6.5          3.0           5.2          2.0 virginica
+            6.2          3.4           5.4          2.3 virginica
+            5.9          3.0           5.1          1.8 virginica
+
+  [150 rows x 5 columns]
+
+Advanced example
+----------------
+
+The following example illustrates Hatch's ability to chain commands together: 
+
+.. code-block:: bash
+
+    cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2
+
+Input is read from the file called `iris.csv` on standard input. Data is passed from left to right in the chain.
+The `filter` command selects all rows where `species` is not equal to `virginica`.
+The filtered rows are then passed to the `sample` command which randomly selects 90% of the remaining rows.
+The sampled rows are then passed to the `pca` command which performs principal component analysis (PCA) as a data
+reduction step, yielding two extra columns in the data called `pc1` and `pc2`. Finally the pca-transformed
+data is passed to the `scatter` command which generates a scatter plot of `pc1` and `pc2` (the first two principal components).
 
 License
 -------

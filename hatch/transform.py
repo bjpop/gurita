@@ -178,7 +178,7 @@ class SampleRows(CommandBase, name="sample"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-n', '--num', metavar='NUM', type=float,
+            'num', metavar='NUM', type=float,
             help='Sample rows from the input data, if NUM >= 1 then sample NUM rows, if 0 <= NUM < 1, then sample NUM fraction of rows')
         self.options = parser.parse_args(args)
 
