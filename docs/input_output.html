@@ -51,7 +51,11 @@
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Input and output</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#input-files">Input files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#input-from-standard-input-device-stdin">Input from standard input device (stdin)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-from-standard-input-device-stdin">Input from standard input device (stdin)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifying-input-file-type-when-reading-from-standard-input">Specifying input file type when reading from standard input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#input-from-a-named-file">Input from a named file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#end-of-options-marker-double-dash">End of options marker (double dash)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#input-file-type">Input file type</a></li>
 </ul>
@@ -168,21 +172,47 @@ must still be present.</p>
 </div>
 <section id="input-files">
 <span id="id1"></span><h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this headline"></a></h2>
-<p>Hatch can read data from a named input file or the standard input device (stdin).</p>
-<p>When reading input from a file, the name of the file must the last argument on the command line.</p>
-<p>The example below illustrates reading input from a named file. This command produces a <a class="reference internal" href="count.html"><span class="doc">count plot</span></a> for the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> dataset:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class titanic.csv
-</pre></div>
-</div>
+<p>Hatch can read data from standard input (stdin) or a named input file.</p>
 <section id="input-from-standard-input-device-stdin">
 <h3>Input from standard input device (stdin)<a class="headerlink" href="#input-from-standard-input-device-stdin" title="Permalink to this headline"></a></h3>
-<p>If no input file name is provided, Hatch will read from stdin instead. For example you can
-redirect input from a file on the Unix command line:</p>
+<p>By default Hatch will read from standard input. For example you can
+redirect input from a file on the command line:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class &lt; titanic.csv
 </pre></div>
 </div>
+<p>Instead of using the redirection operator (&lt;), it is also possible to pipe (|) the output from another command to the standard input:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat titanic.csv <span class="p">|</span> hatch count -x class
+</pre></div>
+</div>
+<p>In the above example we simply use the <code class="docutils literal notranslate"><span class="pre">cat</span></code> command to pipe the contents of the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> into the standard input of Hatch.</p>
 <p>Reading from stdin is particularly useful when you want to use Hatch as part of a command pipeline:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example_command <span class="p">|</span> hatch count -x class
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, when reading from standard input, Hatch assumes that the file is in CSV format.
+This can be overridden by using the <code class="docutils literal notranslate"><span class="pre">stdin</span></code> command and supplying the <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">tsv</span></code> argument. See
+immediately below for details.</p>
+</div>
+<section id="specifying-input-file-type-when-reading-from-standard-input">
+<h4>Specifying input file type when reading from standard input<a class="headerlink" href="#specifying-input-file-type-when-reading-from-standard-input" title="Permalink to this headline"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">stdin</span></code> command lets you specify the format of the input file explicitly.</p>
+<p>Request for TSV file format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch stdin --format tsv &lt; example_file
+</pre></div>
+</div>
+<p>Request for CSV file format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch stdin --format csv &lt; example_file
+</pre></div>
+</div>
+<p>Note: it is redundant to explicitly request CSV format when reading from standard input because that is the default behaviour of Hatch.</p>
+</section>
+</section>
+<section id="input-from-a-named-file">
+<h3>Input from a named file<a class="headerlink" href="#input-from-a-named-file" title="Permalink to this headline"></a></h3>
+<p>The example below illustrates reading input from a named file. This command produces a <a class="reference internal" href="count.html"><span class="doc">count plot</span></a> for the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> dataset:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x class titanic.csv
 </pre></div>
 </div>
 </section>

@@ -26,7 +26,7 @@ class Stdin(CommandBase, name="stdin"):
 
     def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_format, io_args.na, io_args.navalues], add_help=True)
+            parents=[io_args.file_format, io_args.navalues], add_help=True)
         self.options = parser.parse_args(args)
 
     def run(self, _df_ignore):
@@ -54,7 +54,7 @@ class In(CommandBase, name="in"):
 
     def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_format, io_args.na, io_args.navalues], add_help=True)
+            parents=[io_args.file_format, io_args.navalues], add_help=True)
         parser.add_argument('input', metavar='FILE', type=str, help=f'Read input from a named file.')
         self.options = parser.parse_args(args)
 

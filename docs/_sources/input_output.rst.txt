@@ -33,31 +33,65 @@ where each observation has a value associated with each feature.
 Input files
 ===========
 
-Hatch can read data from a named input file or the standard input device (stdin). 
-
-When reading input from a file, the name of the file must the last argument on the command line.
-
-The example below illustrates reading input from a named file. This command produces a :doc:`count plot <count/>` for the ``class`` feature in the ``titantic.csv`` dataset:
-
-.. code-block:: bash
-
-    hatch count -x class titanic.csv
+Hatch can read data from standard input (stdin) or a named input file.
 
 Input from standard input device (stdin)
 ----------------------------------------
 
-If no input file name is provided, Hatch will read from stdin instead. For example you can
-redirect input from a file on the Unix command line:
+By default Hatch will read from standard input. For example you can
+redirect input from a file on the command line:
 
 .. code-block:: bash
 
     hatch count -x class < titanic.csv
+
+Instead of using the redirection operator (<), it is also possible to pipe (|) the output from another command to the standard input:
+
+.. code-block:: bash
+
+    cat titanic.csv | hatch count -x class
+
+In the above example we simply use the ``cat`` command to pipe the contents of the file ``titanic.csv`` into the standard input of Hatch.
 
 Reading from stdin is particularly useful when you want to use Hatch as part of a command pipeline: 
 
 .. code-block:: bash
 
     example_command | hatch count -x class
+
+.. note::
+
+   By default, when reading from standard input, Hatch assumes that the file is in CSV format.
+   This can be overridden by using the ``stdin`` command and supplying the ``--format tsv`` argument. See
+   immediately below for details.
+
+Specifying input file type when reading from standard input 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``stdin`` command lets you specify the format of the input file explicitly.
+
+Request for TSV file format:
+
+.. code-block:: bash
+
+    hatch stdin --format tsv < example_file 
+
+Request for CSV file format: 
+
+.. code-block:: bash
+
+    hatch stdin --format csv < example_file 
+
+Note: it is redundant to explicitly request CSV format when reading from standard input because that is the default behaviour of Hatch.
+
+Input from a named file 
+-----------------------
+
+The example below illustrates reading input from a named file. This command produces a :doc:`count plot <count/>` for the ``class`` feature in the ``titantic.csv`` dataset:
+
+.. code-block:: bash
+
+    hatch count -x class titanic.csv
 
 End of options marker (double dash)
 -----------------------------------
