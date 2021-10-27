@@ -51,7 +51,6 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command line syntax</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-number">Version number</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#common-arguments">Common arguments</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
@@ -133,17 +132,17 @@
   <section id="command-line-syntax">
 <h1>Command line syntax<a class="headerlink" href="#command-line-syntax" title="Permalink to this headline"></a></h1>
 <p>The command line syntax for Hatch follows the pattern:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;subcommand&gt; &lt;arguments&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt; &lt;arguments&gt;
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">subcommand</span></code> selects the plot or analysis type (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code>) and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> controls the behaviour of the subcommand and specifies input data.</p>
-<p>As a simple example, the following command plots a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x passengers flights.csv
+<p>where <code class="docutils literal notranslate"><span class="pre">command</span></code> selects the plot or analysis type (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code>) and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> controls the behaviour of the command and specifies input data.</p>
+<p>As a simple example, the following command plots a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> read from standard input:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x passengers &lt; flights.csv
 </pre></div>
 </div>
-<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the subcommand that selects the histogram plot type, <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> specifies that the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> feature in the data set should be plotted on the X-axis
+<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the command that selects the histogram plot type, <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> specifies that the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> feature in the data set should be plotted on the X-axis
 and <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> specifies that the input data set should be read from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code>. See <a class="reference internal" href="input_output.html"><span class="doc">Input and output</span></a> for more information about input and output files.</p>
-<p>Each subcommand accepts optional arguments that control its behaviour. Some of these are common across all subcommands, and some are subcommand specific.</p>
+<p>Each command accepts optional arguments that control its behaviour. Some of these are common across all commands, and some are command specific.</p>
 <section id="getting-help">
 <span id="help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> command line arguments give an overview of Hatch’s command line syntax:</p>
@@ -151,171 +150,91 @@ and <code class="docutils literal notranslate"><span class="pre">flights.csv</sp
 </pre></div>
 </div>
 <p>The usage message is displayed as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Hatch is a data analytics and plotting program.
 
-usage: hatch [-v] [-h] command &lt;arguments&gt;
+Display a help message or the version number and exit:
 
-optional arguments:
-  -h, --help     show this help message and exit
-  -v, --version  show program&#39;s version number and exit
+    hatch [-h|--help] [-v|--version]
 
-Sub command:
+Display the help message for a command and exit:
 
-      Plotting:
-      ---------
+    hatch command -h
 
-      bar                 Bar plot of categorical feature
-      box                 Box plot of numerical feature
-      boxen               Boxen plot of numerical feature
-      clustermap          Clustered heatmap of two numerical features
-      count               Count plot of categorical feature
-      heatmap             Heatmap of two numerical features
-      hist                Histogram of numerical or categorical feature
-      line                Line plot of numerical feature
-      pca                 Principal components analysis (PCA)
-      point               Point plot of numerical feature
-      scatter             Scatter plot of two numerical features
-      strip               Strip plot of numerical feature
-      swarm               Swarm plot of numerical feature
-      violin              Violin plot of numerical feature
+Run a single command with optional arguments:
 
-      Data manipulation:
-      ------------------
+    hatch command &lt;args&gt;
 
-      transform           Tranform the input data and save the result to a new file
+Run a chain of commands from left to right, each separated by &#39;+&#39; character:
 
-      Statistics:
-      -----------
+    hatch command_1 &lt;args&gt; + ... + command_n &lt;args&gt;
 
-      correlation         Correlation between numerical features
-      info                Show summary information about features in the input data set
-      normtest            Test whether numerical features differ from a normal distribution
+Available commands:
+
+    input/output
+    ------------
+
+    in                  Read CSV/TSV data from a named input file.
+    out                 Write the current dataset to a file in CSV/TSV format.
+    stdin               Read a CSV/TSV file from standard input.
+    stdout              Print the current dataset to the standard output in CSV/TSV format.
+
+    plotting
+    --------
+
+    bar                 Bar plot of categorical feature.
+    box                 Plot distrbution of numerical column using box-and-whiskers.
+    boxen               Plot distrbution of numerical column using boxes for quantiles.
+    clustermap          Clustered heatmap of two categorical columns.
+    count               Plot count of categorical columns using bars.
+    heatmap             Heatmap of two categorical columns.
+    hist                Histogram of numerical or categorical feature.
+    line                Line plot of numerical feature.
+    lmplot              Regression plot
+    pair                Pair plot of numerical features.
+    point               Point plot of numerical feature.
+    scatter             Scatter plot of two numerical columns.
+    strip               Plot distrbution of numerical column using dotted strip.
+    swarm               Plot distrbution of numerical column using dot swarm.
+    violin              Plot distrbution of numerical column using violin.
+
+    transformation
+    --------------
+
+    corr                Pairwise correlation between numerical columns.
+    cut                 Select a subset of columns by name.
+    dropna              Drop rows or columns containing missing values (NA)
+    eval                Compute new columns for each row with an expression.
+    filter              Filter rows with a logical expression.
+    gmm                 Gaussian mixture model clustering.
+    head                Select the first N rows in the data.
+    isnorm              Test whether numerical features differ from a normal distribution.
+    kmeans              k-means clustering
+    melt                Reshape a wide format dataset into a long format dataset.
+    outlier             Detect outliers in numerical columns using interquartile range.
+    pca                 Principal component analysis (PCA).
+    pivot               Reshape a long format dataset into a wide format dataset.
+    sample              Randomly sample rows.
+    sort                Sort based on columns in precedence from left to right.
+    tail                Select the last N rows in the data.
+    zscore              Compute Z-score for numerical columns
+
+    summary information
+    -------------------
+
+    describe            Show summary information about the input data set.
+    pretty              Pretty print a fragment of the data set.
 </pre></div>
 </div>
-<p>Help information for each sub-command can be requested with <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
-after the sub-command name. For example, to get specific help about histograms, use:</p>
+<p>Help information for each command can be requested with <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+after the command name. For example, to get specific help about histograms, use:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -h
 </pre></div>
 </div>
+<p>This will display a detailed help message for the <code class="docutils literal notranslate"><span class="pre">hist</span></code> command.</p>
 </section>
 <section id="version-number">
 <span id="version"></span><h2>Version number<a class="headerlink" href="#version-number" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--version</span></code> (<code class="docutils literal notranslate"><span class="pre">-v</span></code>) command line argument causes Hatch to print its version number.</p>
-</section>
-<section id="common-arguments">
-<h2>Common arguments<a class="headerlink" href="#common-arguments" title="Permalink to this headline"></a></h2>
-<p>The following command line options apply generally across most subcommands:</p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 50%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Argument</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Reference</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code></p></td>
-<td><p>generate a help message</p></td>
-<td><p><a class="reference internal" href="#help"><span class="std std-ref">Getting help</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--filetype</span> <span class="pre">{CSV,TSV}</span></code></p></td>
-<td><p>specify the type of input file, allowed values are <code class="docutils literal notranslate"><span class="pre">CSV</span></code> (default) and <code class="docutils literal notranslate"><span class="pre">TSV</span></code></p></td>
-<td><p><a class="reference internal" href="input_output.html#filetype"><span class="std std-ref">Input file type</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">FILE,</span> <span class="pre">--out</span> <span class="pre">FILE</span></code></p></td>
-<td><p>save output plot to FILE (and override the default file name)</p></td>
-<td><p><a class="reference internal" href="input_output.html#out"><span class="std std-ref">Output plot file name</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">{png,jpg,pdf,svg}</span></code></p></td>
-<td><p>file format to use for saved plots, allowed values are <code class="docutils literal notranslate"><span class="pre">png</span></code> (default) and <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">svg</span></code></p></td>
-<td><p><a class="reference internal" href="input_output.html#format"><span class="std std-ref">Output plot graphics file format</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--prefix</span> <span class="pre">NAME</span></code></p></td>
-<td><p>use NAME as the prefix of the output file (default is to use the prefix of the input data file name)</p></td>
-<td><p><a class="reference internal" href="input_output.html#prefix"><span class="std std-ref">Output prefix</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logfile</span> <span class="pre">LOG_FILE</span></code></p></td>
-<td><p>write progress information and messages to LOG_FILE</p></td>
-<td><p><a class="reference internal" href="input_output.html#log"><span class="std std-ref">Logging progress</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--filter</span> <span class="pre">EXPR</span></code></p></td>
-<td><p>filter the rows of the input data file using the expression EXPR</p></td>
-<td><p><a class="reference internal" href="filter.html"><span class="doc">Filtering rows</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--eval</span> <span class="pre">EXPR</span> <span class="pre">[EXPR</span> <span class="pre">...]</span></code></p></td>
-<td><p>dynamically create new columns in the input data based on the expressions EXPR [EXPR …], each expression creates a new column</p></td>
-<td><p><a class="reference internal" href="eval.html"><span class="doc">Computing new columns</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--navalues</span> <span class="pre">STR</span></code></p></td>
-<td><p>use STR to represent NA values in the input file</p></td>
-<td><p><a class="reference internal" href="input_output.html#navalues"><span class="std std-ref">NA values</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--info,</span> <span class="pre">-i</span></code></p></td>
-<td><p>output a summary of the input data set (including types, an simple statistics where possible)</p></td>
-<td><p><a class="reference internal" href="info.html#info"><span class="std std-ref">Summarising input data</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--verbose</span></code></p></td>
-<td><p>turn on verbose output mode, this will cause Hatch to be more chatty about its behaviour, and in particular it will print the name of any output file created</p></td>
-<td><p><a class="reference internal" href="input_output.html#verbose"><span class="std std-ref">Verbose execution</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--save</span> <span class="pre">FILEPATH,</span> <span class="pre">-s</span> <span class="pre">FILEPATH</span></code></p></td>
-<td><p>Save the data set to a CSV file after running <code class="docutils literal notranslate"><span class="pre">filter</span></code>, <code class="docutils literal notranslate"><span class="pre">eval</span></code> and <code class="docutils literal notranslate"><span class="pre">sample</span></code> commands</p></td>
-<td><p><a class="reference internal" href="input_output.html#save"><span class="std std-ref">Transforming input data and saving to a file</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--sample</span> <span class="pre">NUM</span></code></p></td>
-<td><p>use a random sample of NUM rows from the input data instead of the full data set</p></td>
-<td><p><a class="reference internal" href="sample.html"><span class="doc">Random sampling</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--title</span> <span class="pre">STR</span></code></p></td>
-<td><p>use STR for the title of the plot, by default plots do not have titles</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#title"><span class="std std-ref">Title</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--width</span> <span class="pre">SIZE</span></code></p></td>
-<td><p>specify the width of the plot (in inches) with SIZE</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#width"><span class="std std-ref">Width</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--height</span> <span class="pre">SIZE</span></code></p></td>
-<td><p>specify the height of the plot (in inches) with SIZE</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#height"><span class="std std-ref">Height</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--xlabel</span> <span class="pre">STR</span></code></p></td>
-<td><p>use STR for the X-axis label (otherwise label will be chosen automatically)</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#xlabel"><span class="std std-ref">X axis label</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--ylabel</span> <span class="pre">STR</span></code></p></td>
-<td><p>use STR for the Y-axis label (otherwise label will be chosen automatically)</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#ylabel"><span class="std std-ref">Y axis label</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--noxticklabels</span></code></p></td>
-<td><p>turn off tick labels on the X-axix (by default tick labels are shown on the X-axis where appropriate)</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#noxticklabels"><span class="std std-ref">No X axis tick labels</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--noyticklabels</span></code></p></td>
-<td><p>turn off tick labels on the Y-axix (by default tick labels are shown on the Y-axis where appropriate)</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#noyticklabels"><span class="std std-ref">No y axis tick labels</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--nolegend</span></code></p></td>
-<td><p>turn off the plot legend (only relevant for plots that generate a legend by default)</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#nolegend"><span class="std std-ref">No legend</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--plotstyle</span> <span class="pre">{darkgrid,whitegrid,dark,white,ticks}</span></code></p></td>
-<td><p>Aesthetic style of plot. Allowed values: darkgrid, whitegrid, dark, white, ticks. Default: darkgrid.</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#plotstyle"><span class="std std-ref">Style</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--context</span> <span class="pre">{paper,notebook,talk,poster}</span></code></p></td>
-<td><p>Aesthetic context of plot. Allowed values: paper, notebook, talk, poster.  Default: notebook.</p></td>
-<td><p><a class="reference internal" href="aesthetics.html#context"><span class="std std-ref">Context</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--show</span></code></p></td>
-<td><p>display an interactive plot window instead of saving the plot to a file</p></td>
-<td><p><a class="reference internal" href="input_output.html#show"><span class="std std-ref">show</span></a></p></td>
-</tr>
-</tbody>
-</table>
 </section>
 </section>
 
