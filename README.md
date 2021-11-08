@@ -16,6 +16,19 @@ and complex tasks are possible.
 
 Hatch is implemented in [Python](http://www.python.org/) and makes extensive use of the [Pandas](https://pandas.pydata.org/), [Seaborn](https://seaborn.pydata.org/), and [Scikit-learn](https://scikit-learn.org/) libraries for data processing and plot generation.
 
+# Simple example
+
+Box plot of `sepal_length` for each species in the classic [iris dataset](https://github.com/mwaskom/seaborn-data/blob/master/iris.csv/):
+
+```bash
+cat iris.csv | hatch box -x species -y sepal_length
+```
+
+<p align="center">
+  <img src="docs/_images/iris.sepal_length.species.box.png" alt="example box plot of sepal_length for each species in the classic iris dataset">
+</p>
+
+
 # Licence
 
 This program is released as open source software under the terms of [MIT License](https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE).
