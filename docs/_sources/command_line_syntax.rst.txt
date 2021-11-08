@@ -1,13 +1,31 @@
 Command line syntax
 *******************
 
-The command line syntax for Hatch follows the pattern:
+Hatch provides a suite of commands, each carrying out a analytics or plotting task.
+
+Commands can be chained together in a modular fashion for more complex tasks.
+
+In the simplest case only one command is used:
 
 .. code-block:: bash
 
-    hatch <command> <arguments>
+    hatch <command>
 
-where ``command`` selects the plot or analysis type (e.g. ``hist``) and ``arguments`` controls the behaviour of the command and specifies input data.
+where ``command`` selects the plot or analysis type (e.g. ``hist``).
+
+In more complex cases mulitple commands can be chained together with each separated by a plus sign (``+``):
+
+.. code-block:: bash
+
+    hatch <command_1> + <command_2> + ... + <command_n>
+
+As the following diagram illustrates, data flows from left to right along a command chain:
+
+.. image:: ../images/hatch_command_chain_data_flow.png
+       :align: center
+       :alt: Illustration of data flow direction in Hatch command chain 
+
+Each command in the chain *may* transform the data before passing it along to the next command.
 
 As a simple example, the following command plots a histogram of the ``passengers`` column from the file ``flights.csv`` read from standard input:
 

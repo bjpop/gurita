@@ -27,7 +27,6 @@ where each observation has a value associated with each feature.
    Missing values are allowed, and are indicated by leaving a particular column blank (empty) on a given row; nonetheless the column
    must still be present.
 
-
 .. _input_files:
 
 Input files
@@ -45,15 +44,15 @@ redirect input from a file on the command line:
 
     hatch count -x class < titanic.csv
 
-Instead of using the redirection operator (<), it is also possible to pipe (|) the output from another command to the standard input:
+Instead of using redirection, it is also possible to pipe the output from another command to the standard input:
 
 .. code-block:: bash
 
     cat titanic.csv | hatch count -x class
 
-In the above example we simply use the ``cat`` command to pipe the contents of the file ``titanic.csv`` into the standard input of Hatch.
+In the above example the ``cat`` command is used to pipe the contents of the file ``titanic.csv`` into the standard input of Hatch.
 
-Reading from stdin is particularly useful when you want to use Hatch as part of a command pipeline: 
+Reading from standard input is particularly useful when you want to use Hatch as part of a command pipeline: 
 
 .. code-block:: bash
 
@@ -68,54 +67,37 @@ Reading from stdin is particularly useful when you want to use Hatch as part of 
 Specifying input file type when reading from standard input 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+When reading input from standard input, Hatch will assume that the data is in CSV format unless you tell it otherwise.
+
 The ``stdin`` command lets you specify the format of the input file explicitly.
+
+In the following examples we use ``...`` to indicate that the remainder of the example hatch command is unspecified.
 
 Request for TSV file format:
 
 .. code-block:: bash
 
-    hatch stdin --format tsv < example_file 
+    cat titanic.tsv | hatch stdin --format tsv ... 
 
 Request for CSV file format: 
 
 .. code-block:: bash
 
-    hatch stdin --format csv < example_file 
+    cat titanic.csv | hatch stdin --format csv ...
 
-Note: it is redundant to explicitly request CSV format when reading from standard input because that is the default behaviour of Hatch.
+The above example is redundant because the default behaviour of Hatch is to assume CSV format when reading from standard input. 
 
 Input from a named file 
 -----------------------
 
-The example below illustrates reading input from a named file. This command produces a :doc:`count plot <count/>` for the ``class`` feature in the ``titantic.csv`` dataset:
+The ``in`` command allows you to specify an input file by name, instead of reading from standard input:
 
 .. code-block:: bash
 
-    hatch count -x class titanic.csv
-
-End of options marker (double dash)
------------------------------------
-
-In some instances it is useful (or necessary) to clearly separate the optional command line arguments from the name of the input file. Following standard command line conventions, Hatch uses a double-dash ``--``
-marker for this purpose. The double-dash (surrounded by whitespace) indicates the end of the regular command line arguments, and tells Hatch that the following arugment is the input file name:
-
-.. code-block:: bash
-
-    hatch count -x class -- titanic.csv
-
-.. _filetype:
-
-Input file type
----------------
-
-The input file format must be either `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_. The first row of the input file must be column headings.
+    hatch in titanic.tsv ... 
 
 When reading input from a named file (and not from stdin) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
-``--filetype <type>`` option. 
-
-When reading input from stdin, Hatch will assume that the data is in CSV format unless you tell it otherwise.
-
-If Hatch cannot determine the input file type from the filename extension, or the input is read from stdin and is not in CSV format, then you must specify the input file format using the ``--filetype <type>`` option, where ``<type>`` must be one of ``CSV`` or ``TSV``.
+``--format <type>`` option. 
 
 Output files 
 ============

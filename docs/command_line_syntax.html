@@ -131,11 +131,20 @@
              
   <section id="command-line-syntax">
 <h1>Command line syntax<a class="headerlink" href="#command-line-syntax" title="Permalink to this headline"></a></h1>
-<p>The command line syntax for Hatch follows the pattern:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt; &lt;arguments&gt;
+<p>Hatch provides a suite of commands, each carrying out a analytics or plotting task.</p>
+<p>Commands can be chained together in a modular fashion for more complex tasks.</p>
+<p>In the simplest case only one command is used:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt;
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">command</span></code> selects the plot or analysis type (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code>) and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> controls the behaviour of the command and specifies input data.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">command</span></code> selects the plot or analysis type (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code>).</p>
+<p>In more complex cases mulitple commands can be chained together with each separated by a plus sign (<code class="docutils literal notranslate"><span class="pre">+</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command_1&gt; + &lt;command_2&gt; + ... + &lt;command_n&gt;
+</pre></div>
+</div>
+<p>As the following diagram illustrates, data flows from left to right along a command chain:</p>
+<img alt="Illustration of data flow direction in Hatch command chain" class="align-center" src="_images/hatch_command_chain_data_flow.png" />
+<p>Each command in the chain <em>may</em> transform the data before passing it along to the next command.</p>
 <p>As a simple example, the following command plots a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> read from standard input:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x passengers &lt; flights.csv
 </pre></div>
