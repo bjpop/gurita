@@ -41,7 +41,7 @@ cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatte
 ```
 
 <p align="center">
-  <img src="docs/_images/images/iris.pc1.pc2.species.pca.scatter.png" width="300" alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset">
+  <img src="docs/_images/iris.pc1.pc2.species.pca.scatter.png" width="300" alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset">
 </p>
 
 In this example there are 4 commands that are executed in the following order:
