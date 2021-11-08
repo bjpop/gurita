@@ -20,7 +20,9 @@ Hatch is implemented in [Python](http://www.python.org/) and makes extensive use
 
 Please consult the [Hatch Documentation](https://bjpop.github.io/hatch/index.html) for detailed information about installation and usage.
 
-# Simple example
+# Examples
+
+### Simple example
 
 Box plot of `sepal_length` for each species in the classic [iris dataset](https://github.com/mwaskom/seaborn-data/blob/master/iris.csv/):
 
@@ -32,7 +34,7 @@ cat iris.csv | hatch box -x species -y sepal_length
   <img src="docs/_images/iris.sepal_length.species.box.png" width="300" alt="example box plot of sepal_length for each species in the classic iris dataset">
 </p>
 
-# Advanved example 
+### Advanved example 
 
 The following example illustrates Hatch's ability to chain commands together:
 
