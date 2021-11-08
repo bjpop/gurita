@@ -34,10 +34,13 @@ cat iris.csv | hatch box -x species -y sepal_length
 
 # Advanved example 
 
-The following example illustrates Hatch's ability to chain commands together
+The following example illustrates Hatch's ability to chain commands together:
 
 ```bash
-cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
+cat iris.csv | hatch filter 'species != "virginica"' + \
+                     sample 0.9 + \
+                     pca + \
+                     scatter -x pc1 -y pc2 --hue species
 ```
 
 <p align="center">
