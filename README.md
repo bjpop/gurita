@@ -25,7 +25,7 @@ cat iris.csv | hatch box -x species -y sepal_length
 ```
 
 <p align="center">
-  <img src="docs/_images/iris.sepal_length.species.box.png" alt="example box plot of sepal_length for each species in the classic iris dataset">
+  <img src="docs/_images/iris.sepal_length.species.box.png" width="100" alt="example box plot of sepal_length for each species in the classic iris dataset">
 </p>
 
 
