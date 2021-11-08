@@ -37,7 +37,9 @@ cat iris.csv | hatch box -x species -y sepal_length
 
 ### Advanved example 
 
-The following example illustrates Hatch's ability to chain commands together:
+The following example illustrates Hatch's ability to chain commands together. 
+
+Commands in a chain are separated by the plus sign (+) and data flows from left to right in the chain.
 
 ```bash
 cat iris.csv | hatch filter 'species != "virginica"' + \
@@ -60,7 +62,6 @@ In this example there are 4 commands that are executed in the following order:
 # Licence
 
 This program is released as open source software under the terms of [MIT License](https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE).
-
 
 # Authors
 
