@@ -6,7 +6,7 @@
 
 Hatch is a command line tool for analysing and visualising tabular data in CSV or TSV format.
 
-At its core, Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
+At its core Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
 
 **A unique and powerful feature of Hatch** is that commands to be chained together into flexible analysis pipelines. See the advanced example below.
 
