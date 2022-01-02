@@ -280,6 +280,9 @@ class Heatmap(CommandBase, name="heatmap"):
             '--cmap',  metavar='COLOR_MAP_NAME', type=str,
             help=f'Use this color map, will use Seaborn default if not specified')
         parser.add_argument(
+            '--annot', action='store_true', 
+            help=f'Display the data value in each cell in the heatmap')
+        parser.add_argument(
             '--log', action='store_true',
             help=f'Use a log scale on the numerical data')
         self.options = parser.parse_args(args)
@@ -296,7 +299,7 @@ class Heatmap(CommandBase, name="heatmap"):
         self.y = options.yaxis
         self.val = options.val
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
-        graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap)
+        graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, annot=self.options.annot)
         render_plot.render_plot(options, graph, self.name)
         return df
 
