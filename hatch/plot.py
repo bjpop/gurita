@@ -207,6 +207,10 @@ class Clustermap(CommandBase, name="clustermap"):
         parser.add_argument(
             '--annot', action='store_true',
             help=f'Display the data value in each cell in the heatmap')
+        # See https://docs.python.org/3/library/string.html#formatspec for options on formatting
+        parser.add_argument(
+            '--fmt', type=str, required=False, default=const.DEFAULT_HEATMAP_STRING_FORMAT,
+            help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Default: %(default)s.')
         parser.add_argument(
             '--vmin', type=float, metavar='NUM', required=False,
             help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
@@ -250,6 +254,7 @@ class Clustermap(CommandBase, name="clustermap"):
             yticklabels = False
         # the following arguments control heatmap aspects of the clustermap
         kwargs['annot'] = self.options.annot
+        kwargs['fmt'] = self.options.fmt
         kwargs['robust'] = self.options.robust
         kwargs['vmin'] = self.options.vmin
         kwargs['vmax'] = self.options.vmax
@@ -287,6 +292,10 @@ class Heatmap(CommandBase, name="heatmap"):
         parser.add_argument(
             '--annot', action='store_true', 
             help=f'Display the data value in each cell in the heatmap')
+        # See https://docs.python.org/3/library/string.html#formatspec for options on formatting
+        parser.add_argument(
+            '--fmt', type=str, required=False, default=const.DEFAULT_HEATMAP_STRING_FORMAT,
+            help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Default: %(default)s.')
         parser.add_argument(
             '--vmin', type=float, metavar='NUM', required=False,
             help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
@@ -314,7 +323,7 @@ class Heatmap(CommandBase, name="heatmap"):
         self.val = options.val
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
         graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, annot=self.options.annot, robust=self.options.robust,
-                    vmin=self.options.vmin, vmax=self.options.vmax)
+                    vmin=self.options.vmin, vmax=self.options.vmax, fmt=self.options.fmt)
         render_plot.render_plot(options, graph, self.name)
         return df
 
