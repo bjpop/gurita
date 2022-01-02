@@ -308,6 +308,22 @@ class Heatmap(CommandBase, name="heatmap"):
         parser.add_argument(
             '--log', action='store_true',
             help=f'Use a log scale on the numerical data')
+        x_order_group = parser.add_mutually_exclusive_group()
+        x_order_group.add_argument(
+            '--sortx', metavar='ORDER', type=str, required=False, nargs='?',
+            choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
+            help=f'Sort the X axis by label. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.')
+        x_order_group.add_argument(
+            '--orderx', metavar='LABEL', type=str, required=False, nargs='+',
+            help=f'Order the X axis according to a given list of labels, left to right. Unlisted labels will appear in arbitrary order.')
+        y_order_group = parser.add_mutually_exclusive_group()
+        y_order_group.add_argument(
+            '--sorty', metavar='ORDER', type=str, required=False, nargs='?',
+            choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
+            help=f'Sort the Y axis by label. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.')
+        y_order_group.add_argument(
+            '--ordery', metavar='LABEL', type=str, required=False, nargs='+',
+            help=f'Order the Y axis according to a given list of labels, top to bottom. Unlisted labels will appear in arbitrary order.')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -322,6 +338,34 @@ class Heatmap(CommandBase, name="heatmap"):
         self.y = options.yaxis
         self.val = options.val
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
+        if self.options.sortx is not None:
+            ascending = True if self.options.sortx == 'a' else False
+            pivot_data.sort_index(axis=1, ascending=ascending, inplace=True)
+        if self.options.sorty is not None:
+            ascending = True if self.options.sorty == 'a' else False
+            pivot_data.sort_index(axis=0, ascending=ascending, inplace=True)
+        if self.options.orderx is not None:
+            # orderx must not have duplicates
+            if len(self.options.orderx) != len(set(self.options.orderx)):
+                utils.exit_with_error("X axis labels for ordering contains duplicates", const.EXIT_COMMAND_LINE_ERROR)
+            # orderx must be a subset of the column labels
+            column_label_strings = pivot_data.columns.map(str)
+            if not set(self.options.orderx).issubset(set(column_label_strings)):
+                utils.exit_with_error("X axis labels for ordering are not a subset of column labels", const.EXIT_COMMAND_LINE_ERROR)
+            order_map = { item: pos for (pos, item) in enumerate(self.options.orderx) }
+            max_index = len(self.options.orderx)
+            pivot_data.sort_index(axis=1, inplace=True, key=lambda index: index.map(lambda label: order_map.get(str(label), max_index)))
+        if self.options.ordery is not None:
+            # ordery must not have duplicates
+            if len(self.options.ordery) != len(set(self.options.ordery)):
+                utils.exit_with_error("Y axis labels for ordering contains duplicates", const.EXIT_COMMAND_LINE_ERROR)
+            # ordery must be a subset of the row labels
+            row_label_strings = pivot_data.index.map(str)
+            if not set(self.options.ordery).issubset(set(row_label_strings)):
+                utils.exit_with_error("Y axis labels for ordering are not a subset of row labels", const.EXIT_COMMAND_LINE_ERROR)
+            order_map = { item: pos for (pos, item) in enumerate(self.options.ordery) }
+            max_index = len(self.options.ordery)
+            pivot_data.sort_index(axis=0, inplace=True, key=lambda index: index.map(lambda label: order_map.get(str(label), max_index)))
         graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, annot=self.options.annot, robust=self.options.robust,
                     vmin=self.options.vmin, vmax=self.options.vmax, fmt=self.options.fmt)
         render_plot.render_plot(options, graph, self.name)

@@ -222,7 +222,7 @@ class Sort(CommandBase, name="sort"):
         options = self.options
         ordering = get_sort_ordering(options.columns, options.order)
         utils.validate_columns_error(df, options.columns)
-        df = df.sort_values(by=options.columns, na_position=options.napos, ascending=ordering)
+        df = df.sort_values(by=options.columns, na_position=options.napos, ascending=ordering, ignore_index=True)
         return df
     
 
