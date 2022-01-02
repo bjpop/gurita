@@ -204,6 +204,18 @@ class Clustermap(CommandBase, name="clustermap"):
             help='Linkage method to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
         parser.add_argument('--metric', required=False, choices=const.ALLOWED_CLUSTERMAP_METRICS, default=const.DEFAULT_CLUSTERMAP_METRIC,
             help='Distance metric to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
+        parser.add_argument(
+            '--annot', action='store_true',
+            help=f'Display the data value in each cell in the heatmap')
+        parser.add_argument(
+            '--vmin', type=float, metavar='NUM', required=False,
+            help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
+        parser.add_argument(
+            '--vmax', type=float, metavar='NUM', required=False,
+            help=f'Maximum anchor value for the colormap, if unset this will be inferred from the dataset')
+        parser.add_argument(
+            '--robust', action='store_true',
+            help=f'If --vmin or --vmax absent, use robust quantiles to set colormap range instead of the extreme data values')
         parser.set_defaults(colclust=True)
         self.options = parser.parse_args(args)
 
@@ -221,26 +233,31 @@ class Clustermap(CommandBase, name="clustermap"):
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
         width_inches, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         figsize = (width_inches, height_inches)
-        scale_args= {}
+        kwargs = {}
         if options.zscore == 'y':
-            scale_args['z_score'] = 0
+            kwargs['z_score'] = 0
         elif options.zscore == 'x':
-            scale_args['z_score'] = 1
+            kwargs['z_score'] = 1
         if options.stdscale == 'y':
-            scale_args['standard_scale'] = 0
+            kwargs['standard_scale'] = 0
         elif options.stdscale == 'x':
-            scale_args['standard_scale'] = 1
+            kwargs['standard_scale'] = 1
         xticklabels = True
         if options.nxtl:
             xticklabels = False
         yticklabels = True
         if options.nytl:
             yticklabels = False
+        # the following arguments control heatmap aspects of the clustermap
+        kwargs['annot'] = self.options.annot
+        kwargs['robust'] = self.options.robust
+        kwargs['vmin'] = self.options.vmin
+        kwargs['vmax'] = self.options.vmax
         # same time, even if only one is None.
         graph = sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
                       dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
                       col_cluster=options.colclust, yticklabels=yticklabels, xticklabels=xticklabels,
-                      method=options.method, metric=options.metric, **scale_args)
+                      method=options.method, metric=options.metric, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
