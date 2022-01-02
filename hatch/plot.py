@@ -194,6 +194,7 @@ class Clustermap(CommandBase, name="clustermap"):
             help='Cluster by columns (default).')
         parser.add_argument('--no-colclust', dest='colclust', action='store_false',
             help='Do not cluster by columns')
+        # clustermap does not allow both zscore and standard_scale to be specified at the same time
         cluster_normalise_group = parser.add_mutually_exclusive_group()
         cluster_normalise_group.add_argument('--zscore', required=False, choices=['y', 'x'],
             help='Normalise either across rows (y) or down columns (x) using z-score. Allowed values: %(choices)s.')
@@ -220,39 +221,26 @@ class Clustermap(CommandBase, name="clustermap"):
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
         width_inches, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         figsize = (width_inches, height_inches)
-        z_score = None
+        scale_args= {}
         if options.zscore == 'y':
-            z_score = 0
+            scale_args['z_score'] = 0
         elif options.zscore == 'x':
-            z_score = 1
-        standard_scale = None
+            scale_args['z_score'] = 1
         if options.stdscale == 'y':
-            standard_scale = 0
-        elif options.zscore == 'x':
-            standard_scale = 1
+            scale_args['standard_scale'] = 0
+        elif options.stdscale == 'x':
+            scale_args['standard_scale'] = 1
         xticklabels = True
-        if options.noxticklabels:
+        if options.nxtl:
             xticklabels = False
         yticklabels = True
-        if options.noyticklabels:
+        if options.nytl:
             yticklabels = False
-        # clustermap does not allow both zscore and standard_scale to be specified at the
         # same time, even if only one is None.
-        if standard_scale is not None:
-            graph = sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
+        graph = sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
                       dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
                       col_cluster=options.colclust, yticklabels=yticklabels, xticklabels=xticklabels,
-                      standard_scale=standard_scale, method=options.method, metric=options.metric)
-        elif z_score is not None:
-            graph = sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
-                      dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
-                      col_cluster=options.colclust, z_score=z_score, yticklabels=yticklabels,
-                      xticklabels=xticklabels, method=options.method, metric=options.metric)
-        else:
-            graph = sns.clustermap(data=pivot_data, cmap=options.cmap, figsize=figsize,
-                      dendrogram_ratio=options.dendroratio, row_cluster=options.rowclust,
-                      col_cluster=options.colclust, yticklabels=yticklabels, xticklabels=xticklabels,
-                      method=options.method, metric=options.metric)
+                      method=options.method, metric=options.metric, **scale_args)
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -283,6 +271,15 @@ class Heatmap(CommandBase, name="heatmap"):
             '--annot', action='store_true', 
             help=f'Display the data value in each cell in the heatmap')
         parser.add_argument(
+            '--vmin', type=float, metavar='NUM', required=False,
+            help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
+        parser.add_argument(
+            '--vmax', type=float, metavar='NUM', required=False,
+            help=f'Maximum anchor value for the colormap, if unset this will be inferred from the dataset')
+        parser.add_argument(
+            '--robust', action='store_true', 
+            help=f'If --vmin or --vmax absent, use robust quantiles to set colormap range instead of the extreme data values')
+        parser.add_argument(
             '--log', action='store_true',
             help=f'Use a log scale on the numerical data')
         self.options = parser.parse_args(args)
@@ -299,7 +296,8 @@ class Heatmap(CommandBase, name="heatmap"):
         self.y = options.yaxis
         self.val = options.val
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
-        graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, annot=self.options.annot)
+        graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, annot=self.options.annot, robust=self.options.robust,
+                    vmin=self.options.vmin, vmax=self.options.vmax)
         render_plot.render_plot(options, graph, self.name)
         return df
 
