@@ -46,7 +46,13 @@ def render_plot(options, graph, kind):
         plt.show()
     else:
        output_filename = make_output_filename(options, kind)
-       plt.savefig(output_filename, bbox_inches='tight', format=options.format)
+       # remove date and creator fields in the image metadata because these
+       # are variable and could distrupt testing expected behaviour
+       kwargs = {}
+       if options.format == 'svg':
+           image_metadata = {'Date': None, 'Creator': None}
+           kwargs['metadata'] = image_metadata
+       plt.savefig(output_filename, bbox_inches='tight', format=options.format, **kwargs)
        #if options.verbose:
        #    print(f"Plot written to {output_filename}")
 
