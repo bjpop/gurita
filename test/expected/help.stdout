@@ -1,0 +1,74 @@
+Hatch is a data analytics and plotting program.
+
+Display a help message or the version number and exit:
+
+    hatch [-h|--help] [-v|--version]
+
+Display the help message for a command and exit:
+
+    hatch command -h
+
+Run a single command with optional arguments:
+
+    hatch command <args>
+
+Run a chain of commands from left to right, each separated by '+' character:
+
+    hatch command_1 <args> + ... + command_n <args>
+
+Available commands:
+
+    input/output
+    ------------
+
+    in                  Read CSV/TSV data from a named input file.
+    out                 Write the current dataset to a file in CSV/TSV format.
+    stdin               Read a CSV/TSV file from standard input.
+    stdout              Print the current dataset to the standard output in CSV/TSV format.
+
+    plotting
+    --------
+
+    bar                 Bar plot of categorical feature.
+    box                 Plot distrbution of numerical column using box-and-whiskers.
+    boxen               Plot distrbution of numerical column using boxes for quantiles.
+    clustermap          Clustered heatmap of two categorical columns.
+    count               Plot count of categorical columns using bars.
+    heatmap             Heatmap of two categorical columns.
+    hist                Histogram of numerical or categorical feature.
+    line                Line plot of numerical feature.
+    lmplot              Regression plot
+    pair                Pair plot of numerical features.
+    point               Point plot of numerical feature.
+    scatter             Scatter plot of two numerical columns.
+    strip               Plot distrbution of numerical column using dotted strip.
+    swarm               Plot distrbution of numerical column using dot swarm.
+    violin              Plot distrbution of numerical column using violin.
+
+    transformation
+    --------------
+
+    corr                Pairwise correlation between numerical columns.
+    cut                 Select a subset of columns by name.
+    dropna              Drop rows or columns containing missing values (NA)
+    eval                Compute new columns for each row with an expression.
+    filter              Filter rows with a logical expression.
+    gmm                 Gaussian mixture model clustering.
+    head                Select the first N rows in the data.
+    isnorm              Test whether numerical features differ from a normal distribution.
+    kmeans              k-means clustering
+    melt                Reshape a wide format dataset into a long format dataset.
+    outlier             Detect outliers in numerical columns using interquartile range.
+    pca                 Principal component analysis (PCA).
+    pivot               Reshape a long format dataset into a wide format dataset.
+    sample              Randomly sample rows.
+    sort                Sort based on columns in precedence from left to right.
+    tail                Select the last N rows in the data.
+    zscore              Compute Z-score for numerical columns
+
+    summary information
+    -------------------
+
+    describe            Show summary information about the input data set.
+    pretty              Pretty print a fragment of the data set.
+

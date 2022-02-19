@@ -79,9 +79,10 @@ def stdin_used_safely(commands):
     else:
         return False
 
-def main():
+# Receive command line arguments as a string: useful for testing
+def main_args(cmdline_args):
     df = None
-    original_commands = args.parse_commandline()
+    original_commands = args.parse_commandline(cmdline_args)
     new_commands = original_commands
     init_logging()
     if not is_first_command_input(original_commands):
@@ -109,6 +110,10 @@ def main():
                 break
         logging.info("Completed")
         exit(0)
+
+
+def main():
+    main_args(sys.argv[1:])
 
 
 # If this script is run from the command line then call the main function.

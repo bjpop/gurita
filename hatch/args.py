@@ -102,10 +102,9 @@ def split_list(this_list, sep):
    return [list(group) for is_sep, group in itertools.groupby(this_list, lambda word: word == sep) if not is_sep]
 
 
-def parse_commandline():
+def parse_commandline(cmdline_args):
+    fields = cmdline_args 
     command_map = CommandBase.command_map
-
-    fields = sys.argv[1:]
 
     if len(fields) >= 1:
 
