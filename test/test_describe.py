@@ -1,4 +1,4 @@
-import test.utils
+from test.utils import command_output
 
 # NOTE, the describe command can be nondeterministic in its output
 # with respect to the top feature identified in the input file.
@@ -7,5 +7,5 @@ import test.utils
 
 def test_describe_titanic(capsys):
     with open("test/expected/describe_titanic.stdout") as expected_file:
-       expected_stdout = expected_file.read()
-    test.utils.command_stdout_stderr(capsys, "in data/titanic.csv + describe", expected_stdout)
+       stdout = expected_file.read()
+    command_output(capsys, "in data/titanic.csv + describe", stdout=stdout)

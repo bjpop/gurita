@@ -1,11 +1,11 @@
-import test.utils
+from test.utils import command_output
 
-def test_help_short(capsys):
+def test_help_short(capsys, tmpdir):
     with open("test/expected/help.stdout") as expected_file:
-       expected_stdout = expected_file.read()
-    test.utils.command_stdout_stderr(capsys, "-h", expected_stdout)
+       stdout = expected_file.read()
+    command_output(capsys, "-h", stdout=stdout)
 
-def test_help_long(capsys):
+def test_help_long(capsys, tmpdir):
     with open("test/expected/help.stdout") as expected_file:
-       expected_stdout = expected_file.read()
-    test.utils.command_stdout_stderr(capsys, "--help", expected_stdout)
+       stdout = expected_file.read()
+    command_output(capsys, "--help", stdout=stdout)

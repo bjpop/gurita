@@ -1,6 +1,6 @@
-import test.utils
+from test.utils import command_output
 
-def test_pretty_iris(capsys):
+def test_pretty_iris(capsys, tmpdir):
     with open("test/expected/pretty_iris.stdout") as expected_file:
-       expected_stdout = expected_file.read()
-    test.utils.command_stdout_stderr(capsys, "in data/iris.csv + pretty", expected_stdout)
+       stdout = expected_file.read()
+    command_output(capsys, "in data/iris.csv + pretty", stdout=stdout)
