@@ -87,7 +87,7 @@ class FilterRows(CommandBase, name="filter"):
         try:
             df = df.query(self.options.expr)
         except:
-            utils.exit_with_error(f"Bad filter expression: {options.filter}", const.EXIT_COMMAND_LINE_ERROR)
+            utils.exit_with_error(f"Bad filter expression: {self.options.filter}", const.EXIT_COMMAND_LINE_ERROR)
         return df
 
 
@@ -192,7 +192,7 @@ class SampleRows(CommandBase, name="sample"):
         elif 0 < num < 1:
             df = df.sample(frac = num)
         else:
-            utils.exit_with_error(f"Sample argument {options.sample} out of range. Must be > 0", const.EXIT_COMMAND_LINE_ERROR)
+            utils.exit_with_error(f"Sample argument {self.options.sample} out of range. Must be > 0", const.EXIT_COMMAND_LINE_ERROR)
         return df
 
 
