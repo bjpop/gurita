@@ -23,7 +23,7 @@ setup(
     description=('Plot taular data on the comand line.'),
     long_description=(LONG_DESCRIPTION),
     install_requires=[
-        "numpy==1.20.3",
+        "numpy==1.21.0",
         "scipy==1.6.1",
         "pandas==1.2.4",
         "seaborn==0.11.2",
