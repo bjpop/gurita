@@ -50,7 +50,7 @@ def render_plot(options, graph, kind):
        # are variable and could distrupt testing expected behaviour
        kwargs = {}
        if options.format in ['svg', 'png']:
-           image_metadata = {'Date': None, 'Creator': None}
+           image_metadata = {}
            kwargs['metadata'] = image_metadata
        plt.savefig(output_filename, bbox_inches='tight', format=options.format, **kwargs)
        #if options.verbose:
