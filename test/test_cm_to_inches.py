@@ -1,3 +1,4 @@
+import test.utils
 from hatch.utils import cm_to_inches
 import pytest
 

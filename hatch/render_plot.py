@@ -49,8 +49,8 @@ def render_plot(options, graph, kind):
        # remove date and creator fields in the image metadata because these
        # are variable and could distrupt testing expected behaviour
        kwargs = {}
-       if options.format in ['svg', 'png']:
-           image_metadata = {}
+       if options.format in ['svg']:
+           image_metadata = {'Creator': None, 'Date': None}
            kwargs['metadata'] = image_metadata
        plt.savefig(output_filename, bbox_inches='tight', format=options.format, **kwargs)
        #if options.verbose:

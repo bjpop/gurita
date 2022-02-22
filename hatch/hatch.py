@@ -24,6 +24,13 @@ import hatch.info
 import hatch.stats
 import hatch.cluster
 
+#import matplotlib as mpl
+## Use a constant string instead of a UUID in SVG node IDs
+#mpl.rcParams['svg.hashsalt'] = "hatch_test"
+## Fix the numpy random seed to avoid non-determinism in tests
+#import numpy as np
+#np.random.seed(19680801)
+
 def init_logging(log_filename=None):
     '''If the log_filename is defined, then
     initialise the logging facility, and write log statement
