@@ -406,7 +406,10 @@ class HistogramPlot(CommandBase, name="hist"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
+        # XXX fixme
+        #_width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
+        height_inches = 8
+        aspect = 1 
         if options.bins:
             kwargs['bins'] = options.bins
         if options.binwidth:
