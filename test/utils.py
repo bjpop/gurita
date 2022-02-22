@@ -11,7 +11,6 @@ np.random.seed(19680801)
 from hatch.hatch import main_args
 
 
-
 # Test a command and optionally compare its output file, stdout, stderr and exit status to expected values
 def command_output(capsys, cmd, out_file=None, expect_out_file=None, stdout="", stderr="", exit=0):
     command_fields = cmd.split()
