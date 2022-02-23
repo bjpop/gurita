@@ -52,6 +52,9 @@ def render_plot(options, graph, kind):
        if options.format in ['svg']:
            image_metadata = {'Creator': None, 'Date': None}
            kwargs['metadata'] = image_metadata
+       elif options.format in ['png']:
+           image_metadata = {'Title': None, 'Author': None, 'Description': None, 'Copyright': None, 'Creation Time': None, 'Software': None, 'Disclaimer': None, 'Warning': None, 'Source': None, 'Comment': None}
+           kwargs['metadata'] = image_metadata
        plt.savefig(output_filename, bbox_inches='tight', format=options.format, **kwargs)
        #if options.verbose:
        #    print(f"Plot written to {output_filename}")
