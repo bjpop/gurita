@@ -398,6 +398,12 @@ class HistogramPlot(CommandBase, name="hist"):
         parser.add_argument(
            '--kde', action='store_true',
             help=f'Plot a kernel density estimate for the histogram and show as a line')
+        parser.add_argument(
+           '--nofill', action='store_true', required=False,
+            help=f'Use unfilled histogram bars instead of solid coloured bars')
+        parser.add_argument(
+           '--element', choices=const.ALLOWED_HISTOGRAM_ELEMENTS, default=const.DEFAULT_HISTOGRAM_ELEMENT,
+           help=f'Style of histogram bars. Allowed values: %(choices)s. Default: $(default)s')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -406,10 +412,7 @@ class HistogramPlot(CommandBase, name="hist"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        # XXX fixme
-        #_width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
-        height_inches = 8
-        aspect = 1 
+        _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         if options.bins:
             kwargs['bins'] = options.bins
         if options.binwidth:
@@ -432,6 +435,8 @@ class HistogramPlot(CommandBase, name="hist"):
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
                 #facet_kws=facet_kws, col_wrap=options.colwrap, log_scale=True, **kwargs)
+                element=options.element,
+                fill=not(options.nofill),
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
