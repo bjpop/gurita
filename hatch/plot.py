@@ -403,7 +403,13 @@ class HistogramPlot(CommandBase, name="hist"):
             help=f'Use unfilled histogram bars instead of solid coloured bars')
         parser.add_argument(
            '--element', choices=const.ALLOWED_HISTOGRAM_ELEMENTS, default=const.DEFAULT_HISTOGRAM_ELEMENT,
-           help=f'Style of histogram bars. Allowed values: %(choices)s. Default: $(default)s')
+           help=f'Style of histogram bars. Allowed values: %(choices)s. Default: %(default)s')
+        parser.add_argument(
+           '--stat', choices=const.ALLOWED_HISTOGRAM_STATS, default=const.DEFAULT_HISTOGRAM_STAT, required=False,
+           help=f'Statistic to use for each bin. Allowed values: %(choices)s. Default: %(default)s')
+        parser.add_argument(
+           '--indnorm', action='store_true', required=False,  
+           help=f'For normalised statistics (e.g. percent), normalise each histogram in the plot independently, otherwise normalise over the full dataset')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -434,9 +440,10 @@ class HistogramPlot(CommandBase, name="hist"):
                 height=height_inches, aspect=aspect, hue=options.hue,
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
-                #facet_kws=facet_kws, col_wrap=options.colwrap, log_scale=True, **kwargs)
                 element=options.element,
                 fill=not(options.nofill),
+                stat=options.stat,
+                common_norm=not(options.indnorm),
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df

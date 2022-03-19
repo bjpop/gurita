@@ -62,6 +62,7 @@ DEFAULT_OUTLIER_COLUMN = 'outlier'
 DEFAULT_OUTLIER_IQR_SCALE = 1.5
 DEFAULT_HEATMAP_STRING_FORMAT = ".2g"
 DEFAULT_HISTOGRAM_ELEMENT = 'bars'
+DEFAULT_HISTOGRAM_STAT = 'count'
 
 ALLOWED_FILETYPES = ['csv', 'tsv']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -81,6 +82,7 @@ ALLOWED_PAIRPLOT_KINDS = ['scatter', 'kde', 'hist', 'reg']
 ALLOWED_DROPNA_AXIS = ['rows', 'columns']
 ALLOWED_DROPNA_HOW = ['any', 'all']
 ALLOWED_HISTOGRAM_ELEMENTS = ['bars', 'step', 'poly']
+ALLOWED_HISTOGRAM_STATS = ['count', 'frequency', 'probability', 'proportion', 'percent', 'density']
 
 
 try:
