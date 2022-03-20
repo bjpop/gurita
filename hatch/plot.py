@@ -381,7 +381,7 @@ class HistogramPlot(CommandBase, name="hist"):
             parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
                plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
+               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap, plot_args.vlines, plot_args.hlines],
            add_help=False)
         parser.add_argument(
             '--multiple', required=False, choices=const.ALLOWED_HIST_MULTIPLES,
@@ -445,6 +445,14 @@ class HistogramPlot(CommandBase, name="hist"):
                 stat=options.stat,
                 common_norm=not(options.indnorm),
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+        if options.vlines is not None:
+            for ax in graph.axes.ravel():
+                for pos in options.vlines:
+                    ax.axvline(pos)
+        if options.hlines is not None:
+            for ax in graph.axes.ravel():
+                for pos in options.hlines:
+                    ax.axhline(pos)
         render_plot.render_plot(options, graph, self.name)
         return df
 
