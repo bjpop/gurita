@@ -68,3 +68,30 @@ class Pretty(CommandBase, name="pretty"):
         nrows, ncols = df.shape
         print(f"\n[{nrows} rows x {ncols} columns]")
         return df
+
+
+class Unique(CommandBase, name="unique"):
+    description = "Print the unique values from a column."
+    category = "summary information"
+    
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-c', '--column', metavar='FEATURE', type=str,
+            help=f'Select unique items from this column')
+        parser.add_argument(
+            '--sort', action='store_true',
+            default=False,
+            help=f'Sort the items in ascending order')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
+        utils.check_df_has_columns(df, [options.column])
+        this_unique = df[options.column].unique()
+        if options.sort:
+            this_unique.sort()
+        print("\n".join(this_unique))
