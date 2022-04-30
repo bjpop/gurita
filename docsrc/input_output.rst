@@ -1,17 +1,19 @@
+.. _input_output: 
+
 Input and output
 *****************
 
 Hatch works on tabular input data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
 
-Input data is read from a single named input file or from the standard input device (stdin).
+Input data is read from the standard input device (stdin) or a named input file.
 
 Rows in the input file are considered to be "observations" (or cases) and columns are considered to be "features" (or variables). 
-That is, each row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
+That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
 The names of the features are given in the first row of the input file (the heading row).
 
-Below is a small example of the kind of input data accepted by Hatch. In this case it is in CSV format with five columns and four rows.
-Note that the first row is a header, containing the names of each feature (column) in the dataset. The remaining three rows are observations,
-where each observation has a value associated with each feature. 
+Below is a small example of the kind of input data accepted by Hatch. In this case it is in CSV format with five columns, one heading row and three data rows.
+The first row contains the names of each feature (column) in the dataset. The remaining three rows are data rows,
+where each row has a value associated with each feature column. 
 
 
 .. code-block:: bash
@@ -29,8 +31,8 @@ where each observation has a value associated with each feature.
 
 .. _input_files:
 
-Input files
-===========
+Input data 
+==========
 
 Hatch can read data from standard input (stdin) or a named input file.
 
@@ -44,13 +46,17 @@ redirect input from a file on the command line:
 
     hatch count -x class < titanic.csv
 
-Instead of using redirection, it is also possible to pipe the output from another command to the standard input:
+In the above example the notation ``< titanic.csv`` causes the contents of the file ``titantic.csv`` to be fed into the standard input of Hatch.
+This is called *input redirection*, and is a feature of the command line.
+
+Instead of using input redirection, it is also possible to *pipe* the output from another command to the standard input of Hatch:
 
 .. code-block:: bash
 
     cat titanic.csv | hatch count -x class
 
-In the above example the ``cat`` command is used to pipe the contents of the file ``titanic.csv`` into the standard input of Hatch.
+In the above example the command ``cat titanic.csv`` outputs the contents of the file ``titanic.csv`` to standard output which is then fed through a pipe using the ``|`` (vertical bar) operator
+into the standard input of Hatch.
 
 Reading from standard input is particularly useful when you want to use Hatch as part of a command pipeline: 
 
@@ -58,11 +64,23 @@ Reading from standard input is particularly useful when you want to use Hatch as
 
     example_command | hatch count -x class
 
-.. note::
+.. warning::
 
-   By default, when reading from standard input, Hatch assumes that the file is in CSV format.
-   This can be overridden by using the ``stdin`` command and supplying the ``--format tsv`` argument. See
-   immediately below for details.
+   **standard input defaults to CSV format**
+
+   For performance reasons Hatch does not try to detect the format of the input file when reading from standard input. 
+
+   Therefore, when reading from standard input, unless otherwise specified, Hatch assumes that the file is in CSV format.
+
+   This can be overridden by using the ``stdin`` command and supplying the ``--format tsv`` argument. 
+
+   Alternatively you can use the ``in`` command to read the file directly by its name (thus avoiding the use of standard input).
+   When reading from a file by name Hatch can use the file name extension to guess the file format. For instance, if
+   the file name is ``titanic.tsv`` it will assume the file is in TSV format. Note carefully, file format guessing only works
+   with the ``in`` command.
+
+   See below for details on each approach.
+
 
 Specifying input file type when reading from standard input 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -78,6 +96,12 @@ Request for TSV file format:
 .. code-block:: bash
 
     cat titanic.tsv | hatch stdin --format tsv ... 
+
+If, for example, you wanted to generate a count plot of the ``class`` feature in the ``titanic.tsv`` file, the ``...`` in the above example could be expanded like so:
+
+.. code-block:: bash
+
+    cat titanic.tsv | hatch stdin --format tsv + count -x class 
 
 Request for CSV file format: 
 

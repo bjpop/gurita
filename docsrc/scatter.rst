@@ -1,3 +1,5 @@
+.. _scatter:
+
 Scatter
 *******
 
