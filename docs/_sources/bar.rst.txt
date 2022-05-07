@@ -1,5 +1,7 @@
+.. _bar:
+
 Bar
-*****
+***
 
 Bar plots show the point estimates of the central tendency (mean) of numerical features as boxes with error bars.
 

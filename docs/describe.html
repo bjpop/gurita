@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Heatmap &mdash; hatch  documentation</title>
+  <title>Summarising input data &mdash; hatch  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Histogram" href="histogram.html" />
-    <link rel="prev" title="Count" href="count.html" /> 
+    <link rel="next" title="Docker container" href="docker.html" />
+    <link rel="prev" title="Random sampling" href="sample.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -56,19 +56,13 @@
 <li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
 <li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Heatmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#simple-example">Simple example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#selecting-features-to-plot">Selecting features to plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#log-scale-of-numerical-distribution">Log scale of numerical distribution</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
 <li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
@@ -96,8 +90,11 @@
 <li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Summary information</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="describe.html">Summarising input data</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Summarising input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#summary-information-for-transformed-input-data">Summary information for transformed input data</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
 <ul>
@@ -124,9 +121,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Heatmap</li>
+      <li>Summarising input data</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/heatmap.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/describe.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -134,91 +131,118 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="heatmap">
-<span id="id1"></span><h1>Heatmap<a class="headerlink" href="#heatmap" title="Permalink to this headline"></a></h1>
-<p>Heatmap showing the relationship between two categorical features and a numerical feature.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch heatmap &lt;arguments&gt;
+  <section id="summarising-input-data">
+<span id="info"></span><h1>Summarising input data<a class="headerlink" href="#summarising-input-data" title="Permalink to this headline"></a></h1>
+<p>Input data can be summarised with the <code class="docutils literal notranslate"><span class="pre">info</span></code> command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info &lt;arguments&gt;
 </pre></div>
 </div>
-<p>Heatmap plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.heatmap.html/">heatmap</a> library function.</p>
-<table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 50%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Argument</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Reference</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></td>
-<td><p>display help</p></td>
-<td><p><a class="reference internal" href="#heatmap-help"><span class="std std-ref">Getting help</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE,</span> <span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>select categorial feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE,</span> <span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>select categorical feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">FEATURE,</span> <span class="pre">--val</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>select intensity value for heatmap</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cmap</span> <span class="pre">COLOR_MAP_NAME</span></code></p></td>
-<td><p>color map for the heat map</p></td>
-<td><p><span class="xref std std-ref">heatmap_cmap</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log</span></code></p></td>
-<td><p>Use a log scale on the intensity value</p></td>
-<td><p><a class="reference internal" href="#heatmap-log"><span class="std std-ref">Log scale of numerical distribution</span></a></p></td>
-</tr>
-</tbody>
-</table>
-<section id="simple-example">
-<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Heatmap showing the number of <code class="docutils literal notranslate"><span class="pre">passengers</span></code> by <code class="docutils literal notranslate"><span class="pre">month</span></code> and <code class="docutils literal notranslate"><span class="pre">year</span></code>
-in the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> data set:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers -- flights.csv
+<p>This produces a summary table of features in the input data. By default all features in the
+input data are sumarised, although this can be changed by <span class="xref std std-doc">transforming the data first</span>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info titanic.csv
 </pre></div>
 </div>
-<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">flights.month.year.passengers.heatmap.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/flights.month.year.passengers.heatmap.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set" class="align-center" src="_images/flights.month.year.passengers.heatmap.png" style="width: 600px; height: 600px;" /></a>
+<p>The output for the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch  \
+count   891.000000  891.000000   891  714.000000  891.000000  891.000000
+unique         NaN         NaN     2         NaN         NaN         NaN
+top            NaN         NaN  male         NaN         NaN         NaN
+freq           NaN         NaN   577         NaN         NaN         NaN
+mean      0.383838    2.308642   NaN   29.699118    0.523008    0.381594
+std       0.486592    0.836071   NaN   14.526497    1.102743    0.806057
+min       0.000000    1.000000   NaN    0.420000    0.000000    0.000000
+25%       0.000000    2.000000   NaN   20.125000    0.000000    0.000000
+50%       0.000000    3.000000   NaN   28.000000    0.000000    0.000000
+75%       1.000000    3.000000   NaN   38.000000    1.000000    0.000000
+max       1.000000    3.000000   NaN   80.000000    8.000000    6.000000
+
+              fare embarked  class  who adult_male deck  embark_town alive  \
+count   891.000000      889    891  891        891  203          889   891
+unique         NaN        3      3    3          2    7            3     2
+top            NaN        S  Third  man       True    C  Southampton    no
+freq           NaN      644    491  537        537   59          644   549
+mean     32.204208      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+std      49.693429      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+min       0.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+25%       7.910400      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+50%      14.454200      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+75%      31.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+max     512.329200      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+
+       alone
+count    891
+unique     2
+top     True
+freq     537
+mean     NaN
+std      NaN
+min      NaN
+25%      NaN
+50%      NaN
+75%      NaN
+max      NaN
+
+rows: 891, cols: 15
+</pre></div>
+</div>
+<p>The summary includes the following information:</p>
+<ul class="simple">
+<li><p>count: the number of non-empty data values observed for the feature</p></li>
+</ul>
+<p>For categorical features:</p>
+<ul class="simple">
+<li><p>unique: the number of unique values observed for the feature</p></li>
+<li><p>top: the most frequently observed value</p></li>
+<li><p>freq: the frequency (count) of the most frequently observed value</p></li>
+</ul>
+<p>For numerical features:</p>
+<ul class="simple">
+<li><p>mean: the mean (average)</p></li>
+<li><p>std: the standard deviation</p></li>
+<li><p>min: the minimum observed value</p></li>
+<li><p>25%: the 25th percentile</p></li>
+<li><p>50%: the 50th percentile</p></li>
+<li><p>75%: the 75th percentile</p></li>
+<li><p>max: the maximum observed value</p></li>
+</ul>
+<p>The number of rows and columns in the input data is shown at the end. In this case there are 891 rows and 15 columns in
+the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file.</p>
+<section id="summary-information-for-transformed-input-data">
+<span id="info-trans"></span><h2>Summary information for transformed input data<a class="headerlink" href="#summary-information-for-transformed-input-data" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--info</span></code> option also works on input data that as been transformed using one of Hatch’s <a class="reference internal" href="transform.html"><span class="doc">data manipulation options</span></a>.
+In this case the data summary is provided after those transformations have been performed.</p>
+<p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> features in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info --features age class -- titanic.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>               age  class
+count   714.000000    891
+unique         NaN      3
+top            NaN  Third
+freq           NaN    491
+mean     29.699118    NaN
+std      14.526497    NaN
+min       0.420000    NaN
+25%      20.125000    NaN
+50%      28.000000    NaN
+75%      38.000000    NaN
+max      80.000000    NaN
+
+rows: 891, cols: 2
+</pre></div>
+</div>
+<p>Similarly it is possible to get summary information for data after <code class="docutils literal notranslate"><span class="pre">--filter</span></code>, <code class="docutils literal notranslate"><span class="pre">--eval</span></code>, and <code class="docutils literal notranslate"><span class="pre">--sample</span></code> have been applied to the data.
+In all cases the summary shows that state of the data after the transformations have been applied.</p>
 </section>
-<section id="getting-help">
-<span id="heatmap-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
-<p>The full set of command line arguments for heatmap plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
-arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch heatmap -h
-</pre></div>
-</div>
-</section>
-<section id="selecting-features-to-plot">
-<span id="heatmap-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
-</pre></div>
-</div>
-</section>
-<section id="log-scale-of-numerical-distribution">
-<span id="heatmap-log"></span><h2>Log scale of numerical distribution<a class="headerlink" href="#log-scale-of-numerical-distribution" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">log</span>
-</pre></div>
-</div>
-<span class="target" id="heatmap-range"></span></section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="count.html" class="btn btn-neutral float-left" title="Count" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="histogram.html" class="btn btn-neutral float-right" title="Histogram" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sample.html" class="btn btn-neutral float-left" title="Random sampling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docker.html" class="btn btn-neutral float-right" title="Docker container" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

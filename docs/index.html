@@ -48,38 +48,27 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
-<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
-<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
-<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
-<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
-<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Statistics</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="info.html">Summarising input data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="correlation.html">Correlation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="normal_test.html">Test for normality</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Data maniupulation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="transform.html">Transform and save data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="features.html">Feature selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filter.html">Filtering rows</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eval.html">Computing new columns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Facets</span></p>
 <ul>
@@ -88,6 +77,20 @@
 <p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Transformation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cut.html">Cut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dropna.html">Dropna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Eval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmm.html">Gmm (Gaussian mixture model)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Summary information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="describe.html">Summarising input data</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
 <ul>
@@ -126,9 +129,9 @@
              
   <section id="hatch-a-command-line-data-analytics-and-plotting-tool">
 <h1>Hatch: a command line data analytics and plotting tool<a class="headerlink" href="#hatch-a-command-line-data-analytics-and-plotting-tool" title="Permalink to this headline"></a></h1>
-<p>Hatch is a command line tool for analysing and visualising tabular data in CSV or TSV format.</p>
-<p>At its core, Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
-Additionally, Hatch allows commands to be chained together into flexible analysis pipelines.</p>
+<p>Hatch is a command line tool for transforming, analysing and visualising tabular data in CSV or TSV format.</p>
+<p>At its core Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
+Additionally, Hatch allows commands to be <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chained together</span></a> into flexible analysis pipelines.</p>
 <p>It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (&gt; millions) are readily supported.</p>
 <p>Hatch commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
 and complex tasks are possible.</p>
@@ -136,9 +139,12 @@ and complex tasks are possible.</p>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>The following examples use the <a class="reference external" href="https://github.com/mwaskom/seaborn-data/blob/master/iris.csv/">iris.csv</a> dataset as input. The file contains 150 data rows (plus one heading row) and 5 columns.
-A pretty display of the first and last 5 rows of the data can be viewed using the <code class="docutils literal notranslate"><span class="pre">hatch</span> <span class="pre">pretty</span></code> command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> cat iris.csv <span class="p">|</span> hatch pretty
- sepal_length  sepal_width  petal_length  petal_width   species
+A pretty display of the first and last 5 rows of the data can be viewed using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch pretty
+</pre></div>
+</div>
+<p>The command generates the following output that is displayed on the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> sepal_length  sepal_width  petal_length  petal_width   species
           <span class="m">5</span>.1          <span class="m">3</span>.5           <span class="m">1</span>.4          <span class="m">0</span>.2    setosa
           <span class="m">4</span>.9          <span class="m">3</span>.0           <span class="m">1</span>.4          <span class="m">0</span>.2    setosa
           <span class="m">4</span>.7          <span class="m">3</span>.2           <span class="m">1</span>.3          <span class="m">0</span>.2    setosa
@@ -154,37 +160,50 @@ A pretty display of the first and last 5 rows of the data can be viewed using th
 <span class="o">[</span><span class="m">150</span> rows x <span class="m">5</span> columns<span class="o">]</span>
 </pre></div>
 </div>
-<p>The following Hatch command generates a box plot of data from a file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, the Y-axis
+<p>The following command generates a box plot from <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, such that the Y-axis
 represents the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> numerical feature, and the X-axis is grouped by the <code class="docutils literal notranslate"><span class="pre">species</span></code> categorical feature.
 The goal of this plot is to show the distribution of sepal length of the three different species of iris
 flowers contained in the data set.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch box -x species -y sepal_length
 </pre></div>
 </div>
-<p>The above command generates an output file called <code class="docutils literal notranslate"><span class="pre">hatch.species.sepal_length.box.png</span></code> that
-contains the following box plot:</p>
-<a class="reference internal image-reference" href="_images/iris.sepal_length.species.box.png"><img alt="Box plot showing the distribution of sepal length by species for the iris data set" class="align-center" src="_images/iris.sepal_length.species.box.png" style="width: 600px; height: 600px;" /></a>
+<p>The above command generates an output file called <code class="docutils literal notranslate"><span class="pre">box.species.sepal_length.png</span></code>
+containing the following figure:</p>
+<a class="reference internal image-reference" href="_images/box.species.sepal_length.png"><img alt="Box plot showing the distribution of sepal length by species for the iris data set" class="align-center" src="_images/box.species.sepal_length.png" style="width: 600px; height: 600px;" /></a>
 </section>
 <section id="advanced-example">
 <h2>Advanced example<a class="headerlink" href="#advanced-example" title="Permalink to this headline"></a></h2>
-<p>The following example illustrates Hatch’s ability to chain commands together:</p>
+<p>The next example illustrates Hatch’s ability to <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chain commands</span></a> together:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + <span class="se">\</span>
+                     sample <span class="m">0</span>.9 + <span class="se">\</span>
+                     pca + <span class="se">\</span>
+                     scatter -x pc1 -y pc2 --hue species
+</pre></div>
+</div>
+<p>The above command has been written on mulitple lines for clarity. Note that the backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> indicates a line
+break in the command line syntax.</p>
+<p>Equivalently, the same command can be written in a single line, like so (where backslashes are no longer required):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + sample <span class="m">0</span>.9 + pca + scatter -x pc1 -y pc2 --hue species
 </pre></div>
 </div>
+<p>In the command line syntax supported by Hatch, the plus sign <code class="docutils literal notranslate"><span class="pre">+</span></code> separates each command in a chain. This notation
+is fairly novel to Hatch and not something commonly seen in other command line programs.</p>
 <p>Input is read from the file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> on standard input and data is passed from left to right in the chain.
 Commands can modify the data as it is passed along.</p>
-<p>In this example there are 4 commands that are executed in the following order:</p>
+<p>In this example there are four commands that are executed in the following order:</p>
 <ol class="arabic simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">filter</span></code> command selects all rows where <code class="docutils literal notranslate"><span class="pre">species</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p></li>
-<li><p>The filtered rows are then passed to the <code class="docutils literal notranslate"><span class="pre">sample</span></code> command which randomly selects 90% of the remaining rows.</p></li>
-<li><p>The sampled rows are then passed to the <code class="docutils literal notranslate"><span class="pre">pca</span></code> command which performs principal component analysis (PCA) as a data reduction step, yielding two extra columns in the data called <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code>.</p></li>
-<li><p>Finally the pca-transformed data is passed to the <cite>scatter</cite> command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">'species</span> <span class="pre">!=</span> <span class="pre">&quot;virginica&quot;'</span></code> command selects all rows where <code class="docutils literal notranslate"><span class="pre">species</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p></li>
+<li><p>The filtered rows are then passed to the <code class="docutils literal notranslate"><span class="pre">sample</span> <span class="pre">0.9</span></code> command which randomly selects 90% of the remaining rows.</p></li>
+<li><p>The sampled rows are then passed to the <code class="docutils literal notranslate"><span class="pre">pca</span></code> command which performs principal component analysis (PCA), yielding two extra columns in the data called <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code>.</p></li>
+<li><p>Finally the pca-transformed data is passed to the <code class="docutils literal notranslate"><span class="pre">scatter</span> <span class="pre">-x</span> <span class="pre">pc1</span> <span class="pre">-y</span> <span class="pre">pc2</span> <span class="pre">--hue</span> <span class="pre">species</span></code>  command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components), and colours the points in the plot based on the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> feature.</p></li>
 </ol>
-<a class="reference internal image-reference" href="_images/iris.pc1.pc2.species.pca.scatter.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="_images/iris.pc1.pc2.species.pca.scatter.png" style="width: 700px; height: 600px;" /></a>
-</section>
-<section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline"></a></h2>
-<p>Hatch is open source software and is licensed under the terms of the <a class="reference external" href="https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE">MIT license</a>.</p>
+<p>The output of this entire Hatch command is the scatter plot below that is saved in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code></p>
+<a class="reference internal image-reference" href="../images/iris.pc1.pc2.species.pca.scatter.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="../images/iris.pc1.pc2.species.pca.scatter.png" style="width: 700px; height: 600px;" /></a>
+<p>An interesting aspect of this example is that additional columns are added to the data in the <code class="docutils literal notranslate"><span class="pre">pca</span></code> step, and these extra columns
+are then used to define the axes of the following scatter plot.</p>
+<p>Command chaining allows complex transformations to be combined together and makes Hatch a very powerful tool.</p>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">

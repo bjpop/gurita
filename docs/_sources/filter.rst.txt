@@ -1,5 +1,5 @@
-Filtering rows
-**************
+Filter
+******
 
 Input rows can be filtered using the ``--filter EXPR`` option, where ``EXPR`` is a logical (boolean) expression that determines which rows are retained. 
 
