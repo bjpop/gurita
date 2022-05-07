@@ -307,6 +307,36 @@ class DropNa(CommandBase, name="dropna"):
         df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
         return df
 
+
+class GroupBy(CommandBase, name="groupby"):
+    description = "Group data and apply aggregation function to selected columns" 
+    category = "transformation"
+    
+    def __init__(self):
+        self.options = None
+
+    def parse_args(self, args):
+        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
+        parser.add_argument(
+            '-f', '--fun', metavar='FUNCTION', type=str, choices=const.ALLOWED_GROUPBY_FUN, required=False,
+            default=const.DEFAULT_GROUPBY_FUN,
+            help=f'Aggregation function to apply to selected columns in group. Allowed values: %(choices)s. Default: %(default)s.')
+        parser.add_argument(
+            '-o', '--on', metavar='NAME', nargs="+", type=str, required=True,
+            help=f'Apply aggregation to these columns')
+        parser.add_argument(
+            '-b', '--by', metavar='NAME', nargs="+", type=str, required=True,
+            help=f'Group data by these columns')
+        self.options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
+        utils.validate_columns_error(df, options.on)
+        utils.validate_columns_error(df, options.by)
+        agg_mapping = { column: options.fun for column in options.on }
+        result = df.groupby(options.by, as_index=False).agg(agg_mapping)
+        return result 
+
 #class Transpose(CommandBase, name="transpose"):
 #    description = "Transpose the data." 
 #    category = "transformation"

@@ -63,6 +63,7 @@ DEFAULT_OUTLIER_IQR_SCALE = 1.5
 DEFAULT_HEATMAP_STRING_FORMAT = ".2g"
 DEFAULT_HISTOGRAM_ELEMENT = 'bars'
 DEFAULT_HISTOGRAM_STAT = 'count'
+DEFAULT_GROUPBY_FUN = 'count'
 
 ALLOWED_FILETYPES = ['csv', 'tsv', 'CSV', 'TSV']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -83,6 +84,7 @@ ALLOWED_DROPNA_AXIS = ['rows', 'columns']
 ALLOWED_DROPNA_HOW = ['any', 'all']
 ALLOWED_HISTOGRAM_ELEMENTS = ['bars', 'step', 'poly']
 ALLOWED_HISTOGRAM_STATS = ['count', 'frequency', 'probability', 'proportion', 'percent', 'density']
+ALLOWED_GROUPBY_FUN = ['count', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'mode', 'abs', 'prod', 'std', 'var', 'sem', 'skew', 'kurt', 'quantile', 'cumsum', 'cumprod', 'cummax', 'cummin']
 
 
 try:
