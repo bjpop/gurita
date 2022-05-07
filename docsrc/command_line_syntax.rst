@@ -168,7 +168,7 @@ The fourth (and last) command in the chain creates a scatter plot:
 The X and Y axes of the scatter plot are defined by the options ``-x pc1 -y pc2``. Here you can see that the axes are defined to correspond to columns in the data. In this
 case they are ``pc1`` and ``pc2`` respectively, which are new columns that were added to the data by the previous ``pca`` command. The option ``--hue species`` assigns colours
 to points in the scatter plot based on the ``species`` categorical column. In this example 
-Hatch defaults to saving the plot in a file called ``hatch.pc1.pc2.species.scatter.png``, however, as with all defaults, this can be overridden.
+Hatch defaults to saving the plot in a file called ``scatter.pc1.pc2.species.png``, however, as with all defaults, this can be overridden.
 
 .. note::
 
@@ -222,13 +222,9 @@ Input and output commands
    * - Command
      - Description
    * - :doc:`in <in>`
-     - Read CSV/TSV data from a named input file
+     - Read CSV/TSV data from a named input file or standard input
    * - :doc:`out <out>`
-     - Write the current dataset to a file in CSV/TSV format
-   * - :doc:`stdin <stdin>`
-     - Read a CSV/TSV file from standard input
-   * - :doc:`stdout <stdout>`
-     - Print the current dataset to the standard output in CSV/TSV format
+     - Write data to a file or standard output in CSV/TSV format
 
 Plotting commands
 =================

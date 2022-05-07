@@ -60,7 +60,8 @@ def is_first_command_input(commands):
     if len(commands) > 0:
         first_command = commands[0]
         type_first_command = type(first_command)
-        return (type_first_command is hatch.io.In) or (type_first_command is hatch.io.Stdin)
+        #return (type_first_command is hatch.io.In) or (type_first_command is hatch.io.Stdin)
+        return (type_first_command is hatch.io.In)
     else:
         return False
 
@@ -69,20 +70,24 @@ def is_last_command_transform_or_input(commands):
     if len(commands) > 0:
         last_command = commands[-1]
         type_last_command = type(last_command)
-        return (last_command.category == 'transformation') or (type_last_command is hatch.io.In) or (type_last_command is hatch.io.Stdin)
+        # return (last_command.category == 'transformation') or (type_last_command is hatch.io.In) or (type_last_command is hatch.io.Stdin)
+        return (last_command.category == 'transformation') or (type_last_command is hatch.io.In)
     else:
         return False
 
 # stdin may only be used at most once, and only at the beginning of the command sequence
 def stdin_used_safely(commands):
+    # count the number of times stdin is used
     count = 0
     for command in commands:
-        if type(command) is hatch.io.Stdin:
+        if type(command) is hatch.io.In and command.is_stdin:
             count += 1
     if count == 0:
         return True
     elif count == 1:
-        return type(commands[0] is hatch.io.Stdin)
+        # make sure stdin is only used at the beginning of a command sequence
+        first_command = commands[0]
+        return type(first_command is hatch.io.In) and first_command.is_stdin()
     else:
         return False
 
@@ -96,13 +101,15 @@ def main_args(cmdline_args):
         # If the first command is not an explict read of input data
         # either from stdin or a file then we add an implicit read from 
         # stdin to the command stream
-        stdin_reader = hatch.io.Stdin()
+        #stdin_reader = hatch.io.Stdin()
+        stdin_reader = hatch.io.In()
         stdin_reader.parse_args()
         new_commands = [stdin_reader] + new_commands 
     if (len(original_commands) == 0) or is_last_command_transform_or_input(original_commands):
         # If the last command is a data transformation command or an input command then
         # we add an implicit print to stdout to the command stream
-        stdout_writer = hatch.io.Stdout()
+        #stdout_writer = hatch.io.Stdout()
+        stdout_writer = hatch.io.Out()
         stdout_writer.parse_args()
         new_commands = new_commands + [stdout_writer]
     if not stdin_used_safely(new_commands):

@@ -80,14 +80,6 @@ def get_filetype_from_extension(filename):
         return None
 
 
-def get_output_name(options):
-    if options.prefix:
-        return options.prefix
-    elif options.out is not None:
-        return options.out
-    else:
-        return const.DEFAULT_OUTPUT_NAME
-
 def output_field(options, field):
     if hasattr(options, field) and getattr(options, field) is not None:
         return [getattr(options, field).replace(' ', '_')]

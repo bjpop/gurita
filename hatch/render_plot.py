@@ -70,13 +70,11 @@ def make_output_filename(options, kind):
         return Path(options.out)
     else:
         extension = [options.format]
-        output_name = [utils.get_output_name(options)]
         y_str = utils.output_field(options, 'yaxis')
         x_str = utils.output_field(options, 'xaxis')
         hue_str = utils.output_field(options, 'hue')
         row_str = utils.output_field(options, 'row')
         col_str = utils.output_field(options, 'col')
-        path = Path('.'.join(output_name + x_str + y_str +
-                             hue_str + row_str + col_str +
-                             [kind] + extension))
+        path = Path('.'.join([kind] + x_str + y_str +
+                             hue_str + row_str + col_str + extension))
         return utils.make_unique_numbered_filepath(path)

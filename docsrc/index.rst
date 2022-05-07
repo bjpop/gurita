@@ -57,10 +57,10 @@ flowers contained in the data set.
 
    cat iris.csv | hatch box -x species -y sepal_length
 
-The above command generates an output file called ``hatch.species.sepal_length.box.png`` 
+The above command generates an output file called ``box.species.sepal_length.png`` 
 containing the following figure:
 
-.. image:: ../images/iris.sepal_length.species.box.png
+.. image:: ../images/box.species.sepal_length.png
        :width: 600px
        :height: 600px
        :align: center
@@ -102,7 +102,7 @@ In this example there are four commands that are executed in the following order
 3. The sampled rows are then passed to the ``pca`` command which performs principal component analysis (PCA), yielding two extra columns in the data called ``pc1`` and ``pc2``.
 4. Finally the pca-transformed data is passed to the ``scatter -x pc1 -y pc2 --hue species``  command which generates a scatter plot of ``pc1`` and ``pc2`` (the first two principal components), and colours the points in the plot based on the categorical ``species`` feature.
 
-The output of this entire Hatch command is the scatter plot below that is saved in a file called ``hatch.pc1.pc2.species.scatter.png``
+The output of this entire Hatch command is the scatter plot below that is saved in a file called ``scatter.pc1.pc2.species.png``
 
 .. image:: ../images/iris.pc1.pc2.species.pca.scatter.png
        :width: 700px
