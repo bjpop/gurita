@@ -134,6 +134,7 @@ Command chaining allows complex transformations to be combined together and make
    :hidden:
 
    input_output 
+   plotting 
 
 .. toctree::
    :caption: Plotting 

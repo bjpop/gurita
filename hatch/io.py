@@ -39,6 +39,9 @@ class In(CommandBase, name="in"):
             na_values = options.navalues.split()
         else:
             na_values = None
+        dtype = None
+        #if options.category:
+        #   dtype = { column : 'category' for column in options.category }
         sep = "," 
         maybe_filetype = None
         input_file = sys.stdin
@@ -47,18 +50,17 @@ class In(CommandBase, name="in"):
             maybe_filetype = utils.get_filetype_from_extension(options.input)
             input_file = options.input
             input_file_description = options.input
-        if options.format.lower() == 'tsv':
-            sep = "\t"
-        elif options.format.lower() == 'csv':
-            sep = ','
-        elif maybe_filetype.lower() == 'tsv':
-            sep = "\t"
-        elif maybe_filetype.lower() == 'csv':
-            sep = ","
+        if options.format is not None:
+            if options.format.lower() == 'tsv':
+                sep = "\t"
+            elif options.format.lower() == 'csv':
+                sep = ','
+        elif maybe_filetype is not None:
+            if maybe_filetype.lower() == 'tsv':
+                sep = "\t"
+            elif maybe_filetype.lower() == 'csv':
+                sep = ","
         try:
-            dtype = None
-            #if options.category:
-            #   dtype = { column : 'category' for column in options.category }
             df = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
         except IOError:
             utils.exit_with_error(f"Could not open or read from file: {input_file_description}", const.EXIT_FILE_IO_ERROR)
@@ -85,17 +87,26 @@ class Out(CommandBase, name="out"):
 
     def run(self, df):
         options = self.options
-        sep = None
-        suffix = None
-        if options.format.lower() == 'tsv':
-            sep = '\t'
-            suffix = 'tsv'
-        elif options.format.lower() == 'csv':
-            sep = ','
-            suffix = 'csv'
+        sep = "," 
+        maybe_filetype = None
         if options.out is not None:
+            maybe_filetype = utils.get_filetype_from_extension(options.out)
             output_file = options.out
+            output_file_description = options.out
         else:
             output_file = sys.stdout
-        df.to_csv(output_file, sep=sep, na_rep=options.na, index=False)
+        if options.format is not None:
+            if options.format.lower() == 'tsv':
+                sep = '\t'
+            elif options.format.lower() == 'csv':
+                sep = ','
+        elif maybe_filetype is not None:
+            if maybe_filetype.lower() == 'tsv':
+                sep = '\t'
+            elif maybe_filetype.lower() == 'csv':
+                sep = ","
+        try:
+            df.to_csv(output_file, sep=sep, na_rep=options.na, index=False)
+        except IOError:
+            utils.exit_with_error(f"Could not open or write to file: {output_file_description}", const.EXIT_FILE_IO_ERROR)
         return df

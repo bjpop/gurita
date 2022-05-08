@@ -24,7 +24,7 @@ io_arguments_group.add_argument(
 
 file_format = argparse.ArgumentParser(add_help=False)
 file_format.add_argument(
-    '--format', metavar='FORMAT', type=str, required=False, default=const.DEFAULT_FILETYPE, choices=const.ALLOWED_FILETYPES,
+    '--format', metavar='FORMAT', type=str, required=False, choices=const.ALLOWED_FILETYPES,
     help=f'Use FORMAT for input or output file. Allowed values: %(choices)s. Default: %(default)s.')
 
 na = argparse.ArgumentParser(add_help=False)
