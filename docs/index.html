@@ -52,7 +52,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
 <ul>
@@ -198,7 +199,7 @@ Commands can modify the data as it is passed along.</p>
 <li><p>Finally the pca-transformed data is passed to the <code class="docutils literal notranslate"><span class="pre">scatter</span> <span class="pre">-x</span> <span class="pre">pc1</span> <span class="pre">-y</span> <span class="pre">pc2</span> <span class="pre">--hue</span> <span class="pre">species</span></code>  command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components), and colours the points in the plot based on the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> feature.</p></li>
 </ol>
 <p>The output of this entire Hatch command is the scatter plot below that is saved in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code></p>
-<a class="reference internal image-reference" href="../images/iris.pc1.pc2.species.pca.scatter.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="../images/iris.pc1.pc2.species.pca.scatter.png" style="width: 700px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/scatter.pc1.pc2.species.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="_images/scatter.pc1.pc2.species.png" style="width: 700px; height: 600px;" /></a>
 <p>An interesting aspect of this example is that additional columns are added to the data in the <code class="docutils literal notranslate"><span class="pre">pca</span></code> step, and these extra columns
 are then used to define the axes of the following scatter plot.</p>
 <p>Command chaining allows complex transformations to be combined together and makes Hatch a very powerful tool.</p>

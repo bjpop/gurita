@@ -88,7 +88,6 @@ Equivalently, the same command can be written in a single line, like so (where b
 
     cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
 
-
 In the command line syntax supported by Hatch, the plus sign ``+`` separates each command in a chain. This notation
 is fairly novel to Hatch and not something commonly seen in other command line programs.
 
@@ -104,7 +103,7 @@ In this example there are four commands that are executed in the following order
 
 The output of this entire Hatch command is the scatter plot below that is saved in a file called ``scatter.pc1.pc2.species.png``
 
-.. image:: ../images/iris.pc1.pc2.species.pca.scatter.png
+.. image:: ../images/scatter.pc1.pc2.species.png
        :width: 700px
        :height: 600px
        :align: center
@@ -135,6 +134,7 @@ Command chaining allows complex transformations to be combined together and make
    :hidden:
 
    input_output 
+   plotting 
 
 .. toctree::
    :caption: Plotting 

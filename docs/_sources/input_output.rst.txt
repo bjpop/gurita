@@ -1,11 +1,11 @@
 .. _input_output: 
 
-Input and output
-*****************
+Input and output data
+*********************
 
 Hatch works on tabular input data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
 
-Input data is read from the standard input device (stdin) or a named input file.
+Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).
 
 Rows in the input file are considered to be "observations" and columns are considered to be "features" (or variables). 
 That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
@@ -55,7 +55,7 @@ For example, if you wanted to generate a count plot of the ``class`` feature in 
 
 In the above example data is read from the input file and then passed along the :ref:`command chain <command_chain>` from left to right into the ``count`` command to make a plot.
 
-When reading input from a named file (and not from stdin) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
+When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
 ``--format <type>`` option as noted below.
 
 Specifying input file type explicitly
@@ -114,7 +114,7 @@ Reading from standard input is particularly useful when you want to use Hatch as
 
 Here ``example_command`` is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose ouput is sent as input into Hatch.
 
-.. warning::
+.. note::
 
    **Standard input defaults to CSV format**
 
@@ -126,8 +126,30 @@ Here ``example_command`` is supposed to represent an arbitrary command, possibly
 
    As previously noted, when reading from a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify ``--format``.
 
+   **Standard input can only be read once in a Hatch command**
 
-Implicit CSV input from standard input device (stdin)
+   A Hatch command can only read from standard input at most once in a command. An attempt to read from standard input more than once will result in an error: 
+
+   .. code-block:: text
+
+       hatch in + count -x class + in < titanic.csv
+       hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+
+   **Standard input can only be read at the start of a command**
+
+   Hatch will only permit standard input to be read at the start of a command chain. Therefore it is an error to request to read
+   from standard input in any position other then the first command in the chain:
+
+   .. code-block:: text
+
+      hatch count -x class + in < titanic.csv
+      hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+
+   Note that this restriction is only a concern when using the ``in`` command to read from standard input, and does
+   not apply when reading from standard input implicitly (as noted below).
+
+
+Implicit CSV input from standard input (stdin)
 -----------------------------------------------------
 
 For convenience, if you don't specify how to read input, Hatch will assume you wanted to read from standard input in CSV format.
@@ -138,7 +160,7 @@ Therefore:
 
     hatch in + <rest of command>
 
-is equivalent to:
+can be simplified to:
 
 .. code-block:: text
 
@@ -167,158 +189,249 @@ or, of course, you could achieve the same result with input redirection, again d
 Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
 the type using: ``in --format <type> ...``
 
-Output files 
-============
+Reading input from more than one file in a command chain
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Hatch's default behaviour for plotting commands is to save the resulting image to a file (but it can also do interactive plots, see :ref:`the show command <show>`).
+You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input). 
 
-For example, the following command generates a count plot of the ``class`` feature from the input file ``titanic.csv`` and saves the resulting plot to a file called ``titanic.class.count.png``:
-
-.. code-block:: text
-
-    hatch count -x class titanic.csv
-
-.. _out:
-
-Output plot file name
----------------------
-
-When saving a plot to a file, you can specify the name of the file to use with the ``-o <filename>`` or ``--out <filename>`` option. 
-
-For example, the following command saves the output plot to a file called ``example.png``:
+For example you can do something like this:
 
 .. code-block:: text
 
-    hatch count -x class -o example.png titanic.csv
+    hatch in titanic.csv + ... + in iris.csv + ... 
 
-If you do not specify an output file name, Hatch will choose an appropriate file name based on various input parameters:
+In the above example, first ``titanic.csv`` is read as input, then some unspecified commands are run, and later ``iris.csv`` is read as input, and some more unspecified commands are run.
 
- * The prefix of the input data file name (this can be overridden).
- * The name(s) of the columns that have been selected for plotting.
- * Optionally the names of columns that have been selected for grouping (for example by using ``--hue`` where applicable).
- * The type of plot being produced.
+Whenever a new input is read from a named file the contents of that file become the current data set, and any previous data set in the command chain is discarded.
 
-For example, the following command:
+The following command is a more concrete example:
 
 .. code-block:: text
 
-    hatch hist -x sepal_length --hue species iris.csv
+   hatch in titanic.csv + hist -x fare + in iris.csv + count -x species
 
-automatically produces an output file called ``iris.sepal_length.species.hist.png`` by default, because:
+There are four parts to the above command chain:
 
- * ``iris`` is the prefix of the name of the input file `iris.csv`
- * ``sepal_length`` is the column that has been selected for plotting
- * ``species`` is the column that has been selected for grouping via the ``--hue`` argument
- * ``hist`` is the type of plot (a histogram)
+1. input is read from the ``titanic.csv`` file, this becomes the current data set
+2. a histogram is plotted of the ``fare`` column from the current (titanic) data set, generating an output file called ``hist.fare.png`` 
+3. input is read from the ``iris.csv`` file, this becomes the new current data set, replacing the titanic data set, which is now discarded 
+4. a count plot is created using the ``species`` column for the X axis from the current (iris) data set, generating an output file called ``count.species.png``
 
-If the input data is read from the standard input (stdin) instead of a named file, then the prefix of the output defaults to ``plot``. For example, the following command:
+.. _output_files:
 
-.. code-block:: text
+Output data 
+===========
 
-    hatch hist -x sepal_length --hue species < iris.csv 
+Hatch can write data to a named output file or standard output (stdout).
 
-produces an output file called ``plot.sepal_length.species.hist.png`` because the input data is read (redirected) from stdin.
+Output to a named file 
+----------------------
 
-.. _prefix:
-
-Output prefix
--------------
-
-The output prefix can be overridden with the ``--prefix`` command line option (regardless of whether the input comes from a named file or from stdin). For example:
-
-.. code-block:: text
-
-    hatch hist -x sepal_length --hue species --prefix flower < iris.csv
-
-produces an output file called ``flower.sepal_length.species.hist.png``.
-
-.. _format:
-
-Output plot graphics file format 
---------------------------------
-
-By default Hatch will save output plots in the PNG file format. However, this can be overridden with the ``--format {png,jpg,pdf,svg}`` option.
-
-For example, the following command saves the output plot in SVG format, to a file called ``titanic.class.count.svg``:
-
-.. code-block:: text
-
-    hatch count -x class --format svg titanic.csv
-
-.. note::
-
-    If you do not specify an output file name, Hatch will choose one for you. This includes the addition of a file name suffix indicating the type of graphics format used (``png``, ``pdf``, ``svg``, or ``jpg``). 
-
-    If you use ``-o`` (or ``--out``) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
-
-.. _show:
-
-Interactive plots
-=================
-
-The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
-
-This is illustrated below:
-
-.. code-block:: text
-
-    hatch count -x class --show titanic.csv
-
-.. _save:
-
-Transforming input data and saving to a file
-============================================
-
-Hatch supports a number of data manipulation options, such as :doc:`row filtering <filter/>`, :doc:`random sampling <sample/>`, :doc:`feature selection <features/>`, and :doc:`computation of new columns <eval/>`.
-
-These manipulations are optionally performed prior to plotting or computing statistics.
-
-However, it is also possible to apply these transformations and save the result back to a new file. This is achieved with the :doc:`transform <transform/>` command. For example, the following command randomly samples 100 rows
-from the input file ``iris.csv``, and saves the result to ``iris.trans.csv`` (preserving the header row):
-
-.. code-block:: text
-
-    hatch transform --sample 100 iris.csv
-
-The default output file name can be overridden with ``-o`` (``--out``) like so: 
-
-.. code-block:: text
-
-    hatch transform --sample 100 -o iris.sample100.csv iris.csv
-
-.. _log:
-
-Logging progress
-================
-
-The ``--logfile <filename>`` option causes Hatch to record a timestamped log of program progress to a file. Logging information includes the command line used to invoke the program and key program events.
-The log file can be useful for debugging Hatch's behaviour.
-
-In the following example we add logging to a plotting command, such that the output log data is written to a file called ``hatch.log``:
-
-.. code-block:: text
-
-   hatch count -x class --logfile hatch.log titanic.csv
-
-.. _verbose:
-
-Verbose execution
-=================
-
-By default Hatch does not display any messages on the standard output during normal program execution. This can be overridden with 
-the ``--verbose`` option which causes Hatch to become more chatty. In particular, when generating any output files, the verbose
-mode will cause Hatch to specify the names of any files it has created. This is useful when you want to immediately open the file
-for further inspection.
-
-.. code-block:: text
-
-    hatch count -x class --verbose titanic.csv 
-
-The outut of the above command is:
+The ``out`` command allows you to specify an output file by name:
 
 .. code-block:: text 
 
-    Plot written to titanic.class.count.png
+    hatch ... + out newfile.csv
+
+As before, we use ``...`` to indicate that part of the example Hatch command is omitted for the sake of simplifying the discussion.
+
+You should imagine that ``...`` would be replaced by more text to complete the command.
+For example, the following command reads the file ``titanic.csv`` from standard input and then saves the header row and first ten data rows to an output file called ``newfile.csv``:
+
+.. code-block:: text 
+
+    cat titanic.csv | hatch head 10 + out newfile.csv 
+
+Again we see :ref:`command chaining <command_chain>` in action, where the first command ``head 10`` transforms the input data before it is passed along to the ``out newfile.csv`` command.
+
+When writing output to a named file (and not to standard output) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
+``--format <type>`` option as noted below. This mimics the behaviour of the ``in`` command for reading input from files, as discussed previously.
+
+Specifying output file type explicitly
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``out`` command lets you specify the format of the output file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the output file type.
+
+Request for CSV file format: 
+
+.. code-block:: text 
+
+    hatch ... out --format csv ...
+
+Request for TSV file format:
+
+.. code-block:: text 
+
+    hatch ... out --format tsv ...
+
+Elaborating the above example to a full command:
+
+.. code-block:: text 
+
+    cat titanic.csv | hatch head 10 + out --format tsv example_filename 
+
+.. note::
+
+    ``out --format <type> ...`` forces Hatch to use the specified output type regardless of the filename extension or contents of the file. 
+
+Output to standard output (stdout) 
+----------------------------------
+
+If you don't specify a file name when using the ``out`` command Hatch will assume that the output should be written to standard output (stdout).
+
+.. code-block:: text
+
+    cat titanic.csv | hatch head 10 + out
+
+Writing to standard output is particularly useful when you want to use Hatch as part of a command pipeline: 
+
+.. code-block:: text
+
+    hatch ... + out | example_command
+
+Here ``example_command`` is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose input comes from the standard output of Hatch.
+
+.. note::
+
+   **Standard output defaults to CSV format**
+
+   When writing to standard output, unless otherwise specified, Hatch assumes that the file is in CSV format.
+
+   This can be overridden by ``out --format tsv`` 
+
+   As previously noted, when writing to a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify ``--format``.
+
+
+Implicit CSV output to standard output (stdout)
+-----------------------------------------------
+
+In some circumstances, for convenience, Hatch will implicitly write the final state of the data to standard output. It chooses to do this in precisely two circumstances, when
+the last command in a chain is either:
+
+   * a data transformation
+   * an input command (including implicitly reading from standard input)
+
+However, Hatch will *not* implicitly write the final state of the data to standard output when the last command in a chain is either:
+
+   * a plotting command
+   * a data summary command 
+   * an ``out`` command
+
+The logic for this behaviour is as follows.
+
+If the last command in a chain is a transformation or just an input command, Hatch assumes that you must have read/transformed the data for a reason and you probably
+want to save/use the result. And because you didn't explicitly end the chain with an ``out`` command, the final state of the data would otherwise be lost. So Hatch writes it to standard output in CSV format for you.
+
+If the last command in a chain is a plotting command, then Hatch assumes that your main purpose must have been to generate the plot, and therefore you are not interested in saving/using the final state of the data. 
+Similarly for situations when the last command shows summary information about the data, such as ``pretty``.
+If you want to make a plot or see summary information *and* save the final state of the data you can always achieve this by ending a chain with an explicit ``out`` command. 
+
+If the last command in a chain is an ``out`` command there is no need for implicit output.
+
+Therefore:
+
+.. code-block:: text
+
+    hatch <transformation or input command> + out
+
+can be simplified to:
+
+.. code-block:: text
+
+    hatch <transformation or input command>
+
+As a concrete example, the following command:
+
+.. code-block:: text
+
+    cat titanic.csv | hatch head 10 + out
+
+can be simplified to:
+
+.. code-block:: text
+
+    cat titanic.csv | hatch head 10
+
+or, of course, you could achieve the same result with input redirection, again dropping the ``+ out`` from the original command:
+
+.. code-block:: text
+
+    hatch head 10 < titanic.csv
+
+Note carefully that when implicitly writing to standard output Hatch will always assume the output file should be written in CSV format. If you want to read a different format from standard input you must explicitly specify
+the type using: ``out --format <type> ...``
+
+Writing output to more than one file in a command chain
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You may write output to more than one file in a command chain, both to named files and standard output. 
+
+For example you can do something like this:
+
+.. code-block:: text
+
+    hatch ... out newfile1.csv + ... + out newfile2.tsv + ... 
+
+In the above example, output is written to ``newfile1.csv`` in CSV format, then some unspecified commands are run, and later output is written to ``newfile2.tsv`` in TSV format, and some more unspecified commands are run.
+
+Each invocation of ``out`` causes the current data set to be output to a file or standard output. When used in a chain of commands ``out`` also passes the current data set along unmodified to the next command in the chain. This allows
+the data to be passed along from left to right in the chain with further processing of the data occurring after the ``out`` command has been executed.
+
+This is most useful when you want to save different states of the data as it undergoes various transformations in a command chain.
+
+Note that if multiple different writes to standard output are used, they will form a single concatenated stream of data. 
+
+The following command is a more concrete example:
+
+.. code-block:: text
+
+   hatch in iris.csv + sample 0.6 + out samp.csv + cut -c sepal_length + out len.tsv
+
+There are five parts to the above command chain:
+
+1. input is read from the ``iris.csv`` file, this becomes the current data set
+2. 60% of the data rows in the current data set are randomly sampled, the remaining 40% of the rows are discareded
+3. the current (sampled) data set is written to the output file ``sample.csv`` in CSV format
+4. the ``sepal_length`` column is selected from the current (sampled) data set and the remaining columns are discareded 
+5. the final (cut and sampled) data set is written to the output file ``len.tsv`` in TSV format 
+
+
+Using Hatch to convert between TSV and CSV formats
+==================================================
+
+Hatch can read and write data in both CSV and TSV formats. Therefore, one simple, but useful thing it can easily do is convert data files
+between those formats. Notably, in such conversions it will handle corner cases correctly, such as proper quotation of data values, and
+appropriate formatting of missing (NA) values. 
+
+For example, the following commands all convert the ``iris.csv`` file (in CSV format) into TSV format, and save the result in a file called ``iris.tsv``:
+
+.. code-block:: text
+
+   cat iris.csv | hatch out --format tsv > iris.tsv
+
+.. code-block:: text
+
+   cat iris.csv | hatch out iris.tsv
+
+.. code-block:: text
+
+   hatch in iris.csv + out iris.tsv
+
+Conversely, the following commands all convert the ``iris.tsv`` file (in TSV format) into CSV format, and save the result in a file called ``iris.csv``:
+
+.. code-block:: text
+
+   cat iris.tsv | hatch out > iris.csv
+
+Note that in the above example there is no need to specify that the output file is in CSV format because that is the default behaviour of the ``out`` command.
+
+.. code-block:: text
+
+   cat iris.csv | hatch out iris.csv
+
+.. code-block:: text
+
+   hatch in iris.tsv + out iris.csv
 
 .. _navalues:
 

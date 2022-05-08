@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Input and output" href="input_output.html" />
+    <link rel="next" title="Input and output data" href="input_output.html" />
     <link rel="prev" title="Example input data" href="example_input_data.html" /> 
 </head>
 
@@ -71,7 +71,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
 <ul>
@@ -149,28 +150,28 @@
   <section id="command-line-syntax">
 <h1>Command line syntax<a class="headerlink" href="#command-line-syntax" title="Permalink to this headline"></a></h1>
 <p>Hatch provides a suite of commands, each carrying out a specific task.</p>
-<p>Commands can be chained together in a modular fashion for more complex analysis pipelines.</p>
+<p>Commands can be <a class="reference internal" href="#command-chain"><span class="std std-ref">chained together</span></a> in a modular fashion for more complex analysis pipelines.</p>
 <section id="commands">
 <span id="single-command"></span><h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline"></a></h2>
 <p>Hatch commands have the following structure:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt; <span class="o">[</span>arguments<span class="o">]</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">&lt;command&gt;</span></code> is the command name (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code> or <code class="docutils literal notranslate"><span class="pre">pca</span></code>), and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> is a list of options that control the behaviour of the command. In some cases the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> could be empty.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">&lt;command&gt;</span></code> is the command name (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code> or <code class="docutils literal notranslate"><span class="pre">pca</span></code>), and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> is a list of options that control the behaviour of the command. In some cases the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> can be empty.</p>
 <p>See the <a class="reference internal" href="#list-of-commands"><span class="std std-ref">list of commands</span></a> below for the full list of available commands.</p>
 <p>For instance, the following invocation of Hatch will plot a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> read from standard input:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x passengers &lt; flights.csv
 </pre></div>
 </div>
-<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">-x</span> <span class="pre">passengers</span></code> is a single command. <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the name of the command for plotting histograms, and <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> is an argument that tells the command to use the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> feature from the data on the X axis. The notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">flights.csv</span></code> redirects the contents of the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> file into the standard input of Hatch.  See the section on <a class="reference internal" href="input_output.html#input-output"><span class="std std-ref">input and output</span></a> for more information about input and output files.</p>
+<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">-x</span> <span class="pre">passengers</span></code> is a single command. <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the name of the command for plotting histograms, and <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> is an argument that tells the command to use the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column for the X axis. The notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">flights.csv</span></code> redirects the contents of the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> file into the standard input of Hatch.  See the section on <a class="reference internal" href="input_output.html#input-output"><span class="std std-ref">input and output</span></a> for more information about input and output files.</p>
 <section id="types-of-commands">
 <h3>Types of commands<a class="headerlink" href="#types-of-commands" title="Permalink to this headline"></a></h3>
 <p>Commands fall into four types:</p>
 <ol class="arabic simple">
-<li><p>input/output: reading and writing input data</p></li>
-<li><p>plotting: visualising data as plots</p></li>
-<li><p>transformation: manipulating and analysing the data</p></li>
-<li><p>summary information: getting an overview of the data</p></li>
+<li><p><a class="reference internal" href="#input-output-command-list"><span class="std std-ref">input/output</span></a>: reading and writing data</p></li>
+<li><p><a class="reference internal" href="#plotting-command-list"><span class="std std-ref">plotting</span></a>: visualising data as plots</p></li>
+<li><p><a class="reference internal" href="#transformation-command-list"><span class="std std-ref">transformation</span></a>: manipulating and analysing the data</p></li>
+<li><p><a class="reference internal" href="#summary-command-list"><span class="std std-ref">summary information</span></a>: getting an overview of the data</p></li>
 </ol>
 </section>
 </section>
@@ -191,7 +192,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Motivation for command chaining using +</strong></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator in Hatch acts like the pipe operator <code class="docutils literal notranslate"><span class="pre">|</span></code> in the Unix shell. The main advantage of the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator compared to <code class="docutils literal notranslate"><span class="pre">|</span></code> is that data is transferred between consecutive commands very efficiently.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator in Hatch acts like the pipe operator <code class="docutils literal notranslate"><span class="pre">|</span></code> in the Unix shell. The main advantage of the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator compared to <code class="docutils literal notranslate"><span class="pre">|</span></code> is that data is transferred between consecutive commands efficiently.</p>
 <p>It is <em>possible</em> to join Hatch commands into a pipeline using the <code class="docutils literal notranslate"><span class="pre">|</span></code> shell operator, like so:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command_1&gt; <span class="o">[</span>arguments_1<span class="o">]</span> <span class="p">|</span> hatch &lt;command_2&gt; <span class="o">[</span>arguments_2<span class="o">]</span>
@@ -202,7 +203,7 @@
 <p>The main downside of using <code class="docutils literal notranslate"><span class="pre">|</span></code> pipelines is that it requires the entire dataset to be serialised into a text stream between each
 command. This is redundant, inefficient, and therefore slow, particularly for large datasets.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator lets you compose a pipeline using a single invocation of Hatch and <em>most importantly</em> data is passed between
-successive commands in the chain very efficiently. There is no serialisation to a text stream in between commands. Therefore using <code class="docutils literal notranslate"><span class="pre">+</span></code> will
+successive commands in the chain efficiently. There is no serialisation to a text stream in between commands. Therefore using <code class="docutils literal notranslate"><span class="pre">+</span></code> will
 be much faster than <code class="docutils literal notranslate"><span class="pre">|</span></code>, especially for complex pipelines and large datasets.</p>
 </div>
 <section id="command-chaining-example">
@@ -224,7 +225,7 @@ be much faster than <code class="docutils literal notranslate"><span class="pre"
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch ...
 </pre></div>
 </div>
-<p>Note we could also have used input redirection to achieve the same behaviour:</p>
+<p>Note that input redirection would also achieve the same behaviour:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch ... &lt; iris.csv
 </pre></div>
 </div>
@@ -233,8 +234,10 @@ be much faster than <code class="docutils literal notranslate"><span class="pre"
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span>
 </pre></div>
 </div>
-<p>This retains data rows where the filter condition is true and discards the data rows where it is false. In this case the filter keeps only those
-data rows where the <code class="docutils literal notranslate"><span class="pre">species</span></code> feature is not equal (<code class="docutils literal notranslate"><span class="pre">!=</span></code>) to the value <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p>
+<p>The argument to <code class="docutils literal notranslate"><span class="pre">filter</span></code> is a logical expression that will typically refer to one or more columns of the data set. The <code class="docutils literal notranslate"><span class="pre">filter</span></code> command tests the condition on each row in the data set.
+If the condition is true the row is retained, and if the condition is false the row is discarded. In this case the filter keeps only those
+data rows where the value in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column is not equal (<code class="docutils literal notranslate"><span class="pre">!=</span></code>) to the <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p>
+<p>Note that the locial expression is written inside single quotes. This ensures that the entire expression is treated as a single string.</p>
 <p>In this example, the input to the <code class="docutils literal notranslate"><span class="pre">filter</span></code> command is the original contents of
 <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> and the output is a filtered version of the data set. Therefore the <code class="docutils literal notranslate"><span class="pre">filter</span></code> command <em>transforms</em> the data, and the transformed
 data is fed into the next command in the chain, moving left to right.</p>
@@ -269,7 +272,7 @@ Hatch defaults to saving the plot in a file called <code class="docutils literal
 <li><p>Plotting and summary information commands do not modify the data. They simply perform their respective task on the current data set (such as making a plot) and then pass the same data along unchanged to the next command in the chain.</p></li>
 <li><p>If the last command in a chain is a transformation Hatch will assume that you want the transformed data to be sent to the standard output, so it will do this automatically for you.</p></li>
 <li><p>If the last command in a chain is a plotting command, then Hatch will assume that your primary goal was to generate the plot, and therefore it will not automatically send the data to the standard output at the end. You can override
-this behaviour by adding an explicit <code class="docutils literal notranslate"><span class="pre">stdout</span></code> command at the end of the chain.</p></li>
+this behaviour by adding an explicit <code class="docutils literal notranslate"><span class="pre">out</span></code> command at the end of the chain.</p></li>
 <li><p>You may have more than one plotting command in a chain.</p></li>
 </ul>
 </div>
@@ -282,11 +285,15 @@ this behaviour by adding an explicit <code class="docutils literal notranslate">
 </pre></div>
 </div>
 <p>Help information for each command can be requested with <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
-after the command name. For example, to get specific help about histograms, use:</p>
+after the command name:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt; -h
+</pre></div>
+</div>
+<p>For example, to get specific help about histograms, use:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -h
 </pre></div>
 </div>
-<p>This will display a detailed help message for the <code class="docutils literal notranslate"><span class="pre">hist</span></code> command.</p>
+<p>This will display a detailed help message for the <code class="docutils literal notranslate"><span class="pre">hist</span></code> command, likewise for all other commands.</p>
 </section>
 <section id="version-number">
 <span id="version"></span><h2>Version number<a class="headerlink" href="#version-number" title="Permalink to this headline"></a></h2>
@@ -296,7 +303,7 @@ after the command name. For example, to get specific help about histograms, use:
 <section id="list-of-commands">
 <span id="id1"></span><h1>List of commands<a class="headerlink" href="#list-of-commands" title="Permalink to this headline"></a></h1>
 <section id="input-and-output-commands">
-<h2>Input and output commands<a class="headerlink" href="#input-and-output-commands" title="Permalink to this headline"></a></h2>
+<span id="input-output-command-list"></span><h2>Input and output commands<a class="headerlink" href="#input-and-output-commands" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -318,7 +325,7 @@ after the command name. For example, to get specific help about histograms, use:
 </table>
 </section>
 <section id="plotting-commands">
-<h2>Plotting commands<a class="headerlink" href="#plotting-commands" title="Permalink to this headline"></a></h2>
+<span id="plotting-command-list"></span><h2>Plotting commands<a class="headerlink" href="#plotting-commands" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -379,7 +386,7 @@ after the command name. For example, to get specific help about histograms, use:
 </table>
 </section>
 <section id="transformation-commands">
-<h2>Transformation commands<a class="headerlink" href="#transformation-commands" title="Permalink to this headline"></a></h2>
+<span id="transformation-command-list"></span><h2>Transformation commands<a class="headerlink" href="#transformation-commands" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -446,7 +453,7 @@ after the command name. For example, to get specific help about histograms, use:
 </table>
 </section>
 <section id="summary-information-commands">
-<h2>Summary information commands<a class="headerlink" href="#summary-information-commands" title="Permalink to this headline"></a></h2>
+<span id="summary-command-list"></span><h2>Summary information commands<a class="headerlink" href="#summary-information-commands" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -477,7 +484,7 @@ after the command name. For example, to get specific help about histograms, use:
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="example_input_data.html" class="btn btn-neutral float-left" title="Example input data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="input_output.html" class="btn btn-neutral float-right" title="Input and output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="input_output.html" class="btn btn-neutral float-right" title="Input and output data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

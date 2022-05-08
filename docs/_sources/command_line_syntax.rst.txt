@@ -3,7 +3,7 @@ Command line syntax
 
 Hatch provides a suite of commands, each carrying out a specific task. 
 
-Commands can be chained together in a modular fashion for more complex analysis pipelines.
+Commands can be :ref:`chained together <command_chain>` in a modular fashion for more complex analysis pipelines.
 
 .. _single_command:
 
@@ -16,7 +16,7 @@ Hatch commands have the following structure:
 
     hatch <command> [arguments]
 
-where ``<command>`` is the command name (e.g. ``hist`` or ``pca``), and ``arguments`` is a list of options that control the behaviour of the command. In some cases the ``arguments`` could be empty.
+where ``<command>`` is the command name (e.g. ``hist`` or ``pca``), and ``arguments`` is a list of options that control the behaviour of the command. In some cases the ``arguments`` can be empty.
 
 See the :ref:`list of commands <list_of_commands>` below for the full list of available commands.
 
@@ -26,17 +26,17 @@ For instance, the following invocation of Hatch will plot a histogram of the ``p
 
     hatch hist -x passengers < flights.csv
 
-In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` feature from the data on the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Hatch.  See the section on :ref:`input and output <input_output>` for more information about input and output files.
+In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Hatch.  See the section on :ref:`input and output <input_output>` for more information about input and output files.
 
 Types of commands
 -----------------
 
 Commands fall into four types:
 
-1. input/output: reading and writing input data
-2. plotting: visualising data as plots
-3. transformation: manipulating and analysing the data
-4. summary information: getting an overview of the data 
+1. :ref:`input/output <input_output_command_list>`: reading and writing data
+2. :ref:`plotting <plotting_command_list>`: visualising data as plots
+3. :ref:`transformation <transformation_command_list>`: manipulating and analysing the data
+4. :ref:`summary information <summary_command_list>`: getting an overview of the data 
 
 .. _command_chain:
 
@@ -69,7 +69,7 @@ Each command in the chain *may* transform the data before passing it along to th
 
    **Motivation for command chaining using +**
 
-   The ``+`` operator in Hatch acts like the pipe operator ``|`` in the Unix shell. The main advantage of the ``+`` operator compared to ``|`` is that data is transferred between consecutive commands very efficiently.
+   The ``+`` operator in Hatch acts like the pipe operator ``|`` in the Unix shell. The main advantage of the ``+`` operator compared to ``|`` is that data is transferred between consecutive commands efficiently.
 
    It is *possible* to join Hatch commands into a pipeline using the ``|`` shell operator, like so:
   
@@ -83,7 +83,7 @@ Each command in the chain *may* transform the data before passing it along to th
    command. This is redundant, inefficient, and therefore slow, particularly for large datasets. 
 
    The ``+`` operator lets you compose a pipeline using a single invocation of Hatch and *most importantly* data is passed between
-   successive commands in the chain very efficiently. There is no serialisation to a text stream in between commands. Therefore using ``+`` will
+   successive commands in the chain efficiently. There is no serialisation to a text stream in between commands. Therefore using ``+`` will
    be much faster than ``|``, especially for complex pipelines and large datasets.
 
 
@@ -115,7 +115,7 @@ To begin with, the contents of the file ``iris.csv`` is piped into the standard 
 
    cat iris.csv | hatch ... 
 
-Note we could also have used input redirection to achieve the same behaviour:
+Note that input redirection would also achieve the same behaviour:
 
 .. code-block:: bash
 
@@ -129,12 +129,16 @@ The first command in the chain is a filter:
 
    filter 'species != "virginica"' 
 
-This retains data rows where the filter condition is true and discards the data rows where it is false. In this case the filter keeps only those
-data rows where the ``species`` feature is not equal (``!=``) to the value ``virginica``. 
+The argument to ``filter`` is a logical expression that will typically refer to one or more columns of the data set. The ``filter`` command tests the condition on each row in the data set. 
+If the condition is true the row is retained, and if the condition is false the row is discarded. In this case the filter keeps only those
+data rows where the value in the ``species`` column is not equal (``!=``) to the ``virginica``. 
+
+Note that the locial expression is written inside single quotes. This ensures that the entire expression is treated as a single string.
 
 In this example, the input to the ``filter`` command is the original contents of
 ``iris.csv`` and the output is a filtered version of the data set. Therefore the ``filter`` command *transforms* the data, and the transformed
 data is fed into the next command in the chain, moving left to right.
+
 
 The second command in the chain is a random sampling of the data:
 
@@ -177,7 +181,7 @@ Hatch defaults to saving the plot in a file called ``scatter.pc1.pc2.species.png
    * Plotting and summary information commands do not modify the data. They simply perform their respective task on the current data set (such as making a plot) and then pass the same data along unchanged to the next command in the chain.
    * If the last command in a chain is a transformation Hatch will assume that you want the transformed data to be sent to the standard output, so it will do this automatically for you.
    * If the last command in a chain is a plotting command, then Hatch will assume that your primary goal was to generate the plot, and therefore it will not automatically send the data to the standard output at the end. You can override
-     this behaviour by adding an explicit ``stdout`` command at the end of the chain.
+     this behaviour by adding an explicit ``out`` command at the end of the chain.
    * You may have more than one plotting command in a chain.
 
 .. _help:
@@ -192,13 +196,19 @@ The ``-h`` or ``--help`` command line arguments give an overview of Hatch's comm
     hatch -h
 
 Help information for each command can be requested with ``-h`` or ``--help``
-after the command name. For example, to get specific help about histograms, use:
+after the command name: 
+
+.. code-block:: text 
+
+    hatch <command> -h
+
+For example, to get specific help about histograms, use:
 
 .. code-block:: bash
 
     hatch hist -h
 
-This will display a detailed help message for the ``hist`` command.
+This will display a detailed help message for the ``hist`` command, likewise for all other commands.
 
 .. _version:
 
@@ -211,6 +221,8 @@ The ``--version`` (``-v``) command line argument causes Hatch to print its versi
 
 List of commands
 ****************
+
+.. _input_output_command_list:
 
 Input and output commands
 =========================
@@ -225,6 +237,8 @@ Input and output commands
      - Read CSV/TSV data from a named input file or standard input
    * - :doc:`out <out>`
      - Write data to a file or standard output in CSV/TSV format
+
+.. _plotting_command_list:
 
 Plotting commands
 =================
@@ -265,6 +279,8 @@ Plotting commands
      - Plot distrbution of numerical column using dot swarm
    * - :doc:`violin <violin>`
      - Plot distrbution of numerical column using violin
+
+.. _transformation_command_list:
 
 Transformation commands
 =======================
@@ -309,6 +325,8 @@ Transformation commands
      - Select the last N rows in the data
    * - :doc:`zscore <zscore>`
      - Compute Z-score for numerical columns
+
+.. _summary_command_list:
 
 Summary information commands
 ============================

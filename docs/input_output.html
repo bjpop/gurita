@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input and output &mdash; hatch  documentation</title>
+  <title>Input and output data &mdash; hatch  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bar" href="bar.html" />
+    <link rel="next" title="Saving and viewing plots" href="plotting.html" />
     <link rel="prev" title="Command line syntax" href="command_line_syntax.html" /> 
 </head>
 
@@ -53,29 +53,36 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Input and output</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input and output data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#input-data">Input data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#input-from-a-named-file">Input from a named file</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#specifying-input-file-type-explicitly">Specifying input file type explicitly</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#input-from-standard-input-stdin">Input from standard input (stdin)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implicit-csv-input-from-standard-input-device-stdin">Implicit CSV input from standard input device (stdin)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implicit-csv-input-from-standard-input-stdin">Implicit CSV input from standard input (stdin)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reading-input-from-more-than-one-file-in-a-command-chain">Reading input from more than one file in a command chain</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#output-files">Output files</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#output-plot-file-name">Output plot file name</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#output-prefix">Output prefix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#output-plot-graphics-file-format">Output plot graphics file format</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#interactive-plots">Interactive plots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#transforming-input-data-and-saving-to-a-file">Transforming input data and saving to a file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#logging-progress">Logging progress</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#verbose-execution">Verbose execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-data">Output data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#output-to-a-named-file">Output to a named file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#specifying-output-file-type-explicitly">Specifying output file type explicitly</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#output-to-standard-output-stdout">Output to standard output (stdout)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implicit-csv-output-to-standard-output-stdout">Implicit CSV output to standard output (stdout)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#writing-output-to-more-than-one-file-in-a-command-chain">Writing output to more than one file in a command chain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-hatch-to-convert-between-tsv-and-csv-formats">Using Hatch to convert between TSV and CSV formats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#na-values">NA values</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
 <ul>
@@ -140,7 +147,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Input and output</li>
+      <li>Input and output data</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/input_output.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -150,10 +157,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-and-output">
-<span id="input-output"></span><h1>Input and output<a class="headerlink" href="#input-and-output" title="Permalink to this headline"></a></h1>
+  <section id="input-and-output-data">
+<span id="input-output"></span><h1>Input and output data<a class="headerlink" href="#input-and-output-data" title="Permalink to this headline"></a></h1>
 <p>Hatch works on tabular input data in <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV (comma separated values)</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV (tab separated values)</a> format.</p>
-<p>Input data is read from the standard input device (stdin) or a named input file.</p>
+<p>Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).</p>
 <p>Rows in the input file are considered to be “observations” and columns are considered to be “features” (or variables).
 That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
 The names of the features are given in the first row of the input file (the heading row).</p>
@@ -188,7 +195,7 @@ For example, if you wanted to generate a count plot of the <code class="docutils
 </pre></div>
 </div>
 <p>In the above example data is read from the input file and then passed along the <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a> from left to right into the <code class="docutils literal notranslate"><span class="pre">count</span></code> command to make a plot.</p>
-<p>When reading input from a named file (and not from stdin) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
+<p>When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
 <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">&lt;type&gt;</span></code> option as noted below.</p>
 <section id="specifying-input-file-type-explicitly">
 <h4>Specifying input file type explicitly<a class="headerlink" href="#specifying-input-file-type-explicitly" title="Permalink to this headline"></a></h4>
@@ -230,23 +237,38 @@ into the standard input of Hatch.</p>
 </pre></div>
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose ouput is sent as input into Hatch.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><strong>Standard input defaults to CSV format</strong></p>
 <p>For performance reasons Hatch does not try to detect the format of the input file when reading from standard input.</p>
 <p>Therefore, when reading from standard input, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
 <p>This can be overridden by <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--format</span> <span class="pre">tsv</span> <span class="pre">...</span></code></p>
 <p>As previously noted, when reading from a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify <code class="docutils literal notranslate"><span class="pre">--format</span></code>.</p>
+<p><strong>Standard input can only be read once in a Hatch command</strong></p>
+<p>A Hatch command can only read from standard input at most once in a command. An attempt to read from standard input more than once will result in an error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class + in &lt; titanic.csv
+hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+</pre></div>
+</div>
+<p><strong>Standard input can only be read at the start of a command</strong></p>
+<p>Hatch will only permit standard input to be read at the start of a command chain. Therefore it is an error to request to read
+from standard input in any position other then the first command in the chain:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class + in &lt; titanic.csv
+hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+</pre></div>
+</div>
+<p>Note that this restriction is only a concern when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command to read from standard input, and does
+not apply when reading from standard input implicitly (as noted below).</p>
 </div>
 </section>
-<section id="implicit-csv-input-from-standard-input-device-stdin">
-<h3>Implicit CSV input from standard input device (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-device-stdin" title="Permalink to this headline"></a></h3>
+<section id="implicit-csv-input-from-standard-input-stdin">
+<h3>Implicit CSV input from standard input (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-stdin" title="Permalink to this headline"></a></h3>
 <p>For convenience, if you don’t specify how to read input, Hatch will assume you wanted to read from standard input in CSV format.</p>
 <p>Therefore:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + &lt;rest of command&gt;
 </pre></div>
 </div>
-<p>is equivalent to:</p>
+<p>can be simplified to:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;rest of command&gt;
 </pre></div>
 </div>
@@ -265,114 +287,185 @@ into the standard input of Hatch.</p>
 </div>
 <p>Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
 the type using: <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--format</span> <span class="pre">&lt;type&gt;</span> <span class="pre">...</span></code></p>
+<section id="reading-input-from-more-than-one-file-in-a-command-chain">
+<h4>Reading input from more than one file in a command chain<a class="headerlink" href="#reading-input-from-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h4>
+<p>You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input).</p>
+<p>For example you can do something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + ... + in iris.csv + ...
+</pre></div>
+</div>
+<p>In the above example, first <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is read as input, then some unspecified commands are run, and later <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> is read as input, and some more unspecified commands are run.</p>
+<p>Whenever a new input is read from a named file the contents of that file become the current data set, and any previous data set in the command chain is discarded.</p>
+<p>The following command is a more concrete example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + hist -x fare + in iris.csv + count -x species
+</pre></div>
+</div>
+<p>There are four parts to the above command chain:</p>
+<ol class="arabic simple">
+<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file, this becomes the current data set</p></li>
+<li><p>a histogram is plotted of the <code class="docutils literal notranslate"><span class="pre">fare</span></code> column from the current (titanic) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">hist.fare.png</span></code></p></li>
+<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file, this becomes the new current data set, replacing the titanic data set, which is now discarded</p></li>
+<li><p>a count plot is created using the <code class="docutils literal notranslate"><span class="pre">species</span></code> column for the X axis from the current (iris) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">count.species.png</span></code></p></li>
+</ol>
 </section>
 </section>
-<section id="output-files">
-<h2>Output files<a class="headerlink" href="#output-files" title="Permalink to this headline"></a></h2>
-<p>Hatch’s default behaviour for plotting commands is to save the resulting image to a file (but it can also do interactive plots, see <a class="reference internal" href="#show"><span class="std std-ref">the show command</span></a>).</p>
-<p>For example, the following command generates a count plot of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature from the input file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> and saves the resulting plot to a file called <code class="docutils literal notranslate"><span class="pre">titanic.class.count.png</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class titanic.csv
-</pre></div>
-</div>
-<section id="output-plot-file-name">
-<span id="out"></span><h3>Output plot file name<a class="headerlink" href="#output-plot-file-name" title="Permalink to this headline"></a></h3>
-<p>When saving a plot to a file, you can specify the name of the file to use with the <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">&lt;filename&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--out</span> <span class="pre">&lt;filename&gt;</span></code> option.</p>
-<p>For example, the following command saves the output plot to a file called <code class="docutils literal notranslate"><span class="pre">example.png</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class -o example.png titanic.csv
-</pre></div>
-</div>
-<p>If you do not specify an output file name, Hatch will choose an appropriate file name based on various input parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>The prefix of the input data file name (this can be overridden).</p></li>
-<li><p>The name(s) of the columns that have been selected for plotting.</p></li>
-<li><p>Optionally the names of columns that have been selected for grouping (for example by using <code class="docutils literal notranslate"><span class="pre">--hue</span></code> where applicable).</p></li>
-<li><p>The type of plot being produced.</p></li>
-</ul>
-</div></blockquote>
-<p>For example, the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x sepal_length --hue species iris.csv
-</pre></div>
-</div>
-<p>automatically produces an output file called <code class="docutils literal notranslate"><span class="pre">iris.sepal_length.species.hist.png</span></code> by default, because:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">iris</span></code> is the prefix of the name of the input file <cite>iris.csv</cite></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is the column that has been selected for plotting</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">species</span></code> is the column that has been selected for grouping via the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hist</span></code> is the type of plot (a histogram)</p></li>
-</ul>
-</div></blockquote>
-<p>If the input data is read from the standard input (stdin) instead of a named file, then the prefix of the output defaults to <code class="docutils literal notranslate"><span class="pre">plot</span></code>. For example, the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x sepal_length --hue species &lt; iris.csv
-</pre></div>
-</div>
-<p>produces an output file called <code class="docutils literal notranslate"><span class="pre">plot.sepal_length.species.hist.png</span></code> because the input data is read (redirected) from stdin.</p>
 </section>
-<section id="output-prefix">
-<span id="prefix"></span><h3>Output prefix<a class="headerlink" href="#output-prefix" title="Permalink to this headline"></a></h3>
-<p>The output prefix can be overridden with the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> command line option (regardless of whether the input comes from a named file or from stdin). For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x sepal_length --hue species --prefix flower &lt; iris.csv
+<section id="output-data">
+<span id="output-files"></span><h2>Output data<a class="headerlink" href="#output-data" title="Permalink to this headline"></a></h2>
+<p>Hatch can write data to a named output file or standard output (stdout).</p>
+<section id="output-to-a-named-file">
+<h3>Output to a named file<a class="headerlink" href="#output-to-a-named-file" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command allows you to specify an output file by name:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + out newfile.csv
 </pre></div>
 </div>
-<p>produces an output file called <code class="docutils literal notranslate"><span class="pre">flower.sepal_length.species.hist.png</span></code>.</p>
-</section>
-<section id="output-plot-graphics-file-format">
-<span id="format"></span><h3>Output plot graphics file format<a class="headerlink" href="#output-plot-graphics-file-format" title="Permalink to this headline"></a></h3>
-<p>By default Hatch will save output plots in the PNG file format. However, this can be overridden with the <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">{png,jpg,pdf,svg}</span></code> option.</p>
-<p>For example, the following command saves the output plot in SVG format, to a file called <code class="docutils literal notranslate"><span class="pre">titanic.class.count.svg</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --format svg titanic.csv
+<p>As before, we use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that part of the example Hatch command is omitted for the sake of simplifying the discussion.</p>
+<p>You should imagine that <code class="docutils literal notranslate"><span class="pre">...</span></code> would be replaced by more text to complete the command.
+For example, the following command reads the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> from standard input and then saves the header row and first ten data rows to an output file called <code class="docutils literal notranslate"><span class="pre">newfile.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out newfile.csv
+</pre></div>
+</div>
+<p>Again we see <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chaining</span></a> in action, where the first command <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">10</span></code> transforms the input data before it is passed along to the <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">newfile.csv</span></code> command.</p>
+<p>When writing output to a named file (and not to standard output) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
+<code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">&lt;type&gt;</span></code> option as noted below. This mimics the behaviour of the <code class="docutils literal notranslate"><span class="pre">in</span></code> command for reading input from files, as discussed previously.</p>
+<section id="specifying-output-file-type-explicitly">
+<h4>Specifying output file type explicitly<a class="headerlink" href="#specifying-output-file-type-explicitly" title="Permalink to this headline"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command lets you specify the format of the output file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the output file type.</p>
+<p>Request for CSV file format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --format csv ...
+</pre></div>
+</div>
+<p>Request for TSV file format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --format tsv ...
+</pre></div>
+</div>
+<p>Elaborating the above example to a full command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out --format tsv example_filename
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you do not specify an output file name, Hatch will choose one for you. This includes the addition of a file name suffix indicating the type of graphics format used (<code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">svg</span></code>, or <code class="docutils literal notranslate"><span class="pre">jpg</span></code>).</p>
-<p>If you use <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--out</span></code>) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option (otherwise the default <code class="docutils literal notranslate"><span class="pre">png</span></code> type is used).</p>
+<p><code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--format</span> <span class="pre">&lt;type&gt;</span> <span class="pre">...</span></code> forces Hatch to use the specified output type regardless of the filename extension or contents of the file.</p>
 </div>
 </section>
 </section>
-<section id="interactive-plots">
-<span id="show"></span><h2>Interactive plots<a class="headerlink" href="#interactive-plots" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--show</span></code> option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.</p>
-<p>This is illustrated below:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --show titanic.csv
+<section id="output-to-standard-output-stdout">
+<h3>Output to standard output (stdout)<a class="headerlink" href="#output-to-standard-output-stdout" title="Permalink to this headline"></a></h3>
+<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">out</span></code> command Hatch will assume that the output should be written to standard output (stdout).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out
 </pre></div>
+</div>
+<p>Writing to standard output is particularly useful when you want to use Hatch as part of a command pipeline:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + out | example_command
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose input comes from the standard output of Hatch.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Standard output defaults to CSV format</strong></p>
+<p>When writing to standard output, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
+<p>This can be overridden by <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--format</span> <span class="pre">tsv</span></code></p>
+<p>As previously noted, when writing to a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify <code class="docutils literal notranslate"><span class="pre">--format</span></code>.</p>
 </div>
 </section>
-<section id="transforming-input-data-and-saving-to-a-file">
-<span id="save"></span><h2>Transforming input data and saving to a file<a class="headerlink" href="#transforming-input-data-and-saving-to-a-file" title="Permalink to this headline"></a></h2>
-<p>Hatch supports a number of data manipulation options, such as <a class="reference internal" href="filter.html"><span class="doc">row filtering</span></a>, <a class="reference internal" href="sample.html"><span class="doc">random sampling</span></a>, <a class="reference internal" href="features.html"><span class="doc">feature selection</span></a>, and <a class="reference internal" href="eval.html"><span class="doc">computation of new columns</span></a>.</p>
-<p>These manipulations are optionally performed prior to plotting or computing statistics.</p>
-<p>However, it is also possible to apply these transformations and save the result back to a new file. This is achieved with the <a class="reference internal" href="transform.html"><span class="doc">transform</span></a> command. For example, the following command randomly samples 100 rows
-from the input file <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, and saves the result to <code class="docutils literal notranslate"><span class="pre">iris.trans.csv</span></code> (preserving the header row):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch transform --sample 100 iris.csv
+<section id="implicit-csv-output-to-standard-output-stdout">
+<h3>Implicit CSV output to standard output (stdout)<a class="headerlink" href="#implicit-csv-output-to-standard-output-stdout" title="Permalink to this headline"></a></h3>
+<p>In some circumstances, for convenience, Hatch will implicitly write the final state of the data to standard output. It chooses to do this in precisely two circumstances, when
+the last command in a chain is either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>a data transformation</p></li>
+<li><p>an input command (including implicitly reading from standard input)</p></li>
+</ul>
+</div></blockquote>
+<p>However, Hatch will <em>not</em> implicitly write the final state of the data to standard output when the last command in a chain is either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>a plotting command</p></li>
+<li><p>a data summary command</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">out</span></code> command</p></li>
+</ul>
+</div></blockquote>
+<p>The logic for this behaviour is as follows.</p>
+<p>If the last command in a chain is a transformation or just an input command, Hatch assumes that you must have read/transformed the data for a reason and you probably
+want to save/use the result. And because you didn’t explicitly end the chain with an <code class="docutils literal notranslate"><span class="pre">out</span></code> command, the final state of the data would otherwise be lost. So Hatch writes it to standard output in CSV format for you.</p>
+<p>If the last command in a chain is a plotting command, then Hatch assumes that your main purpose must have been to generate the plot, and therefore you are not interested in saving/using the final state of the data.
+Similarly for situations when the last command shows summary information about the data, such as <code class="docutils literal notranslate"><span class="pre">pretty</span></code>.
+If you want to make a plot or see summary information <em>and</em> save the final state of the data you can always achieve this by ending a chain with an explicit <code class="docutils literal notranslate"><span class="pre">out</span></code> command.</p>
+<p>If the last command in a chain is an <code class="docutils literal notranslate"><span class="pre">out</span></code> command there is no need for implicit output.</p>
+<p>Therefore:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;transformation or input command&gt; + out
 </pre></div>
 </div>
-<p>The default output file name can be overridden with <code class="docutils literal notranslate"><span class="pre">-o</span></code> (<code class="docutils literal notranslate"><span class="pre">--out</span></code>) like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch transform --sample 100 -o iris.sample100.csv iris.csv
+<p>can be simplified to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;transformation or input command&gt;
 </pre></div>
 </div>
+<p>As a concrete example, the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out
+</pre></div>
+</div>
+<p>can be simplified to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10
+</pre></div>
+</div>
+<p>or, of course, you could achieve the same result with input redirection, again dropping the <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">out</span></code> from the original command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch head 10 &lt; titanic.csv
+</pre></div>
+</div>
+<p>Note carefully that when implicitly writing to standard output Hatch will always assume the output file should be written in CSV format. If you want to read a different format from standard input you must explicitly specify
+the type using: <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--format</span> <span class="pre">&lt;type&gt;</span> <span class="pre">...</span></code></p>
+<section id="writing-output-to-more-than-one-file-in-a-command-chain">
+<h4>Writing output to more than one file in a command chain<a class="headerlink" href="#writing-output-to-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h4>
+<p>You may write output to more than one file in a command chain, both to named files and standard output.</p>
+<p>For example you can do something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out newfile1.csv + ... + out newfile2.tsv + ...
+</pre></div>
+</div>
+<p>In the above example, output is written to <code class="docutils literal notranslate"><span class="pre">newfile1.csv</span></code> in CSV format, then some unspecified commands are run, and later output is written to <code class="docutils literal notranslate"><span class="pre">newfile2.tsv</span></code> in TSV format, and some more unspecified commands are run.</p>
+<p>Each invocation of <code class="docutils literal notranslate"><span class="pre">out</span></code> causes the current data set to be output to a file or standard output. When used in a chain of commands <code class="docutils literal notranslate"><span class="pre">out</span></code> also passes the current data set along unmodified to the next command in the chain. This allows
+the data to be passed along from left to right in the chain with further processing of the data occurring after the <code class="docutils literal notranslate"><span class="pre">out</span></code> command has been executed.</p>
+<p>This is most useful when you want to save different states of the data as it undergoes various transformations in a command chain.</p>
+<p>Note that if multiple different writes to standard output are used, they will form a single concatenated stream of data.</p>
+<p>The following command is a more concrete example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.csv + sample 0.6 + out samp.csv + cut -c sepal_length + out len.tsv
+</pre></div>
+</div>
+<p>There are five parts to the above command chain:</p>
+<ol class="arabic simple">
+<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file, this becomes the current data set</p></li>
+<li><p>60% of the data rows in the current data set are randomly sampled, the remaining 40% of the rows are discareded</p></li>
+<li><p>the current (sampled) data set is written to the output file <code class="docutils literal notranslate"><span class="pre">sample.csv</span></code> in CSV format</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> column is selected from the current (sampled) data set and the remaining columns are discareded</p></li>
+<li><p>the final (cut and sampled) data set is written to the output file <code class="docutils literal notranslate"><span class="pre">len.tsv</span></code> in TSV format</p></li>
+</ol>
 </section>
-<section id="logging-progress">
-<span id="log"></span><h2>Logging progress<a class="headerlink" href="#logging-progress" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--logfile</span> <span class="pre">&lt;filename&gt;</span></code> option causes Hatch to record a timestamped log of program progress to a file. Logging information includes the command line used to invoke the program and key program events.
-The log file can be useful for debugging Hatch’s behaviour.</p>
-<p>In the following example we add logging to a plotting command, such that the output log data is written to a file called <code class="docutils literal notranslate"><span class="pre">hatch.log</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --logfile hatch.log titanic.csv
-</pre></div>
-</div>
 </section>
-<section id="verbose-execution">
-<span id="verbose"></span><h2>Verbose execution<a class="headerlink" href="#verbose-execution" title="Permalink to this headline"></a></h2>
-<p>By default Hatch does not display any messages on the standard output during normal program execution. This can be overridden with
-the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option which causes Hatch to become more chatty. In particular, when generating any output files, the verbose
-mode will cause Hatch to specify the names of any files it has created. This is useful when you want to immediately open the file
-for further inspection.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --verbose titanic.csv
+</section>
+<section id="using-hatch-to-convert-between-tsv-and-csv-formats">
+<h2>Using Hatch to convert between TSV and CSV formats<a class="headerlink" href="#using-hatch-to-convert-between-tsv-and-csv-formats" title="Permalink to this headline"></a></h2>
+<p>Hatch can read and write data in both CSV and TSV formats. Therefore, one simple, but useful thing it can easily do is convert data files
+between those formats. Notably, in such conversions it will handle corner cases correctly, such as proper quotation of data values, and
+appropriate formatting of missing (NA) values.</p>
+<p>For example, the following commands all convert the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file (in CSV format) into TSV format, and save the result in a file called <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out --format tsv &gt; iris.tsv
 </pre></div>
 </div>
-<p>The outut of the above command is:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Plot written to titanic.class.count.png
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out iris.tsv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.csv + out iris.tsv
+</pre></div>
+</div>
+<p>Conversely, the following commands all convert the <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code> file (in TSV format) into CSV format, and save the result in a file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | hatch out &gt; iris.csv
+</pre></div>
+</div>
+<p>Note that in the above example there is no need to specify that the output file is in CSV format because that is the default behaviour of the <code class="docutils literal notranslate"><span class="pre">out</span></code> command.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out iris.csv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.tsv + out iris.csv
 </pre></div>
 </div>
 </section>
@@ -386,7 +479,7 @@ for further inspection.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="command_line_syntax.html" class="btn btn-neutral float-left" title="Command line syntax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="bar.html" class="btn btn-neutral float-right" title="Bar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plotting.html" class="btn btn-neutral float-right" title="Saving and viewing plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
