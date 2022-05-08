@@ -80,7 +80,7 @@ def stdin_used_safely(commands):
     # count the number of times stdin is used
     count = 0
     for command in commands:
-        if type(command) is hatch.io.In and command.is_stdin:
+        if type(command) is hatch.io.In and command.is_stdin():
             count += 1
     if count == 0:
         return True
