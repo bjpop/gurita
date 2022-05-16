@@ -319,8 +319,8 @@ class GroupBy(CommandBase, name="groupby"):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
             '-f', '--fun', metavar='FUNCTION', type=str, choices=const.ALLOWED_GROUPBY_FUN, required=False,
-            default=const.DEFAULT_GROUPBY_FUN,
-            help=f'Aggregation function to apply to selected columns in group. Allowed values: %(choices)s. Default: %(default)s.')
+            default=const.DEFAULT_GROUPBY_FUN, nargs="+",
+            help=f'Aggregation function(s) to apply to selected columns in group. Allowed values: %(choices)s. Default: %(default)s.')
         parser.add_argument(
             '-o', '--on', metavar='NAME', nargs="+", type=str, required=True,
             help=f'Apply aggregation to these columns')
@@ -335,6 +335,8 @@ class GroupBy(CommandBase, name="groupby"):
         utils.validate_columns_error(df, options.by)
         agg_mapping = { column: options.fun for column in options.on }
         result = df.groupby(options.by, as_index=False).agg(agg_mapping)
+        new_column_names = options.by + [o + "_" + f for o in options.on for f in options.fun]
+        result.columns = new_column_names
         return result 
 
 #class Transpose(CommandBase, name="transpose"):
