@@ -236,9 +236,9 @@ be much faster than <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>The argument to <code class="docutils literal notranslate"><span class="pre">filter</span></code> is a logical expression that will typically refer to one or more columns of the data set. The <code class="docutils literal notranslate"><span class="pre">filter</span></code> command tests the condition on each row in the data set.
 If the condition is true the row is retained, and if the condition is false the row is discarded. In this case the filter keeps only those
-data rows where the value in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column is not equal (<code class="docutils literal notranslate"><span class="pre">!=</span></code>) to the <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p>
-<p>Note that the locial expression is written inside single quotes. This ensures that the entire expression is treated as a single string.</p>
-<p>In this example, the input to the <code class="docutils literal notranslate"><span class="pre">filter</span></code> command is the original contents of
+data rows where the value in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column is not equal (<code class="docutils literal notranslate"><span class="pre">!=</span></code>) to <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p>
+<p>Note that the entire locial expression is written inside single quotes <code class="docutils literal notranslate"><span class="pre">'...'</span></code>. This ensures that the expression is treated as a single string.</p>
+<p>In this example, the input to the <code class="docutils literal notranslate"><span class="pre">filter</span></code> command is the contents of
 <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> and the output is a filtered version of the data set. Therefore the <code class="docutils literal notranslate"><span class="pre">filter</span></code> command <em>transforms</em> the data, and the transformed
 data is fed into the next command in the chain, moving left to right.</p>
 <p>The second command in the chain is a random sampling of the data:</p>

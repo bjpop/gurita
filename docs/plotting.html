@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saving and viewing plots &mdash; hatch  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bar" href="bar.html" />
+    <link rel="prev" title="Input and output data" href="input_output.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> hatch
+            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Saving and viewing plots</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plots-are-saved-to-a-file-by-default">Plots are saved to a file by default</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-an-output-file-name-explicitly">Specifying an output file name explicitly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-plot-graphics-file-format">Output plot graphics file format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#supported-file-formats">Supported file formats:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-plots">Interactive plots</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Transformation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cut.html">Cut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dropna.html">Dropna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Eval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmm.html">Gmm (Gaussian mixture model)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Summary information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="describe.html">Summarising input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_requests.html">Feature requests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hatch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Saving and viewing plots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/plotting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="saving-and-viewing-plots">
+<span id="plotting"></span><h1>Saving and viewing plots<a class="headerlink" href="#saving-and-viewing-plots" title="Permalink to this headline"></a></h1>
+<p>Hatch provides several <a class="reference internal" href="command_line_syntax.html#plotting-command-list"><span class="std std-ref">plotting commands</span></a> for visualising data as plots.</p>
+<section id="plots-are-saved-to-a-file-by-default">
+<h2>Plots are saved to a file by default<a class="headerlink" href="#plots-are-saved-to-a-file-by-default" title="Permalink to this headline"></a></h2>
+<p>Hatch’s default behaviour for plotting commands is to save the resulting image to a file in PNG format.</p>
+<p>For example, the following command generates a count plot of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature from the input file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> and saves the resulting plot to a file called <code class="docutils literal notranslate"><span class="pre">count.class.png</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class &lt; titanic.csv
+</pre></div>
+</div>
+<p>The image below shows the resulting plot:</p>
+<a class="reference internal image-reference" href="_images/count.class.png"><img alt="Count plot of the class column from titanic.csv" class="align-center" src="_images/count.class.png" style="width: 600px; height: 600px;" /></a>
+<p>The default output plot file name is chosen using the following information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The type of plot being generated (e.g. hist, scatter, count, etc).</p></li>
+<li><p>The name(s) of the columns that have been selected for plotting on the axes.</p></li>
+<li><p>Optionally the names of columns that have been selected for grouping (specifically <code class="docutils literal notranslate"><span class="pre">--hue</span></code> and <code class="docutils literal notranslate"><span class="pre">--row</span></code> and <code class="docutils literal notranslate"><span class="pre">--col</span></code> for facet plots).</p></li>
+<li><p>The file name extension is based on the format of the output file. By default this is <code class="docutils literal notranslate"><span class="pre">png</span></code>, but it can be overridden with the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option.</p></li>
+</ul>
+</div></blockquote>
+<p>As a slightly more complex example, consider the command below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch scatter -x sepal_length -y petal_length --hue species &lt; iris.csv
+</pre></div>
+</div>
+<p>Hatch will save the output plot in a file called <code class="docutils literal notranslate"><span class="pre">scatter.sepal_length.petal_length.species.png</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hatch will avoid using the name of a file that already exists when choosing a default output file name for a plot.</p>
+<p>For example, if the file <code class="docutils literal notranslate"><span class="pre">count.class.png</span></code> already exists in the current directory Hatch will try to
+find a new unique name by appending a number, e.g. <code class="docutils literal notranslate"><span class="pre">count.class_1.png</span></code>. If that file name exists
+it will increment the number and try again, e.g. <code class="docutils literal notranslate"><span class="pre">count.class_2.png</span></code>, and so on.</p>
+<p>This avoids overwriting an existing file by accident.</p>
+<p>If you don’t want this behaviour then you can specify a file name yourself and Hatch will write the
+plot to that file regardless of whether it already exists.</p>
+</div>
+</section>
+<section id="specifying-an-output-file-name-explicitly">
+<span id="out"></span><h2>Specifying an output file name explicitly<a class="headerlink" href="#specifying-an-output-file-name-explicitly" title="Permalink to this headline"></a></h2>
+<p>You can override the default behaviour and specify the name of the file to use with the <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">&lt;filename&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--out</span> <span class="pre">&lt;filename&gt;</span></code> option.</p>
+<p>For example, the following command saves the output plot to a file called <code class="docutils literal notranslate"><span class="pre">example.png</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class -o example.png &lt; titanic.csv
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If tell Hatch to save a plot to a specific file name, and that file already exists, Hatch will overwrite the contents of the
+file with the new plot. This will lose old contents of the file.</p>
+</div>
+</section>
+<section id="output-plot-graphics-file-format">
+<span id="format"></span><h2>Output plot graphics file format<a class="headerlink" href="#output-plot-graphics-file-format" title="Permalink to this headline"></a></h2>
+<p>By default Hatch will save output plots in the PNG file format. However, this can be overridden with the <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">{png,jpg,pdf,svg}</span></code> option.</p>
+<section id="supported-file-formats">
+<h3>Supported file formats:<a class="headerlink" href="#supported-file-formats" title="Permalink to this headline"></a></h3>
+<p>Hatch supports the following file formats when saving plots to file:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>: <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">png</span></code> (this is the default format used by Hatch)</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/JPEG">JPEG</a>: <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">jpg</span></code></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/PDF">PDF</a>: <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">pdf</span></code></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/SVG">SVG</a>: <code class="docutils literal notranslate"><span class="pre">--format</span> <span class="pre">svg</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>For example, the following command saves the output plot in SVG format, to a file called <code class="docutils literal notranslate"><span class="pre">titanic.class.count.svg</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --format svg titanic.csv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--out</span></code>) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option (otherwise the default <code class="docutils literal notranslate"><span class="pre">png</span></code> type is used).</p>
+</div>
+</section>
+<section id="interactive-plots">
+<span id="show"></span><h3>Interactive plots<a class="headerlink" href="#interactive-plots" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">--show</span></code> option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.</p>
+<p>This is illustrated below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --show titanic.csv
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="input_output.html" class="btn btn-neutral float-left" title="Input and output data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bar.html" class="btn btn-neutral float-right" title="Bar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -79,7 +79,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#using-hatch-to-convert-between-tsv-and-csv-formats">Using Hatch to convert between TSV and CSV formats</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#na-values">NA values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#missing-na-values">Missing (NA) values</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
@@ -159,7 +159,7 @@
              
   <section id="input-and-output-data">
 <span id="input-output"></span><h1>Input and output data<a class="headerlink" href="#input-and-output-data" title="Permalink to this headline"></a></h1>
-<p>Hatch works on tabular input data in <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV (comma separated values)</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV (tab separated values)</a> format.</p>
+<p>Hatch works on tabular data in <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV (comma separated values)</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV (tab separated values)</a> format.</p>
 <p>Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).</p>
 <p>Rows in the input file are considered to be “observations” and columns are considered to be “features” (or variables).
 That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
@@ -176,8 +176,7 @@ where each row has a value associated with each column:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Hatch requires that the input data is <strong>rectangular</strong> in shape. In other words, every row must contain the same number of columns.
-Missing values are allowed, and are indicated by leaving a particular column blank (empty) on a given row; nonetheless the column
-must still be present.</p>
+<a class="reference internal" href="#missing-values"><span class="std std-ref">Missing values</span></a> are allowed, and are indicated by leaving a particular entry blank (empty) or marking it with a special value.</p>
 </div>
 <section id="input-data">
 <span id="input-files"></span><h2>Input data<a class="headerlink" href="#input-data" title="Permalink to this headline"></a></h2>
@@ -469,8 +468,8 @@ appropriate formatting of missing (NA) values.</p>
 </pre></div>
 </div>
 </section>
-<section id="na-values">
-<span id="navalues"></span><h2>NA values<a class="headerlink" href="#na-values" title="Permalink to this headline"></a></h2>
+<section id="missing-na-values">
+<span id="missing-values"></span><h2>Missing (NA) values<a class="headerlink" href="#missing-na-values" title="Permalink to this headline"></a></h2>
 </section>
 </section>
 
