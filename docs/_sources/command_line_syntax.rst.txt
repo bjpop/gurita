@@ -131,11 +131,11 @@ The first command in the chain is a filter:
 
 The argument to ``filter`` is a logical expression that will typically refer to one or more columns of the data set. The ``filter`` command tests the condition on each row in the data set. 
 If the condition is true the row is retained, and if the condition is false the row is discarded. In this case the filter keeps only those
-data rows where the value in the ``species`` column is not equal (``!=``) to the ``virginica``. 
+data rows where the value in the ``species`` column is not equal (``!=``) to ``virginica``. 
 
-Note that the locial expression is written inside single quotes. This ensures that the entire expression is treated as a single string.
+Note that the entire locial expression is written inside single quotes ``'...'``. This ensures that the expression is treated as a single string.
 
-In this example, the input to the ``filter`` command is the original contents of
+In this example, the input to the ``filter`` command is the contents of
 ``iris.csv`` and the output is a filtered version of the data set. Therefore the ``filter`` command *transforms* the data, and the transformed
 data is fed into the next command in the chain, moving left to right.
 

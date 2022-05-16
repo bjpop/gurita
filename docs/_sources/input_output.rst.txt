@@ -3,7 +3,7 @@
 Input and output data
 *********************
 
-Hatch works on tabular input data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
+Hatch works on tabular data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
 
 Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).
 
@@ -25,8 +25,7 @@ where each row has a value associated with each column:
 .. note::
 
    Hatch requires that the input data is **rectangular** in shape. In other words, every row must contain the same number of columns.
-   Missing values are allowed, and are indicated by leaving a particular column blank (empty) on a given row; nonetheless the column
-   must still be present.
+   :ref:`Missing values <missing_values>` are allowed, and are indicated by leaving a particular entry blank (empty) or marking it with a special value. 
 
 .. _input_files:
 
@@ -433,7 +432,7 @@ Note that in the above example there is no need to specify that the output file 
 
    hatch in iris.tsv + out iris.csv
 
-.. _navalues:
+.. _missing_values:
 
-NA values
-=========
+Missing (NA) values
+===================
