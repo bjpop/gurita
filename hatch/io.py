@@ -91,7 +91,7 @@ class Out(CommandBase, name="out"):
         kwargs['index'] = False
         if options.out is not None:
             # Write output from a named file and try to guess separator from filename extension (.csv, .tsv)
-            maybe_sep = utils.get_filetype_from_extension(options.out)
+            maybe_sep = utils.get_sep_from_extension(options.out)
             if maybe_sep is not None:
                 kwargs['sep'] = maybe_sep
             output_file = options.out
