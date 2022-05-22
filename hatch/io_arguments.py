@@ -34,5 +34,5 @@ na.add_argument(
 
 navalues = argparse.ArgumentParser(add_help=False)
 navalues.add_argument(
-    '--navalues', metavar='STR', required=False, type=str,
-    help='Treat values in this space separated list as NA values. Example: --navalues ". - !"')
+    '--navalues', metavar='STR', required=False, type=str, nargs='+',
+    help="Treat values in this space separated list as NA values. Example: --navalues '.' '-' '!'")

@@ -55,7 +55,7 @@ Each command has its own optional arguments, so the chaining syntax is more comp
 
     hatch <command_1> [arguments_1] + <command_2> [arguments_2] + ... + <command_n> [arguments_n]
 
-The idea with command chaining is to build a *pipeline* of data transformation and plotting. This allows you to build complex analytics processes by joining commands together in sequence. 
+The idea with command chaining is to build a *pipeline* of data transformation and/or plotting. This allows you to build complex analytics processes by joining commands together in sequence. 
 
 The most important detail about command chaining is that data flows from left to right in the chain, as illustrated in the following diagram:
 

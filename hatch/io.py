@@ -35,11 +35,12 @@ class In(CommandBase, name="in"):
 
     def run(self, _df_ignore):
         options = self.options
+        kwargs = {}
         if options.navalues:
-            na_values = options.navalues.split()
+            kwargs['na_values'] = options.navalues
+            kwargs['keep_default_na'] = False
         else:
-            na_values = None
-        dtype = None
+            kwargs['keep_default_na'] = True 
         #if options.category:
         #   dtype = { column : 'category' for column in options.category }
         sep = "," 
@@ -61,7 +62,7 @@ class In(CommandBase, name="in"):
             elif maybe_filetype.lower() == 'csv':
                 sep = ","
         try:
-            df = pd.read_csv(input_file, sep=sep, keep_default_na=True, na_values=na_values, dtype=dtype)
+            df = pd.read_csv(input_file, sep=sep, **kwargs)
         except IOError:
             utils.exit_with_error(f"Could not open or read from file: {input_file_description}", const.EXIT_FILE_IO_ERROR)
         return df
