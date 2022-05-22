@@ -64,8 +64,9 @@ DEFAULT_HEATMAP_STRING_FORMAT = ".2g"
 DEFAULT_HISTOGRAM_ELEMENT = 'bars'
 DEFAULT_HISTOGRAM_STAT = 'count'
 DEFAULT_GROUPBY_FUN = 'count'
+DEFAULT_SEP = ','
 
-ALLOWED_FILETYPES = ['csv', 'tsv', 'CSV', 'TSV']
+#ALLOWED_FILETYPES = ['csv', 'tsv', 'CSV', 'TSV']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
 ALLOWED_STYLES = ['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']
 ALLOWED_CONTEXTS = ['paper', 'notebook', 'talk', 'poster'] 

@@ -17,15 +17,15 @@ io_arguments_group.add_argument(
     '-o', '--out', metavar='FILE', type=str, nargs='?', required=False,
     help=f'Write output to a file. Use filename if provided, otherwise a filename will be automatically chosen.')
 
-io_arguments_group.add_argument(
-    '--prefix',  metavar='NAME', type=str,
-    required=False, 
-    help=f'Prefix for output file')
+#io_arguments_group.add_argument(
+#    '--prefix',  metavar='NAME', type=str,
+#    required=False, 
+#    help=f'Prefix for output file')
 
-file_format = argparse.ArgumentParser(add_help=False)
-file_format.add_argument(
-    '--format', metavar='FORMAT', type=str, required=False, choices=const.ALLOWED_FILETYPES,
-    help=f'Use FORMAT for input or output file. Allowed values: %(choices)s. Default: %(default)s.')
+file_sep = argparse.ArgumentParser(add_help=False)
+file_sep.add_argument(
+    '--sep', metavar='STR', type=str, required=False, 
+    help=f"Use STR as field separator for input/output tabular file. For TAB delimiter, use --sep '\\t'")
 
 na = argparse.ArgumentParser(add_help=False)
 na.add_argument(

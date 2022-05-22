@@ -11,7 +11,14 @@ import sys
 import logging
 from pathlib import Path
 import hatch.constants as const
+import re
+import codecs
 
+# This magical incantation is intended to correctly parse escape characters in strings,
+# and tries to make sure that unicode characters are handled correctly.
+# See: https://stackoverflow.com/questions/4020539/process-escape-sequences-in-a-string-in-python
+def decode_escapes(str):
+    return str.encode('utf8').decode('unicode_escape').encode("latin1").decode('utf8')
 
 # convert cm measurement to inches
 def plot_dimensions_inches(width, height):
@@ -70,12 +77,12 @@ def exit_with_error(message, exit_status):
     sys.exit(exit_status)
 
 
-def get_filetype_from_extension(filename):
+def get_sep_from_extension(filename):
     path = Path(filename)
     if path.suffix.upper() == '.TSV':
-        return 'TSV'
+        return '\t'
     elif path.suffix.upper() == '.CSV':
-        return 'CSV'
+        return ','
     else:
         return None
 

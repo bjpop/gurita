@@ -26,7 +26,7 @@ class In(CommandBase, name="in"):
 
     def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_format, io_args.navalues], add_help=True)
+            parents=[io_args.file_sep, io_args.navalues], add_help=True)
         parser.add_argument('input', nargs="?", metavar='FILE', type=str, help=f'Read input from a named file. If this argument is absent input will be read from standard input (stdin).')
         self.options = parser.parse_args(args)
 
@@ -36,6 +36,8 @@ class In(CommandBase, name="in"):
     def run(self, _df_ignore):
         options = self.options
         kwargs = {}
+        # Ensure that the separator is set to the default. It may be overridden below.
+        kwargs['sep'] = const.DEFAULT_SEP
         if options.navalues:
             kwargs['na_values'] = options.navalues
             kwargs['keep_default_na'] = False
@@ -43,26 +45,21 @@ class In(CommandBase, name="in"):
             kwargs['keep_default_na'] = True 
         #if options.category:
         #   dtype = { column : 'category' for column in options.category }
-        sep = "," 
-        maybe_filetype = None
         input_file = sys.stdin
         input_file_description = "stdin"
         if options.input is not None:
-            maybe_filetype = utils.get_filetype_from_extension(options.input)
+            # Read input from a named file and try to guess separator from filename extension (.csv, .tsv)
+            maybe_sep = utils.get_sep_from_extension(options.input)
+            if maybe_sep is not None:
+                kwargs['sep'] = maybe_sep 
             input_file = options.input
             input_file_description = options.input
-        if options.format is not None:
-            if options.format.lower() == 'tsv':
-                sep = "\t"
-            elif options.format.lower() == 'csv':
-                sep = ','
-        elif maybe_filetype is not None:
-            if maybe_filetype.lower() == 'tsv':
-                sep = "\t"
-            elif maybe_filetype.lower() == 'csv':
-                sep = ","
+        if options.sep is not None:
+            # If the user specifies a separator to use it overrides anything else, including whatever may
+            # be inferred from the name of the file
+            kwargs['sep'] = utils.decode_escapes(options.sep)
         try:
-            df = pd.read_csv(input_file, sep=sep, **kwargs)
+            df = pd.read_csv(input_file, **kwargs)
         except IOError:
             utils.exit_with_error(f"Could not open or read from file: {input_file_description}", const.EXIT_FILE_IO_ERROR)
         return df
@@ -80,7 +77,7 @@ class Out(CommandBase, name="out"):
 
     def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_format, io_args.na], add_help=True)
+            parents=[io_args.file_sep, io_args.na], add_help=True)
         parser.add_argument('out', metavar='FILE', type=str, nargs='?',
             help=f'Write data to a file. If this argument is absent output will be written to standard output (stdout)')
 
@@ -88,26 +85,25 @@ class Out(CommandBase, name="out"):
 
     def run(self, df):
         options = self.options
-        sep = "," 
-        maybe_filetype = None
+        kwargs = {}
+        kwargs['sep'] = const.DEFAULT_SEP
+        kwargs['na_rep'] = options.na
+        kwargs['index'] = False
         if options.out is not None:
-            maybe_filetype = utils.get_filetype_from_extension(options.out)
+            # Write output from a named file and try to guess separator from filename extension (.csv, .tsv)
+            maybe_sep = utils.get_filetype_from_extension(options.out)
+            if maybe_sep is not None:
+                kwargs['sep'] = maybe_sep
             output_file = options.out
             output_file_description = options.out
         else:
             output_file = sys.stdout
-        if options.format is not None:
-            if options.format.lower() == 'tsv':
-                sep = '\t'
-            elif options.format.lower() == 'csv':
-                sep = ','
-        elif maybe_filetype is not None:
-            if maybe_filetype.lower() == 'tsv':
-                sep = '\t'
-            elif maybe_filetype.lower() == 'csv':
-                sep = ","
+        if options.sep is not None:
+            # If the user specifies a separator to use it overrides anything else, including whatever may
+            # be inferred from the name of the file
+            kwargs['sep'] = utils.decode_escapes(options.sep)
         try:
-            df.to_csv(output_file, sep=sep, na_rep=options.na, index=False)
+            df.to_csv(output_file, **kwargs)
         except IOError:
             utils.exit_with_error(f"Could not open or write to file: {output_file_description}", const.EXIT_FILE_IO_ERROR)
         return df
