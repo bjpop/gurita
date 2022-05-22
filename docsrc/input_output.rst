@@ -3,7 +3,10 @@
 Input and output data
 *********************
 
-Hatch works on tabular data in `CSV (comma separated values) <https://en.wikipedia.org/wiki/Comma-separated_values>`_ or `TSV (tab separated values) <https://en.wikipedia.org/wiki/Tab-separated_values>`_ format.
+Hatch reads and writes data in tabular data format.
+
+By default it will use `CSV <https://en.wikipedia.org/wiki/Comma-separated_values>`_ format, where a comma is used as the field separator. However, upon request, it allows alternative field separators to be used.
+For example, `TSV <https://en.wikipedia.org/wiki/Tab-separated_values>`_ files are supported by setting the field separator to a tab character (\\t).
 
 Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).
 
@@ -55,39 +58,55 @@ For example, if you wanted to generate a count plot of the ``class`` feature in 
 In the above example data is read from the input file and then passed along the :ref:`command chain <command_chain>` from left to right into the ``count`` command to make a plot.
 
 When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
-``--format <type>`` option as noted below.
+``--sep <str>`` option as noted below.
 
-Specifying input file type explicitly
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Specifying the field separator explicitly in input files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``in`` command lets you specify the format of the input file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the input file type.
+The ``in`` command lets you specify the field separator explicitly. This will override any default behaviour that Hatch would otherwise have when choosing what separator to use. 
 
-Request for CSV file format: 
-
-.. code-block:: text 
-
-    hatch in --format csv ...
-
-Request for TSV file format:
+Using a comma as the field separator:
 
 .. code-block:: text 
 
-    hatch in --format tsv ... 
+    hatch in --sep ',' ...
 
-Elaborating the above example to a full command:
+Note: comma is the default separator used by Hatch, so you don't need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.
+
+Using a tab character as the field separator:
 
 .. code-block:: text 
 
-    hatch in --format tsv example_filename + count -x class 
+    hatch in --sep '\t' ... 
+
+Be sure to enclose the ``\t`` in quote characters to ensure that it is treated as a single string.
+
+Elaborating the above example to a full command, assuming ``example_filename`` is the name of a file containing data in TSV format:
+
+.. code-block:: text 
+
+    hatch in --sep '\t' example_filename + count -x class 
+
+Using a vertical bar character as the field separator:
+
+.. code-block:: text 
+
+    hatch in --sep '|' ... 
 
 .. note::
 
-    ``in --format <type> ...`` forces Hatch to use the specified input type regardless of the filename extension or contents of the file. 
+    ``--sep <str>`` forces Hatch to use the specified field separator regardless of the filename extension or contents of the file. 
 
 Input from standard input (stdin) 
 ---------------------------------
 
-If you don't specify a file name when using the ``in`` command Hatch will assume that the input should be read from standard input (stdin).
+If you don't specify a file name when using the ``in`` command Hatch will assume that the input should be read from standard input (stdin):
+
+.. code-block:: text
+
+    hatch in ... 
+
+For example:
 
 .. code-block:: text
 
@@ -121,9 +140,9 @@ Here ``example_command`` is supposed to represent an arbitrary command, possibly
 
    Therefore, when reading from standard input, unless otherwise specified, Hatch assumes that the file is in CSV format.
 
-   This can be overridden by ``in --format tsv ...`` 
+   This can be overridden by ``in --sep <str> ...`` 
 
-   As previously noted, when reading from a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify ``--format``.
+   As previously noted, when reading from a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify ``--sep``.
 
    **Standard input can only be read once in a Hatch command**
 
@@ -149,9 +168,9 @@ Here ``example_command`` is supposed to represent an arbitrary command, possibly
 
 
 Implicit CSV input from standard input (stdin)
------------------------------------------------------
+----------------------------------------------
 
-For convenience, if you don't specify how to read input, Hatch will assume you wanted to read from standard input in CSV format.
+For convenience, if you don't use the ``in`` command explicitly Hatch will assume you wanted to read from standard input in CSV format.
 
 Therefore:
 
@@ -186,7 +205,7 @@ or, of course, you could achieve the same result with input redirection, again d
     hatch count -x class < titanic.csv
 
 Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
-the type using: ``in --format <type> ...``
+the type using: ``in --sep <str>``
 
 Reading input from more than one file in a command chain
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -244,39 +263,60 @@ For example, the following command reads the file ``titanic.csv`` from standard 
 Again we see :ref:`command chaining <command_chain>` in action, where the first command ``head 10`` transforms the input data before it is passed along to the ``out newfile.csv`` command.
 
 When writing output to a named file (and not to standard output) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
-``--format <type>`` option as noted below. This mimics the behaviour of the ``in`` command for reading input from files, as discussed previously.
+``--sep <str>`` option as noted below. 
 
-Specifying output file type explicitly
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. warning:: 
 
-The ``out`` command lets you specify the format of the output file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the output file type.
+   When writing to a named file, if the file already exists,  the ``out`` command will overwrite its contents. The original contents of the file will be lost.
+
+Specifying the field separator explicitly in output files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``out`` command lets you specify the field separator of the output file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the output file type.
+This mimics the behaviour of the ``in`` command for reading input from files, as discussed previously.
 
 Request for CSV file format: 
 
 .. code-block:: text 
 
-    hatch ... out --format csv ...
+    hatch ... out --sep ',' ...
+
+Note: comma is the default separator used by Hatch, so you don't need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.
 
 Request for TSV file format:
 
 .. code-block:: text 
 
-    hatch ... out --format tsv ...
+    hatch ... out --sep '\t' ...
+
+Be sure to enclose the ``\t`` in quote characters to ensure that it is treated as a single string.
 
 Elaborating the above example to a full command:
 
 .. code-block:: text 
 
-    cat titanic.csv | hatch head 10 + out --format tsv example_filename 
+    cat titanic.csv | hatch head 10 + out --sep '\t' example_filename 
+
+Using a vertical bar character as the field separator:
+
+.. code-block:: text 
+
+    hatch ... out --sep '|' ... 
 
 .. note::
 
-    ``out --format <type> ...`` forces Hatch to use the specified output type regardless of the filename extension or contents of the file. 
+    ``out --sep <str>``  forces Hatch to use the specified field separator regardless of the filename extension or contents of the file. 
 
 Output to standard output (stdout) 
 ----------------------------------
 
-If you don't specify a file name when using the ``out`` command Hatch will assume that the output should be written to standard output (stdout).
+If you don't specify a file name when using the ``out`` command Hatch will assume that the output should be written to standard output (stdout):
+
+.. code-block:: text
+
+    hatch ... out
+
+For example:
 
 .. code-block:: text
 
@@ -296,9 +336,9 @@ Here ``example_command`` is supposed to represent an arbitrary command, possibly
 
    When writing to standard output, unless otherwise specified, Hatch assumes that the file is in CSV format.
 
-   This can be overridden by ``out --format tsv`` 
+   This can be overridden by ``out --sep <str>`` 
 
-   As previously noted, when writing to a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify ``--format``.
+   As previously noted, when writing to a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify ``--sep``.
 
 
 Implicit CSV output to standard output (stdout)
@@ -319,13 +359,11 @@ However, Hatch will *not* implicitly write the final state of the data to standa
 The logic for this behaviour is as follows.
 
 If the last command in a chain is a transformation or just an input command, Hatch assumes that you must have read/transformed the data for a reason and you probably
-want to save/use the result. And because you didn't explicitly end the chain with an ``out`` command, the final state of the data would otherwise be lost. So Hatch writes it to standard output in CSV format for you.
+want to save/use the result. If a command chain does not explicitly end with an ``out`` command the final state of the data would be lost. So Hatch writes it to standard output in CSV format for you.
 
 If the last command in a chain is a plotting command, then Hatch assumes that your main purpose must have been to generate the plot, and therefore you are not interested in saving/using the final state of the data. 
 Similarly for situations when the last command shows summary information about the data, such as ``pretty``.
 If you want to make a plot or see summary information *and* save the final state of the data you can always achieve this by ending a chain with an explicit ``out`` command. 
-
-If the last command in a chain is an ``out`` command there is no need for implicit output.
 
 Therefore:
 
@@ -358,7 +396,7 @@ or, of course, you could achieve the same result with input redirection, again d
     hatch head 10 < titanic.csv
 
 Note carefully that when implicitly writing to standard output Hatch will always assume the output file should be written in CSV format. If you want to read a different format from standard input you must explicitly specify
-the type using: ``out --format <type> ...``
+the type using: ``out --sep <str> ...``
 
 Writing output to more than one file in a command chain
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -373,12 +411,14 @@ For example you can do something like this:
 
 In the above example, output is written to ``newfile1.csv`` in CSV format, then some unspecified commands are run, and later output is written to ``newfile2.tsv`` in TSV format, and some more unspecified commands are run.
 
-Each invocation of ``out`` causes the current data set to be output to a file or standard output. When used in a chain of commands ``out`` also passes the current data set along unmodified to the next command in the chain. This allows
+Each invocation of ``out`` causes the current data set to be written to a file or standard output. When used in a chain of commands ``out`` also passes the current data set along unmodified to the next command in the chain. This allows
 the data to be passed along from left to right in the chain with further processing of the data occurring after the ``out`` command has been executed.
 
 This is most useful when you want to save different states of the data as it undergoes various transformations in a command chain.
 
-Note that if multiple different writes to standard output are used, they will form a single concatenated stream of data. 
+Warning: if you have two separate ``out`` commands that write to the same named output file, the last occurrence will overwrite any earlier output that that file. 
+
+However, if multiple different writes to standard output are used, they will form a single concatenated stream of data. 
 
 The following command is a more concrete example:
 
@@ -390,7 +430,7 @@ There are five parts to the above command chain:
 
 1. input is read from the ``iris.csv`` file, this becomes the current data set
 2. 60% of the data rows in the current data set are randomly sampled, the remaining 40% of the rows are discareded
-3. the current (sampled) data set is written to the output file ``sample.csv`` in CSV format
+3. the current (sampled) data set is written to the output file ``samp.csv`` in CSV format
 4. the ``sepal_length`` column is selected from the current (sampled) data set and the remaining columns are discareded 
 5. the final (cut and sampled) data set is written to the output file ``len.tsv`` in TSV format 
 
@@ -406,7 +446,7 @@ For example, the following commands all convert the ``iris.csv`` file (in CSV fo
 
 .. code-block:: text
 
-   cat iris.csv | hatch out --format tsv > iris.tsv
+   cat iris.csv | hatch out --sep '\t' > iris.tsv
 
 .. code-block:: text
 
@@ -420,13 +460,13 @@ Conversely, the following commands all convert the ``iris.tsv`` file (in TSV for
 
 .. code-block:: text
 
-   cat iris.tsv | hatch out > iris.csv
+   cat iris.tsv | hatch in --sep '\t' + out > iris.csv
 
 Note that in the above example there is no need to specify that the output file is in CSV format because that is the default behaviour of the ``out`` command.
 
 .. code-block:: text
 
-   cat iris.csv | hatch out iris.csv
+   cat iris.tsv | hatch in --sep '\t' + out iris.csv
 
 .. code-block:: text
 

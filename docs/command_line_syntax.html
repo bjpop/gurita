@@ -185,7 +185,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch &lt;command_1&gt; <span class="o">[</span>arguments_1<span class="o">]</span> + &lt;command_2&gt; <span class="o">[</span>arguments_2<span class="o">]</span> + ... + &lt;command_n&gt; <span class="o">[</span>arguments_n<span class="o">]</span>
 </pre></div>
 </div>
-<p>The idea with command chaining is to build a <em>pipeline</em> of data transformation and plotting. This allows you to build complex analytics processes by joining commands together in sequence.</p>
+<p>The idea with command chaining is to build a <em>pipeline</em> of data transformation and/or plotting. This allows you to build complex analytics processes by joining commands together in sequence.</p>
 <p>The most important detail about command chaining is that data flows from left to right in the chain, as illustrated in the following diagram:</p>
 <img alt="Illustration of data flow direction in Hatch command chain" class="align-center" src="_images/hatch_command_chain_data_flow.png" />
 <p>Each command in the chain <em>may</em> transform the data before passing it along to the next command.</p>
