@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reading input data &mdash; hatch  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Writing output data" href="output.html" />
+    <link rel="prev" title="Tabular input and output data" href="input_output.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> hatch
+            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reading input data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#input-from-a-named-file">Input from a named file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-the-field-separator-explicitly">Specifying the field separator explicitly</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#input-from-standard-input-stdin">Input from standard input (stdin)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implicit-csv-input-from-standard-input-stdin">Implicit CSV input from standard input (stdin)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reading-input-from-more-than-one-file-in-a-command-chain">Reading input from more than one file in a command chain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Transformation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cut.html">Cut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dropna.html">Dropna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Eval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmm.html">Gmm (Gaussian mixture model)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Summary information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="describe.html">Summarising input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_requests.html">Feature requests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hatch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Reading input data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/input.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="reading-input-data">
+<span id="input-files"></span><h1>Reading input data<a class="headerlink" href="#reading-input-data" title="Permalink to this headline"></a></h1>
+<p>Hatch can read data from a named input file or standard input (stdin).</p>
+<section id="input-from-a-named-file">
+<h2>Input from a named file<a class="headerlink" href="#input-from-a-named-file" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command allows you to specify an input file by name:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv ...
+</pre></div>
+</div>
+<p>We use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that the remainder of the example Hatch command is omitted for the sake of simplifying the discussion.</p>
+<p>You should imagine that <code class="docutils literal notranslate"><span class="pre">...</span></code> would be replaced by more text to complete the command.
+For example, if you wanted to generate a count plot of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file, the <code class="docutils literal notranslate"><span class="pre">...</span></code> in the above example could be expanded like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + count -x class
+</pre></div>
+</div>
+<p>In the above example data is read from the input file and then passed along the <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a> from left to right into the <code class="docutils literal notranslate"><span class="pre">count</span></code> command to make a plot.</p>
+<p>When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
+<code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
+<section id="specifying-the-field-separator-explicitly">
+<h3>Specifying the field separator explicitly<a class="headerlink" href="#specifying-the-field-separator-explicitly" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command lets you specify the field separator explicitly. This will override any default behaviour that Hatch would otherwise have when choosing what separator to use.</p>
+<p>Using a comma as the field separator:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;,&#39; ...
+</pre></div>
+</div>
+<p>Note: comma is the default separator used by Hatch, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
+<p>Using a tab character as the field separator:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;\t&#39; ...
+</pre></div>
+</div>
+<p>Be sure to enclose the <code class="docutils literal notranslate"><span class="pre">\t</span></code> in quote characters to ensure that it is treated as a single string.</p>
+<p>Elaborating the above example to a full command, assuming <code class="docutils literal notranslate"><span class="pre">example_filename</span></code> is the name of a file containing data in TSV format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;\t&#39; example_filename + count -x class
+</pre></div>
+</div>
+<p>Using a vertical bar character as the field separator:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;|&#39; ...
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> forces Hatch to use the specified field separator regardless of the filename extension or contents of the file.</p>
+</div>
+</section>
+</section>
+<section id="input-from-standard-input-stdin">
+<h2>Input from standard input (stdin)<a class="headerlink" href="#input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
+<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command Hatch will assume that the input should be read from standard input (stdin):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in ...
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class &lt; titanic.csv
+</pre></div>
+</div>
+<p>In the above example the notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">titanic.csv</span></code> causes the contents of the file <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> to be fed into the standard input of Hatch.
+This is called <em>input redirection</em>.</p>
+<p>Instead of using input redirection, it is also possible to <em>pipe</em> the output from another command to the standard input of Hatch:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch in + count -x class
+</pre></div>
+</div>
+<p>In the above example the command <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">titanic.csv</span></code> outputs the contents of the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> to standard output which is then fed through a pipe using the <code class="docutils literal notranslate"><span class="pre">|</span></code> (vertical bar) operator
+into the standard input of Hatch.</p>
+<p>Reading from standard input is particularly useful when you want to use Hatch as part of a command pipeline:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>example_command | hatch in + count -x class
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose ouput is sent as input into Hatch.</p>
+<p>For performance reasons Hatch does not try to detect the format of the input file when reading from standard input.</p>
+<p>Therefore, when reading from standard input, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
+<p>As before, this can be overridden by <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code>, as illustrated in the example below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.tsv | hatch in --sep &#39;\t&#39; + count -x class
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Standard input can only be read once in a Hatch command</strong></p>
+<p>A Hatch command can only read from standard input at most once in a command. An attempt to read from standard input more than once will result in an error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class + in &lt; titanic.csv
+hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Standard input can only be read at the start of a command</strong></p>
+<p>Hatch will only permit standard input to be read at the start of a command chain. Therefore it is an error to request to read
+from standard input in any position other then the first command in the chain:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class + in &lt; titanic.csv
+hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+</pre></div>
+</div>
+<p>Note that this restriction is only a concern when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command to read from standard input, and does
+not apply when reading from standard input implicitly (as noted below).</p>
+</div>
+</section>
+<section id="implicit-csv-input-from-standard-input-stdin">
+<h2>Implicit CSV input from standard input (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
+<p>For convenience, if you don’t use the <code class="docutils literal notranslate"><span class="pre">in</span></code> command explicitly Hatch will assume you wanted to read from standard input in CSV format.</p>
+<p>Therefore:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + &lt;rest of command&gt;
+</pre></div>
+</div>
+<p>can be simplified to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;rest of command&gt;
+</pre></div>
+</div>
+<p>In other words, if a Hatch command starts with <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> you can simply omit that part, and Hatch will implicitly read from standard input using CSV format. This saves you a bit of typing and makes the command line tidier.</p>
+<p>As a concrete example, the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch in + count -x class
+</pre></div>
+</div>
+<p>can be simplified to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch count -x class
+</pre></div>
+</div>
+<p>or, of course, you could achieve the same result with input redirection, again dropping the <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> from the original command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class &lt; titanic.csv
+</pre></div>
+</div>
+<p>Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
+the type using: <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code></p>
+<section id="reading-input-from-more-than-one-file-in-a-command-chain">
+<h3>Reading input from more than one file in a command chain<a class="headerlink" href="#reading-input-from-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h3>
+<p>You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input).</p>
+<p>For example you can do something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + ... + in iris.csv + ...
+</pre></div>
+</div>
+<p>In the above example, first <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is read as input, then some unspecified commands are run, and later <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> is read as input, and some more unspecified commands are run.</p>
+<p>Whenever a new input is read from a named file the contents of that file become the current data set, and any previous data set in the command chain is discarded.</p>
+<p>The following command is a more concrete example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + hist -x fare + in iris.csv + count -x species
+</pre></div>
+</div>
+<p>There are four parts to the above command chain:</p>
+<ol class="arabic simple">
+<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file, this becomes the current data set</p></li>
+<li><p>a histogram is plotted of the <code class="docutils literal notranslate"><span class="pre">fare</span></code> column from the current (titanic) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">hist.fare.png</span></code></p></li>
+<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file, this becomes the new current data set, replacing the titanic data set, which is now discarded</p></li>
+<li><p>a count plot is created using the <code class="docutils literal notranslate"><span class="pre">species</span></code> column for the X axis from the current (iris) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">count.species.png</span></code></p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="input_output.html" class="btn btn-neutral float-left" title="Tabular input and output data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="output.html" class="btn btn-neutral float-right" title="Writing output data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

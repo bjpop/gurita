@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missing values &mdash; hatch  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Saving and viewing plots" href="plotting.html" />
+    <link rel="prev" title="Writing output data" href="output.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> hatch
+            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Missing values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#missing-values-in-input-data">Missing values in input data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-symbols-for-missing-data-in-input-files">Default symbols for missing data in input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specifying-symbols-to-use-for-missing-data-in-input-files">Specifying symbols to use for missing data in input files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#missing-values-in-output-data">Missing values in output data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Transformation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cut.html">Cut</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dropna.html">Dropna</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eval.html">Eval</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filter.html">Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gmm.html">Gmm (Gaussian mixture model)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pca.html">Principal Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Summary information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="describe.html">Summarising input data</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug_reports.html">Bug reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_requests.html">Feature requests</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hatch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Missing values</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/missing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="missing-values">
+<span id="id1"></span><h1>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline"></a></h1>
+<p>Hatch supports data sets with missing values.</p>
+<p>Hatch uses <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> to read, write and manipulate tabular data, and therefore inherits its behaviour for handling missing values from that library.</p>
+<p>The <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/missing_data.html">working with missing data</a> page in the Pandas documentation contains useful background information on this topic.</p>
+<p>One of the most important consequences is that missing values are stored internally as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
+(standing for <a class="reference external" href="https://en.wikipedia.org/wiki/NaN">not a number</a>, it is a special code that is used to encode undefined or unrepresentable values).</p>
+<section id="missing-values-in-input-data">
+<h2>Missing values in input data<a class="headerlink" href="#missing-values-in-input-data" title="Permalink to this headline"></a></h2>
+<p>Here is the contents of a small example CSV file that has two missing values:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,
+4.9,3.0,1.4,0.2,virginica
+4.7,,1.3,0.2,setosa
+</pre></div>
+</div>
+<p>The first data row is missing a categorical value in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column. This is indicated by the comma occurring at the end of the line – there is no final value in the last column on the first data row.</p>
+<p>The third data row is missing a numerical value in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column. This is indicated by two adjacent commas without in intervening value between them.</p>
+<section id="default-symbols-for-missing-data-in-input-files">
+<h3>Default symbols for missing data in input files<a class="headerlink" href="#default-symbols-for-missing-data-in-input-files" title="Permalink to this headline"></a></h3>
+<p>By default the following values are interpreted as missing values in input data: the empty string, <code class="docutils literal notranslate"><span class="pre">#N/A</span></code>, <code class="docutils literal notranslate"><span class="pre">#N/A</span> <span class="pre">N/A</span></code>, <code class="docutils literal notranslate"><span class="pre">#NA</span></code>, <code class="docutils literal notranslate"><span class="pre">-1.#IND</span></code> <code class="docutils literal notranslate"><span class="pre">-1.#QNAN</span></code>, <code class="docutils literal notranslate"><span class="pre">-NaN</span></code>, <code class="docutils literal notranslate"><span class="pre">-nan</span></code>, <code class="docutils literal notranslate"><span class="pre">1.#IND</span></code>, <code class="docutils literal notranslate"><span class="pre">1.#QNAN</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">N/A</span></code>, <code class="docutils literal notranslate"><span class="pre">NA</span></code>, <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, <code class="docutils literal notranslate"><span class="pre">n/a</span></code>, <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">N/A</span></code> and <code class="docutils literal notranslate"><span class="pre">null</span></code> to represent missing values, the above data equivalently be represented in the input file in the following way:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,N/A
+4.9,3.0,1.4,0.2,virginica
+4.7,null,1.3,0.2,setosa
+</pre></div>
+</div>
+<p>In this case <code class="docutils literal notranslate"><span class="pre">N/A</span></code> is used on the first data row to indicate a missing <code class="docutils literal notranslate"><span class="pre">species</span></code> value, and <code class="docutils literal notranslate"><span class="pre">null</span></code> is used on the third data row to indicate a missing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> value. It is not common to mix and match different representations of missing values in the one data set, so this example is a bit unusual. However, it does show that it is possible.</p>
+</section>
+<section id="specifying-symbols-to-use-for-missing-data-in-input-files">
+<h3>Specifying symbols to use for missing data in input files<a class="headerlink" href="#specifying-symbols-to-use-for-missing-data-in-input-files" title="Permalink to this headline"></a></h3>
+<p>You can override the default symbols used for representing missing data in input files using the <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">in</span></code> command.</p>
+<p>For example, suppose you want to use the symbols <code class="docutils literal notranslate"><span class="pre">-</span></code> (a single dash), <code class="docutils literal notranslate"><span class="pre">NA</span></code> and the empty string as symbols for missing values, then you can specify this as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat example.csv | hatch in --navalues &#39;-&#39; &#39;&#39; &#39;NA&#39;
+</pre></div>
+</div>
+<p>Note than when <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> is used the default missing value symbols no longer apply, and only those symbols given as arguments to <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> will be used to represent missing values.</p>
+</section>
+</section>
+<section id="missing-values-in-output-data">
+<h2>Missing values in output data<a class="headerlink" href="#missing-values-in-output-data" title="Permalink to this headline"></a></h2>
+<p>When writing a data set as output, by default Hatch will use empty fields to indicate missing values. However, this can be overridden with the <code class="docutils literal notranslate"><span class="pre">--na</span> <span class="pre">&lt;str&gt;</span></code> argument, where <code class="docutils literal notranslate"><span class="pre">&lt;str&gt;&gt;</span></code> will be used to indicate a missing value.</p>
+<p>For example, suppose that the previous small data set with missing values is stored in a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code>. The following command will feed the contents of that file into the standard input of Hatch, which will then write the file back out to standard output with missing values indicated by
+underscores:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch out --na &#39;_&#39;
+</pre></div>
+</div>
+<p>The resulting data will be represented like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,_
+4.9,3.0,1.4,0.2,virginica
+4.7,_,1.3,0.2,setosa
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="output.html" class="btn btn-neutral float-left" title="Writing output data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plotting.html" class="btn btn-neutral float-right" title="Saving and viewing plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

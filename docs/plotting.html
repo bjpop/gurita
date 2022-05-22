@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Bar" href="bar.html" />
-    <link rel="prev" title="Input and output data" href="input_output.html" /> 
+    <link rel="prev" title="Missing values" href="missing.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,15 +53,18 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Saving and viewing plots</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#plots-are-saved-to-a-file-by-default">Plots are saved to a file by default</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#specifying-an-output-file-name-explicitly">Specifying an output file name explicitly</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#output-plot-graphics-file-format">Output plot graphics file format</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#supported-file-formats">Supported file formats:</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#interactive-plots">Interactive plots</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#interactive-plots">Interactive plots</a></li>
 </ul>
 </li>
 </ul>
@@ -141,6 +144,7 @@
   <section id="saving-and-viewing-plots">
 <span id="plotting"></span><h1>Saving and viewing plots<a class="headerlink" href="#saving-and-viewing-plots" title="Permalink to this headline"></a></h1>
 <p>Hatch provides several <a class="reference internal" href="command_line_syntax.html#plotting-command-list"><span class="std std-ref">plotting commands</span></a> for visualising data as plots.</p>
+<p>Plots can be saved to files or viewed interactively.</p>
 <section id="plots-are-saved-to-a-file-by-default">
 <h2>Plots are saved to a file by default<a class="headerlink" href="#plots-are-saved-to-a-file-by-default" title="Permalink to this headline"></a></h2>
 <p>Hatch’s default behaviour for plotting commands is to save the resulting image to a file in PNG format.</p>
@@ -208,17 +212,19 @@ file with the new plot. This will lose old contents of the file.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you use <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--out</span></code>) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option (otherwise the default <code class="docutils literal notranslate"><span class="pre">png</span></code> type is used).</p>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--out</span></code>) to specify an output file name, Hatch will use that name verbatim and will not append a suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the <code class="docutils literal notranslate"><span class="pre">--format</span></code> option (otherwise the default <code class="docutils literal notranslate"><span class="pre">png</span></code> type is used).</p>
 </div>
 </section>
+</section>
 <section id="interactive-plots">
-<span id="show"></span><h3>Interactive plots<a class="headerlink" href="#interactive-plots" title="Permalink to this headline"></a></h3>
+<span id="show"></span><h2>Interactive plots<a class="headerlink" href="#interactive-plots" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">--show</span></code> option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.</p>
 <p>This is illustrated below:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class --show titanic.csv
 </pre></div>
 </div>
-</section>
+<p>The plot will appear in an interactive window like so:</p>
+<a class="reference internal image-reference" href="_images/hatch_interactive_plot.png"><img alt="Interactive plot window" class="align-center" src="_images/hatch_interactive_plot.png" style="width: 600px; height: 600px;" /></a>
 </section>
 </section>
 
@@ -226,7 +232,7 @@ file with the new plot. This will lose old contents of the file.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="input_output.html" class="btn btn-neutral float-left" title="Input and output data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="missing.html" class="btn btn-neutral float-left" title="Missing values" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="bar.html" class="btn btn-neutral float-right" title="Bar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

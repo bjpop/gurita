@@ -5,6 +5,8 @@ Saving and viewing plots
 
 Hatch provides several :ref:`plotting commands <plotting_command_list>` for visualising data as plots. 
 
+Plots can be saved to files or viewed interactively.
+
 Plots are saved to a file by default
 ------------------------------------
 
@@ -95,12 +97,12 @@ For example, the following command saves the output plot in SVG format, to a fil
 
 .. note::
 
-    If you use ``-o`` (or ``--out``) to specify an output file name, Hatch will use that name verbatim and will not append suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
+    If you use ``-o`` (or ``--out``) to specify an output file name, Hatch will use that name verbatim and will not append a suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
 
 .. _show:
 
 Interactive plots
-=================
+-----------------
 
 The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
 
@@ -110,3 +112,10 @@ This is illustrated below:
 
     hatch count -x class --show titanic.csv
 
+The plot will appear in an interactive window like so: 
+
+.. image:: ../images/hatch_interactive_plot.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Interactive plot window 

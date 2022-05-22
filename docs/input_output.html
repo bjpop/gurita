@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input and output data &mdash; hatch  documentation</title>
+  <title>Tabular input and output data &mdash; hatch  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Saving and viewing plots" href="plotting.html" />
+    <link rel="next" title="Reading input data" href="input.html" />
     <link rel="prev" title="Command line syntax" href="command_line_syntax.html" /> 
 </head>
 
@@ -53,42 +53,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Input and output data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#input-data">Input data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#input-from-a-named-file">Input from a named file</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#specifying-the-field-separator-explicitly-in-input-files">Specifying the field separator explicitly in input files</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#input-from-standard-input-stdin">Input from standard input (stdin)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implicit-csv-input-from-standard-input-stdin">Implicit CSV input from standard input (stdin)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#reading-input-from-more-than-one-file-in-a-command-chain">Reading input from more than one file in a command chain</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#output-data">Output data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#output-to-a-named-file">Output to a named file</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#specifying-the-field-separator-explicitly-in-output-files">Specifying the field separator explicitly in output files</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#output-to-standard-output-stdout">Output to standard output (stdout)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implicit-csv-output-to-standard-output-stdout">Implicit CSV output to standard output (stdout)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#writing-output-to-more-than-one-file-in-a-command-chain">Writing output to more than one file in a command chain</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#using-hatch-to-convert-between-tsv-and-csv-formats">Using Hatch to convert between TSV and CSV formats</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#missing-values">Missing values</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#missing-values-in-input-data">Missing values in input data</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#default-symbols-for-missing-data-in-input-files">Default symbols for missing data in input files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#specifying-symbols-to-use-for-missing-data-in-input-files">Specifying symbols to use for missing data in input files</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tabular input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
@@ -154,7 +122,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Input and output data</li>
+      <li>Tabular input and output data</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/input_output.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -164,8 +132,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-and-output-data">
-<span id="input-output"></span><h1>Input and output data<a class="headerlink" href="#input-and-output-data" title="Permalink to this headline"></a></h1>
+  <section id="tabular-input-and-output-data">
+<span id="input-output"></span><h1>Tabular input and output data<a class="headerlink" href="#tabular-input-and-output-data" title="Permalink to this headline"></a></h1>
 <p>Hatch reads and writes data in tabular data format.</p>
 <p>By default it will use <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> format, where a comma is used as the field separator. However, upon request, it allows alternative field separators to be used.
 For example, <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> files are supported by setting the field separator to a tab character (\t).</p>
@@ -185,364 +153,8 @@ where each row has a value associated with each column:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Hatch requires that the input data is <strong>rectangular</strong> in shape. In other words, every row must contain the same number of columns.
-<a class="reference internal" href="#missing-values"><span class="std std-ref">Missing values</span></a> are allowed, and are indicated by leaving a particular entry blank (empty) or marking it with a special value.</p>
+<a class="reference internal" href="missing.html#missing-values"><span class="std std-ref">Missing values</span></a> are allowed, and are indicated by leaving a particular entry blank (empty) or marking it with a special value.</p>
 </div>
-<section id="input-data">
-<span id="input-files"></span><h2>Input data<a class="headerlink" href="#input-data" title="Permalink to this headline"></a></h2>
-<p>Hatch can read data from a named input file or standard input (stdin).</p>
-<section id="input-from-a-named-file">
-<h3>Input from a named file<a class="headerlink" href="#input-from-a-named-file" title="Permalink to this headline"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command allows you to specify an input file by name:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv ...
-</pre></div>
-</div>
-<p>We use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that the remainder of the example Hatch command is omitted for the sake of simplifying the discussion.</p>
-<p>You should imagine that <code class="docutils literal notranslate"><span class="pre">...</span></code> would be replaced by more text to complete the command.
-For example, if you wanted to generate a count plot of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file, the <code class="docutils literal notranslate"><span class="pre">...</span></code> in the above example could be expanded like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + count -x class
-</pre></div>
-</div>
-<p>In the above example data is read from the input file and then passed along the <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a> from left to right into the <code class="docutils literal notranslate"><span class="pre">count</span></code> command to make a plot.</p>
-<p>When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
-<code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
-<section id="specifying-the-field-separator-explicitly-in-input-files">
-<h4>Specifying the field separator explicitly in input files<a class="headerlink" href="#specifying-the-field-separator-explicitly-in-input-files" title="Permalink to this headline"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command lets you specify the field separator explicitly. This will override any default behaviour that Hatch would otherwise have when choosing what separator to use.</p>
-<p>Using a comma as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;,&#39; ...
-</pre></div>
-</div>
-<p>Note: comma is the default separator used by Hatch, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
-<p>Using a tab character as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;\t&#39; ...
-</pre></div>
-</div>
-<p>Be sure to enclose the <code class="docutils literal notranslate"><span class="pre">\t</span></code> in quote characters to ensure that it is treated as a single string.</p>
-<p>Elaborating the above example to a full command, assuming <code class="docutils literal notranslate"><span class="pre">example_filename</span></code> is the name of a file containing data in TSV format:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;\t&#39; example_filename + count -x class
-</pre></div>
-</div>
-<p>Using a vertical bar character as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;|&#39; ...
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> forces Hatch to use the specified field separator regardless of the filename extension or contents of the file.</p>
-</div>
-</section>
-</section>
-<section id="input-from-standard-input-stdin">
-<h3>Input from standard input (stdin)<a class="headerlink" href="#input-from-standard-input-stdin" title="Permalink to this headline"></a></h3>
-<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command Hatch will assume that the input should be read from standard input (stdin):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in ...
-</pre></div>
-</div>
-<p>For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class &lt; titanic.csv
-</pre></div>
-</div>
-<p>In the above example the notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">titanic.csv</span></code> causes the contents of the file <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> to be fed into the standard input of Hatch.
-This is called <em>input redirection</em>.</p>
-<p>Instead of using input redirection, it is also possible to <em>pipe</em> the output from another command to the standard input of Hatch:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch in + count -x class
-</pre></div>
-</div>
-<p>In the above example the command <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">titanic.csv</span></code> outputs the contents of the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> to standard output which is then fed through a pipe using the <code class="docutils literal notranslate"><span class="pre">|</span></code> (vertical bar) operator
-into the standard input of Hatch.</p>
-<p>Reading from standard input is particularly useful when you want to use Hatch as part of a command pipeline:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>example_command | hatch in + count -x class
-</pre></div>
-</div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose ouput is sent as input into Hatch.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Standard input defaults to CSV format</strong></p>
-<p>For performance reasons Hatch does not try to detect the format of the input file when reading from standard input.</p>
-<p>Therefore, when reading from standard input, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
-<p>This can be overridden by <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span> <span class="pre">...</span></code></p>
-<p>As previously noted, when reading from a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify <code class="docutils literal notranslate"><span class="pre">--sep</span></code>.</p>
-<p><strong>Standard input can only be read once in a Hatch command</strong></p>
-<p>A Hatch command can only read from standard input at most once in a command. An attempt to read from standard input more than once will result in an error:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class + in &lt; titanic.csv
-hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
-</pre></div>
-</div>
-<p><strong>Standard input can only be read at the start of a command</strong></p>
-<p>Hatch will only permit standard input to be read at the start of a command chain. Therefore it is an error to request to read
-from standard input in any position other then the first command in the chain:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class + in &lt; titanic.csv
-hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
-</pre></div>
-</div>
-<p>Note that this restriction is only a concern when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command to read from standard input, and does
-not apply when reading from standard input implicitly (as noted below).</p>
-</div>
-</section>
-<section id="implicit-csv-input-from-standard-input-stdin">
-<h3>Implicit CSV input from standard input (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-stdin" title="Permalink to this headline"></a></h3>
-<p>For convenience, if you don’t use the <code class="docutils literal notranslate"><span class="pre">in</span></code> command explicitly Hatch will assume you wanted to read from standard input in CSV format.</p>
-<p>Therefore:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + &lt;rest of command&gt;
-</pre></div>
-</div>
-<p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;rest of command&gt;
-</pre></div>
-</div>
-<p>In other words, if a Hatch command starts with <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> you can simply omit that part, and Hatch will implicitly read from standard input using CSV format. This saves you a bit of typing and makes the command line tidier.</p>
-<p>As a concrete example, the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch in + count -x class
-</pre></div>
-</div>
-<p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch count -x class
-</pre></div>
-</div>
-<p>or, of course, you could achieve the same result with input redirection, again dropping the <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> from the original command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class &lt; titanic.csv
-</pre></div>
-</div>
-<p>Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
-the type using: <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code></p>
-<section id="reading-input-from-more-than-one-file-in-a-command-chain">
-<h4>Reading input from more than one file in a command chain<a class="headerlink" href="#reading-input-from-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h4>
-<p>You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input).</p>
-<p>For example you can do something like this:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + ... + in iris.csv + ...
-</pre></div>
-</div>
-<p>In the above example, first <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is read as input, then some unspecified commands are run, and later <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> is read as input, and some more unspecified commands are run.</p>
-<p>Whenever a new input is read from a named file the contents of that file become the current data set, and any previous data set in the command chain is discarded.</p>
-<p>The following command is a more concrete example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + hist -x fare + in iris.csv + count -x species
-</pre></div>
-</div>
-<p>There are four parts to the above command chain:</p>
-<ol class="arabic simple">
-<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file, this becomes the current data set</p></li>
-<li><p>a histogram is plotted of the <code class="docutils literal notranslate"><span class="pre">fare</span></code> column from the current (titanic) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">hist.fare.png</span></code></p></li>
-<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file, this becomes the new current data set, replacing the titanic data set, which is now discarded</p></li>
-<li><p>a count plot is created using the <code class="docutils literal notranslate"><span class="pre">species</span></code> column for the X axis from the current (iris) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">count.species.png</span></code></p></li>
-</ol>
-</section>
-</section>
-</section>
-<section id="output-data">
-<span id="output-files"></span><h2>Output data<a class="headerlink" href="#output-data" title="Permalink to this headline"></a></h2>
-<p>Hatch can write data to a named output file or standard output (stdout).</p>
-<section id="output-to-a-named-file">
-<h3>Output to a named file<a class="headerlink" href="#output-to-a-named-file" title="Permalink to this headline"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command allows you to specify an output file by name:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + out newfile.csv
-</pre></div>
-</div>
-<p>As before, we use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that part of the example Hatch command is omitted for the sake of simplifying the discussion.</p>
-<p>You should imagine that <code class="docutils literal notranslate"><span class="pre">...</span></code> would be replaced by more text to complete the command.
-For example, the following command reads the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> from standard input and then saves the header row and first ten data rows to an output file called <code class="docutils literal notranslate"><span class="pre">newfile.csv</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out newfile.csv
-</pre></div>
-</div>
-<p>Again we see <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chaining</span></a> in action, where the first command <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">10</span></code> transforms the input data before it is passed along to the <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">newfile.csv</span></code> command.</p>
-<p>When writing output to a named file (and not to standard output) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
-<code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>When writing to a named file, if the file already exists,  the <code class="docutils literal notranslate"><span class="pre">out</span></code> command will overwrite its contents. The original contents of the file will be lost.</p>
-</div>
-<section id="specifying-the-field-separator-explicitly-in-output-files">
-<h4>Specifying the field separator explicitly in output files<a class="headerlink" href="#specifying-the-field-separator-explicitly-in-output-files" title="Permalink to this headline"></a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command lets you specify the field separator of the output file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the output file type.
-This mimics the behaviour of the <code class="docutils literal notranslate"><span class="pre">in</span></code> command for reading input from files, as discussed previously.</p>
-<p>Request for CSV file format:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --sep &#39;,&#39; ...
-</pre></div>
-</div>
-<p>Note: comma is the default separator used by Hatch, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
-<p>Request for TSV file format:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --sep &#39;\t&#39; ...
-</pre></div>
-</div>
-<p>Be sure to enclose the <code class="docutils literal notranslate"><span class="pre">\t</span></code> in quote characters to ensure that it is treated as a single string.</p>
-<p>Elaborating the above example to a full command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out --sep &#39;\t&#39; example_filename
-</pre></div>
-</div>
-<p>Using a vertical bar character as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --sep &#39;|&#39; ...
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code>  forces Hatch to use the specified field separator regardless of the filename extension or contents of the file.</p>
-</div>
-</section>
-</section>
-<section id="output-to-standard-output-stdout">
-<h3>Output to standard output (stdout)<a class="headerlink" href="#output-to-standard-output-stdout" title="Permalink to this headline"></a></h3>
-<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">out</span></code> command Hatch will assume that the output should be written to standard output (stdout):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out
-</pre></div>
-</div>
-<p>For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out
-</pre></div>
-</div>
-<p>Writing to standard output is particularly useful when you want to use Hatch as part of a command pipeline:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + out | example_command
-</pre></div>
-</div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose input comes from the standard output of Hatch.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Standard output defaults to CSV format</strong></p>
-<p>When writing to standard output, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
-<p>This can be overridden by <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code></p>
-<p>As previously noted, when writing to a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify <code class="docutils literal notranslate"><span class="pre">--sep</span></code>.</p>
-</div>
-</section>
-<section id="implicit-csv-output-to-standard-output-stdout">
-<h3>Implicit CSV output to standard output (stdout)<a class="headerlink" href="#implicit-csv-output-to-standard-output-stdout" title="Permalink to this headline"></a></h3>
-<p>In some circumstances, for convenience, Hatch will implicitly write the final state of the data to standard output. It chooses to do this in precisely two circumstances, when
-the last command in a chain is either:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>a data transformation</p></li>
-<li><p>an input command (including implicitly reading from standard input)</p></li>
-</ul>
-</div></blockquote>
-<p>However, Hatch will <em>not</em> implicitly write the final state of the data to standard output when the last command in a chain is either:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>a plotting command</p></li>
-<li><p>a data summary command</p></li>
-<li><p>an <code class="docutils literal notranslate"><span class="pre">out</span></code> command</p></li>
-</ul>
-</div></blockquote>
-<p>The logic for this behaviour is as follows.</p>
-<p>If the last command in a chain is a transformation or just an input command, Hatch assumes that you must have read/transformed the data for a reason and you probably
-want to save/use the result. If a command chain does not explicitly end with an <code class="docutils literal notranslate"><span class="pre">out</span></code> command the final state of the data would be lost. So Hatch writes it to standard output in CSV format for you.</p>
-<p>If the last command in a chain is a plotting command, then Hatch assumes that your main purpose must have been to generate the plot, and therefore you are not interested in saving/using the final state of the data.
-Similarly for situations when the last command shows summary information about the data, such as <code class="docutils literal notranslate"><span class="pre">pretty</span></code>.
-If you want to make a plot or see summary information <em>and</em> save the final state of the data you can always achieve this by ending a chain with an explicit <code class="docutils literal notranslate"><span class="pre">out</span></code> command.</p>
-<p>Therefore:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;transformation or input command&gt; + out
-</pre></div>
-</div>
-<p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;transformation or input command&gt;
-</pre></div>
-</div>
-<p>As a concrete example, the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out
-</pre></div>
-</div>
-<p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10
-</pre></div>
-</div>
-<p>or, of course, you could achieve the same result with input redirection, again dropping the <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">out</span></code> from the original command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch head 10 &lt; titanic.csv
-</pre></div>
-</div>
-<p>Note carefully that when implicitly writing to standard output Hatch will always assume the output file should be written in CSV format. If you want to read a different format from standard input you must explicitly specify
-the type using: <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span> <span class="pre">...</span></code></p>
-<section id="writing-output-to-more-than-one-file-in-a-command-chain">
-<h4>Writing output to more than one file in a command chain<a class="headerlink" href="#writing-output-to-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h4>
-<p>You may write output to more than one file in a command chain, both to named files and standard output.</p>
-<p>For example you can do something like this:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out newfile1.csv + ... + out newfile2.tsv + ...
-</pre></div>
-</div>
-<p>In the above example, output is written to <code class="docutils literal notranslate"><span class="pre">newfile1.csv</span></code> in CSV format, then some unspecified commands are run, and later output is written to <code class="docutils literal notranslate"><span class="pre">newfile2.tsv</span></code> in TSV format, and some more unspecified commands are run.</p>
-<p>Each invocation of <code class="docutils literal notranslate"><span class="pre">out</span></code> causes the current data set to be written to a file or standard output. When used in a chain of commands <code class="docutils literal notranslate"><span class="pre">out</span></code> also passes the current data set along unmodified to the next command in the chain. This allows
-the data to be passed along from left to right in the chain with further processing of the data occurring after the <code class="docutils literal notranslate"><span class="pre">out</span></code> command has been executed.</p>
-<p>This is most useful when you want to save different states of the data as it undergoes various transformations in a command chain.</p>
-<p>Warning: if you have two separate <code class="docutils literal notranslate"><span class="pre">out</span></code> commands that write to the same named output file, the last occurrence will overwrite any earlier output that that file.</p>
-<p>However, if multiple different writes to standard output are used, they will form a single concatenated stream of data.</p>
-<p>The following command is a more concrete example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.csv + sample 0.6 + out samp.csv + cut -c sepal_length + out len.tsv
-</pre></div>
-</div>
-<p>There are five parts to the above command chain:</p>
-<ol class="arabic simple">
-<li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file, this becomes the current data set</p></li>
-<li><p>60% of the data rows in the current data set are randomly sampled, the remaining 40% of the rows are discareded</p></li>
-<li><p>the current (sampled) data set is written to the output file <code class="docutils literal notranslate"><span class="pre">samp.csv</span></code> in CSV format</p></li>
-<li><p>the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> column is selected from the current (sampled) data set and the remaining columns are discareded</p></li>
-<li><p>the final (cut and sampled) data set is written to the output file <code class="docutils literal notranslate"><span class="pre">len.tsv</span></code> in TSV format</p></li>
-</ol>
-</section>
-</section>
-</section>
-<section id="using-hatch-to-convert-between-tsv-and-csv-formats">
-<h2>Using Hatch to convert between TSV and CSV formats<a class="headerlink" href="#using-hatch-to-convert-between-tsv-and-csv-formats" title="Permalink to this headline"></a></h2>
-<p>Hatch can read and write data in both CSV and TSV formats. Therefore, one simple, but useful thing it can easily do is convert data files
-between those formats. Notably, in such conversions it will handle corner cases correctly, such as proper quotation of data values, and
-appropriate formatting of missing (NA) values.</p>
-<p>For example, the following commands all convert the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file (in CSV format) into TSV format, and save the result in a file called <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out --sep &#39;\t&#39; &gt; iris.tsv
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out iris.tsv
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.csv + out iris.tsv
-</pre></div>
-</div>
-<p>Conversely, the following commands all convert the <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code> file (in TSV format) into CSV format, and save the result in a file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | hatch in --sep &#39;\t&#39; + out &gt; iris.csv
-</pre></div>
-</div>
-<p>Note that in the above example there is no need to specify that the output file is in CSV format because that is the default behaviour of the <code class="docutils literal notranslate"><span class="pre">out</span></code> command.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | hatch in --sep &#39;\t&#39; + out iris.csv
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.tsv + out iris.csv
-</pre></div>
-</div>
-</section>
-<section id="missing-values">
-<span id="id1"></span><h2>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline"></a></h2>
-<p>Hatch supports data sets with missing values.</p>
-<p>Hatch uses <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> to read, write and manipulate tabular data, and therefore inherits its behaviour for handling missing values from that library.</p>
-<p>The <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/missing_data.html">working with missing data</a> page in the Pandas documentation contains useful background information on this topic.</p>
-<p>One of the most important consequences is that missing values are stored internally as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
-(standing for <a class="reference external" href="https://en.wikipedia.org/wiki/NaN">not a number</a>, it is a special code that is used to encode undefined or unrepresentable values).</p>
-<section id="missing-values-in-input-data">
-<h3>Missing values in input data<a class="headerlink" href="#missing-values-in-input-data" title="Permalink to this headline"></a></h3>
-<p>Here is the contents of a small example CSV file that has two missing values:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
-5.1,3.5,1.4,0.2,
-4.9,3.0,1.4,0.2,virginica
-4.7,,1.3,0.2,setosa
-</pre></div>
-</div>
-<p>The first data row is missing a categorical value in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column. This is indicated by the comma occurring at the end of the line – there is no final value in the last column on the first data row.</p>
-<p>The third data row is missing a numerical value in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column. This is indicated by two adjacent commas without in intervening value between them.</p>
-<section id="default-symbols-for-missing-data-in-input-files">
-<h4>Default symbols for missing data in input files<a class="headerlink" href="#default-symbols-for-missing-data-in-input-files" title="Permalink to this headline"></a></h4>
-<p>By default the following values are interpreted as missing values in input data: the empty string, <code class="docutils literal notranslate"><span class="pre">#N/A</span></code>, <code class="docutils literal notranslate"><span class="pre">#N/A</span> <span class="pre">N/A</span></code>, <code class="docutils literal notranslate"><span class="pre">#NA</span></code>, <code class="docutils literal notranslate"><span class="pre">-1.#IND</span></code> <code class="docutils literal notranslate"><span class="pre">-1.#QNAN</span></code>, <code class="docutils literal notranslate"><span class="pre">-NaN</span></code>, <code class="docutils literal notranslate"><span class="pre">-nan</span></code>, <code class="docutils literal notranslate"><span class="pre">1.#IND</span></code>, <code class="docutils literal notranslate"><span class="pre">1.#QNAN</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">N/A</span></code>, <code class="docutils literal notranslate"><span class="pre">NA</span></code>, <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, <code class="docutils literal notranslate"><span class="pre">n/a</span></code>, <code class="docutils literal notranslate"><span class="pre">nan</span></code>, <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
-<p>Using <code class="docutils literal notranslate"><span class="pre">N/A</span></code> and <code class="docutils literal notranslate"><span class="pre">null</span></code> to represent missing values, the above data equivalently be represented in the input file in the following way:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
-5.1,3.5,1.4,0.2,N/A
-4.9,3.0,1.4,0.2,virginica
-4.7,null,1.3,0.2,setosa
-</pre></div>
-</div>
-<p>In this case <code class="docutils literal notranslate"><span class="pre">N/A</span></code> is used on the first data row to indicate a missing <code class="docutils literal notranslate"><span class="pre">species</span></code> value, and <code class="docutils literal notranslate"><span class="pre">null</span></code> is used on the third data row to indicate a missing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> value. It is not common to mix and match different representations of missing values in the one data set, so this example is a bit unusual. However, it does show that it is possible.</p>
-</section>
-<section id="specifying-symbols-to-use-for-missing-data-in-input-files">
-<h4>Specifying symbols to use for missing data in input files<a class="headerlink" href="#specifying-symbols-to-use-for-missing-data-in-input-files" title="Permalink to this headline"></a></h4>
-<p>You can override the default symbols used for representing missing data in input files using the <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">in</span></code> command.</p>
-<p>For example, suppose you want to use the symbols <code class="docutils literal notranslate"><span class="pre">-</span></code> (a single dash), <code class="docutils literal notranslate"><span class="pre">NA</span></code> and the empty string as symbols for missing values, then you can specify this as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat example.csv | hatch in --navalues &#39;-&#39; &#39;&#39; &#39;NA&#39;
-</pre></div>
-</div>
-<p>Note than when <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> is used the default missing value symbols no longer apply, and only those symbols given as arguments to <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> will be used to represent missing values.</p>
-</section>
-</section>
-</section>
 </section>
 
 
@@ -550,7 +162,7 @@ appropriate formatting of missing (NA) values.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="command_line_syntax.html" class="btn btn-neutral float-left" title="Command line syntax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="plotting.html" class="btn btn-neutral float-right" title="Saving and viewing plots" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="input.html" class="btn btn-neutral float-right" title="Reading input data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
