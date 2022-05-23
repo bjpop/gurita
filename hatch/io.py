@@ -27,6 +27,8 @@ class In(CommandBase, name="in"):
     def parse_args(self, args=[]):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.file_sep, io_args.navalues], add_help=True)
+        parser.add_argument('--comment', metavar='CHAR', required=False, type=str,
+            help=f'If provided, CHAR marks the start of a comment. Text from this CHAR until the end of the line will be ignored.') 
         parser.add_argument('input', nargs="?", metavar='FILE', type=str, help=f'Read input from a named file. If this argument is absent input will be read from standard input (stdin).')
         self.options = parser.parse_args(args)
 
@@ -36,6 +38,10 @@ class In(CommandBase, name="in"):
     def run(self, _df_ignore):
         options = self.options
         kwargs = {}
+        if options.comment is not None:
+            if len(options.comment) != 1:
+                utils.exit_with_error(f"Comment marker must be exactly one character. Supplied comment marker had length: {len(options.comment)}", const.EXIT_COMMAND_LINE_ERROR)
+            kwargs['comment'] = options.comment
         # Ensure that the separator is set to the default. It may be overridden below.
         kwargs['sep'] = const.DEFAULT_SEP
         if options.navalues:
