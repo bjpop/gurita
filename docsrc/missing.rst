@@ -77,3 +77,40 @@ The resulting data will be represented like so:
     5.1,3.5,1.4,0.2,_
     4.9,3.0,1.4,0.2,virginica
     4.7,_,1.3,0.2,setosa
+
+Dropping rows or columns containing missing values
+--------------------------------------------------
+
+The :doc:`dropna <dropna>` command allows you to remove rows or columns that contain missing values based on certain criteria.
+
+Following from previous examples we assume the existence of a file called ``missing.csv`` that contains some missing values.
+
+Drop rows that contain at least one missing value:
+
+.. code-block:: text 
+
+    cat missing.csv | hatch dropna 
+
+Drop rows where *all* values are missing: 
+
+.. code-block:: text 
+
+    cat missing.csv | hatch dropna --how all
+
+Drop rows with missing values in columns ``sepal_width`` or ``species``:
+
+.. code-block:: text 
+
+    cat missing.csv | hatch dropna --columns sepal_width species 
+
+Drop columns that contain at least one missing value:
+
+.. code-block:: text 
+
+    cat missing.csv | hatch dropna --axis columns 
+
+Drop columns where *all* values are missing: 
+
+.. code-block:: text 
+
+    cat missing.csv | hatch dropna --axis columns --how all

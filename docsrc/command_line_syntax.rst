@@ -12,17 +12,17 @@ Commands
 
 Hatch commands have the following structure:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch <command> [arguments]
 
 where ``<command>`` is the command name (e.g. ``hist`` or ``pca``), and ``arguments`` is a list of options that control the behaviour of the command. In some cases the ``arguments`` can be empty.
 
-See the :ref:`list of commands <list_of_commands>` below for the full list of available commands.
+See the :ref:`list of commands <list_of_commands>` for a summary of all the available commands.
 
 For instance, the following invocation of Hatch will plot a histogram of the ``passengers`` column from the file ``flights.csv`` read from standard input:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch hist -x passengers < flights.csv
 
@@ -45,13 +45,13 @@ Command chaining
 
 In more complex cases mulitple commands can be chained together into a pipeline. Hatch uses the plus sign ``+`` to separate each command in the chain: 
 
-.. code-block:: bash
+.. code-block:: text 
 
     hatch <command_1> + <command_2> + ... + <command_n>
 
 Each command has its own optional arguments, so the chaining syntax is more completely characterised as follows:
 
-.. code-block:: bash
+.. code-block:: text 
 
     hatch <command_1> [arguments_1] + <command_2> [arguments_2] + ... + <command_n> [arguments_n]
 
@@ -73,7 +73,7 @@ Each command in the chain *may* transform the data before passing it along to th
 
    It is *possible* to join Hatch commands into a pipeline using the ``|`` shell operator, like so:
   
-    .. code-block:: bash
+    .. code-block:: text
 
         hatch <command_1> [arguments_1] | hatch <command_2> [arguments_2] 
 
@@ -92,7 +92,7 @@ Command chaining example
 
 The following is a more advanced example of command chaining in Hatch, consisting of four commands:
 
-.. code-block:: bash
+.. code-block:: text 
 
     cat iris.csv | hatch filter 'species != "virginica"' + \
                          sample 0.9 + \
@@ -103,7 +103,7 @@ The above command is split over multiple lines for clarity, using the backslash 
 
 Equivalently, the same command can be written in a single line, like so (where backslashes are no longer required):
 
-.. code-block:: bash
+.. code-block:: text
 
     cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
 
@@ -111,13 +111,13 @@ To understand how it works it is useful to break it down into parts.
 
 To begin with, the contents of the file ``iris.csv`` is piped into the standard input of Hatch:
 
-.. code-block:: bash
+.. code-block:: text
 
    cat iris.csv | hatch ... 
 
 Note that input redirection would also achieve the same behaviour:
 
-.. code-block:: bash
+.. code-block:: text
 
    hatch ... < iris.csv
 
@@ -125,7 +125,7 @@ This data is then passed through the chain of commands from left to right. Along
 
 The first command in the chain is a filter:
 
-.. code-block:: bash
+.. code-block:: text
 
    filter 'species != "virginica"' 
 
@@ -142,7 +142,7 @@ data is fed into the next command in the chain, moving left to right.
 
 The second command in the chain is a random sampling of the data:
 
-.. code-block:: bash
+.. code-block:: text
 
    sample 0.9 
 
@@ -154,7 +154,7 @@ The net result of the two commands we have discussed so far is to remove all the
 
 The third command in the chain is a principal component analysis (PCA):
 
-.. code-block:: bash
+.. code-block:: text
 
    pca 
 
@@ -165,7 +165,7 @@ and in those cases more columns would be added, one for each component.
 
 The fourth (and last) command in the chain creates a scatter plot:
 
-.. code-block:: bash
+.. code-block:: text 
 
     scatter -x pc1 -y pc2 --hue species
 
@@ -191,7 +191,7 @@ Getting help
 
 The ``-h`` or ``--help`` command line arguments give an overview of Hatch's command line syntax:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch -h
 
@@ -204,7 +204,7 @@ after the command name:
 
 For example, to get specific help about histograms, use:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch hist -h
 
@@ -215,131 +215,25 @@ This will display a detailed help message for the ``hist`` command, likewise for
 Version number
 ==============
 
+Hatch uses `semantic versioning <https://semver.org/>`_, such that its version number has three parts:
+
+.. code-block:: text
+
+    major.minor.patch 
+
+The major version number indicates significant changes in the behaviour and compatibility of the program. A change in major version number indicates that the different versions may not be entirely compatible with each other.
+
+The minor version number indicates a change in functionality that is backwards compatible within the corresponding major version. For example, this could indicate the addition of a feature that was not previously present, but does not interfere with existing features.
+
+The patch version number indicates a backwards compatible change that does not change functionality in a significant way. This is usually used for bug fixes.
+
 The ``--version`` (``-v``) command line argument causes Hatch to print its version number.
 
-.. _list_of_commands:
+.. code-block:: text
 
-List of commands
-****************
+    hatch --version 
 
-.. _input_output_command_list:
+.. code-block:: text
 
-Input and output commands
-=========================
+    hatch -v
 
-.. list-table::
-   :widths: 1 2
-   :header-rows: 1
-
-   * - Command
-     - Description
-   * - :doc:`in <in>`
-     - Read CSV/TSV data from a named input file or standard input
-   * - :doc:`out <out>`
-     - Write data to a file or standard output in CSV/TSV format
-
-.. _plotting_command_list:
-
-Plotting commands
-=================
-
-.. list-table::
-   :widths: 1 2
-   :header-rows: 1
-
-   * - Command 
-     - Description
-   * - :doc:`bar <bar>`
-     - Bar plot of categorical feature
-   * - :doc:`box <box>`
-     - Plot distrbution of numerical column using box-and-whiskers
-   * - :doc:`boxen <boxen>`
-     - Plot distrbution of numerical column using boxes for quantiles
-   * - :doc:`clustermap <clustermap>`
-     - Clustered heatmap of two categorical columns
-   * - :doc:`count <count>`
-     - Plot count of categorical columns using bars
-   * - :doc:`heatmap <heatmap>`
-     - Heatmap of two categorical columns
-   * - :doc:`hist <histogram>`
-     - Histogram of numerical or categorical feature
-   * - :doc:`line <line>`
-     - Line plot of numerical feature
-   * - :doc:`lmplot <lmplot>`
-     - Regression plot (linear model)
-   * - :doc:`pair <pair>`
-     - Pair plot of numerical features
-   * - :doc:`point <point>`
-     - Point plot of numerical feature
-   * - :doc:`scatter <scatter>`
-     - Scatter plot of two numerical columns
-   * - :doc:`strip <strip>`
-     - Plot distrbution of numerical column using dotted strip
-   * - :doc:`swarm <swarm>`
-     - Plot distrbution of numerical column using dot swarm
-   * - :doc:`violin <violin>`
-     - Plot distrbution of numerical column using violin
-
-.. _transformation_command_list:
-
-Transformation commands
-=======================
-
-.. list-table::
-   :widths: 1 2
-   :header-rows: 1
-
-   * - Command 
-     - Description
-   * - :doc:`corr <corr>`
-     - Pairwise correlation between numerical columns
-   * - :doc:`cut <cut>`
-     - Select a subset of columns by name
-   * - :doc:`dropna <dropna>`
-     - Drop rows or columns containing missing values (NA)
-   * - :doc:`eval <eval>`
-     - Compute new columns for each row with an expression
-   * - :doc:`filter <filter>`
-     - Filter rows with a logical expression
-   * - :doc:`gmm <gmm>`
-     - Gaussian mixture model clustering
-   * - :doc:`head <head>`
-     - Select the first N rows in the data
-   * - :doc:`isnorm <isnorm>`
-     - Test whether numerical features differ from a normal distribution
-   * - :doc:`kmeans <kmeans>`
-     - k-means clustering
-   * - :doc:`melt <melt>`
-     - Reshape a wide format dataset into a long format dataset
-   * - :doc:`outlier <outlier>`
-     - Detect outliers in numerical columns using interquartile range
-   * - :doc:`pca <pca>`
-     - Principal component analysis (PCA)
-   * - :doc:`pivot <pivot>`
-     - Reshape a long format dataset into a wide format dataset
-   * - :doc:`sample <sample>`
-     - Randomly sample rows
-   * - :doc:`sort <sort>`
-     - Sort based on columns in precedence from left to right
-   * - :doc:`tail <tail>`
-     - Select the last N rows in the data
-   * - :doc:`zscore <zscore>`
-     - Compute Z-score for numerical columns
-
-.. _summary_command_list:
-
-Summary information commands
-============================
-
-.. list-table::
-   :widths: 1 2
-   :header-rows: 1
-
-   * - Command 
-     - Description
-   * - :doc:`describe <describe>`
-     - Show summary information about the input data set
-   * - :doc:`pretty <pretty>`
-     - Pretty print a fragment of the data set
-   * - :doc:`unique <unique>`
-     - Print the unique values from a column

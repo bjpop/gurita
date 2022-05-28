@@ -118,7 +118,7 @@ def main_args(cmdline_args):
         for command in new_commands:
             try:
                 df = command.run(df)
-            except ValueError as e:
+            except (ValueError, TypeError) as e:
                 utils.exit_with_error(f"Error: {str(e)}", const.EXIT_COMMAND_LINE_ERROR)
             if df is None:
                 break
