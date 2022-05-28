@@ -13,6 +13,7 @@ from pathlib import Path
 import hatch.constants as const
 import re
 import codecs
+import numpy as np
 
 # This magical incantation is intended to correctly parse escape characters in strings,
 # and tries to make sure that unicode characters are handled correctly.
@@ -102,3 +103,11 @@ def make_unique_numbered_filepath(path):
         path = Path(stem + "_" + str(counter) + ext)
         counter += 1
     return path
+
+def make_estimator(str):
+    estimators = const.ESTIMATOR_FUNS
+    if str in estimators:
+        return estimators[str]
+    else:
+        exit_with_error(f"Unknown estimator function: {str}",
+                const.EXIT_COMMAND_LINE_ERROR)

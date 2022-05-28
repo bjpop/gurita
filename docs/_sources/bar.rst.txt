@@ -3,7 +3,9 @@
 Bar
 ***
 
-Bar plots show the point estimates of the central tendency (mean) of numerical features as boxes with error bars.
+Bar plots summarise a numerical feature as boxes with optional error bars.
+
+By default the numerical feature is summarised by its mean, but other summary functions can be chosen.
 
 .. code-block:: bash
 
@@ -31,6 +33,15 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
        * ``--yaxis FEATURE [FEATURE ...]``
      - select feature for the Y axis
      - :ref:`bar_feature_selection`
+   * - ``--estimator {mean, median, max, min, sum, std, var}``
+     - Function to compute point estimate of numerical feature
+     - :ref:`bar_estimator`
+   * - ``--std``
+     - Show standard deviation of numerical feature as error bar 
+     - :ref:`standard_deviation`
+   * - ``--ci [NUM]``
+     - Show confidence interval as error bar to estimate uncertainty of point estimate 
+     - :ref:`confidence_interval`
    * - ``--orient {v,h}``
      - Orientation of plot.
        Allowed values: v = vertical, h = horizontal.
@@ -91,7 +102,7 @@ The output of the above command is written to ``bar.age.png``:
        :alt: Bar plot showing the mean of the age for the titanic data set
 
 The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the mean and error of ``age`` is shown for each value in the ``class`` feature:
+In the following example the mean of ``age`` is shown for each value in the ``class`` feature:
 
 .. code-block:: bash
 
@@ -130,7 +141,7 @@ Selecting features to plot
 Bar plots can be plotted for numerical features and optionally grouped by categorical features.
 
 If no categorical feature is specified, a single column bar plot will be generated showing
-the mean of the numerical feature.
+a summary (mean by default) of the numerical feature.
 
 .. note:: 
 
@@ -145,7 +156,7 @@ the mean of the numerical feature.
     the numerical feature is specified by ``-x``, and the (optional) categorical feature is specified
     by ``-y``.
 
-In the following example the mean and error of ``age`` is shown for each value in the ``class`` feature,
+In the following example the mean of ``age`` is shown for each value in the ``class`` feature,
 where the boxes are plotted horizontally:
 
 .. code-block:: bash
@@ -157,6 +168,68 @@ where the boxes are plotted horizontally:
        :height: 600px
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, shown horizontally
+
+.. _bar_estimator:
+
+Summary function
+================
+
+By default bar plots show the mean of the selected numerical feature. However alternative functions
+can be chosen using the ``--estimator`` argument.
+
+The allowed choices are: ``mean``, ``median``, ``max``, ``min``, ``sum``, ``std`` (standard deviation), ``var`` (variance).
+
+For example, the maximum ``age`` is shown for each value of ``class``: 
+
+.. code-block:: bash
+
+    hatch bar -y age -x class --estimator max < titanic.csv 
+
+.. image:: ../images/bar.class.age.max.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Bar plot showing the maximum age for each class in the titanic data set
+
+.. _standard_deviation:
+
+Standard deviaiton
+==================
+
+The standard deviation of the numerical feature can be shown as an error bar with the ``--std`` argument.
+
+For example the mean and standard deviation of ``age`` is shown for each value in the ``class`` feature:
+
+.. code-block:: bash
+
+    hatch bar -y age -x class --std < titanic.csv 
+
+.. image:: ../images/bar.class.age.std.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Bar plot showing the mean of age for each class in the titanic data set
+
+.. _confidence_interval:
+
+Confidence interval
+===================
+
+The confidence interval of the summary estimate can be shown as an error bar with the ``--ci`` argument.
+
+By default, if ``--ci`` is specified without a numerical argument, then the 95% confidence interval is shown, but this can be changed by supplying a specific numeric value.
+
+For example the mean of age and its 98% confidence interval is shown for each value in the ``class`` feature:
+
+.. code-block:: bash
+
+    hatch bar -y age -x class --ci 98 < titanic.csv 
+
+.. image:: ../images/bar.class.age.ci.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Bar plot showing the mean of age and 98% confidence interval for each class in the titanic data set
 
 .. _bar_order:
 

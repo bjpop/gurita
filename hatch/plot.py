@@ -68,10 +68,14 @@ class BarPlot(CommandBase, name="bar"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-            plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
+            plot_args.x_argument, plot_args.y_argument, plot_args.estimator,
+            plot_args.hue, plot_args.row, plot_args.col,
             plot_args.order, plot_args.hue_order, plot_args.orient,
             plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
             add_help=False)
+        group = parser.add_mutually_exclusive_group()
+        group.add_argument('--std', action='store_true', default=False, required=False, help=f'Show standard deviation of numerical feature as error bar')
+        group.add_argument('--ci', metavar='NUM', type=float, required=False, nargs='?', const=const.DEFAULT_CI, help=f'Show confidence interval as error bar to estimate uncertainty of point estimate')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -80,9 +84,15 @@ class BarPlot(CommandBase, name="bar"):
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }
         kwargs = {}
+        estimator_fun = utils.make_estimator(options.estimator)
+        error_indicator = options.ci
+        if options.std:
+            error_indicator = 'sd' 
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, estimator=estimator_fun,
+                ci=error_indicator,
+                col=options.col, row=options.row,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)

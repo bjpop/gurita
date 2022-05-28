@@ -65,6 +65,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#simple-example">Simple example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#selecting-features-to-plot">Selecting features to plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary-function">Summary function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-deviaiton">Standard deviaiton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#confidence-interval">Confidence interval</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#controlling-the-order-of-the-plotted-bar-columns">Controlling the order of the plotted bar columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#grouping-features-with-hue">Grouping features with hue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#log-scale-of-numerical-feature">Log scale of numerical feature</a></li>
@@ -144,7 +147,8 @@
              
   <section id="bar">
 <span id="id1"></span><h1>Bar<a class="headerlink" href="#bar" title="Permalink to this headline"></a></h1>
-<p>Bar plots show the point estimates of the central tendency (mean) of numerical features as boxes with error bars.</p>
+<p>Bar plots summarise a numerical feature as boxes with optional error bars.</p>
+<p>By default the numerical feature is summarised by its mean, but other summary functions can be chosen.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar &lt;arguments&gt;
 </pre></div>
 </div>
@@ -182,37 +186,49 @@
 <td><p>select feature for the Y axis</p></td>
 <td><p><a class="reference internal" href="#bar-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">{v,h}</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--estimator</span> <span class="pre">{mean,</span> <span class="pre">median,</span> <span class="pre">max,</span> <span class="pre">min,</span> <span class="pre">sum,</span> <span class="pre">std,</span> <span class="pre">var}</span></code></p></td>
+<td><p>Function to compute point estimate of numerical feature</p></td>
+<td><p><a class="reference internal" href="#bar-estimator"><span class="std std-ref">Summary function</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--std</span></code></p></td>
+<td><p>Show standard deviation of numerical feature as error bar</p></td>
+<td><p><a class="reference internal" href="#standard-deviation"><span class="std std-ref">Standard deviaiton</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--ci</span> <span class="pre">[NUM]</span></code></p></td>
+<td><p>Show confidence interval as error bar to estimate uncertainty of point estimate</p></td>
+<td><p><a class="reference internal" href="#confidence-interval"><span class="std std-ref">Confidence interval</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">{v,h}</span></code></p></td>
 <td><p>Orientation of plot.
 Allowed values: v = vertical, h = horizontal.
 Default: v.</p></td>
 <td><p><a class="reference internal" href="#bar-orient"><span class="std std-ref">Plot orientation</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
 <td><p>group features by hue</p></td>
 <td><p><a class="reference internal" href="#bar-hue"><span class="std std-ref">Grouping features with hue</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
 <td><p>order of hue features</p></td>
 <td><p><a class="reference internal" href="#bar-hueorder"><span class="std std-ref">Hue order</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
 <td><p>log scale X axis (only relevant with <code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">h</span></code></p></td>
 <td><p><a class="reference internal" href="#bar-log"><span class="std std-ref">Log scale of numerical feature</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logy</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--logy</span></code></p></td>
 <td><p>log scale Y axis</p></td>
 <td><p><a class="reference internal" href="#bar-log"><span class="std std-ref">Log scale of numerical feature</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--xlim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--xlim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
 <td><p>range limit X axis</p></td>
 <td><p><a class="reference internal" href="#bar-range"><span class="std std-ref">Range limits</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--ylim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ylim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
 <td><p>range limit Y axis</p></td>
 <td><p><a class="reference internal" href="#bar-range"><span class="std std-ref">Range limits</span></a></p></td>
 </tr>
-<tr class="row-even"><td><ul class="simple">
+<tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></li>
 </ul>
@@ -220,7 +236,7 @@ Default: v.</p></td>
 <td><p>feature to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#bar-facets"><span class="std std-ref">Facets</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><ul class="simple">
+<tr class="row-even"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></li>
 </ul>
@@ -228,7 +244,7 @@ Default: v.</p></td>
 <td><p>feature to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#bar-facets"><span class="std std-ref">Facets</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
 <td><p>wrap the facet column at this width, to span multiple rows</p></td>
 <td><p><a class="reference internal" href="#bar-facets"><span class="std std-ref">Facets</span></a></p></td>
 </tr>
@@ -252,7 +268,7 @@ Default: v.</p></td>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">bar.age.png</span></code>:</p>
 <a class="reference internal image-reference" href="_images/bar.age.png"><img alt="Bar plot showing the mean of the age for the titanic data set" class="align-center" src="_images/bar.age.png" style="width: 600px; height: 600px;" /></a>
 <p>The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the mean and error of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
+In the following example the mean of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -y age -x class &lt; titanic.csv
 </pre></div>
 </div>
@@ -275,7 +291,7 @@ arguments:</p>
 </div>
 <p>Bar plots can be plotted for numerical features and optionally grouped by categorical features.</p>
 <p>If no categorical feature is specified, a single column bar plot will be generated showing
-the mean of the numerical feature.</p>
+a summary (mean by default) of the numerical feature.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p id="bar-orient">By default the orientation of the bar plot is vertical. In this scenario
@@ -286,12 +302,42 @@ In this case the sense of the X and Y axes are swapped from the default, and thu
 the numerical feature is specified by <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and the (optional) categorical feature is specified
 by <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 </div>
-<p>In the following example the mean and error of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature,
+<p>In the following example the mean of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature,
 where the boxes are plotted horizontally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -x age -y class --orient h &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/bar.age.class.png"><img alt="Bar plot showing the mean of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/bar.age.class.png" style="width: 600px; height: 600px;" /></a>
+</section>
+<section id="summary-function">
+<span id="bar-estimator"></span><h2>Summary function<a class="headerlink" href="#summary-function" title="Permalink to this headline"></a></h2>
+<p>By default bar plots show the mean of the selected numerical feature. However alternative functions
+can be chosen using the <code class="docutils literal notranslate"><span class="pre">--estimator</span></code> argument.</p>
+<p>The allowed choices are: <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">median</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code> (standard deviation), <code class="docutils literal notranslate"><span class="pre">var</span></code> (variance).</p>
+<p>For example, the maximum <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value of <code class="docutils literal notranslate"><span class="pre">class</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -y age -x class --estimator max &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/bar.class.age.max.png"><img alt="Bar plot showing the maximum age for each class in the titanic data set" class="align-center" src="_images/bar.class.age.max.png" style="width: 600px; height: 600px;" /></a>
+</section>
+<section id="standard-deviaiton">
+<span id="standard-deviation"></span><h2>Standard deviaiton<a class="headerlink" href="#standard-deviaiton" title="Permalink to this headline"></a></h2>
+<p>The standard deviation of the numerical feature can be shown as an error bar with the <code class="docutils literal notranslate"><span class="pre">--std</span></code> argument.</p>
+<p>For example the mean and standard deviation of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -y age -x class --std &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/bar.class.age.std.png"><img alt="Bar plot showing the mean of age for each class in the titanic data set" class="align-center" src="_images/bar.class.age.std.png" style="width: 600px; height: 600px;" /></a>
+</section>
+<section id="confidence-interval">
+<span id="id2"></span><h2>Confidence interval<a class="headerlink" href="#confidence-interval" title="Permalink to this headline"></a></h2>
+<p>The confidence interval of the summary estimate can be shown as an error bar with the <code class="docutils literal notranslate"><span class="pre">--ci</span></code> argument.</p>
+<p>By default, if <code class="docutils literal notranslate"><span class="pre">--ci</span></code> is specified without a numerical argument, then the 95% confidence interval is shown, but this can be changed by supplying a specific numeric value.</p>
+<p>For example the mean of age and its 98% confidence interval is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -y age -x class --ci <span class="m">98</span> &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/bar.class.age.ci.png"><img alt="Bar plot showing the mean of age and 98% confidence interval for each class in the titanic data set" class="align-center" src="_images/bar.class.age.ci.png" style="width: 600px; height: 600px;" /></a>
 </section>
 <section id="controlling-the-order-of-the-plotted-bar-columns">
 <span id="bar-order"></span><h2>Controlling the order of the plotted bar columns<a class="headerlink" href="#controlling-the-order-of-the-plotted-bar-columns" title="Permalink to this headline"></a></h2>

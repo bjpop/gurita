@@ -9,6 +9,7 @@ Portability : POSIX
 
 import pkg_resources
 import matplotlib.pyplot as plt
+import numpy as np
 
 PROGRAM_NAME = "hatch"
 
@@ -65,6 +66,8 @@ DEFAULT_HISTOGRAM_ELEMENT = 'bars'
 DEFAULT_HISTOGRAM_STAT = 'count'
 DEFAULT_GROUPBY_FUN = 'count'
 DEFAULT_SEP = ','
+DEFAULT_ESTIMATOR = 'mean'
+DEFAULT_CI = 95
 
 #ALLOWED_FILETYPES = ['csv', 'tsv', 'CSV', 'TSV']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -86,6 +89,9 @@ ALLOWED_DROPNA_HOW = ['any', 'all']
 ALLOWED_HISTOGRAM_ELEMENTS = ['bars', 'step', 'poly']
 ALLOWED_HISTOGRAM_STATS = ['count', 'frequency', 'probability', 'proportion', 'percent', 'density']
 ALLOWED_GROUPBY_FUN = ['count', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'mode', 'abs', 'prod', 'std', 'var', 'sem', 'skew', 'kurt', 'quantile', 'cumsum', 'cumprod', 'cummax', 'cummin']
+ESTIMATOR_FUNS = {'mean': np.mean, 'median': np.median, 'max': np.max, 'min': np.min,
+  'sum': np.sum, 'std': np.std, 'var': np.var }
+ALLOWED_ESTIMATORS = list(ESTIMATOR_FUNS.keys())
 
 
 try:

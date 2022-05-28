@@ -171,3 +171,6 @@ strip.add_argument('--strip', action='store_true', default=False, help=f'Overlay
 
 nooutliers = argparse.ArgumentParser(add_help=False)
 nooutliers.add_argument('--nooutliers', action='store_true', default=False, help=f'Do not display outlier data.')
+
+estimator = argparse.ArgumentParser(add_help=False)
+estimator.add_argument('--estimator', metavar='FUN', default=const.DEFAULT_ESTIMATOR, required=False, choices=const.ALLOWED_ESTIMATORS, help=f'Function to compute point estimate of numerical feature. Choices: %(choices)s. Default: %(default)s.')
