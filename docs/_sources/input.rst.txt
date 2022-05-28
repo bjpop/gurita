@@ -28,8 +28,8 @@ In the above example data is read from the input file and then passed along the 
 When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
 ``--sep <str>`` option as noted below.
 
-Specifying the field separator explicitly 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Specifying the field separator 
+------------------------------
 
 The ``in`` command lets you specify the field separator explicitly. This will override any default behaviour that Hatch would otherwise have when choosing what separator to use. 
 
@@ -179,8 +179,35 @@ or, of course, you could achieve the same result with input redirection, again d
 Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
 the type using: ``in --sep <str>``
 
+
+Ignoring comments in the input data
+-----------------------------------
+
+Hatch optionally supports comments in input data files where the comment starts with a special character, such as a hash, and continues until the end of the line.
+
+This feature is enabled for the ``in`` command with the ``--comment <char>`` option, where ``<char>`` is a single character that marks the start of a comment.
+
+For example, the following CSV data contains two comments, each starting with a hash character.
+
+.. code-block:: text
+
+    sepal_length,sepal_width,petal_length,petal_width,species
+    # This is a comment
+    5.1,3.5,1.4,0.2,setosa
+    4.9,3.0,1.4,0.2,virginica# This is also a comment
+    4.7,3.2,1.3,0.2,setosa
+
+Such an input file can be read like so:
+
+.. code-block:: text
+
+    cat iris.csv | hatch in --comment '#' ... 
+
+Be sure to enclose the comment marker in quotes to ensure that is is not interpreted as having a special meaning to the shell.
+For instance, the hash character ``#`` indicates a comment in most Unix command line shells. Enclosing it in quotes prevents it from being interpreted this way. 
+
 Reading input from more than one file in a command chain
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------------
 
 You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input). 
 

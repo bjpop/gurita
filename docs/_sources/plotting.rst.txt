@@ -119,3 +119,15 @@ The plot will appear in an interactive window like so:
        :height: 600px
        :align: center
        :alt: Interactive plot window 
+
+Note that interactive plot commands pause the computation in a command chain. This is significant when the interactive plot is not the last command in the chain. For example, suppose you have a command like so:
+
+.. code-block:: text
+
+    hatch ... + count -x class --show + ... <rest of the command chain>
+
+In this circumstance the command chain will pause while the interactive ``count`` plot is 
+open. The rest of the command chain will resume when the plot is closed. 
+
+Therefore, if a command chain contains multiple interactive plots, only one plot will be shown at a time.
+

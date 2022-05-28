@@ -49,7 +49,7 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul class="current">
@@ -143,7 +143,7 @@
              
   <section id="saving-and-viewing-plots">
 <span id="plotting"></span><h1>Saving and viewing plots<a class="headerlink" href="#saving-and-viewing-plots" title="Permalink to this headline"></a></h1>
-<p>Hatch provides several <a class="reference internal" href="command_line_syntax.html#plotting-command-list"><span class="std std-ref">plotting commands</span></a> for visualising data as plots.</p>
+<p>Hatch provides several <a class="reference internal" href="list_of_commands.html#plotting-command-list"><span class="std std-ref">plotting commands</span></a> for visualising data as plots.</p>
 <p>Plots can be saved to files or viewed interactively.</p>
 <section id="plots-are-saved-to-a-file-by-default">
 <h2>Plots are saved to a file by default<a class="headerlink" href="#plots-are-saved-to-a-file-by-default" title="Permalink to this headline"></a></h2>
@@ -225,6 +225,13 @@ file with the new plot. This will lose old contents of the file.</p>
 </div>
 <p>The plot will appear in an interactive window like so:</p>
 <a class="reference internal image-reference" href="_images/hatch_interactive_plot.png"><img alt="Interactive plot window" class="align-center" src="_images/hatch_interactive_plot.png" style="width: 600px; height: 600px;" /></a>
+<p>Note that interactive plot commands pause the computation in a command chain. This is significant when the interactive plot is not the last command in the chain. For example, suppose you have a command like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + count -x class --show + ... &lt;rest of the command chain&gt;
+</pre></div>
+</div>
+<p>In this circumstance the command chain will pause while the interactive <code class="docutils literal notranslate"><span class="pre">count</span></code> plot is
+open. The rest of the command chain will resume when the plot is closed.</p>
+<p>Therefore, if a command chain contains multiple interactive plots, only one plot will be shown at a time.</p>
 </section>
 </section>
 

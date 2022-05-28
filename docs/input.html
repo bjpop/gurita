@@ -49,21 +49,18 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reading input data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#input-from-a-named-file">Input from a named file</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#specifying-the-field-separator-explicitly">Specifying the field separator explicitly</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#input-from-a-named-file">Input from a named file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-the-field-separator">Specifying the field separator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#input-from-standard-input-stdin">Input from standard input (stdin)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#implicit-csv-input-from-standard-input-stdin">Implicit CSV input from standard input (stdin)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reading-input-from-more-than-one-file-in-a-command-chain">Reading input from more than one file in a command chain</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#implicit-csv-input-from-standard-input-stdin">Implicit CSV input from standard input (stdin)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ignoring-comments-in-the-input-data">Ignoring comments in the input data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-input-from-more-than-one-file-in-a-command-chain">Reading input from more than one file in a command chain</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
@@ -161,8 +158,9 @@ For example, if you wanted to generate a count plot of the <code class="docutils
 <p>In the above example data is read from the input file and then passed along the <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a> from left to right into the <code class="docutils literal notranslate"><span class="pre">count</span></code> command to make a plot.</p>
 <p>When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
 <code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
-<section id="specifying-the-field-separator-explicitly">
-<h3>Specifying the field separator explicitly<a class="headerlink" href="#specifying-the-field-separator-explicitly" title="Permalink to this headline"></a></h3>
+</section>
+<section id="specifying-the-field-separator">
+<h2>Specifying the field separator<a class="headerlink" href="#specifying-the-field-separator" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command lets you specify the field separator explicitly. This will override any default behaviour that Hatch would otherwise have when choosing what separator to use.</p>
 <p>Using a comma as the field separator:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;,&#39; ...
@@ -186,7 +184,6 @@ For example, if you wanted to generate a count plot of the <code class="docutils
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> forces Hatch to use the specified field separator regardless of the filename extension or contents of the file.</p>
 </div>
-</section>
 </section>
 <section id="input-from-standard-input-stdin">
 <h2>Input from standard input (stdin)<a class="headerlink" href="#input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
@@ -265,8 +262,28 @@ not apply when reading from standard input implicitly (as noted below).</p>
 </div>
 <p>Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
 the type using: <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code></p>
+</section>
+<section id="ignoring-comments-in-the-input-data">
+<h2>Ignoring comments in the input data<a class="headerlink" href="#ignoring-comments-in-the-input-data" title="Permalink to this headline"></a></h2>
+<p>Hatch optionally supports comments in input data files where the comment starts with a special character, such as a hash, and continues until the end of the line.</p>
+<p>This feature is enabled for the <code class="docutils literal notranslate"><span class="pre">in</span></code> command with the <code class="docutils literal notranslate"><span class="pre">--comment</span> <span class="pre">&lt;char&gt;</span></code> option, where <code class="docutils literal notranslate"><span class="pre">&lt;char&gt;</span></code> is a single character that marks the start of a comment.</p>
+<p>For example, the following CSV data contains two comments, each starting with a hash character.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+# This is a comment
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,virginica# This is also a comment
+4.7,3.2,1.3,0.2,setosa
+</pre></div>
+</div>
+<p>Such an input file can be read like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch in --comment &#39;#&#39; ...
+</pre></div>
+</div>
+<p>Be sure to enclose the comment marker in quotes to ensure that is is not interpreted as having a special meaning to the shell.
+For instance, the hash character <code class="docutils literal notranslate"><span class="pre">#</span></code> indicates a comment in most Unix command line shells. Enclosing it in quotes prevents it from being interpreted this way.</p>
+</section>
 <section id="reading-input-from-more-than-one-file-in-a-command-chain">
-<h3>Reading input from more than one file in a command chain<a class="headerlink" href="#reading-input-from-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h3>
+<h2>Reading input from more than one file in a command chain<a class="headerlink" href="#reading-input-from-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h2>
 <p>You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input).</p>
 <p>For example you can do something like this:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + ... + in iris.csv + ...
@@ -285,7 +302,6 @@ the type using: <code class="docutils literal notranslate"><span class="pre">in<
 <li><p>input is read from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file, this becomes the new current data set, replacing the titanic data set, which is now discarded</p></li>
 <li><p>a count plot is created using the <code class="docutils literal notranslate"><span class="pre">species</span></code> column for the X axis from the current (iris) data set, generating an output file called <code class="docutils literal notranslate"><span class="pre">count.species.png</span></code></p></li>
 </ol>
-</section>
 </section>
 </section>
 

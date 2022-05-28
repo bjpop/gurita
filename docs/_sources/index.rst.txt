@@ -128,6 +128,7 @@ Command chaining allows complex transformations to be combined together and make
    :hidden:
 
    command_line_syntax 
+   list_of_commands 
 
 .. toctree::
    :caption: Input and Output 

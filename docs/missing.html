@@ -49,7 +49,7 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html#list-of-commands">List of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
 <ul class="current">
@@ -63,6 +63,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#missing-values-in-output-data">Missing values in output data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dropping-rows-or-columns-containing-missing-values">Dropping rows or columns containing missing values</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
@@ -193,6 +194,31 @@ underscores:</p>
 5.1,3.5,1.4,0.2,_
 4.9,3.0,1.4,0.2,virginica
 4.7,_,1.3,0.2,setosa
+</pre></div>
+</div>
+</section>
+<section id="dropping-rows-or-columns-containing-missing-values">
+<h2>Dropping rows or columns containing missing values<a class="headerlink" href="#dropping-rows-or-columns-containing-missing-values" title="Permalink to this headline"></a></h2>
+<p>The <a class="reference internal" href="dropna.html"><span class="doc">dropna</span></a> command allows you to remove rows or columns that contain missing values based on certain criteria.</p>
+<p>Following from previous examples we assume the existence of a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code> that contains some missing values.</p>
+<p>Drop rows that contain at least one missing value:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna
+</pre></div>
+</div>
+<p>Drop rows where <em>all</em> values are missing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --how all
+</pre></div>
+</div>
+<p>Drop rows with missing values in columns <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> or <code class="docutils literal notranslate"><span class="pre">species</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --columns sepal_width species
+</pre></div>
+</div>
+<p>Drop columns that contain at least one missing value:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --axis columns
+</pre></div>
+</div>
+<p>Drop columns where <em>all</em> values are missing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --axis columns --how all
 </pre></div>
 </div>
 </section>
