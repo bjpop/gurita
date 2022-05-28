@@ -87,22 +87,7 @@ Similar functionality to bar plots are provided by:
 Simple example
 ==============
 
-Bar plot the mean ``age`` of passengers in the ``titanic.csv`` input file:
-
-.. code-block:: bash
-
-    hatch bar -y age < titanic.csv 
-
-The output of the above command is written to ``bar.age.png``:
-
-.. image:: ../images/bar.age.png
-       :width: 600px
-       :height: 600px
-       :align: center
-       :alt: Bar plot showing the mean of the age for the titanic data set
-
-The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the mean of ``age`` is shown for each value in the ``class`` feature:
+Bar plot the mean ``age`` of passengers for each value of ``class`` in the ``titanic.csv`` input file:
 
 .. code-block:: bash
 

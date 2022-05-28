@@ -261,14 +261,7 @@ Default: v.</p></td>
 </div></blockquote>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Bar plot the mean <code class="docutils literal notranslate"><span class="pre">age</span></code> of passengers in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -y age &lt; titanic.csv
-</pre></div>
-</div>
-<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">bar.age.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/bar.age.png"><img alt="Bar plot showing the mean of the age for the titanic data set" class="align-center" src="_images/bar.age.png" style="width: 600px; height: 600px;" /></a>
-<p>The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the mean of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
+<p>Bar plot the mean <code class="docutils literal notranslate"><span class="pre">age</span></code> of passengers for each value of <code class="docutils literal notranslate"><span class="pre">class</span></code> in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch bar -y age -x class &lt; titanic.csv
 </pre></div>
 </div>
