@@ -33,6 +33,11 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
        * ``--yaxis FEATURE [FEATURE ...]``
      - select feature for the Y axis
      - :ref:`bar_feature_selection`
+   * - ``--orient {v,h}``
+     - Orientation of plot.
+       Allowed values: v = vertical, h = horizontal.
+       Default: v.
+     - :ref:`Plot orientation <bar_orient>`
    * - ``--estimator {mean, median, max, min, sum, std, var}``
      - Function to compute point estimate of numerical feature
      - :ref:`bar_estimator`
@@ -42,11 +47,6 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--ci [NUM]``
      - Show confidence interval as error bar to estimate uncertainty of point estimate 
      - :ref:`confidence_interval`
-   * - ``--orient {v,h}``
-     - Orientation of plot.
-       Allowed values: v = vertical, h = horizontal.
-       Default: v.
-     - :ref:`Plot orientation <bar_orient>`
    * - ``--hue FEATURE [FEATURE ...]``
      - group features by hue
      - :ref:`bar_hue`
