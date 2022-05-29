@@ -4,7 +4,7 @@ Box
 ***
 
 Box (or box-and-whisker) plots show the distribution of values in a numerical feature optionally grouped by categorical features.
-The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate points.
+The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate diamond shaped points.
 
 .. code-block:: bash
 
@@ -13,8 +13,9 @@ The distribution of a numerical feature is displayed using the inter-quartile ra
 Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="box"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
@@ -22,15 +23,23 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``-h``
      - display help
      - :ref:`box_help`
-   * - ``-x FEATURE, --xaxis FEATURE``
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
      - :ref:`box_feature_selection`
-   * - ``-y FEATURE, --yaxis FEATURE``
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
      - :ref:`box_feature_selection`
    * - ``--orient {v,h}``
      - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
      - :ref:`Box orientation <box_orient>`
+   * - ``--nooutliers``
+     - do not display outlier data
+     - :ref:`box_no_outliers`
+   * - ``--strip``
+     - overlay data points using a strip plot
+     - :ref:`box_strip`
    * - ``--order FEATURE [FEATURE ..]``
      - control the order of the plotted columns
      - :ref:`Box order <box_order>`
@@ -40,6 +49,9 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--hueorder FEATURE [FEATURE ...]``
      - order of hue features
      - :ref:`Hue order <box_hueorder>`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`box_log`
    * - ``--logy``
      - log scale Y axis 
      - :ref:`box_log`
@@ -49,10 +61,12 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`box_range`
-   * - ``--row FEATURE, -r FEATURE``
+   * - * ``--row FEATURE``
+       * ``-r FEATURE``
      - feature to use for facet rows 
      - :ref:`box_facets`
-   * - ``--col FEATURE, -c FEATURE``
+   * - * ``--col FEATURE``
+       * ``-c FEATURE``
      - feature to use for facet columns 
      - :ref:`box_facets`
    * - ``--colwrap INT``
@@ -73,11 +87,11 @@ Box plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
-    hatch box -y age -- titanic.csv 
+    hatch box -y age < titanic.csv 
 
-The output of the above command is written to ``titanic.age.box.png``:
+The output of the above command is written to ``box.age.png``:
 
-.. image:: ../images/titanic.age.box.png
+.. image:: ../images/box.age.png
        :width: 600px
        :height: 600px
        :align: center
@@ -88,11 +102,11 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch box -y age -x class -- titanic.csv 
+    hatch box -y age -x class < titanic.csv 
 
-The output of the above command is written to ``titanic.age.class.box.png``:
+The output of the above command is written to ``box.class.age.png``:
 
-.. image:: ../images/titanic.age.class.box.png
+.. image:: ../images/box.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -143,13 +157,52 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch box -x age -y class --orient h -- titanic.csv
+    hatch box -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/titanic.class.age.box.horizontal.png
+.. image:: ../images/box.age.class.png
        :width: 600px
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, shown horizontally
+
+.. _box_no_outliers:
+
+Turn off display of outlier points
+==================================
+
+Outlier data points are shown in box plots by default as small diamonds. This can be turned off with the ``--nooutliers`` option.
+
+This can be particularly useful in conjunction with ``--strip``, because the outlier points will also be shown as circular dots, and it can be confusing to see both
+displayed at the same time.
+
+.. code-block:: bash
+
+    hatch box -y age -x class --nooutliers < titanic.csv 
+
+.. image:: ../images/box.class.age.nooutliers.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, with display of outlier points turned off
+
+.. _box_strip:
+
+Overlay data points using a strip plot
+======================================
+
+Individual data points can be overlaid on top of the box plot using the ``--strip`` option.
+
+.. code-block:: bash
+
+    hatch box -y age -x class --strip --nooutliers < titanic.csv 
+
+Note that in the example above we also turn off the display of outlier points with ``--nooutliers``.
+
+.. image:: ../images/box.class.age.strip.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, with data points overlaid on top as a strip plot, and outliers turned off
 
 .. _box_order:
 
@@ -167,9 +220,9 @@ In the following example the box columns of the ``class`` feature are displayed 
 
 .. code-block:: bash
 
-    hatch box -y age -x class --order First Second Third -- titanic.csv
+    hatch box -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/titanic.age.class.box.order.png
+.. image:: ../images/box.class.age.order.png
        :width: 600px
        :height: 600px
        :align: center
@@ -190,9 +243,9 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch box -y age -x class --hue sex -- titanic.csv
+    hatch box -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.box.png
+.. image:: ../images/box.class.age.sex.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -207,9 +260,9 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch box -y age -x class --hue sex --hueorder female male -- titanic.csv
+    hatch box -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.box.hueorder.png
+.. image:: ../images/box.class.age.sex.hueorder.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -220,9 +273,9 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. code-block:: bash
 
-    hatch box -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+    hatch box -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.box.order.hueorder.png
+.. image:: ../images/box.class.age.sex.order.hueorder.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -247,7 +300,13 @@ For example, you can display a log scale box plot for the ``age`` feature groupe
 
 .. code-block:: bash
 
-    hatch box -y age -x class --logy -- titanic.csv 
+    hatch box -y age -x class --logy < titanic.csv 
+
+.. image:: ../images/box.class.age.logy.png 
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
 
 .. _box_range:
 
@@ -270,7 +329,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch box -y age -x class --ylim 10 30 -- titanic.csv
+    hatch box -y age -x class --ylim 10 30 < titanic.csv
 
 .. _box_facets:
 
@@ -287,3 +346,15 @@ Box plots can be further divided into facets, generating a matrix of box plots, 
 further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+The follow command creates a faceted box plot where the ``sex`` feature is used to determine the facet columns:
+
+.. code-block:: bash
+
+    hatch box -y age -x class --col sex < titanic.csv
+
+.. image:: ../images/box.class.age.sex.facet.png
+       :width: 600px
+       :height: 300px
+       :align: center
+       :alt: Box plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets

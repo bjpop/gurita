@@ -217,14 +217,14 @@
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">titanic.age.box.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/titanic.age.box.png"><img alt="Box plot showing the distribution of age for the titanic data set" class="align-center" src="_images/titanic.age.box.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.age.box.png"><img alt="Box plot showing the distribution of age for the titanic data set" class="align-center" src="../images/titanic.age.box.png" style="width: 600px; height: 600px;" /></a>
 <p>The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class -- titanic.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">titanic.age.class.box.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/titanic.age.class.box.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set" class="align-center" src="_images/titanic.age.class.box.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.age.class.box.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set" class="align-center" src="../images/titanic.age.class.box.png" style="width: 600px; height: 600px;" /></a>
 </section>
 <section id="getting-help">
 <span id="box-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
@@ -258,7 +258,7 @@ where the boxes are plotted horizontally:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -x age -y class --orient h -- titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.class.age.box.horizontal.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/titanic.class.age.box.horizontal.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.class.age.box.horizontal.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="../images/titanic.class.age.box.horizontal.png" style="width: 600px; height: 600px;" /></a>
 </section>
 <section id="controlling-the-order-of-the-plotted-box-columns">
 <span id="box-order"></span><h2>Controlling the order of the plotted box columns<a class="headerlink" href="#controlling-the-order-of-the-plotted-box-columns" title="Permalink to this headline"></a></h2>
@@ -271,7 +271,7 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --order First Second Third -- titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.box.order.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/titanic.age.class.box.order.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.age.class.box.order.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="../images/titanic.age.class.box.order.png" style="width: 600px; height: 600px;" /></a>
 </section>
 <section id="grouping-features-with-hue">
 <span id="box-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
@@ -283,20 +283,20 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --hue sex -- titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.box.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/titanic.age.class.sex.box.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.age.class.sex.box.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="../images/titanic.age.class.sex.box.png" style="width: 600px; height: 600px;" /></a>
 <p id="box-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
 <p>In the following example the <code class="docutils literal notranslate"><span class="pre">sex</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">female</span></code>, <code class="docutils literal notranslate"><span class="pre">male</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --hue sex --hueorder female male -- titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.box.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex" class="align-center" src="_images/titanic.age.class.sex.box.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.age.class.sex.box.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex" class="align-center" src="../images/titanic.age.class.sex.box.hueorder.png" style="width: 600px; height: 600px;" /></a>
 <p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
 the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical features:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.box.order.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex" class="align-center" src="_images/titanic.age.class.sex.box.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="../images/titanic.age.class.sex.box.order.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex" class="align-center" src="../images/titanic.age.class.sex.box.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
 </section>
 <section id="log-scale-of-numerical-distribution">
 <span id="box-log"></span><h2>Log scale of numerical distribution<a class="headerlink" href="#log-scale-of-numerical-distribution" title="Permalink to this headline"></a></h2>
