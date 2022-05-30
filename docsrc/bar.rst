@@ -25,12 +25,12 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``-h`` 
      - display help
      - :ref:`bar_help`
-   * - * ``-x FEATURE [FEATURE ...]``
-       * ``--xaxis FEATURE [FEATURE ...]``
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
      - :ref:`bar_feature_selection`
-   * - * ``-y FEATURE [FEATURE ...]``
-       * ``--yaxis FEATURE [FEATURE ...]``
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
      - :ref:`bar_feature_selection`
    * - ``--orient {v,h}``
@@ -65,12 +65,12 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`bar_range`
-   * - * ``--row FEATURE [FEATURE ...]``
-       * ``-r FEATURE [FEATURE ...]``
+   * - * ``--row FEATURE``
+       * ``-r FEATURE``
      - feature to use for facet rows 
      - :ref:`bar_facets`
-   * - * ``--col FEATURE [FEATURE ...]``
-       * ``-c FEATURE [FEATURE ...]``
+   * - * ``--col FEATURE``
+       * ``-c FEATURE``
      - feature to use for facet columns 
      - :ref:`bar_facets`
    * - ``--colwrap INT``

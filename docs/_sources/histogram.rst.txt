@@ -5,15 +5,16 @@ Histogram
 
 Plot distributions of selected numerical or categorical features as histograms.
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch hist <arguments> 
 
 Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated/seaborn.displot.html>`_ library function, using the ``kind="hist"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 20 20 20 
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
@@ -21,10 +22,12 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
    * - ``-h``
      - display help 
      - :ref:`hist_help`
-   * - ``-x FEATURE, --xaxis FEATURE``
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis 
      - :ref:`hist_feature_selection`
-   * - ``-y FEATURE, --yaxis FEATURE`` 
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE`` 
      - select feature for the Y axis 
      - :ref:`hist_feature_selection`
    * - ``--bins NUM``
@@ -39,9 +42,21 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
    * - ``--hue FEATURE``
      - group features by hue
      - :ref:`hist_hue`
+   * - ``--stat {count,frequency,probability,proportion,percent,density}``
+     - Statistic to use for each bin (default: count) 
+     - :ref:`hist_stat`
+   * - ``--indnorm``
+     - normalise each histogram in the plot independently, otherwise normalise over the full dataset 
+     - :ref:`hist_indnorm`
    * - ``--kde``
      - overlay a kernel density estimate (kde) as a line 
      - :ref:`hist_kde`
+   * - ``--nofill``
+     - use unfilled histogram bars instead of solid coloured bars 
+     - :ref:`hist_nofill`
+   * - ``--element {bars,step,poly}``
+     - style of histogram bars (default is bars)
+     - :ref:`hist_element`
    * - ``--logx``
      - log scale X axis 
      - :ref:`hist_log`
@@ -54,10 +69,12 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`hist_range`
-   * - ``-r FEATURE, --row FEATURE``
+   * - * ``-r FEATURE``
+       * ``--row FEATURE``
      - feature to use for facet rows 
      - :ref:`hist_facets`
-   * - ``-c FEATURE, --col FEATURE``
+   * - * ``-c FEATURE``
+       * ``--col FEATURE``
      - feature to use for facet columns 
      - :ref:`hist_facets`
    * - ``--colwrap INT``
@@ -72,13 +89,13 @@ Simple examples
 
 Plot a histogram of the ``tip`` amount from the ``tips.csv`` input file:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip -- tips.csv
+    hatch hist -x tip < tips.csv
 
-The output of the above command is written to ``tips.tip.hist.png``:
+The output of the above command is written to ``hist.tip.png``:
 
-.. image:: ../images/tips.tip.hist.png
+.. image:: ../images/hist.tip.png
        :width: 600px
        :height: 600px
        :align: center
@@ -87,18 +104,17 @@ The output of the above command is written to ``tips.tip.hist.png``:
 
 Plot a count of the different categorical values in the ``day`` feature:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x day -- tips.csv
+    hatch hist -x day < tips.csv
 
-The output of the above command is written to ``tips.day.hist.png``:
+The output of the above command is written to ``hist.day.png``:
 
-.. image:: ../images/tips.day.hist.png
+.. image:: ../images/hist.day.png
        :width: 600px
        :height: 600px
        :align: center
        :alt: Histogram plot showing the count of the different categorical values in the day feature 
-
 
 .. _hist_help:
 
@@ -108,7 +124,7 @@ Getting help
 The full set of command line arguments for histograms can be obtained with the ``-h`` or ``--help``
 arguments:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch hist -h
 
@@ -140,11 +156,11 @@ If both ``-x`` and ``-y`` are both specified then a heatmap will be plotted.
 See :ref:`the example <hist_example>` above for a vertical axis plot.
 For comparison, the following command uses ``-y tip`` to plot a histogram of ``tip`` horizontally:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -y tip -- tips.csv
+    hatch hist -y tip < tips.csv
 
-.. image:: ../images/tips.tip.hist.y.png
+.. image:: ../images/hist.tip.y.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -159,15 +175,15 @@ Bivariate histograms (two features) can be plotted by specifying both ``-x`` and
 
 In the following example the distribution of ``tip`` is compared to the distribution of ``total_bill``. The result is shown as a heatmap:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip -y total_bill -- tips.csv 
+    hatch hist -x tip -y total_bill < tips.csv 
 
-.. image:: ../images/tips.total_bill.tip.hist.png
+.. image:: ../images/hist.tip.total_bill.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram plot showing the distribution of tip against total_bill 
+       :alt: Bivariate histogram plot showing the distribution of tip against total_bill 
 
 Bivariate histograms also work with categorical variables and combinations of numerical and categorical variables.
 
@@ -182,15 +198,15 @@ selected feature.
 However, this can be overridden by specifying the required number of bins to use with the ``--bins`` 
 argument like so:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --bins 5 -- tips.csv
+    hatch hist -x tip --bins 5 < tips.csv
 
-.. image:: ../images/tips.tip.hist.bins5.png
+.. image:: ../images/hist.tip.bins5.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using 10 bins
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using 5 bins 
 
 .. _hist_binwidth:
 
@@ -203,11 +219,11 @@ selected feature.
 However, this can be overridden by specifying the required bin width to use with the ``--binwidth`` 
 argument like so:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --binwidth 3 -- tips.csv
+    hatch hist -x tip --binwidth 3 < tips.csv
 
-.. image:: ../images/tips.tip.hist.binwidth3.png
+.. image:: ../images/hist.tip.binwidth3.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -220,17 +236,13 @@ Note that ``--binwidth`` overrides the ``--bins`` parameter.
 Cumulative histograms 
 =====================
 
-.. code-block:: 
-
-  --cumulative          Generate cumulative histogram
-
 Cumulative histograms can be plotted with the ``--cumulative`` argument.  
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --cumulative -- tips.csv
+    hatch hist -x tip --cumulative < tips.csv
 
-.. image:: ../images/tips.tip.hist.cumulative.png
+.. image:: ../images/hist.tip.cumulative.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -251,11 +263,11 @@ In the following example the distribution of distribution of the ``tip`` feature
 is divided into two subsets based on the categorical ``smoker`` feature. Each
 subset is plotted as its own histogram, layered on top of each other:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --hue smoker -- tips.csv  
+    hatch hist -x tip --hue smoker < tips.csv  
 
-.. image:: ../images/tips.tip.smoker.hist.layer.png
+.. image:: ../images/hist.tip.smoker.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -268,11 +280,11 @@ The default behaviour is to layer overlapping histograms on top of each other, a
 The ``--multiple`` parameter lets you choose alternative ways to show overlapping histograms. The example below shows the
 two histograms stacked on top of each other:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --hue smoker --multiple stack -- tips.csv  
+    hatch hist -x tip --hue smoker --multiple stack < tips.csv  
 
-.. image:: ../images/tips.tip.smoker.hist.stack.png
+.. image:: ../images/hist.tip.smoker.stacked.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -282,11 +294,11 @@ The ``--multiple`` paramter supports the following values: ``layer`` (default), 
 
 The following example shows the effect of ``--multiple dodge``, where categorical fields are shown next to each other:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --hue smoker --multiple dodge -- tips.csv  
+    hatch hist -x tip --hue smoker --multiple dodge < tips.csv  
 
-.. image:: ../images/tips.tip.smoker.hist.dodge.png
+.. image:: ../images/hist.tip.smoker.dodge.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -294,36 +306,139 @@ The following example shows the effect of ``--multiple dodge``, where categorica
 
 The following example shows the effect of ``--multiple fill``, where counts are normalised to a proportion, and bars are filled so that all categories sum to 1:
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --hue smoker --multiple fill -- tips.csv  
+    hatch hist -x tip --hue smoker --multiple fill < tips.csv  
 
-.. image:: ../images/tips.tip.smoker.hist.fill.png
+.. image:: ../images/hist.tip.smoker.fill.png 
        :width: 600px
        :height: 600px
        :align: center
        :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms filled to proportions 
+
+.. _hist_stat:
+
+Histogram statistic
+===================
+
+By default histograms show a count of the number of values in each bin. However this can be changed with the ``--stat {count,frequency,probability,proportion,percent,density}``
+argument
+
+.. code-block:: text
+
+    hatch hist -x tip --stat proportion < tips.csv
+
+.. image:: ../images/hist.tip.proportion.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin 
+
+.. _hist_indnorm:
+
+Independent normalised statistics
+=================================
+
+The ``--stat`` argument allows the use of the following normalising statistics:
+
+* probability
+* proportion (same as probability)
+* percent
+* density
+
+In plots with mutliple histograms for categorical subsets using ``--hue``, by default these statistics are normalised across the entire dataset.
+This behaviour can be changed by ``--indnorm`` such that the normalisation happens *within* each categorical subset.
+
+Compare the following plots that show a histograms of the ``tip`` feature for each value of ``smoker`` using a ``proportion`` as the statistic.
+
+In the example below the default normalisation occurs, across the entire dataset:
+
+.. code-block:: text
+
+    hatch hist -x tip --hue smoker --stat proportion --multiple dodge < tips.csv 
+
+.. image:: ../images/hist.tip.proportion.smoker.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin and global normalisation
+
+And now the same command as above, but with the ``--indnorm`` argument supplied, so that each value of ``smoker`` is normalised independently:
+
+.. code-block:: text
+
+    hatch hist -x tip --hue smoker --stat proportion --multiple dodge --indnorm < tips.csv 
+
+.. image:: ../images/hist.tip.proportion.smoker.indnorm.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin and indepdendent normalisation
 
 .. _hist_kde:
 
 Kernel density estimate
 =======================
 
-.. code-block:: 
-
-  --kde                 Plot a kernel density estimate for the distribution and show as a line 
-
 A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimation>`_ can be plotted with the ``--kde`` argument.   
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --kde -- tips.csv
+    hatch hist -x tip --kde < tips.csv
 
-.. image:: ../images/tips.tip.hist.kde.png
+.. image:: ../images/hist.tip.kde.png 
        :width: 600px
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a kernel density overlaid as a line 
+
+.. _hist_nofill:
+
+Unfilled histogram bars 
+=======================
+
+By default histogram bars are shown with solid filled bars. This can be changed with ``--nofill`` which uses unfilled bars instead:
+
+.. code-block:: text
+
+    hatch hist -x tip --nofill < tips.csv
+
+.. image:: ../images/hist.tip.nofill.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set with unfilled bars
+
+.. _hist_element:
+
+Visual style of univariate histograms
+=====================================
+
+By default univariate histograms are visualised as bars. This can be changed with ``--element {bars,step,poly}`` which allows alternative renderings. 
+
+The example below shows the ``step`` visual style.
+
+.. code-block:: text
+
+    hatch hist -x tip --element step < tips.csv
+
+.. image:: ../images/hist.tip.step.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set using a step visualisation style 
+
+The example below shows the ``poly`` (polygon) visual style, with vertices in the center of each bin.
+
+.. code-block:: text
+
+    hatch hist -x tip --element poly < tips.csv
+
+.. image:: ../images/hist.tip.poly.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set using a polygon visualisation style 
 
 .. _hist_log:
 
@@ -337,9 +452,15 @@ Log scale of X and Y axes
 
 The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``.
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --logy -- tips.csv 
+    hatch hist -x tip --logy < tips.csv 
+
+.. image:: ../images/hist.tip.logy.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set with log scale on the Y axis 
 
 .. _hist_range:
 
@@ -354,9 +475,9 @@ Range limits
 The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --xlim 3 8 -- tips.csv 
+    hatch hist -x tip --xlim 3 8 < tips.csv 
 
 .. _hist_facets:
 
@@ -374,9 +495,12 @@ further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
 
-.. code-block:: bash
+.. code-block:: text
 
-    hatch hist -x tip --col day -- tips.csv 
+    hatch hist -x tip --col day < tips.csv 
 
-.. image:: ../images/tips.tip.hist.col.day.png
+.. image:: ../images/hist.tip.day.png 
+       :width: 600px
+       :height: 300px
+       :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a column for each day 

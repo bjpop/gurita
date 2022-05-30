@@ -445,13 +445,17 @@ class HistogramPlot(CommandBase, name="hist"):
             log_axes[1] = True 
             del options.logy
         kwargs['log_scale'] = tuple(log_axes) 
+        kwargs['element'] = options.element
+        kwargs['fill'] = not(options.nofill)
+        if options.xaxis is not None and options.yaxis is not None:
+            # element and fill are only defined for univariate data
+            kwargs.pop('element', None)
+            kwargs.pop('fill', None)
         graph = sns.displot(kind='hist', data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
-                element=options.element,
-                fill=not(options.nofill),
                 stat=options.stat,
                 common_norm=not(options.indnorm),
                 facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
