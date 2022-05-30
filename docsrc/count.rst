@@ -3,7 +3,7 @@
 Count 
 *****
 
-Count plots show the frequency of values in categorical features using bars.
+Count plots show the frequency of values within categorical features using bars.
 
 .. code-block:: bash
 
@@ -12,8 +12,9 @@ Count plots show the frequency of values in categorical features using bars.
 Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="count"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
@@ -21,10 +22,12 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help 
      - :ref:`count_help`
-   * - ``-x FEATURE, --xaxis FEATURE``
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis 
      - :ref:`count_feature_selection`
-   * - ``-y FEATURE, --yaxis FEATURE`` 
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE`` 
      - select feature for the Y axis 
      - :ref:`count_feature_selection`
    * - ``--order FEATURE [FEATURE ...]`` 
@@ -48,10 +51,12 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`count_range`
-   * - ``--row FEATURE, -r FEATURE``
+   * - * ``--row FEATURE``
+       * ``-r FEATURE``
      - feature to use for facet rows
      - :ref:`count_facets`
-   * - ``--col FEATURE, -c FEATURE``
+   * - * ``--col FEATURE``
+       * ``-c FEATURE``
      - feature to use for facet columns
      - :ref:`count_facets`
    * - ``--colwrap INT``
@@ -67,11 +72,11 @@ Plot a count of the ``embark_town`` categorical feature from the ``titanic.csv``
 
 .. code-block:: bash
 
-    hatch count -x embark_town -- titanic.csv
+    hatch count -x embark_town < titanic.csv
 
-The output of the above command is written to ``titanic.embark_town.count.png``:
+The output of the above command is written to ``count.embark_town.png``:
 
-.. image:: ../images/titanic.embark_town.count.png
+.. image:: ../images/count.embark_town.png
        :width: 600px
        :height: 600px
        :align: center
@@ -120,9 +125,9 @@ For comparison, the following command uses ``-y embark_town`` to plot a histogra
 
 .. code-block:: bash
 
-    hatch count -y embark_town -- titanic.csv
+    hatch count -y embark_town < titanic.csv
 
-.. image:: ../images/titanic.embark_town.count.y.png
+.. image:: ../images/count.embark_town.y.png
        :width: 600px
        :height: 600px
        :align: center
@@ -146,9 +151,9 @@ In the following example the counts of the ``embark_town`` feature are displayed
 
 .. code-block:: bash
 
-    hatch count -x embark_town --order Cherbourg Queenstown Southampton -- titanic.csv
+    hatch count -x embark_town --order Cherbourg Queenstown Southampton < titanic.csv
 
-.. image:: ../images/titanic.embark_town.count.order.png
+.. image:: ../images/count.embark_town.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -169,9 +174,9 @@ In the following example the counts of the ``embark_town`` feature are grouped b
 
 .. code-block:: bash
 
-    hatch count -x embark_town --hue class -- titanic.csv  
+    hatch count -x embark_town --hue class < titanic.csv  
 
-.. image:: ../images/titanic.embark_town.class.count.png
+.. image:: ../images/count.embark_town.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -186,9 +191,9 @@ In the following example the ``class`` values are displayed in the order of ``Fi
 
 .. code-block:: bash
 
-    hatch count -x embark_town --hue class --hueorder First Second Third -- titanic.csv  
+    hatch count -x embark_town --hue class --hueorder First Second Third < titanic.csv  
 
-.. image:: ../images/titanic.embark_town.class.count.hueorder.png
+.. image:: ../images/count.embark_town.class.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -200,9 +205,9 @@ the ``embark_town`` and ``class`` categorical features:
 .. code-block:: bash
 
     hatch count -x embark_town --hue class --order Cherbourg Queenstown Southampton \
-                --hueorder First Second Third -- titanic.csv
+                --hueorder First Second Third < titanic.csv
 
-.. image:: ../images/titanic.embark_town.class.count.order.hueorder.png
+.. image:: ../images/count.embark_town.class.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -228,7 +233,14 @@ data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument shou
 
 .. code-block:: bash
 
-    hatch count -x embark_town --logy -- titanic.csv  
+    hatch count -x embark_town --logy < titanic.csv  
+
+.. image:: ../images/count.embark_town.logy.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Count plot of embark_town showing grouping on town and on class, where the order of values is specified
+
 
 .. _count_range:
 
@@ -250,7 +262,7 @@ data is displayed on the X-axis (``-x``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch count -x embark_town --ylim 100 300 -- titanic.csv
+    hatch count -x embark_town --ylim 100 300 < titanic.csv
 
 .. _count_facets:
 
@@ -267,3 +279,15 @@ Facets
 Count plots can be further divided into facets, generating a matrix of count plots. 
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+The follow command creates a faceted bar plot where the ``sex`` feature is used to determine the facet columns:
+
+.. code-block:: bash
+
+    hatch count -x embark_town --col sex < titanic.csv 
+
+.. image:: ../images/count.embark_town.sex.png 
+       :width: 600px
+       :height: 300px
+       :align: center
+       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, using sex to determine facet columns
