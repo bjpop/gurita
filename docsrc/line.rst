@@ -14,8 +14,9 @@ If multiple Y values are provided for each X value then the plot will show an es
 Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="line"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
@@ -23,13 +24,15 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
    * - ``-h``
      - display help
      - :ref:`line_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
      - :ref:`line_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
      - :ref:`line_feature_selection`
-   * - ``--hue FEATURE [FEATURE ...]``
+   * - ``--hue FEATURE``
      - group features by hue
      - :ref:`line_hue`
    * - ``--hueorder FEATURE [FEATURE ...]``
@@ -44,10 +47,12 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`line_range`
-   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+   * - * ``--row FEATURE``
+       * ``-r FEATURE``
      - feature to use for facet rows 
      - :ref:`line_facets`
-   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+   * - * ``--col FEATURE``
+       * ``-c FEATURE``
      - feature to use for facet columns 
      - :ref:`line_facets`
    * - ``--colwrap INT``

@@ -12,7 +12,7 @@ Plot distributions of selected numerical or categorical features as histograms.
 Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated/seaborn.displot.html>`_ library function, using the ``kind="hist"`` option.
 
 .. list-table::
-   :widths: 20 20 20 
+   :widths: 25 20 10
    :header-rows: 1
    :class: tight-table
 
@@ -21,65 +21,65 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
      - Reference
    * - ``-h``
      - display help 
-     - :ref:`hist_help`
+     - :ref:`help <hist_help>`
    * - * ``-x FEATURE``
        * ``--xaxis FEATURE``
      - select feature for the X axis 
-     - :ref:`hist_feature_selection`
+     - :ref:`X axis <hist_feature_selection>`
    * - * ``-y FEATURE``
        * ``--yaxis FEATURE`` 
      - select feature for the Y axis 
-     - :ref:`hist_feature_selection`
+     - :ref:`Y axis <hist_feature_selection>`
    * - ``--bins NUM``
      - number of bins 
-     - :ref:`hist_bins`
+     - :ref:`bins <hist_bins>`
    * - ``--binwidth NUM``
      - width of bins, overrides ``--bins`` 
-     - :ref:`hist_binwidth`
+     - :ref:`bin width <hist_binwidth>`
    * - ``--cumulative``
      - plot a cumulative histogram 
-     - :ref:`hist_cumulative`
+     - :ref:`cumulative <hist_cumulative>`
    * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`hist_hue`
-   * - ``--stat {count,frequency,probability,proportion,percent,density}``
+     - :ref:`hue <hist_hue>`
+   * - ``--stat {count, frequency, probability, proportion, percent, density}``
      - Statistic to use for each bin (default: count) 
-     - :ref:`hist_stat`
+     - :ref:`stat <hist_stat>`
    * - ``--indnorm``
      - normalise each histogram in the plot independently, otherwise normalise over the full dataset 
-     - :ref:`hist_indnorm`
+     - :ref:`independent normalisation <hist_indnorm>`
    * - ``--kde``
      - overlay a kernel density estimate (kde) as a line 
-     - :ref:`hist_kde`
+     - :ref:`kernel density estimation <hist_kde>`
    * - ``--nofill``
      - use unfilled histogram bars instead of solid coloured bars 
-     - :ref:`hist_nofill`
+     - :ref:`no fill <hist_nofill>`
    * - ``--element {bars,step,poly}``
      - style of histogram bars (default is bars)
-     - :ref:`hist_element`
+     - :ref:`element <hist_element>`
    * - ``--logx``
      - log scale X axis 
-     - :ref:`hist_log`
+     - :ref:`log X axis <hist_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`hist_log`
+     - :ref:`log Y axis <hist_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`hist_range`
+     - :ref:`limit X axis <hist_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`hist_range`
+     - :ref:`limit Y axis <hist_range>`
    * - * ``-r FEATURE``
        * ``--row FEATURE``
      - feature to use for facet rows 
-     - :ref:`hist_facets`
+     - :ref:`facet rows <hist_facets>`
    * - * ``-c FEATURE``
        * ``--col FEATURE``
      - feature to use for facet columns 
-     - :ref:`hist_facets`
+     - :ref:`facet columns <hist_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`hist_facets`
+     - :ref:`facet wrap <hist_facets>`
 
 
 .. _hist_example:

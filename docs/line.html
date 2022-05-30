@@ -149,11 +149,11 @@
 </pre></div>
 </div>
 <p>Line plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">relplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;line&quot;</span></code> option.</p>
-<table class="colwidths-given docutils align-default">
+<table class="colwidths-given tight-table docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 50%" />
-<col style="width: 25%" />
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Argument</p></th>
@@ -166,15 +166,23 @@
 <td><p>display help</p></td>
 <td><p><a class="reference internal" href="#line-help"><span class="std std-ref">Getting help</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...],</span> <span class="pre">--xaxis</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select feature for the X axis</p></td>
 <td><p><a class="reference internal" href="#line-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...],</span> <span class="pre">--yaxis</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select feature for the Y axis</p></td>
 <td><p><a class="reference internal" href="#line-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
 <td><p>group features by hue</p></td>
 <td><p><a class="reference internal" href="#line-hue"><span class="std std-ref">Grouping features with hue</span></a></p></td>
 </tr>
@@ -194,11 +202,19 @@
 <td><p>range limit Y axis</p></td>
 <td><p><a class="reference internal" href="#line-range"><span class="std std-ref">Range limits</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...],</span> <span class="pre">-r</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>feature to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#line-facets"><span class="std std-ref">Facets</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...],</span> <span class="pre">-c</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>feature to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#line-facets"><span class="std std-ref">Facets</span></a></p></td>
 </tr>

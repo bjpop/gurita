@@ -92,12 +92,12 @@ col.add_argument(
 
 order = argparse.ArgumentParser(add_help=False)
 order.add_argument(
-    '--order', metavar='FEATURE', nargs="+", required=False, type=str,
+    '--order', metavar='VALUE', nargs="+", required=False, type=str,
     help=f'Order to display categorical values.')
 
 hue_order = argparse.ArgumentParser(add_help=False)
 hue_order.add_argument(
-    '--hueorder', metavar='FEATURE', nargs="+", required=False, type=str,
+    '--hueorder', metavar='VALUE', nargs="+", required=False, type=str,
     help=f'Order to display categorical values selected for hue.')
 
 orient = argparse.ArgumentParser(add_help=False)

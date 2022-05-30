@@ -23,59 +23,62 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - Description
      - Reference
    * - ``-h`` 
-     - display help
-     - :ref:`bar_help`
+     - display help for this command
+     - :ref:`help <bar_help>`
    * - * ``-x FEATURE``
        * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`bar_feature_selection`
+     - :ref:`X axis <bar_feature_selection>`
    * - * ``-y FEATURE``
        * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`bar_feature_selection`
+     - :ref:`Y axis <bar_feature_selection>`
    * - ``--orient {v,h}``
      - Orientation of plot.
        Allowed values: v = vertical, h = horizontal.
        Default: v.
-     - :ref:`Plot orientation <bar_orient>`
+     - :ref:`orient <bar_orient>`
    * - ``--estimator {mean, median, max, min, sum, std, var}``
      - Function to compute point estimate of numerical feature
-     - :ref:`bar_estimator`
+     - :ref:`estimator <bar_estimator>`
    * - ``--std``
-     - Show standard deviation of numerical feature as error bar 
-     - :ref:`standard_deviation`
+     - show standard deviation of numerical feature as error bar 
+     - :ref:`standard deviation error bar <standard_deviation>`
    * - ``--ci [NUM]``
      - Show confidence interval as error bar to estimate uncertainty of point estimate 
-     - :ref:`confidence_interval`
-   * - ``--hue FEATURE [FEATURE ...]``
+     - :ref:`confidence interval error bar <confidence_interval>`
+   * - ``--order VALUE [VALUE ...]``
+     - controlling the order of the plotted bar columns 
+     - :ref:`order <bar_order>`
+   * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`bar_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+     - :ref:`hue <bar_hue>`
+   * - ``--hueorder VALUE [VALUE ...]``
      - order of hue features
-     - :ref:`Hue order <bar_hueorder>`
+     - :ref:`hue order <bar_hueorder>`
    * - ``--logx``
      - log scale X axis (only relevant with ``--orient h`` 
-     - :ref:`bar_log`
+     - :ref:`log X axis <bar_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`bar_log`
+     - :ref:`log Y axis <bar_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`bar_range`
+     - :ref:`limit X axis <bar_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`bar_range`
+     - :ref:`limit Y axis <bar_range>`
    * - * ``--row FEATURE``
        * ``-r FEATURE``
      - feature to use for facet rows 
-     - :ref:`bar_facets`
+     - :ref:`facet rows <bar_facets>`
    * - * ``--col FEATURE``
        * ``-c FEATURE``
      - feature to use for facet columns 
-     - :ref:`bar_facets`
+     - :ref:`facet columns <bar_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`bar_facets`
+     - :ref:`facet wrap <bar_facets>`
 
 Similar functionality to bar plots are provided by:
 
@@ -120,8 +123,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
 Bar plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -223,7 +226,7 @@ Controlling the order of the plotted bar columns
 
 .. code-block:: 
 
-    --order FEATURE [FEATURE ...]
+    --order VALUE [VALUE...]
 
 By default the order of the categorical features displayed in the bar plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
@@ -247,7 +250,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -350,8 +353,8 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row FEATURE, -r FEATURE
+ --col FEATURE, -c FEATURE
  --colwrap INT
 
 Bar plots can be further divided into facets, generating a matrix of bar plots, where a numerical value is

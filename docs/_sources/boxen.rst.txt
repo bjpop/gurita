@@ -12,48 +12,59 @@ Boxen plots show the distribution of values in a numerical feature optionally gr
 Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="boxen"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
      - Reference
    * - ``-h``
      - display help
-     - :ref:`boxen_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - :ref:`help <boxen_help>`
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`boxen_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+     - :ref:`X axis <boxen_feature_selection>`
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`boxen_feature_selection`
+     - :ref:`Y axis <boxen_feature_selection>`
    * - ``--orient {v,h}``
      - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
-     - :ref:`Box orientation <boxen_orient>`
-   * - ``--hue FEATURE [FEATURE ...]``
+     - :ref:`orient <boxen_orient>`
+   * - ``--order VALUE [VALUE ...]``
+     - controlling the order of the plotted boxen 
+     - :ref:`order <boxen_order>`
+   * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`boxen_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+     - :ref:`hue <boxen_hue>`
+   * - ``--hueorder VALUE [VALUE...]``
      - order of hue features
-     - :ref:`Hue order <boxen_hueorder>`
+     - :ref:`hue order <boxen_hueorder>`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`log X axis <boxen_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`boxen_log`
+     - :ref:`log Y axis <boxen_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`boxen_range`
+     - :ref:`limit X axis <boxen_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`boxen_range`
-   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+     - :ref:`limit Y axis <boxen_range>`
+   * - * ``--row FEATURE``
+       * ``-r FEATURE [FEATURE ...]``
      - feature to use for facet rows 
-     - :ref:`boxen_facets`
-   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+     - :ref:`facet rows <boxen_facets>`
+   * - * ``--col FEATURE``
+       * ``-c FEATURE [FEATURE ...]``
      - feature to use for facet columns 
-     - :ref:`boxen_facets`
+     - :ref:`facet columns <boxen_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`boxen_facets`
+     - :ref:`facet wrap <boxen_facets>`
 
 Similar functionality to boxen plots are provided by:
 
@@ -69,11 +80,11 @@ Boxen plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
-    hatch boxen -y age -- titanic.csv 
+    hatch boxen -y age < titanic.csv 
 
-The output of the above command is written to ``titanic.age.boxen.png``:
+The output of the above command is written to ``boxen.age.png``:
 
-.. image:: ../images/titanic.age.boxen.png
+.. image:: ../images/boxen.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -84,11 +95,11 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class -- titanic.csv 
+    hatch boxen -y age -x class < titanic.csv 
 
-The output of the above command is written to ``titanic.age.class.boxen.png``:
+The output of the above command is written to ``boxen.class.age.png``:
 
-.. image:: ../images/titanic.age.class.boxen.png
+.. image:: ../images/boxen.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -113,8 +124,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE 
+  -y FEATURE, --yaxis FEATURE
 
 Boxen plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -139,9 +150,9 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch boxen -x age -y class --orient h -- titanic.csv
+    hatch boxen -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/titanic.class.age.boxen.horizontal.png
+.. image:: ../images/boxen.age.class.png
        :width: 600px
        :height: 600px
        :align: center
@@ -154,7 +165,7 @@ Controlling the order of the plotted boxen columns
 
 .. code-block:: 
 
-    --order FEATURE [FEATURE ...]
+    --order VALUE [VALUE ...]
 
 By default the order of the categorical features displayed in the boxen plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
@@ -163,9 +174,9 @@ In the following example the boxen columns of the ``class`` feature are displaye
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --order First Second Third -- titanic.csv
+    hatch boxen -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/titanic.age.class.boxen.order.png
+.. image:: ../images/boxen.age.class.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -186,9 +197,9 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --hue sex -- titanic.csv
+    hatch boxen -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.boxen.png
+.. image:: ../images/boxen.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -203,9 +214,9 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --hue sex --hueorder female male -- titanic.csv
+    hatch boxen -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.boxen.hueorder.png
+.. image:: ../images/boxen.age.class.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -216,9 +227,9 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+    hatch boxen -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.boxen.order.hueorder.png
+.. image:: ../images/boxen.age.class.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -275,8 +286,8 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row FEATURE, -r FEATURE
+ --col FEATURE, -c FEATURE
  --colwrap INT
 
 Boxen plots can be further divided into facets, generating a matrix of boxen plots, where a numerical value is

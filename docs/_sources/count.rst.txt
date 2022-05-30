@@ -21,47 +21,47 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - Reference
    * - ``-h``
      - display help 
-     - :ref:`count_help`
+     - :ref:`help <count_help>`
    * - * ``-x FEATURE``
        * ``--xaxis FEATURE``
      - select feature for the X axis 
-     - :ref:`count_feature_selection`
+     - :ref:`X axis <count_feature_selection>`
    * - * ``-y FEATURE``
        * ``--yaxis FEATURE`` 
      - select feature for the Y axis 
-     - :ref:`count_feature_selection`
-   * - ``--order FEATURE [FEATURE ...]`` 
+     - :ref:`Y axis <count_feature_selection>`
+   * - ``--order VALUE [VALUE ...]`` 
      - order of the plotted columns  
-     - :ref:`count_order`
+     - :ref:`order <count_order>`
    * - ``--hue FEATURE`` 
      - group features by hue 
-     - :ref:`count_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]`` 
+     - :ref:`hue <count_hue>`
+   * - ``--hueorder VALUE [VALUE ...]`` 
      - order of hue features
-     - :ref:`Hue order <count_hueorder>`
+     - :ref:`hue order <count_hueorder>`
    * - ``--logx``
      - log scale X axis 
-     - :ref:`count_log`
+     - :ref:`log X axis <count_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`count_log`
+     - :ref:`log Y axis <count_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`count_range`
+     - :ref:`limit X axis <count_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`count_range`
+     - :ref:`limit Y axis <count_range>`
    * - * ``--row FEATURE``
        * ``-r FEATURE``
      - feature to use for facet rows
-     - :ref:`count_facets`
+     - :ref:`facet rows <count_facets>`
    * - * ``--col FEATURE``
        * ``-c FEATURE``
      - feature to use for facet columns
-     - :ref:`count_facets`
+     - :ref:`facet columns <count_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`count_facets`
+     - :ref:`facet wrap <count_facets>`
 
 .. _count_example:
 
@@ -142,7 +142,7 @@ Controlling the order of the plotted columns
 
 .. code-block:: 
 
-    --order FEATURE [FEATURE ...]
+    --order VALUE [VALUE ...]
 
 By default the order of the categorical features displayed in the count plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 

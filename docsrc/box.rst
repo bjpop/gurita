@@ -22,56 +22,56 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - Reference
    * - ``-h``
      - display help
-     - :ref:`box_help`
+     - :ref:`help <box_help>`
    * - * ``-x FEATURE``
        * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`box_feature_selection`
+     - :ref:`X axis <box_feature_selection>`
    * - * ``-y FEATURE``
        * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`box_feature_selection`
+     - :ref:`Y axis <box_feature_selection>`
    * - ``--orient {v,h}``
-     - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
-     - :ref:`Box orientation <box_orient>`
+     - orientation of plot. v = vertical, h = horizontal. Default: v.
+     - :ref:`orient <box_orient>`
    * - ``--nooutliers``
      - do not display outlier data
-     - :ref:`box_no_outliers`
+     - :ref:`no outliers <box_no_outliers>`
    * - ``--strip``
      - overlay data points using a strip plot
-     - :ref:`box_strip`
-   * - ``--order FEATURE [FEATURE ..]``
+     - :ref:`strip <box_strip>`
+   * - ``--order VALUE [VALUE ..]``
      - control the order of the plotted columns
-     - :ref:`Box order <box_order>`
+     - :ref:`order <box_order>`
    * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`box_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+     - :ref:`hue <box_hue>`
+   * - ``--hueorder VALUE [VALUE ...]``
      - order of hue features
-     - :ref:`Hue order <box_hueorder>`
+     - :ref:`hue order <box_hueorder>`
    * - ``--logx``
      - log scale X axis 
-     - :ref:`box_log`
+     - :ref:`log X axis <box_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`box_log`
+     - :ref:`log Y axis <box_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`box_range`
+     - :ref:`limit X axis <box_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`box_range`
+     - :ref:`limit Y axis <box_range>`
    * - * ``--row FEATURE``
        * ``-r FEATURE``
      - feature to use for facet rows 
-     - :ref:`box_facets`
+     - :ref:`facet rows <box_facets>`
    * - * ``--col FEATURE``
        * ``-c FEATURE``
      - feature to use for facet columns 
-     - :ref:`box_facets`
+     - :ref:`facet colums <box_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`box_facets`
+     - :ref:`facet wrap <box_facets>`
 
 Similar functionality to box plots are provided by:
 
@@ -211,7 +211,7 @@ Controlling the order of the plotted box columns
 
 .. code-block:: 
 
-    --order FEATURE [FEATURE ...]
+    --order VALUE [VALUE ...]
 
 By default the order of the categorical features displayed in the box plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
