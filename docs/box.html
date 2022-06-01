@@ -198,7 +198,7 @@ The distribution of a numerical feature is displayed using the inter-quartile ra
 <td><p><a class="reference internal" href="#box-strip"><span class="std std-ref">strip</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--order</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">..]</span></code></p></td>
-<td><p>control the order of the plotted columns</p></td>
+<td><p>control the order of the plotted boxes</p></td>
 <td><p><a class="reference internal" href="transform.html#box-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
@@ -404,7 +404,7 @@ data is displayed on the Y-axis (<code class="docutils literal notranslate"><spa
 <p>Box plots can be further divided into facets, generating a matrix of box plots, where a numerical value is
 further categorised by up to 2 more categorical features.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
-<p>The follow command creates a faceted box plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature is used to determine the facet columns:</p>
+<p>The following command creates a faceted box plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature is used to determine the facet columns:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --col sex &lt; titanic.csv
 </pre></div>
 </div>

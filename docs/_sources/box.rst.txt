@@ -41,7 +41,7 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - overlay data points using a strip plot
      - :ref:`strip <box_strip>`
    * - ``--order VALUE [VALUE ..]``
-     - control the order of the plotted columns
+     - control the order of the plotted boxes 
      - :ref:`order <box_order>`
    * - ``--hue FEATURE``
      - group features by hue
@@ -347,7 +347,7 @@ further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
 
-The follow command creates a faceted box plot where the ``sex`` feature is used to determine the facet columns:
+The following command creates a faceted box plot where the ``sex`` feature is used to determine the facet columns:
 
 .. code-block:: bash
 

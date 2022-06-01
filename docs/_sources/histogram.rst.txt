@@ -46,7 +46,7 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
      - Statistic to use for each bin (default: count) 
      - :ref:`stat <hist_stat>`
    * - ``--indnorm``
-     - normalise each histogram in the plot independently, otherwise normalise over the full dataset 
+     - normalise each histogram in the plot independently
      - :ref:`independent normalisation <hist_indnorm>`
    * - ``--kde``
      - overlay a kernel density estimate (kde) as a line 

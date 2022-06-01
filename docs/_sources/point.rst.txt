@@ -12,52 +12,63 @@ Point plots show the point estimates of the central tendency (mean) of numerical
 Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="point"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
      - Reference
    * - ``-h``
      - display help
-     - :ref:`point_help`
-   * - ``-x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]``
+     - :ref:`help <point_help>`
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`point_feature_selection`
-   * - ``-y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]``
+     - :ref:`X axis <point_feature_selection>`
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`point_feature_selection`
+     - :ref:`Y axis <point_feature_selection>`
    * - ``--orient {v,h}``
      - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
-     - :ref:`Box orientation <point_orient>`
-   * - ``--hue FEATURE [FEATURE ...]``
+     - :ref:`orient <point_orient>`
+   * - ``--order VALUE [VALUE ...]``
+     - controlling the order of the plotted points 
+     - :ref:`order <point_order>`
+   * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`point_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+     - :ref:`hue <point_hue>`
+   * - ``--hueorder VALUE [VALUE ...]``
      - order of hue features
-     - :ref:`Hue order <point_hueorder>`
+     - :ref:`hue order <point_hueorder>`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`log X axis <point_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`point_log`
+     - :ref:`log Y axis <point_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`point_range`
+     - :ref:`limit X axis <point_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`point_range`
-   * - ``--row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]``
+     - :ref:`limit Y axis <point_range>`
+   * - * ``--row FEATURE``
+       * ``-r FEATURE``
      - feature to use for facet rows 
-     - :ref:`point_facets`
-   * - ``--col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]``
+     - :ref:`facet rows <point_facets>`
+   * - * ``--col FEATURE``
+       * ``-c FEATURE``
      - feature to use for facet columns 
-     - :ref:`point_facets`
+     - :ref:`facet columns <point_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`point_facets`
+     - :ref:`facet wrap <point_facets>`
 
 Similar functionality to point plots are provided by:
 
- * :doc:`Bar plots <boxen/>` 
+ * :doc:`Bar plots <bar/>` 
 
 Simple example
 ==============
@@ -66,15 +77,15 @@ Point plot showing the mean ``age`` for passengers on the titanic by passenger `
 
 .. code-block:: bash
 
-    hatch point -y age -x class -- titanic.csv 
+    hatch point -y age -x class < titanic.csv 
 
-The output of the above command is written to ``titanic.age.class.point.png``:
+The output of the above command is written to ``point.class.age.png``:
 
-.. image:: ../images/titanic.age.class.point.png
+.. image:: ../images/point.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Point plot showing the distribution of age for each class in the titanic data set
+       :alt: Point plot showing the mean and error of the age feature for each class in the titanic data set
 
 .. _point_help:
 
@@ -95,8 +106,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
 Point plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -121,22 +132,22 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch point -x age -y class --orient h -- titanic.csv
+    hatch point -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/titanic.class.age.point.horizontal.png
+.. image:: ../images/point.age.class.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Point plot showing the distribution of age for each class in the titanic data set, shown horizontally
+       :alt: Point plot showing the mean and error of age for each class in the titanic data set, shown horizontally
 
 .. _point_order:
 
-Controlling the order of the plotted point columns
-==================================================
+Controlling the order of the plotted points
+===========================================
 
 .. code-block:: 
 
-    --order FEATURE [FEATURE ...]
+    --order VALUE [VALUE ...] 
 
 By default the order of the categorical features displayed in the point plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
@@ -145,13 +156,13 @@ In the following example the point columns of the ``class`` feature are displaye
 
 .. code-block:: bash
 
-    hatch point -y age -x class --order First Second Third -- titanic.csv
+    hatch point -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/titanic.age.class.point.order.png
+.. image:: ../images/point.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Point plot showing the distribution of age for each class in the titanic data set, shown in a specified order
+       :alt: Point plot showing the mean and error of age for each class in the titanic data set, shown in a specified order
 
 .. _point_hue:
 
@@ -160,7 +171,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -168,13 +179,13 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch point -y age -x class --hue sex -- titanic.csv
+    hatch point -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.point.png
+.. image:: ../images/point.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Point plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
+       :alt: Point plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex 
 
 .. _point_hueorder:
 
@@ -185,31 +196,32 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch point -y age -x class --hue sex --hueorder female male -- titanic.csv
+    hatch point -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.point.hueorder.png
+.. image:: ../images/point.class.age.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Count plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex, with sex shown in a specific order
+
 
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
 
 .. code-block:: bash
 
-    hatch point -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+    hatch point -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.point.order.hueorder.png
+.. image:: ../images/point.class.age.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Count plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex, with class and sex shown in a specific order
 
 .. _point_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale of numerical features 
+===============================
 
 .. code-block:: 
 
@@ -225,7 +237,13 @@ For example, you can display a log scale point plot for the ``age`` feature grou
 
 .. code-block:: bash
 
-    hatch point -y age -x class --logy -- titanic.csv 
+    hatch point -y age -x class --logy < titanic.csv 
+
+.. image:: ../images/point.class.age.logx.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Point plot showing the mean of age and error for each class in the titanic data set, with the Y axis plotted in log scale
 
 .. _point_range:
 
@@ -248,7 +266,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch point -y age -x class --ylim 10 30 -- titanic.csv
+    hatch point -y age -x class --ylim 10 30 < titanic.csv
 
 .. _point_facets:
 
@@ -257,11 +275,21 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row FEATURE, -r FEATURE 
+ --col FEATURE, -c FEATURE 
  --colwrap INT
 
 Point plots can be further divided into facets, generating a matrix of point plots, where a numerical value is
 further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+.. code-block:: bash
+
+    hatch point -y age -x class --col sex < titanic.csv
+
+.. image:: ../images/point.class.age.sex.facets.png 
+       :width: 600px
+       :height: 300px
+       :align: center
+       :alt: Point plot showing the mean and error of age for each class in the titanic data set grouped by class, using sex to determine the plot facets

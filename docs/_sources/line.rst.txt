@@ -3,7 +3,8 @@
 Line
 ****
 
-Line plots comparing two numerical features, optionally grouped by categorical features.
+Line plots show the relationship between two numerical features, 
+optionally grouped by categorical features.
 
 If multiple Y values are provided for each X value then the plot will show an estimate of the central tendency of X and confidence interval for the estimate.
 
@@ -23,41 +24,44 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
      - Reference
    * - ``-h``
      - display help
-     - :ref:`line_help`
+     - :ref:`help <line_help>`
    * - * ``-x FEATURE``
        * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`line_feature_selection`
+     - :ref:`X axis <line_feature_selection>`
    * - * ``-y FEATURE``
        * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`line_feature_selection`
+     - :ref:`Y axis <line_feature_selection>`
    * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`line_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+     - :ref:`hue <line_hue>`
+   * - ``--hueorder VALUE [VALUE ...]``
      - order of hue features
-     - :ref:`Hue order <line_hueorder>`
+     - :ref:`hue order <line_hueorder>`
+   * - ``--logx``
+     - log scale X axis 
+     - :ref:`log X axis <line_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`line_log`
+     - :ref:`log Y axis <line_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`line_range`
+     - :ref:`limit X axis <line_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`line_range`
+     - :ref:`limit Y axis <line_range>`
    * - * ``--row FEATURE``
        * ``-r FEATURE``
      - feature to use for facet rows 
-     - :ref:`line_facets`
+     - :ref:`facet rows <line_facets>`
    * - * ``--col FEATURE``
        * ``-c FEATURE``
      - feature to use for facet columns 
-     - :ref:`line_facets`
+     - :ref:`facet columns <line_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`line_facets`
+     - :ref:`facet wrap <line_facets>`
 
 Simple example
 ==============
@@ -66,11 +70,11 @@ A line plot showing the relationship between ``timepoint`` on the X axis and ``s
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal -- fmri.csv  
+    hatch line -x timepoint -y signal < fmri.csv  
 
-The output of the above command is written to ``fmri.signal.timepoint.line.png``:
+The output of the above command is written to ``line.timepoint.signal.png``.
 
-.. image:: ../images/fmri.signal.timepoint.line.png
+.. image:: ../images/line.timepoint.signal.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -95,8 +99,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
 Line plots show an indepdent numerical feature on the X axis and a depdendent numerical feature on the Y axis.
 
@@ -107,7 +111,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE [FEATURE ...]
+  --hue FEATURE
 
 The data can be grouped by a categorical feature with the ``--hue`` argument.
 
@@ -115,9 +119,9 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal --hue event -- fmri.csv
+    hatch line -x timepoint -y signal --hue event < fmri.csv
 
-.. image:: ../images/fmri.signal.timepoint.event.line.png
+.. image:: ../images/line.timepoint.signal.event.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -132,9 +136,9 @@ In the following example the classes of ``event`` are displayed in the order ``c
 
 .. code-block:: bash
 
-        hatch line -x timepoint -y signal --hue event --hueorder cue stim -- fmri.csv
+        hatch line -x timepoint -y signal --hue event --hueorder cue stim < fmri.csv
 
-.. image:: ../images/fmri.signal.timepoint.event.line.hueorder.png
+.. image:: ../images/line.timepoint.signal.event.hue.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -142,8 +146,8 @@ In the following example the classes of ``event`` are displayed in the order ``c
 
 .. _line_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale of X and Y axis 
+=========================
 
 .. code-block:: 
 
@@ -155,11 +159,17 @@ The distribution of numerical values can be displayed in log (base 10) scale wit
 It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
 conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
 
-For example, you can display a log scale line plot for the ``signal`` feature like so:
+For example, the X axis can be plotted in log scale like so:
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal --logy -- fmri.csv 
+   hatch line -x timepoint -y signal --logx < fmri.csv
+
+.. image:: ../images/line.timepoint.signal.logx.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Line plot where signal is plotted against timepoint with the X axis in log scale 
 
 .. _line_range:
 
@@ -180,7 +190,13 @@ For example, you can display range-limited range for the ``timepoint`` feature l
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal --xlim 7.5 12.5 -- fmri.csv 
+    hatch line -x timepoint -y signal --xlim 5 15.5 < fmri.csv 
+
+.. image:: ../images/line.timepoint.signal.xlim.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Line plot where signal is plotted against timepoint with the X axis range limited to [5, 15.5] 
 
 .. _line_facets:
 
@@ -189,11 +205,23 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row FEATURE, -r FEATURE 
+ --col FEATURE, -c FEATURE 
  --colwrap INT
 
 Line plots can be further divided into facets, generating a matrix of line plots, where a numerical value is
 further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+The following command creates a faceted line plot where the ``event`` feature is used to determine the facet columns:
+
+.. code-block:: bash
+
+    hatch line -x timepoint -y signal --col event < fmri.csv 
+
+.. image:: ../images/line.timepoint.signal.event.facet.png 
+       :width: 600px
+       :height: 300px 
+       :align: center
+       :alt: Line plot where signal is plotted against timepoint split into facets based on the event feature 

@@ -48,7 +48,7 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - Show confidence interval as error bar to estimate uncertainty of point estimate 
      - :ref:`confidence interval error bar <confidence_interval>`
    * - ``--order VALUE [VALUE ...]``
-     - controlling the order of the plotted bar columns 
+     - controlling the order of the plotted bars
      - :ref:`order <bar_order>`
    * - ``--hue FEATURE``
      - group features by hue
@@ -82,10 +82,7 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
 
 Similar functionality to bar plots are provided by:
 
- * :doc:`Box plots <box/>`
- * :doc:`Violin plots <violin/>`
- * :doc:`Swarm plots <swarm/>` 
- * :doc:`Strip plots <strip/>` 
+ * :doc:`Point plots <point/>`
 
 Simple example
 ==============
