@@ -1,7 +1,7 @@
 .. _swarm:
 
-Swarm
-*********
+swarm
+=====
 
 Swarm plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 
@@ -72,7 +72,7 @@ Similar functionality to swarm plots are provided by:
    instead.
 
 Simple example
-==============
+--------------
 
 Swarm plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
@@ -106,7 +106,7 @@ The output of the above command is written to ``titanic.age.class.swarm.png``:
 .. _swarm_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for swarm plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -118,7 +118,7 @@ arguments:
 .. _swarm_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -158,8 +158,8 @@ where the boxes are plotted horizontally:
 
 .. _swarm_order:
 
-Controlling the order of the plotted swarm columns
-==================================================
+Controlling the order of the swarms
+-----------------------------------
 
 .. code-block:: 
 
@@ -183,7 +183,7 @@ In the following example the swarm columns of the ``class`` feature are displaye
 .. _swarm_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -252,8 +252,8 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. _swarm_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -273,8 +273,8 @@ For example, you can display a log scale swarm plot for the ``age`` feature grou
 
 .. _swarm_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -297,7 +297,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _swarm_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

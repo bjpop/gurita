@@ -1,7 +1,7 @@
 .. _bar:
 
-Bar
-***
+bar
+===
 
 Bar plots summarise a numerical feature as boxes with optional error bars.
 
@@ -85,7 +85,7 @@ Similar functionality to bar plots are provided by:
  * :doc:`Point plots <point/>`
 
 Simple example
-==============
+--------------
 
 Bar plot the mean ``age`` of passengers for each value of ``class`` in the ``titanic.csv`` input file:
 
@@ -104,7 +104,7 @@ The output of the above command is written to ``bar.class.age.png``:
 .. _bar_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for bar plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -116,7 +116,7 @@ arguments:
 .. _bar_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -157,7 +157,7 @@ where the boxes are plotted horizontally:
 .. _bar_estimator:
 
 Summary function
-================
+----------------
 
 By default bar plots show the mean of the selected numerical feature. However alternative functions
 can be chosen using the ``--estimator`` argument.
@@ -179,7 +179,7 @@ For example, the maximum ``age`` is shown for each value of ``class``:
 .. _standard_deviation:
 
 Standard deviaiton
-==================
+------------------
 
 The standard deviation of the numerical feature can be shown as an error bar with the ``--std`` argument.
 
@@ -198,7 +198,7 @@ For example the mean and standard deviation of ``age`` is shown for each value i
 .. _confidence_interval:
 
 Confidence interval
-===================
+-------------------
 
 The confidence interval of the summary estimate can be shown as an error bar with the ``--ci`` argument.
 
@@ -218,8 +218,8 @@ For example the mean of age and its 98% confidence interval is shown for each va
 
 .. _bar_order:
 
-Controlling the order of the plotted bar columns
-==================================================
+Controlling the order of the bars
+---------------------------------
 
 .. code-block:: 
 
@@ -243,7 +243,7 @@ In the following example the bar columns of the ``class`` feature are displayed 
 .. _bar_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -295,8 +295,8 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. _bar_log:
 
-Log scale of numerical feature 
-==============================
+Log scale 
+---------
 
 .. code-block:: 
 
@@ -322,8 +322,8 @@ For example, you can display a log scale bar plot for the ``age`` feature groupe
 
 .. _bar_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -346,7 +346,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _bar_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

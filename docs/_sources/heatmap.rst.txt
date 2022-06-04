@@ -1,7 +1,7 @@
 .. _heatmap:
 
-Heatmap
-*******
+heatmap
+=======
 
 Heatmap showing the relationship between two categorical features and a numerical feature.
 
@@ -39,7 +39,7 @@ Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/genera
 
 
 Simple example
-==============
+--------------
 
 Heatmap showing the number of ``passengers`` by ``month`` and ``year``
 in the ``flights.csv`` data set:
@@ -59,7 +59,7 @@ The output of the above command is written to ``flights.month.year.passengers.he
 .. _heatmap_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for heatmap plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -71,7 +71,7 @@ arguments:
 .. _heatmap_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -82,8 +82,8 @@ Selecting features to plot
 
 .. _heatmap_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale
+---------
 
 .. code-block:: 
 

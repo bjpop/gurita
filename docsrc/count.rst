@@ -1,7 +1,7 @@
 .. _count:
 
-Count 
-*****
+count 
+=====
 
 Count plots show the frequency of values within categorical features using bars.
 
@@ -66,7 +66,7 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
 .. _count_example:
 
 Simple example
-==============
+--------------
 
 Plot a count of the ``embark_town`` categorical feature from the ``titanic.csv`` input file:
 
@@ -85,7 +85,7 @@ The output of the above command is written to ``count.embark_town.png``:
 .. _count_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for count plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -97,7 +97,7 @@ arguments:
 .. _count_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -133,12 +133,10 @@ For comparison, the following command uses ``-y embark_town`` to plot a histogra
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, plotted horizontally
 
-
-
 .. _count_order:
 
-Controlling the order of the plotted columns
-============================================
+Controlling the order of the bars 
+---------------------------------
 
 .. code-block:: 
 
@@ -162,7 +160,7 @@ In the following example the counts of the ``embark_town`` feature are displayed
 .. _count_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -215,8 +213,8 @@ the ``embark_town`` and ``class`` categorical features:
 
 .. _count_log:
 
-Log scale of counts
-===================
+Log scale 
+---------
 
 .. code-block:: 
 
@@ -244,8 +242,8 @@ data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument shou
 
 .. _count_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -267,14 +265,13 @@ data is displayed on the X-axis (``-x``), therefore the ``--ylim`` argument shou
 .. _count_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 
  -r FEATURE, --row FEATURE
  -c FEATURE, --col FEATURE
  --colwrap INT
-
 
 Count plots can be further divided into facets, generating a matrix of count plots. 
 

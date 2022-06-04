@@ -1,7 +1,7 @@
 .. _box:
 
-Box 
-***
+box 
+===
 
 Box (or box-and-whisker) plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate diamond shaped points.
@@ -81,7 +81,7 @@ Similar functionality to box plots are provided by:
  * :doc:`Boxen plots <boxen/>` 
 
 Simple example
-==============
+--------------
 
 Box plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
@@ -115,7 +115,7 @@ The output of the above command is written to ``box.class.age.png``:
 .. _box_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for box plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -127,7 +127,7 @@ arguments:
 .. _box_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -168,7 +168,7 @@ where the boxes are plotted horizontally:
 .. _box_no_outliers:
 
 Turn off display of outlier points
-==================================
+----------------------------------
 
 Outlier data points are shown in box plots by default as small diamonds. This can be turned off with the ``--nooutliers`` option.
 
@@ -188,7 +188,7 @@ displayed at the same time.
 .. _box_strip:
 
 Overlay data points using a strip plot
-======================================
+--------------------------------------
 
 Individual data points can be overlaid on top of the box plot using the ``--strip`` option.
 
@@ -206,8 +206,8 @@ Note that in the example above we also turn off the display of outlier points wi
 
 .. _box_order:
 
-Controlling the order of the plotted box columns
-================================================
+Controlling the order of the boxes 
+----------------------------------
 
 .. code-block:: 
 
@@ -231,7 +231,7 @@ In the following example the box columns of the ``class`` feature are displayed 
 .. _box_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -283,8 +283,8 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. _box_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -310,8 +310,8 @@ For example, you can display a log scale box plot for the ``age`` feature groupe
 
 .. _box_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -334,7 +334,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _box_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

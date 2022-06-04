@@ -1,7 +1,7 @@
 .. _point:
 
-Point
-*****
+point
+=====
 
 Point plots show the point estimates of the central tendency (mean) of numerical features with error bars. 
 
@@ -71,7 +71,7 @@ Similar functionality to point plots are provided by:
  * :doc:`Bar plots <bar/>` 
 
 Simple example
-==============
+--------------
 
 Point plot showing the mean ``age`` for passengers on the titanic by passenger ``class``:
 
@@ -90,7 +90,7 @@ The output of the above command is written to ``point.class.age.png``:
 .. _point_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for point plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -102,7 +102,7 @@ arguments:
 .. _point_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -143,7 +143,7 @@ where the boxes are plotted horizontally:
 .. _point_order:
 
 Controlling the order of the plotted points
-===========================================
+-------------------------------------------
 
 .. code-block:: 
 
@@ -167,7 +167,7 @@ In the following example the point columns of the ``class`` feature are displaye
 .. _point_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -220,8 +220,8 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. _point_log:
 
-Log scale of numerical features 
-===============================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -247,8 +247,8 @@ For example, you can display a log scale point plot for the ``age`` feature grou
 
 .. _point_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -271,7 +271,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _point_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

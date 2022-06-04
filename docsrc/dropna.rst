@@ -1,2 +1,4 @@
-Dropna
-******
+.. _dropna:
+
+dropna
+======

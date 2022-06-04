@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Principal Component Analysis (PCA) &mdash; hatch  documentation</title>
+  <title>pca &mdash; hatch  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Random sampling" href="sample.html" />
-    <link rel="prev" title="Gmm (Gaussian mixture model)" href="gmm.html" /> 
+    <link rel="next" title="pivot" href="pivot.html" />
+    <link rel="prev" title="outlier" href="outlier.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,63 +50,39 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Input and Output</span></p>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Plotting</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bar.html">Bar</a></li>
-<li class="toctree-l1"><a class="reference internal" href="box.html">Box</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxen.html">Boxen</a></li>
-<li class="toctree-l1"><a class="reference internal" href="clustermap.html">Clustermap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="count.html">Count</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heatmap.html">Heatmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="histogram.html">Histogram</a></li>
-<li class="toctree-l1"><a class="reference internal" href="line.html">Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="point.html">Point</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scatter.html">Scatter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="strip.html">Strip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="swarm.html">Swarm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="violin.html">Violin</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Facets</span></p>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Plot aesthetics</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Transformation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Commands</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cut.html">Cut</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dropna.html">Dropna</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eval.html">Eval</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filter.html">Filter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gmm.html">Gmm (Gaussian mixture model)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Principal Component Analysis (PCA)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#simple-example">Simple example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting help</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#selecting-features-to-plot">Selecting features to plot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#controlling-the-number-of-bins-used">Controlling the number of bins used</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cumulative-histograms">Cumulative histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_commands.html">Plotting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="transformation_commands.html">Data transformation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="corr.html">corr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cut.html">cut</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dropna.html">dropna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eval.html">eval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmm.html">gmm (Gaussian mixture model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html">groupby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="head.html">head</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isnorm.html">isnorm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kmeans.html">kmeans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="melt.html">melt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outlier.html">outlier</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pca</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pivot.html">pivot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sort.html">sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="sample.html">Random sampling</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Summary information</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="describe.html">Summarising input data</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Advanced topics</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary_commands.html">Summary information</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
@@ -129,7 +105,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Principal Component Analysis (PCA)</li>
+          <li><a href="transformation_commands.html">Data transformation</a> &raquo;</li>
+      <li>pca</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/pca.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -139,92 +116,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="principal-component-analysis-pca">
-<h1>Principal Component Analysis (PCA)<a class="headerlink" href="#principal-component-analysis-pca" title="Permalink to this headline"></a></h1>
-<p>Plot distributions of selected numerical or categorical features as histograms.</p>
-<p>Plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.histplot.html/">histplot</a> library function.</p>
-<section id="simple-example">
-<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Plot a histogram of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> amount from the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> input file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip -- tips.csv
-</pre></div>
-</div>
-<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">tips.tip.histogram.png</span></code>:</p>
-<a class="reference internal image-reference" href="../images/tips.tip.histogram.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set" class="align-center" src="../images/tips.tip.histogram.png" style="width: 600px; height: 600px;" /></a>
-</section>
-<section id="getting-help">
-<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
-<p>The full set of command line arguments for histograms can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
-arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -h
-</pre></div>
-</div>
-</section>
-<section id="selecting-features-to-plot">
-<h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
-                      <span class="n">Feature</span> <span class="n">to</span> <span class="n">plot</span> <span class="n">along</span> <span class="n">the</span> <span class="n">X</span> <span class="n">axis</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
-                      <span class="n">Feature</span> <span class="n">to</span> <span class="n">plot</span> <span class="n">along</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">axis</span>
-</pre></div>
-</div>
-<p>Histograms can be plotted for both numerical features and for categorical features. Numerical data is binned
-and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
-column for each categorical value in the specified feature.</p>
-<p>You can select the feature that you want to plot as a histogram using the <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xargs</span></code>) or <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yargs</span></code>)
-arguments.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xargs</span></code>) is chosen the histogram columns will be plotted vertically.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yargs</span></code>) is chosen the histogram columns will be plotted horizontally.</p>
-<p>In both cases you can specify more than one feature to plot; hatch will generate a separate histogram plot for
-every feature specified.</p>
-<p>The following command will generate separate histogram plots for <code class="docutils literal notranslate"><span class="pre">total_bill</span></code>, <code class="docutils literal notranslate"><span class="pre">tip</span></code> and <code class="docutils literal notranslate"><span class="pre">day</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x total_bill tip day -- tips.csv
-</pre></div>
-</div>
-<p>The outputs of the above command will be saved in the following 3 files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tips.total_bill.histogram.png
-tips.tip.histogram.png
-tips.day.histogram.png
-</pre></div>
-</div>
-<p>Selecting the <code class="docutils literal notranslate"><span class="pre">tip</span></code> feature using the <code class="docutils literal notranslate"><span class="pre">-y</span></code> argument causes the histogram bars to be plotted
-horizontally instead of vertically:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -y tip -- tips.csv
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="../images/tips.tip.histogram.y.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set" class="align-center" src="../images/tips.tip.histogram.y.png" style="width: 600px; height: 600px;" /></a>
-<p>You may use both <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code> in the same command line.</p>
-</section>
-<section id="controlling-the-number-of-bins-used">
-<h2>Controlling the number of bins used<a class="headerlink" href="#controlling-the-number-of-bins-used" title="Permalink to this headline"></a></h2>
-<p>By default hatch will try to automatically pick an appropriate number of bins for the
-selected feature.</p>
-<p>However, this can be overridden by specifying the required number of bins to use with the <code class="docutils literal notranslate"><span class="pre">--bins</span></code>
-argument like so:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --bins <span class="m">5</span> -- tips.csv
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="../images/tips.tip.histogram.bins10.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set, using 10 bins" class="align-center" src="../images/tips.tip.histogram.bins10.png" style="width: 600px; height: 600px;" /></a>
-</section>
-<section id="cumulative-histograms">
-<h2>Cumulative histograms<a class="headerlink" href="#cumulative-histograms" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">cumulative</span>          <span class="n">Generate</span> <span class="n">cumulative</span> <span class="n">histogram</span>
-</pre></div>
-</div>
-<p>Cumulative histograms can be plotted with the <code class="docutils literal notranslate"><span class="pre">--cumulative</span></code> argument.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --cumulative -- tips.csv
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="../images/tips.tip.histogram.cumulative.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set in cumulative style" class="align-center" src="../images/tips.tip.histogram.cumulative.png" style="width: 600px; height: 600px;" /></a>
-</section>
+  <section id="pca">
+<span id="id1"></span><h1>pca<a class="headerlink" href="#pca" title="Permalink to this headline"></a></h1>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gmm.html" class="btn btn-neutral float-left" title="Gmm (Gaussian mixture model)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sample.html" class="btn btn-neutral float-right" title="Random sampling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="outlier.html" class="btn btn-neutral float-left" title="outlier" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pivot.html" class="btn btn-neutral float-right" title="pivot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,7 +1,7 @@
 .. _line:
 
-Line
-****
+line
+====
 
 Line plots show the relationship between two numerical features, 
 optionally grouped by categorical features.
@@ -64,7 +64,7 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
      - :ref:`facet wrap <line_facets>`
 
 Simple example
-==============
+--------------
 
 A line plot showing the relationship between ``timepoint`` on the X axis and ``signal`` on the Y axis for the ``fmri.csv`` dataset:
 
@@ -83,7 +83,7 @@ The output of the above command is written to ``line.timepoint.signal.png``.
 .. _line_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for line plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -95,7 +95,7 @@ arguments:
 .. _line_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -107,7 +107,7 @@ Line plots show an indepdent numerical feature on the X axis and a depdendent nu
 .. _line_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -146,8 +146,8 @@ In the following example the classes of ``event`` are displayed in the order ``c
 
 .. _line_log:
 
-Log scale of X and Y axis 
-=========================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -173,8 +173,8 @@ For example, the X axis can be plotted in log scale like so:
 
 .. _line_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -201,7 +201,7 @@ For example, you can display range-limited range for the ``timepoint`` feature l
 .. _line_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

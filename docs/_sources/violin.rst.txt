@@ -1,7 +1,7 @@
 .. _violin:
 
-Violin
-*********
+violin
+======
 
 Violin plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 
@@ -63,7 +63,7 @@ Similar functionality to violin plots are provided by:
  * :doc:`Boxen plots <boxen/>` 
 
 Simple example
-==============
+--------------
 
 Violin plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
@@ -97,7 +97,7 @@ The output of the above command is written to ``titanic.age.class.violin.png``:
 .. _violin_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for violin plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -109,7 +109,7 @@ arguments:
 .. _violin_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -149,8 +149,8 @@ where the boxes are plotted horizontally:
 
 .. _violin_order:
 
-Controlling the order of the plotted violin columns
-===================================================
+Controlling the order of the violins 
+------------------------------------
 
 .. code-block:: 
 
@@ -174,7 +174,7 @@ In the following example the violin columns of the ``class`` feature are display
 .. _violin_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -226,8 +226,8 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. _violin_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -247,8 +247,8 @@ For example, you can display a log scale violin plot for the ``age`` feature gro
 
 .. _violin_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -271,7 +271,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _violin_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

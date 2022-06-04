@@ -1,7 +1,7 @@
 .. _hist:
 
-Histogram
-*********
+hist (histogram)
+================
 
 Plot distributions of selected numerical or categorical features as histograms.
 
@@ -85,7 +85,7 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
 .. _hist_example:
 
 Simple examples
-===============
+---------------
 
 Plot a histogram of the ``tip`` amount from the ``tips.csv`` input file:
 
@@ -100,7 +100,6 @@ The output of the above command is written to ``hist.tip.png``:
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set
-
 
 Plot a count of the different categorical values in the ``day`` feature:
 
@@ -119,7 +118,7 @@ The output of the above command is written to ``hist.day.png``:
 .. _hist_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for histograms can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -131,7 +130,7 @@ arguments:
 .. _hist_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -169,7 +168,7 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
 .. _hist_bivariate:
 
 Histogram of two features (bivariate heatmaps)
-==============================================
+----------------------------------------------
 
 Bivariate histograms (two features) can be plotted by specifying both ``-x`` and ``-y``.
 
@@ -189,8 +188,8 @@ Bivariate histograms also work with categorical variables and combinations of nu
 
 .. _hist_bins:
 
-Controlling the number of bins used
-===================================
+Number of bins 
+--------------
 
 For numerical features, by default hatch will try to automatically pick an appropriate number of bins for the
 selected feature.
@@ -210,8 +209,8 @@ argument like so:
 
 .. _hist_binwidth:
 
-Controlling the width of bins 
-=============================
+Width of bins 
+-------------
 
 For numerical features, by default hatch will try to automatically pick an appropriate bin width for the
 selected feature.
@@ -234,7 +233,7 @@ Note that ``--binwidth`` overrides the ``--bins`` parameter.
 .. _hist_cumulative:
 
 Cumulative histograms 
-=====================
+---------------------
 
 Cumulative histograms can be plotted with the ``--cumulative`` argument.  
 
@@ -251,7 +250,7 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
 .. _hist_hue:
 
 Show distributions of categorical subsets using hue
-===================================================
+---------------------------------------------------
 
 .. code-block:: 
 
@@ -319,7 +318,7 @@ The following example shows the effect of ``--multiple fill``, where counts are 
 .. _hist_stat:
 
 Histogram statistic
-===================
+-------------------
 
 By default histograms show a count of the number of values in each bin. However this can be changed with the ``--stat {count,frequency,probability,proportion,percent,density}``
 argument
@@ -337,7 +336,7 @@ argument
 .. _hist_indnorm:
 
 Independent normalised statistics
-=================================
+---------------------------------
 
 The ``--stat`` argument allows the use of the following normalising statistics:
 
@@ -378,7 +377,7 @@ And now the same command as above, but with the ``--indnorm`` argument supplied,
 .. _hist_kde:
 
 Kernel density estimate
-=======================
+-----------------------
 
 A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimation>`_ can be plotted with the ``--kde`` argument.   
 
@@ -395,7 +394,7 @@ A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimat
 .. _hist_nofill:
 
 Unfilled histogram bars 
-=======================
+-----------------------
 
 By default histogram bars are shown with solid filled bars. This can be changed with ``--nofill`` which uses unfilled bars instead:
 
@@ -412,7 +411,7 @@ By default histogram bars are shown with solid filled bars. This can be changed 
 .. _hist_element:
 
 Visual style of univariate histograms
-=====================================
+-------------------------------------
 
 By default univariate histograms are visualised as bars. This can be changed with ``--element {bars,step,poly}`` which allows alternative renderings. 
 
@@ -442,8 +441,8 @@ The example below shows the ``poly`` (polygon) visual style, with vertices in th
 
 .. _hist_log:
 
-Log scale of X and Y axes 
-=========================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -464,8 +463,8 @@ The distribution of numerical values can be displayed in log (base 10) scale wit
 
 .. _hist_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -474,7 +473,6 @@ Range limits
 
 The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
-
 .. code-block:: text
 
     hatch hist -x tip --xlim 3 8 < tips.csv 
@@ -482,7 +480,7 @@ The range of displayed numerical distributions can be restricted with ``--xlim``
 .. _hist_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

@@ -1,13 +1,13 @@
-.. _info: 
+.. _describe: 
 
-Summarising input data
-**********************
+describe
+========
 
-Input data can be summarised with the ``info`` command
+Input data can be summarised with the ``describe`` command
 
 .. code-block:: bash
 
-    hatch info <arguments>
+    hatch describe <arguments>
 
 This produces a summary table of features in the input data. By default all features in the 
 input data are sumarised, although this can be changed by :doc:`transforming the data first <info_trans/>`.

@@ -544,7 +544,7 @@ class PointPlot(CommandBase, name="point"):
 
 
 class ScatterPlot(CommandBase, name="scatter"):
-    description = "Scatter plot of two numerical columns."
+    description = "Scatter plot comparing two features as dot plot"
     category = "plotting"
 
     def __init__(self):
@@ -554,9 +554,9 @@ class ScatterPlot(CommandBase, name="scatter"):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[ io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
+               plot_args.order, plot_args.hue_order,
                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-               plot_args.dotsize, plot_args.dotalpha, plot_args.dotlinewidth, plot_args.dotstyle, plot_args.dotsizerange,
+               plot_args.dotsize, plot_args.dotalpha, plot_args.dotlinewidth, plot_args.dotstyle, plot_args.dotsizerange, plot_args.dotlinecolour,
                plot_args.vlines, plot_args.hlines],
             add_help=False)
         self.options = parser.parse_args(args)
@@ -568,6 +568,10 @@ class ScatterPlot(CommandBase, name="scatter"):
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         facet_kws = { 'legend_out': True }
         kwargs = {}
+        if options.dotlinewidth is not None:
+            kwargs['linewidth'] = options.dotlinewidth
+        if options.dotlinecolour is not None:
+            kwargs['edgecolor'] = options.dotlinecolour 
         sizes = None
         if options.dotsizerange is not None:
             sizes=tuple(options.dotsizerange)

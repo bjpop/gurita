@@ -1,7 +1,7 @@
 .. _strip:
 
-Strip
-*****
+strip
+=====
 
 Strip plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 
@@ -66,7 +66,7 @@ Similar functionality to strip plots are provided by:
  * :doc:`Boxen plots <boxen/>` 
 
 Simple example
-==============
+--------------
 
 Strip plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
@@ -100,7 +100,7 @@ The output of the above command is written to ``titanic.age.class.strip.png``:
 .. _strip_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for strip plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -112,7 +112,7 @@ arguments:
 .. _strip_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -152,8 +152,8 @@ where the boxes are plotted horizontally:
 
 .. _strip_order:
 
-Controlling the order of the plotted strip columns
-==================================================
+Controlling the order of the strips
+-----------------------------------
 
 .. code-block:: 
 
@@ -177,7 +177,7 @@ In the following example the strip columns of the ``class`` feature are displaye
 .. _strip_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -244,11 +244,10 @@ the order of both the ``class`` and ``sex`` categorical features:
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
 
-
 .. _strip_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale 
+---------
 
 .. code-block:: 
 
@@ -268,8 +267,8 @@ For example, you can display a log scale strip plot for the ``age`` feature grou
 
 .. _strip_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -292,7 +291,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _strip_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

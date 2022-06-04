@@ -1,7 +1,7 @@
 .. _boxen:
 
-Boxen
-*****
+boxen
+=====
 
 Boxen plots show the distribution of values in a numerical feature optionally grouped by categorical features.
 
@@ -74,7 +74,7 @@ Similar functionality to boxen plots are provided by:
  * :doc:`Strip plots <strip/>` 
 
 Simple example
-==============
+--------------
 
 Boxen plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
@@ -108,7 +108,7 @@ The output of the above command is written to ``boxen.class.age.png``:
 .. _boxen_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for boxen plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -120,7 +120,7 @@ arguments:
 .. _boxen_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -160,8 +160,8 @@ where the boxes are plotted horizontally:
 
 .. _boxen_order:
 
-Controlling the order of the plotted boxen columns
-==================================================
+Controlling the order of the boxes
+----------------------------------
 
 .. code-block:: 
 
@@ -185,7 +185,7 @@ In the following example the boxen columns of the ``class`` feature are displaye
 .. _boxen_hue:
 
 Grouping features with hue 
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -237,8 +237,8 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. _boxen_log:
 
-Log scale of numerical distribution 
-===================================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -258,8 +258,8 @@ For example, you can display a log scale boxen plot for the ``age`` feature grou
 
 .. _boxen_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -282,7 +282,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 .. _boxen_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

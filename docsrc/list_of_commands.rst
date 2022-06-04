@@ -42,7 +42,7 @@ Plotting commands
      - Plot count of categorical columns using bars
    * - :doc:`heatmap <heatmap>`
      - Heatmap of two categorical columns
-   * - :doc:`hist <histogram>`
+   * - :doc:`hist <hist>`
      - Histogram of numerical or categorical feature
    * - :doc:`line <line>`
      - Line plot of numerical feature

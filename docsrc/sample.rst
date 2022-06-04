@@ -1,5 +1,7 @@
-Random sampling
-***************
+.. _sample:
+
+sample
+======
 
 Input rows can be randomly sampled using the ``--sample NUM`` argument. If NUM >= 1 then sample NUM rows, otherwise if 0 <= NUM < 1, then sample NUM fraction of rows.
 

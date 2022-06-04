@@ -129,89 +129,22 @@ Command chaining allows complex transformations to be combined together and make
 
    command_line_syntax 
    list_of_commands 
-
-.. toctree::
-   :caption: Input and Output 
-   :hidden:
-
    input_output 
    input
    output
    missing
    plotting 
-
-.. toctree::
-   :caption: Plotting 
-   :hidden:
-
-   bar
-   box
-   boxen
-   clustermap
-   count
-   heatmap
-   histogram 
-   line
-   lmplot
-   pair
-   point
-   scatter
-   strip
-   swarm
-   violin
-
-.. toctree::
-   :hidden:
-   :maxdepth: 1
-   :caption: Facets 
-
+   aesthetics 
    facets 
 
 .. toctree::
+   :titlesonly:
    :hidden:
-   :maxdepth: 1
-   :caption: Plot aesthetics 
+   :caption: Commands 
 
-   aesthetics 
-
-.. toctree::
-   :hidden:
-   :maxdepth: 1
-   :caption: Transformation 
-
-   corr
-   cut
-   dropna
-   eval
-   filter
-   gmm
-   head
-   isnorm
-   kmeans
-   melt
-   outlier
-   pca
-   pivot
-   sample
-   sort
-   tail
-   zscore
-
-.. toctree::
-   :caption: Summary information 
-   :hidden:
-
-   describe 
-   pretty
-   unique
-
-
-.. toctree::
-   :hidden:
-   :maxdepth: 1
-   :caption: Advanced topics 
-
-   docker
+   plotting_commands
+   transformation_commands
+   summary_commands
 
 .. toctree::
    :hidden:

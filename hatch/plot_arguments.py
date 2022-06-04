@@ -142,8 +142,13 @@ dotalpha.add_argument(
 
 dotlinewidth = argparse.ArgumentParser(add_help=False)
 dotlinewidth.add_argument(
-    '--dotlinewidth',  metavar='WIDTH', type=int, default=const.DEFAULT_LINEWIDTH,
-    help=f'Line width value for plotted points. Default: %(default)s.')
+    '--dotlinewidth',  metavar='WIDTH', type=float, 
+    help=f'Border line width value for plotted points.')
+
+dotlinecolour = argparse.ArgumentParser(add_help=False)
+dotlinecolour.add_argument(
+    '--dotlinecolour',  metavar='COLOUR', type=str, 
+    help=f'Border line colour plotted points.')
 
 dotstyle = argparse.ArgumentParser(add_help=False)
 dotstyle.add_argument(

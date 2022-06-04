@@ -1,2 +1,4 @@
-Gmm (Gaussian mixture model)
-****************************
+.. _gmm:
+
+gmm (Gaussian mixture model)
+============================

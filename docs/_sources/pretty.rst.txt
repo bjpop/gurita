@@ -1,0 +1,4 @@
+.. _pretty:
+
+pretty
+======

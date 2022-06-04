@@ -1,7 +1,7 @@
 .. _scatter:
 
-Scatter
-*******
+scatter
+=======
 
 Scatter plots show the relationship between two features as a scatter of data points.
 
@@ -15,75 +15,80 @@ When one of the two features being compared is a categorical value the scatter p
 Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html>`_ library function, using the ``kind="scatter"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table 
 
    * - Argument
      - Description
      - Reference
    * - ``-h``
      - display help
-     - :ref:`scatter_help`
-   * - ``-x FEATURE, --xaxis FEATURE``
+     - :ref:`help <scatter_help>`
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`scatter_feature_selection`
-   * - ``-y FEATURE, --yaxis FEATURE``
+     - :ref:`X axis <scatter_feature_selection>`
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`scatter_feature_selection`
+     - :ref:`Y axis <scatter_feature_selection>`
    * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`scatter_hue`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+     - :ref:`hue <scatter_hue>`
+   * - ``--hueorder VALUE [VALUE ...]``
      - order of hue features
-     - :ref:`Hue order <scatter_hueorder>`
+     - :ref:`hue order <scatter_hueorder>`
    * - ``--dotstyle FEATURE``
      - name of categorical feature to use for plotted dot marker style
-     - :ref:`Dot style <scatter_dotstyle>`
+     - :ref:`dot style <scatter_dotstyle>`
    * - ``--dotsize FEATURE``
      - scale the size of plotted dots based on a feature 
-     - :ref:`scatter_dotsize`
+     - :ref:`dot size <scatter_dotsize>`
    * - ``--dotalpha ALPHA``
      - alpha value for plotted points, default: 0.5  
-     - :ref:`scatter_dotalpha_linewidth`
+     - :ref:`dot alpha <scatter_dotalpha_linewidth>`
    * - ``--dotlinewidth WIDTH``
      - line width value for plotted points, default: 0
-     - :ref:`scatter_dotalpha_linewidth`
+     - :ref:`dot line width <scatter_dotalpha_linewidth>`
    * - ``--logx``
      - log scale X axis 
-     - :ref:`scatter_log`
+     - :ref:`log X axis <scatter_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`scatter_log`
+     - :ref:`log Y axis <scatter_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`scatter_range`
+     - :ref:`limit X axis <scatter_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`scatter_range`
-   * - ``-r FEATURE, --row FEATURE``
+     - :ref:`limit Y axis <scatter_range>`
+   * - * ``-r FEATURE``
+       * ``--row FEATURE``
      - feature to use for facet rows 
-     - :ref:`scatter_facets`
-   * - ``-c FEATURE, --col FEATURE``
+     - :ref:`facet rows <scatter_facets>`
+   * - * ``-c FEATURE``
+       * ``--col FEATURE``
      - feature to use for facet columns 
-     - :ref:`scatter_facets`
+     - :ref:`facet columns <scatter_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`scatter_facets`
+     - :ref:`facet wrap <scatter_facets>`
 
 .. _scatter_example:
 
 Simple example
-==============
+--------------
 
 Scatter plot of the ``tip`` numerical feature compared to the ``total_bill`` numerical feature from the ``tips.csv`` input file:
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip -- tips.csv 
+    hatch scatter -x total_bill -y tip < tips.csv 
 
-The output of the above command is written to ``tips.tip.total_bill.scatter.png``:
+The output of the above command is written to ``scatter.total_bill.tip.png``:
 
-.. image:: ../images/tips.tip.total_bill.scatter.png
+.. image:: ../images/scatter.total_bill.tip.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -92,7 +97,7 @@ The output of the above command is written to ``tips.tip.total_bill.scatter.png`
 .. _scatter_help:
 
 Getting help
-============
+------------
 
 The full set of command line arguments for scatter plots can be obtained with the ``-h`` or ``--help``
 arguments:
@@ -104,7 +109,7 @@ arguments:
 .. _scatter_feature_selection:
 
 Selecting features to plot
-==========================
+--------------------------
 
 .. code-block:: 
 
@@ -117,9 +122,9 @@ Scatter plots can also be used to compare a numerical feature against a categori
 
 .. code-block::
 
-    hatch scatter -x day -y tip -- tips.csv
+    hatch scatter -x day -y tip < tips.csv
 
-.. image:: ../images/tips.tip.day.scatter.png
+.. image:: ../images/scatter.day.tip.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -132,7 +137,7 @@ Swapping ``-x`` and ``-y`` in the above command would result in a horizontal plo
 .. _scatter_hue:
 
 Colouring data points with hue 
-==============================
+------------------------------
 
 .. code-block:: 
 
@@ -145,9 +150,9 @@ coloured by their corresponding categorical ``day`` value:
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --hue day -- tips.csv 
+    hatch scatter -x total_bill -y tip --hue day < tips.csv 
 
-.. image:: ../images/tips.tip.total_bill.day.scatter.png
+.. image:: ../images/scatter.total_bill.tip.day.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -159,9 +164,9 @@ argument:
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --hue size -- tips.csv 
+    hatch scatter -x total_bill -y tip --hue size < tips.csv 
 
-.. image:: ../images/tips.tip.total_bill.size.scatter.png
+.. image:: ../images/scatter.total_bill.tip.size.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -174,8 +179,8 @@ the hue groups in the legend.
 
 .. _scatter_dotstyle:
 
-Dot style based on categorical feature
-======================================
+Dot style 
+---------
 
 .. code-block:: 
 
@@ -187,9 +192,9 @@ The ``--dotstyle`` argument lets you change the shape of dots based on a categor
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --hue day --dotstyle sex -- tips.csv
+    hatch scatter -x total_bill -y tip --hue day --dotstyle sex < tips.csv
 
-.. image:: ../images/tips.tip.total_bill.scatter.dotstyle.png
+.. image:: ../images/scatter.total_bill.tip.day.dotstyle.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -202,8 +207,8 @@ the underlying feature.
 
 .. _scatter_dotsize:
 
-Scaling dot size base on feature
-================================
+Dot size
+--------
 
 .. code-block:: 
 
@@ -211,37 +216,44 @@ Scaling dot size base on feature
 
 The size of plotted dots in the scatter plot can be scaled according the a numerical feature with the ``--dotsize`` argument.
 
-In the following example, the dot size is scaled according to the value of the ``size`` feature
-in ``tips.csv``:
+The following example generates a scatter plot comparing ``sepal_length`` to ``sepal_width`` using the ``iris.csv`` dataset. The size of dots in the
+plot is scaled according to the ``petal_length`` feature.
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --dotsize size -- tips.csv
+    hatch scatter -x sepal_length -y sepal_width --dotsize petal_length < iris.csv  
 
-.. image:: ../images/tips.tip.total_bill.scatter.dotsize.png
-       :width: 600px
-       :height: 600px
+.. image:: ../images/scatter.sepal_length.sepal_width.png 
+       :width: 600px 
+       :height: 500px 
        :align: center
-       :alt: Scatter plot comparing tip and total_bill with dot size scaled by size 
+       :alt: Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset 
 
 .. _scatter_dotalpha_linewidth:
 
-Dot alpha transparency and border linewidth
-===========================================
+Dot transparency, border line width, border line colour
+-------------------------------------------------------
 
 .. code-block:: 
 
     --dotalpha ALPHA 
     --dotlinewidth WIDTH
+    --dotlinecolour COLOUR
 
-By default the alpha transparency value of scatter plot dots is set to 0.5, and the dot border linewidth is set to 0. These can be overridden with the ``--dotalpha`` and ``--dotlinewidth`` arguments
-respectively.
+The transparency of dots is defined by the *dot alpha* value, which is a number ranging from 0 to 1, where 0 is fully transparent and 1 is
+fully opaque.
 
-In the following example, the dot alpha is set to 1 and the boder line width is set to 1.
+By default the alpha transparency value of scatter plot dots is 0.8. This can be
+overridden with ``--dotalpha``.
+
+Dots are plotted with a thin white border by default. The border line width can be changed with ``--dotlinewidth`` and the border line colour can 
+be changed with ``--dotlinecolour``.
+
+In the following example, the dot alpha is set to 1, the border line width is set to 0.5, and the border line colour is set to black.
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 1 -- tips.csv
+    hatch scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black < tips.csv
 
 .. image:: ../images/tips.tip.total_bill.scatter.dotalpha.dotlinewidth.png
        :width: 600px
@@ -251,8 +263,8 @@ In the following example, the dot alpha is set to 1 and the boder line width is 
 
 .. _scatter_log:
 
-Log scale of X and Y axes 
-=========================
+Log scale
+---------
 
 .. code-block:: 
 
@@ -263,12 +275,12 @@ The distribution of numerical values can be displayed in log (base 10) scale wit
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --logy -- tips.csv 
+    hatch scatter -x total_bill -y tip --logy < tips.csv 
 
 .. _scatter_range:
 
-Range limits
-============
+Axis range limits
+-----------------
 
 .. code-block:: 
 
@@ -277,15 +289,14 @@ Range limits
 
 The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
-
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --xlim 20 40  -- tips.csv 
+    hatch scatter -x total_bill -y tip --xlim 20 40 < tips.csv 
 
 .. _scatter_facets:
 
 Facets
-======
+------
 
 .. code-block:: 
 

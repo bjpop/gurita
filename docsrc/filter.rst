@@ -1,5 +1,7 @@
-Filter
-******
+.. _filter:
+
+filter
+======
 
 Input rows can be filtered using the ``--filter EXPR`` option, where ``EXPR`` is a logical (boolean) expression that determines which rows are retained. 
 
@@ -15,7 +17,7 @@ to Hatch. In this case a histogram will be generated for the ``age`` column in `
 Columns can be referred to by their name, such as ``embark_town``. Literal categorical values are written as strings inside quotation marks, such as ``"Cherbourg"``.
 
 Filter expression syntax
-========================
+------------------------
 
 Hatch row filtering uses the same syntax as the `Pandas data frame query method <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html>`_, and generally resembles
 Python notation.
