@@ -142,6 +142,7 @@ Command chaining allows complex transformations to be combined together and make
    :hidden:
    :caption: Commands 
 
+   io_commands
    plotting_commands
    transformation_commands
    summary_commands
