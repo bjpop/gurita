@@ -348,11 +348,11 @@ fully opaque.</p>
 overridden with <code class="docutils literal notranslate"><span class="pre">--dotalpha</span></code>.</p>
 <p>Dots are plotted with a thin white border by default. The border line width can be changed with <code class="docutils literal notranslate"><span class="pre">--dotlinewidth</span></code> and the border line colour can
 be changed with <code class="docutils literal notranslate"><span class="pre">--dotlinecolour</span></code>.</p>
-<p>In the following example, the dot alpha is set to 1, the border line width is set to 0.5, and the border line colour is set to black.</p>
+<p>In the following example, the dot alpha is set to 1 (fully opaque), the border line width is set to 0.5, and the border line colour is set to black.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --dotalpha <span class="m">1</span> --dotlinewidth <span class="m">0</span>.5 --dotlinecolour black &lt; tips.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/tips.tip.total_bill.scatter.dotalpha.dotlinewidth.png"><img alt="Scatter plot comparing tip and total_bill with dot alpha set to 1 and dot line width set to 1" class="align-center" src="_images/tips.tip.total_bill.scatter.dotalpha.dotlinewidth.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/scatter.total_bill.tip.alpha.width.colour.png"><img alt="Scatter plot comparing tip and total_bill with dot alpha set to 1, dot line width set to 1, and dot line colour set to black" class="align-center" src="_images/scatter.total_bill.tip.alpha.width.colour.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -364,8 +364,13 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 </pre></div>
 </div>
 <p>The distribution of numerical values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --logy &lt; tips.csv
+<p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> on the X axis is plotted in log scale:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --logx &lt; tips.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/scatter.total_bill.tip.logx.png"><img alt="Scatter plot comparing tip and total_bill with the X axis in log scale." class="align-center" src="_images/scatter.total_bill.tip.logx.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="axis-range-limits">
@@ -374,9 +379,14 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 <span class="o">--</span><span class="n">ylim</span> <span class="n">LOW</span> <span class="n">HIGH</span>
 </pre></div>
 </div>
-<p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.</p>
+<p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the (inclusive) range to be displayed.</p>
+<p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that the range of <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> on the X axis is limited to values between 20 and 40 inclusive:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --xlim <span class="m">20</span> <span class="m">40</span> &lt; tips.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/scatter.total_bill.tip.xlim.png"><img alt="Scatter plot comparing tip and total_bill with the X axis range limited to values between 20 and 40 inclusively." class="align-center" src="_images/scatter.total_bill.tip.xlim.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="facets">
@@ -389,6 +399,14 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 <p>Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is
 further categorised by up to 2 more categorical features.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
+<p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that facet column is determined by the value of the <code class="docutils literal notranslate"><span class="pre">smoker</span></code> feature.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --col smoker &lt; tips.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/scatter.total_bill.tip.smoker.png"><img alt="Scatter plot comparing tip and total_bill with facet columns determined by the value of smoker" class="align-center" src="_images/scatter.total_bill.tip.smoker.png" style="width: 600px; height: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 </section>
 

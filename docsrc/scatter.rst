@@ -282,17 +282,17 @@ overridden with ``--dotalpha``.
 Dots are plotted with a thin white border by default. The border line width can be changed with ``--dotlinewidth`` and the border line colour can 
 be changed with ``--dotlinecolour``.
 
-In the following example, the dot alpha is set to 1, the border line width is set to 0.5, and the border line colour is set to black.
+In the following example, the dot alpha is set to 1 (fully opaque), the border line width is set to 0.5, and the border line colour is set to black.
 
 .. code-block:: bash
 
     hatch scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black < tips.csv
 
-.. image:: ../images/tips.tip.total_bill.scatter.dotalpha.dotlinewidth.png
+.. image:: ../images/scatter.total_bill.tip.alpha.width.colour.png 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Scatter plot comparing tip and total_bill with dot alpha set to 1 and dot line width set to 1
+       :alt: Scatter plot comparing tip and total_bill with dot alpha set to 1, dot line width set to 1, and dot line colour set to black
 
 |
 
@@ -308,9 +308,19 @@ Log scale
 
 The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
 
+For example the following command produces a scatter plot comparing ``total_bill`` with ``tip``, such that ``total_bill`` on the X axis is plotted in log scale:
+
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --logy < tips.csv 
+    hatch scatter -x total_bill -y tip --logx < tips.csv 
+
+.. image:: ../images/scatter.total_bill.tip.logx.png  
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Scatter plot comparing tip and total_bill with the X axis in log scale. 
+
+|
 
 .. _scatter_range:
 
@@ -322,11 +332,21 @@ Axis range limits
   --xlim LOW HIGH 
   --ylim LOW HIGH
 
-The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
+The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the (inclusive) range to be displayed.
+
+For example the following command produces a scatter plot comparing ``total_bill`` with ``tip``, such that the range of ``total_bill`` on the X axis is limited to values between 20 and 40 inclusive: 
 
 .. code-block:: bash
 
     hatch scatter -x total_bill -y tip --xlim 20 40 < tips.csv 
+
+.. image:: ../images/scatter.total_bill.tip.xlim.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Scatter plot comparing tip and total_bill with the X axis range limited to values between 20 and 40 inclusively. 
+
+|
 
 .. _scatter_facets:
 
@@ -343,3 +363,17 @@ Scatter plots can be further divided into facets, generating a matrix of scatter
 further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+For example the following command produces a scatter plot comparing ``total_bill`` with ``tip``, such that facet column is determined by the value of the ``smoker`` feature. 
+
+.. code-block:: bash
+
+    hatch scatter -x total_bill -y tip --col smoker < tips.csv
+
+.. image:: ../images/scatter.total_bill.tip.smoker.png  
+       :width: 600px
+       :height: 300px
+       :align: center
+       :alt: Scatter plot comparing tip and total_bill with facet columns determined by the value of smoker 
+
+|
