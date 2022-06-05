@@ -57,7 +57,7 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - order of hue features
      - :ref:`hue order <bar_hueorder>`
    * - ``--logx``
-     - log scale X axis (only relevant with ``--orient h`` 
+     - log scale X axis (only relevant with ``--orient h``)
      - :ref:`log X axis <bar_log>`
    * - ``--logy``
      - log scale Y axis 

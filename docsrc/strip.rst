@@ -3,7 +3,7 @@
 strip
 =====
 
-Strip plots show the distribution of values in a numerical feature optionally grouped by categorical features.
+Strip plots show the distribution of values in a numerical feature optionally grouped by categorical features, where dots are used to show the underlying data points.
 
 .. code-block:: bash
 
@@ -12,51 +12,62 @@ Strip plots show the distribution of values in a numerical feature optionally gr
 Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="strip"`` option.
 
 .. list-table::
-   :widths: 1 2 1
+   :widths: 25 20 10
    :header-rows: 1
+   :class: tight-table
 
    * - Argument
      - Description
      - Reference
    * - ``-h``
      - display help
-     - :ref:`strip_help`
-   * - ``-x FEATURE, --xaxis FEATURE``
+     - :ref:`help <strip_help>`
+   * - * ``-x FEATURE``
+       * ``--xaxis FEATURE``
      - select feature for the X axis
-     - :ref:`strip_feature_selection`
-   * - ``-y FEATURE, --yaxis FEATURE``
+     - :ref:`X axis <strip_feature_selection>`
+   * - * ``-y FEATURE``
+       * ``--yaxis FEATURE``
      - select feature for the Y axis
-     - :ref:`strip_feature_selection`
+     - :ref:`Y axis <strip_feature_selection>`
    * - ``--orient {v,h}``
      - Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.
-     - :ref:`Box orientation <strip_orient>`
+     - :ref:`orient <strip_orient>`
+   * - ``--order VALUE [VALUE ...]``
+     - controlling the order of the plotted strips 
+     - :ref:`order <strip_order>`
    * - ``--hue FEATURE``
      - group features by hue
-     - :ref:`strip_hue`
+     - :ref:`hue <strip_hue>`
    * - ``--dodge``
      - separate hue levels along the categorical axis  
      - :ref:`dodge <strip_dodge>`
    * - ``--hueorder FEATURE [FEATURE ...]``
      - order of hue features
-     - :ref:`Hue order <strip_hueorder>`
+     - :ref:`hue order <strip_hueorder>`
+   * - ``--logx``
+     - log scale X axis (only relevant with ``--orient h``) 
+     - :ref:`log X axis <strip_log>`
    * - ``--logy``
      - log scale Y axis 
-     - :ref:`strip_log`
+     - :ref:`log Y axis <strip_log>`
    * - ``--xlim BOUND BOUND``
      - range limit X axis 
-     - :ref:`strip_range`
+     - :ref:`limit X axis <strip_range>`
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
-     - :ref:`strip_range`
-   * - ``--row FEATURE, -r FEATURE``
+     - :ref:`limit Y axis <strip_range>`
+   * - * ``--row FEATURE``
+       * ``-r FEATURE``
      - feature to use for facet rows 
-     - :ref:`strip_facets`
-   * - ``--col FEATURE, -c FEATURE``
+     - :ref:`facet rows <strip_facets>`
+   * - * ``--col FEATURE``
+       * ``-c FEATURE``
      - feature to use for facet columns 
-     - :ref:`strip_facets`
+     - :ref:`facet columns <strip_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
-     - :ref:`strip_facets`
+     - :ref:`facet wrap <strip_facets>`
 
 Similar functionality to strip plots are provided by:
 
@@ -72,11 +83,11 @@ Strip plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
-    hatch strip -y age -- titanic.csv 
+    hatch strip -y age < titanic.csv 
 
-The output of the above command is written to ``titanic.age.strip.png``:
+The output of the above command is written to ``strip.age.png``:
 
-.. image:: ../images/titanic.age.strip.png
+.. image:: ../images/strip.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -89,11 +100,11 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch strip -y age -x class -- titanic.csv 
+    hatch strip -y age -x class < titanic.csv 
 
-The output of the above command is written to ``titanic.age.class.strip.png``:
+The output of the above command is written to ``strip.class.age.png``:
 
-.. image:: ../images/titanic.age.class.strip.png
+.. image:: ../images/strip.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -146,9 +157,9 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch strip -x age -y class --orient h -- titanic.csv
+    hatch strip -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/titanic.class.age.strip.horizontal.png
+.. image:: ../images/strip.age.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -163,7 +174,7 @@ Controlling the order of the strips
 
 .. code-block:: 
 
-    --order FEATURE [FEATURE ...]
+    --order VALUE [VALUE ...]
 
 By default the order of the categorical features displayed in the strip plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
@@ -172,9 +183,9 @@ In the following example the strip columns of the ``class`` feature are displaye
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --order First Second Third -- titanic.csv
+    hatch strip -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/titanic.age.class.strip.order.png
+.. image:: ../images/strip.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -197,10 +208,10 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --hue sex -- titanic.csv
+    hatch strip -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.strip.png
-       :width: 700px
+.. image:: ../images/strip.class.age.sex.png 
+       :width: 600px
        :height: 600px
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
@@ -216,10 +227,10 @@ The ``--dodge`` argument will separate hue levels along the categorical axis, ra
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --hue sex --dodge -- titanic.csv
+    hatch strip -y age -x class --hue sex --dodge < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.strip.dodge.png
-       :width: 700px
+.. image:: ../images/strip.class.age.sex.dodge.png 
+       :width: 600px
        :height: 600px
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the sex data separated into strips
@@ -235,13 +246,13 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --hue sex --hueorder female male -- titanic.csv
+    hatch strip -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.strip.hueorder.png
-       :width: 700px
+.. image:: ../images/strip.class.age.sex.hueorder.png 
+       :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the order of sex values specified 
 
 |
 
@@ -250,13 +261,13 @@ the order of both the ``class`` and ``sex`` categorical features:
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+    hatch strip -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/titanic.age.class.sex.strip.order.hueorder.png
-       :width: 700px
+.. image:: ../images/strip.class.age.sex.order.hueorder.png 
+       :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the order of class and sex values specified 
 
 |
 
@@ -279,7 +290,15 @@ For example, you can display a log scale strip plot for the ``age`` feature grou
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --logy -- titanic.csv 
+    hatch strip -y age -x class --logy < titanic.csv 
+
+.. image:: ../images/strip.class.age.logy.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class, with the Y axis in log scale 
+
+|
 
 .. _strip_range:
 
@@ -302,7 +321,13 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --ylim 10 30 -- titanic.csv
+    hatch strip -y age -x class --ylim 10 30 < titanic.csv
+
+.. image:: ../images/strip.class.age.ylim.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class, with the Y axis limited to the range 10 to 30 inclusive
 
 .. _strip_facets:
 
@@ -319,3 +344,15 @@ Strip plots can be further divided into facets, generating a matrix of strip plo
 further categorised by up to 2 more categorical features.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+.. code-block:: bash
+
+    hatch strip -y age -x class --col sex < titanic.csv
+
+.. image:: ../images/strip.class.age.sex.facet.png
+       :width: 600px
+       :height: 300px 
+       :align: center
+       :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class, with facet columns determined by sex 
+
+|
