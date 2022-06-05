@@ -131,8 +131,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE [FEATURE ...], --xaxis FEATURE [FEATURE ...]
-  -y FEATURE [FEATURE ...], --yaxis FEATURE [FEATURE ...]
+  -x FEATURE, --xaxis FEATURE
+  -y FEATURE, --yaxis FEATURE
 
 Strip plots can be plotted for numerical features and optionally grouped by categorical features.
 
