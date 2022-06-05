@@ -54,8 +54,6 @@ Hatch will save the output plot in a file called ``scatter.sepal_length.petal_le
    If you don't want this behaviour then you can specify a file name yourself and Hatch will write the
    plot to that file regardless of whether it already exists.
 
-.. _out:
-
 Specifying an output file name explicitly
 -----------------------------------------
 

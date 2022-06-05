@@ -45,12 +45,18 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--dotsize FEATURE``
      - scale the size of plotted dots based on a feature 
      - :ref:`dot size <scatter_dotsize>`
+   * - ``--dotsizerange BOUND BOUND``
+     - size range for plotted point size based on numerical feature [LOW,HIGH]  
+     - :ref:`dot size range <scatter_dotsize>`
    * - ``--dotalpha ALPHA``
-     - alpha value for plotted points, default: 0.5  
+     - alpha value for plotted points, default: 0.8  
      - :ref:`dot alpha <scatter_dotalpha_linewidth>`
    * - ``--dotlinewidth WIDTH``
-     - line width value for plotted points, default: 0
-     - :ref:`dot line width <scatter_dotalpha_linewidth>`
+     - border line width value for plotted points
+     - :ref:`dot line width <scatter_dotalpha_linewidth_linecolour>`
+   * - ``--dotlinecolour COLOUR``
+     - border line colour plotted point  
+     - :ref:`dot border colour <scatter_dotalpha_linewidth_linecolour>`
    * - ``--logx``
      - log scale X axis 
      - :ref:`log X axis <scatter_log>`
@@ -229,7 +235,7 @@ plot is scaled according to the ``petal_length`` feature.
        :align: center
        :alt: Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset 
 
-.. _scatter_dotalpha_linewidth:
+.. _scatter_dotalpha_linewidth_linecolour:
 
 Dot transparency, border line width, border line colour
 -------------------------------------------------------
