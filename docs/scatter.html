@@ -172,13 +172,21 @@
 <td><p>scale the size of plotted dots based on a feature</p></td>
 <td><p><a class="reference internal" href="#scatter-dotsize"><span class="std std-ref">dot size</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotalpha</span> <span class="pre">ALPHA</span></code></p></td>
-<td><p>alpha value for plotted points, default: 0.5</p></td>
-<td><p><a class="reference internal" href="#scatter-dotalpha-linewidth"><span class="std std-ref">dot alpha</span></a></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotsizerange</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
+<td><p>size range for plotted point size based on numerical feature [LOW,HIGH]</p></td>
+<td><p><a class="reference internal" href="#scatter-dotsize"><span class="std std-ref">dot size range</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dotlinewidth</span> <span class="pre">WIDTH</span></code></p></td>
-<td><p>line width value for plotted points, default: 0</p></td>
-<td><p><a class="reference internal" href="#scatter-dotalpha-linewidth"><span class="std std-ref">dot line width</span></a></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dotalpha</span> <span class="pre">ALPHA</span></code></p></td>
+<td><p>alpha value for plotted points, default: 0.8</p></td>
+<td><p><a class="reference internal" href="#scatter-dotalpha-linewidth-linecolour"><span class="std std-ref">dot alpha</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotlinewidth</span> <span class="pre">WIDTH</span></code></p></td>
+<td><p>border line width value for plotted points</p></td>
+<td><p><a class="reference internal" href="#scatter-dotalpha-linewidth-linecolour"><span class="std std-ref">dot line width</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dotlinecolour</span> <span class="pre">COLOUR</span></code></p></td>
+<td><p>border line colour plotted point</p></td>
+<td><p><a class="reference internal" href="#scatter-dotalpha-linewidth-linecolour"><span class="std std-ref">dot border colour</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
 <td><p>log scale X axis</p></td>
@@ -301,7 +309,7 @@ plot is scaled according to the <code class="docutils literal notranslate"><span
 <a class="reference internal image-reference" href="_images/scatter.sepal_length.sepal_width.png"><img alt="Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset" class="align-center" src="_images/scatter.sepal_length.sepal_width.png" style="width: 600px; height: 500px;" /></a>
 </section>
 <section id="dot-transparency-border-line-width-border-line-colour">
-<span id="scatter-dotalpha-linewidth"></span><h2>Dot transparency, border line width, border line colour<a class="headerlink" href="#dot-transparency-border-line-width-border-line-colour" title="Permalink to this headline"></a></h2>
+<span id="scatter-dotalpha-linewidth-linecolour"></span><h2>Dot transparency, border line width, border line colour<a class="headerlink" href="#dot-transparency-border-line-width-border-line-colour" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dotalpha</span> <span class="n">ALPHA</span>
 <span class="o">--</span><span class="n">dotlinewidth</span> <span class="n">WIDTH</span>
 <span class="o">--</span><span class="n">dotlinecolour</span> <span class="n">COLOUR</span>

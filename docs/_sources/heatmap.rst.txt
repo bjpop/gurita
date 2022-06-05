@@ -9,7 +9,7 @@ Heatmap showing the relationship between two categorical features and a numerica
 
     hatch heatmap <arguments>
 
-Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/generated/seaborn.heatmap.html/>`_ library function.
+Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/generated/seaborn.heatmap.html/>`__ library function.
 
 .. list-table::
    :widths: 1 2 1
@@ -79,6 +79,10 @@ Selecting features to plot
   -y FEATURE, --yaxis FEATURE
 
 
+.. _heatmap_cmap:
+
+Colour palette
+--------------
 
 .. _heatmap_log:
 

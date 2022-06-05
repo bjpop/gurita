@@ -108,9 +108,8 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch describe &lt;arguments&gt;
 </pre></div>
 </div>
-<p>This produces a summary table of features in the input data. By default all features in the
-input data are sumarised, although this can be changed by <span class="xref std std-doc">transforming the data first</span>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info titanic.csv
+<p>This produces a summary table of features in the input data.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch describe &lt; titanic.csv
 </pre></div>
 </div>
 <p>The output for the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is as follows:</p>
@@ -180,10 +179,8 @@ rows: 891, cols: 15
 the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file.</p>
 <section id="summary-information-for-transformed-input-data">
 <span id="info-trans"></span><h2>Summary information for transformed input data<a class="headerlink" href="#summary-information-for-transformed-input-data" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--info</span></code> option also works on input data that as been transformed using one of Hatch’s <a class="reference internal" href="transform.html"><span class="doc">data manipulation options</span></a>.
-In this case the data summary is provided after those transformations have been performed.</p>
 <p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> features in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch info --features age class -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch describe --columns age class &lt; titanic.csv
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>

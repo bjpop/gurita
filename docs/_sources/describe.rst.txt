@@ -9,12 +9,11 @@ Input data can be summarised with the ``describe`` command
 
     hatch describe <arguments>
 
-This produces a summary table of features in the input data. By default all features in the 
-input data are sumarised, although this can be changed by :doc:`transforming the data first <info_trans/>`.
+This produces a summary table of features in the input data. 
 
 .. code-block:: bash
 
-   hatch info titanic.csv
+   hatch describe < titanic.csv
 
 The output for the file ``titanic.csv`` is as follows:
 
@@ -90,14 +89,11 @@ the ``titanic.csv`` file.
 Summary information for transformed input data 
 ----------------------------------------------
 
-The ``--info`` option also works on input data that as been transformed using one of Hatch's :doc:`data manipulation options <transform/>`.
-In this case the data summary is provided after those transformations have been performed.
-
 As an example, The following commmand only shows summary information for the ``age`` and ``class`` features in the file ``titanic.csv``:
 
 .. code-block:: bash
 
-    hatch info --features age class -- titanic.csv
+    hatch describe --columns age class < titanic.csv
 
 The output of the above command is as follows:
 

@@ -50,7 +50,7 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
      - :ref:`dot size range <scatter_dotsize>`
    * - ``--dotalpha ALPHA``
      - alpha value for plotted points, default: 0.8  
-     - :ref:`dot alpha <scatter_dotalpha_linewidth>`
+     - :ref:`dot alpha <scatter_dotalpha_linewidth_linecolour>`
    * - ``--dotlinewidth WIDTH``
      - border line width value for plotted points
      - :ref:`dot line width <scatter_dotalpha_linewidth_linecolour>`
