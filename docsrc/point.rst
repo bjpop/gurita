@@ -87,6 +87,8 @@ The output of the above command is written to ``point.class.age.png``:
        :align: center
        :alt: Point plot showing the mean and error of the age feature for each class in the titanic data set
 
+|
+
 .. _point_help:
 
 Getting help
@@ -140,6 +142,8 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Point plot showing the mean and error of age for each class in the titanic data set, shown horizontally
 
+|
+
 .. _point_order:
 
 Controlling the order of the plotted points
@@ -164,6 +168,8 @@ In the following example the point columns of the ``class`` feature are displaye
        :align: center
        :alt: Point plot showing the mean and error of age for each class in the titanic data set, shown in a specified order
 
+|
+
 .. _point_hue:
 
 Grouping features with hue 
@@ -187,6 +193,8 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Point plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex 
 
+|
+
 .. _point_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -204,6 +212,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :align: center
        :alt: Count plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex, with sex shown in a specific order
 
+|
 
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
@@ -217,6 +226,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :height: 600px
        :align: center
        :alt: Count plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex, with class and sex shown in a specific order
+
+|
 
 .. _point_log:
 
@@ -244,6 +255,8 @@ For example, you can display a log scale point plot for the ``age`` feature grou
        :height: 600px
        :align: center
        :alt: Point plot showing the mean of age and error for each class in the titanic data set, with the Y axis plotted in log scale
+
+|
 
 .. _point_range:
 
@@ -293,3 +306,5 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
        :height: 300px
        :align: center
        :alt: Point plot showing the mean and error of age for each class in the titanic data set grouped by class, using sex to determine the plot facets
+
+|

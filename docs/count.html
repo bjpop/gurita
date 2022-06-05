@@ -212,6 +212,9 @@
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">count.embark_town.png</span></code>:</p>
 <a class="reference internal image-reference" href="_images/count.embark_town.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file" class="align-center" src="_images/count.embark_town.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="getting-help">
 <span id="count-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
@@ -244,6 +247,9 @@ For comparison, the following command uses <code class="docutils literal notrans
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.y.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, plotted horizontally" class="align-center" src="_images/count.embark_town.y.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="controlling-the-order-of-the-bars">
 <span id="count-order"></span><h2>Controlling the order of the bars<a class="headerlink" href="#controlling-the-order-of-the-bars" title="Permalink to this headline"></a></h2>
@@ -257,6 +263,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.order.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, with specific order" class="align-center" src="_images/count.embark_town.order.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="grouping-features-with-hue">
 <span id="count-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
@@ -269,6 +278,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.class.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature" class="align-center" src="_images/count.embark_town.class.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p id="count-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
 <p>In the following example the <code class="docutils literal notranslate"><span class="pre">class</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">First</span></code>, <code class="docutils literal notranslate"><span class="pre">Second</span></code>, <code class="docutils literal notranslate"><span class="pre">Third</span></code>:</p>
@@ -276,6 +288,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.class.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order" class="align-center" src="_images/count.embark_town.class.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>It is possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls the order of both
 the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> categorical features:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --hue class --order Cherbourg Queenstown Southampton <span class="se">\</span>
@@ -283,6 +298,9 @@ the <code class="docutils literal notranslate"><span class="pre">embark_town</sp
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.class.order.hueorder.png"><img alt="Count plot of embark_town showing grouping on town and on class, where the order of values is specified" class="align-center" src="_images/count.embark_town.class.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="log-scale">
 <span id="count-log"></span><h2>Log scale<a class="headerlink" href="#log-scale" title="Permalink to this headline"></a></h2>
@@ -299,6 +317,9 @@ data is displayed on the X-axis (<code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.logy.png"><img alt="Count plot of embark_town showing grouping on town and on class, where the order of values is specified" class="align-center" src="_images/count.embark_town.logy.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="axis-range-limits">
 <span id="count-range"></span><h2>Axis range limits<a class="headerlink" href="#axis-range-limits" title="Permalink to this headline"></a></h2>
@@ -329,6 +350,9 @@ data is displayed on the X-axis (<code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/count.embark_town.sex.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, using sex to determine facet columns" class="align-center" src="_images/count.embark_town.sex.png" style="width: 600px; height: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 </section>
 

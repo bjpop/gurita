@@ -82,6 +82,8 @@ The output of the above command is written to ``titanic.age.strip.png``:
        :align: center
        :alt: Strip plot showing the distribution of age for the titanic data set
 
+|
+
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
 
@@ -96,6 +98,8 @@ The output of the above command is written to ``titanic.age.class.strip.png``:
        :height: 600px
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set
+
+|
 
 .. _strip_help:
 
@@ -150,6 +154,8 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
+|
+
 .. _strip_order:
 
 Controlling the order of the strips
@@ -174,6 +180,8 @@ In the following example the strip columns of the ``class`` feature are displaye
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+|
+
 .. _strip_hue:
 
 Grouping features with hue 
@@ -197,6 +205,8 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
+|
+
 .. _strip_dodge:
 
 As the previous example demonstrates, when ``--hue`` is used, by default all hue levels are shown mixed together in the same strip.
@@ -213,6 +223,8 @@ The ``--dodge`` argument will separate hue levels along the categorical axis, ra
        :height: 600px
        :align: center
        :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the sex data separated into strips
+
+|
 
 .. _strip_hueorder:
 
@@ -231,6 +243,8 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
 
+|
+
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
 
@@ -243,6 +257,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :height: 600px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+
+|
 
 .. _strip_log:
 

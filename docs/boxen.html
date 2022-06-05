@@ -225,6 +225,9 @@
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">boxen.age.png</span></code>:</p>
 <a class="reference internal image-reference" href="_images/boxen.age.png"><img alt="Boxen plot showing the distribution of age for the titanic data set" class="align-center" src="_images/boxen.age.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch boxen -y age -x class &lt; titanic.csv
@@ -232,6 +235,9 @@ In the following example the distribution of <code class="docutils literal notra
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">boxen.class.age.png</span></code>:</p>
 <a class="reference internal image-reference" href="_images/boxen.class.age.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set" class="align-center" src="_images/boxen.class.age.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="getting-help">
 <span id="boxen-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
@@ -266,6 +272,9 @@ where the boxes are plotted horizontally:</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/boxen.age.class.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/boxen.age.class.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="controlling-the-order-of-the-boxes">
 <span id="boxen-order"></span><h2>Controlling the order of the boxes<a class="headerlink" href="#controlling-the-order-of-the-boxes" title="Permalink to this headline"></a></h2>
@@ -279,6 +288,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/boxen.age.class.order.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/boxen.age.class.order.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="grouping-features-with-hue">
 <span id="boxen-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
@@ -291,6 +303,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/boxen.class.age.sex.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/boxen.class.age.sex.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p id="boxen-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
 <p>In the following example the <code class="docutils literal notranslate"><span class="pre">sex</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">female</span></code>, <code class="docutils literal notranslate"><span class="pre">male</span></code>:</p>
@@ -298,12 +313,18 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/boxen.age.class.sex.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order" class="align-center" src="_images/boxen.age.class.sex.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
 the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical features:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch boxen -y age -x class --order First Second Third --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/boxen.age.class.sex.order.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order" class="align-center" src="_images/boxen.age.class.sex.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="log-scale">
 <span id="boxen-log"></span><h2>Log scale<a class="headerlink" href="#log-scale" title="Permalink to this headline"></a></h2>

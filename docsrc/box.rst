@@ -97,6 +97,8 @@ The output of the above command is written to ``box.age.png``:
        :align: center
        :alt: Box plot showing the distribution of age for the titanic data set
 
+|
+
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
 
@@ -111,6 +113,8 @@ The output of the above command is written to ``box.class.age.png``:
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set
+
+|
 
 .. _box_help:
 
@@ -165,6 +169,8 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
+|
+
 .. _box_no_outliers:
 
 Turn off display of outlier points
@@ -185,6 +191,8 @@ displayed at the same time.
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, with display of outlier points turned off
 
+|
+
 .. _box_strip:
 
 Overlay data points using a strip plot
@@ -203,6 +211,8 @@ Note that in the example above we also turn off the display of outlier points wi
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, with data points overlaid on top as a strip plot, and outliers turned off
+
+|
 
 .. _box_order:
 
@@ -228,6 +238,8 @@ In the following example the box columns of the ``class`` feature are displayed 
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+|
+
 .. _box_hue:
 
 Grouping features with hue 
@@ -251,6 +263,8 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
+|
+
 .. _box_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -268,6 +282,8 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex 
 
+|
+
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
 
@@ -280,6 +296,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex 
+
+|
 
 .. _box_log:
 
@@ -307,6 +325,8 @@ For example, you can display a log scale box plot for the ``age`` feature groupe
        :height: 600px
        :align: center
        :alt: Box plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
+
+|
 
 .. _box_range:
 
@@ -358,3 +378,5 @@ The following command creates a faceted box plot where the ``sex`` feature is us
        :height: 300px
        :align: center
        :alt: Box plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets
+
+|

@@ -45,8 +45,8 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--dotsize FEATURE``
      - scale the size of plotted dots based on a feature 
      - :ref:`dot size <scatter_dotsize>`
-   * - ``--dotsizerange BOUND BOUND``
-     - size range for plotted point size based on numerical feature [LOW,HIGH]  
+   * - ``--dotsizerange LOW HIGH``
+     - size range for plotted point size
      - :ref:`dot size range <scatter_dotsize>`
    * - ``--dotalpha ALPHA``
      - alpha value for plotted points, default: 0.8  
@@ -100,6 +100,8 @@ The output of the above command is written to ``scatter.total_bill.tip.png``:
        :align: center
        :alt: Scatter plot comparing tip to total_bill in the tips.csv file 
 
+|
+
 .. _scatter_help:
 
 Getting help
@@ -136,6 +138,8 @@ Scatter plots can also be used to compare a numerical feature against a categori
        :align: center
        :alt: Scatter plot comparing tip to day in the tips.csv file 
 
+|
+
 It should be noted that :doc:`strip plots <strip/>` achieve a similar result as above, and may be preferable over scatter plots when comparing numerical and categorical data. 
 
 Swapping ``-x`` and ``-y`` in the above command would result in a horizontal plot instead of a vertical plot.
@@ -164,6 +168,8 @@ coloured by their corresponding categorical ``day`` value:
        :align: center
        :alt: Scatter plot comparing tip and total_bill coloured by day 
 
+|
+
 When the ``--hue`` paramter specifies a numerical feature the colour scale is graduated.
 For example, in the following scatter plot the numerical ``size`` feature is used for the ``--hue``
 argument:
@@ -177,6 +183,8 @@ argument:
        :height: 600px
        :align: center
        :alt: Scatter plot comparing tip and total_bill coloured by size 
+
+|
 
 .. _scatter_hueorder:
 
@@ -206,6 +214,8 @@ The ``--dotstyle`` argument lets you change the shape of dots based on a categor
        :align: center
        :alt: Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical feature 
 
+|
+
 In the above example the hue of dots is determined by the ``day`` feature and the dot marker style is determined by the ``sex`` feature. In this case ``male`` dots use a cross marker and ``female`` dots use a circle marker.
 
 It is acceptable for both the ``--hue`` and ``--dotstyle`` arguments to be based on the same (categorical) feature in the data set. In such cases both the colour and marker shape will vary with 
@@ -219,6 +229,7 @@ Dot size
 .. code-block:: 
 
     --dotsize FEATURE 
+    --dotsizerange LOW HIGH
 
 The size of plotted dots in the scatter plot can be scaled according the a numerical feature with the ``--dotsize`` argument.
 
@@ -234,6 +245,22 @@ plot is scaled according to the ``petal_length`` feature.
        :height: 500px 
        :align: center
        :alt: Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset 
+
+|
+
+The range of dot sizes can be adjusted with ``--dotsizerange LOW HIGH``.
+
+.. code-block:: bash
+
+    hatch scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange 10 200 < iris.csv
+
+.. image:: ../images/scatter.sepal_length.sepal_width.sizerange.png 
+       :width: 600px 
+       :height: 500px 
+       :align: center
+       :alt: Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset, where the size range of dots is set between 10 and 200
+
+|
 
 .. _scatter_dotalpha_linewidth_linecolour:
 
@@ -266,6 +293,8 @@ In the following example, the dot alpha is set to 1, the border line width is se
        :height: 600px
        :align: center
        :alt: Scatter plot comparing tip and total_bill with dot alpha set to 1 and dot line width set to 1
+
+|
 
 .. _scatter_log:
 

@@ -26,6 +26,8 @@ The image below shows the resulting plot:
        :align: center
        :alt: Count plot of the class column from titanic.csv 
 
+|
+
 The default output plot file name is chosen using the following information:
 
  * The type of plot being generated (e.g. hist, scatter, count, etc). 
@@ -117,6 +119,8 @@ The plot will appear in an interactive window like so:
        :height: 600px
        :align: center
        :alt: Interactive plot window 
+
+|
 
 Note that interactive plot commands pause the computation in a command chain. This is significant when the interactive plot is not the last command in the chain. For example, suppose you have a command like so:
 

@@ -222,6 +222,9 @@
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">point.class.age.png</span></code>:</p>
 <a class="reference internal image-reference" href="_images/point.class.age.png"><img alt="Point plot showing the mean and error of the age feature for each class in the titanic data set" class="align-center" src="_images/point.class.age.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="getting-help">
 <span id="point-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
@@ -256,6 +259,9 @@ where the boxes are plotted horizontally:</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.age.class.png"><img alt="Point plot showing the mean and error of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/point.age.class.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="controlling-the-order-of-the-plotted-points">
 <span id="point-order"></span><h2>Controlling the order of the plotted points<a class="headerlink" href="#controlling-the-order-of-the-plotted-points" title="Permalink to this headline"></a></h2>
@@ -269,6 +275,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.class.age.order.png"><img alt="Point plot showing the mean and error of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/point.class.age.order.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="grouping-features-with-hue">
 <span id="point-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
@@ -281,6 +290,9 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.class.age.sex.png"><img alt="Point plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/point.class.age.sex.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p id="point-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
 <p>In the following example the <code class="docutils literal notranslate"><span class="pre">sex</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">female</span></code>, <code class="docutils literal notranslate"><span class="pre">male</span></code>:</p>
@@ -288,12 +300,18 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.class.age.sex.hueorder.png"><img alt="Count plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex, with sex shown in a specific order" class="align-center" src="_images/point.class.age.sex.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
 the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical features:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch point -y age -x class --order First Second Third --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.class.age.sex.order.hueorder.png"><img alt="Count plot showing the mean and error of age for each class in the titanic data set, grouped by class and sex, with class and sex shown in a specific order" class="align-center" src="_images/point.class.age.sex.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="log-scale">
 <span id="point-log"></span><h2>Log scale<a class="headerlink" href="#log-scale" title="Permalink to this headline"></a></h2>
@@ -309,6 +327,9 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--logy<
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.class.age.logx.png"><img alt="Point plot showing the mean of age and error for each class in the titanic data set, with the Y axis plotted in log scale" class="align-center" src="_images/point.class.age.logx.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="axis-range-limits">
 <span id="point-range"></span><h2>Axis range limits<a class="headerlink" href="#axis-range-limits" title="Permalink to this headline"></a></h2>
@@ -340,6 +361,9 @@ further categorised by up to 2 more categorical features.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/point.class.age.sex.facets.png"><img alt="Point plot showing the mean and error of age for each class in the titanic data set grouped by class, using sex to determine the plot facets" class="align-center" src="_images/point.class.age.sex.facets.png" style="width: 600px; height: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 </section>
 

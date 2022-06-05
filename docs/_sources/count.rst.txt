@@ -82,6 +82,8 @@ The output of the above command is written to ``count.embark_town.png``:
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file 
 
+|
+
 .. _count_help:
 
 Getting help
@@ -133,6 +135,8 @@ For comparison, the following command uses ``-y embark_town`` to plot a histogra
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, plotted horizontally
 
+|
+
 .. _count_order:
 
 Controlling the order of the bars 
@@ -157,6 +161,8 @@ In the following example the counts of the ``embark_town`` feature are displayed
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, with specific order 
 
+|
+
 .. _count_hue:
 
 Grouping features with hue 
@@ -180,6 +186,8 @@ In the following example the counts of the ``embark_town`` feature are grouped b
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature 
 
+|
+
 .. _count_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -197,6 +205,8 @@ In the following example the ``class`` values are displayed in the order of ``Fi
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
 
+|
+
 It is possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls the order of both 
 the ``embark_town`` and ``class`` categorical features:
 
@@ -210,6 +220,8 @@ the ``embark_town`` and ``class`` categorical features:
        :height: 600px
        :align: center
        :alt: Count plot of embark_town showing grouping on town and on class, where the order of values is specified 
+
+|
 
 .. _count_log:
 
@@ -239,6 +251,7 @@ data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument shou
        :align: center
        :alt: Count plot of embark_town showing grouping on town and on class, where the order of values is specified
 
+|
 
 .. _count_range:
 
@@ -288,3 +301,5 @@ The follow command creates a faceted bar plot where the ``sex`` feature is used 
        :height: 300px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, using sex to determine facet columns
+
+|

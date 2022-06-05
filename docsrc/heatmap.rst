@@ -56,6 +56,8 @@ The output of the above command is written to ``flights.month.year.passengers.he
        :align: center
        :alt: Heatmap showing the number of passengers by month and year in the flights.csv data set 
 
+|
+
 .. _heatmap_help:
 
 Getting help

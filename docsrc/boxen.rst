@@ -90,6 +90,8 @@ The output of the above command is written to ``boxen.age.png``:
        :align: center
        :alt: Boxen plot showing the distribution of age for the titanic data set
 
+|
+
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
 
@@ -104,6 +106,8 @@ The output of the above command is written to ``boxen.class.age.png``:
        :height: 600px
        :align: center
        :alt: Boxen plot showing the distribution of age for each class in the titanic data set
+
+|
 
 .. _boxen_help:
 
@@ -158,6 +162,8 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Boxen plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
+|
+
 .. _boxen_order:
 
 Controlling the order of the boxes
@@ -182,6 +188,8 @@ In the following example the boxen columns of the ``class`` feature are displaye
        :align: center
        :alt: Boxen plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+|
+
 .. _boxen_hue:
 
 Grouping features with hue 
@@ -205,6 +213,8 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Boxen plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
+|
+
 .. _boxen_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -222,6 +232,8 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
 
+|
+
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
 
@@ -234,6 +246,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :height: 600px
        :align: center
        :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+
+|
 
 .. _boxen_log:
 

@@ -172,8 +172,8 @@
 <td><p>scale the size of plotted dots based on a feature</p></td>
 <td><p><a class="reference internal" href="#scatter-dotsize"><span class="std std-ref">dot size</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotsizerange</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
-<td><p>size range for plotted point size based on numerical feature [LOW,HIGH]</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotsizerange</span> <span class="pre">LOW</span> <span class="pre">HIGH</span></code></p></td>
+<td><p>size range for plotted point size</p></td>
 <td><p><a class="reference internal" href="#scatter-dotsize"><span class="std std-ref">dot size range</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dotalpha</span> <span class="pre">ALPHA</span></code></p></td>
@@ -234,6 +234,9 @@
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">scatter.total_bill.tip.png</span></code>:</p>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.png"><img alt="Scatter plot comparing tip to total_bill in the tips.csv file" class="align-center" src="_images/scatter.total_bill.tip.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="getting-help">
 <span id="scatter-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
@@ -255,6 +258,9 @@ arguments:</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.day.tip.png"><img alt="Scatter plot comparing tip to day in the tips.csv file" class="align-center" src="_images/scatter.day.tip.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>It should be noted that <a class="reference internal" href="strip.html"><span class="doc">strip plots</span></a> achieve a similar result as above, and may be preferable over scatter plots when comparing numerical and categorical data.</p>
 <p>Swapping <code class="docutils literal notranslate"><span class="pre">-x</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span></code> in the above command would result in a horizontal plot instead of a vertical plot.</p>
 </section>
@@ -270,6 +276,9 @@ coloured by their corresponding categorical <code class="docutils literal notran
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.day.png"><img alt="Scatter plot comparing tip and total_bill coloured by day" class="align-center" src="_images/scatter.total_bill.tip.day.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>When the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> paramter specifies a numerical feature the colour scale is graduated.
 For example, in the following scatter plot the numerical <code class="docutils literal notranslate"><span class="pre">size</span></code> feature is used for the <code class="docutils literal notranslate"><span class="pre">--hue</span></code>
 argument:</p>
@@ -277,6 +286,9 @@ argument:</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.size.png"><img alt="Scatter plot comparing tip and total_bill coloured by size" class="align-center" src="_images/scatter.total_bill.tip.size.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p id="scatter-hueorder">For categorical hue groups, the order displayed in the legend is determined from their occurrence in the input data. This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of
 the hue groups in the legend.</p>
 </section>
@@ -291,6 +303,9 @@ the hue groups in the legend.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.day.dotstyle.png"><img alt="Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical feature" class="align-center" src="_images/scatter.total_bill.tip.day.dotstyle.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>In the above example the hue of dots is determined by the <code class="docutils literal notranslate"><span class="pre">day</span></code> feature and the dot marker style is determined by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature. In this case <code class="docutils literal notranslate"><span class="pre">male</span></code> dots use a cross marker and <code class="docutils literal notranslate"><span class="pre">female</span></code> dots use a circle marker.</p>
 <p>It is acceptable for both the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> and <code class="docutils literal notranslate"><span class="pre">--dotstyle</span></code> arguments to be based on the same (categorical) feature in the data set. In such cases both the colour and marker shape will vary with
 the underlying feature.</p>
@@ -298,6 +313,7 @@ the underlying feature.</p>
 <section id="dot-size">
 <span id="scatter-dotsize"></span><h2>Dot size<a class="headerlink" href="#dot-size" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dotsize</span> <span class="n">FEATURE</span>
+<span class="o">--</span><span class="n">dotsizerange</span> <span class="n">LOW</span> <span class="n">HIGH</span>
 </pre></div>
 </div>
 <p>The size of plotted dots in the scatter plot can be scaled according the a numerical feature with the <code class="docutils literal notranslate"><span class="pre">--dotsize</span></code> argument.</p>
@@ -307,6 +323,17 @@ plot is scaled according to the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.sepal_length.sepal_width.png"><img alt="Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset" class="align-center" src="_images/scatter.sepal_length.sepal_width.png" style="width: 600px; height: 500px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The range of dot sizes can be adjusted with <code class="docutils literal notranslate"><span class="pre">--dotsizerange</span> <span class="pre">LOW</span> <span class="pre">HIGH</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange <span class="m">10</span> <span class="m">200</span> &lt; iris.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/scatter.sepal_length.sepal_width.sizerange.png"><img alt="Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset, where the size range of dots is set between 10 and 200" class="align-center" src="_images/scatter.sepal_length.sepal_width.sizerange.png" style="width: 600px; height: 500px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="dot-transparency-border-line-width-border-line-colour">
 <span id="scatter-dotalpha-linewidth-linecolour"></span><h2>Dot transparency, border line width, border line colour<a class="headerlink" href="#dot-transparency-border-line-width-border-line-colour" title="Permalink to this headline"></a></h2>
@@ -326,6 +353,9 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/tips.tip.total_bill.scatter.dotalpha.dotlinewidth.png"><img alt="Scatter plot comparing tip and total_bill with dot alpha set to 1 and dot line width set to 1" class="align-center" src="_images/tips.tip.total_bill.scatter.dotalpha.dotlinewidth.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="log-scale">
 <span id="scatter-log"></span><h2>Log scale<a class="headerlink" href="#log-scale" title="Permalink to this headline"></a></h2>

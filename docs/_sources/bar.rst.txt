@@ -101,6 +101,8 @@ The output of the above command is written to ``bar.class.age.png``:
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set
 
+|
+
 .. _bar_help:
 
 Getting help
@@ -154,6 +156,8 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, shown horizontally
 
+|
+
 .. _bar_estimator:
 
 Summary function
@@ -176,6 +180,8 @@ For example, the maximum ``age`` is shown for each value of ``class``:
        :align: center
        :alt: Bar plot showing the maximum age for each class in the titanic data set
 
+|
+
 .. _standard_deviation:
 
 Standard deviaiton
@@ -194,6 +200,8 @@ For example the mean and standard deviation of ``age`` is shown for each value i
        :height: 600px
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set
+
+|
 
 .. _confidence_interval:
 
@@ -215,6 +223,8 @@ For example the mean of age and its 98% confidence interval is shown for each va
        :height: 600px
        :align: center
        :alt: Bar plot showing the mean of age and 98% confidence interval for each class in the titanic data set
+
+|
 
 .. _bar_order:
 
@@ -240,6 +250,8 @@ In the following example the bar columns of the ``class`` feature are displayed 
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, shown in a specified order
 
+|
+
 .. _bar_hue:
 
 Grouping features with hue 
@@ -263,6 +275,8 @@ In the following example the mean and error of ``age`` is shown for each value i
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, grouped by class and sex 
 
+|
+
 .. _bar_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -280,6 +294,8 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, grouped by class and sex, with sex order specified
 
+|
+
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
 
@@ -292,6 +308,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :height: 600px
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, grouped by class and sex, with class order and sex order specified
+
+|
 
 .. _bar_log:
 
@@ -319,6 +337,8 @@ For example, you can display a log scale bar plot for the ``age`` feature groupe
        :height: 600px
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set, with the Y axis plotted in log scale 
+
+|
 
 .. _bar_range:
 
@@ -370,3 +390,5 @@ The follow command creates a faceted bar plot where the ``sex`` feature is used 
        :height: 300px
        :align: center
        :alt: Bar plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets
+
+|

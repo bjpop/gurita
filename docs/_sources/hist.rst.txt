@@ -101,6 +101,8 @@ The output of the above command is written to ``hist.tip.png``:
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set
 
+|
+
 Plot a count of the different categorical values in the ``day`` feature:
 
 .. code-block:: text
@@ -114,6 +116,8 @@ The output of the above command is written to ``hist.day.png``:
        :height: 600px
        :align: center
        :alt: Histogram plot showing the count of the different categorical values in the day feature 
+
+|
 
 .. _hist_help:
 
@@ -165,6 +169,8 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set
 
+|
+
 .. _hist_bivariate:
 
 Histogram of two features (bivariate heatmaps)
@@ -183,6 +189,8 @@ In the following example the distribution of ``tip`` is compared to the distribu
        :height: 600px
        :align: center
        :alt: Bivariate histogram plot showing the distribution of tip against total_bill 
+
+|
 
 Bivariate histograms also work with categorical variables and combinations of numerical and categorical variables.
 
@@ -207,6 +215,8 @@ argument like so:
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using 5 bins 
 
+|
+
 .. _hist_binwidth:
 
 Width of bins 
@@ -228,6 +238,8 @@ argument like so:
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set, using bins of width 3
 
+|
+
 Note that ``--binwidth`` overrides the ``--bins`` parameter.
 
 .. _hist_cumulative:
@@ -246,6 +258,8 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set in cumulative style
+
+|
 
 .. _hist_hue:
 
@@ -272,6 +286,8 @@ subset is plotted as its own histogram, layered on top of each other:
        :align: center
        :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature 
 
+|
+
 The default behaviour is to layer overlapping histograms on top of each other, as demonstrated in the above plot.
 
 .. _hist_multiple:
@@ -289,6 +305,8 @@ two histograms stacked on top of each other:
        :align: center
        :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms stacked
 
+|
+
 The ``--multiple`` paramter supports the following values: ``layer`` (default), ``stack``, ``dodge``, and ``fill``.
 
 The following example shows the effect of ``--multiple dodge``, where categorical fields are shown next to each other:
@@ -303,6 +321,8 @@ The following example shows the effect of ``--multiple dodge``, where categorica
        :align: center
        :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms side-by-side 
 
+|
+
 The following example shows the effect of ``--multiple fill``, where counts are normalised to a proportion, and bars are filled so that all categories sum to 1:
 
 .. code-block:: text
@@ -314,6 +334,8 @@ The following example shows the effect of ``--multiple fill``, where counts are 
        :height: 600px
        :align: center
        :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms filled to proportions 
+
+|
 
 .. _hist_stat:
 
@@ -332,6 +354,8 @@ argument
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin 
+
+|
 
 .. _hist_indnorm:
 
@@ -362,6 +386,8 @@ In the example below the default normalisation occurs, across the entire dataset
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin and global normalisation
 
+|
+
 And now the same command as above, but with the ``--indnorm`` argument supplied, so that each value of ``smoker`` is normalised independently:
 
 .. code-block:: text
@@ -373,6 +399,8 @@ And now the same command as above, but with the ``--indnorm`` argument supplied,
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin and indepdendent normalisation
+
+|
 
 .. _hist_kde:
 
@@ -391,6 +419,8 @@ A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimat
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a kernel density overlaid as a line 
 
+|
+
 .. _hist_nofill:
 
 Unfilled histogram bars 
@@ -407,6 +437,8 @@ By default histogram bars are shown with solid filled bars. This can be changed 
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with unfilled bars
+
+|
 
 .. _hist_element:
 
@@ -427,6 +459,8 @@ The example below shows the ``step`` visual style.
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set using a step visualisation style 
 
+|
+
 The example below shows the ``poly`` (polygon) visual style, with vertices in the center of each bin.
 
 .. code-block:: text
@@ -438,6 +472,8 @@ The example below shows the ``poly`` (polygon) visual style, with vertices in th
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set using a polygon visualisation style 
+
+|
 
 .. _hist_log:
 
@@ -460,6 +496,8 @@ The distribution of numerical values can be displayed in log (base 10) scale wit
        :height: 600px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with log scale on the Y axis 
+
+|
 
 .. _hist_range:
 
@@ -502,3 +540,5 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
        :height: 300px
        :align: center
        :alt: Histogram plot showing the distribution of tip amounts for the tips data set with a column for each day 
+
+|

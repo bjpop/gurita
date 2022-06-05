@@ -66,6 +66,7 @@ containing the following figure:
        :align: center
        :alt: Box plot showing the distribution of sepal length by species for the iris data set
 
+|
 
 Advanced example
 ----------------
@@ -108,6 +109,8 @@ The output of this entire Hatch command is the scatter plot below that is saved 
        :height: 600px
        :align: center
        :alt: Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset 
+
+|
 
 An interesting aspect of this example is that additional columns are added to the data in the ``pca`` step, and these extra columns
 are then used to define the axes of the following scatter plot.

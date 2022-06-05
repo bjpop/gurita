@@ -80,6 +80,8 @@ The output of the above command is written to ``line.timepoint.signal.png``.
        :align: center
        :alt: line plot showing the relationship between timepoint on the X axis and signal on the Y axis for the fmri.csv dataset
 
+|
+
 .. _line_help:
 
 Getting help
@@ -127,6 +129,8 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
        :align: center
        :alt: Line plot where signal is plotted against timepoint for the two different classes of the event feature  in the fmri.csv dataset.
 
+|
+
 .. _line_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -143,6 +147,8 @@ In the following example the classes of ``event`` are displayed in the order ``c
        :height: 600px
        :align: center
        :alt: Line plot where signal is plotted against timepoint for the two different classes of the event feature in the fmri.csv dataset, using a specified hue order
+
+|
 
 .. _line_log:
 
@@ -171,6 +177,8 @@ For example, the X axis can be plotted in log scale like so:
        :align: center
        :alt: Line plot where signal is plotted against timepoint with the X axis in log scale 
 
+|
+
 .. _line_range:
 
 Axis range limits
@@ -197,6 +205,8 @@ For example, you can display range-limited range for the ``timepoint`` feature l
        :height: 600px
        :align: center
        :alt: Line plot where signal is plotted against timepoint with the X axis range limited to [5, 15.5] 
+
+|
 
 .. _line_facets:
 
@@ -225,3 +235,5 @@ The following command creates a faceted line plot where the ``event`` feature is
        :height: 300px 
        :align: center
        :alt: Line plot where signal is plotted against timepoint split into facets based on the event feature 
+
+|

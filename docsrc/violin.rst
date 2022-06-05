@@ -79,6 +79,8 @@ The output of the above command is written to ``titanic.age.violin.png``:
        :align: center
        :alt: Violin plot showing the distribution of age for the titanic data set
 
+|
+
 The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
 
@@ -93,6 +95,8 @@ The output of the above command is written to ``titanic.age.class.violin.png``:
        :height: 600px
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set
+
+|
 
 .. _violin_help:
 
@@ -147,6 +151,8 @@ where the boxes are plotted horizontally:
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, shown horizontally
 
+|
+
 .. _violin_order:
 
 Controlling the order of the violins 
@@ -171,6 +177,8 @@ In the following example the violin columns of the ``class`` feature are display
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, shown in a specified order
 
+|
+
 .. _violin_hue:
 
 Grouping features with hue 
@@ -194,6 +202,8 @@ In the following example the distribution of ``age`` is shown for each value in 
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
 
+|
+
 .. _violin_hueorder:
 
 By default the order of the columns within each hue group is determined from their occurrence in the input data. 
@@ -211,6 +221,8 @@ In the following example the ``sex`` values are displayed in the order of ``fema
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the order of sex specified
 
+|
+
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical features:
 
@@ -223,6 +235,8 @@ the order of both the ``class`` and ``sex`` categorical features:
        :height: 600px
        :align: center
        :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the order of class and sex specified
+
+|
 
 .. _violin_log:
 

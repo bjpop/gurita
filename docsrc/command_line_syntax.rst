@@ -63,6 +63,8 @@ The most important detail about command chaining is that data flows from left to
        :align: center
        :alt: Illustration of data flow direction in Hatch command chain 
 
+|
+
 Each command in the chain *may* transform the data before passing it along to the next command.
 
 .. note::
