@@ -121,11 +121,11 @@
 </pre></div>
 </div>
 <p>Swarm plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;swarm&quot;</span></code> option.</p>
-<table class="colwidths-given docutils align-default">
+<table class="colwidths-given tight-table docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 50%" />
-<col style="width: 25%" />
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Argument</p></th>
@@ -136,55 +136,79 @@
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></td>
 <td><p>display help</p></td>
-<td><p><a class="reference internal" href="#swarm-help"><span class="std std-ref">Getting help</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE,</span> <span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#swarm-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE,</span> <span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#swarm-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">{v,h}</span></code></p></td>
 <td><p>Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.</p></td>
-<td><p><a class="reference internal" href="#swarm-orient"><span class="std std-ref">Box orientation</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-orient"><span class="std std-ref">orient</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--order</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
+<td><p>controlling the order of the plotted swarms</p></td>
+<td><p><a class="reference internal" href="#swarm-order"><span class="std std-ref">order</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
 <td><p>group features by hue</p></td>
-<td><p><a class="reference internal" href="#swarm-hue"><span class="std std-ref">Grouping features with hue</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dodge</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dodge</span></code></p></td>
 <td><p>separate hue levels along the categorical axis</p></td>
 <td><p><a class="reference internal" href="#swarm-dodge"><span class="std std-ref">dodge</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">FEATURE</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
 <td><p>order of hue features</p></td>
-<td><p><a class="reference internal" href="#swarm-hueorder"><span class="std std-ref">Hue order</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-hueorder"><span class="std std-ref">hue order</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
+<td><p>log scale X axis</p></td>
+<td><p><a class="reference internal" href="#swarm-log"><span class="std std-ref">log X</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logy</span></code></p></td>
 <td><p>log scale Y axis</p></td>
-<td><p><a class="reference internal" href="#swarm-log"><span class="std std-ref">Log scale</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-log"><span class="std std-ref">log Y</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--xlim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
 <td><p>range limit X axis</p></td>
-<td><p><a class="reference internal" href="#swarm-range"><span class="std std-ref">Axis range limits</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-range"><span class="std std-ref">limit X axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--ylim</span> <span class="pre">BOUND</span> <span class="pre">BOUND</span></code></p></td>
 <td><p>range limit Y axis</p></td>
-<td><p><a class="reference internal" href="#swarm-range"><span class="std std-ref">Axis range limits</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE,</span> <span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>feature to use for facet rows</p></td>
-<td><p><a class="reference internal" href="#swarm-facets"><span class="std std-ref">Facets</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE,</span> <span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>feature to use for facet columns</p></td>
-<td><p><a class="reference internal" href="#swarm-facets"><span class="std std-ref">Facets</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
 <td><p>wrap the facet column at this width, to span multiple rows</p></td>
-<td><p><a class="reference internal" href="#swarm-facets"><span class="std std-ref">Facets</span></a></p></td>
+<td><p><a class="reference internal" href="#swarm-facets"><span class="std std-ref">facet wrap</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -199,28 +223,29 @@
 </div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Swarm plots can be slow to render on input data sets with large numbers of points.
-In cases where the swarm plot is too slow to render, consider using a <a class="reference internal" href="strip.html"><span class="doc">strip plot</span></a>
-instead.</p>
+<p>Swarm plots can be slow to render on input data sets with large numbers of rows.
+In cases where the swarm plot is too slow to render, consider using an alternative
+distribution plot, such as <a class="reference internal" href="strip.html"><span class="doc">strip</span></a>, <a class="reference internal" href="box.html"><span class="doc">box</span></a>, <a class="reference internal" href="boxen.html"><span class="doc">boxen</span></a>, or <a class="reference internal" href="violin.html"><span class="doc">violin</span></a>.
+Alternatively you can reduce the number of rows using a <a class="reference internal" href="sample.html"><span class="doc">random sample</span></a> of the data.</p>
 </div>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Swarm plot of the <code class="docutils literal notranslate"><span class="pre">age</span></code> numerical feature from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age &lt; titanic.csv
 </pre></div>
 </div>
-<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">titanic.age.swarm.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/titanic.age.swarm.png"><img alt="Swarm plot showing the distribution of age for the titanic data set" class="align-center" src="_images/titanic.age.swarm.png" style="width: 600px; height: 600px;" /></a>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">swarm.age.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/swarm.age.png"><img alt="Swarm plot showing the distribution of age for the titanic data set" class="align-center" src="_images/swarm.age.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>The plotted numerical feature can be divided into groups based on a categorical feature.
 In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class &lt; titanic.csv
 </pre></div>
 </div>
-<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">titanic.age.class.swarm.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/titanic.age.class.swarm.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set" class="align-center" src="_images/titanic.age.class.swarm.png" style="width: 600px; height: 600px;" /></a>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">swarm.class.age.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/swarm.class.age.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set" class="align-center" src="_images/swarm.class.age.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -235,8 +260,8 @@ arguments:</p>
 </section>
 <section id="selecting-features-to-plot">
 <span id="swarm-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
 </pre></div>
 </div>
 <p>Swarm plots can be plotted for numerical features and optionally grouped by categorical features.</p>
@@ -254,70 +279,70 @@ by <code class="docutils literal notranslate"><span class="pre">-y</span></code>
 </div>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature,
 where the boxes are plotted horizontally:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -x age -y class --orient h -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -x age -y class --orient h &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.class.age.swarm.horizontal.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/titanic.class.age.swarm.horizontal.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/swarm.age.class.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/swarm.age.class.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
 <section id="controlling-the-order-of-the-swarms">
 <span id="swarm-order"></span><h2>Controlling the order of the swarms<a class="headerlink" href="#controlling-the-order-of-the-swarms" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">order</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">order</span> <span class="n">VALUE</span> <span class="p">[</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>By default the order of the categorical features displayed in the swarm plot is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--order</span></code> argument, which allows you to specify the exact ordering of columns based on their values.</p>
 <p>In the following example the swarm columns of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature are displayed in the order of <code class="docutils literal notranslate"><span class="pre">First</span></code>, <code class="docutils literal notranslate"><span class="pre">Second</span></code>, <code class="docutils literal notranslate"><span class="pre">Third</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --order First Second Third -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --order First Second Third &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.swarm.order.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/titanic.age.class.swarm.order.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/swarm.class.age.order.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/swarm.class.age.order.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
 <section id="grouping-features-with-hue">
 <span id="swarm-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
 </pre></div>
 </div>
 <p>The data can be further grouped by an additional categorical feature with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --hue sex -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --hue sex &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.swarm.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/titanic.age.class.sex.swarm.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/swarm.class.age.sex.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/swarm.class.age.sex.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p id="swarm-dodge">As the previous example demonstrates, when <code class="docutils literal notranslate"><span class="pre">--hue</span></code> is used, by default all hue levels are shown mixed together in the same swarm.
 However, you might want to show each hue level in its own swarm. This can be achieved with the <code class="docutils literal notranslate"><span class="pre">--dodge</span></code> command.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--dodge</span></code> argument will separate hue levels along the categorical axis, rather than mix them together:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --hue sex --dodge -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --hue sex --dodge &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.swarm.dodge.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the sex data separated into swarms" class="align-center" src="_images/titanic.age.class.sex.swarm.dodge.png" style="width: 700px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/swarm.class.age.sex.dodge.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with the sex data separated into swarms" class="align-center" src="_images/swarm.class.age.sex.dodge.png" style="width: 700px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p id="swarm-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
 <p>In the following example the <code class="docutils literal notranslate"><span class="pre">sex</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">female</span></code>, <code class="docutils literal notranslate"><span class="pre">male</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --hue sex --hueorder female male -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.swarm.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order" class="align-center" src="_images/titanic.age.class.sex.swarm.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/swarm.class.age.sex.hueorder.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, and the order of sex values specified" class="align-center" src="_images/swarm.class.age.sex.hueorder.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
 the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical features:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --order First Second Third --hue sex --hueorder female male -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --order First Second Third --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/titanic.age.class.sex.swarm.order.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order" class="align-center" src="_images/titanic.age.class.sex.swarm.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/swarm.class.age.sex.order.hueorder.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, and the order of class and sex values specified" class="align-center" src="_images/swarm.class.age.sex.order.hueorder.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -332,8 +357,12 @@ the order of both the <code class="docutils literal notranslate"><span class="pr
 <p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
 conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 <p>For example, you can display a log scale swarm plot for the <code class="docutils literal notranslate"><span class="pre">age</span></code> feature grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the numerical distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --logy -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --logy &lt; titanic.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/swarm.class.age.logy.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, with the Y axis in log scale" class="align-center" src="_images/swarm.class.age.logy.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="axis-range-limits">
@@ -348,20 +377,32 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--ylim<
 <p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">age</span></code> feature grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so.
 Note carefully that the numerical
 data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> &lt; titanic.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/swarm.class.age.ylim.png"><img alt="Swarm plot showing the distribution of age for each class in the titanic data set, with the Y axis limited to values in the range 10 to 30 inclusive" class="align-center" src="_images/swarm.class.age.ylim.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="facets">
 <span id="swarm-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">],</span> <span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
-<span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">],</span> <span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span> <span class="p">[</span><span class="n">FEATURE</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span>
+<span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span>
 <span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Swarm plots can be further divided into facets, generating a matrix of swarm plots, where a numerical value is
 further categorised by up to 2 more categorical features.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
+<p>The follow command creates a faceted swarm plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature is used to determine the facet columns:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch swarm -y age -x class --col sex &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/swarm.class.age.sex.facets.png"><img alt="Swarm plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets" class="align-center" src="_images/swarm.class.age.sex.facets.png" style="width: 600px; height: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 </section>
 
