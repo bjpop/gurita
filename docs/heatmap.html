@@ -117,15 +117,15 @@
   <section id="heatmap">
 <span id="id1"></span><h1>heatmap<a class="headerlink" href="#heatmap" title="Permalink to this headline"></a></h1>
 <p>Heatmap showing the relationship between two categorical features and a numerical feature.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch heatmap &lt;arguments&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap &lt;arguments&gt;
 </pre></div>
 </div>
 <p>Heatmap plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.heatmap.html/">heatmap</a> library function.</p>
-<table class="colwidths-given docutils align-default">
+<table class="colwidths-given tight-table docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 50%" />
-<col style="width: 25%" />
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Argument</p></th>
@@ -136,39 +136,79 @@
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></td>
 <td><p>display help</p></td>
-<td><p><a class="reference internal" href="#heatmap-help"><span class="std std-ref">Getting help</span></a></p></td>
+<td><p><a class="reference internal" href="#heatmap-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE,</span> <span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select categorial feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE,</span> <span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select categorical feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">FEATURE,</span> <span class="pre">--val</span> <span class="pre">FEATURE</span></code></p></td>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--val</span> <span class="pre">FEATURE</span></code></p></li>
+</ul>
+</td>
 <td><p>select intensity value for heatmap</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Selecting features to plot</span></a></p></td>
+<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">value</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cmap</span> <span class="pre">COLOR_MAP_NAME</span></code></p></td>
-<td><p>color map for the heat map</p></td>
-<td><p><a class="reference internal" href="#heatmap-cmap"><span class="std std-ref">Colour palette</span></a></p></td>
+<td><p>colour map for the heat map</p></td>
+<td><p><a class="reference internal" href="#heatmap-cmap"><span class="std std-ref">colour map</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--log</span></code></p></td>
-<td><p>Use a log scale on the intensity value</p></td>
-<td><p><a class="reference internal" href="#heatmap-log"><span class="std std-ref">Log scale</span></a></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--annot</span> <span class="pre">[FORMAT]</span></code></p></td>
+<td><p>show the value as text in cells</p></td>
+<td><p><a class="reference internal" href="#heatmap-annot"><span class="std std-ref">annotate</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--vmin</span> <span class="pre">NUM</span></code></p></td>
+<td><p>minimum anchor value for the colormap</p></td>
+<td><p><a class="reference internal" href="#heatmap-vmin"><span class="std std-ref">minimum colormap value</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--vmax</span> <span class="pre">NUM</span></code></p></td>
+<td><p>maximum anchor value for the colormap</p></td>
+<td><p><a class="reference internal" href="#heatmap-vmax"><span class="std std-ref">maximum colormap value</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--robust</span></code></p></td>
+<td><p>use robust quantiles to set colormap range</p></td>
+<td><p><a class="reference internal" href="#heatmap-robust"><span class="std std-ref">robust quantiles</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--sortx</span> <span class="pre">[{a,d}]]</span></code></p></td>
+<td><p>sort the X axis by value, allowed values: a, d. a=ascending, d=descending, default: a.</p></td>
+<td><p><a class="reference internal" href="#heatmap-sortx"><span class="std std-ref">sort X axis</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--sorty</span> <span class="pre">[{a,d}]]</span></code></p></td>
+<td><p>sort the Y axis by value, allowed values: a, d. a=ascending, d=descending, default: a.</p></td>
+<td><p><a class="reference internal" href="#heatmap-sorty"><span class="std std-ref">sort Y axis</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--orderx</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
+<td><p>order the X axis according to a given list of values</p></td>
+<td><p><a class="reference internal" href="#heatmap-orderx"><span class="std std-ref">order X axis by value</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ordery</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
+<td><p>order the Y axis according to a given list of values</p></td>
+<td><p><a class="reference internal" href="#heatmap-ordery"><span class="std std-ref">order Y axis by value</span></a></p></td>
 </tr>
 </tbody>
 </table>
 <section id="simple-example">
-<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<span id="heatmap-simple-example"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Heatmap showing the number of <code class="docutils literal notranslate"><span class="pre">passengers</span></code> by <code class="docutils literal notranslate"><span class="pre">month</span></code> and <code class="docutils literal notranslate"><span class="pre">year</span></code>
 in the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> data set:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers -- flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers &lt; flights.csv
 </pre></div>
 </div>
-<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">flights.month.year.passengers.heatmap.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/flights.month.year.passengers.heatmap.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set" class="align-center" src="_images/flights.month.year.passengers.heatmap.png" style="width: 600px; height: 600px;" /></a>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">heatmap.month.year.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set" class="align-center" src="_images/heatmap.month.year.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -177,7 +217,7 @@ in the <code class="docutils literal notranslate"><span class="pre">flights.csv<
 <span id="heatmap-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for heatmap plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch heatmap -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -h
 </pre></div>
 </div>
 </section>
@@ -187,16 +227,110 @@ arguments:</p>
 <span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
 </pre></div>
 </div>
-</section>
-<section id="colour-palette">
-<span id="heatmap-cmap"></span><h2>Colour palette<a class="headerlink" href="#colour-palette" title="Permalink to this headline"></a></h2>
-</section>
-<section id="log-scale">
-<span id="heatmap-log"></span><h2>Log scale<a class="headerlink" href="#log-scale" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">log</span>
+<p>The X and Y axes of a heatmap must be categorical features. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
+If your data is not in this format it may be possible to transform it into this format using <a class="reference internal" href="pivot.html"><span class="doc">pivot</span></a>.</p>
+<p>The example below shows the same heatmap <a class="reference internal" href="#heatmap-simple-example"><span class="std std-ref">the simple example above</span></a> but with the month on the Y axis and the year on the X axis:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y month -x year -v passengers &lt; flights.csv
 </pre></div>
 </div>
-<span class="target" id="heatmap-range"></span></section>
+<a class="reference internal image-reference" href="_images/heatmap.year.month.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set" class="align-center" src="_images/heatmap.year.month.png" style="width: 600px; height: 500px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="colour-map">
+<span id="heatmap-cmap"></span><h2>Colour map<a class="headerlink" href="#colour-map" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">cmap</span> <span class="n">COLOR_MAP_NAME</span>
+</pre></div>
+</div>
+<p>The colour map used in the heatmap can be set explicitly using <code class="docutils literal notranslate"><span class="pre">--cmap</span></code> with the name of the colour map as its argument.</p>
+<p>Hatch uses <a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html/">Matlplotlib’s colour map names</a> (because Hatch uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/</p>
+<p>The example below uses the <code class="docutils literal notranslate"><span class="pre">YlOrRd</span></code> (yellow-orange-red) colour map:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --cmap YlOrRd &lt; flights.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.cmap.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, using the YlOrRd colour map" class="align-center" src="_images/heatmap.month.year.cmap.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="show-the-value-as-text-in-each-cell">
+<span id="heatmap-annot"></span><span id="heatmap-range"></span><span id="heatmap-log"></span><h2>Show the value as text in each cell<a class="headerlink" href="#show-the-value-as-text-in-each-cell" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">annot</span> <span class="p">[</span><span class="n">FORMAT</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--annot</span></code> option will display the numerical value as text in each cell of the heatmap. The optional argument <code class="docutils literal notranslate"><span class="pre">FORMAT</span></code> is a string that specifies how to display the numeric value as text.
+The format string uses <a class="reference external" href="https://docs.python.org/3/library/string.html#format-specification-mini-language">Python’s format specification language</a>. It defaults to <code class="docutils literal notranslate"><span class="pre">d</span></code> which displays the value as
+a decimal integer.</p>
+<p>For real numbers (floating point) you may want to use a format like <code class="docutils literal notranslate"><span class="pre">.2g</span></code> which will display the number in scientific notation with 2 decimal places.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --annot &lt; flights.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.annot.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the numeric value in each cell shown as text" class="align-center" src="_images/heatmap.month.year.annot.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="control-the-range-of-values-used-in-the-colour-map">
+<span id="heatmap-robust"></span><span id="heatmap-vmax"></span><span id="heatmap-vmin"></span><h2>Control the range of values used in the colour map<a class="headerlink" href="#control-the-range-of-values-used-in-the-colour-map" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">vmin</span> <span class="n">NUM</span>
+<span class="o">--</span><span class="n">vmax</span> <span class="n">NUM</span>
+<span class="o">--</span><span class="n">robust</span>
+</pre></div>
+</div>
+<p>The upper and lower bounds of the values displayed in the heatmap are chosen from the data by default, but they can be ajusted with <code class="docutils literal notranslate"><span class="pre">--vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">--vmax</span></code>, setting the lower and upper bounds respectively.
+It is possible to set one or both bounds at the same time.</p>
+<p>In the example below the lower bound is set to 250 and the upper bound is set to 550. Values outside these bounds are clamped to the bounding values.</p>
+<p>We observe that in this example data set it wasn’t until the early 1950s that the number of passengers per flight exceeded 250, hence the predominance of black cells in the top part of the plot.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --vmin 250 --vmax 550  &lt; flights.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.vmin.vmax.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the minimum and maximum range of values specified." class="align-center" src="_images/heatmap.month.year.vmin.vmax.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">--robust</span></code> argument will cause the maximum and minimum values to be chosen based on quantiles, which can be desirable when extreme outliers occur in the data.
+Note that <code class="docutils literal notranslate"><span class="pre">--robust</span></code> may not be used at the same time as <code class="docutils literal notranslate"><span class="pre">--vmin</span></code> and/or <code class="docutils literal notranslate"><span class="pre">--vmax</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --robust &lt; flights.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.robust.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the quantiles used to determine the minimum and maximum values." class="align-center" src="_images/heatmap.month.year.robust.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="control-the-order-of-the-columns-and-rows">
+<span id="heatmap-ordery"></span><span id="heatmap-orderx"></span><span id="heatmap-sorty"></span><span id="heatmap-sortx"></span><h2>Control the order of the columns and rows<a class="headerlink" href="#control-the-order-of-the-columns-and-rows" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--sortx [{a,d}]]
+--sorty [{a,d}]]
+--orderx VALUE [VALUE]
+--ordery VALUE [VALUE]
+</pre></div>
+</div>
+<p>The default ordering of values on the X and Y axis is determined by their relative order in the input data. In many cases this is not the best order to display in the heatmap.</p>
+<p>Therefore the order of the values on the axes can be either sorted, using <code class="docutils literal notranslate"><span class="pre">--sortx</span></code> and <code class="docutils literal notranslate"><span class="pre">--sorty</span></code>, or manually specified using <code class="docutils literal notranslate"><span class="pre">--orderx</span></code> and <code class="docutils literal notranslate"><span class="pre">--ordery</span></code>.</p>
+<p>Both sort arguments accept an optional argument that specifies the direction of the sort: <code class="docutils literal notranslate"><span class="pre">a</span></code> for ascending and <code class="docutils literal notranslate"><span class="pre">d</span></code> for descending, where the <em>order</em> of rows is considered from top to bottom and the <em>order</em> of columns is considered
+from left to right.</p>
+<p>Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.</p>
+<p>If a specific order of values is required then this can be achived with <code class="docutils literal notranslate"><span class="pre">--orderx</span></code> and <code class="docutils literal notranslate"><span class="pre">--ordery</span></code>. Both of these arguments require one or more values to be specified, though it is possible to specify only a subset of all the possible
+values. Any unlisted values will be ordered arbitrarily. This can be useful when the relative order of only a few values is important.</p>
+<p>The example below generates a heatmap with the values on the Y axes displayed in descending sorted order:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --sorty d &lt; flights.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.sorty.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the values on the Y axis in sorted descending order" class="align-center" src="_images/heatmap.month.year.sorty.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The example below generates a heatmap with the first four values on the X axis shown in a specific order, namely: January, February, March, April. Note that the complete ordering of the twelve possible months is not specified. Thus the last eight months are shown in an arbitary order. If we wanted to specifiy the full order then the first eleven months would need to be specified.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --orderx January February March April &lt; flights.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/heatmap.month.year.orderx.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the values on the X axis specified in a particular partial order" class="align-center" src="_images/heatmap.month.year.orderx.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 </section>
 
 

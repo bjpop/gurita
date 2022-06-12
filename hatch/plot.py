@@ -219,8 +219,9 @@ class Clustermap(CommandBase, name="clustermap"):
             help=f'Display the data value in each cell in the heatmap')
         # See https://docs.python.org/3/library/string.html#formatspec for options on formatting
         parser.add_argument(
-            '--fmt', type=str, required=False, default=const.DEFAULT_HEATMAP_STRING_FORMAT,
-            help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Default: %(default)s.')
+            '--fmt', type=str, required=False, #default=const.DEFAULT_HEATMAP_STRING_FORMAT,
+            #help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Default: %(default)s.')
+            help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot.')
         parser.add_argument(
             '--vmin', type=float, metavar='NUM', required=False,
             help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
@@ -300,12 +301,13 @@ class Heatmap(CommandBase, name="heatmap"):
             '--cmap',  metavar='COLOR_MAP_NAME', type=str,
             help=f'Use this color map, will use Seaborn default if not specified')
         parser.add_argument(
-            '--annot', action='store_true', 
-            help=f'Display the data value in each cell in the heatmap')
+            '--annot', type=str, required=False, nargs='?', metavar='FORMAT',
+            const=const.DEFAULT_HEATMAP_STRING_FORMAT,
+            help=f'Display the data value in each cell in the heatmap. Optional FORMAT argument uses Python format specifcation (default: %(const)s)')
         # See https://docs.python.org/3/library/string.html#formatspec for options on formatting
-        parser.add_argument(
-            '--fmt', type=str, required=False, default=const.DEFAULT_HEATMAP_STRING_FORMAT,
-            help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Default: %(default)s.')
+        #parser.add_argument(
+        #    '--fmt', type=str, required=False, 
+        #    help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Uses Python format specifications.')
         parser.add_argument(
             '--vmin', type=float, metavar='NUM', required=False,
             help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
@@ -315,25 +317,25 @@ class Heatmap(CommandBase, name="heatmap"):
         parser.add_argument(
             '--robust', action='store_true', 
             help=f'If --vmin or --vmax absent, use robust quantiles to set colormap range instead of the extreme data values')
-        parser.add_argument(
-            '--log', action='store_true',
-            help=f'Use a log scale on the numerical data')
+        #parser.add_argument(
+        #    '--log', action='store_true',
+        #    help=f'Use a log scale on the numerical data')
         x_order_group = parser.add_mutually_exclusive_group()
         x_order_group.add_argument(
-            '--sortx', metavar='ORDER', type=str, required=False, nargs='?',
+            '--sortx',  type=str, required=False, nargs='?',
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
             help=f'Sort the X axis by label. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.')
         x_order_group.add_argument(
-            '--orderx', metavar='LABEL', type=str, required=False, nargs='+',
-            help=f'Order the X axis according to a given list of labels, left to right. Unlisted labels will appear in arbitrary order.')
+            '--orderx', metavar='VALUE', type=str, required=False, nargs='+',
+            help=f'Order the X axis according to a given list of values, left to right. Unlisted values will appear in arbitrary order.')
         y_order_group = parser.add_mutually_exclusive_group()
         y_order_group.add_argument(
-            '--sorty', metavar='ORDER', type=str, required=False, nargs='?',
+            '--sorty', type=str, required=False, nargs='?',
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
             help=f'Sort the Y axis by label. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.')
         y_order_group.add_argument(
-            '--ordery', metavar='LABEL', type=str, required=False, nargs='+',
-            help=f'Order the Y axis according to a given list of labels, top to bottom. Unlisted labels will appear in arbitrary order.')
+            '--ordery', metavar='VALUE', type=str, required=False, nargs='+',
+            help=f'Order the Y axis according to a given list of values, top to bottom. Unlisted values will appear in arbitrary order.')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -347,6 +349,10 @@ class Heatmap(CommandBase, name="heatmap"):
         self.x = options.xaxis
         self.y = options.yaxis
         self.val = options.val
+        kwargs = {}
+        if options.annot is not None:
+            kwargs['fmt'] = options.annot
+            kwargs['annot'] = True
         pivot_data = df.pivot(index=self.y, columns=self.x, values=self.val)
         if self.options.sortx is not None:
             ascending = True if self.options.sortx == 'a' else False
@@ -376,8 +382,8 @@ class Heatmap(CommandBase, name="heatmap"):
             order_map = { item: pos for (pos, item) in enumerate(self.options.ordery) }
             max_index = len(self.options.ordery)
             pivot_data.sort_index(axis=0, inplace=True, key=lambda index: index.map(lambda label: order_map.get(str(label), max_index)))
-        graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, annot=self.options.annot, robust=self.options.robust,
-                    vmin=self.options.vmin, vmax=self.options.vmax, fmt=self.options.fmt)
+        graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, robust=self.options.robust,
+                    vmin=self.options.vmin, vmax=self.options.vmax, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
