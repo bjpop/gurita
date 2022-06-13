@@ -22,16 +22,16 @@ Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/genera
    * - ``-h``
      - display help
      - :ref:`help <heatmap_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select categorial feature for the X axis
      - :ref:`X axis <heatmap_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE``
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN``
      - select categorical feature for the Y axis
      - :ref:`Y axis <heatmap_feature_selection>`
-   * - * ``-v FEATURE``
-       * ``--val FEATURE``
+   * - * ``-v COLUMN``
+       * ``--val COLUMN``
      - select intensity value for heatmap 
      - :ref:`value <heatmap_feature_selection>`
    * - ``--cmap COLOR_MAP_NAME``
@@ -103,8 +103,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE 
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN 
+  -y COLUMN, --yaxis COLUMN
 
 The X and Y axes of a heatmap must be categorical features. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
 If your data is not in this format it may be possible to transform it into this format using :doc:`pivot <pivot>`.

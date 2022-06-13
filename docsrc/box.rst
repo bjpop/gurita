@@ -23,12 +23,12 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``-h``
      - display help
      - :ref:`help <box_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis
      - :ref:`X axis <box_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE``
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN``
      - select feature for the Y axis
      - :ref:`Y axis <box_feature_selection>`
    * - ``--orient {v,h}``
@@ -43,7 +43,7 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--order VALUE [VALUE ..]``
      - control the order of the plotted boxes 
      - :ref:`order <box_order>`
-   * - ``--hue FEATURE``
+   * - ``--hue COLUMN``
      - group features by hue
      - :ref:`hue <box_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
@@ -61,12 +61,12 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <box_range>`
-   * - * ``--row FEATURE``
-       * ``-r FEATURE``
+   * - * ``--row COLUMN``
+       * ``-r COLUMN``
      - feature to use for facet rows 
      - :ref:`facet rows <box_facets>`
-   * - * ``--col FEATURE``
-       * ``-c FEATURE``
+   * - * ``--col COLUMN``
+       * ``-c COLUMN``
      - feature to use for facet columns 
      - :ref:`facet colums <box_facets>`
    * - ``--colwrap INT``
@@ -135,8 +135,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
+  -y COLUMN, --yaxis COLUMN
 
 Box plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -247,7 +247,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -358,8 +358,8 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE, -r FEATURE
- --col FEATURE, -c FEATURE
+ --row COLUMN, -r COLUMN
+ --col COLUMN, -c COLUMN
  --colwrap INT
 
 Box plots can be further divided into facets, generating a matrix of box plots, where a numerical value is

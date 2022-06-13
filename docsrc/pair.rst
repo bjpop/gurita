@@ -26,8 +26,8 @@ Pair plots are based on Seaborn's `pairplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help for this command
      - :ref:`help <pair_help>`
-   * - * ``-c [FEATURE ...]``
-       * ``--columns [FEATURE ...]``
+   * - * ``-c [COLUMN ...]``
+       * ``--columns [COLUMN ...]``
      - select columns to compare 
      - :ref:`columns <pair_columns>`:
 

@@ -25,15 +25,15 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
    * - ``-h``
      - display help
      - :ref:`help <line_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis
      - :ref:`X axis <line_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE``
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN``
      - select feature for the Y axis
      - :ref:`Y axis <line_feature_selection>`
-   * - ``--hue FEATURE``
+   * - ``--hue COLUMN``
      - group features by hue
      - :ref:`hue <line_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
@@ -51,12 +51,12 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <line_range>`
-   * - * ``--row FEATURE``
-       * ``-r FEATURE``
+   * - * ``--row COLUMN``
+       * ``-r COLUMN``
      - feature to use for facet rows 
      - :ref:`facet rows <line_facets>`
-   * - * ``--col FEATURE``
-       * ``-c FEATURE``
+   * - * ``--col COLUMN``
+       * ``-c COLUMN``
      - feature to use for facet columns 
      - :ref:`facet columns <line_facets>`
    * - ``--colwrap INT``
@@ -101,8 +101,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
+  -y COLUMN, --yaxis COLUMN
 
 Line plots show an indepdent numerical feature on the X axis and a depdendent numerical feature on the Y axis.
 
@@ -113,7 +113,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The data can be grouped by a categorical feature with the ``--hue`` argument.
 
@@ -215,8 +215,8 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE, -r FEATURE 
- --col FEATURE, -c FEATURE 
+ --row COLUMN, -r COLUMN 
+ --col COLUMN, -c COLUMN 
  --colwrap INT
 
 Line plots can be further divided into facets, generating a matrix of line plots, where a numerical value is

@@ -33,7 +33,7 @@ class PairPlot(CommandBase, name="pair"):
                 plot_args.hue, plot_args.hue_order],
                 add_help=False)
         parser.add_argument(
-            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
         parser.add_argument(
             '--kind',  type=str,
@@ -184,7 +184,7 @@ class Clustermap(CommandBase, name="clustermap"):
                      parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
                          plot_args.x_argument, plot_args.y_argument], add_help=False)
         parser.add_argument(
-            '-v', '--val', metavar='FEATURE', required=True, type=str,
+            '-v', '--val', metavar='COLUMN', required=True, type=str,
             help=f'Interpret this feature (column of data) as the values of the heatmap')
         parser.add_argument(
             '--cmap',  metavar='COLOR_MAP_NAME', type=str,
@@ -289,13 +289,13 @@ class Heatmap(CommandBase, name="heatmap"):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
                      parents=[io_args.io_arguments, plot_args.make_plot_arguments()], add_help=False)
         parser.add_argument(
-            '-x', '--xaxis', metavar='FEATURE', required=True, type=str,
+            '-x', '--xaxis', metavar='COLUMN', required=True, type=str,
             help=f'Feature to plot along the X axis.')
         parser.add_argument(
-            '-y', '--yaxis', metavar='FEATURE', required=True, type=str,
+            '-y', '--yaxis', metavar='COLUMN', required=True, type=str,
             help=f'Feature to plot along the Y axis.')
         parser.add_argument(
-            '-v', '--val', metavar='FEATURE', required=True, type=str,
+            '-v', '--val', metavar='COLUMN', required=True, type=str,
             help=f'Interpret this feature (column of data) as the values of the heatmap')
         parser.add_argument(
             '--cmap',  metavar='COLOR_MAP_NAME', type=str,

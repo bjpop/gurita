@@ -23,7 +23,7 @@ class Describe(CommandBase, name="describe"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
         self.options = parser.parse_args(args)
 
@@ -49,7 +49,7 @@ class Pretty(CommandBase, name="pretty"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
         parser.add_argument(
             '--maxrows', metavar='NUM', type=int, required=False, default=const.DEFAULT_PRETTY_MAX_ROWS,
@@ -80,7 +80,7 @@ class Unique(CommandBase, name="unique"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--column', metavar='FEATURE', type=str,
+            '-c', '--column', metavar='COLUMN', type=str,
             help=f'Select unique items from this column')
         parser.add_argument(
             '--sort', action='store_true',

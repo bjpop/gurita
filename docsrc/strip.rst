@@ -22,12 +22,12 @@ Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help
      - :ref:`help <strip_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis
      - :ref:`X axis <strip_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE``
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN``
      - select feature for the Y axis
      - :ref:`Y axis <strip_feature_selection>`
    * - ``--orient {v,h}``
@@ -36,13 +36,13 @@ Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--order VALUE [VALUE ...]``
      - controlling the order of the plotted strips 
      - :ref:`order <strip_order>`
-   * - ``--hue FEATURE``
+   * - ``--hue COLUMN``
      - group features by hue
      - :ref:`hue <strip_hue>`
    * - ``--dodge``
      - separate hue levels along the categorical axis  
      - :ref:`dodge <strip_dodge>`
-   * - ``--hueorder FEATURE [FEATURE ...]``
+   * - ``--hueorder COLUMN [COLUMN ...]``
      - order of hue features
      - :ref:`hue order <strip_hueorder>`
    * - ``--logx``
@@ -57,12 +57,12 @@ Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <strip_range>`
-   * - * ``--row FEATURE``
-       * ``-r FEATURE``
+   * - * ``--row COLUMN``
+       * ``-r COLUMN``
      - feature to use for facet rows 
      - :ref:`facet rows <strip_facets>`
-   * - * ``--col FEATURE``
-       * ``-c FEATURE``
+   * - * ``--col COLUMN``
+       * ``-c COLUMN``
      - feature to use for facet columns 
      - :ref:`facet columns <strip_facets>`
    * - ``--colwrap INT``
@@ -131,8 +131,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
+  -y COLUMN, --yaxis COLUMN
 
 Strip plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -200,7 +200,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -336,8 +336,8 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE [FEATURE ...], -r FEATURE [FEATURE ...]
- --col FEATURE [FEATURE ...], -c FEATURE [FEATURE ...]
+ --row COLUMN [COLUMN ...], -r COLUMN [COLUMN ...]
+ --col COLUMN [COLUMN ...], -c COLUMN [COLUMN ...]
  --colwrap INT
 
 Strip plots can be further divided into facets, generating a matrix of strip plots, where a numerical value is

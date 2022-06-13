@@ -25,12 +25,12 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``-h`` 
      - display help for this command
      - :ref:`help <bar_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis
      - :ref:`X axis <bar_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE``
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN``
      - select feature for the Y axis
      - :ref:`Y axis <bar_feature_selection>`
    * - ``--orient {v,h}``
@@ -50,7 +50,7 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--order VALUE [VALUE ...]``
      - controlling the order of the plotted bars
      - :ref:`order <bar_order>`
-   * - ``--hue FEATURE``
+   * - ``--hue COLUMN``
      - group features by hue
      - :ref:`hue <bar_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
@@ -68,12 +68,12 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <bar_range>`
-   * - * ``--row FEATURE``
-       * ``-r FEATURE``
+   * - * ``--row COLUMN``
+       * ``-r COLUMN``
      - feature to use for facet rows 
      - :ref:`facet rows <bar_facets>`
-   * - * ``--col FEATURE``
-       * ``-c FEATURE``
+   * - * ``--col COLUMN``
+       * ``-c COLUMN``
      - feature to use for facet columns 
      - :ref:`facet columns <bar_facets>`
    * - ``--colwrap INT``
@@ -122,8 +122,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
+  -y COLUMN, --yaxis COLUMN
 
 Bar plots can be plotted for numerical features and optionally grouped by categorical features.
 
@@ -259,7 +259,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
 
@@ -370,8 +370,8 @@ Facets
 
 .. code-block:: 
 
- --row FEATURE, -r FEATURE
- --col FEATURE, -c FEATURE
+ --row COLUMN, -r COLUMN
+ --col COLUMN, -c COLUMN
  --colwrap INT
 
 Bar plots can be further divided into facets, generating a matrix of bar plots, where a numerical value is

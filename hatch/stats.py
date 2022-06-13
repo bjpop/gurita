@@ -28,7 +28,7 @@ class IsNorm(CommandBase, name="isnorm"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
         help=f'Select only these columns (columns)')
         self.options = parser.parse_args(args)
 
@@ -72,7 +72,7 @@ class Correlation(CommandBase, name="corr"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--columns', metavar='FEATURE', nargs="*", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
         parser.add_argument('--method', required=False, default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
             help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')

@@ -25,24 +25,24 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``-h``
      - display help
      - :ref:`help <scatter_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis
      - :ref:`X axis <scatter_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE``
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN``
      - select feature for the Y axis
      - :ref:`Y axis <scatter_feature_selection>`
-   * - ``--hue FEATURE``
+   * - ``--hue COLUMN``
      - group features by hue
      - :ref:`hue <scatter_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
      - order of hue features
      - :ref:`hue order <scatter_hueorder>`
-   * - ``--dotstyle FEATURE``
+   * - ``--dotstyle COLUMN``
      - name of categorical feature to use for plotted dot marker style
      - :ref:`dot style <scatter_dotstyle>`
-   * - ``--dotsize FEATURE``
+   * - ``--dotsize COLUMN``
      - scale the size of plotted dots based on a feature 
      - :ref:`dot size <scatter_dotsize>`
    * - ``--dotsizerange LOW HIGH``
@@ -69,12 +69,12 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <scatter_range>`
-   * - * ``-r FEATURE``
-       * ``--row FEATURE``
+   * - * ``-r COLUMN``
+       * ``--row COLUMN``
      - feature to use for facet rows 
      - :ref:`facet rows <scatter_facets>`
-   * - * ``-c FEATURE``
-       * ``--col FEATURE``
+   * - * ``-c COLUMN``
+       * ``--col COLUMN``
      - feature to use for facet columns 
      - :ref:`facet columns <scatter_facets>`
    * - ``--colwrap INT``
@@ -121,8 +121,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
+  -y COLUMN, --yaxis COLUMN
 
 Scatter plots can be plotted for two numerical features as illustrated in the :ref:`example above <scatter_example>`, one on each of the axes.
 
@@ -151,7 +151,7 @@ Colouring data points with hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The data points can be coloured by an additional numerical or categorical feature with the ``--hue`` argument.
 
@@ -198,7 +198,7 @@ Dot style
 
 .. code-block:: 
 
-    --dotstyle FEATURE 
+    --dotstyle COLUMN 
 
 By default dots in scatter plots are drawn as circles.
 
@@ -228,7 +228,7 @@ Dot size
 
 .. code-block:: 
 
-    --dotsize FEATURE 
+    --dotsize COLUMN 
     --dotsizerange LOW HIGH
 
 The size of plotted dots in the scatter plot can be scaled according the a numerical feature with the ``--dotsize`` argument.
@@ -355,8 +355,8 @@ Facets
 
 .. code-block:: 
 
- -r FEATURE, --row FEATURE  
- -c FEATURE, --col FEATURE
+ -r COLUMN, --row COLUMN  
+ -c COLUMN, --col COLUMN
  --colwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is

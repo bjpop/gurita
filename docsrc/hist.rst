@@ -22,12 +22,12 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
    * - ``-h``
      - display help 
      - :ref:`help <hist_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis 
      - :ref:`X axis <hist_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE`` 
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN`` 
      - select feature for the Y axis 
      - :ref:`Y axis <hist_feature_selection>`
    * - ``--bins NUM``
@@ -39,7 +39,7 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
    * - ``--cumulative``
      - plot a cumulative histogram 
      - :ref:`cumulative <hist_cumulative>`
-   * - ``--hue FEATURE``
+   * - ``--hue COLUMN``
      - group features by hue
      - :ref:`hue <hist_hue>`
    * - ``--stat {count, frequency, probability, proportion, percent, density}``
@@ -69,12 +69,12 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <hist_range>`
-   * - * ``-r FEATURE``
-       * ``--row FEATURE``
+   * - * ``-r COLUMN``
+       * ``--row COLUMN``
      - feature to use for facet rows 
      - :ref:`facet rows <hist_facets>`
-   * - * ``-c FEATURE``
-       * ``--col FEATURE``
+   * - * ``-c COLUMN``
+       * ``--col COLUMN``
      - feature to use for facet columns 
      - :ref:`facet columns <hist_facets>`
    * - ``--colwrap INT``
@@ -138,9 +138,9 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
                         Feature to plot along the X axis
-  -y FEATURE, --yaxis FEATURE
+  -y COLUMN, --yaxis COLUMN
                         Feature to plot along the Y axis
 
 Histograms can be plotted for both numerical features and for categorical features. Numerical data is binned
@@ -268,7 +268,7 @@ Show distributions of categorical subsets using hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The distribution of categorical subsets of the data can be shown with the ``--hue`` argument.
 
@@ -522,8 +522,8 @@ Facets
 
 .. code-block:: 
 
- -r FEATURE, --row FEATURE  
- -c FEATURE, --col FEATURE
+ -r COLUMN, --row COLUMN  
+ -c COLUMN, --col COLUMN
  --colwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is

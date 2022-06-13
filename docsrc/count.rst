@@ -22,18 +22,18 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``-h``
      - display help 
      - :ref:`help <count_help>`
-   * - * ``-x FEATURE``
-       * ``--xaxis FEATURE``
+   * - * ``-x COLUMN``
+       * ``--xaxis COLUMN``
      - select feature for the X axis 
      - :ref:`X axis <count_feature_selection>`
-   * - * ``-y FEATURE``
-       * ``--yaxis FEATURE`` 
+   * - * ``-y COLUMN``
+       * ``--yaxis COLUMN`` 
      - select feature for the Y axis 
      - :ref:`Y axis <count_feature_selection>`
    * - ``--order VALUE [VALUE ...]`` 
      - order of the plotted columns  
      - :ref:`order <count_order>`
-   * - ``--hue FEATURE`` 
+   * - ``--hue COLUMN`` 
      - group features by hue 
      - :ref:`hue <count_hue>`
    * - ``--hueorder VALUE [VALUE ...]`` 
@@ -51,12 +51,12 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <count_range>`
-   * - * ``--row FEATURE``
-       * ``-r FEATURE``
+   * - * ``--row COLUMN``
+       * ``-r COLUMN``
      - feature to use for facet rows
      - :ref:`facet rows <count_facets>`
-   * - * ``--col FEATURE``
-       * ``-c FEATURE``
+   * - * ``--col COLUMN``
+       * ``-c COLUMN``
      - feature to use for facet columns
      - :ref:`facet columns <count_facets>`
    * - ``--colwrap INT``
@@ -103,8 +103,8 @@ Selecting features to plot
 
 .. code-block:: 
 
-  -x FEATURE, --xaxis FEATURE
-  -y FEATURE, --yaxis FEATURE
+  -x COLUMN, --xaxis COLUMN
+  -y COLUMN, --yaxis COLUMN
 
 Count plots can be plotted for categorical features.
 
@@ -113,7 +113,7 @@ Count plots can be plotted for categorical features.
     If a numerical feature is selected for a count plot it will be treated as categorical, which may
     not give expected behaviour.
 
-    You may not use both ``-x FEATURE`` and ``-y FEATURE`` in the same command line for count plots.
+    You may not use both ``-x COLUMN`` and ``-y COLUMN`` in the same command line for count plots.
 
 You can select the feature that you want to plot as a count using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
 arguments.
@@ -170,7 +170,7 @@ Grouping features with hue
 
 .. code-block:: 
 
-  --hue FEATURE
+  --hue COLUMN
 
 The feature being counted can be grouped based on another categorical feature using the ``--hue`` argument.
 
@@ -282,8 +282,8 @@ Facets
 
 .. code-block:: 
 
- -r FEATURE, --row FEATURE
- -c FEATURE, --col FEATURE
+ -r COLUMN, --row COLUMN
+ -c COLUMN, --col COLUMN
  --colwrap INT
 
 Count plots can be further divided into facets, generating a matrix of count plots. 

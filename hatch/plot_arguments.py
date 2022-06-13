@@ -67,27 +67,27 @@ def make_plot_arguments(default_width=const.DEFAULT_PLOT_WIDTH, default_height=c
 
 x_argument = argparse.ArgumentParser(add_help=False)
 x_argument.add_argument(
-    '-x', '--xaxis', metavar='FEATURE', required=False, type=str,
+    '-x', '--xaxis', metavar='COLUMN', required=False, type=str,
     help=f'Feature to plot along the X axis.')
 
 y_argument = argparse.ArgumentParser(add_help=False)
 y_argument.add_argument(
-    '-y', '--yaxis', metavar='FEATURE', required=False, type=str,
+    '-y', '--yaxis', metavar='COLUMN', required=False, type=str,
     help=f'Feature to plot along the Y axis.')
 
 hue = argparse.ArgumentParser(add_help=False)
 hue.add_argument(
-    '--hue',  metavar='FEATURE', type=str, required=False, 
+    '--hue',  metavar='COLUMN', type=str, required=False, 
     help=f'Name of feature to use for colouring/grouping the plotted data.')
 
 row = argparse.ArgumentParser(add_help=False)
 row.add_argument(
-    '-r', '--row', metavar='FEATURE', type=str, required=False, 
+    '-r', '--row', metavar='COLUMN', type=str, required=False, 
     help=f'Name of feature to use for facet rows.')
 
 col = argparse.ArgumentParser(add_help=False)
 col.add_argument(
-    '-c', '--col', metavar='FEATURE', type=str, required=False, 
+    '-c', '--col', metavar='COLUMN', type=str, required=False, 
     help=f'Name of feature to use for facet columns.')
 
 order = argparse.ArgumentParser(add_help=False)
@@ -127,7 +127,7 @@ ylim.add_argument(
 
 dotsize = argparse.ArgumentParser(add_help=False)
 dotsize.add_argument(
-    '--dotsize',  metavar='FEATURE', type=str, required=False, 
+    '--dotsize',  metavar='COLUMN', type=str, required=False, 
     help=f'Name of feature to use for plotted point size.')
 
 dotsizerange = argparse.ArgumentParser(add_help=False)
@@ -152,7 +152,7 @@ dotlinecolour.add_argument(
 
 dotstyle = argparse.ArgumentParser(add_help=False)
 dotstyle.add_argument(
-    '--dotstyle', metavar='FEATURE', type=str, required=False, 
+    '--dotstyle', metavar='COLUMN', type=str, required=False, 
     help=f'Name of categorical feature to use for plotted dot marker style.')
 
 colwrap = argparse.ArgumentParser(add_help=False)
