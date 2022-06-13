@@ -3,9 +3,9 @@
 bar
 ===
 
-Bar plots summarise a numerical feature as boxes with optional error bars.
+Bar plots summarise a numerical column as boxes with optional error bars.
 
-By default the numerical feature is summarised by its mean, but other summary functions can be chosen.
+By default the numerical column is summarised by its mean, but other summary functions can be chosen.
 
 .. code-block:: bash
 
@@ -27,22 +27,22 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - :ref:`help <bar_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select feature for the X axis
-     - :ref:`X axis <bar_feature_selection>`
+     - select column for the X axis
+     - :ref:`X axis <bar_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN``
-     - select feature for the Y axis
-     - :ref:`Y axis <bar_feature_selection>`
+     - select column for the Y axis
+     - :ref:`Y axis <bar_column_selection>`
    * - ``--orient {v,h}``
      - Orientation of plot.
        Allowed values: v = vertical, h = horizontal.
        Default: v.
      - :ref:`orient <bar_orient>`
    * - ``--estimator {mean, median, max, min, sum, std, var}``
-     - Function to compute point estimate of numerical feature
+     - Function to compute point estimate of numerical column
      - :ref:`estimator <bar_estimator>`
    * - ``--std``
-     - show standard deviation of numerical feature as error bar 
+     - show standard deviation of numerical column as error bar 
      - :ref:`standard deviation error bar <standard_deviation>`
    * - ``--ci [NUM]``
      - Show confidence interval as error bar to estimate uncertainty of point estimate 
@@ -51,10 +51,10 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - controlling the order of the plotted bars
      - :ref:`order <bar_order>`
    * - ``--hue COLUMN``
-     - group features by hue
+     - group columns by hue
      - :ref:`hue <bar_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
-     - order of hue features
+     - order of hue columns
      - :ref:`hue order <bar_hueorder>`
    * - ``--logx``
      - log scale X axis (only relevant with ``--orient h``)
@@ -70,11 +70,11 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - :ref:`limit Y axis <bar_range>`
    * - * ``--row COLUMN``
        * ``-r COLUMN``
-     - feature to use for facet rows 
+     - column to use for facet rows 
      - :ref:`facet rows <bar_facets>`
    * - * ``--col COLUMN``
        * ``-c COLUMN``
-     - feature to use for facet columns 
+     - column to use for facet columns 
      - :ref:`facet columns <bar_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
@@ -115,9 +115,9 @@ arguments:
 
     hatch bar -h
 
-.. _bar_feature_selection:
+.. _bar_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -125,25 +125,25 @@ Selecting features to plot
   -x COLUMN, --xaxis COLUMN
   -y COLUMN, --yaxis COLUMN
 
-Bar plots can be plotted for numerical features and optionally grouped by categorical features.
+Bar plots can be plotted for numerical columns and optionally grouped by categorical columns.
 
-If no categorical feature is specified, a single column bar plot will be generated showing
-a summary (mean by default) of the numerical feature.
+If no categorical column is specified, a single column bar plot will be generated showing
+a summary (mean by default) of the numerical column.
 
 .. note:: 
 
     .. _bar_orient:
 
     By default the orientation of the bar plot is vertical. In this scenario
-    the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
+    the numerical column is specified by ``-y``, and the (optional) categorical column is specified
     by ``-x``.
     
     However, the orientation of the bar plot can be made horizontal using the ``--orient h`` argument.
     In this case the sense of the X and Y axes are swapped from the default, and thus
-    the numerical feature is specified by ``-x``, and the (optional) categorical feature is specified
+    the numerical column is specified by ``-x``, and the (optional) categorical column is specified
     by ``-y``.
 
-In the following example the mean of ``age`` is shown for each value in the ``class`` feature,
+In the following example the mean of ``age`` is shown for each value in the ``class`` column,
 where the boxes are plotted horizontally:
 
 .. code-block:: bash
@@ -163,7 +163,7 @@ where the boxes are plotted horizontally:
 Summary function
 ----------------
 
-By default bar plots show the mean of the selected numerical feature. However alternative functions
+By default bar plots show the mean of the selected numerical column. However alternative functions
 can be chosen using the ``--estimator`` argument.
 
 The allowed choices are: ``mean``, ``median``, ``max``, ``min``, ``sum``, ``std`` (standard deviation), ``var`` (variance).
@@ -187,9 +187,9 @@ For example, the maximum ``age`` is shown for each value of ``class``:
 Standard deviaiton
 ------------------
 
-The standard deviation of the numerical feature can be shown as an error bar with the ``--std`` argument.
+The standard deviation of the numerical column can be shown as an error bar with the ``--std`` argument.
 
-For example the mean and standard deviation of ``age`` is shown for each value in the ``class`` feature:
+For example the mean and standard deviation of ``age`` is shown for each value in the ``class`` column:
 
 .. code-block:: bash
 
@@ -212,7 +212,7 @@ The confidence interval of the summary estimate can be shown as an error bar wit
 
 By default, if ``--ci`` is specified without a numerical argument, then the 95% confidence interval is shown, but this can be changed by supplying a specific numeric value.
 
-For example the mean of age and its 98% confidence interval is shown for each value in the ``class`` feature:
+For example the mean of age and its 98% confidence interval is shown for each value in the ``class`` column:
 
 .. code-block:: bash
 
@@ -235,10 +235,10 @@ Controlling the order of the bars
 
     --order VALUE [VALUE...]
 
-By default the order of the categorical features displayed in the bar plot is determined from their occurrence in the input data.
+By default the order of the categorical columns displayed in the bar plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
 
-In the following example the bar columns of the ``class`` feature are displayed in the order of ``First``, ``Second``, ``Third``:
+In the following example the bar columns of the ``class`` column are displayed in the order of ``First``, ``Second``, ``Third``:
 
 .. code-block:: bash
 
@@ -254,16 +254,16 @@ In the following example the bar columns of the ``class`` feature are displayed 
 
 .. _bar_hue:
 
-Grouping features with hue 
+Grouping columns with hue 
 --------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
+The data can be further grouped by an additional categorical column with the ``--hue`` argument.
 
-In the following example the mean and error of ``age`` is shown for each value in the ``class`` feature, and further sub-divided by the ``sex`` feature:
+In the following example the mean and error of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
 .. code-block:: bash
 
@@ -297,7 +297,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 |
 
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
-the order of both the ``class`` and ``sex`` categorical features:
+the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: bash
 
@@ -323,10 +323,10 @@ Log scale
 
 The mean of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
 
-It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
+It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical columns are selected with ``-x``, and
+conversely, ``--logy`` should be used when numerical columns are selected with ``-y``.
 
-For example, you can display a log scale bar plot for the ``age`` feature grouped by ``class`` (when the mean of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical mean:
+For example, you can display a log scale bar plot for the ``age`` column grouped by ``class`` (when the mean of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical mean:
 
 .. code-block:: bash
 
@@ -350,12 +350,12 @@ Axis range limits
   --xlim LOW HIGH 
   --ylim LOW HIGH
 
-The range of displayed numerical features can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
+The range of displayed numerical columns can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
-It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--ylim`` should be used when numerical features are selected with ``-y``.
+It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical columns are selected with ``-x``, and
+conversely, ``--ylim`` should be used when numerical columns are selected with ``-y``.
 
-For example, you can display range-limited range for the ``age`` feature grouped by ``class`` (when ``age`` is displayed on the Y axis) like so.
+For example, you can display range-limited range for the ``age`` column grouped by ``class`` (when ``age`` is displayed on the Y axis) like so.
 Note carefully that the numerical 
 data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument should be used to range-limit the mean: 
 
@@ -375,11 +375,11 @@ Facets
  --colwrap INT
 
 Bar plots can be further divided into facets, generating a matrix of bar plots, where a numerical value is
-further categorised by up to 2 more categorical features.
+further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+See the :doc:`facet documentation <facets/>` for more information on this column.
 
-The follow command creates a faceted bar plot where the ``sex`` feature is used to determine the facet columns:
+The follow command creates a faceted bar plot where the ``sex`` column is used to determine the facet columns:
 
 .. code-block:: bash
 

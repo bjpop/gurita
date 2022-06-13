@@ -31,7 +31,7 @@ Plotting commands
    * - Command 
      - Description
    * - :doc:`bar <bar>`
-     - Bar plot of categorical feature
+     - Bar plot of categorical column
    * - :doc:`box <box>`
      - Plot distrbution of numerical column using box-and-whiskers
    * - :doc:`boxen <boxen>`
@@ -43,15 +43,15 @@ Plotting commands
    * - :doc:`heatmap <heatmap>`
      - Heatmap of two categorical columns
    * - :doc:`hist <hist>`
-     - Histogram of numerical or categorical feature
+     - Histogram of numerical or categorical column
    * - :doc:`line <line>`
-     - Line plot of numerical feature
+     - Line plot of numerical column
    * - :doc:`lmplot <lmplot>`
      - Regression plot (linear model)
    * - :doc:`pair <pair>`
-     - Pair plot of numerical features
+     - Pair plot of numerical columns
    * - :doc:`point <point>`
-     - Point plot of numerical feature
+     - Point plot of numerical column
    * - :doc:`scatter <scatter>`
      - Scatter plot of two numerical columns
    * - :doc:`strip <strip>`
@@ -87,7 +87,7 @@ Transformation commands
    * - :doc:`head <head>`
      - Select the first N rows in the data
    * - :doc:`isnorm <isnorm>`
-     - Test whether numerical features differ from a normal distribution
+     - Test whether numerical columns differ from a normal distribution
    * - :doc:`kmeans <kmeans>`
      - k-means clustering
    * - :doc:`melt <melt>`

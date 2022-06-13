@@ -116,11 +116,11 @@
              
   <section id="scatter">
 <span id="id1"></span><h1>scatter<a class="headerlink" href="#scatter" title="Permalink to this headline"></a></h1>
-<p>Scatter plots show the relationship between two features as a scatter of data points.</p>
+<p>Scatter plots show the relationship between two columns as a scatter of data points.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter &lt;arguments&gt;
 </pre></div>
 </div>
-<p>When one of the two features being compared is a categorical value the scatter plot is similar to
+<p>When one of the two columns being compared is a categorical value the scatter plot is similar to
 <a class="reference internal" href="strip.html"><span class="doc">strip plot</span></a>.</p>
 <p>Scatter plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.relplot.html">relplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;scatter&quot;</span></code> option.</p>
 <table class="colwidths-given tight-table docutils align-default">
@@ -141,35 +141,35 @@
 <td><p><a class="reference internal" href="#scatter-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#scatter-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
+<td><p>select column for the X axis</p></td>
+<td><p><a class="reference internal" href="#scatter-column-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#scatter-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
+<td><p>select column for the Y axis</p></td>
+<td><p><a class="reference internal" href="#scatter-column-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>group features by hue</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>group columns by hue</p></td>
 <td><p><a class="reference internal" href="#scatter-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
-<td><p>order of hue features</p></td>
+<td><p>order of hue columns</p></td>
 <td><p><a class="reference internal" href="#scatter-hueorder"><span class="std std-ref">hue order</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotstyle</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>name of categorical feature to use for plotted dot marker style</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotstyle</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>name of categorical column to use for plotted dot marker style</p></td>
 <td><p><a class="reference internal" href="#scatter-dotstyle"><span class="std std-ref">dot style</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dotsize</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>scale the size of plotted dots based on a feature</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--dotsize</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>scale the size of plotted dots based on a column</p></td>
 <td><p><a class="reference internal" href="#scatter-dotsize"><span class="std std-ref">dot size</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--dotsizerange</span> <span class="pre">LOW</span> <span class="pre">HIGH</span></code></p></td>
@@ -205,19 +205,19 @@
 <td><p><a class="reference internal" href="#scatter-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet rows</p></td>
+<td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#scatter-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet columns</p></td>
+<td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#scatter-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
@@ -228,7 +228,7 @@
 </table>
 <section id="simple-example">
 <span id="scatter-example"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Scatter plot of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> numerical feature compared to the <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> numerical feature from the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> input file:</p>
+<p>Scatter plot of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> numerical column compared to the <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> numerical column from the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> input file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip &lt; tips.csv
 </pre></div>
 </div>
@@ -246,14 +246,14 @@ arguments:</p>
 </pre></div>
 </div>
 </section>
-<section id="selecting-features-to-plot">
-<span id="scatter-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+<section id="selecting-columns-to-plot">
+<span id="scatter-column-selection"></span><h2>Selecting columns to plot<a class="headerlink" href="#selecting-columns-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>Scatter plots can be plotted for two numerical features as illustrated in the <a class="reference internal" href="#scatter-example"><span class="std std-ref">example above</span></a>, one on each of the axes.</p>
-<p>Scatter plots can also be used to compare a numerical feature against a categorical feature. In the example below, the numerical <code class="docutils literal notranslate"><span class="pre">tip</span></code> feature is compared with the categorical <code class="docutils literal notranslate"><span class="pre">day</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> dataset:</p>
+<p>Scatter plots can be plotted for two numerical columns as illustrated in the <a class="reference internal" href="#scatter-example"><span class="std std-ref">example above</span></a>, one on each of the axes.</p>
+<p>Scatter plots can also be used to compare a numerical column against a categorical column. In the example below, the numerical <code class="docutils literal notranslate"><span class="pre">tip</span></code> column is compared with the categorical <code class="docutils literal notranslate"><span class="pre">day</span></code> column in the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> dataset:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hatch</span> <span class="n">scatter</span> <span class="o">-</span><span class="n">x</span> <span class="n">day</span> <span class="o">-</span><span class="n">y</span> <span class="n">tip</span> <span class="o">&lt;</span> <span class="n">tips</span><span class="o">.</span><span class="n">csv</span>
 </pre></div>
 </div>
@@ -266,10 +266,10 @@ arguments:</p>
 </section>
 <section id="colouring-data-points-with-hue">
 <span id="scatter-hue"></span><h2>Colouring data points with hue<a class="headerlink" href="#colouring-data-points-with-hue" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The data points can be coloured by an additional numerical or categorical feature with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>The data points can be coloured by an additional numerical or categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
 <p>In the following example the data points in a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">tip</span></code> and <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> are
 coloured by their corresponding categorical <code class="docutils literal notranslate"><span class="pre">day</span></code> value:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --hue day &lt; tips.csv
@@ -279,8 +279,8 @@ coloured by their corresponding categorical <code class="docutils literal notran
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>When the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> paramter specifies a numerical feature the colour scale is graduated.
-For example, in the following scatter plot the numerical <code class="docutils literal notranslate"><span class="pre">size</span></code> feature is used for the <code class="docutils literal notranslate"><span class="pre">--hue</span></code>
+<p>When the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> paramter specifies a numerical column the colour scale is graduated.
+For example, in the following scatter plot the numerical <code class="docutils literal notranslate"><span class="pre">size</span></code> column is used for the <code class="docutils literal notranslate"><span class="pre">--hue</span></code>
 argument:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --hue size &lt; tips.csv
 </pre></div>
@@ -294,31 +294,31 @@ the hue groups in the legend.</p>
 </section>
 <section id="dot-style">
 <span id="scatter-dotstyle"></span><h2>Dot style<a class="headerlink" href="#dot-style" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dotstyle</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dotstyle</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
 <p>By default dots in scatter plots are drawn as circles.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">--dotstyle</span></code> argument lets you change the shape of dots based on a categorical feature.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--dotstyle</span></code> argument lets you change the shape of dots based on a categorical column.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --hue day --dotstyle sex &lt; tips.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/scatter.total_bill.tip.day.dotstyle.png"><img alt="Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical feature" class="align-center" src="_images/scatter.total_bill.tip.day.dotstyle.png" style="width: 700px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/scatter.total_bill.tip.day.dotstyle.png"><img alt="Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical column" class="align-center" src="_images/scatter.total_bill.tip.day.dotstyle.png" style="width: 700px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>In the above example the hue of dots is determined by the <code class="docutils literal notranslate"><span class="pre">day</span></code> feature and the dot marker style is determined by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature. In this case <code class="docutils literal notranslate"><span class="pre">male</span></code> dots use a cross marker and <code class="docutils literal notranslate"><span class="pre">female</span></code> dots use a circle marker.</p>
-<p>It is acceptable for both the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> and <code class="docutils literal notranslate"><span class="pre">--dotstyle</span></code> arguments to be based on the same (categorical) feature in the data set. In such cases both the colour and marker shape will vary with
-the underlying feature.</p>
+<p>In the above example the hue of dots is determined by the <code class="docutils literal notranslate"><span class="pre">day</span></code> column and the dot marker style is determined by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column. In this case <code class="docutils literal notranslate"><span class="pre">male</span></code> dots use a cross marker and <code class="docutils literal notranslate"><span class="pre">female</span></code> dots use a circle marker.</p>
+<p>It is acceptable for both the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> and <code class="docutils literal notranslate"><span class="pre">--dotstyle</span></code> arguments to be based on the same (categorical) column in the data set. In such cases both the colour and marker shape will vary with
+the underlying column.</p>
 </section>
 <section id="dot-size">
 <span id="scatter-dotsize"></span><h2>Dot size<a class="headerlink" href="#dot-size" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dotsize</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">dotsize</span> <span class="n">COLUMN</span>
 <span class="o">--</span><span class="n">dotsizerange</span> <span class="n">LOW</span> <span class="n">HIGH</span>
 </pre></div>
 </div>
-<p>The size of plotted dots in the scatter plot can be scaled according the a numerical feature with the <code class="docutils literal notranslate"><span class="pre">--dotsize</span></code> argument.</p>
+<p>The size of plotted dots in the scatter plot can be scaled according the a numerical column with the <code class="docutils literal notranslate"><span class="pre">--dotsize</span></code> argument.</p>
 <p>The following example generates a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> to <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> using the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset. The size of dots in the
-plot is scaled according to the <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> feature.</p>
+plot is scaled according to the <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> column.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x sepal_length -y sepal_width --dotsize petal_length &lt; iris.csv
 </pre></div>
 </div>
@@ -391,15 +391,15 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 </section>
 <section id="facets">
 <span id="scatter-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span>
 <span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is
-further categorised by up to 2 more categorical features.</p>
-<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
-<p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that facet column is determined by the value of the <code class="docutils literal notranslate"><span class="pre">smoker</span></code> feature.</p>
+further categorised by up to 2 more categorical columns.</p>
+<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this column.</p>
+<p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that facet column is determined by the value of the <code class="docutils literal notranslate"><span class="pre">smoker</span></code> column.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --col smoker &lt; tips.csv
 </pre></div>
 </div>

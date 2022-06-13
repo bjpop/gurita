@@ -116,8 +116,8 @@
              
   <section id="line">
 <span id="id1"></span><h1>line<a class="headerlink" href="#line" title="Permalink to this headline"></a></h1>
-<p>Line plots show the relationship between two numerical features,
-optionally grouped by categorical features.</p>
+<p>Line plots show the relationship between two numerical columns,
+optionally grouped by categorical columns.</p>
 <p>If multiple Y values are provided for each X value then the plot will show an estimate of the central tendency of X and confidence interval for the estimate.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch line &lt;arguments&gt;
 </pre></div>
@@ -141,27 +141,27 @@ optionally grouped by categorical features.</p>
 <td><p><a class="reference internal" href="#line-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#line-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
+<td><p>select column for the X axis</p></td>
+<td><p><a class="reference internal" href="#line-column-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#line-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
+<td><p>select column for the Y axis</p></td>
+<td><p><a class="reference internal" href="#line-column-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>group features by hue</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>group columns by hue</p></td>
 <td><p><a class="reference internal" href="#line-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
-<td><p>order of hue features</p></td>
+<td><p>order of hue columns</p></td>
 <td><p><a class="reference internal" href="#line-hueorder"><span class="std std-ref">hue order</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
@@ -181,19 +181,19 @@ optionally grouped by categorical features.</p>
 <td><p><a class="reference internal" href="#line-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet rows</p></td>
+<td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#line-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet columns</p></td>
+<td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#line-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
@@ -222,25 +222,25 @@ arguments:</p>
 </pre></div>
 </div>
 </section>
-<section id="selecting-features-to-plot">
-<span id="line-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+<section id="selecting-columns-to-plot">
+<span id="line-column-selection"></span><h2>Selecting columns to plot<a class="headerlink" href="#selecting-columns-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>Line plots show an indepdent numerical feature on the X axis and a depdendent numerical feature on the Y axis.</p>
+<p>Line plots show an indepdent numerical column on the X axis and a depdendent numerical column on the Y axis.</p>
 </section>
-<section id="grouping-features-with-hue">
-<span id="line-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
+<section id="grouping-columns-with-hue">
+<span id="line-hue"></span><h2>Grouping columns with hue<a class="headerlink" href="#grouping-columns-with-hue" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The data can be grouped by a categorical feature with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
-<p>In the following example <code class="docutils literal notranslate"><span class="pre">signal</span></code> is plotted against <code class="docutils literal notranslate"><span class="pre">timepoint</span></code> for the two different classes of the <code class="docutils literal notranslate"><span class="pre">event</span></code> feature in the <code class="docutils literal notranslate"><span class="pre">fmri.csv</span></code> dataset:</p>
+<p>The data can be grouped by a categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>In the following example <code class="docutils literal notranslate"><span class="pre">signal</span></code> is plotted against <code class="docutils literal notranslate"><span class="pre">timepoint</span></code> for the two different classes of the <code class="docutils literal notranslate"><span class="pre">event</span></code> column in the <code class="docutils literal notranslate"><span class="pre">fmri.csv</span></code> dataset:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch line -x timepoint -y signal --hue event &lt; fmri.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/line.timepoint.signal.event.png"><img alt="Line plot where signal is plotted against timepoint for the two different classes of the event feature  in the fmri.csv dataset." class="align-center" src="_images/line.timepoint.signal.event.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/line.timepoint.signal.event.png"><img alt="Line plot where signal is plotted against timepoint for the two different classes of the event column  in the fmri.csv dataset." class="align-center" src="_images/line.timepoint.signal.event.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -250,7 +250,7 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch line -x timepoint -y signal --hue event --hueorder cue stim &lt; fmri.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/line.timepoint.signal.event.hue.png"><img alt="Line plot where signal is plotted against timepoint for the two different classes of the event feature in the fmri.csv dataset, using a specified hue order" class="align-center" src="_images/line.timepoint.signal.event.hue.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/line.timepoint.signal.event.hue.png"><img alt="Line plot where signal is plotted against timepoint for the two different classes of the event column in the fmri.csv dataset, using a specified hue order" class="align-center" src="_images/line.timepoint.signal.event.hue.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -262,8 +262,8 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p>The distribution of numerical values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
-<p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
-conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 <p>For example, the X axis can be plotted in log scale like so:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch line -x timepoint -y signal --logx &lt; fmri.csv
 </pre></div>
@@ -280,9 +280,9 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--logy<
 </pre></div>
 </div>
 <p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.</p>
-<p>It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
-conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
-<p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">timepoint</span></code> feature like so:</p>
+<p>It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">timepoint</span></code> column like so:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch line -x timepoint -y signal --xlim <span class="m">5</span> <span class="m">15</span>.5 &lt; fmri.csv
 </pre></div>
 </div>
@@ -293,19 +293,19 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--ylim<
 </section>
 <section id="facets">
 <span id="line-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span>
-<span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span>
+<span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span>
 <span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Line plots can be further divided into facets, generating a matrix of line plots, where a numerical value is
-further categorised by up to 2 more categorical features.</p>
-<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
-<p>The following command creates a faceted line plot where the <code class="docutils literal notranslate"><span class="pre">event</span></code> feature is used to determine the facet columns:</p>
+further categorised by up to 2 more categorical columns.</p>
+<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this column.</p>
+<p>The following command creates a faceted line plot where the <code class="docutils literal notranslate"><span class="pre">event</span></code> column is used to determine the facet columns:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch line -x timepoint -y signal --col event &lt; fmri.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/line.timepoint.signal.event.facet.png"><img alt="Line plot where signal is plotted against timepoint split into facets based on the event feature" class="align-center" src="_images/line.timepoint.signal.event.facet.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/line.timepoint.signal.event.facet.png"><img alt="Line plot where signal is plotted against timepoint split into facets based on the event column" class="align-center" src="_images/line.timepoint.signal.event.facet.png" style="width: 600px; height: 300px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

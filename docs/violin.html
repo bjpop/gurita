@@ -116,7 +116,7 @@
              
   <section id="violin">
 <span id="id1"></span><h1>violin<a class="headerlink" href="#violin" title="Permalink to this headline"></a></h1>
-<p>Violin plots show the distribution of values in a numerical feature optionally grouped by categorical features.</p>
+<p>Violin plots show the distribution of values in a numerical column optionally grouped by categorical columns.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin &lt;arguments&gt;
 </pre></div>
 </div>
@@ -139,20 +139,20 @@
 <td><p><a class="reference internal" href="#violin-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#violin-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
+<td><p>select column for the X axis</p></td>
+<td><p><a class="reference internal" href="#violin-column-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#violin-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
+<td><p>select column for the Y axis</p></td>
+<td><p><a class="reference internal" href="#violin-column-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">{v,h}</span></code></p></td>
 <td><p>Orientation of plot. Allowed values: v = vertical, h = horizontal. Default: v.</p></td>
@@ -162,12 +162,12 @@
 <td><p>controlling the order of the plotted violins</p></td>
 <td><p><a class="reference internal" href="#violin-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>group features by hue</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>group columns by hue</p></td>
 <td><p><a class="reference internal" href="#violin-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
-<td><p>order of hue features</p></td>
+<td><p>order of hue columns</p></td>
 <td><p><a class="reference internal" href="#violin-hueorder"><span class="std std-ref">hue order</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
@@ -187,19 +187,19 @@
 <td><p><a class="reference internal" href="#violin-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet rows</p></td>
+<td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#violin-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet columns</p></td>
+<td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#violin-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
@@ -219,7 +219,7 @@
 </div></blockquote>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Violin plot of the <code class="docutils literal notranslate"><span class="pre">age</span></code> numerical feature from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
+<p>Violin plot of the <code class="docutils literal notranslate"><span class="pre">age</span></code> numerical column from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age &lt; titanic.csv
 </pre></div>
 </div>
@@ -228,8 +228,8 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature:</p>
+<p>The plotted numerical column can be divided into groups based on a categorical column.
+In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class &lt; titanic.csv
 </pre></div>
 </div>
@@ -247,26 +247,26 @@ arguments:</p>
 </pre></div>
 </div>
 </section>
-<section id="selecting-features-to-plot">
-<span id="violin-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+<section id="selecting-columns-to-plot">
+<span id="violin-column-selection"></span><h2>Selecting columns to plot<a class="headerlink" href="#selecting-columns-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>Violin plots can be plotted for numerical features and optionally grouped by categorical features.</p>
-<p>If no categorical feature is specified, a single column violin plot will be generated showing
-the distribution of the numerical feature.</p>
+<p>Violin plots can be plotted for numerical columns and optionally grouped by categorical columns.</p>
+<p>If no categorical column is specified, a single column violin plot will be generated showing
+the distribution of the numerical column.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p id="violin-orient">By default the orientation of the violin plot is vertical. In this scenario
-the numerical feature is specified by <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and the (optional) categorical feature is specified
+the numerical column is specified by <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and the (optional) categorical column is specified
 by <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p>
 <p>However, the orientation of the violin plot can be made horizontal using the <code class="docutils literal notranslate"><span class="pre">--orient</span> <span class="pre">h</span></code> argument.
 In this case the sense of the X and Y axes are swapped from the default, and thus
-the numerical feature is specified by <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and the (optional) categorical feature is specified
+the numerical column is specified by <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and the (optional) categorical column is specified
 by <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 </div>
-<p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature,
+<p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column,
 where the boxes are plotted horizontally:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -x age -y class --orient h &lt; titanic.csv
 </pre></div>
@@ -281,9 +281,9 @@ where the boxes are plotted horizontally:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">order</span> <span class="n">VALUE</span> <span class="p">[</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>By default the order of the categorical features displayed in the violin plot is determined from their occurrence in the input data.
+<p>By default the order of the categorical columns displayed in the violin plot is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--order</span></code> argument, which allows you to specify the exact ordering of columns based on their values.</p>
-<p>In the following example the violin columns of the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature are displayed in the order of <code class="docutils literal notranslate"><span class="pre">First</span></code>, <code class="docutils literal notranslate"><span class="pre">Second</span></code>, <code class="docutils literal notranslate"><span class="pre">Third</span></code>:</p>
+<p>In the following example the violin columns of the <code class="docutils literal notranslate"><span class="pre">class</span></code> column are displayed in the order of <code class="docutils literal notranslate"><span class="pre">First</span></code>, <code class="docutils literal notranslate"><span class="pre">Second</span></code>, <code class="docutils literal notranslate"><span class="pre">Third</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class --order First Second Third &lt; titanic.csv
 </pre></div>
 </div>
@@ -292,13 +292,13 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="grouping-features-with-hue">
-<span id="violin-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
+<section id="grouping-columns-with-hue">
+<span id="violin-hue"></span><h2>Grouping columns with hue<a class="headerlink" href="#grouping-columns-with-hue" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The data can be further grouped by an additional categorical feature with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
-<p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature:</p>
+<p>The data can be further grouped by an additional categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class --hue sex &lt; titanic.csv
 </pre></div>
 </div>
@@ -317,7 +317,7 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="line"><br /></div>
 </div>
 <p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
-the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical features:</p>
+the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical columns:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class --order First Second Third --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
@@ -333,9 +333,9 @@ the order of both the <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 <p>The distribution of numerical values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
-<p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
-conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
-<p>For example, you can display a log scale violin plot for the <code class="docutils literal notranslate"><span class="pre">age</span></code> feature grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the numerical distribution:</p>
+<p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<p>For example, you can display a log scale violin plot for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the numerical distribution:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class --logy &lt; titanic.csv
 </pre></div>
 </div>
@@ -347,9 +347,9 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--logy<
 </pre></div>
 </div>
 <p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.</p>
-<p>It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
-conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when numerical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
-<p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">age</span></code> feature grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so.
+<p>It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so.
 Note carefully that the numerical
 data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the distribution:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class --ylim 10 30 &lt; titanic.csv
@@ -358,15 +358,15 @@ data is displayed on the Y-axis (<code class="docutils literal notranslate"><spa
 </section>
 <section id="facets">
 <span id="violin-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span>
-<span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span>
+<span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span>
 <span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Violin plots can be further divided into facets, generating a matrix of violin plots, where a numerical value is
-further categorised by up to 2 more categorical features.</p>
-<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
-<p>The following command creates a faceted violin plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature is used to determine the facet columns:</p>
+further categorised by up to 2 more categorical columns.</p>
+<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this column.</p>
+<p>The following command creates a faceted violin plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column is used to determine the facet columns:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch violin -y age -x class --col sex &lt; titanic.csv
 </pre></div>
 </div>

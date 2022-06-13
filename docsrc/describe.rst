@@ -9,7 +9,7 @@ Input data can be summarised with the ``describe`` command
 
     hatch describe <arguments>
 
-This produces a summary table of features in the input data. 
+This produces a summary table of columns in the input data. 
 
 .. code-block:: bash
 
@@ -62,15 +62,15 @@ The output for the file ``titanic.csv`` is as follows:
 
 The summary includes the following information:
 
-* count: the number of non-empty data values observed for the feature
+* count: the number of non-empty data values observed for the column
 
-For categorical features:
+For categorical columns:
 
-* unique: the number of unique values observed for the feature 
+* unique: the number of unique values observed for the column 
 * top: the most frequently observed value
 * freq: the frequency (count) of the most frequently observed value
 
-For numerical features:
+For numerical columns:
 
 * mean: the mean (average)
 * std: the standard deviation
@@ -89,7 +89,7 @@ the ``titanic.csv`` file.
 Summary information for transformed input data 
 ----------------------------------------------
 
-As an example, The following commmand only shows summary information for the ``age`` and ``class`` features in the file ``titanic.csv``:
+As an example, The following commmand only shows summary information for the ``age`` and ``class`` columns in the file ``titanic.csv``:
 
 .. code-block:: bash
 

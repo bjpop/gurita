@@ -11,8 +11,8 @@ For example, `TSV <https://en.wikipedia.org/wiki/Tab-separated_values>`_ files a
 Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).
 
 Rows in the input file are considered to be "observations" and columns are considered to be "features" (or variables). 
-That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its features.
-The names of the features are given in the first row of the input file (the heading row).
+That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its columns.
+The names of the columns are given in the first row of the input file (the heading row).
 
 Below is a small example of the kind of input data accepted by Hatch. In this case it is in CSV format with five columns, one heading row and three data rows.
 The first row contains the names of each column. The remaining three rows are data rows,

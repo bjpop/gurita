@@ -131,56 +131,56 @@ to Hatch. In this case a histogram will be generated for the <code class="docuti
 <h2>Filter expression syntax<a class="headerlink" href="#filter-expression-syntax" title="Permalink to this headline"></a></h2>
 <p>Hatch row filtering uses the same syntax as the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html">Pandas data frame query method</a>, and generally resembles
 Python notation.</p>
-<p>You can refer to column headings (feature names) in the input data by name, join multiple sub-expressions together using logical operators <code class="docutils literal notranslate"><span class="pre">and</span></code> <code class="docutils literal notranslate"><span class="pre">or</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span></code>, and group sub-expressions with parentheses.</p>
+<p>You can refer to column headings (column names) in the input data by name, join multiple sub-expressions together using logical operators <code class="docutils literal notranslate"><span class="pre">and</span></code> <code class="docutils literal notranslate"><span class="pre">or</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span></code>, and group sub-expressions with parentheses.</p>
 </section>
-<section id="quoting-feature-names-with-spaces">
-<h2>Quoting feature names with spaces<a class="headerlink" href="#quoting-feature-names-with-spaces" title="Permalink to this headline"></a></h2>
+<section id="quoting-column-names-with-spaces">
+<h2>Quoting column names with spaces<a class="headerlink" href="#quoting-column-names-with-spaces" title="Permalink to this headline"></a></h2>
 <p>Features (column names) that contain spaces must be surrounded in back-tick quotes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;`top score` &gt; 1000&#39;</span> -x <span class="nb">time</span> game.csv
 </pre></div>
 </div>
-<p>In the above example, the feature (column name) <code class="docutils literal notranslate"><span class="pre">top</span> <span class="pre">score</span></code> must be surrounded in back-tick quotes because it contains a whitespace character.</p>
+<p>In the above example, the column (column name) <code class="docutils literal notranslate"><span class="pre">top</span> <span class="pre">score</span></code> must be surrounded in back-tick quotes because it contains a whitespace character.</p>
 </section>
-<section id="filtering-on-numerical-features">
-<h2>Filtering on numerical features<a class="headerlink" href="#filtering-on-numerical-features" title="Permalink to this headline"></a></h2>
-<p>Numerical features can be compared for equality and also ordering. Numerical literals are written using Python syntax.</p>
+<section id="filtering-on-numerical-columns">
+<h2>Filtering on numerical columns<a class="headerlink" href="#filtering-on-numerical-columns" title="Permalink to this headline"></a></h2>
+<p>Numerical columns can be compared for equality and also ordering. Numerical literals are written using Python syntax.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;fare &lt;= 100&#39;</span> -x age titanic.csv
 </pre></div>
 </div>
 <p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">fare</span></code> is less than or equal to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
 </section>
-<section id="filtering-on-categorical-features">
-<h2>Filtering on categorical features<a class="headerlink" href="#filtering-on-categorical-features" title="Permalink to this headline"></a></h2>
+<section id="filtering-on-categorical-columns">
+<h2>Filtering on categorical columns<a class="headerlink" href="#filtering-on-categorical-columns" title="Permalink to this headline"></a></h2>
 <p>Categorical literals (but not booleans) are written as quoted strings.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;who != &quot;child&quot;&#39;</span> -x age titanic.csv
 </pre></div>
 </div>
 <p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">who</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">&quot;child&quot;</span></code> (in other words only for adults).</p>
 </section>
-<section id="filtering-on-boolean-features">
-<h2>Filtering on boolean features<a class="headerlink" href="#filtering-on-boolean-features" title="Permalink to this headline"></a></h2>
+<section id="filtering-on-boolean-columns">
+<h2>Filtering on boolean columns<a class="headerlink" href="#filtering-on-boolean-columns" title="Permalink to this headline"></a></h2>
 <p>Boolean literals are written with a capital first letter, as they are done in Python. Note that boolean literals are not quoted.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;adult_male == True&#39;</span> -x age titanic.csv
 </pre></div>
 </div>
 <p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">adult_male</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>Note that it is redundant to compare boolean features to literal truth values. The same result in the above example can be achieved as follows:</p>
+<p>Note that it is redundant to compare boolean columns to literal truth values. The same result in the above example can be achieved as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;adult_male&#39;</span> -x age titanic.csv
 </pre></div>
 </div>
-<p>Boolean features can be negated with <code class="docutils literal notranslate"><span class="pre">not</span></code>:</p>
+<p>Boolean columns can be negated with <code class="docutils literal notranslate"><span class="pre">not</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;not adult_male&#39;</span> -x age titanic.csv
 </pre></div>
 </div>
 <p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">adult_male</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </section>
-<section id="comparing-features">
-<h2>Comparing features<a class="headerlink" href="#comparing-features" title="Permalink to this headline"></a></h2>
-<p>Filter expressions can compare values from different columns, assuming they have a compatible type (for example, numerical features may only be compared to other numerical features, and so forth).</p>
+<section id="comparing-columns">
+<h2>Comparing columns<a class="headerlink" href="#comparing-columns" title="Permalink to this headline"></a></h2>
+<p>Filter expressions can compare values from different columns, assuming they have a compatible type (for example, numerical columns may only be compared to other numerical columns, and so forth).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;sepal_length &gt; petal_length&#39;</span> -x sepal_width iris.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column in <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, but only for rows where the numerical feature <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is greater than the numerical feature <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>.</p>
+<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column in <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, but only for rows where the numerical column <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is greater than the numerical column <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>.</p>
 </section>
 <section id="compound-filter-expressions">
 <h2>Compound filter expressions<a class="headerlink" href="#compound-filter-expressions" title="Permalink to this headline"></a></h2>
@@ -188,7 +188,7 @@ Python notation.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;smoker == &quot;No&quot; and total_bill &gt; 10&#39;</span> -x tip tips.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column in <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code>, but only for rows where the categorical feature <code class="docutils literal notranslate"><span class="pre">smoker</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;No&quot;</span></code> and the numerical feature <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> is greater than 10.</p>
+<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column in <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code>, but only for rows where the categorical column <code class="docutils literal notranslate"><span class="pre">smoker</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;No&quot;</span></code> and the numerical column <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> is greater than 10.</p>
 <p>If needed, parentheses can be used to group sub-expressions:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch hist --filter <span class="s1">&#39;smoker == &quot;No&quot; and (total_bill &gt; 10 or day == &quot;Sun&quot;)&#39;</span> -x tip tips.csv
 </pre></div>

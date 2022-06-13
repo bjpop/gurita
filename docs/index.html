@@ -97,7 +97,7 @@
              
   <section id="hatch-a-command-line-data-analytics-and-plotting-tool">
 <h1>Hatch: a command line data analytics and plotting tool<a class="headerlink" href="#hatch-a-command-line-data-analytics-and-plotting-tool" title="Permalink to this headline"></a></h1>
-<p>Hatch is a command line tool for transforming, analysing and visualising tabular data in CSV or TSV format.</p>
+<p>Hatch is a command line tool for transforming, analysing, and visualising tabular data in CSV or TSV format.</p>
 <p>At its core Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
 Additionally, Hatch allows commands to be <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chained together</span></a> into flexible analysis pipelines.</p>
 <p>It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (&gt; millions) are readily supported.</p>
@@ -129,7 +129,7 @@ A pretty display of the first and last 5 rows of the data can be viewed using th
 </pre></div>
 </div>
 <p>The following command generates a box plot from <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, such that the Y-axis
-represents the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> numerical feature, and the X-axis is grouped by the <code class="docutils literal notranslate"><span class="pre">species</span></code> categorical feature.
+represents the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> numerical column, and the X-axis is grouped by the <code class="docutils literal notranslate"><span class="pre">species</span></code> categorical column.
 The goal of this plot is to show the distribution of sepal length of the three different species of iris
 flowers contained in the data set.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch box -x species -y sepal_length
@@ -166,7 +166,7 @@ Commands can modify the data as it is passed along.</p>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">'species</span> <span class="pre">!=</span> <span class="pre">&quot;virginica&quot;'</span></code> command selects all rows where <code class="docutils literal notranslate"><span class="pre">species</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p></li>
 <li><p>The filtered rows are then passed to the <code class="docutils literal notranslate"><span class="pre">sample</span> <span class="pre">0.9</span></code> command which randomly selects 90% of the remaining rows.</p></li>
 <li><p>The sampled rows are then passed to the <code class="docutils literal notranslate"><span class="pre">pca</span></code> command which performs principal component analysis (PCA), yielding two extra columns in the data called <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code>.</p></li>
-<li><p>Finally the pca-transformed data is passed to the <code class="docutils literal notranslate"><span class="pre">scatter</span> <span class="pre">-x</span> <span class="pre">pc1</span> <span class="pre">-y</span> <span class="pre">pc2</span> <span class="pre">--hue</span> <span class="pre">species</span></code>  command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components), and colours the points in the plot based on the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> feature.</p></li>
+<li><p>Finally the pca-transformed data is passed to the <code class="docutils literal notranslate"><span class="pre">scatter</span> <span class="pre">-x</span> <span class="pre">pc1</span> <span class="pre">-y</span> <span class="pre">pc2</span> <span class="pre">--hue</span> <span class="pre">species</span></code>  command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components), and colours the points in the plot based on the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> column.</p></li>
 </ol>
 <p>The output of this entire Hatch command is the scatter plot below that is saved in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code></p>
 <a class="reference internal image-reference" href="_images/scatter.pc1.pc2.species.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="_images/scatter.pc1.pc2.species.png" style="width: 700px; height: 600px;" /></a>

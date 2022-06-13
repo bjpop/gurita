@@ -116,7 +116,7 @@
              
   <section id="count">
 <span id="id1"></span><h1>count<a class="headerlink" href="#count" title="Permalink to this headline"></a></h1>
-<p>Count plots show the frequency of values within categorical features using bars.</p>
+<p>Count plots show the frequency of values within categorical columns using bars.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count &lt;arguments&gt;
 </pre></div>
 </div>
@@ -139,31 +139,31 @@
 <td><p><a class="reference internal" href="#count-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#count-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
+<td><p>select column for the X axis</p></td>
+<td><p><a class="reference internal" href="#count-column-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#count-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
+<td><p>select column for the Y axis</p></td>
+<td><p><a class="reference internal" href="#count-column-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--order</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
 <td><p>order of the plotted columns</p></td>
 <td><p><a class="reference internal" href="#count-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>group features by hue</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>group columns by hue</p></td>
 <td><p><a class="reference internal" href="#count-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
-<td><p>order of hue features</p></td>
+<td><p>order of hue columns</p></td>
 <td><p><a class="reference internal" href="#count-hueorder"><span class="std std-ref">hue order</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--logx</span></code></p></td>
@@ -183,19 +183,19 @@
 <td><p><a class="reference internal" href="#count-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet rows</p></td>
+<td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#count-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet columns</p></td>
+<td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#count-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
@@ -206,12 +206,12 @@
 </table>
 <section id="simple-example">
 <span id="count-example"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Plot a count of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> categorical feature from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
+<p>Plot a count of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> categorical column from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town &lt; titanic.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">count.embark_town.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/count.embark_town.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file" class="align-center" src="_images/count.embark_town.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/count.embark_town.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file" class="align-center" src="_images/count.embark_town.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -224,20 +224,20 @@ arguments:</p>
 </pre></div>
 </div>
 </section>
-<section id="selecting-features-to-plot">
-<span id="count-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+<section id="selecting-columns-to-plot">
+<span id="count-column-selection"></span><h2>Selecting columns to plot<a class="headerlink" href="#selecting-columns-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>Count plots can be plotted for categorical features.</p>
+<p>Count plots can be plotted for categorical columns.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If a numerical feature is selected for a count plot it will be treated as categorical, which may
+<p>If a numerical column is selected for a count plot it will be treated as categorical, which may
 not give expected behaviour.</p>
-<p>You may not use both <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code> in the same command line for count plots.</p>
+<p>You may not use both <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code> in the same command line for count plots.</p>
 </div>
-<p>You can select the feature that you want to plot as a count using the <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) or <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>)
+<p>You can select the column that you want to plot as a count using the <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) or <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>)
 arguments.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) is chosen the count columns will be plotted vertically.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>) is chosen the count columns will be plotted horizontally.</p>
@@ -246,7 +246,7 @@ For comparison, the following command uses <code class="docutils literal notrans
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -y embark_town &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/count.embark_town.y.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, plotted horizontally" class="align-center" src="_images/count.embark_town.y.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/count.embark_town.y.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, plotted horizontally" class="align-center" src="_images/count.embark_town.y.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -256,28 +256,28 @@ For comparison, the following command uses <code class="docutils literal notrans
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">order</span> <span class="n">VALUE</span> <span class="p">[</span><span class="n">VALUE</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>By default the order of the categorical features displayed in the count plot is determined from their occurrence in the input data.
+<p>By default the order of the categorical columns displayed in the count plot is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--order</span></code> argument, which allows you to specify the exact ordering of columns based on their values.</p>
-<p>In the following example the counts of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> feature are displayed in the order of <code class="docutils literal notranslate"><span class="pre">Cherbourg</span></code>, <code class="docutils literal notranslate"><span class="pre">Queenstown</span></code>, <code class="docutils literal notranslate"><span class="pre">Southampton</span></code>:</p>
+<p>In the following example the counts of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column are displayed in the order of <code class="docutils literal notranslate"><span class="pre">Cherbourg</span></code>, <code class="docutils literal notranslate"><span class="pre">Queenstown</span></code>, <code class="docutils literal notranslate"><span class="pre">Southampton</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --order Cherbourg Queenstown Southampton &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/count.embark_town.order.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, with specific order" class="align-center" src="_images/count.embark_town.order.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/count.embark_town.order.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, with specific order" class="align-center" src="_images/count.embark_town.order.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="grouping-features-with-hue">
-<span id="count-hue"></span><h2>Grouping features with hue<a class="headerlink" href="#grouping-features-with-hue" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
+<section id="grouping-columns-with-hue">
+<span id="count-hue"></span><h2>Grouping columns with hue<a class="headerlink" href="#grouping-columns-with-hue" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The feature being counted can be grouped based on another categorical feature using the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
-<p>In the following example the counts of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> feature are grouped by the <code class="docutils literal notranslate"><span class="pre">class</span></code> feature from the titanic data set:</p>
+<p>The column being counted can be grouped based on another categorical column using the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>In the following example the counts of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column are grouped by the <code class="docutils literal notranslate"><span class="pre">class</span></code> column from the titanic data set:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --hue class &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/count.embark_town.class.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature" class="align-center" src="_images/count.embark_town.class.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/count.embark_town.class.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, grouped by the class column" class="align-center" src="_images/count.embark_town.class.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -287,12 +287,12 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --hue class --hueorder First Second Third &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/count.embark_town.class.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order" class="align-center" src="_images/count.embark_town.class.hueorder.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/count.embark_town.class.hueorder.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, grouped by the class column, displayed in a specified order" class="align-center" src="_images/count.embark_town.class.hueorder.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>It is possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls the order of both
-the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> categorical features:</p>
+the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> categorical columns:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --hue class --order Cherbourg Queenstown Southampton <span class="se">\</span>
             --hueorder First Second Third &lt; titanic.csv
 </pre></div>
@@ -309,9 +309,9 @@ the <code class="docutils literal notranslate"><span class="pre">embark_town</sp
 </pre></div>
 </div>
 <p>Count values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
-<p>It only makes sense to log-scale the count axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when categorical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and
-conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when categorical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p>
-<p>For example, you can display a log scale of counts for the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> feature (when the feature is displayed on the X-axis) like so. Note carefully that the categorical
+<p>It only makes sense to log-scale the count axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when categorical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when categorical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p>
+<p>For example, you can display a log scale of counts for the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column (when the column is displayed on the X-axis) like so. Note carefully that the categorical
 data is displayed on the X-axis (<code class="docutils literal notranslate"><span class="pre">-x</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the counts:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --logy &lt; titanic.csv
 </pre></div>
@@ -328,9 +328,9 @@ data is displayed on the X-axis (<code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <p>The range of displayed count values can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of values to be displayed.</p>
-<p>It only makes sense to range-limit the count axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when categorical features are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and
-conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when categorical features are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p>
-<p>For example, you can display range-limited count for the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> feature (when the feature is displayed on the X-axis) like so. Note carefully that the categorical
+<p>It only makes sense to range-limit the count axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> should be used when categorical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>, and
+conversely, <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> should be used when categorical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>.</p>
+<p>For example, you can display range-limited count for the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column (when the column is displayed on the X-axis) like so. Note carefully that the categorical
 data is displayed on the X-axis (<code class="docutils literal notranslate"><span class="pre">-x</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the counts:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --ylim <span class="m">100</span> <span class="m">300</span> &lt; titanic.csv
 </pre></div>
@@ -338,18 +338,18 @@ data is displayed on the X-axis (<code class="docutils literal notranslate"><spa
 </section>
 <section id="facets">
 <span id="count-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span>
 <span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Count plots can be further divided into facets, generating a matrix of count plots.</p>
-<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
-<p>The follow command creates a faceted bar plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> feature is used to determine the facet columns:</p>
+<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this column.</p>
+<p>The follow command creates a faceted bar plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column is used to determine the facet columns:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch count -x embark_town --col sex &lt; titanic.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/count.embark_town.sex.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, using sex to determine facet columns" class="align-center" src="_images/count.embark_town.sex.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/count.embark_town.sex.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, using sex to determine facet columns" class="align-center" src="_images/count.embark_town.sex.png" style="width: 600px; height: 300px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

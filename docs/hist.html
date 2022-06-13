@@ -116,7 +116,7 @@
              
   <section id="hist-histogram">
 <span id="hist"></span><h1>hist (histogram)<a class="headerlink" href="#hist-histogram" title="Permalink to this headline"></a></h1>
-<p>Plot distributions of selected numerical or categorical features as histograms.</p>
+<p>Plot distributions of selected numerical or categorical columns as histograms.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist &lt;arguments&gt;
 </pre></div>
 </div>
@@ -139,20 +139,20 @@
 <td><p><a class="reference internal" href="#hist-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#hist-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
+<td><p>select column for the X axis</p></td>
+<td><p><a class="reference internal" href="#hist-column-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#hist-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
+<td><p>select column for the Y axis</p></td>
+<td><p><a class="reference internal" href="#hist-column-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--bins</span> <span class="pre">NUM</span></code></p></td>
 <td><p>number of bins</p></td>
@@ -166,8 +166,8 @@
 <td><p>plot a cumulative histogram</p></td>
 <td><p><a class="reference internal" href="#hist-cumulative"><span class="std std-ref">cumulative</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">FEATURE</span></code></p></td>
-<td><p>group features by hue</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
+<td><p>group columns by hue</p></td>
 <td><p><a class="reference internal" href="#hist-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--stat</span> <span class="pre">{count,</span> <span class="pre">frequency,</span> <span class="pre">probability,</span> <span class="pre">proportion,</span> <span class="pre">percent,</span> <span class="pre">density}</span></code></p></td>
@@ -207,19 +207,19 @@
 <td><p><a class="reference internal" href="#hist-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet rows</p></td>
+<td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#hist-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>feature to use for facet columns</p></td>
+<td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#hist-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
@@ -239,12 +239,12 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Plot a count of the different categorical values in the <code class="docutils literal notranslate"><span class="pre">day</span></code> feature:</p>
+<p>Plot a count of the different categorical values in the <code class="docutils literal notranslate"><span class="pre">day</span></code> column:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x day &lt; tips.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">hist.day.png</span></code>:</p>
-<a class="reference internal image-reference" href="_images/hist.day.png"><img alt="Histogram plot showing the count of the different categorical values in the day feature" class="align-center" src="_images/hist.day.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/hist.day.png"><img alt="Histogram plot showing the count of the different categorical values in the day column" class="align-center" src="_images/hist.day.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -257,18 +257,18 @@ arguments:</p>
 </pre></div>
 </div>
 </section>
-<section id="selecting-features-to-plot">
-<span id="hist-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
+<section id="selecting-columns-to-plot">
+<span id="hist-column-selection"></span><h2>Selecting columns to plot<a class="headerlink" href="#selecting-columns-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">COLUMN</span>
                       <span class="n">Feature</span> <span class="n">to</span> <span class="n">plot</span> <span class="n">along</span> <span class="n">the</span> <span class="n">X</span> <span class="n">axis</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">COLUMN</span>
                       <span class="n">Feature</span> <span class="n">to</span> <span class="n">plot</span> <span class="n">along</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">axis</span>
 </pre></div>
 </div>
-<p>Histograms can be plotted for both numerical features and for categorical features. Numerical data is binned
+<p>Histograms can be plotted for both numerical columns and for categorical columns. Numerical data is binned
 and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
-column for each categorical value in the specified feature.</p>
-<p>You can select the feature that you want to plot as a histogram using the <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) or <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>)
+column for each categorical value in the specified column.</p>
+<p>You can select the column that you want to plot as a histogram using the <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) or <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>)
 arguments.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) is chosen the histogram columns will be plotted vertically.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>) is chosen the histogram columns will be plotted horizontally.</p>
@@ -283,9 +283,9 @@ For comparison, the following command uses <code class="docutils literal notrans
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="histogram-of-two-features-bivariate-heatmaps">
-<span id="hist-bivariate"></span><h2>Histogram of two features (bivariate heatmaps)<a class="headerlink" href="#histogram-of-two-features-bivariate-heatmaps" title="Permalink to this headline"></a></h2>
-<p>Bivariate histograms (two features) can be plotted by specifying both <code class="docutils literal notranslate"><span class="pre">-x</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
+<section id="histogram-of-two-columns-bivariate-heatmaps">
+<span id="hist-bivariate"></span><h2>Histogram of two columns (bivariate heatmaps)<a class="headerlink" href="#histogram-of-two-columns-bivariate-heatmaps" title="Permalink to this headline"></a></h2>
+<p>Bivariate histograms (two columns) can be plotted by specifying both <code class="docutils literal notranslate"><span class="pre">-x</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">tip</span></code> is compared to the distribution of <code class="docutils literal notranslate"><span class="pre">total_bill</span></code>. The result is shown as a heatmap:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip -y total_bill &lt; tips.csv
 </pre></div>
@@ -298,8 +298,8 @@ For comparison, the following command uses <code class="docutils literal notrans
 </section>
 <section id="number-of-bins">
 <span id="hist-bins"></span><h2>Number of bins<a class="headerlink" href="#number-of-bins" title="Permalink to this headline"></a></h2>
-<p>For numerical features, by default hatch will try to automatically pick an appropriate number of bins for the
-selected feature.</p>
+<p>For numerical columns, by default hatch will try to automatically pick an appropriate number of bins for the
+selected column.</p>
 <p>However, this can be overridden by specifying the required number of bins to use with the <code class="docutils literal notranslate"><span class="pre">--bins</span></code>
 argument like so:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --bins 5 &lt; tips.csv
@@ -312,8 +312,8 @@ argument like so:</p>
 </section>
 <section id="width-of-bins">
 <span id="hist-binwidth"></span><h2>Width of bins<a class="headerlink" href="#width-of-bins" title="Permalink to this headline"></a></h2>
-<p>For numerical features, by default hatch will try to automatically pick an appropriate bin width for the
-selected feature.</p>
+<p>For numerical columns, by default hatch will try to automatically pick an appropriate bin width for the
+selected column.</p>
 <p>However, this can be overridden by specifying the required bin width to use with the <code class="docutils literal notranslate"><span class="pre">--binwidth</span></code>
 argument like so:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --binwidth 3 &lt; tips.csv
@@ -338,17 +338,17 @@ argument like so:</p>
 </section>
 <section id="show-distributions-of-categorical-subsets-using-hue">
 <span id="hist-hue"></span><h2>Show distributions of categorical subsets using hue<a class="headerlink" href="#show-distributions-of-categorical-subsets-using-hue" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
 <p>The distribution of categorical subsets of the data can be shown with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
-<p>In the following example the distribution of distribution of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> feature
-is divided into two subsets based on the categorical <code class="docutils literal notranslate"><span class="pre">smoker</span></code> feature. Each
+<p>In the following example the distribution of distribution of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column
+is divided into two subsets based on the categorical <code class="docutils literal notranslate"><span class="pre">smoker</span></code> column. Each
 subset is plotted as its own histogram, layered on top of each other:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker &lt; tips.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/hist.tip.smoker.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker feature" class="align-center" src="_images/hist.tip.smoker.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/hist.tip.smoker.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column" class="align-center" src="_images/hist.tip.smoker.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -358,7 +358,7 @@ two histograms stacked on top of each other:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --multiple stack &lt; tips.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/hist.tip.smoker.stacked.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms stacked" class="align-center" src="_images/hist.tip.smoker.stacked.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/hist.tip.smoker.stacked.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms stacked" class="align-center" src="_images/hist.tip.smoker.stacked.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -367,7 +367,7 @@ two histograms stacked on top of each other:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --multiple dodge &lt; tips.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/hist.tip.smoker.dodge.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms side-by-side" class="align-center" src="_images/hist.tip.smoker.dodge.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/hist.tip.smoker.dodge.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms side-by-side" class="align-center" src="_images/hist.tip.smoker.dodge.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -375,7 +375,7 @@ two histograms stacked on top of each other:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --multiple fill &lt; tips.csv
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/hist.tip.smoker.fill.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms filled to proportions" class="align-center" src="_images/hist.tip.smoker.fill.png" style="width: 600px; height: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/hist.tip.smoker.fill.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms filled to proportions" class="align-center" src="_images/hist.tip.smoker.fill.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -403,7 +403,7 @@ argument</p>
 </ul>
 <p>In plots with mutliple histograms for categorical subsets using <code class="docutils literal notranslate"><span class="pre">--hue</span></code>, by default these statistics are normalised across the entire dataset.
 This behaviour can be changed by <code class="docutils literal notranslate"><span class="pre">--indnorm</span></code> such that the normalisation happens <em>within</em> each categorical subset.</p>
-<p>Compare the following plots that show a histograms of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> feature for each value of <code class="docutils literal notranslate"><span class="pre">smoker</span></code> using a <code class="docutils literal notranslate"><span class="pre">proportion</span></code> as the statistic.</p>
+<p>Compare the following plots that show a histograms of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column for each value of <code class="docutils literal notranslate"><span class="pre">smoker</span></code> using a <code class="docutils literal notranslate"><span class="pre">proportion</span></code> as the statistic.</p>
 <p>In the example below the default normalisation occurs, across the entire dataset:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --stat proportion --multiple dodge &lt; tips.csv
 </pre></div>
@@ -491,14 +491,14 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 </section>
 <section id="facets">
 <span id="hist-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">c</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">FEATURE</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span>
 <span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is
-further categorised by up to 2 more categorical features.</p>
-<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
+further categorised by up to 2 more categorical columns.</p>
+<p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this column.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --col day &lt; tips.csv
 </pre></div>
 </div>

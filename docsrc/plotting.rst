@@ -12,7 +12,7 @@ Plots are saved to a file by default
 
 Hatch's default behaviour for plotting commands is to save the resulting image to a file in PNG format. 
 
-For example, the following command generates a count plot of the ``class`` feature from the input file ``titanic.csv`` and saves the resulting plot to a file called ``count.class.png``:
+For example, the following command generates a count plot of the ``class`` column from the input file ``titanic.csv`` and saves the resulting plot to a file called ``count.class.png``:
 
 .. code-block:: text
 

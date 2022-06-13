@@ -3,13 +3,13 @@
 scatter
 =======
 
-Scatter plots show the relationship between two features as a scatter of data points.
+Scatter plots show the relationship between two columns as a scatter of data points.
 
 .. code-block:: bash
 
     hatch scatter <arguments>
 
-When one of the two features being compared is a categorical value the scatter plot is similar to
+When one of the two columns being compared is a categorical value the scatter plot is similar to
 :doc:`strip plot <strip/>`.
 
 Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html>`_ library function, using the ``kind="scatter"`` option.
@@ -27,23 +27,23 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
      - :ref:`help <scatter_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select feature for the X axis
-     - :ref:`X axis <scatter_feature_selection>`
+     - select column for the X axis
+     - :ref:`X axis <scatter_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN``
-     - select feature for the Y axis
-     - :ref:`Y axis <scatter_feature_selection>`
+     - select column for the Y axis
+     - :ref:`Y axis <scatter_column_selection>`
    * - ``--hue COLUMN``
-     - group features by hue
+     - group columns by hue
      - :ref:`hue <scatter_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
-     - order of hue features
+     - order of hue columns
      - :ref:`hue order <scatter_hueorder>`
    * - ``--dotstyle COLUMN``
-     - name of categorical feature to use for plotted dot marker style
+     - name of categorical column to use for plotted dot marker style
      - :ref:`dot style <scatter_dotstyle>`
    * - ``--dotsize COLUMN``
-     - scale the size of plotted dots based on a feature 
+     - scale the size of plotted dots based on a column 
      - :ref:`dot size <scatter_dotsize>`
    * - ``--dotsizerange LOW HIGH``
      - size range for plotted point size
@@ -71,11 +71,11 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
      - :ref:`limit Y axis <scatter_range>`
    * - * ``-r COLUMN``
        * ``--row COLUMN``
-     - feature to use for facet rows 
+     - column to use for facet rows 
      - :ref:`facet rows <scatter_facets>`
    * - * ``-c COLUMN``
        * ``--col COLUMN``
-     - feature to use for facet columns 
+     - column to use for facet columns 
      - :ref:`facet columns <scatter_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
@@ -86,7 +86,7 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
 Simple example
 --------------
 
-Scatter plot of the ``tip`` numerical feature compared to the ``total_bill`` numerical feature from the ``tips.csv`` input file:
+Scatter plot of the ``tip`` numerical column compared to the ``total_bill`` numerical column from the ``tips.csv`` input file:
 
 .. code-block:: bash
 
@@ -114,9 +114,9 @@ arguments:
 
     hatch scatter -h
 
-.. _scatter_feature_selection:
+.. _scatter_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -124,9 +124,9 @@ Selecting features to plot
   -x COLUMN, --xaxis COLUMN
   -y COLUMN, --yaxis COLUMN
 
-Scatter plots can be plotted for two numerical features as illustrated in the :ref:`example above <scatter_example>`, one on each of the axes.
+Scatter plots can be plotted for two numerical columns as illustrated in the :ref:`example above <scatter_example>`, one on each of the axes.
 
-Scatter plots can also be used to compare a numerical feature against a categorical feature. In the example below, the numerical ``tip`` feature is compared with the categorical ``day`` feature in the ``tips.csv`` dataset:
+Scatter plots can also be used to compare a numerical column against a categorical column. In the example below, the numerical ``tip`` column is compared with the categorical ``day`` column in the ``tips.csv`` dataset:
 
 .. code-block::
 
@@ -153,7 +153,7 @@ Colouring data points with hue
 
   --hue COLUMN
 
-The data points can be coloured by an additional numerical or categorical feature with the ``--hue`` argument.
+The data points can be coloured by an additional numerical or categorical column with the ``--hue`` argument.
 
 In the following example the data points in a scatter plot comparing ``tip`` and ``total_bill`` are
 coloured by their corresponding categorical ``day`` value: 
@@ -170,8 +170,8 @@ coloured by their corresponding categorical ``day`` value:
 
 |
 
-When the ``--hue`` paramter specifies a numerical feature the colour scale is graduated.
-For example, in the following scatter plot the numerical ``size`` feature is used for the ``--hue``
+When the ``--hue`` paramter specifies a numerical column the colour scale is graduated.
+For example, in the following scatter plot the numerical ``size`` column is used for the ``--hue``
 argument:
 
 .. code-block:: bash
@@ -202,7 +202,7 @@ Dot style
 
 By default dots in scatter plots are drawn as circles.
 
-The ``--dotstyle`` argument lets you change the shape of dots based on a categorical feature.
+The ``--dotstyle`` argument lets you change the shape of dots based on a categorical column.
 
 .. code-block:: bash
 
@@ -212,14 +212,14 @@ The ``--dotstyle`` argument lets you change the shape of dots based on a categor
        :width: 700px
        :height: 600px
        :align: center
-       :alt: Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical feature 
+       :alt: Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical column 
 
 |
 
-In the above example the hue of dots is determined by the ``day`` feature and the dot marker style is determined by the ``sex`` feature. In this case ``male`` dots use a cross marker and ``female`` dots use a circle marker.
+In the above example the hue of dots is determined by the ``day`` column and the dot marker style is determined by the ``sex`` column. In this case ``male`` dots use a cross marker and ``female`` dots use a circle marker.
 
-It is acceptable for both the ``--hue`` and ``--dotstyle`` arguments to be based on the same (categorical) feature in the data set. In such cases both the colour and marker shape will vary with 
-the underlying feature.
+It is acceptable for both the ``--hue`` and ``--dotstyle`` arguments to be based on the same (categorical) column in the data set. In such cases both the colour and marker shape will vary with 
+the underlying column.
 
 .. _scatter_dotsize:
 
@@ -231,10 +231,10 @@ Dot size
     --dotsize COLUMN 
     --dotsizerange LOW HIGH
 
-The size of plotted dots in the scatter plot can be scaled according the a numerical feature with the ``--dotsize`` argument.
+The size of plotted dots in the scatter plot can be scaled according the a numerical column with the ``--dotsize`` argument.
 
 The following example generates a scatter plot comparing ``sepal_length`` to ``sepal_width`` using the ``iris.csv`` dataset. The size of dots in the
-plot is scaled according to the ``petal_length`` feature.
+plot is scaled according to the ``petal_length`` column.
 
 .. code-block:: bash
 
@@ -360,11 +360,11 @@ Facets
  --colwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is
-further categorised by up to 2 more categorical features.
+further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+See the :doc:`facet documentation <facets/>` for more information on this column.
 
-For example the following command produces a scatter plot comparing ``total_bill`` with ``tip``, such that facet column is determined by the value of the ``smoker`` feature. 
+For example the following command produces a scatter plot comparing ``total_bill`` with ``tip``, such that facet column is determined by the value of the ``smoker`` column. 
 
 .. code-block:: bash
 

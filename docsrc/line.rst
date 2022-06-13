@@ -3,8 +3,8 @@
 line
 ====
 
-Line plots show the relationship between two numerical features, 
-optionally grouped by categorical features.
+Line plots show the relationship between two numerical columns, 
+optionally grouped by categorical columns.
 
 If multiple Y values are provided for each X value then the plot will show an estimate of the central tendency of X and confidence interval for the estimate.
 
@@ -27,17 +27,17 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
      - :ref:`help <line_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select feature for the X axis
-     - :ref:`X axis <line_feature_selection>`
+     - select column for the X axis
+     - :ref:`X axis <line_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN``
-     - select feature for the Y axis
-     - :ref:`Y axis <line_feature_selection>`
+     - select column for the Y axis
+     - :ref:`Y axis <line_column_selection>`
    * - ``--hue COLUMN``
-     - group features by hue
+     - group columns by hue
      - :ref:`hue <line_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
-     - order of hue features
+     - order of hue columns
      - :ref:`hue order <line_hueorder>`
    * - ``--logx``
      - log scale X axis 
@@ -53,11 +53,11 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
      - :ref:`limit Y axis <line_range>`
    * - * ``--row COLUMN``
        * ``-r COLUMN``
-     - feature to use for facet rows 
+     - column to use for facet rows 
      - :ref:`facet rows <line_facets>`
    * - * ``--col COLUMN``
        * ``-c COLUMN``
-     - feature to use for facet columns 
+     - column to use for facet columns 
      - :ref:`facet columns <line_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
@@ -94,9 +94,9 @@ arguments:
 
     hatch line -h
 
-.. _line_feature_selection:
+.. _line_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -104,20 +104,20 @@ Selecting features to plot
   -x COLUMN, --xaxis COLUMN
   -y COLUMN, --yaxis COLUMN
 
-Line plots show an indepdent numerical feature on the X axis and a depdendent numerical feature on the Y axis.
+Line plots show an indepdent numerical column on the X axis and a depdendent numerical column on the Y axis.
 
 .. _line_hue:
 
-Grouping features with hue 
+Grouping columns with hue 
 --------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be grouped by a categorical feature with the ``--hue`` argument.
+The data can be grouped by a categorical column with the ``--hue`` argument.
 
-In the following example ``signal`` is plotted against ``timepoint`` for the two different classes of the ``event`` feature in the ``fmri.csv`` dataset:
+In the following example ``signal`` is plotted against ``timepoint`` for the two different classes of the ``event`` column in the ``fmri.csv`` dataset:
 
 .. code-block:: bash
 
@@ -127,7 +127,7 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Line plot where signal is plotted against timepoint for the two different classes of the event feature  in the fmri.csv dataset.
+       :alt: Line plot where signal is plotted against timepoint for the two different classes of the event column  in the fmri.csv dataset.
 
 |
 
@@ -146,7 +146,7 @@ In the following example the classes of ``event`` are displayed in the order ``c
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Line plot where signal is plotted against timepoint for the two different classes of the event feature in the fmri.csv dataset, using a specified hue order
+       :alt: Line plot where signal is plotted against timepoint for the two different classes of the event column in the fmri.csv dataset, using a specified hue order
 
 |
 
@@ -162,8 +162,8 @@ Log scale
 
 The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
 
-It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
+It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical columns are selected with ``-x``, and
+conversely, ``--logy`` should be used when numerical columns are selected with ``-y``.
 
 For example, the X axis can be plotted in log scale like so:
 
@@ -191,10 +191,10 @@ Axis range limits
 
 The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
-It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--ylim`` should be used when numerical features are selected with ``-y``.
+It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical columns are selected with ``-x``, and
+conversely, ``--ylim`` should be used when numerical columns are selected with ``-y``.
 
-For example, you can display range-limited range for the ``timepoint`` feature like so:
+For example, you can display range-limited range for the ``timepoint`` column like so:
 
 .. code-block:: bash
 
@@ -220,11 +220,11 @@ Facets
  --colwrap INT
 
 Line plots can be further divided into facets, generating a matrix of line plots, where a numerical value is
-further categorised by up to 2 more categorical features.
+further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+See the :doc:`facet documentation <facets/>` for more information on this column.
 
-The following command creates a faceted line plot where the ``event`` feature is used to determine the facet columns:
+The following command creates a faceted line plot where the ``event`` column is used to determine the facet columns:
 
 .. code-block:: bash
 
@@ -234,6 +234,6 @@ The following command creates a faceted line plot where the ``event`` feature is
        :width: 600px
        :height: 300px 
        :align: center
-       :alt: Line plot where signal is plotted against timepoint split into facets based on the event feature 
+       :alt: Line plot where signal is plotted against timepoint split into facets based on the event column 
 
 |

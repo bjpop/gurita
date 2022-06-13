@@ -3,8 +3,8 @@
 box 
 ===
 
-Box (or box-and-whisker) plots show the distribution of values in a numerical feature optionally grouped by categorical features.
-The distribution of a numerical feature is displayed using the inter-quartile range, with outliers shown as separate diamond shaped points.
+Box (or box-and-whisker) plots show the distribution of values in a numerical column optionally grouped by categorical columns.
+The distribution of a numerical column is displayed using the inter-quartile range, with outliers shown as separate diamond shaped points.
 
 .. code-block:: bash
 
@@ -25,12 +25,12 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - :ref:`help <box_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select feature for the X axis
-     - :ref:`X axis <box_feature_selection>`
+     - select column for the X axis
+     - :ref:`X axis <box_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN``
-     - select feature for the Y axis
-     - :ref:`Y axis <box_feature_selection>`
+     - select column for the Y axis
+     - :ref:`Y axis <box_column_selection>`
    * - ``--orient {v,h}``
      - orientation of plot. v = vertical, h = horizontal. Default: v.
      - :ref:`orient <box_orient>`
@@ -44,10 +44,10 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - control the order of the plotted boxes 
      - :ref:`order <box_order>`
    * - ``--hue COLUMN``
-     - group features by hue
+     - group columns by hue
      - :ref:`hue <box_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
-     - order of hue features
+     - order of hue columns
      - :ref:`hue order <box_hueorder>`
    * - ``--logx``
      - log scale X axis 
@@ -63,11 +63,11 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - :ref:`limit Y axis <box_range>`
    * - * ``--row COLUMN``
        * ``-r COLUMN``
-     - feature to use for facet rows 
+     - column to use for facet rows 
      - :ref:`facet rows <box_facets>`
    * - * ``--col COLUMN``
        * ``-c COLUMN``
-     - feature to use for facet columns 
+     - column to use for facet columns 
      - :ref:`facet colums <box_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
@@ -83,7 +83,7 @@ Similar functionality to box plots are provided by:
 Simple example
 --------------
 
-Box plot of the ``age`` numerical feature from the ``titanic.csv`` input file:
+Box plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
@@ -99,8 +99,8 @@ The output of the above command is written to ``box.age.png``:
 
 |
 
-The plotted numerical feature can be divided into groups based on a categorical feature.
-In the following example the distribution of ``age`` is shown for each value in the ``class`` feature:
+The plotted numerical column can be divided into groups based on a categorical column.
+In the following example the distribution of ``age`` is shown for each value in the ``class`` column:
 
 .. code-block:: bash
 
@@ -128,9 +128,9 @@ arguments:
 
     hatch box -h
 
-.. _box_feature_selection:
+.. _box_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -138,25 +138,25 @@ Selecting features to plot
   -x COLUMN, --xaxis COLUMN
   -y COLUMN, --yaxis COLUMN
 
-Box plots can be plotted for numerical features and optionally grouped by categorical features.
+Box plots can be plotted for numerical columns and optionally grouped by categorical columns.
 
-If no categorical feature is specified, a single column box plot will be generated showing
-the distribution of the numerical feature.
+If no categorical column is specified, a single column box plot will be generated showing
+the distribution of the numerical column.
 
 .. note:: 
 
     .. _box_orient:
 
     By default the orientation of the box plot is vertical. In this scenario
-    the numerical feature is specified by ``-y``, and the (optional) categorical feature is specified
+    the numerical column is specified by ``-y``, and the (optional) categorical column is specified
     by ``-x``.
     
     However, the orientation of the box plot can be made horizontal using the ``--orient h`` argument.
     In this case the sense of the X and Y axes are swapped from the default, and thus
-    the numerical feature is specified by ``-x``, and the (optional) categorical feature is specified
+    the numerical column is specified by ``-x``, and the (optional) categorical column is specified
     by ``-y``.
 
-In the following example the distribution of ``age`` is shown for each value in the ``class`` feature,
+In the following example the distribution of ``age`` is shown for each value in the ``class`` column,
 where the boxes are plotted horizontally:
 
 .. code-block:: bash
@@ -223,10 +223,10 @@ Controlling the order of the boxes
 
     --order VALUE [VALUE ...]
 
-By default the order of the categorical features displayed in the box plot is determined from their occurrence in the input data.
+By default the order of the categorical columns displayed in the box plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
 
-In the following example the box columns of the ``class`` feature are displayed in the order of ``First``, ``Second``, ``Third``:
+In the following example the box columns of the ``class`` column are displayed in the order of ``First``, ``Second``, ``Third``:
 
 .. code-block:: bash
 
@@ -242,16 +242,16 @@ In the following example the box columns of the ``class`` feature are displayed 
 
 .. _box_hue:
 
-Grouping features with hue 
+Grouping columns with hue 
 --------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical feature with the ``--hue`` argument.
+The data can be further grouped by an additional categorical column with the ``--hue`` argument.
 
-In the following example the distribution of ``age`` is shown for each value in the ``class`` feature, and further sub-divided by the ``sex`` feature:
+In the following example the distribution of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
 .. code-block:: bash
 
@@ -285,7 +285,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 |
 
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
-the order of both the ``class`` and ``sex`` categorical features:
+the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: bash
 
@@ -311,10 +311,10 @@ Log scale
 
 The distribution of numerical values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
 
-It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--logy`` should be used when numerical features are selected with ``-y``.
+It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, ``--logx`` should be used when numerical columns are selected with ``-x``, and
+conversely, ``--logy`` should be used when numerical columns are selected with ``-y``.
 
-For example, you can display a log scale box plot for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical distribution:
+For example, you can display a log scale box plot for the ``age`` column grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical distribution:
 
 .. code-block:: bash
 
@@ -340,10 +340,10 @@ Axis range limits
 
 The range of displayed numerical distributions can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.
 
-It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical features are selected with ``-x``, and
-conversely, ``--ylim`` should be used when numerical features are selected with ``-y``.
+It only makes sense to range-limit the numerical axis (and not the categorical axis). Therefore, ``--xlim`` should be used when numerical columns are selected with ``-x``, and
+conversely, ``--ylim`` should be used when numerical columns are selected with ``-y``.
 
-For example, you can display range-limited range for the ``age`` feature grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so.
+For example, you can display range-limited range for the ``age`` column grouped by ``class`` (when the distribution of ``age`` is displayed on the Y axis) like so.
 Note carefully that the numerical 
 data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument should be used to range-limit the distribution: 
 
@@ -363,11 +363,11 @@ Facets
  --colwrap INT
 
 Box plots can be further divided into facets, generating a matrix of box plots, where a numerical value is
-further categorised by up to 2 more categorical features.
+further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+See the :doc:`facet documentation <facets/>` for more information on this column.
 
-The following command creates a faceted box plot where the ``sex`` feature is used to determine the facet columns:
+The following command creates a faceted box plot where the ``sex`` column is used to determine the facet columns:
 
 .. code-block:: bash
 

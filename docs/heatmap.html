@@ -116,7 +116,7 @@
              
   <section id="heatmap">
 <span id="id1"></span><h1>heatmap<a class="headerlink" href="#heatmap" title="Permalink to this headline"></a></h1>
-<p>Heatmap showing the relationship between two categorical features and a numerical feature.</p>
+<p>Heatmap showing the relationship between two categorical columns and a numerical column.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap &lt;arguments&gt;
 </pre></div>
 </div>
@@ -139,28 +139,28 @@
 <td><p><a class="reference internal" href="#heatmap-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--xaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select categorial feature for the X axis</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">X axis</span></a></p></td>
+<td><p>select categorial column for the X axis</p></td>
+<td><p><a class="reference internal" href="#heatmap-column-selection"><span class="std std-ref">X axis</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--yaxis</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
-<td><p>select categorical feature for the Y axis</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">Y axis</span></a></p></td>
+<td><p>select categorical column for the Y axis</p></td>
+<td><p><a class="reference internal" href="#heatmap-column-selection"><span class="std std-ref">Y axis</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">FEATURE</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--val</span> <span class="pre">FEATURE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">COLUMN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--val</span> <span class="pre">COLUMN</span></code></p></li>
 </ul>
 </td>
 <td><p>select intensity value for heatmap</p></td>
-<td><p><a class="reference internal" href="#heatmap-feature-selection"><span class="std std-ref">value</span></a></p></td>
+<td><p><a class="reference internal" href="#heatmap-column-selection"><span class="std std-ref">value</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--cmap</span> <span class="pre">COLOR_MAP_NAME</span></code></p></td>
 <td><p>colour map for the heat map</p></td>
@@ -221,13 +221,13 @@ arguments:</p>
 </pre></div>
 </div>
 </section>
-<section id="selecting-features-to-plot">
-<span id="heatmap-feature-selection"></span><h2>Selecting features to plot<a class="headerlink" href="#selecting-features-to-plot" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">FEATURE</span>
-<span class="o">-</span><span class="n">y</span> <span class="n">FEATURE</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">FEATURE</span>
+<section id="selecting-columns-to-plot">
+<span id="heatmap-column-selection"></span><h2>Selecting columns to plot<a class="headerlink" href="#selecting-columns-to-plot" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">x</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">xaxis</span> <span class="n">COLUMN</span>
+<span class="o">-</span><span class="n">y</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">yaxis</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The X and Y axes of a heatmap must be categorical features. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
+<p>The X and Y axes of a heatmap must be categorical columns. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
 If your data is not in this format it may be possible to transform it into this format using <a class="reference internal" href="pivot.html"><span class="doc">pivot</span></a>.</p>
 <p>The example below shows the same heatmap <a class="reference internal" href="#heatmap-simple-example"><span class="std std-ref">the simple example above</span></a> but with the month on the Y axis and the year on the X axis:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y month -x year -v passengers &lt; flights.csv
@@ -311,7 +311,7 @@ Note that <code class="docutils literal notranslate"><span class="pre">--robust<
 <p>Therefore the order of the values on the axes can be either sorted, using <code class="docutils literal notranslate"><span class="pre">--sortx</span></code> and <code class="docutils literal notranslate"><span class="pre">--sorty</span></code>, or manually specified using <code class="docutils literal notranslate"><span class="pre">--orderx</span></code> and <code class="docutils literal notranslate"><span class="pre">--ordery</span></code>.</p>
 <p>Both sort arguments accept an optional argument that specifies the direction of the sort: <code class="docutils literal notranslate"><span class="pre">a</span></code> for ascending and <code class="docutils literal notranslate"><span class="pre">d</span></code> for descending, where the <em>order</em> of rows is considered from top to bottom and the <em>order</em> of columns is considered
 from left to right.</p>
-<p>Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.</p>
+<p>Categorical columns will be sorted alphabetically. Numerical columns will be sorted numerically.</p>
 <p>If a specific order of values is required then this can be achived with <code class="docutils literal notranslate"><span class="pre">--orderx</span></code> and <code class="docutils literal notranslate"><span class="pre">--ordery</span></code>. Both of these arguments require one or more values to be specified, though it is possible to specify only a subset of all the possible
 values. Any unlisted values will be ordered arbitrarily. This can be useful when the relative order of only a few values is important.</p>
 <p>The example below generates a heatmap with the values on the Y axes displayed in descending sorted order:</p>

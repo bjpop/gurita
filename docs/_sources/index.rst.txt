@@ -6,7 +6,7 @@
 Hatch: a command line data analytics and plotting tool
 ******************************************************
 
-Hatch is a command line tool for transforming, analysing and visualising tabular data in CSV or TSV format.
+Hatch is a command line tool for transforming, analysing, and visualising tabular data in CSV or TSV format.
 
 At its core Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
 Additionally, Hatch allows commands to be :ref:`chained together <command_chain>` into flexible analysis pipelines.
@@ -49,7 +49,7 @@ The command generates the following output that is displayed on the terminal:
   [150 rows x 5 columns]
 
 The following command generates a box plot from ``iris.csv``, such that the Y-axis
-represents the ``sepal_length`` numerical feature, and the X-axis is grouped by the ``species`` categorical feature.
+represents the ``sepal_length`` numerical column, and the X-axis is grouped by the ``species`` categorical column.
 The goal of this plot is to show the distribution of sepal length of the three different species of iris
 flowers contained in the data set.
 
@@ -100,7 +100,7 @@ In this example there are four commands that are executed in the following order
 1. The ``filter 'species != "virginica"'`` command selects all rows where ``species`` is not equal to ``virginica``.
 2. The filtered rows are then passed to the ``sample 0.9`` command which randomly selects 90% of the remaining rows.
 3. The sampled rows are then passed to the ``pca`` command which performs principal component analysis (PCA), yielding two extra columns in the data called ``pc1`` and ``pc2``.
-4. Finally the pca-transformed data is passed to the ``scatter -x pc1 -y pc2 --hue species``  command which generates a scatter plot of ``pc1`` and ``pc2`` (the first two principal components), and colours the points in the plot based on the categorical ``species`` feature.
+4. Finally the pca-transformed data is passed to the ``scatter -x pc1 -y pc2 --hue species``  command which generates a scatter plot of ``pc1`` and ``pc2`` (the first two principal components), and colours the points in the plot based on the categorical ``species`` column.
 
 The output of this entire Hatch command is the scatter plot below that is saved in a file called ``scatter.pc1.pc2.species.png``
 

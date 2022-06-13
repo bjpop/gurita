@@ -11,7 +11,7 @@ Example:
 
    hatch hist --sample 100 -x signal fmri.csv
 
-In the example above a histogram is plotted of the ``signal`` feature using 100 randomly sampled rows from the input data.
+In the example above a histogram is plotted of the ``signal`` column using 100 randomly sampled rows from the input data.
 
 Example:
 
@@ -19,7 +19,7 @@ Example:
 
    hatch hist --sample 0.1 -x signal fmri.csv
 
-In the example above a histogram is plotted of the ``signal`` feature using 0.1 (as close as possible to one tenth) of the total rows randomly sampled from the input data.
+In the example above a histogram is plotted of the ``signal`` column using 0.1 (as close as possible to one tenth) of the total rows randomly sampled from the input data.
 
 .. note::
 

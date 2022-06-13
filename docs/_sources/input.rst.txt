@@ -17,7 +17,7 @@ The ``in`` command allows you to specify an input file by name:
 We use ``...`` to indicate that the remainder of the example Hatch command is omitted for the sake of simplifying the discussion.
 
 You should imagine that ``...`` would be replaced by more text to complete the command.
-For example, if you wanted to generate a count plot of the ``class`` feature in the ``titanic.csv`` file, the ``...`` in the above example could be expanded like so:
+For example, if you wanted to generate a count plot of the ``class`` column in the ``titanic.csv`` file, the ``...`` in the above example could be expanded like so:
 
 .. code-block:: text 
 

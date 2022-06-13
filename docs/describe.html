@@ -108,7 +108,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch describe &lt;arguments&gt;
 </pre></div>
 </div>
-<p>This produces a summary table of features in the input data.</p>
+<p>This produces a summary table of columns in the input data.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch describe &lt; titanic.csv
 </pre></div>
 </div>
@@ -157,15 +157,15 @@ rows: 891, cols: 15
 </div>
 <p>The summary includes the following information:</p>
 <ul class="simple">
-<li><p>count: the number of non-empty data values observed for the feature</p></li>
+<li><p>count: the number of non-empty data values observed for the column</p></li>
 </ul>
-<p>For categorical features:</p>
+<p>For categorical columns:</p>
 <ul class="simple">
-<li><p>unique: the number of unique values observed for the feature</p></li>
+<li><p>unique: the number of unique values observed for the column</p></li>
 <li><p>top: the most frequently observed value</p></li>
 <li><p>freq: the frequency (count) of the most frequently observed value</p></li>
 </ul>
-<p>For numerical features:</p>
+<p>For numerical columns:</p>
 <ul class="simple">
 <li><p>mean: the mean (average)</p></li>
 <li><p>std: the standard deviation</p></li>
@@ -179,7 +179,7 @@ rows: 891, cols: 15
 the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file.</p>
 <section id="summary-information-for-transformed-input-data">
 <span id="info-trans"></span><h2>Summary information for transformed input data<a class="headerlink" href="#summary-information-for-transformed-input-data" title="Permalink to this headline"></a></h2>
-<p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> features in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
+<p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> columns in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch describe --columns age class &lt; titanic.csv
 </pre></div>
 </div>

@@ -3,7 +3,7 @@
 count 
 =====
 
-Count plots show the frequency of values within categorical features using bars.
+Count plots show the frequency of values within categorical columns using bars.
 
 .. code-block:: bash
 
@@ -24,20 +24,20 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - :ref:`help <count_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select feature for the X axis 
-     - :ref:`X axis <count_feature_selection>`
+     - select column for the X axis 
+     - :ref:`X axis <count_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN`` 
-     - select feature for the Y axis 
-     - :ref:`Y axis <count_feature_selection>`
+     - select column for the Y axis 
+     - :ref:`Y axis <count_column_selection>`
    * - ``--order VALUE [VALUE ...]`` 
      - order of the plotted columns  
      - :ref:`order <count_order>`
    * - ``--hue COLUMN`` 
-     - group features by hue 
+     - group columns by hue 
      - :ref:`hue <count_hue>`
    * - ``--hueorder VALUE [VALUE ...]`` 
-     - order of hue features
+     - order of hue columns
      - :ref:`hue order <count_hueorder>`
    * - ``--logx``
      - log scale X axis 
@@ -53,11 +53,11 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - :ref:`limit Y axis <count_range>`
    * - * ``--row COLUMN``
        * ``-r COLUMN``
-     - feature to use for facet rows
+     - column to use for facet rows
      - :ref:`facet rows <count_facets>`
    * - * ``--col COLUMN``
        * ``-c COLUMN``
-     - feature to use for facet columns
+     - column to use for facet columns
      - :ref:`facet columns <count_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
@@ -68,7 +68,7 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
 Simple example
 --------------
 
-Plot a count of the ``embark_town`` categorical feature from the ``titanic.csv`` input file:
+Plot a count of the ``embark_town`` categorical column from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
@@ -80,7 +80,7 @@ The output of the above command is written to ``count.embark_town.png``:
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file 
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file 
 
 |
 
@@ -96,9 +96,9 @@ arguments:
 
     hatch count -h
 
-.. _count_feature_selection:
+.. _count_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -106,16 +106,16 @@ Selecting features to plot
   -x COLUMN, --xaxis COLUMN
   -y COLUMN, --yaxis COLUMN
 
-Count plots can be plotted for categorical features.
+Count plots can be plotted for categorical columns.
 
 .. note::
 
-    If a numerical feature is selected for a count plot it will be treated as categorical, which may
+    If a numerical column is selected for a count plot it will be treated as categorical, which may
     not give expected behaviour.
 
     You may not use both ``-x COLUMN`` and ``-y COLUMN`` in the same command line for count plots.
 
-You can select the feature that you want to plot as a count using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
+You can select the column that you want to plot as a count using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
 arguments.
 
 If ``-x`` (``--xaxis``) is chosen the count columns will be plotted vertically.
@@ -133,7 +133,7 @@ For comparison, the following command uses ``-y embark_town`` to plot a histogra
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, plotted horizontally
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, plotted horizontally
 
 |
 
@@ -146,10 +146,10 @@ Controlling the order of the bars
 
     --order VALUE [VALUE ...]
 
-By default the order of the categorical features displayed in the count plot is determined from their occurrence in the input data.
+By default the order of the categorical columns displayed in the count plot is determined from their occurrence in the input data.
 This can be overridden with the ``--order`` argument, which allows you to specify the exact ordering of columns based on their values. 
 
-In the following example the counts of the ``embark_town`` feature are displayed in the order of ``Cherbourg``, ``Queenstown``, ``Southampton``:
+In the following example the counts of the ``embark_town`` column are displayed in the order of ``Cherbourg``, ``Queenstown``, ``Southampton``:
 
 .. code-block:: bash
 
@@ -159,22 +159,22 @@ In the following example the counts of the ``embark_town`` feature are displayed
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, with specific order 
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, with specific order 
 
 |
 
 .. _count_hue:
 
-Grouping features with hue 
+Grouping columns with hue 
 --------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The feature being counted can be grouped based on another categorical feature using the ``--hue`` argument.
+The column being counted can be grouped based on another categorical column using the ``--hue`` argument.
 
-In the following example the counts of the ``embark_town`` feature are grouped by the ``class`` feature from the titanic data set:
+In the following example the counts of the ``embark_town`` column are grouped by the ``class`` column from the titanic data set:
 
 .. code-block:: bash
 
@@ -184,7 +184,7 @@ In the following example the counts of the ``embark_town`` feature are grouped b
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature 
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, grouped by the class column 
 
 |
 
@@ -203,12 +203,12 @@ In the following example the ``class`` values are displayed in the order of ``Fi
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, grouped by the class feature, displayed in a specified order
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, grouped by the class column, displayed in a specified order
 
 |
 
 It is possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls the order of both 
-the ``embark_town`` and ``class`` categorical features:
+the ``embark_town`` and ``class`` categorical columns:
 
 .. code-block:: bash
 
@@ -235,10 +235,10 @@ Log scale
 
 Count values can be displayed in log (base 10) scale with ``--logx`` and ``--logy``. 
 
-It only makes sense to log-scale the count axis (and not the categorical axis). Therefore, ``--logx`` should be used when categorical features are selected with ``-y``, and
-conversely, ``--logy`` should be used when categorical features are selected with ``-x``.
+It only makes sense to log-scale the count axis (and not the categorical axis). Therefore, ``--logx`` should be used when categorical columns are selected with ``-y``, and
+conversely, ``--logy`` should be used when categorical columns are selected with ``-x``.
 
-For example, you can display a log scale of counts for the ``embark_town`` feature (when the feature is displayed on the X-axis) like so. Note carefully that the categorical
+For example, you can display a log scale of counts for the ``embark_town`` column (when the column is displayed on the X-axis) like so. Note carefully that the categorical
 data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument should be used to log-scale the counts:
 
 .. code-block:: bash
@@ -265,10 +265,10 @@ Axis range limits
 
 The range of displayed count values can be restricted with ``--xlim`` and ``--ylim``. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of values to be displayed.
 
-It only makes sense to range-limit the count axis (and not the categorical axis). Therefore, ``--xlim`` should be used when categorical features are selected with ``-y``, and
-conversely, ``--ylim`` should be used when categorical features are selected with ``-x``.
+It only makes sense to range-limit the count axis (and not the categorical axis). Therefore, ``--xlim`` should be used when categorical columns are selected with ``-y``, and
+conversely, ``--ylim`` should be used when categorical columns are selected with ``-x``.
 
-For example, you can display range-limited count for the ``embark_town`` feature (when the feature is displayed on the X-axis) like so. Note carefully that the categorical
+For example, you can display range-limited count for the ``embark_town`` column (when the column is displayed on the X-axis) like so. Note carefully that the categorical
 data is displayed on the X-axis (``-x``), therefore the ``--ylim`` argument should be used to range-limit the counts: 
 
 .. code-block:: bash
@@ -288,9 +288,9 @@ Facets
 
 Count plots can be further divided into facets, generating a matrix of count plots. 
 
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+See the :doc:`facet documentation <facets/>` for more information on this column.
 
-The follow command creates a faceted bar plot where the ``sex`` feature is used to determine the facet columns:
+The follow command creates a faceted bar plot where the ``sex`` column is used to determine the facet columns:
 
 .. code-block:: bash
 
@@ -300,6 +300,6 @@ The follow command creates a faceted bar plot where the ``sex`` feature is used 
        :width: 600px
        :height: 300px
        :align: center
-       :alt: Count plot showing the frequency of the categorical values in the embark_town feature from the titanic.csv file, using sex to determine facet columns
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, using sex to determine facet columns
 
 |

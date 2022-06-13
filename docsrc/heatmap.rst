@@ -3,7 +3,7 @@
 heatmap
 =======
 
-Heatmap showing the relationship between two categorical features and a numerical feature.
+Heatmap showing the relationship between two categorical columns and a numerical column.
 
 .. code-block:: text
 
@@ -24,16 +24,16 @@ Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/genera
      - :ref:`help <heatmap_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select categorial feature for the X axis
-     - :ref:`X axis <heatmap_feature_selection>`
+     - select categorial column for the X axis
+     - :ref:`X axis <heatmap_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN``
-     - select categorical feature for the Y axis
-     - :ref:`Y axis <heatmap_feature_selection>`
+     - select categorical column for the Y axis
+     - :ref:`Y axis <heatmap_column_selection>`
    * - * ``-v COLUMN``
        * ``--val COLUMN``
      - select intensity value for heatmap 
-     - :ref:`value <heatmap_feature_selection>`
+     - :ref:`value <heatmap_column_selection>`
    * - ``--cmap COLOR_MAP_NAME``
      - colour map for the heat map 
      - :ref:`colour map <heatmap_cmap>`
@@ -96,9 +96,9 @@ arguments:
 
     hatch heatmap -h
 
-.. _heatmap_feature_selection:
+.. _heatmap_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -106,7 +106,7 @@ Selecting features to plot
   -x COLUMN, --xaxis COLUMN 
   -y COLUMN, --yaxis COLUMN
 
-The X and Y axes of a heatmap must be categorical features. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
+The X and Y axes of a heatmap must be categorical columns. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
 If your data is not in this format it may be possible to transform it into this format using :doc:`pivot <pivot>`.
 
 The example below shows the same heatmap :ref:`the simple example above <heatmap_simple_example>` but with the month on the Y axis and the year on the X axis:
@@ -253,7 +253,7 @@ Therefore the order of the values on the axes can be either sorted, using ``--so
 Both sort arguments accept an optional argument that specifies the direction of the sort: ``a`` for ascending and ``d`` for descending, where the *order* of rows is considered from top to bottom and the *order* of columns is considered
 from left to right.
 
-Categorical features will be sorted alphabetically. Numerical features will be sorted numerically.
+Categorical columns will be sorted alphabetically. Numerical columns will be sorted numerically.
 
 If a specific order of values is required then this can be achived with ``--orderx`` and ``--ordery``. Both of these arguments require one or more values to be specified, though it is possible to specify only a subset of all the possible
 values. Any unlisted values will be ordered arbitrarily. This can be useful when the relative order of only a few values is important.

@@ -3,7 +3,7 @@
 hist (histogram)
 ================
 
-Plot distributions of selected numerical or categorical features as histograms.
+Plot distributions of selected numerical or categorical columns as histograms.
 
 .. code-block:: text
 
@@ -24,12 +24,12 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
      - :ref:`help <hist_help>`
    * - * ``-x COLUMN``
        * ``--xaxis COLUMN``
-     - select feature for the X axis 
-     - :ref:`X axis <hist_feature_selection>`
+     - select column for the X axis 
+     - :ref:`X axis <hist_column_selection>`
    * - * ``-y COLUMN``
        * ``--yaxis COLUMN`` 
-     - select feature for the Y axis 
-     - :ref:`Y axis <hist_feature_selection>`
+     - select column for the Y axis 
+     - :ref:`Y axis <hist_column_selection>`
    * - ``--bins NUM``
      - number of bins 
      - :ref:`bins <hist_bins>`
@@ -40,7 +40,7 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
      - plot a cumulative histogram 
      - :ref:`cumulative <hist_cumulative>`
    * - ``--hue COLUMN``
-     - group features by hue
+     - group columns by hue
      - :ref:`hue <hist_hue>`
    * - ``--stat {count, frequency, probability, proportion, percent, density}``
      - Statistic to use for each bin (default: count) 
@@ -71,11 +71,11 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
      - :ref:`limit Y axis <hist_range>`
    * - * ``-r COLUMN``
        * ``--row COLUMN``
-     - feature to use for facet rows 
+     - column to use for facet rows 
      - :ref:`facet rows <hist_facets>`
    * - * ``-c COLUMN``
        * ``--col COLUMN``
-     - feature to use for facet columns 
+     - column to use for facet columns 
      - :ref:`facet columns <hist_facets>`
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
@@ -103,7 +103,7 @@ The output of the above command is written to ``hist.tip.png``:
 
 |
 
-Plot a count of the different categorical values in the ``day`` feature:
+Plot a count of the different categorical values in the ``day`` column:
 
 .. code-block:: text
 
@@ -115,7 +115,7 @@ The output of the above command is written to ``hist.day.png``:
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram plot showing the count of the different categorical values in the day feature 
+       :alt: Histogram plot showing the count of the different categorical values in the day column 
 
 |
 
@@ -131,9 +131,9 @@ arguments:
 
     hatch hist -h
 
-.. _hist_feature_selection:
+.. _hist_column_selection:
 
-Selecting features to plot
+Selecting columns to plot
 --------------------------
 
 .. code-block:: 
@@ -143,11 +143,11 @@ Selecting features to plot
   -y COLUMN, --yaxis COLUMN
                         Feature to plot along the Y axis
 
-Histograms can be plotted for both numerical features and for categorical features. Numerical data is binned
+Histograms can be plotted for both numerical columns and for categorical columns. Numerical data is binned
 and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
-column for each categorical value in the specified feature.
+column for each categorical value in the specified column.
 
-You can select the feature that you want to plot as a histogram using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
+You can select the column that you want to plot as a histogram using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
 arguments.
 
 If ``-x`` (``--xaxis``) is chosen the histogram columns will be plotted vertically.
@@ -173,10 +173,10 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
 
 .. _hist_bivariate:
 
-Histogram of two features (bivariate heatmaps)
+Histogram of two columns (bivariate heatmaps)
 ----------------------------------------------
 
-Bivariate histograms (two features) can be plotted by specifying both ``-x`` and ``-y``.
+Bivariate histograms (two columns) can be plotted by specifying both ``-x`` and ``-y``.
 
 In the following example the distribution of ``tip`` is compared to the distribution of ``total_bill``. The result is shown as a heatmap:
 
@@ -199,8 +199,8 @@ Bivariate histograms also work with categorical variables and combinations of nu
 Number of bins 
 --------------
 
-For numerical features, by default hatch will try to automatically pick an appropriate number of bins for the
-selected feature.
+For numerical columns, by default hatch will try to automatically pick an appropriate number of bins for the
+selected column.
 
 However, this can be overridden by specifying the required number of bins to use with the ``--bins`` 
 argument like so:
@@ -222,8 +222,8 @@ argument like so:
 Width of bins 
 -------------
 
-For numerical features, by default hatch will try to automatically pick an appropriate bin width for the
-selected feature.
+For numerical columns, by default hatch will try to automatically pick an appropriate bin width for the
+selected column.
 
 However, this can be overridden by specifying the required bin width to use with the ``--binwidth`` 
 argument like so:
@@ -272,8 +272,8 @@ Show distributions of categorical subsets using hue
 
 The distribution of categorical subsets of the data can be shown with the ``--hue`` argument.
 
-In the following example the distribution of distribution of the ``tip`` feature
-is divided into two subsets based on the categorical ``smoker`` feature. Each
+In the following example the distribution of distribution of the ``tip`` column
+is divided into two subsets based on the categorical ``smoker`` column. Each
 subset is plotted as its own histogram, layered on top of each other:
 
 .. code-block:: text
@@ -284,7 +284,7 @@ subset is plotted as its own histogram, layered on top of each other:
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature 
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker column 
 
 |
 
@@ -303,7 +303,7 @@ two histograms stacked on top of each other:
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms stacked
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms stacked
 
 |
 
@@ -319,7 +319,7 @@ The following example shows the effect of ``--multiple dodge``, where categorica
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms side-by-side 
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms side-by-side 
 
 |
 
@@ -333,7 +333,7 @@ The following example shows the effect of ``--multiple fill``, where counts are 
        :width: 600px
        :height: 600px
        :align: center
-       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker feature, with overlapping histograms filled to proportions 
+       :alt: Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms filled to proportions 
 
 |
 
@@ -372,7 +372,7 @@ The ``--stat`` argument allows the use of the following normalising statistics:
 In plots with mutliple histograms for categorical subsets using ``--hue``, by default these statistics are normalised across the entire dataset.
 This behaviour can be changed by ``--indnorm`` such that the normalisation happens *within* each categorical subset.
 
-Compare the following plots that show a histograms of the ``tip`` feature for each value of ``smoker`` using a ``proportion`` as the statistic.
+Compare the following plots that show a histograms of the ``tip`` column for each value of ``smoker`` using a ``proportion`` as the statistic.
 
 In the example below the default normalisation occurs, across the entire dataset:
 
@@ -527,9 +527,9 @@ Facets
  --colwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is
-further categorised by up to 2 more categorical features.
+further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this feature.
+See the :doc:`facet documentation <facets/>` for more information on this column.
 
 .. code-block:: text
 
