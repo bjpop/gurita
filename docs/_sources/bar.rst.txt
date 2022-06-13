@@ -7,7 +7,7 @@ Bar plots summarise a numerical column as boxes with optional error bars.
 
 By default the numerical column is summarised by its mean, but other summary functions can be chosen.
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar <arguments>
 
@@ -89,7 +89,7 @@ Simple example
 
 Bar plot the mean ``age`` of passengers for each value of ``class`` in the ``titanic.csv`` input file:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class < titanic.csv 
 
@@ -111,7 +111,7 @@ Getting help
 The full set of command line arguments for bar plots can be obtained with the ``-h`` or ``--help``
 arguments:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -h
 
@@ -146,7 +146,7 @@ a summary (mean by default) of the numerical column.
 In the following example the mean of ``age`` is shown for each value in the ``class`` column,
 where the boxes are plotted horizontally:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -x age -y class --orient h < titanic.csv
 
@@ -170,7 +170,7 @@ The allowed choices are: ``mean``, ``median``, ``max``, ``min``, ``sum``, ``std`
 
 For example, the maximum ``age`` is shown for each value of ``class``: 
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --estimator max < titanic.csv 
 
@@ -191,7 +191,7 @@ The standard deviation of the numerical column can be shown as an error bar with
 
 For example the mean and standard deviation of ``age`` is shown for each value in the ``class`` column:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --std < titanic.csv 
 
@@ -214,7 +214,7 @@ By default, if ``--ci`` is specified without a numerical argument, then the 95% 
 
 For example the mean of age and its 98% confidence interval is shown for each value in the ``class`` column:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --ci 98 < titanic.csv 
 
@@ -240,7 +240,7 @@ This can be overridden with the ``--order`` argument, which allows you to specif
 
 In the following example the bar columns of the ``class`` column are displayed in the order of ``First``, ``Second``, ``Third``:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --order First Second Third < titanic.csv
 
@@ -265,7 +265,7 @@ The data can be further grouped by an additional categorical column with the ``-
 
 In the following example the mean and error of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --hue sex < titanic.csv
 
@@ -284,7 +284,7 @@ This can be overridden with the ``--hueorder`` argument, which allows you to spe
 
 In the following example the ``sex`` values are displayed in the order of ``female``, ``male``: 
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --hue sex --hueorder female male < titanic.csv
 
@@ -299,7 +299,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 It is also possible to use both ``--order`` and ``--hueorder`` in the same command. For example, the following command controls
 the order of both the ``class`` and ``sex`` categorical columns:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
@@ -328,7 +328,7 @@ conversely, ``--logy`` should be used when numerical columns are selected with `
 
 For example, you can display a log scale bar plot for the ``age`` column grouped by ``class`` (when the mean of ``age`` is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (``-y``), therefore the ``--logy`` argument should be used to log-scale the numerical mean:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --logy < titanic.csv 
 
@@ -359,7 +359,7 @@ For example, you can display range-limited range for the ``age`` column grouped 
 Note carefully that the numerical 
 data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument should be used to range-limit the mean: 
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --ylim 10 30 < titanic.csv
 
@@ -381,7 +381,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 The follow command creates a faceted bar plot where the ``sex`` column is used to determine the facet columns:
 
-.. code-block:: bash
+.. code-block:: text
 
     hatch bar -y age -x class --col sex < titanic.csv
 

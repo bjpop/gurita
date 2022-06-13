@@ -251,7 +251,7 @@ class Tail(CommandBase, name="tail"):
         return df.tail(self.options.num)
     
 class Head(CommandBase, name="head"):
-    description = "Select the first N rows in the data." 
+    description = "Select the first or last N rows in the data." 
     category = "transformation"
     
     def __init__(self):
