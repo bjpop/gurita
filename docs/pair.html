@@ -116,12 +116,65 @@
              
   <section id="pair">
 <span id="id1"></span><h1>pair<a class="headerlink" href="#pair" title="Permalink to this headline"></a></h1>
-<p>Line plots show the relationship between two numerical features,
-optionally grouped by categorical features.</p>
-<p>If multiple Y values are provided for each X value then the plot will show an estimate of the central tendency of X and confidence interval for the estimate.</p>
+<p>Plot relationships between pairs of variables on a grid of axes.</p>
+<p>By default comparisons are made between
+all numerical variables in the data, however it is possible to specify which variables to compare, including
+categorical variables as well.</p>
+<p>Pair plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html">pairplot</a> library function.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch pair &lt;arguments&gt;
 </pre></div>
 </div>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#pair-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">[FEATURE</span> <span class="pre">...]</span></code></p></li>
+</ul>
+</td>
+<td><p>select columns to compare</p></td>
+<td><p><a class="reference internal" href="#pair-columns"><span class="std std-ref">columns</span></a>:</p></td>
+</tr>
+</tbody>
+</table>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>The following example generates a pair plot comparing all the numerical features in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> data set. By default, if no column names are
+specified, all the numerical columns will be compared.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch pair &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">pair.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/pair.png"><img alt="Pair plot comparing all the numerical features in the iris.csv data set" class="align-center" src="_images/pair.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="getting-help">
+<span id="pair-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for pair plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch pair -h
+</pre></div>
+</div>
+</section>
+<section id="selecting-columns-to-compare">
+<span id="pair-columns"></span><h2>Selecting columns to compare<a class="headerlink" href="#selecting-columns-to-compare" title="Permalink to this headline"></a></h2>
+</section>
 </section>
 
 
