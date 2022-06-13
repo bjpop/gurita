@@ -307,4 +307,4 @@ Facets
 Boxen plots can be further divided into facets, generating a matrix of boxen plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.

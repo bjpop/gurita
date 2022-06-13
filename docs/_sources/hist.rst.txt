@@ -529,7 +529,7 @@ Facets
 Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is
 further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.
 
 .. code-block:: text
 

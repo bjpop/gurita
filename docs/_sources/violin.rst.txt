@@ -307,7 +307,7 @@ Facets
 Violin plots can be further divided into facets, generating a matrix of violin plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.
 
 The following command creates a faceted violin plot where the ``sex`` column is used to determine the facet columns:
 

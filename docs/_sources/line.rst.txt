@@ -222,7 +222,7 @@ Facets
 Line plots can be further divided into facets, generating a matrix of line plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.
 
 The following command creates a faceted line plot where the ``event`` column is used to determine the facet columns:
 

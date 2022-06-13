@@ -352,7 +352,7 @@ Facets
 Swarm plots can be further divided into facets, generating a matrix of swarm plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.
 
 The follow command creates a faceted swarm plot where the ``sex`` column is used to determine the facet columns:
 

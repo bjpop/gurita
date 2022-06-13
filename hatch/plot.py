@@ -609,9 +609,7 @@ class LMPlot(CommandBase, name="lmplot"):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
             parents=[ io_args.io_arguments, plot_args.make_plot_arguments(),
                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, 
-               plot_args.logx, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-               plot_args.dotsize, plot_args.dotalpha, plot_args.dotlinewidth, plot_args.dotstyle, plot_args.dotsizerange],
+               plot_args.hue_order, plot_args.colwrap],
             add_help=False)
         self.options = parser.parse_args(args)
 
@@ -622,7 +620,6 @@ class LMPlot(CommandBase, name="lmplot"):
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         facet_kws = { 'legend_out': True }
         kwargs = {}
-        #scatter_kws = { 'style': options.dotstyle }
         scatter_kws = {}
         graph = sns.lmplot(data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,

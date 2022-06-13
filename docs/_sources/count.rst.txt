@@ -288,7 +288,7 @@ Facets
 
 Count plots can be further divided into facets, generating a matrix of count plots. 
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.
 
 The follow command creates a faceted bar plot where the ``sex`` column is used to determine the facet columns:
 

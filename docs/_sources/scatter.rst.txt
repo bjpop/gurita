@@ -362,7 +362,7 @@ Facets
 Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
 
-See the :doc:`facet documentation <facets/>` for more information on this column.
+See the :doc:`facet documentation <facets/>` for more information on this feature.
 
 For example the following command produces a scatter plot comparing ``total_bill`` with ``tip``, such that facet column is determined by the value of the ``smoker`` column. 
 
