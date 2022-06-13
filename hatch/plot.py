@@ -34,7 +34,7 @@ class PairPlot(CommandBase, name="pair"):
                 add_help=False)
         parser.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
-            help=f'Select only these columns (columns)')
+            help=f'Select only these columns')
         parser.add_argument(
             '--kind',  type=str,
             choices=const.ALLOWED_PAIRPLOT_KINDS, default=const.DEFAULT_PAIR_PLOT_KIND,
