@@ -119,7 +119,8 @@
              
   <section id="head">
 <span id="id1"></span><h1>head<a class="headerlink" href="#head" title="Permalink to this headline"></a></h1>
-<p>Select a number of rows from the start (top) of the input data set.</p>
+<p>Select a number of rows from the start (top) of the input data set, return the result as a new table.</p>
+<p>Compare to the <a class="reference internal" href="tail.html"><span class="doc">tail</span></a> command that returns rows from the end (bottom) of the data instead of the start.</p>
 <table class="colwidths-given tight-table docutils align-default">
 <colgroup>
 <col style="width: 45%" />
@@ -143,12 +144,6 @@
 </tr>
 </tbody>
 </table>
-<p>The <code class="docutils literal notranslate"><span class="pre">tail</span></code> command performs a similar job to <code class="docutils literal notranslate"><span class="pre">head</span></code> except that it returns rows from the end (bottom) of the data:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="tail.html"><span class="doc">tail</span></a></p></li>
-</ul>
-</div></blockquote>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>In the following document we assume the existence of an input file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code> that contains the following data (10 data rows and 1 heading row):</p>
@@ -178,8 +173,9 @@
 5.0,3.6,1.4,0.2,setosa
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">head</span></code> returns a data set as its output, so it can be combined with other commands in a chain using the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator.</p>
-<p>For example the following command uses <code class="docutils literal notranslate"><span class="pre">head</span></code> to select the first 5 rows from the input data <em>and then</em> uses <code class="docutils literal notranslate"><span class="pre">tail</span></code> to select the last 3 rows from the first 5. The net result is that rows 3,4,5 of the original data are returned.</p>
+<p>Note that there are 5 data rows in the above result <em>plus</em> one header row.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">head</span></code> command returns a data set as its output, so it can be combined with other commands in a chain using the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator.</p>
+<p>For example the following command uses <code class="docutils literal notranslate"><span class="pre">head</span></code> to select the first 5 rows from the input data <em>and then</em> uses <code class="docutils literal notranslate"><span class="pre">tail</span></code> to select the last 3 rows from the first 5. The net result is that rows 3,4,5 (counting from 1) of the original data are returned.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch head 5 + tail 3 &lt; example.csv
 </pre></div>
 </div>
@@ -203,7 +199,7 @@ arguments:</p>
 <p>The head command takes exactly one argument, an integer <code class="docutils literal notranslate"><span class="pre">NUM</span></code>.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">NUM</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, rows will be selected from the <em>start</em> (top) of the data. If <code class="docutils literal notranslate"><span class="pre">NUM</span></code> is greater than the number of rows in the data then the entire input data will be returned as the result.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">NUM</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>, rows will be selected from the <em>start</em> (top) of the data. If <code class="docutils literal notranslate"><span class="pre">NUM</span></code> is greater than or equal to the number of rows in the data then the entire input data will be returned as the result.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">NUM</span> <span class="pre">=</span> <span class="pre">0</span></code>, the result will be an empty data set.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">NUM</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, select all rows <em>except</em> the last <code class="docutils literal notranslate"><span class="pre">NUM</span></code> rows of the data. If <code class="docutils literal notranslate"><span class="pre">NUM</span></code> is greater than or equal to the number of rows in the data then the result will be an empty data set.</p></li>
 </ul>

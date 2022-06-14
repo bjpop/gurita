@@ -3,7 +3,9 @@
 head
 ====
 
-Select a number of rows from the start (top) of the input data set.
+Select a number of rows from the start (top) of the input data set, return the result as a new table.
+
+Compare to the :doc:`tail <tail/>` command that returns rows from the end (bottom) of the data instead of the start.
 
 .. list-table::
    :widths: 25 20 10
@@ -20,9 +22,6 @@ Select a number of rows from the start (top) of the input data set.
      - the number of rows to select 
      - :ref:`number of rows <head_num>`
 
-The ``tail`` command performs a similar job to ``head`` except that it returns rows from the end (bottom) of the data: 
-
- * :doc:`tail <tail/>`
 
 Simple example
 --------------
@@ -60,9 +59,11 @@ The output of the above command is:
     4.6,3.1,1.5,0.2,setosa
     5.0,3.6,1.4,0.2,setosa
 
-Note that ``head`` returns a data set as its output, so it can be combined with other commands in a chain using the ``+`` operator.
+Note that there are 5 data rows in the above result *plus* one header row.
 
-For example the following command uses ``head`` to select the first 5 rows from the input data *and then* uses ``tail`` to select the last 3 rows from the first 5. The net result is that rows 3,4,5 of the original data are returned.
+The ``head`` command returns a data set as its output, so it can be combined with other commands in a chain using the ``+`` operator.
+
+For example the following command uses ``head`` to select the first 5 rows from the input data *and then* uses ``tail`` to select the last 3 rows from the first 5. The net result is that rows 3,4,5 (counting from 1) of the original data are returned.
 
 .. code-block:: text
 
@@ -94,7 +95,7 @@ Specifying the number of rows to select
 
 The head command takes exactly one argument, an integer ``NUM``. 
 
- * If ``NUM > 0``, rows will be selected from the *start* (top) of the data. If ``NUM`` is greater than the number of rows in the data then the entire input data will be returned as the result.
+ * If ``NUM > 0``, rows will be selected from the *start* (top) of the data. If ``NUM`` is greater than or equal to the number of rows in the data then the entire input data will be returned as the result.
  * If ``NUM = 0``, the result will be an empty data set.
  * If ``NUM < 0``, select all rows *except* the last ``NUM`` rows of the data. If ``NUM`` is greater than or equal to the number of rows in the data then the result will be an empty data set.
 
