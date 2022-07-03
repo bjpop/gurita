@@ -1,5 +1,5 @@
-Data transformation
-*******************
+Data transformation and analysis
+********************************
 
 .. toctree::
    :maxdepth: 1
