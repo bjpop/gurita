@@ -26,8 +26,11 @@ class Cut(CommandBase, name="cut"):
     def parse_args(self, args):
         parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
         parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=True,
             help=f'Select only these named columns')
+        parser.add_argument(
+            '-i', '--invert', required=False, action='store_true', default=False,
+            help=f'Invert the selection of columns, speified columns are dropped instead of kept')
         self.options = parser.parse_args(args)
 
     def run(self, df):
@@ -36,7 +39,10 @@ class Cut(CommandBase, name="cut"):
             columns = options.columns
             valid_columns, invalid_columns = utils.validate_columns(df, columns)
             if valid_columns:
-                df = df[valid_columns]
+                if options.invert:
+                    df = df.drop(options.columns, axis=1)
+                else:
+                    df = df[valid_columns]
             else:
                 print(f"{PROGRAM_NAME} {self.name} WARNING: no valid columns were specified")
                 # return None as the result, we should stop here 

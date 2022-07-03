@@ -43,7 +43,7 @@ Compute the correlation between ``sepal_width`` and ``sepal_length`` from the ``
 
 .. code-block:: text
 
-    hatch corr --columns sepal_length sepal_width < iris.csv 
+    hatch corr -c sepal_length sepal_width < iris.csv 
 
 The output of the above command is a table with three columns: ``col1``, ``col2`` and ``corr``, such that ``col1`` and ``col2`` show the names of the
 input columns being correlated, and ``corr`` shows their numerical correlation value.
@@ -63,7 +63,7 @@ In the above example we specify two columns for comparison and the output is a t
 Getting help
 ------------
 
-The full set of command line arguments for bar plots can be obtained with the ``-h`` or ``--help``
+The full set of command line arguments for correlations can be obtained with the ``-h`` or ``--help``
 arguments:
 
 .. code-block:: text

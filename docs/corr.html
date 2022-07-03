@@ -168,7 +168,7 @@
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Compute the correlation between <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> and <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> data set:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch corr --columns sepal_length sepal_width &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch corr -c sepal_length sepal_width &lt; iris.csv
 </pre></div>
 </div>
 <p>The output of the above command is a table with three columns: <code class="docutils literal notranslate"><span class="pre">col1</span></code>, <code class="docutils literal notranslate"><span class="pre">col2</span></code> and <code class="docutils literal notranslate"><span class="pre">corr</span></code>, such that <code class="docutils literal notranslate"><span class="pre">col1</span></code> and <code class="docutils literal notranslate"><span class="pre">col2</span></code> show the names of the
@@ -184,7 +184,7 @@ sepal_width,sepal_width,1.0
 </section>
 <section id="getting-help">
 <span id="corr-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
-<p>The full set of command line arguments for bar plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+<p>The full set of command line arguments for correlations can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch corr -h
 </pre></div>
