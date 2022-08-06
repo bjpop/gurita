@@ -45,7 +45,7 @@ cat iris.csv | gurita filter 'species != "virginica"' + \
 ```
 
 <p align="center">
-  <img src="docs/_images/scatter.pc1.pc2.species.png" width="400" alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset">
+  <img src="docs/_images/scatter.pc1.pc2.species.png" width="500" alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset">
 </p>
 
 In this example there are 4 commands that are executed in the following order:
