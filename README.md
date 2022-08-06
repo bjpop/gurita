@@ -28,7 +28,7 @@ cat iris.csv | gurita box -x species -y sepal_length
 ```
 
 <p align="center">
-  <img src="docs/_images/iris.sepal_length.species.box.png" width="400" alt="example box plot of sepal_length for each species in the classic iris dataset">
+  <img src="docs/_images/box.species.sepal_length.png" width="400" alt="example box plot of sepal_length for each species in the classic iris dataset">
 </p>
 
 ### Advanced example 
@@ -45,7 +45,7 @@ cat iris.csv | gurita filter 'species != "virginica"' + \
 ```
 
 <p align="center">
-  <img src="docs/_images/iris.pc1.pc2.species.pca.scatter.png" width="400" alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset">
+  <img src="docs/_images/scatter.pc1.pc2.species.png" width="400" alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset">
 </p>
 
 In this example there are 4 commands that are executed in the following order:
