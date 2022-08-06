@@ -7,7 +7,7 @@ Plot distributions of selected numerical or categorical columns as histograms.
 
 .. code-block:: text
 
-    hatch hist <arguments> 
+    gurita hist <arguments> 
 
 Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated/seaborn.displot.html>`_ library function, using the ``kind="hist"`` option.
 
@@ -91,7 +91,7 @@ Plot a histogram of the ``tip`` amount from the ``tips.csv`` input file:
 
 .. code-block:: text
 
-    hatch hist -x tip < tips.csv
+    gurita hist -x tip < tips.csv
 
 The output of the above command is written to ``hist.tip.png``:
 
@@ -107,7 +107,7 @@ Plot a count of the different categorical values in the ``day`` column:
 
 .. code-block:: text
 
-    hatch hist -x day < tips.csv
+    gurita hist -x day < tips.csv
 
 The output of the above command is written to ``hist.day.png``:
 
@@ -129,7 +129,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch hist -h
+    gurita hist -h
 
 .. _hist_column_selection:
 
@@ -161,7 +161,7 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
 
 .. code-block:: text
 
-    hatch hist -y tip < tips.csv
+    gurita hist -y tip < tips.csv
 
 .. image:: ../images/hist.tip.y.png 
        :width: 600px
@@ -182,7 +182,7 @@ In the following example the distribution of ``tip`` is compared to the distribu
 
 .. code-block:: text
 
-    hatch hist -x tip -y total_bill < tips.csv 
+    gurita hist -x tip -y total_bill < tips.csv 
 
 .. image:: ../images/hist.tip.total_bill.png 
        :width: 600px
@@ -199,7 +199,7 @@ Bivariate histograms also work with categorical variables and combinations of nu
 Number of bins 
 --------------
 
-For numerical columns, by default hatch will try to automatically pick an appropriate number of bins for the
+For numerical columns, by default gurita will try to automatically pick an appropriate number of bins for the
 selected column.
 
 However, this can be overridden by specifying the required number of bins to use with the ``--bins`` 
@@ -207,7 +207,7 @@ argument like so:
 
 .. code-block:: text
 
-    hatch hist -x tip --bins 5 < tips.csv
+    gurita hist -x tip --bins 5 < tips.csv
 
 .. image:: ../images/hist.tip.bins5.png 
        :width: 600px
@@ -222,7 +222,7 @@ argument like so:
 Width of bins 
 -------------
 
-For numerical columns, by default hatch will try to automatically pick an appropriate bin width for the
+For numerical columns, by default gurita will try to automatically pick an appropriate bin width for the
 selected column.
 
 However, this can be overridden by specifying the required bin width to use with the ``--binwidth`` 
@@ -230,7 +230,7 @@ argument like so:
 
 .. code-block:: text
 
-    hatch hist -x tip --binwidth 3 < tips.csv
+    gurita hist -x tip --binwidth 3 < tips.csv
 
 .. image:: ../images/hist.tip.binwidth3.png 
        :width: 600px
@@ -251,7 +251,7 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
 
 .. code-block:: text
 
-    hatch hist -x tip --cumulative < tips.csv
+    gurita hist -x tip --cumulative < tips.csv
 
 .. image:: ../images/hist.tip.cumulative.png 
        :width: 600px
@@ -278,7 +278,7 @@ subset is plotted as its own histogram, layered on top of each other:
 
 .. code-block:: text
 
-    hatch hist -x tip --hue smoker < tips.csv  
+    gurita hist -x tip --hue smoker < tips.csv  
 
 .. image:: ../images/hist.tip.smoker.png 
        :width: 600px
@@ -297,7 +297,7 @@ two histograms stacked on top of each other:
 
 .. code-block:: text
 
-    hatch hist -x tip --hue smoker --multiple stack < tips.csv  
+    gurita hist -x tip --hue smoker --multiple stack < tips.csv  
 
 .. image:: ../images/hist.tip.smoker.stacked.png 
        :width: 600px
@@ -313,7 +313,7 @@ The following example shows the effect of ``--multiple dodge``, where categorica
 
 .. code-block:: text
 
-    hatch hist -x tip --hue smoker --multiple dodge < tips.csv  
+    gurita hist -x tip --hue smoker --multiple dodge < tips.csv  
 
 .. image:: ../images/hist.tip.smoker.dodge.png 
        :width: 600px
@@ -327,7 +327,7 @@ The following example shows the effect of ``--multiple fill``, where counts are 
 
 .. code-block:: text
 
-    hatch hist -x tip --hue smoker --multiple fill < tips.csv  
+    gurita hist -x tip --hue smoker --multiple fill < tips.csv  
 
 .. image:: ../images/hist.tip.smoker.fill.png 
        :width: 600px
@@ -347,7 +347,7 @@ argument
 
 .. code-block:: text
 
-    hatch hist -x tip --stat proportion < tips.csv
+    gurita hist -x tip --stat proportion < tips.csv
 
 .. image:: ../images/hist.tip.proportion.png 
        :width: 600px
@@ -378,7 +378,7 @@ In the example below the default normalisation occurs, across the entire dataset
 
 .. code-block:: text
 
-    hatch hist -x tip --hue smoker --stat proportion --multiple dodge < tips.csv 
+    gurita hist -x tip --hue smoker --stat proportion --multiple dodge < tips.csv 
 
 .. image:: ../images/hist.tip.proportion.smoker.png 
        :width: 600px
@@ -392,7 +392,7 @@ And now the same command as above, but with the ``--indnorm`` argument supplied,
 
 .. code-block:: text
 
-    hatch hist -x tip --hue smoker --stat proportion --multiple dodge --indnorm < tips.csv 
+    gurita hist -x tip --hue smoker --stat proportion --multiple dodge --indnorm < tips.csv 
 
 .. image:: ../images/hist.tip.proportion.smoker.indnorm.png 
        :width: 600px
@@ -411,7 +411,7 @@ A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimat
 
 .. code-block:: text
 
-    hatch hist -x tip --kde < tips.csv
+    gurita hist -x tip --kde < tips.csv
 
 .. image:: ../images/hist.tip.kde.png 
        :width: 600px
@@ -430,7 +430,7 @@ By default histogram bars are shown with solid filled bars. This can be changed 
 
 .. code-block:: text
 
-    hatch hist -x tip --nofill < tips.csv
+    gurita hist -x tip --nofill < tips.csv
 
 .. image:: ../images/hist.tip.nofill.png
        :width: 600px
@@ -451,7 +451,7 @@ The example below shows the ``step`` visual style.
 
 .. code-block:: text
 
-    hatch hist -x tip --element step < tips.csv
+    gurita hist -x tip --element step < tips.csv
 
 .. image:: ../images/hist.tip.step.png
        :width: 600px
@@ -465,7 +465,7 @@ The example below shows the ``poly`` (polygon) visual style, with vertices in th
 
 .. code-block:: text
 
-    hatch hist -x tip --element poly < tips.csv
+    gurita hist -x tip --element poly < tips.csv
 
 .. image:: ../images/hist.tip.poly.png
        :width: 600px
@@ -489,7 +489,7 @@ The distribution of numerical values can be displayed in log (base 10) scale wit
 
 .. code-block:: text
 
-    hatch hist -x tip --logy < tips.csv 
+    gurita hist -x tip --logy < tips.csv 
 
 .. image:: ../images/hist.tip.logy.png 
        :width: 600px
@@ -513,7 +513,7 @@ The range of displayed numerical distributions can be restricted with ``--xlim``
 
 .. code-block:: text
 
-    hatch hist -x tip --xlim 3 8 < tips.csv 
+    gurita hist -x tip --xlim 3 8 < tips.csv 
 
 .. _hist_facets:
 
@@ -533,7 +533,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 .. code-block:: text
 
-    hatch hist -x tip --col day < tips.csv 
+    gurita hist -x tip --col day < tips.csv 
 
 .. image:: ../images/hist.tip.day.png 
        :width: 600px

@@ -46,7 +46,7 @@ Select the last 5 rows from ``example.csv`` :
 
 .. code-block:: text 
 
-    hatch tail 5 < example.csv 
+    gurita tail 5 < example.csv 
 
 The output of the above command is:
 
@@ -67,7 +67,7 @@ For example the following command uses ``tail`` to select the last 5 rows from t
 
 .. code-block:: text
 
-    hatch tail 5 + head 3 < example.csv
+    gurita tail 5 + head 3 < example.csv
 
 .. code-block:: text 
 
@@ -87,7 +87,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch tail -h
+    gurita tail -h
 
 .. _tail_num:
 
@@ -104,7 +104,7 @@ Select the first 1 rows from ``example.csv``:
 
 .. code-block:: text 
 
-    hatch tail 1 < example.csv 
+    gurita tail 1 < example.csv 
 
 The output of the above command is:
 
@@ -117,7 +117,7 @@ Select all but the first 3 lines from ``example.csv``. Note that this yields the
 
 .. code-block:: text 
 
-    hatch tail -3 < example.csv 
+    gurita tail -3 < example.csv 
 
 The output of the above command is:
 

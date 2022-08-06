@@ -3,7 +3,7 @@
 Tabular input and output data
 *****************************
 
-Hatch reads and writes data in tabular data format.
+Gurita reads and writes data in tabular data format.
 
 By default it will use `CSV <https://en.wikipedia.org/wiki/Comma-separated_values>`_ format, where a comma is used as the field separator. However, upon request, it allows alternative field separators to be used.
 For example, `TSV <https://en.wikipedia.org/wiki/Tab-separated_values>`_ files are supported by setting the field separator to a tab character (\\t).
@@ -14,7 +14,7 @@ Rows in the input file are considered to be "observations" and columns are consi
 That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its columns.
 The names of the columns are given in the first row of the input file (the heading row).
 
-Below is a small example of the kind of input data accepted by Hatch. In this case it is in CSV format with five columns, one heading row and three data rows.
+Below is a small example of the kind of input data accepted by Gurita. In this case it is in CSV format with five columns, one heading row and three data rows.
 The first row contains the names of each column. The remaining three rows are data rows,
 where each row has a value associated with each column:
 
@@ -27,5 +27,5 @@ where each row has a value associated with each column:
 
 .. note::
 
-   Hatch requires that the input data is **rectangular** in shape. In other words, every row must contain the same number of columns.
+   Gurita requires that the input data is **rectangular** in shape. In other words, every row must contain the same number of columns.
    :ref:`Missing values <missing_values>` are allowed, and are indicated by leaving a particular entry blank (empty) or marking it with a special value. 

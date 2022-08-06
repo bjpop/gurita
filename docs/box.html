@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>box &mdash; hatch  documentation</title>
+  <title>box &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -95,7 +94,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -118,7 +117,7 @@
 <span id="id1"></span><h1>box<a class="headerlink" href="#box" title="Permalink to this headline"></a></h1>
 <p>Box (or box-and-whisker) plots show the distribution of values in a numerical column optionally grouped by categorical columns.
 The distribution of a numerical column is displayed using the inter-quartile range, with outliers shown as separate diamond shaped points.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box &lt;arguments&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box &lt;arguments&gt;
 </pre></div>
 </div>
 <p>Box plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;box&quot;</span></code> option.</p>
@@ -229,7 +228,7 @@ The distribution of a numerical column is displayed using the inter-quartile ran
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Box plot of the <code class="docutils literal notranslate"><span class="pre">age</span></code> numerical column from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age &lt; titanic.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">box.age.png</span></code>:</p>
@@ -239,7 +238,7 @@ The distribution of a numerical column is displayed using the inter-quartile ran
 </div>
 <p>The plotted numerical column can be divided into groups based on a categorical column.
 In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class &lt; titanic.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">box.class.age.png</span></code>:</p>
@@ -252,7 +251,7 @@ In the following example the distribution of <code class="docutils literal notra
 <span id="box-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for box plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -h
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -h
 </pre></div>
 </div>
 </section>
@@ -277,7 +276,7 @@ by <code class="docutils literal notranslate"><span class="pre">-y</span></code>
 </div>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column,
 where the boxes are plotted horizontally:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -x age -y class --orient h &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -x age -y class --orient h &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.age.class.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown horizontally" class="align-center" src="_images/box.age.class.png" style="width: 600px; height: 600px;" /></a>
@@ -290,7 +289,7 @@ where the boxes are plotted horizontally:</p>
 <p>Outlier data points are shown in box plots by default as small diamonds. This can be turned off with the <code class="docutils literal notranslate"><span class="pre">--nooutliers</span></code> option.</p>
 <p>This can be particularly useful in conjunction with <code class="docutils literal notranslate"><span class="pre">--strip</span></code>, because the outlier points will also be shown as circular dots, and it can be confusing to see both
 displayed at the same time.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --nooutliers &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --nooutliers &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.nooutliers.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, with display of outlier points turned off" class="align-center" src="_images/box.class.age.nooutliers.png" style="width: 600px; height: 600px;" /></a>
@@ -301,7 +300,7 @@ displayed at the same time.</p>
 <section id="overlay-data-points-using-a-strip-plot">
 <span id="box-strip"></span><h2>Overlay data points using a strip plot<a class="headerlink" href="#overlay-data-points-using-a-strip-plot" title="Permalink to this headline"></a></h2>
 <p>Individual data points can be overlaid on top of the box plot using the <code class="docutils literal notranslate"><span class="pre">--strip</span></code> option.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --strip --nooutliers &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --strip --nooutliers &lt; titanic.csv
 </pre></div>
 </div>
 <p>Note that in the example above we also turn off the display of outlier points with <code class="docutils literal notranslate"><span class="pre">--nooutliers</span></code>.</p>
@@ -318,7 +317,7 @@ displayed at the same time.</p>
 <p>By default the order of the categorical columns displayed in the box plot is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--order</span></code> argument, which allows you to specify the exact ordering of columns based on their values.</p>
 <p>In the following example the box columns of the <code class="docutils literal notranslate"><span class="pre">class</span></code> column are displayed in the order of <code class="docutils literal notranslate"><span class="pre">First</span></code>, <code class="docutils literal notranslate"><span class="pre">Second</span></code>, <code class="docutils literal notranslate"><span class="pre">Third</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --order First Second Third &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --order First Second Third &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.order.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, shown in a specified order" class="align-center" src="_images/box.class.age.order.png" style="width: 600px; height: 600px;" /></a>
@@ -333,7 +332,7 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </div>
 <p>The data can be further grouped by an additional categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --hue sex &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --hue sex &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.sex.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/box.class.age.sex.png" style="width: 700px; height: 600px;" /></a>
@@ -343,7 +342,7 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <p id="box-hueorder">By default the order of the columns within each hue group is determined from their occurrence in the input data.
 This can be overridden with the <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> argument, which allows you to specify the exact ordering of columns within each hue group, based on their values.</p>
 <p>In the following example the <code class="docutils literal notranslate"><span class="pre">sex</span></code> values are displayed in the order of <code class="docutils literal notranslate"><span class="pre">female</span></code>, <code class="docutils literal notranslate"><span class="pre">male</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --hue sex --hueorder female male &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.sex.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for sex" class="align-center" src="_images/box.class.age.sex.hueorder.png" style="width: 700px; height: 600px;" /></a>
@@ -352,7 +351,7 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 </div>
 <p>It is also possible to use both <code class="docutils literal notranslate"><span class="pre">--order</span></code> and <code class="docutils literal notranslate"><span class="pre">--hueorder</span></code> in the same command. For example, the following command controls
 the order of both the <code class="docutils literal notranslate"><span class="pre">class</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> categorical columns:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --order First Second Third --hue sex --hueorder female male &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --order First Second Third --hue sex --hueorder female male &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.sex.order.hueorder.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex, with ordering specified for class and sex" class="align-center" src="_images/box.class.age.sex.order.hueorder.png" style="width: 700px; height: 600px;" /></a>
@@ -370,7 +369,7 @@ the order of both the <code class="docutils literal notranslate"><span class="pr
 <p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
 conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 <p>For example, you can display a log scale box plot for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the numerical distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --logy &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --logy &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.logy.png"><img alt="Box plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale" class="align-center" src="_images/box.class.age.logy.png" style="width: 700px; height: 600px;" /></a>
@@ -390,7 +389,7 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--ylim<
 <p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so.
 Note carefully that the numerical
 data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> &lt; titanic.csv
 </pre></div>
 </div>
 </section>
@@ -405,7 +404,7 @@ data is displayed on the Y-axis (<code class="docutils literal notranslate"><spa
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
 <p>The following command creates a faceted box plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column is used to determine the facet columns:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch box -y age -x class --col sex &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --col sex &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.sex.facet.png"><img alt="Box plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets" class="align-center" src="_images/box.class.age.sex.facet.png" style="width: 600px; height: 300px;" /></a>

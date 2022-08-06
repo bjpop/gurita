@@ -8,7 +8,7 @@ The distribution of a numerical column is displayed using the inter-quartile ran
 
 .. code-block:: bash
 
-    hatch box <arguments>
+    gurita box <arguments>
 
 Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="box"`` option.
 
@@ -87,7 +87,7 @@ Box plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
-    hatch box -y age < titanic.csv 
+    gurita box -y age < titanic.csv 
 
 The output of the above command is written to ``box.age.png``:
 
@@ -104,7 +104,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch box -y age -x class < titanic.csv 
+    gurita box -y age -x class < titanic.csv 
 
 The output of the above command is written to ``box.class.age.png``:
 
@@ -126,7 +126,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch box -h
+    gurita box -h
 
 .. _box_column_selection:
 
@@ -161,7 +161,7 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch box -x age -y class --orient h < titanic.csv
+    gurita box -x age -y class --orient h < titanic.csv
 
 .. image:: ../images/box.age.class.png
        :width: 600px
@@ -183,7 +183,7 @@ displayed at the same time.
 
 .. code-block:: bash
 
-    hatch box -y age -x class --nooutliers < titanic.csv 
+    gurita box -y age -x class --nooutliers < titanic.csv 
 
 .. image:: ../images/box.class.age.nooutliers.png 
        :width: 600px
@@ -202,7 +202,7 @@ Individual data points can be overlaid on top of the box plot using the ``--stri
 
 .. code-block:: bash
 
-    hatch box -y age -x class --strip --nooutliers < titanic.csv 
+    gurita box -y age -x class --strip --nooutliers < titanic.csv 
 
 Note that in the example above we also turn off the display of outlier points with ``--nooutliers``.
 
@@ -230,7 +230,7 @@ In the following example the box columns of the ``class`` column are displayed i
 
 .. code-block:: bash
 
-    hatch box -y age -x class --order First Second Third < titanic.csv
+    gurita box -y age -x class --order First Second Third < titanic.csv
 
 .. image:: ../images/box.class.age.order.png
        :width: 600px
@@ -255,7 +255,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch box -y age -x class --hue sex < titanic.csv
+    gurita box -y age -x class --hue sex < titanic.csv
 
 .. image:: ../images/box.class.age.sex.png 
        :width: 700px
@@ -274,7 +274,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch box -y age -x class --hue sex --hueorder female male < titanic.csv
+    gurita box -y age -x class --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/box.class.age.sex.hueorder.png 
        :width: 700px
@@ -289,7 +289,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: bash
 
-    hatch box -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
+    gurita box -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/box.class.age.sex.order.hueorder.png 
        :width: 700px
@@ -318,7 +318,7 @@ For example, you can display a log scale box plot for the ``age`` column grouped
 
 .. code-block:: bash
 
-    hatch box -y age -x class --logy < titanic.csv 
+    gurita box -y age -x class --logy < titanic.csv 
 
 .. image:: ../images/box.class.age.logy.png 
        :width: 700px
@@ -349,7 +349,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch box -y age -x class --ylim 10 30 < titanic.csv
+    gurita box -y age -x class --ylim 10 30 < titanic.csv
 
 .. _box_facets:
 
@@ -371,7 +371,7 @@ The following command creates a faceted box plot where the ``sex`` column is use
 
 .. code-block:: bash
 
-    hatch box -y age -x class --col sex < titanic.csv
+    gurita box -y age -x class --col sex < titanic.csv
 
 .. image:: ../images/box.class.age.sex.facet.png
        :width: 600px

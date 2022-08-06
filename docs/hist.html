@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hist (histogram) &mdash; hatch  documentation</title>
+  <title>hist (histogram) &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -95,7 +94,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -117,7 +116,7 @@
   <section id="hist-histogram">
 <span id="hist"></span><h1>hist (histogram)<a class="headerlink" href="#hist-histogram" title="Permalink to this headline"></a></h1>
 <p>Plot distributions of selected numerical or categorical columns as histograms.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist &lt;arguments&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist &lt;arguments&gt;
 </pre></div>
 </div>
 <p>Histograms are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.displot.html">displot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;hist&quot;</span></code> option.</p>
@@ -231,7 +230,7 @@
 <section id="simple-examples">
 <span id="hist-example"></span><h2>Simple examples<a class="headerlink" href="#simple-examples" title="Permalink to this headline"></a></h2>
 <p>Plot a histogram of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> amount from the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> input file:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip &lt; tips.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">hist.tip.png</span></code>:</p>
@@ -240,7 +239,7 @@
 <div class="line"><br /></div>
 </div>
 <p>Plot a count of the different categorical values in the <code class="docutils literal notranslate"><span class="pre">day</span></code> column:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x day &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x day &lt; tips.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">hist.day.png</span></code>:</p>
@@ -253,7 +252,7 @@
 <span id="hist-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for histograms can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -h
 </pre></div>
 </div>
 </section>
@@ -275,7 +274,7 @@ arguments.</p>
 <p>If both <code class="docutils literal notranslate"><span class="pre">-x</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span></code> are both specified then a heatmap will be plotted.</p>
 <p>See <a class="reference internal" href="#hist-example"><span class="std std-ref">the example</span></a> above for a vertical axis plot.
 For comparison, the following command uses <code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">tip</span></code> to plot a histogram of <code class="docutils literal notranslate"><span class="pre">tip</span></code> horizontally:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -y tip &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -y tip &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.y.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set" class="align-center" src="_images/hist.tip.y.png" style="width: 600px; height: 600px;" /></a>
@@ -287,7 +286,7 @@ For comparison, the following command uses <code class="docutils literal notrans
 <span id="hist-bivariate"></span><h2>Histogram of two columns (bivariate heatmaps)<a class="headerlink" href="#histogram-of-two-columns-bivariate-heatmaps" title="Permalink to this headline"></a></h2>
 <p>Bivariate histograms (two columns) can be plotted by specifying both <code class="docutils literal notranslate"><span class="pre">-x</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">tip</span></code> is compared to the distribution of <code class="docutils literal notranslate"><span class="pre">total_bill</span></code>. The result is shown as a heatmap:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip -y total_bill &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip -y total_bill &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.total_bill.png"><img alt="Bivariate histogram plot showing the distribution of tip against total_bill" class="align-center" src="_images/hist.tip.total_bill.png" style="width: 600px; height: 600px;" /></a>
@@ -298,11 +297,11 @@ For comparison, the following command uses <code class="docutils literal notrans
 </section>
 <section id="number-of-bins">
 <span id="hist-bins"></span><h2>Number of bins<a class="headerlink" href="#number-of-bins" title="Permalink to this headline"></a></h2>
-<p>For numerical columns, by default hatch will try to automatically pick an appropriate number of bins for the
+<p>For numerical columns, by default gurita will try to automatically pick an appropriate number of bins for the
 selected column.</p>
 <p>However, this can be overridden by specifying the required number of bins to use with the <code class="docutils literal notranslate"><span class="pre">--bins</span></code>
 argument like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --bins 5 &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --bins 5 &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.bins5.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set, using 5 bins" class="align-center" src="_images/hist.tip.bins5.png" style="width: 600px; height: 600px;" /></a>
@@ -312,11 +311,11 @@ argument like so:</p>
 </section>
 <section id="width-of-bins">
 <span id="hist-binwidth"></span><h2>Width of bins<a class="headerlink" href="#width-of-bins" title="Permalink to this headline"></a></h2>
-<p>For numerical columns, by default hatch will try to automatically pick an appropriate bin width for the
+<p>For numerical columns, by default gurita will try to automatically pick an appropriate bin width for the
 selected column.</p>
 <p>However, this can be overridden by specifying the required bin width to use with the <code class="docutils literal notranslate"><span class="pre">--binwidth</span></code>
 argument like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --binwidth 3 &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --binwidth 3 &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.binwidth3.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set, using bins of width 3" class="align-center" src="_images/hist.tip.binwidth3.png" style="width: 600px; height: 600px;" /></a>
@@ -328,7 +327,7 @@ argument like so:</p>
 <section id="cumulative-histograms">
 <span id="hist-cumulative"></span><h2>Cumulative histograms<a class="headerlink" href="#cumulative-histograms" title="Permalink to this headline"></a></h2>
 <p>Cumulative histograms can be plotted with the <code class="docutils literal notranslate"><span class="pre">--cumulative</span></code> argument.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --cumulative &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --cumulative &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.cumulative.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set in cumulative style" class="align-center" src="_images/hist.tip.cumulative.png" style="width: 600px; height: 600px;" /></a>
@@ -345,7 +344,7 @@ argument like so:</p>
 <p>In the following example the distribution of distribution of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column
 is divided into two subsets based on the categorical <code class="docutils literal notranslate"><span class="pre">smoker</span></code> column. Each
 subset is plotted as its own histogram, layered on top of each other:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --hue smoker &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.smoker.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column" class="align-center" src="_images/hist.tip.smoker.png" style="width: 600px; height: 600px;" /></a>
@@ -355,7 +354,7 @@ subset is plotted as its own histogram, layered on top of each other:</p>
 <p>The default behaviour is to layer overlapping histograms on top of each other, as demonstrated in the above plot.</p>
 <p id="hist-multiple">The <code class="docutils literal notranslate"><span class="pre">--multiple</span></code> parameter lets you choose alternative ways to show overlapping histograms. The example below shows the
 two histograms stacked on top of each other:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --multiple stack &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --hue smoker --multiple stack &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.smoker.stacked.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms stacked" class="align-center" src="_images/hist.tip.smoker.stacked.png" style="width: 600px; height: 600px;" /></a>
@@ -364,7 +363,7 @@ two histograms stacked on top of each other:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">--multiple</span></code> paramter supports the following values: <code class="docutils literal notranslate"><span class="pre">layer</span></code> (default), <code class="docutils literal notranslate"><span class="pre">stack</span></code>, <code class="docutils literal notranslate"><span class="pre">dodge</span></code>, and <code class="docutils literal notranslate"><span class="pre">fill</span></code>.</p>
 <p>The following example shows the effect of <code class="docutils literal notranslate"><span class="pre">--multiple</span> <span class="pre">dodge</span></code>, where categorical fields are shown next to each other:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --multiple dodge &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --hue smoker --multiple dodge &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.smoker.dodge.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms side-by-side" class="align-center" src="_images/hist.tip.smoker.dodge.png" style="width: 600px; height: 600px;" /></a>
@@ -372,7 +371,7 @@ two histograms stacked on top of each other:</p>
 <div class="line"><br /></div>
 </div>
 <p>The following example shows the effect of <code class="docutils literal notranslate"><span class="pre">--multiple</span> <span class="pre">fill</span></code>, where counts are normalised to a proportion, and bars are filled so that all categories sum to 1:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --multiple fill &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --hue smoker --multiple fill &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.smoker.fill.png"><img alt="Histogram showing the distribution of tip based divided into subsets based on the smoker column, with overlapping histograms filled to proportions" class="align-center" src="_images/hist.tip.smoker.fill.png" style="width: 600px; height: 600px;" /></a>
@@ -384,7 +383,7 @@ two histograms stacked on top of each other:</p>
 <span id="hist-stat"></span><h2>Histogram statistic<a class="headerlink" href="#histogram-statistic" title="Permalink to this headline"></a></h2>
 <p>By default histograms show a count of the number of values in each bin. However this can be changed with the <code class="docutils literal notranslate"><span class="pre">--stat</span> <span class="pre">{count,frequency,probability,proportion,percent,density}</span></code>
 argument</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --stat proportion &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --stat proportion &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.proportion.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin" class="align-center" src="_images/hist.tip.proportion.png" style="width: 600px; height: 600px;" /></a>
@@ -405,7 +404,7 @@ argument</p>
 This behaviour can be changed by <code class="docutils literal notranslate"><span class="pre">--indnorm</span></code> such that the normalisation happens <em>within</em> each categorical subset.</p>
 <p>Compare the following plots that show a histograms of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column for each value of <code class="docutils literal notranslate"><span class="pre">smoker</span></code> using a <code class="docutils literal notranslate"><span class="pre">proportion</span></code> as the statistic.</p>
 <p>In the example below the default normalisation occurs, across the entire dataset:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --stat proportion --multiple dodge &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --hue smoker --stat proportion --multiple dodge &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.proportion.smoker.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin and global normalisation" class="align-center" src="_images/hist.tip.proportion.smoker.png" style="width: 600px; height: 600px;" /></a>
@@ -413,7 +412,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <div class="line"><br /></div>
 </div>
 <p>And now the same command as above, but with the <code class="docutils literal notranslate"><span class="pre">--indnorm</span></code> argument supplied, so that each value of <code class="docutils literal notranslate"><span class="pre">smoker</span></code> is normalised independently:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --hue smoker --stat proportion --multiple dodge --indnorm &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --hue smoker --stat proportion --multiple dodge --indnorm &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.proportion.smoker.indnorm.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set showing the proportion statistic for each bin and indepdendent normalisation" class="align-center" src="_images/hist.tip.proportion.smoker.indnorm.png" style="width: 600px; height: 600px;" /></a>
@@ -424,7 +423,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <section id="kernel-density-estimate">
 <span id="hist-kde"></span><h2>Kernel density estimate<a class="headerlink" href="#kernel-density-estimate" title="Permalink to this headline"></a></h2>
 <p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">kernel density estimate</a> can be plotted with the <code class="docutils literal notranslate"><span class="pre">--kde</span></code> argument.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --kde &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --kde &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.kde.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set with a kernel density overlaid as a line" class="align-center" src="_images/hist.tip.kde.png" style="width: 600px; height: 600px;" /></a>
@@ -435,7 +434,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <section id="unfilled-histogram-bars">
 <span id="hist-nofill"></span><h2>Unfilled histogram bars<a class="headerlink" href="#unfilled-histogram-bars" title="Permalink to this headline"></a></h2>
 <p>By default histogram bars are shown with solid filled bars. This can be changed with <code class="docutils literal notranslate"><span class="pre">--nofill</span></code> which uses unfilled bars instead:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --nofill &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --nofill &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.nofill.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set with unfilled bars" class="align-center" src="_images/hist.tip.nofill.png" style="width: 600px; height: 600px;" /></a>
@@ -447,7 +446,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <span id="hist-element"></span><h2>Visual style of univariate histograms<a class="headerlink" href="#visual-style-of-univariate-histograms" title="Permalink to this headline"></a></h2>
 <p>By default univariate histograms are visualised as bars. This can be changed with <code class="docutils literal notranslate"><span class="pre">--element</span> <span class="pre">{bars,step,poly}</span></code> which allows alternative renderings.</p>
 <p>The example below shows the <code class="docutils literal notranslate"><span class="pre">step</span></code> visual style.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --element step &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --element step &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.step.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set using a step visualisation style" class="align-center" src="_images/hist.tip.step.png" style="width: 600px; height: 600px;" /></a>
@@ -455,7 +454,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <div class="line"><br /></div>
 </div>
 <p>The example below shows the <code class="docutils literal notranslate"><span class="pre">poly</span></code> (polygon) visual style, with vertices in the center of each bin.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --element poly &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --element poly &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.poly.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set using a polygon visualisation style" class="align-center" src="_images/hist.tip.poly.png" style="width: 600px; height: 600px;" /></a>
@@ -470,7 +469,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <p>The distribution of numerical values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --logy &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --logy &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.logy.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set with log scale on the Y axis" class="align-center" src="_images/hist.tip.logy.png" style="width: 600px; height: 600px;" /></a>
@@ -485,7 +484,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --xlim 3 8 &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --xlim 3 8 &lt; tips.csv
 </pre></div>
 </div>
 </section>
@@ -499,7 +498,7 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <p>Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x tip --col day &lt; tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --col day &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/hist.tip.day.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set with a column for each day" class="align-center" src="_images/hist.tip.day.png" style="width: 600px; height: 300px;" /></a>

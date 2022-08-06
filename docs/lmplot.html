@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lmplot &mdash; hatch  documentation</title>
+  <title>lmplot &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -95,7 +94,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -117,7 +116,7 @@
   <section id="lmplot">
 <span id="id1"></span><h1>lmplot<a class="headerlink" href="#lmplot" title="Permalink to this headline"></a></h1>
 <p>A scatter plot with a fitted linear model (linear regression).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch lmplot &lt;arguments&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot &lt;arguments&gt;
 </pre></div>
 </div>
 <p>Lmplots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html">lmplot</a> library function.</p>
@@ -187,7 +186,7 @@
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>A lmplot showing the relationship between <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> data set:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch lmplot -x sepal_length -y petal_length &lt; iris.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot -x sepal_length -y petal_length &lt; iris.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">lmplot.sepal_length.petal_length.png</span></code>.</p>
@@ -200,7 +199,7 @@
 <span id="lmplot-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for lmplots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch lmplot -h
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot -h
 </pre></div>
 </div>
 </section>
@@ -222,7 +221,7 @@ arguments:</p>
 A linear model will be fitted to each separate group of points.</p>
 <p>In the following example the data points in an lmplot comparing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> are
 grouped by their corresponding categorical <code class="docutils literal notranslate"><span class="pre">day</span></code> value, and a linear model is fitted to both groups.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch lmplot -x sepal_length -y petal_length --hue species &lt; iris.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot -x sepal_length -y petal_length --hue species &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/lmplot.sepal_length.petal_length.species.png"><img alt="lmplot comparing sepal_length and petal_length grouped by species with a linear model fitted to each group" class="align-center" src="_images/lmplot.sepal_length.petal_length.species.png" style="width: 700px; height: 600px;" /></a>
@@ -240,7 +239,7 @@ the hue groups in the legend.</p>
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
 <p>For example the following command produces an lmplot comparing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> with <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, such that facet column is determined by the value of the <code class="docutils literal notranslate"><span class="pre">species</span></code> column.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch lmplot -x sepal_length -y petal_length --col species &lt; iris.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot -x sepal_length -y petal_length --col species &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/lmplot.sepal_length.petal_length.species.facets.png"><img alt="lmplot comparing sepal_length and petal_length, with species determining the facet column" class="align-center" src="_images/lmplot.sepal_length.petal_length.species.facets.png" style="width: 600px; height: 300px;" /></a>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Command line syntax &mdash; hatch  documentation</title>
+  <title>Command line syntax &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -90,7 +89,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -110,21 +109,21 @@
              
   <section id="command-line-syntax">
 <h1>Command line syntax<a class="headerlink" href="#command-line-syntax" title="Permalink to this headline"></a></h1>
-<p>Hatch provides a suite of commands, each carrying out a specific task.</p>
+<p>Gurita provides a suite of commands, each carrying out a specific task.</p>
 <p>Commands can be <a class="reference internal" href="#command-chain"><span class="std std-ref">chained together</span></a> in a modular fashion for more complex analysis pipelines.</p>
 <section id="commands">
 <span id="single-command"></span><h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline"></a></h2>
-<p>Hatch commands have the following structure:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt; [arguments]
+<p>Gurita commands have the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;command&gt; [arguments]
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">&lt;command&gt;</span></code> is the command name (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code> or <code class="docutils literal notranslate"><span class="pre">pca</span></code>), and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> is a list of options that control the behaviour of the command. In some cases the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> can be empty.</p>
 <p>See the <a class="reference internal" href="list_of_commands.html#list-of-commands"><span class="std std-ref">list of commands</span></a> for a summary of all the available commands.</p>
-<p>For instance, the following invocation of Hatch will plot a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> read from standard input:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -x passengers &lt; flights.csv
+<p>For instance, the following invocation of Gurita will plot a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> read from standard input:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x passengers &lt; flights.csv
 </pre></div>
 </div>
-<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">-x</span> <span class="pre">passengers</span></code> is a single command. <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the name of the command for plotting histograms, and <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> is an argument that tells the command to use the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column for the X axis. The notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">flights.csv</span></code> redirects the contents of the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> file into the standard input of Hatch.  See the section on <a class="reference internal" href="input_output.html#input-output"><span class="std std-ref">input and output</span></a> for more information about input and output files.</p>
+<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">-x</span> <span class="pre">passengers</span></code> is a single command. <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the name of the command for plotting histograms, and <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> is an argument that tells the command to use the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column for the X axis. The notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">flights.csv</span></code> redirects the contents of the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> file into the standard input of Gurita.  See the section on <a class="reference internal" href="input_output.html#input-output"><span class="std std-ref">input and output</span></a> for more information about input and output files.</p>
 <section id="types-of-commands">
 <h3>Types of commands<a class="headerlink" href="#types-of-commands" title="Permalink to this headline"></a></h3>
 <p>Commands fall into four types:</p>
@@ -138,17 +137,17 @@
 </section>
 <section id="command-chaining">
 <span id="command-chain"></span><h2>Command chaining<a class="headerlink" href="#command-chaining" title="Permalink to this headline"></a></h2>
-<p>In more complex cases mulitple commands can be chained together into a pipeline. Hatch uses the plus sign <code class="docutils literal notranslate"><span class="pre">+</span></code> to separate each command in the chain:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;command_1&gt; + &lt;command_2&gt; + ... + &lt;command_n&gt;
+<p>In more complex cases mulitple commands can be chained together into a pipeline. Gurita uses the plus sign <code class="docutils literal notranslate"><span class="pre">+</span></code> to separate each command in the chain:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;command_1&gt; + &lt;command_2&gt; + ... + &lt;command_n&gt;
 </pre></div>
 </div>
 <p>Each command has its own optional arguments, so the chaining syntax is more completely characterised as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;command_1&gt; [arguments_1] + &lt;command_2&gt; [arguments_2] + ... + &lt;command_n&gt; [arguments_n]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;command_1&gt; [arguments_1] + &lt;command_2&gt; [arguments_2] + ... + &lt;command_n&gt; [arguments_n]
 </pre></div>
 </div>
 <p>The idea with command chaining is to build a <em>pipeline</em> of data transformation and/or plotting. This allows you to build complex analytics processes by joining commands together in sequence.</p>
 <p>The most important detail about command chaining is that data flows from left to right in the chain, as illustrated in the following diagram:</p>
-<img alt="Illustration of data flow direction in Hatch command chain" class="align-center" src="_images/hatch_command_chain_data_flow.png" />
+<img alt="Illustration of data flow direction in Gurita command chain" class="align-center" src="_images/gurita_command_chain_data_flow.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -156,24 +155,24 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Motivation for command chaining using +</strong></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator in Hatch acts like the pipe operator <code class="docutils literal notranslate"><span class="pre">|</span></code> in the Unix shell. The main advantage of the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator compared to <code class="docutils literal notranslate"><span class="pre">|</span></code> is that data is transferred between consecutive commands efficiently.</p>
-<p>It is <em>possible</em> to join Hatch commands into a pipeline using the <code class="docutils literal notranslate"><span class="pre">|</span></code> shell operator, like so:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator in Gurita acts like the pipe operator <code class="docutils literal notranslate"><span class="pre">|</span></code> in the Unix shell. The main advantage of the <code class="docutils literal notranslate"><span class="pre">+</span></code> operator compared to <code class="docutils literal notranslate"><span class="pre">|</span></code> is that data is transferred between consecutive commands efficiently.</p>
+<p>It is <em>possible</em> to join Gurita commands into a pipeline using the <code class="docutils literal notranslate"><span class="pre">|</span></code> shell operator, like so:</p>
 <blockquote>
-<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;command_1&gt; [arguments_1] | hatch &lt;command_2&gt; [arguments_2]
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;command_1&gt; [arguments_1] | gurita &lt;command_2&gt; [arguments_2]
 </pre></div>
 </div>
 </div></blockquote>
-<p>Note that this requires the Hatch program to be invoked multiple times in the same pipeline.</p>
+<p>Note that this requires the Gurita program to be invoked multiple times in the same pipeline.</p>
 <p>The main downside of using <code class="docutils literal notranslate"><span class="pre">|</span></code> pipelines is that it requires the entire dataset to be serialised into a text stream between each
 command. This is redundant, inefficient, and therefore slow, particularly for large datasets.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator lets you compose a pipeline using a single invocation of Hatch and <em>most importantly</em> data is passed between
+<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator lets you compose a pipeline using a single invocation of Gurita and <em>most importantly</em> data is passed between
 successive commands in the chain efficiently. There is no serialisation to a text stream in between commands. Therefore using <code class="docutils literal notranslate"><span class="pre">+</span></code> will
 be much faster than <code class="docutils literal notranslate"><span class="pre">|</span></code>, especially for complex pipelines and large datasets.</p>
 </div>
 <section id="command-chaining-example">
 <h3>Command chaining example<a class="headerlink" href="#command-chaining-example" title="Permalink to this headline"></a></h3>
-<p>The following is a more advanced example of command chaining in Hatch, consisting of four commands:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch filter &#39;species != &quot;virginica&quot;&#39; + \
+<p>The following is a more advanced example of command chaining in Gurita, consisting of four commands:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita filter &#39;species != &quot;virginica&quot;&#39; + \
                      sample 0.9 + \
                      pca + \
                      scatter -x pc1 -y pc2 --hue species
@@ -181,16 +180,16 @@ be much faster than <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>The above command is split over multiple lines for clarity, using the backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> to split lines.</p>
 <p>Equivalently, the same command can be written in a single line, like so (where backslashes are no longer required):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch filter &#39;species != &quot;virginica&quot;&#39; + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita filter &#39;species != &quot;virginica&quot;&#39; + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
 </pre></div>
 </div>
 <p>To understand how it works it is useful to break it down into parts.</p>
-<p>To begin with, the contents of the file <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> is piped into the standard input of Hatch:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch ...
+<p>To begin with, the contents of the file <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> is piped into the standard input of Gurita:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita ...
 </pre></div>
 </div>
 <p>Note that input redirection would also achieve the same behaviour:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... &lt; iris.csv
 </pre></div>
 </div>
 <p>This data is then passed through the chain of commands from left to right. Along the way the data may be transformed, displayed or plotted.</p>
@@ -228,14 +227,14 @@ and in those cases more columns would be added, one for each component.</p>
 <p>The X and Y axes of the scatter plot are defined by the options <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">pc1</span> <span class="pre">-y</span> <span class="pre">pc2</span></code>. Here you can see that the axes are defined to correspond to columns in the data. In this
 case they are <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> respectively, which are new columns that were added to the data by the previous <code class="docutils literal notranslate"><span class="pre">pca</span></code> command. The option <code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">species</span></code> assigns colours
 to points in the scatter plot based on the <code class="docutils literal notranslate"><span class="pre">species</span></code> categorical column. In this example
-Hatch defaults to saving the plot in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code>, however, as with all defaults, this can be overridden.</p>
+Gurita defaults to saving the plot in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code>, however, as with all defaults, this can be overridden.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>There are a number of things to note about command chains:</p>
 <ul class="simple">
 <li><p>Plotting and summary information commands do not modify the data. They simply perform their respective task on the current data set (such as making a plot) and then pass the same data along unchanged to the next command in the chain.</p></li>
-<li><p>If the last command in a chain is a transformation Hatch will assume that you want the transformed data to be sent to the standard output, so it will do this automatically for you.</p></li>
-<li><p>If the last command in a chain is a plotting command, then Hatch will assume that your primary goal was to generate the plot, and therefore it will not automatically send the data to the standard output at the end. You can override
+<li><p>If the last command in a chain is a transformation Gurita will assume that you want the transformed data to be sent to the standard output, so it will do this automatically for you.</p></li>
+<li><p>If the last command in a chain is a plotting command, then Gurita will assume that your primary goal was to generate the plot, and therefore it will not automatically send the data to the standard output at the end. You can override
 this behaviour by adding an explicit <code class="docutils literal notranslate"><span class="pre">out</span></code> command at the end of the chain.</p></li>
 <li><p>You may have more than one plotting command in a chain.</p></li>
 </ul>
@@ -244,35 +243,35 @@ this behaviour by adding an explicit <code class="docutils literal notranslate">
 </section>
 <section id="getting-help">
 <span id="help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> command line arguments give an overview of Hatch’s command line syntax:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch -h
+<p>The <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> command line arguments give an overview of Gurita’s command line syntax:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita -h
 </pre></div>
 </div>
 <p>Help information for each command can be requested with <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 after the command name:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;command&gt; -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;command&gt; -h
 </pre></div>
 </div>
 <p>For example, to get specific help about histograms, use:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch hist -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -h
 </pre></div>
 </div>
 <p>This will display a detailed help message for the <code class="docutils literal notranslate"><span class="pre">hist</span></code> command, likewise for all other commands.</p>
 </section>
 <section id="version-number">
 <span id="version"></span><h2>Version number<a class="headerlink" href="#version-number" title="Permalink to this headline"></a></h2>
-<p>Hatch uses <a class="reference external" href="https://semver.org/">semantic versioning</a>, such that its version number has three parts:</p>
+<p>Gurita uses <a class="reference external" href="https://semver.org/">semantic versioning</a>, such that its version number has three parts:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>major.minor.patch
 </pre></div>
 </div>
 <p>The major version number indicates significant changes in the behaviour and compatibility of the program. A change in major version number indicates that the different versions may not be entirely compatible with each other.</p>
 <p>The minor version number indicates a change in functionality that is backwards compatible within the corresponding major version. For example, this could indicate the addition of a feature that was not previously present, but does not interfere with existing features.</p>
 <p>The patch version number indicates a backwards compatible change that does not change functionality in a significant way. This is usually used for bug fixes.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">--version</span></code> (<code class="docutils literal notranslate"><span class="pre">-v</span></code>) command line argument causes Hatch to print its version number.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch --version
+<p>The <code class="docutils literal notranslate"><span class="pre">--version</span></code> (<code class="docutils literal notranslate"><span class="pre">-v</span></code>) command line argument causes Gurita to print its version number.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita --version
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch -v
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita -v
 </pre></div>
 </div>
 </section>

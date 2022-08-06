@@ -7,7 +7,7 @@ Count plots show the frequency of values within categorical columns using bars.
 
 .. code-block:: bash
 
-    hatch count <arguments> 
+    gurita count <arguments> 
 
 Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="count"`` option.
 
@@ -72,7 +72,7 @@ Plot a count of the ``embark_town`` categorical column from the ``titanic.csv`` 
 
 .. code-block:: bash
 
-    hatch count -x embark_town < titanic.csv
+    gurita count -x embark_town < titanic.csv
 
 The output of the above command is written to ``count.embark_town.png``:
 
@@ -94,7 +94,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch count -h
+    gurita count -h
 
 .. _count_column_selection:
 
@@ -127,7 +127,7 @@ For comparison, the following command uses ``-y embark_town`` to plot a histogra
 
 .. code-block:: bash
 
-    hatch count -y embark_town < titanic.csv
+    gurita count -y embark_town < titanic.csv
 
 .. image:: ../images/count.embark_town.y.png
        :width: 600px
@@ -153,7 +153,7 @@ In the following example the counts of the ``embark_town`` column are displayed 
 
 .. code-block:: bash
 
-    hatch count -x embark_town --order Cherbourg Queenstown Southampton < titanic.csv
+    gurita count -x embark_town --order Cherbourg Queenstown Southampton < titanic.csv
 
 .. image:: ../images/count.embark_town.order.png 
        :width: 600px
@@ -178,7 +178,7 @@ In the following example the counts of the ``embark_town`` column are grouped by
 
 .. code-block:: bash
 
-    hatch count -x embark_town --hue class < titanic.csv  
+    gurita count -x embark_town --hue class < titanic.csv  
 
 .. image:: ../images/count.embark_town.class.png 
        :width: 600px
@@ -197,7 +197,7 @@ In the following example the ``class`` values are displayed in the order of ``Fi
 
 .. code-block:: bash
 
-    hatch count -x embark_town --hue class --hueorder First Second Third < titanic.csv  
+    gurita count -x embark_town --hue class --hueorder First Second Third < titanic.csv  
 
 .. image:: ../images/count.embark_town.class.hueorder.png 
        :width: 600px
@@ -212,7 +212,7 @@ the ``embark_town`` and ``class`` categorical columns:
 
 .. code-block:: bash
 
-    hatch count -x embark_town --hue class --order Cherbourg Queenstown Southampton \
+    gurita count -x embark_town --hue class --order Cherbourg Queenstown Southampton \
                 --hueorder First Second Third < titanic.csv
 
 .. image:: ../images/count.embark_town.class.order.hueorder.png 
@@ -243,7 +243,7 @@ data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument shou
 
 .. code-block:: bash
 
-    hatch count -x embark_town --logy < titanic.csv  
+    gurita count -x embark_town --logy < titanic.csv  
 
 .. image:: ../images/count.embark_town.logy.png
        :width: 600px
@@ -273,7 +273,7 @@ data is displayed on the X-axis (``-x``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch count -x embark_town --ylim 100 300 < titanic.csv
+    gurita count -x embark_town --ylim 100 300 < titanic.csv
 
 .. _count_facets:
 
@@ -294,7 +294,7 @@ The follow command creates a faceted bar plot where the ``sex`` column is used t
 
 .. code-block:: bash
 
-    hatch count -x embark_town --col sex < titanic.csv 
+    gurita count -x embark_town --col sex < titanic.csv 
 
 .. image:: ../images/count.embark_town.sex.png 
        :width: 600px

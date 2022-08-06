@@ -4,23 +4,23 @@ from distutils.core import setup
 
 LONG_DESCRIPTION = \
 '''
-Plot taular data on the comand line.
+Plot and analyse tabular data on the comand line.
 '''
 
 
 setup(
-    name='hatch',
+    name='gurita',
     version='1.0.0',
     author='Bernie Pope',
     author_email='bjpope@unimelb.edu.au',
-    packages=['hatch'],
-    package_dir={'hatch': 'hatch'},
+    packages=['gurita'],
+    package_dir={'gurita': 'gurita'},
     entry_points={
-        'console_scripts': ['hatch = hatch.hatch:main']
+        'console_scripts': ['gurita = gurita.gurita:main']
     },
-    url='https://github.com/bjpop/hatch',
+    url='https://github.com/bjpop/gurita',
     license='LICENSE',
-    description=('Plot taular data on the comand line.'),
+    description=('Plot and analyse tabular data on the comand line.'),
     long_description=(LONG_DESCRIPTION),
     install_requires=[
         "numpy==1.22.2",

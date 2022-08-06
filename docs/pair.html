@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pair &mdash; hatch  documentation</title>
+  <title>pair &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -95,7 +94,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -122,7 +121,7 @@ all numerical columns in the data, however it is possible to specify which colum
 categorical columns as well.</p>
 <p>A histogram showing the distribution of each column is shown on the diagonal.</p>
 <p>Pair plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html">pairplot</a> library function.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair &lt;arguments&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair &lt;arguments&gt;
 </pre></div>
 </div>
 <table class="colwidths-given tight-table docutils align-default">
@@ -170,7 +169,7 @@ categorical columns as well.</p>
 <p>Note that there are four numerical columns in this data set (<code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>) and one categorical column (<code class="docutils literal notranslate"><span class="pre">species</span></code>).
 By default, if no column names are specified in a pair plot, all the numerical columns will be compared (and catergorical columns are ignored).
 This behaviour can be overridden with the <code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--columns</span></code> <a class="reference internal" href="#pair-columns"><span class="std std-ref">argument</span></a>.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair &lt; iris.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">pair.png</span></code>:</p>
@@ -183,7 +182,7 @@ This behaviour can be overridden with the <code class="docutils literal notransl
 <span id="pair-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for pair plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair -h
 </pre></div>
 </div>
 </section>
@@ -196,7 +195,7 @@ arguments:</p>
 This behaviour can be overridden with the <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--columns</span></code>) argument.</p>
 <p>The following example generates a pair plot comparing the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, and <code class="docutils literal notranslate"><span class="pre">species</span></code> columns. Note that <code class="docutils literal notranslate"><span class="pre">species</span></code> is
 a categorical column, and it would not be plotted by default.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair -c sepal_length petal_length species &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair -c sepal_length petal_length species &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.columns.png"><img alt="Pair plot comparing various specific columns in the iris.csv data set" class="align-center" src="_images/pair.columns.png" style="width: 600px; height: 600px;" /></a>
@@ -205,7 +204,7 @@ a categorical column, and it would not be plotted by default.</p>
 </div>
 <p>Unfortunately, due to the small size of the above plot, the axes labels for <code class="docutils literal notranslate"><span class="pre">species</span></code> on the X axis overlap one another. This can be avoided
 by rotating the X axis tick labels by 90 degrees using <code class="docutils literal notranslate"><span class="pre">--rxtl</span> <span class="pre">90</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair -c sepal_length petal_length species --rxtl 90 &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair -c sepal_length petal_length species --rxtl 90 &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.columns.rxtl.png"><img alt="Pair plot comparing various specific columns in the iris.csv data set, with X axis labels rotated 90 degrees to avoid overlapping" class="align-center" src="_images/pair.columns.rxtl.png" style="width: 600px; height: 600px;" /></a>
@@ -220,7 +219,7 @@ by rotating the X axis tick labels by 90 degrees using <code class="docutils lit
 </div>
 <p>The plotted data can be grouped by a categorical column, where each group is rendered as a different colour.</p>
 <p>In the example below, no column names are specified, so only the numerical columns are plotted.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair --hue species &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair --hue species &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.species.png"><img alt="Pair plot comparing all the numerical columns in the iris.csv data set, grouped by species" class="align-center" src="_images/pair.species.png" style="width: 600px; height: 500px;" /></a>
@@ -235,7 +234,7 @@ by rotating the X axis tick labels by 90 degrees using <code class="docutils lit
 </div>
 <p>By default a pair plot shows a full square grid of plots for each pairwise comparison. In this sense the top right and bottom left triangles
 of the plot are reflected mirror images. An alternative is to plot only the bottom left corner of the grid using the <code class="docutils literal notranslate"><span class="pre">--corner</span></code> argument.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair --corner &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair --corner &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.corner.png"><img alt="Pair plot comparing all the numerical columns in the iris.csv data set, showing only the lower left corner" class="align-center" src="_images/pair.corner.png" style="width: 600px; height: 600px;" /></a>
@@ -257,7 +256,7 @@ from four plot types:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">reg</span></code> regression</p></li>
 </ol>
 <p>The example below shows a pair plot using <code class="docutils literal notranslate"><span class="pre">kde</span></code> (kernel density estimate) as the method of comparison:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair --kind kde &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair --kind kde &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.kde.png"><img alt="Pair plot comparing all the numerical columns in the iris.csv data set, using a kde to compare columns" class="align-center" src="_images/pair.kde.png" style="width: 600px; height: 600px;" /></a>
@@ -265,7 +264,7 @@ from four plot types:</p>
 <div class="line"><br /></div>
 </div>
 <p>The example below shows a pair plot using <code class="docutils literal notranslate"><span class="pre">hist</span></code> (histogram) as the method of comparison:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair --kind hist &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair --kind hist &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.hist.png"><img alt="Pair plot comparing all the numerical columns in the iris.csv data set, using a histogram to compare columns" class="align-center" src="_images/pair.hist.png" style="width: 600px; height: 600px;" /></a>
@@ -273,7 +272,7 @@ from four plot types:</p>
 <div class="line"><br /></div>
 </div>
 <p>The example below shows a pair plot using <code class="docutils literal notranslate"><span class="pre">reg</span></code> (regression) as the method of comparison:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch pair --kind reg &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair --kind reg &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/pair.reg.png"><img alt="Pair plot comparing all the numerical columns in the iris.csv data set, using a regression to compare columns" class="align-center" src="_images/pair.reg.png" style="width: 600px; height: 600px;" /></a>

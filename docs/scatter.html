@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>scatter &mdash; hatch  documentation</title>
+  <title>scatter &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -95,7 +94,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -117,7 +116,7 @@
   <section id="scatter">
 <span id="id1"></span><h1>scatter<a class="headerlink" href="#scatter" title="Permalink to this headline"></a></h1>
 <p>Scatter plots show the relationship between two columns as a scatter of data points.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter &lt;arguments&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter &lt;arguments&gt;
 </pre></div>
 </div>
 <p>When one of the two columns being compared is a categorical value the scatter plot is similar to
@@ -229,7 +228,7 @@
 <section id="simple-example">
 <span id="scatter-example"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Scatter plot of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> numerical column compared to the <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> numerical column from the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> input file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip &lt; tips.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">scatter.total_bill.tip.png</span></code>:</p>
@@ -242,7 +241,7 @@
 <span id="scatter-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for scatter plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -h
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -h
 </pre></div>
 </div>
 </section>
@@ -254,7 +253,7 @@ arguments:</p>
 </div>
 <p>Scatter plots can be plotted for two numerical columns as illustrated in the <a class="reference internal" href="#scatter-example"><span class="std std-ref">example above</span></a>, one on each of the axes.</p>
 <p>Scatter plots can also be used to compare a numerical column against a categorical column. In the example below, the numerical <code class="docutils literal notranslate"><span class="pre">tip</span></code> column is compared with the categorical <code class="docutils literal notranslate"><span class="pre">day</span></code> column in the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> dataset:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hatch</span> <span class="n">scatter</span> <span class="o">-</span><span class="n">x</span> <span class="n">day</span> <span class="o">-</span><span class="n">y</span> <span class="n">tip</span> <span class="o">&lt;</span> <span class="n">tips</span><span class="o">.</span><span class="n">csv</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gurita</span> <span class="n">scatter</span> <span class="o">-</span><span class="n">x</span> <span class="n">day</span> <span class="o">-</span><span class="n">y</span> <span class="n">tip</span> <span class="o">&lt;</span> <span class="n">tips</span><span class="o">.</span><span class="n">csv</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.day.tip.png"><img alt="Scatter plot comparing tip to day in the tips.csv file" class="align-center" src="_images/scatter.day.tip.png" style="width: 600px; height: 600px;" /></a>
@@ -272,7 +271,7 @@ arguments:</p>
 <p>The data points can be coloured by an additional numerical or categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
 <p>In the following example the data points in a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">tip</span></code> and <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> are
 coloured by their corresponding categorical <code class="docutils literal notranslate"><span class="pre">day</span></code> value:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --hue day &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --hue day &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.day.png"><img alt="Scatter plot comparing tip and total_bill coloured by day" class="align-center" src="_images/scatter.total_bill.tip.day.png" style="width: 700px; height: 600px;" /></a>
@@ -282,7 +281,7 @@ coloured by their corresponding categorical <code class="docutils literal notran
 <p>When the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> paramter specifies a numerical column the colour scale is graduated.
 For example, in the following scatter plot the numerical <code class="docutils literal notranslate"><span class="pre">size</span></code> column is used for the <code class="docutils literal notranslate"><span class="pre">--hue</span></code>
 argument:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --hue size &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --hue size &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.size.png"><img alt="Scatter plot comparing tip and total_bill coloured by size" class="align-center" src="_images/scatter.total_bill.tip.size.png" style="width: 700px; height: 600px;" /></a>
@@ -299,7 +298,7 @@ the hue groups in the legend.</p>
 </div>
 <p>By default dots in scatter plots are drawn as circles.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--dotstyle</span></code> argument lets you change the shape of dots based on a categorical column.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --hue day --dotstyle sex &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --hue day --dotstyle sex &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.day.dotstyle.png"><img alt="Scatter plot comparing tip and total_bill with dot size where the dot style is based on the sex categorical column" class="align-center" src="_images/scatter.total_bill.tip.day.dotstyle.png" style="width: 700px; height: 600px;" /></a>
@@ -319,7 +318,7 @@ the underlying column.</p>
 <p>The size of plotted dots in the scatter plot can be scaled according the a numerical column with the <code class="docutils literal notranslate"><span class="pre">--dotsize</span></code> argument.</p>
 <p>The following example generates a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> to <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> using the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset. The size of dots in the
 plot is scaled according to the <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> column.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x sepal_length -y sepal_width --dotsize petal_length &lt; iris.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x sepal_length -y sepal_width --dotsize petal_length &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.sepal_length.sepal_width.png"><img alt="Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset" class="align-center" src="_images/scatter.sepal_length.sepal_width.png" style="width: 600px; height: 500px;" /></a>
@@ -327,7 +326,7 @@ plot is scaled according to the <code class="docutils literal notranslate"><span
 <div class="line"><br /></div>
 </div>
 <p>The range of dot sizes can be adjusted with <code class="docutils literal notranslate"><span class="pre">--dotsizerange</span> <span class="pre">LOW</span> <span class="pre">HIGH</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange <span class="m">10</span> <span class="m">200</span> &lt; iris.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange <span class="m">10</span> <span class="m">200</span> &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.sepal_length.sepal_width.sizerange.png"><img alt="Scatter plot comparing sepal_length and sepal_width with dot size scaled by petal_length using the iris.csv dataset, where the size range of dots is set between 10 and 200" class="align-center" src="_images/scatter.sepal_length.sepal_width.sizerange.png" style="width: 600px; height: 500px;" /></a>
@@ -349,7 +348,7 @@ overridden with <code class="docutils literal notranslate"><span class="pre">--d
 <p>Dots are plotted with a thin white border by default. The border line width can be changed with <code class="docutils literal notranslate"><span class="pre">--dotlinewidth</span></code> and the border line colour can
 be changed with <code class="docutils literal notranslate"><span class="pre">--dotlinecolour</span></code>.</p>
 <p>In the following example, the dot alpha is set to 1 (fully opaque), the border line width is set to 0.5, and the border line colour is set to black.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --dotalpha <span class="m">1</span> --dotlinewidth <span class="m">0</span>.5 --dotlinecolour black &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --dotalpha <span class="m">1</span> --dotlinewidth <span class="m">0</span>.5 --dotlinecolour black &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.alpha.width.colour.png"><img alt="Scatter plot comparing tip and total_bill with dot alpha set to 1, dot line width set to 1, and dot line colour set to black" class="align-center" src="_images/scatter.total_bill.tip.alpha.width.colour.png" style="width: 600px; height: 600px;" /></a>
@@ -365,7 +364,7 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 </div>
 <p>The distribution of numerical values can be displayed in log (base 10) scale with <code class="docutils literal notranslate"><span class="pre">--logx</span></code> and <code class="docutils literal notranslate"><span class="pre">--logy</span></code>.</p>
 <p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> on the X axis is plotted in log scale:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --logx &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --logx &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.logx.png"><img alt="Scatter plot comparing tip and total_bill with the X axis in log scale." class="align-center" src="_images/scatter.total_bill.tip.logx.png" style="width: 600px; height: 600px;" /></a>
@@ -381,7 +380,7 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 </div>
 <p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the (inclusive) range to be displayed.</p>
 <p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that the range of <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> on the X axis is limited to values between 20 and 40 inclusive:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --xlim <span class="m">20</span> <span class="m">40</span> &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --xlim <span class="m">20</span> <span class="m">40</span> &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.xlim.png"><img alt="Scatter plot comparing tip and total_bill with the X axis range limited to values between 20 and 40 inclusively." class="align-center" src="_images/scatter.total_bill.tip.xlim.png" style="width: 600px; height: 600px;" /></a>
@@ -400,7 +399,7 @@ be changed with <code class="docutils literal notranslate"><span class="pre">--d
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
 <p>For example the following command produces a scatter plot comparing <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> with <code class="docutils literal notranslate"><span class="pre">tip</span></code>, such that facet column is determined by the value of the <code class="docutils literal notranslate"><span class="pre">smoker</span></code> column.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hatch scatter -x total_bill -y tip --col smoker &lt; tips.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita scatter -x total_bill -y tip --col smoker &lt; tips.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/scatter.total_bill.tip.smoker.png"><img alt="Scatter plot comparing tip and total_bill with facet columns determined by the value of smoker" class="align-center" src="_images/scatter.total_bill.tip.smoker.png" style="width: 600px; height: 300px;" /></a>

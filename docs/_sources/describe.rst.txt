@@ -7,13 +7,13 @@ Input data can be summarised with the ``describe`` command
 
 .. code-block:: bash
 
-    hatch describe <arguments>
+    gurita describe <arguments>
 
 This produces a summary table of columns in the input data. 
 
 .. code-block:: bash
 
-   hatch describe < titanic.csv
+   gurita describe < titanic.csv
 
 The output for the file ``titanic.csv`` is as follows:
 
@@ -93,7 +93,7 @@ As an example, The following commmand only shows summary information for the ``a
 
 .. code-block:: bash
 
-    hatch describe --columns age class < titanic.csv
+    gurita describe --columns age class < titanic.csv
 
 The output of the above command is as follows:
 

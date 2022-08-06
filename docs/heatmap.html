@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>heatmap &mdash; hatch  documentation</title>
+  <title>heatmap &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -95,7 +94,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -117,7 +116,7 @@
   <section id="heatmap">
 <span id="id1"></span><h1>heatmap<a class="headerlink" href="#heatmap" title="Permalink to this headline"></a></h1>
 <p>Heatmap showing the relationship between two categorical columns and a numerical column.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap &lt;arguments&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap &lt;arguments&gt;
 </pre></div>
 </div>
 <p>Heatmap plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.heatmap.html/">heatmap</a> library function.</p>
@@ -204,7 +203,7 @@
 <span id="heatmap-simple-example"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Heatmap showing the number of <code class="docutils literal notranslate"><span class="pre">passengers</span></code> by <code class="docutils literal notranslate"><span class="pre">month</span></code> and <code class="docutils literal notranslate"><span class="pre">year</span></code>
 in the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> data set:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers &lt; flights.csv
 </pre></div>
 </div>
 <p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">heatmap.month.year.png</span></code>:</p>
@@ -217,7 +216,7 @@ in the <code class="docutils literal notranslate"><span class="pre">flights.csv<
 <span id="heatmap-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
 <p>The full set of command line arguments for heatmap plots can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
 arguments:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -h
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -h
 </pre></div>
 </div>
 </section>
@@ -230,7 +229,7 @@ arguments:</p>
 <p>The X and Y axes of a heatmap must be categorical columns. The data must be formatted such that in each row the pair of values (X, Y) is unique (not repeated).
 If your data is not in this format it may be possible to transform it into this format using <a class="reference internal" href="pivot.html"><span class="doc">pivot</span></a>.</p>
 <p>The example below shows the same heatmap <a class="reference internal" href="#heatmap-simple-example"><span class="std std-ref">the simple example above</span></a> but with the month on the Y axis and the year on the X axis:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y month -x year -v passengers &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y month -x year -v passengers &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.year.month.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set" class="align-center" src="_images/heatmap.year.month.png" style="width: 600px; height: 500px;" /></a>
@@ -244,9 +243,9 @@ If your data is not in this format it may be possible to transform it into this 
 </pre></div>
 </div>
 <p>The colour map used in the heatmap can be set explicitly using <code class="docutils literal notranslate"><span class="pre">--cmap</span></code> with the name of the colour map as its argument.</p>
-<p>Hatch uses <a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html/">Matlplotlib’s colour map names</a> (because Hatch uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/</p>
+<p>Gurita uses <a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html/">Matlplotlib’s colour map names</a> (because Gurita uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/</p>
 <p>The example below uses the <code class="docutils literal notranslate"><span class="pre">YlOrRd</span></code> (yellow-orange-red) colour map:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --cmap YlOrRd &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --cmap YlOrRd &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.cmap.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, using the YlOrRd colour map" class="align-center" src="_images/heatmap.month.year.cmap.png" style="width: 600px; height: 600px;" /></a>
@@ -263,7 +262,7 @@ If your data is not in this format it may be possible to transform it into this 
 The format string uses <a class="reference external" href="https://docs.python.org/3/library/string.html#format-specification-mini-language">Python’s format specification language</a>. It defaults to <code class="docutils literal notranslate"><span class="pre">d</span></code> which displays the value as
 a decimal integer.</p>
 <p>For real numbers (floating point) you may want to use a format like <code class="docutils literal notranslate"><span class="pre">.2g</span></code> which will display the number in scientific notation with 2 decimal places.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --annot &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --annot &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.annot.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the numeric value in each cell shown as text" class="align-center" src="_images/heatmap.month.year.annot.png" style="width: 600px; height: 600px;" /></a>
@@ -282,7 +281,7 @@ a decimal integer.</p>
 It is possible to set one or both bounds at the same time.</p>
 <p>In the example below the lower bound is set to 250 and the upper bound is set to 550. Values outside these bounds are clamped to the bounding values.</p>
 <p>We observe that in this example data set it wasn’t until the early 1950s that the number of passengers per flight exceeded 250, hence the predominance of black cells in the top part of the plot.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --vmin 250 --vmax 550  &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --vmin 250 --vmax 550  &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.vmin.vmax.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the minimum and maximum range of values specified." class="align-center" src="_images/heatmap.month.year.vmin.vmax.png" style="width: 600px; height: 600px;" /></a>
@@ -291,7 +290,7 @@ It is possible to set one or both bounds at the same time.</p>
 </div>
 <p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">--robust</span></code> argument will cause the maximum and minimum values to be chosen based on quantiles, which can be desirable when extreme outliers occur in the data.
 Note that <code class="docutils literal notranslate"><span class="pre">--robust</span></code> may not be used at the same time as <code class="docutils literal notranslate"><span class="pre">--vmin</span></code> and/or <code class="docutils literal notranslate"><span class="pre">--vmax</span></code>.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --robust &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --robust &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.robust.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the quantiles used to determine the minimum and maximum values." class="align-center" src="_images/heatmap.month.year.robust.png" style="width: 600px; height: 600px;" /></a>
@@ -315,7 +314,7 @@ from left to right.</p>
 <p>If a specific order of values is required then this can be achived with <code class="docutils literal notranslate"><span class="pre">--orderx</span></code> and <code class="docutils literal notranslate"><span class="pre">--ordery</span></code>. Both of these arguments require one or more values to be specified, though it is possible to specify only a subset of all the possible
 values. Any unlisted values will be ordered arbitrarily. This can be useful when the relative order of only a few values is important.</p>
 <p>The example below generates a heatmap with the values on the Y axes displayed in descending sorted order:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --sorty d &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --sorty d &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.sorty.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the values on the Y axis in sorted descending order" class="align-center" src="_images/heatmap.month.year.sorty.png" style="width: 600px; height: 600px;" /></a>
@@ -323,7 +322,7 @@ values. Any unlisted values will be ordered arbitrarily. This can be useful when
 <div class="line"><br /></div>
 </div>
 <p>The example below generates a heatmap with the first four values on the X axis shown in a specific order, namely: January, February, March, April. Note that the complete ordering of the twelve possible months is not specified. Thus the last eight months are shown in an arbitary order. If we wanted to specifiy the full order then the first eleven months would need to be specified.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch heatmap -y year -x month -v passengers --orderx January February March April &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --orderx January February March April &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.orderx.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the values on the X axis specified in a particular partial order" class="align-center" src="_images/heatmap.month.year.orderx.png" style="width: 600px; height: 600px;" /></a>

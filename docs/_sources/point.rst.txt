@@ -7,7 +7,7 @@ Point plots show the point estimates of the central tendency (mean) of numerical
 
 .. code-block:: bash
 
-    hatch point <arguments>
+    gurita point <arguments>
 
 Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="point"`` option.
 
@@ -77,7 +77,7 @@ Point plot showing the mean ``age`` for passengers on the titanic by passenger `
 
 .. code-block:: bash
 
-    hatch point -y age -x class < titanic.csv 
+    gurita point -y age -x class < titanic.csv 
 
 The output of the above command is written to ``point.class.age.png``:
 
@@ -99,7 +99,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch point -h
+    gurita point -h
 
 .. _point_column_selection:
 
@@ -134,7 +134,7 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch point -x age -y class --orient h < titanic.csv
+    gurita point -x age -y class --orient h < titanic.csv
 
 .. image:: ../images/point.age.class.png 
        :width: 600px
@@ -160,7 +160,7 @@ In the following example the point columns of the ``class`` column are displayed
 
 .. code-block:: bash
 
-    hatch point -y age -x class --order First Second Third < titanic.csv
+    gurita point -y age -x class --order First Second Third < titanic.csv
 
 .. image:: ../images/point.class.age.order.png 
        :width: 600px
@@ -185,7 +185,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch point -y age -x class --hue sex < titanic.csv
+    gurita point -y age -x class --hue sex < titanic.csv
 
 .. image:: ../images/point.class.age.sex.png 
        :width: 600px
@@ -204,7 +204,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch point -y age -x class --hue sex --hueorder female male < titanic.csv
+    gurita point -y age -x class --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/point.class.age.sex.hueorder.png 
        :width: 600px
@@ -219,7 +219,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: bash
 
-    hatch point -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
+    gurita point -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/point.class.age.sex.order.hueorder.png 
        :width: 600px
@@ -248,7 +248,7 @@ For example, you can display a log scale point plot for the ``age`` column group
 
 .. code-block:: bash
 
-    hatch point -y age -x class --logy < titanic.csv 
+    gurita point -y age -x class --logy < titanic.csv 
 
 .. image:: ../images/point.class.age.logx.png
        :width: 600px
@@ -279,7 +279,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch point -y age -x class --ylim 10 30 < titanic.csv
+    gurita point -y age -x class --ylim 10 30 < titanic.csv
 
 .. _point_facets:
 
@@ -299,7 +299,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 .. code-block:: bash
 
-    hatch point -y age -x class --col sex < titanic.csv
+    gurita point -y age -x class --col sex < titanic.csv
 
 .. image:: ../images/point.class.age.sex.facets.png 
        :width: 600px

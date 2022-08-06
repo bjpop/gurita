@@ -1,25 +1,21 @@
-<p align="center">
-  <img src="docs/_static/hatch_logo_small.png" width="100" alt="logo">
-</p>
+# Gurita: a command line data analytics and plotting tool 
 
-# Hatch: a command line data analytics and plotting tool 
+Gurita is a command line tool for analysing and visualising tabular data in CSV or TSV format.
 
-Hatch is a command line tool for analysing and visualising tabular data in CSV or TSV format.
+At its core Gurita provides a suite of commands, each of which carries out a common data analytics or plotting task.
 
-At its core Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
-
-**A unique and powerful feature of Hatch** is that commands to be chained together into flexible analysis pipelines. See the advanced example below.
+**A unique and powerful feature of Gurita** is that commands to be chained together into flexible analysis pipelines. See the advanced example below.
 
 It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.
 
-Hatch commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
+Gurita commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
 and complex tasks are possible.
 
-Hatch is implemented in [Python](http://www.python.org/) and makes extensive use of the [Pandas](https://pandas.pydata.org/), [Seaborn](https://seaborn.pydata.org/), and [Scikit-learn](https://scikit-learn.org/) libraries for data processing and plot generation.
+Gurita is implemented in [Python](http://www.python.org/) and makes extensive use of the [Pandas](https://pandas.pydata.org/), [Seaborn](https://seaborn.pydata.org/), and [Scikit-learn](https://scikit-learn.org/) libraries for data processing and plot generation.
 
 # Documentation
 
-Please consult the [Hatch Documentation](https://bjpop.github.io/hatch/index.html) for detailed information about installation and usage.
+Please consult the [Gurita Documentation](https://bjpop.github.io/gurita/index.html) for detailed information about installation and usage.
 
 # Examples
 
@@ -28,7 +24,7 @@ Please consult the [Hatch Documentation](https://bjpop.github.io/hatch/index.htm
 Box plot of `sepal_length` for each species in the classic [iris dataset](https://github.com/mwaskom/seaborn-data/blob/master/iris.csv/):
 
 ```bash
-cat iris.csv | hatch box -x species -y sepal_length
+cat iris.csv | gurita box -x species -y sepal_length
 ```
 
 <p align="center">
@@ -37,12 +33,12 @@ cat iris.csv | hatch box -x species -y sepal_length
 
 ### Advanced example 
 
-The following example illustrates Hatch's ability to chain commands together. 
+The following example illustrates Gurita's ability to chain commands together. 
 
 Commands in a chain are separated by the plus sign (+) and data flows from left to right in the chain.
 
 ```bash
-cat iris.csv | hatch filter 'species != "virginica"' + \
+cat iris.csv | gurita filter 'species != "virginica"' + \
                      sample 0.9 + \
                      pca + \
                      scatter -x pc1 -y pc2 --hue species
@@ -61,7 +57,7 @@ In this example there are 4 commands that are executed in the following order:
 
 # Licence
 
-This program is released as open source software under the terms of [MIT License](https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE).
+This program is released as open source software under the terms of [MIT License](https://raw.githubusercontent.com/bjpop/gurita/master/LICENSE).
 
 # Authors
 

@@ -7,7 +7,7 @@ Strip plots show the distribution of values in a numerical column optionally gro
 
 .. code-block:: bash
 
-    hatch strip <arguments>
+    gurita strip <arguments>
 
 Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="strip"`` option.
 
@@ -83,7 +83,7 @@ Strip plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
-    hatch strip -y age < titanic.csv 
+    gurita strip -y age < titanic.csv 
 
 The output of the above command is written to ``strip.age.png``:
 
@@ -100,7 +100,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch strip -y age -x class < titanic.csv 
+    gurita strip -y age -x class < titanic.csv 
 
 The output of the above command is written to ``strip.class.age.png``:
 
@@ -122,7 +122,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch strip -h
+    gurita strip -h
 
 .. _strip_column_selection:
 
@@ -157,7 +157,7 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch strip -x age -y class --orient h < titanic.csv
+    gurita strip -x age -y class --orient h < titanic.csv
 
 .. image:: ../images/strip.age.class.png 
        :width: 600px
@@ -183,7 +183,7 @@ In the following example the strip columns of the ``class`` column are displayed
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --order First Second Third < titanic.csv
+    gurita strip -y age -x class --order First Second Third < titanic.csv
 
 .. image:: ../images/strip.class.age.order.png 
        :width: 600px
@@ -208,7 +208,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --hue sex < titanic.csv
+    gurita strip -y age -x class --hue sex < titanic.csv
 
 .. image:: ../images/strip.class.age.sex.png 
        :width: 600px
@@ -227,7 +227,7 @@ The ``--dodge`` argument will separate hue levels along the categorical axis, ra
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --hue sex --dodge < titanic.csv
+    gurita strip -y age -x class --hue sex --dodge < titanic.csv
 
 .. image:: ../images/strip.class.age.sex.dodge.png 
        :width: 600px
@@ -246,7 +246,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --hue sex --hueorder female male < titanic.csv
+    gurita strip -y age -x class --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/strip.class.age.sex.hueorder.png 
        :width: 600px
@@ -261,7 +261,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
+    gurita strip -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/strip.class.age.sex.order.hueorder.png 
        :width: 600px
@@ -290,7 +290,7 @@ For example, you can display a log scale strip plot for the ``age`` column group
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --logy < titanic.csv 
+    gurita strip -y age -x class --logy < titanic.csv 
 
 .. image:: ../images/strip.class.age.logy.png 
        :width: 600px
@@ -321,7 +321,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --ylim 10 30 < titanic.csv
+    gurita strip -y age -x class --ylim 10 30 < titanic.csv
 
 .. image:: ../images/strip.class.age.ylim.png 
        :width: 600px
@@ -347,7 +347,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 .. code-block:: bash
 
-    hatch strip -y age -x class --col sex < titanic.csv
+    gurita strip -y age -x class --col sex < titanic.csv
 
 .. image:: ../images/strip.class.age.sex.facet.png
        :width: 600px

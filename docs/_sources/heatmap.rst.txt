@@ -7,7 +7,7 @@ Heatmap showing the relationship between two categorical columns and a numerical
 
 .. code-block:: text
 
-    hatch heatmap <arguments>
+    gurita heatmap <arguments>
 
 Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/generated/seaborn.heatmap.html/>`__ library function.
 
@@ -72,7 +72,7 @@ in the ``flights.csv`` data set:
 
 .. code-block:: text
 
-    hatch heatmap -y year -x month -v passengers < flights.csv  
+    gurita heatmap -y year -x month -v passengers < flights.csv  
 
 The output of the above command is written to ``heatmap.month.year.png``:
 
@@ -94,7 +94,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch heatmap -h
+    gurita heatmap -h
 
 .. _heatmap_column_selection:
 
@@ -113,7 +113,7 @@ The example below shows the same heatmap :ref:`the simple example above <heatmap
 
 .. code-block:: text
 
-    hatch heatmap -y month -x year -v passengers < flights.csv
+    gurita heatmap -y month -x year -v passengers < flights.csv
 
 .. image:: ../images/heatmap.year.month.png 
        :width: 600px
@@ -134,13 +134,13 @@ Colour map
 
 The colour map used in the heatmap can be set explicitly using ``--cmap`` with the name of the colour map as its argument.
 
-Hatch uses `Matlplotlib's colour map names <https://matplotlib.org/stable/gallery/color/colormap_reference.html/>`_ (because Hatch uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/ 
+Gurita uses `Matlplotlib's colour map names <https://matplotlib.org/stable/gallery/color/colormap_reference.html/>`_ (because Gurita uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/ 
 
 The example below uses the ``YlOrRd`` (yellow-orange-red) colour map:
 
 .. code-block:: text
 
-    hatch heatmap -y year -x month -v passengers --cmap YlOrRd < flights.csv  
+    gurita heatmap -y year -x month -v passengers --cmap YlOrRd < flights.csv  
 
 .. image:: ../images/heatmap.month.year.cmap.png 
        :width: 600px
@@ -173,7 +173,7 @@ For real numbers (floating point) you may want to use a format like ``.2g`` whic
 
 .. code-block:: text
 
-    hatch heatmap -y year -x month -v passengers --annot < flights.csv  
+    gurita heatmap -y year -x month -v passengers --annot < flights.csv  
 
 .. image:: ../images/heatmap.month.year.annot.png 
        :width: 600px
@@ -205,7 +205,7 @@ We observe that in this example data set it wasn't until the early 1950s that th
 
 .. code-block:: text
 
-   hatch heatmap -y year -x month -v passengers --vmin 250 --vmax 550  < flights.csv
+   gurita heatmap -y year -x month -v passengers --vmin 250 --vmax 550  < flights.csv
 
 .. image:: ../images/heatmap.month.year.vmin.vmax.png 
        :width: 600px
@@ -220,7 +220,7 @@ Note that ``--robust`` may not be used at the same time as ``--vmin`` and/or ``-
 
 .. code-block:: text
 
-   hatch heatmap -y year -x month -v passengers --robust < flights.csv
+   gurita heatmap -y year -x month -v passengers --robust < flights.csv
 
 .. image:: ../images/heatmap.month.year.robust.png 
        :width: 600px
@@ -262,7 +262,7 @@ The example below generates a heatmap with the values on the Y axes displayed in
 
 .. code-block:: text
 
-   hatch heatmap -y year -x month -v passengers --sorty d < flights.csv
+   gurita heatmap -y year -x month -v passengers --sorty d < flights.csv
 
 .. image:: ../images/heatmap.month.year.sorty.png
        :width: 600px
@@ -276,7 +276,7 @@ The example below generates a heatmap with the first four values on the X axis s
 
 .. code-block:: text
 
-   hatch heatmap -y year -x month -v passengers --orderx January February March April < flights.csv
+   gurita heatmap -y year -x month -v passengers --orderx January February March April < flights.csv
 
 .. image:: ../images/heatmap.month.year.orderx.png
        :width: 600px

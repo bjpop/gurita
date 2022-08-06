@@ -1,7 +1,7 @@
 License
 *******
 
-Hatch is open source software licensed under the terms of the `MIT license <https://raw.githubusercontent.com/bjpop/hatch/master/LICENSE>`_. 
+Gurita is open source software licensed under the terms of the `MIT license <https://raw.githubusercontent.com/bjpop/gurita/master/LICENSE>`_. 
 
 Copyright Bernard Pope (bjpope@unimelb.edu.au): 19 Sep 2019 - present day
 

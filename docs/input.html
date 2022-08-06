@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reading input data &mdash; hatch  documentation</title>
+  <title>Reading input data &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -86,7 +85,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -106,94 +105,94 @@
              
   <section id="reading-input-data">
 <span id="input-files"></span><h1>Reading input data<a class="headerlink" href="#reading-input-data" title="Permalink to this headline"></a></h1>
-<p>Hatch can read data from a named input file or standard input (stdin).</p>
+<p>Gurita can read data from a named input file or standard input (stdin).</p>
 <section id="input-from-a-named-file">
 <h2>Input from a named file<a class="headerlink" href="#input-from-a-named-file" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command allows you to specify an input file by name:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in titanic.csv ...
 </pre></div>
 </div>
-<p>We use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that the remainder of the example Hatch command is omitted for the sake of simplifying the discussion.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that the remainder of the example Gurita command is omitted for the sake of simplifying the discussion.</p>
 <p>You should imagine that <code class="docutils literal notranslate"><span class="pre">...</span></code> would be replaced by more text to complete the command.
 For example, if you wanted to generate a count plot of the <code class="docutils literal notranslate"><span class="pre">class</span></code> column in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file, the <code class="docutils literal notranslate"><span class="pre">...</span></code> in the above example could be expanded like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + count -x class
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in titanic.csv + count -x class
 </pre></div>
 </div>
 <p>In the above example data is read from the input file and then passed along the <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a> from left to right into the <code class="docutils literal notranslate"><span class="pre">count</span></code> command to make a plot.</p>
-<p>When reading input from a named file (and not from standard input) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
+<p>When reading input from a named file (and not from standard input) Gurita will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
 <code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
 </section>
 <section id="specifying-the-field-separator">
 <h2>Specifying the field separator<a class="headerlink" href="#specifying-the-field-separator" title="Permalink to this headline"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command lets you specify the field separator explicitly. This will override any default behaviour that Hatch would otherwise have when choosing what separator to use.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command lets you specify the field separator explicitly. This will override any default behaviour that Gurita would otherwise have when choosing what separator to use.</p>
 <p>Using a comma as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;,&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;,&#39; ...
 </pre></div>
 </div>
-<p>Note: comma is the default separator used by Hatch, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
+<p>Note: comma is the default separator used by Gurita, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
 <p>Using a tab character as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;\t&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;\t&#39; ...
 </pre></div>
 </div>
 <p>Be sure to enclose the <code class="docutils literal notranslate"><span class="pre">\t</span></code> in quote characters to ensure that it is treated as a single string.</p>
 <p>Elaborating the above example to a full command, assuming <code class="docutils literal notranslate"><span class="pre">example_filename</span></code> is the name of a file containing data in TSV format:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;\t&#39; example_filename + count -x class
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;\t&#39; example_filename + count -x class
 </pre></div>
 </div>
 <p>Using a vertical bar character as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in --sep &#39;|&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;|&#39; ...
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> forces Hatch to use the specified field separator regardless of the filename extension or contents of the file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> forces Gurita to use the specified field separator regardless of the filename extension or contents of the file.</p>
 </div>
 </section>
 <section id="input-from-standard-input-stdin">
 <h2>Input from standard input (stdin)<a class="headerlink" href="#input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
-<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command Hatch will assume that the input should be read from standard input (stdin):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in ...
+<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command Gurita will assume that the input should be read from standard input (stdin):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in ...
 </pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class &lt; titanic.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in + count -x class &lt; titanic.csv
 </pre></div>
 </div>
-<p>In the above example the notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">titanic.csv</span></code> causes the contents of the file <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> to be fed into the standard input of Hatch.
+<p>In the above example the notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">titanic.csv</span></code> causes the contents of the file <code class="docutils literal notranslate"><span class="pre">titantic.csv</span></code> to be fed into the standard input of Gurita.
 This is called <em>input redirection</em>.</p>
-<p>Instead of using input redirection, it is also possible to <em>pipe</em> the output from another command to the standard input of Hatch:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch in + count -x class
+<p>Instead of using input redirection, it is also possible to <em>pipe</em> the output from another command to the standard input of Gurita:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita in + count -x class
 </pre></div>
 </div>
 <p>In the above example the command <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">titanic.csv</span></code> outputs the contents of the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> to standard output which is then fed through a pipe using the <code class="docutils literal notranslate"><span class="pre">|</span></code> (vertical bar) operator
-into the standard input of Hatch.</p>
-<p>Reading from standard input is particularly useful when you want to use Hatch as part of a command pipeline:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>example_command | hatch in + count -x class
+into the standard input of Gurita.</p>
+<p>Reading from standard input is particularly useful when you want to use Gurita as part of a command pipeline:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>example_command | gurita in + count -x class
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose ouput is sent as input into Hatch.</p>
-<p>For performance reasons Hatch does not try to detect the format of the input file when reading from standard input.</p>
-<p>Therefore, when reading from standard input, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose ouput is sent as input into Gurita.</p>
+<p>For performance reasons Gurita does not try to detect the format of the input file when reading from standard input.</p>
+<p>Therefore, when reading from standard input, unless otherwise specified, Gurita assumes that the file is in CSV format.</p>
 <p>As before, this can be overridden by <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code>, as illustrated in the example below:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.tsv | hatch in --sep &#39;\t&#39; + count -x class
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.tsv | gurita in --sep &#39;\t&#39; + count -x class
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Standard input can only be read once in a Hatch command</strong></p>
-<p>A Hatch command can only read from standard input at most once in a command. An attempt to read from standard input more than once will result in an error:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + count -x class + in &lt; titanic.csv
-hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+<p><strong>Standard input can only be read once in a Gurita command</strong></p>
+<p>A Gurita command can only read from standard input at most once in a command. An attempt to read from standard input more than once will result in an error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in + count -x class + in &lt; titanic.csv
+gurita ERROR: stdin may only be used at most once, and only as the first command; exiting
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Standard input can only be read at the start of a command</strong></p>
-<p>Hatch will only permit standard input to be read at the start of a command chain. Therefore it is an error to request to read
+<p>Gurita will only permit standard input to be read at the start of a command chain. Therefore it is an error to request to read
 from standard input in any position other then the first command in the chain:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class + in &lt; titanic.csv
-hatch ERROR: stdin may only be used at most once, and only as the first command; exiting
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita count -x class + in &lt; titanic.csv
+gurita ERROR: stdin may only be used at most once, and only as the first command; exiting
 </pre></div>
 </div>
 <p>Note that this restriction is only a concern when using the <code class="docutils literal notranslate"><span class="pre">in</span></code> command to read from standard input, and does
@@ -202,34 +201,34 @@ not apply when reading from standard input implicitly (as noted below).</p>
 </section>
 <section id="implicit-csv-input-from-standard-input-stdin">
 <h2>Implicit CSV input from standard input (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
-<p>For convenience, if you don’t use the <code class="docutils literal notranslate"><span class="pre">in</span></code> command explicitly Hatch will assume you wanted to read from standard input in CSV format.</p>
+<p>For convenience, if you don’t use the <code class="docutils literal notranslate"><span class="pre">in</span></code> command explicitly Gurita will assume you wanted to read from standard input in CSV format.</p>
 <p>Therefore:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in + &lt;rest of command&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in + &lt;rest of command&gt;
 </pre></div>
 </div>
 <p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;rest of command&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;rest of command&gt;
 </pre></div>
 </div>
-<p>In other words, if a Hatch command starts with <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> you can simply omit that part, and Hatch will implicitly read from standard input using CSV format. This saves you a bit of typing and makes the command line tidier.</p>
+<p>In other words, if a Gurita command starts with <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> you can simply omit that part, and Gurita will implicitly read from standard input using CSV format. This saves you a bit of typing and makes the command line tidier.</p>
 <p>As a concrete example, the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch in + count -x class
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita in + count -x class
 </pre></div>
 </div>
 <p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch count -x class
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita count -x class
 </pre></div>
 </div>
 <p>or, of course, you could achieve the same result with input redirection, again dropping the <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">+</span></code> from the original command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch count -x class &lt; titanic.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita count -x class &lt; titanic.csv
 </pre></div>
 </div>
-<p>Note carefully that when implicitly reading from standard input Hatch will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
+<p>Note carefully that when implicitly reading from standard input Gurita will always assume the input file is in CSV format. If you want to read a different format from standard input you must explicitly specify
 the type using: <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code></p>
 </section>
 <section id="ignoring-comments-in-the-input-data">
 <h2>Ignoring comments in the input data<a class="headerlink" href="#ignoring-comments-in-the-input-data" title="Permalink to this headline"></a></h2>
-<p>Hatch optionally supports comments in input data files where the comment starts with a special character, such as a hash, and continues until the end of the line.</p>
+<p>Gurita optionally supports comments in input data files where the comment starts with a special character, such as a hash, and continues until the end of the line.</p>
 <p>This feature is enabled for the <code class="docutils literal notranslate"><span class="pre">in</span></code> command with the <code class="docutils literal notranslate"><span class="pre">--comment</span> <span class="pre">&lt;char&gt;</span></code> option, where <code class="docutils literal notranslate"><span class="pre">&lt;char&gt;</span></code> is a single character that marks the start of a comment.</p>
 <p>For example, the following CSV data contains two comments, each starting with a hash character.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
@@ -240,7 +239,7 @@ the type using: <code class="docutils literal notranslate"><span class="pre">in<
 </pre></div>
 </div>
 <p>Such an input file can be read like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch in --comment &#39;#&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita in --comment &#39;#&#39; ...
 </pre></div>
 </div>
 <p>Be sure to enclose the comment marker in quotes to ensure that is is not interpreted as having a special meaning to the shell.
@@ -250,13 +249,13 @@ For instance, the hash character <code class="docutils literal notranslate"><spa
 <h2>Reading input from more than one file in a command chain<a class="headerlink" href="#reading-input-from-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h2>
 <p>You may read input from more than one file in a command chain, but only when each of those files is read from a named file (and not standard input).</p>
 <p>For example you can do something like this:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + ... + in iris.csv + ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in titanic.csv + ... + in iris.csv + ...
 </pre></div>
 </div>
 <p>In the above example, first <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is read as input, then some unspecified commands are run, and later <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> is read as input, and some more unspecified commands are run.</p>
 <p>Whenever a new input is read from a named file the contents of that file become the current data set, and any previous data set in the command chain is discarded.</p>
 <p>The following command is a more concrete example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in titanic.csv + hist -x fare + in iris.csv + count -x species
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in titanic.csv + hist -x fare + in iris.csv + count -x species
 </pre></div>
 </div>
 <p>There are four parts to the above command chain:</p>

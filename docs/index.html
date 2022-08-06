@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hatch: a command line data analytics and plotting tool &mdash; hatch  documentation</title>
+  <title>Gurita: a command line data analytics and plotting tool &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -27,8 +27,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="#" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -40,7 +39,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -77,7 +76,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">hatch</a>
+          <a href="#">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -85,7 +84,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Hatch: a command line data analytics and plotting tool</li>
+      <li>Gurita: a command line data analytics and plotting tool</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,20 +94,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="hatch-a-command-line-data-analytics-and-plotting-tool">
-<h1>Hatch: a command line data analytics and plotting tool<a class="headerlink" href="#hatch-a-command-line-data-analytics-and-plotting-tool" title="Permalink to this headline"></a></h1>
-<p>Hatch is a command line tool for transforming, analysing, and visualising tabular data in CSV or TSV format.</p>
-<p>At its core Hatch provides a suite of commands, each of which carries out a common data analytics or plotting task.
-Additionally, Hatch allows commands to be <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chained together</span></a> into flexible analysis pipelines.</p>
+  <section id="gurita-a-command-line-data-analytics-and-plotting-tool">
+<h1>Gurita: a command line data analytics and plotting tool<a class="headerlink" href="#gurita-a-command-line-data-analytics-and-plotting-tool" title="Permalink to this headline"></a></h1>
+<p>Gurita is a command line tool for transforming, analysing, and visualising tabular data in CSV or TSV format.</p>
+<p>At its core Gurita provides a suite of commands, each of which carries out a common data analytics or plotting task.
+Additionally, Gurita allows commands to be <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chained together</span></a> into flexible analysis pipelines.</p>
 <p>It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (&gt; millions) are readily supported.</p>
-<p>Hatch commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
+<p>Gurita commands are highly customisable, however sensible defaults are applied. Therefore simple tasks are easy to express
 and complex tasks are possible.</p>
-<p>Hatch is implemented in <a class="reference external" href="http://www.python.org/">Python</a> and makes extensive use of the <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a>, and <a class="reference external" href="https://scikit-learn.org/">Scikit-learn</a> libraries for data processing and plot generation.</p>
+<p>Gurita is implemented in <a class="reference external" href="http://www.python.org/">Python</a> and makes extensive use of the <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a>, and <a class="reference external" href="https://scikit-learn.org/">Scikit-learn</a> libraries for data processing and plot generation.</p>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>The following examples use the <a class="reference external" href="https://github.com/mwaskom/seaborn-data/blob/master/iris.csv/">iris.csv</a> dataset as input. The file contains 150 data rows (plus one heading row) and 5 columns.
 A pretty display of the first and last 5 rows of the data can be viewed using the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch pretty
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> gurita pretty
 </pre></div>
 </div>
 <p>The command generates the following output that is displayed on the terminal:</p>
@@ -132,7 +131,7 @@ A pretty display of the first and last 5 rows of the data can be viewed using th
 represents the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> numerical column, and the X-axis is grouped by the <code class="docutils literal notranslate"><span class="pre">species</span></code> categorical column.
 The goal of this plot is to show the distribution of sepal length of the three different species of iris
 flowers contained in the data set.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch box -x species -y sepal_length
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> gurita box -x species -y sepal_length
 </pre></div>
 </div>
 <p>The above command generates an output file called <code class="docutils literal notranslate"><span class="pre">box.species.sepal_length.png</span></code>
@@ -144,8 +143,8 @@ containing the following figure:</p>
 </section>
 <section id="advanced-example">
 <h2>Advanced example<a class="headerlink" href="#advanced-example" title="Permalink to this headline"></a></h2>
-<p>The next example illustrates Hatch’s ability to <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chain commands</span></a> together:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + <span class="se">\</span>
+<p>The next example illustrates Gurita’s ability to <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chain commands</span></a> together:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> gurita filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + <span class="se">\</span>
                      sample <span class="m">0</span>.9 + <span class="se">\</span>
                      pca + <span class="se">\</span>
                      scatter -x pc1 -y pc2 --hue species
@@ -154,11 +153,11 @@ containing the following figure:</p>
 <p>The above command has been written on mulitple lines for clarity. Note that the backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> indicates a line
 break in the command line syntax.</p>
 <p>Equivalently, the same command can be written in a single line, like so (where backslashes are no longer required):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> hatch filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + sample <span class="m">0</span>.9 + pca + scatter -x pc1 -y pc2 --hue species
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> gurita filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + sample <span class="m">0</span>.9 + pca + scatter -x pc1 -y pc2 --hue species
 </pre></div>
 </div>
-<p>In the command line syntax supported by Hatch, the plus sign <code class="docutils literal notranslate"><span class="pre">+</span></code> separates each command in a chain. This notation
-is fairly novel to Hatch and not something commonly seen in other command line programs.</p>
+<p>In the command line syntax supported by Gurita, the plus sign <code class="docutils literal notranslate"><span class="pre">+</span></code> separates each command in a chain. This notation
+is fairly novel to Gurita and not something commonly seen in other command line programs.</p>
 <p>Input is read from the file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> on standard input and data is passed from left to right in the chain.
 Commands can modify the data as it is passed along.</p>
 <p>In this example there are four commands that are executed in the following order:</p>
@@ -168,14 +167,14 @@ Commands can modify the data as it is passed along.</p>
 <li><p>The sampled rows are then passed to the <code class="docutils literal notranslate"><span class="pre">pca</span></code> command which performs principal component analysis (PCA), yielding two extra columns in the data called <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code>.</p></li>
 <li><p>Finally the pca-transformed data is passed to the <code class="docutils literal notranslate"><span class="pre">scatter</span> <span class="pre">-x</span> <span class="pre">pc1</span> <span class="pre">-y</span> <span class="pre">pc2</span> <span class="pre">--hue</span> <span class="pre">species</span></code>  command which generates a scatter plot of <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code> (the first two principal components), and colours the points in the plot based on the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> column.</p></li>
 </ol>
-<p>The output of this entire Hatch command is the scatter plot below that is saved in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code></p>
+<p>The output of this entire Gurita command is the scatter plot below that is saved in a file called <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.species.png</span></code></p>
 <a class="reference internal image-reference" href="_images/scatter.pc1.pc2.species.png"><img alt="Scatter plot comparing principal components pc1 and pc2 from a filtered iris dataset" class="align-center" src="_images/scatter.pc1.pc2.species.png" style="width: 700px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>An interesting aspect of this example is that additional columns are added to the data in the <code class="docutils literal notranslate"><span class="pre">pca</span></code> step, and these extra columns
 are then used to define the axes of the following scatter plot.</p>
-<p>Command chaining allows complex transformations to be combined together and makes Hatch a very powerful tool.</p>
+<p>Command chaining allows complex transformations to be combined together and makes Gurita a very powerful tool.</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">

@@ -7,7 +7,7 @@ A scatter plot with a fitted linear model (linear regression).
 
 .. code-block:: bash
 
-    hatch lmplot <arguments>
+    gurita lmplot <arguments>
 
 Lmplots are based on Seaborn's `lmplot <https://seaborn.pydata.org/generated/seaborn.lmplot.html>`__ library function.
 
@@ -55,7 +55,7 @@ A lmplot showing the relationship between ``sepal_length`` and ``petal_length`` 
 
 .. code-block:: bash
 
-    hatch lmplot -x sepal_length -y petal_length < iris.csv 
+    gurita lmplot -x sepal_length -y petal_length < iris.csv 
 
 The output of the above command is written to ``lmplot.sepal_length.petal_length.png``.
 
@@ -77,7 +77,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch lmplot -h
+    gurita lmplot -h
 
 .. _lmplot_column_selection:
 
@@ -110,7 +110,7 @@ grouped by their corresponding categorical ``day`` value, and a linear model is 
 
 .. code-block:: bash
 
-    hatch lmplot -x sepal_length -y petal_length --hue species < iris.csv
+    gurita lmplot -x sepal_length -y petal_length --hue species < iris.csv
 
 .. image:: ../images/lmplot.sepal_length.petal_length.species.png 
        :width: 700px
@@ -143,7 +143,7 @@ For example the following command produces an lmplot comparing ``sepal_length`` 
 
 .. code-block:: bash
 
-    hatch lmplot -x sepal_length -y petal_length --col species < iris.csv 
+    gurita lmplot -x sepal_length -y petal_length --col species < iris.csv 
 
 .. image:: ../images/lmplot.sepal_length.petal_length.species.facets.png 
        :width: 600px

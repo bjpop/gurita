@@ -10,7 +10,7 @@ If multiple Y values are provided for each X value then the plot will show an es
 
 .. code-block:: bash
 
-    hatch line <arguments>
+    gurita line <arguments>
 
 Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="line"`` option.
 
@@ -70,7 +70,7 @@ A line plot showing the relationship between ``timepoint`` on the X axis and ``s
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal < fmri.csv  
+    gurita line -x timepoint -y signal < fmri.csv  
 
 The output of the above command is written to ``line.timepoint.signal.png``.
 
@@ -92,7 +92,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch line -h
+    gurita line -h
 
 .. _line_column_selection:
 
@@ -121,7 +121,7 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal --hue event < fmri.csv
+    gurita line -x timepoint -y signal --hue event < fmri.csv
 
 .. image:: ../images/line.timepoint.signal.event.png 
        :width: 600px
@@ -140,7 +140,7 @@ In the following example the classes of ``event`` are displayed in the order ``c
 
 .. code-block:: bash
 
-        hatch line -x timepoint -y signal --hue event --hueorder cue stim < fmri.csv
+        gurita line -x timepoint -y signal --hue event --hueorder cue stim < fmri.csv
 
 .. image:: ../images/line.timepoint.signal.event.hue.png 
        :width: 600px
@@ -169,7 +169,7 @@ For example, the X axis can be plotted in log scale like so:
 
 .. code-block:: bash
 
-   hatch line -x timepoint -y signal --logx < fmri.csv
+   gurita line -x timepoint -y signal --logx < fmri.csv
 
 .. image:: ../images/line.timepoint.signal.logx.png
        :width: 600px
@@ -198,7 +198,7 @@ For example, you can display range-limited range for the ``timepoint`` column li
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal --xlim 5 15.5 < fmri.csv 
+    gurita line -x timepoint -y signal --xlim 5 15.5 < fmri.csv 
 
 .. image:: ../images/line.timepoint.signal.xlim.png 
        :width: 600px
@@ -228,7 +228,7 @@ The following command creates a faceted line plot where the ``event`` column is 
 
 .. code-block:: bash
 
-    hatch line -x timepoint -y signal --col event < fmri.csv 
+    gurita line -x timepoint -y signal --col event < fmri.csv 
 
 .. image:: ../images/line.timepoint.signal.event.facet.png 
        :width: 600px

@@ -15,7 +15,7 @@ Pair plots are based on Seaborn's `pairplot <https://seaborn.pydata.org/generate
 
 .. code-block:: text
 
-    hatch pair <arguments>
+    gurita pair <arguments>
 
 .. list-table::
    :widths: 25 20 10
@@ -53,7 +53,7 @@ This behaviour can be overridden with the ``-c, --columns`` :ref:`argument <pair
 
 .. code-block:: text 
 
-    hatch pair < iris.csv
+    gurita pair < iris.csv
 
 The output of the above command is written to ``pair.png``:
 
@@ -75,7 +75,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch pair -h
+    gurita pair -h
 
 .. _pair_columns:
 
@@ -95,7 +95,7 @@ a categorical column, and it would not be plotted by default.
 
 .. code-block:: text
 
-    hatch pair -c sepal_length petal_length species < iris.csv 
+    gurita pair -c sepal_length petal_length species < iris.csv 
 
 .. image:: ../images/pair.columns.png
        :width: 600px
@@ -110,7 +110,7 @@ by rotating the X axis tick labels by 90 degrees using ``--rxtl 90``:
 
 .. code-block:: text
 
-    hatch pair -c sepal_length petal_length species --rxtl 90 < iris.csv 
+    gurita pair -c sepal_length petal_length species --rxtl 90 < iris.csv 
 
 .. image:: ../images/pair.columns.rxtl.png
        :width: 600px
@@ -135,7 +135,7 @@ In the example below, no column names are specified, so only the numerical colum
 
 .. code-block:: text
 
-    hatch pair --hue species < iris.csv 
+    gurita pair --hue species < iris.csv 
 
 .. image:: ../images/pair.species.png 
        :width: 600px
@@ -159,7 +159,7 @@ of the plot are reflected mirror images. An alternative is to plot only the bott
 
 .. code-block:: text
 
-    hatch pair --corner < iris.csv
+    gurita pair --corner < iris.csv
 
 .. image:: ../images/pair.corner.png
        :width: 600px
@@ -190,7 +190,7 @@ The example below shows a pair plot using ``kde`` (kernel density estimate) as t
 
 .. code-block:: text
 
-    hatch pair --kind kde < iris.csv
+    gurita pair --kind kde < iris.csv
 
 .. image:: ../images/pair.kde.png
        :width: 600px
@@ -204,7 +204,7 @@ The example below shows a pair plot using ``hist`` (histogram) as the method of 
 
 .. code-block:: text
 
-    hatch pair --kind hist < iris.csv
+    gurita pair --kind hist < iris.csv
 
 .. image:: ../images/pair.hist.png
        :width: 600px
@@ -218,7 +218,7 @@ The example below shows a pair plot using ``reg`` (regression) as the method of 
 
 .. code-block:: text
 
-    hatch pair --kind reg < iris.csv
+    gurita pair --kind reg < iris.csv
 
 .. image:: ../images/pair.reg.png
        :width: 600px

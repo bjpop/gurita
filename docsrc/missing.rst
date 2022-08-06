@@ -3,9 +3,9 @@
 Missing values
 ==============
 
-Hatch supports data sets with missing values. 
+Gurita supports data sets with missing values. 
 
-Hatch uses `Pandas <https://pandas.pydata.org/>`_ to read, write and manipulate tabular data, and therefore inherits its behaviour for handling missing values from that library.
+Gurita uses `Pandas <https://pandas.pydata.org/>`_ to read, write and manipulate tabular data, and therefore inherits its behaviour for handling missing values from that library.
 
 The `working with missing data <https://pandas.pydata.org/docs/user_guide/missing_data.html>`_ page in the Pandas documentation contains useful background information on this topic.
 
@@ -53,21 +53,21 @@ For example, suppose you want to use the symbols ``-`` (a single dash), ``NA`` a
 
 .. code-block:: text 
 
-   cat example.csv | hatch in --navalues '-' '' 'NA'
+   cat example.csv | gurita in --navalues '-' '' 'NA'
 
 Note than when ``--navalues`` is used the default missing value symbols no longer apply, and only those symbols given as arguments to ``--navalues`` will be used to represent missing values.
 
 Missing values in output data
 -----------------------------
 
-When writing a data set as output, by default Hatch will use empty fields to indicate missing values. However, this can be overridden with the ``--na <str>`` argument, where ``<str>>`` will be used to indicate a missing value.
+When writing a data set as output, by default Gurita will use empty fields to indicate missing values. However, this can be overridden with the ``--na <str>`` argument, where ``<str>>`` will be used to indicate a missing value.
 
-For example, suppose that the previous small data set with missing values is stored in a file called ``missing.csv``. The following command will feed the contents of that file into the standard input of Hatch, which will then write the file back out to standard output with missing values indicated by 
+For example, suppose that the previous small data set with missing values is stored in a file called ``missing.csv``. The following command will feed the contents of that file into the standard input of Gurita, which will then write the file back out to standard output with missing values indicated by 
 underscores:
 
 .. code-block:: text 
 
-    cat missing.csv | hatch out --na '_'
+    cat missing.csv | gurita out --na '_'
 
 The resulting data will be represented like so:
 
@@ -89,28 +89,28 @@ Drop rows that contain at least one missing value:
 
 .. code-block:: text 
 
-    cat missing.csv | hatch dropna 
+    cat missing.csv | gurita dropna 
 
 Drop rows where *all* values are missing: 
 
 .. code-block:: text 
 
-    cat missing.csv | hatch dropna --how all
+    cat missing.csv | gurita dropna --how all
 
 Drop rows with missing values in columns ``sepal_width`` or ``species``:
 
 .. code-block:: text 
 
-    cat missing.csv | hatch dropna --columns sepal_width species 
+    cat missing.csv | gurita dropna --columns sepal_width species 
 
 Drop columns that contain at least one missing value:
 
 .. code-block:: text 
 
-    cat missing.csv | hatch dropna --axis columns 
+    cat missing.csv | gurita dropna --axis columns 
 
 Drop columns where *all* values are missing: 
 
 .. code-block:: text 
 
-    cat missing.csv | hatch dropna --axis columns --how all
+    cat missing.csv | gurita dropna --axis columns --how all

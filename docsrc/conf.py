@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'hatch'
+project = 'gurita'
 copyright = '2020, Bernie Pope'
 author = 'Bernie Pope'
 
@@ -53,5 +53,5 @@ html_show_copyright = False
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_css_files = ["css/custom.css"]
-html_logo = "_static/hatch_logo_small.png" 
-logo_only = True
+#html_logo = "_static/gurita_logo_small.png" 
+#logo_only = True

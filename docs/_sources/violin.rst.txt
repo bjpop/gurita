@@ -7,7 +7,7 @@ Violin plots show the distribution of values in a numerical column optionally gr
 
 .. code-block:: text
 
-    hatch violin <arguments>
+    gurita violin <arguments>
 
 Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="violin"`` option.
 
@@ -80,7 +80,7 @@ Violin plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 .. code-block:: text
 
-    hatch violin -y age < titanic.csv 
+    gurita violin -y age < titanic.csv 
 
 The output of the above command is written to ``violin.age.png``:
 
@@ -97,7 +97,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: text
 
-    hatch violin -y age -x class < titanic.csv 
+    gurita violin -y age -x class < titanic.csv 
 
 The output of the above command is written to ``violin.class.age.png``:
 
@@ -119,7 +119,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch violin -h
+    gurita violin -h
 
 .. _violin_column_selection:
 
@@ -154,7 +154,7 @@ where the boxes are plotted horizontally:
 
 .. code-block:: text
 
-    hatch violin -x age -y class --orient h < titanic.csv
+    gurita violin -x age -y class --orient h < titanic.csv
 
 .. image:: ../images/violin.age.class.png 
        :width: 600px
@@ -180,7 +180,7 @@ In the following example the violin columns of the ``class`` column are displaye
 
 .. code-block:: text
 
-    hatch violin -y age -x class --order First Second Third < titanic.csv
+    gurita violin -y age -x class --order First Second Third < titanic.csv
 
 .. image:: ../images/violin.class.age.order.png 
        :width: 600px
@@ -205,7 +205,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: text
 
-    hatch violin -y age -x class --hue sex < titanic.csv
+    gurita violin -y age -x class --hue sex < titanic.csv
 
 .. image:: ../images/violin.class.age.sex.png 
        :width: 600px
@@ -224,7 +224,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: text
 
-    hatch violin -y age -x class --hue sex --hueorder female male < titanic.csv
+    gurita violin -y age -x class --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/violin.class.age.sex.hueorder.png 
        :width: 600px
@@ -239,7 +239,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: text
 
-    hatch violin -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
+    gurita violin -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/violin.class.age.sex.order.hueorder.png 
        :width: 600px
@@ -268,7 +268,7 @@ For example, you can display a log scale violin plot for the ``age`` column grou
 
 .. code-block:: text
 
-    hatch violin -y age -x class --logy < titanic.csv 
+    gurita violin -y age -x class --logy < titanic.csv 
 
 .. _violin_range:
 
@@ -291,7 +291,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: text
 
-    hatch violin -y age -x class --ylim 10 30 < titanic.csv
+    gurita violin -y age -x class --ylim 10 30 < titanic.csv
 
 .. _violin_facets:
 
@@ -313,7 +313,7 @@ The following command creates a faceted violin plot where the ``sex`` column is 
 
 .. code-block:: bash
 
-    hatch violin -y age -x class --col sex < titanic.csv
+    gurita violin -y age -x class --col sex < titanic.csv
 
 .. image:: ../images/violin.class.age.sex.facet.png 
        :width: 600px

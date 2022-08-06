@@ -7,7 +7,7 @@ Boxen plots show the distribution of values in a numerical column optionally gro
 
 .. code-block:: bash
 
-    hatch boxen <arguments>
+    gurita boxen <arguments>
 
 Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="boxen"`` option.
 
@@ -80,7 +80,7 @@ Boxen plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 .. code-block:: bash
 
-    hatch boxen -y age < titanic.csv 
+    gurita boxen -y age < titanic.csv 
 
 The output of the above command is written to ``boxen.age.png``:
 
@@ -97,7 +97,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class < titanic.csv 
+    gurita boxen -y age -x class < titanic.csv 
 
 The output of the above command is written to ``boxen.class.age.png``:
 
@@ -119,7 +119,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch boxen -h
+    gurita boxen -h
 
 .. _boxen_column_selection:
 
@@ -154,7 +154,7 @@ where the boxes are plotted horizontally:
 
 .. code-block:: bash
 
-    hatch boxen -x age -y class --orient h < titanic.csv
+    gurita boxen -x age -y class --orient h < titanic.csv
 
 .. image:: ../images/boxen.age.class.png
        :width: 600px
@@ -180,7 +180,7 @@ In the following example the boxen columns of the ``class`` column are displayed
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --order First Second Third < titanic.csv
+    gurita boxen -y age -x class --order First Second Third < titanic.csv
 
 .. image:: ../images/boxen.age.class.order.png 
        :width: 600px
@@ -205,7 +205,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --hue sex < titanic.csv
+    gurita boxen -y age -x class --hue sex < titanic.csv
 
 .. image:: ../images/boxen.class.age.sex.png 
        :width: 600px
@@ -224,7 +224,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --hue sex --hueorder female male < titanic.csv
+    gurita boxen -y age -x class --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/boxen.age.class.sex.hueorder.png 
        :width: 600px
@@ -239,7 +239,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
+    gurita boxen -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/boxen.age.class.sex.order.hueorder.png 
        :width: 600px
@@ -268,7 +268,7 @@ For example, you can display a log scale boxen plot for the ``age`` column group
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --logy -- titanic.csv 
+    gurita boxen -y age -x class --logy -- titanic.csv 
 
 .. _boxen_range:
 
@@ -291,7 +291,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    hatch boxen -y age -x class --ylim 10 30 -- titanic.csv
+    gurita boxen -y age -x class --ylim 10 30 -- titanic.csv
 
 .. _boxen_facets:
 

@@ -7,7 +7,7 @@ Select and keep or drop specified columns from the data set.
 
 .. code-block:: bash
 
-    hatch cut <arguments>
+    gurita cut <arguments>
 
 .. list-table::
    :widths: 25 20 10
@@ -53,7 +53,7 @@ We can select and keep just the ``sepal_length`` and ``species`` columns and dis
 
 .. code-block:: text
 
-    hatch cut -c sepal_length species < example.csv
+    gurita cut -c sepal_length species < example.csv
 
 The output of the above command is shown below. Observe that only the two selected columns remain in the data set.
 
@@ -81,7 +81,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch cut -h
+    gurita cut -h
 
 .. _cut_columns:
 
@@ -107,7 +107,7 @@ For example, the command below drops the columns ``sepal_length`` and ``species`
 
 .. code-block:: text
 
-    hatch cut -c sepal_length species -i < example.csv
+    gurita cut -c sepal_length species -i < example.csv
 
 The output of the command is shown below. Note that the columns retained are the inverse of the ones from the simple example above. 
 

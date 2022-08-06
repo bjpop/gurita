@@ -7,7 +7,7 @@ Scatter plots show the relationship between two columns as a scatter of data poi
 
 .. code-block:: bash
 
-    hatch scatter <arguments>
+    gurita scatter <arguments>
 
 When one of the two columns being compared is a categorical value the scatter plot is similar to
 :doc:`strip plot <strip/>`.
@@ -90,7 +90,7 @@ Scatter plot of the ``tip`` numerical column compared to the ``total_bill`` nume
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip < tips.csv 
+    gurita scatter -x total_bill -y tip < tips.csv 
 
 The output of the above command is written to ``scatter.total_bill.tip.png``:
 
@@ -112,7 +112,7 @@ arguments:
 
 .. code-block:: bash
 
-    hatch scatter -h
+    gurita scatter -h
 
 .. _scatter_column_selection:
 
@@ -130,7 +130,7 @@ Scatter plots can also be used to compare a numerical column against a categoric
 
 .. code-block::
 
-    hatch scatter -x day -y tip < tips.csv
+    gurita scatter -x day -y tip < tips.csv
 
 .. image:: ../images/scatter.day.tip.png 
        :width: 600px
@@ -160,7 +160,7 @@ coloured by their corresponding categorical ``day`` value:
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --hue day < tips.csv 
+    gurita scatter -x total_bill -y tip --hue day < tips.csv 
 
 .. image:: ../images/scatter.total_bill.tip.day.png 
        :width: 700px
@@ -176,7 +176,7 @@ argument:
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --hue size < tips.csv 
+    gurita scatter -x total_bill -y tip --hue size < tips.csv 
 
 .. image:: ../images/scatter.total_bill.tip.size.png 
        :width: 700px
@@ -206,7 +206,7 @@ The ``--dotstyle`` argument lets you change the shape of dots based on a categor
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --hue day --dotstyle sex < tips.csv
+    gurita scatter -x total_bill -y tip --hue day --dotstyle sex < tips.csv
 
 .. image:: ../images/scatter.total_bill.tip.day.dotstyle.png 
        :width: 700px
@@ -238,7 +238,7 @@ plot is scaled according to the ``petal_length`` column.
 
 .. code-block:: bash
 
-    hatch scatter -x sepal_length -y sepal_width --dotsize petal_length < iris.csv  
+    gurita scatter -x sepal_length -y sepal_width --dotsize petal_length < iris.csv  
 
 .. image:: ../images/scatter.sepal_length.sepal_width.png 
        :width: 600px 
@@ -252,7 +252,7 @@ The range of dot sizes can be adjusted with ``--dotsizerange LOW HIGH``.
 
 .. code-block:: bash
 
-    hatch scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange 10 200 < iris.csv
+    gurita scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange 10 200 < iris.csv
 
 .. image:: ../images/scatter.sepal_length.sepal_width.sizerange.png 
        :width: 600px 
@@ -286,7 +286,7 @@ In the following example, the dot alpha is set to 1 (fully opaque), the border l
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black < tips.csv
+    gurita scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black < tips.csv
 
 .. image:: ../images/scatter.total_bill.tip.alpha.width.colour.png 
        :width: 600px
@@ -312,7 +312,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --logx < tips.csv 
+    gurita scatter -x total_bill -y tip --logx < tips.csv 
 
 .. image:: ../images/scatter.total_bill.tip.logx.png  
        :width: 600px
@@ -338,7 +338,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --xlim 20 40 < tips.csv 
+    gurita scatter -x total_bill -y tip --xlim 20 40 < tips.csv 
 
 .. image:: ../images/scatter.total_bill.tip.xlim.png 
        :width: 600px
@@ -368,7 +368,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
 .. code-block:: bash
 
-    hatch scatter -x total_bill -y tip --col smoker < tips.csv
+    gurita scatter -x total_bill -y tip --col smoker < tips.csv
 
 .. image:: ../images/scatter.total_bill.tip.smoker.png  
        :width: 600px

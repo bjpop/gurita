@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Writing output data &mdash; hatch  documentation</title>
+  <title>Writing output data &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -90,7 +89,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -110,21 +109,21 @@
              
   <section id="writing-output-data">
 <span id="output-files"></span><h1>Writing output data<a class="headerlink" href="#writing-output-data" title="Permalink to this headline"></a></h1>
-<p>Hatch can write data to a named output file or standard output (stdout).</p>
+<p>Gurita can write data to a named output file or standard output (stdout).</p>
 <section id="output-to-a-named-file">
 <h2>Output to a named file<a class="headerlink" href="#output-to-a-named-file" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command allows you to specify an output file by name:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + out newfile.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... + out newfile.csv
 </pre></div>
 </div>
-<p>As before, we use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that part of the example Hatch command is omitted for the sake of simplifying the discussion.</p>
+<p>As before, we use <code class="docutils literal notranslate"><span class="pre">...</span></code> to indicate that part of the example Gurita command is omitted for the sake of simplifying the discussion.</p>
 <p>You should imagine that <code class="docutils literal notranslate"><span class="pre">...</span></code> would be replaced by more text to complete the command.
 For example, the following command reads the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> from standard input and then saves the header row and first ten data rows to an output file called <code class="docutils literal notranslate"><span class="pre">newfile.csv</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out newfile.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita head 10 + out newfile.csv
 </pre></div>
 </div>
 <p>Again we see <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chaining</span></a> in action, where the first command <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">10</span></code> transforms the input data before it is passed along to the <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">newfile.csv</span></code> command.</p>
-<p>When writing output to a named file (and not to standard output) Hatch will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
+<p>When writing output to a named file (and not to standard output) Gurita will look at the file extension and assume CSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.csv</span></code> and TSV format if the extension is <code class="docutils literal notranslate"><span class="pre">.tsv</span></code>. This behaviour can be overridden with the
 <code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -132,58 +131,58 @@ For example, the following command reads the file <code class="docutils literal 
 </div>
 <section id="specifying-the-field-separator-explicitly">
 <h3>Specifying the field separator explicitly<a class="headerlink" href="#specifying-the-field-separator-explicitly" title="Permalink to this headline"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command lets you specify the field separator of the output file explicitly. This will override any default behaviour that Hatch would otherwise have when determining the output file type.
+<p>The <code class="docutils literal notranslate"><span class="pre">out</span></code> command lets you specify the field separator of the output file explicitly. This will override any default behaviour that Gurita would otherwise have when determining the output file type.
 This mimics the behaviour of the <code class="docutils literal notranslate"><span class="pre">in</span></code> command for reading input from files, as discussed previously.</p>
 <p>Request for CSV file format:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --sep &#39;,&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... out --sep &#39;,&#39; ...
 </pre></div>
 </div>
-<p>Note: comma is the default separator used by Hatch, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
+<p>Note: comma is the default separator used by Gurita, so you don’t need to specify it explicitly. Therefore the above example is redundant, and only shown for the sake of illustration.</p>
 <p>Request for TSV file format:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --sep &#39;\t&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... out --sep &#39;\t&#39; ...
 </pre></div>
 </div>
 <p>Be sure to enclose the <code class="docutils literal notranslate"><span class="pre">\t</span></code> in quote characters to ensure that it is treated as a single string.</p>
 <p>Elaborating the above example to a full command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out --sep &#39;\t&#39; example_filename
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita head 10 + out --sep &#39;\t&#39; example_filename
 </pre></div>
 </div>
 <p>Using a vertical bar character as the field separator:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out --sep &#39;|&#39; ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... out --sep &#39;|&#39; ...
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code>  forces Hatch to use the specified field separator regardless of the filename extension or contents of the file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code>  forces Gurita to use the specified field separator regardless of the filename extension or contents of the file.</p>
 </div>
 </section>
 </section>
 <section id="output-to-standard-output-stdout">
 <h2>Output to standard output (stdout)<a class="headerlink" href="#output-to-standard-output-stdout" title="Permalink to this headline"></a></h2>
-<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">out</span></code> command Hatch will assume that the output should be written to standard output (stdout):</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out
+<p>If you don’t specify a file name when using the <code class="docutils literal notranslate"><span class="pre">out</span></code> command Gurita will assume that the output should be written to standard output (stdout):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... out
 </pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita head 10 + out
 </pre></div>
 </div>
-<p>Writing to standard output is particularly useful when you want to use Hatch as part of a command pipeline:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... + out | example_command
+<p>Writing to standard output is particularly useful when you want to use Gurita as part of a command pipeline:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... + out | example_command
 </pre></div>
 </div>
-<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose input comes from the standard output of Hatch.</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">example_command</span></code> is supposed to represent an arbitrary command, possibly itself a series of commands piped together, whose input comes from the standard output of Gurita.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Standard output defaults to CSV format</strong></p>
-<p>When writing to standard output, unless otherwise specified, Hatch assumes that the file is in CSV format.</p>
+<p>When writing to standard output, unless otherwise specified, Gurita assumes that the file is in CSV format.</p>
 <p>This can be overridden by <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code></p>
-<p>As previously noted, when writing to a named file Hatch will try to use the file name extension to determine the file format, avoiding the need to specify <code class="docutils literal notranslate"><span class="pre">--sep</span></code>.</p>
+<p>As previously noted, when writing to a named file Gurita will try to use the file name extension to determine the file format, avoiding the need to specify <code class="docutils literal notranslate"><span class="pre">--sep</span></code>.</p>
 </div>
 </section>
 <section id="implicit-csv-output-to-standard-output-stdout">
 <h2>Implicit CSV output to standard output (stdout)<a class="headerlink" href="#implicit-csv-output-to-standard-output-stdout" title="Permalink to this headline"></a></h2>
-<p>In some circumstances, for convenience, Hatch will implicitly write the final state of the data to standard output. It chooses to do this in precisely two circumstances, when
+<p>In some circumstances, for convenience, Gurita will implicitly write the final state of the data to standard output. It chooses to do this in precisely two circumstances, when
 the last command in a chain is either:</p>
 <blockquote>
 <div><ul class="simple">
@@ -191,7 +190,7 @@ the last command in a chain is either:</p>
 <li><p>an input command (including implicitly reading from standard input)</p></li>
 </ul>
 </div></blockquote>
-<p>However, Hatch will <em>not</em> implicitly write the final state of the data to standard output when the last command in a chain is either:</p>
+<p>However, Gurita will <em>not</em> implicitly write the final state of the data to standard output when the last command in a chain is either:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>a plotting command</p></li>
@@ -200,38 +199,38 @@ the last command in a chain is either:</p>
 </ul>
 </div></blockquote>
 <p>The logic for this behaviour is as follows.</p>
-<p>If the last command in a chain is a transformation or just an input command, Hatch assumes that you must have read/transformed the data for a reason and you probably
-want to save/use the result. If a command chain does not explicitly end with an <code class="docutils literal notranslate"><span class="pre">out</span></code> command the final state of the data would be lost. So Hatch writes it to standard output in CSV format for you.</p>
-<p>If the last command in a chain is a plotting command, then Hatch assumes that your main purpose must have been to generate the plot, and therefore you are not interested in saving/using the final state of the data.
+<p>If the last command in a chain is a transformation or just an input command, Gurita assumes that you must have read/transformed the data for a reason and you probably
+want to save/use the result. If a command chain does not explicitly end with an <code class="docutils literal notranslate"><span class="pre">out</span></code> command the final state of the data would be lost. So Gurita writes it to standard output in CSV format for you.</p>
+<p>If the last command in a chain is a plotting command, then Gurita assumes that your main purpose must have been to generate the plot, and therefore you are not interested in saving/using the final state of the data.
 Similarly for situations when the last command shows summary information about the data, such as <code class="docutils literal notranslate"><span class="pre">pretty</span></code>.
 If you want to make a plot or see summary information <em>and</em> save the final state of the data you can always achieve this by ending a chain with an explicit <code class="docutils literal notranslate"><span class="pre">out</span></code> command.</p>
 <p>Therefore:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;transformation or input command&gt; + out
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;transformation or input command&gt; + out
 </pre></div>
 </div>
 <p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch &lt;transformation or input command&gt;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;transformation or input command&gt;
 </pre></div>
 </div>
 <p>As a concrete example, the following command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10 + out
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita head 10 + out
 </pre></div>
 </div>
 <p>can be simplified to:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | hatch head 10
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat titanic.csv | gurita head 10
 </pre></div>
 </div>
 <p>or, of course, you could achieve the same result with input redirection, again dropping the <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">out</span></code> from the original command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch head 10 &lt; titanic.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita head 10 &lt; titanic.csv
 </pre></div>
 </div>
-<p>Note carefully that when implicitly writing to standard output Hatch will always assume the output file should be written in CSV format. If you want to read a different format from standard input you must explicitly specify
+<p>Note carefully that when implicitly writing to standard output Gurita will always assume the output file should be written in CSV format. If you want to read a different format from standard input you must explicitly specify
 the type using: <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span> <span class="pre">...</span></code></p>
 <section id="writing-output-to-more-than-one-file-in-a-command-chain">
 <h3>Writing output to more than one file in a command chain<a class="headerlink" href="#writing-output-to-more-than-one-file-in-a-command-chain" title="Permalink to this headline"></a></h3>
 <p>You may write output to more than one file in a command chain, both to named files and standard output.</p>
 <p>For example you can do something like this:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch ... out newfile1.csv + ... + out newfile2.tsv + ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... out newfile1.csv + ... + out newfile2.tsv + ...
 </pre></div>
 </div>
 <p>In the above example, output is written to <code class="docutils literal notranslate"><span class="pre">newfile1.csv</span></code> in CSV format, then some unspecified commands are run, and later output is written to <code class="docutils literal notranslate"><span class="pre">newfile2.tsv</span></code> in TSV format, and some more unspecified commands are run.</p>
@@ -241,7 +240,7 @@ the data to be passed along from left to right in the chain with further process
 <p>Warning: if you have two separate <code class="docutils literal notranslate"><span class="pre">out</span></code> commands that write to the same named output file, the last occurrence will overwrite any earlier output that that file.</p>
 <p>However, if multiple different writes to standard output are used, they will form a single concatenated stream of data.</p>
 <p>The following command is a more concrete example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.csv + sample 0.6 + out samp.csv + cut -c sepal_length + out len.tsv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in iris.csv + sample 0.6 + out samp.csv + cut -c sepal_length + out len.tsv
 </pre></div>
 </div>
 <p>There are five parts to the above command chain:</p>
@@ -256,27 +255,27 @@ the data to be passed along from left to right in the chain with further process
 </section>
 <section id="converting-between-tsv-and-csv-formats">
 <h2>Converting between TSV and CSV formats<a class="headerlink" href="#converting-between-tsv-and-csv-formats" title="Permalink to this headline"></a></h2>
-<p>Hatch can read and write data in both CSV and TSV formats. Therefore, one simple but useful thing it can easily do is convert data files
+<p>Gurita can read and write data in both CSV and TSV formats. Therefore, one simple but useful thing it can easily do is convert data files
 between those formats. Notably, in such conversions it will handle corner cases correctly, such as proper quotation of data values, and
 appropriate formatting of missing (NA) values.</p>
 <p>For example, the following commands all convert the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file (in CSV format) into TSV format, and save the result in a file called <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.csv + out iris.tsv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in iris.csv + out iris.tsv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out iris.tsv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita out iris.tsv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | hatch out --sep &#39;\t&#39; &gt; iris.tsv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita out --sep &#39;\t&#39; &gt; iris.tsv
 </pre></div>
 </div>
 <p>Conversely, the following commands all convert the <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code> file (in TSV format) into CSV format, and save the result in a file called <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hatch in iris.tsv + out iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in iris.tsv + out iris.csv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | hatch in --sep &#39;\t&#39; + out iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | gurita in --sep &#39;\t&#39; + out iris.csv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | hatch in --sep &#39;\t&#39; + out &gt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.tsv | gurita in --sep &#39;\t&#39; + out &gt; iris.csv
 </pre></div>
 </div>
 <p>Note that in the above example there is no need to specify that the output file is in CSV format because that is the default behaviour of the <code class="docutils literal notranslate"><span class="pre">out</span></code> command.</p>

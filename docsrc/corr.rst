@@ -13,7 +13,7 @@ For visualisation the output of the ``corr`` command can be fed into the :doc:`h
 
 .. code-block:: bash
 
-    hatch corr <arguments>
+    gurita corr <arguments>
 
 .. list-table::
    :widths: 25 20 10
@@ -43,7 +43,7 @@ Compute the correlation between ``sepal_width`` and ``sepal_length`` from the ``
 
 .. code-block:: text
 
-    hatch corr -c sepal_length sepal_width < iris.csv 
+    gurita corr -c sepal_length sepal_width < iris.csv 
 
 The output of the above command is a table with three columns: ``col1``, ``col2`` and ``corr``, such that ``col1`` and ``col2`` show the names of the
 input columns being correlated, and ``corr`` shows their numerical correlation value.
@@ -68,7 +68,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch corr -h
+    gurita corr -h
 
 .. _corr_columns:
 
@@ -85,7 +85,7 @@ For example, the following command performs pairise correlation on all numerical
 
 .. code-block:: text
 
-   hatch corr < iris.csv
+   gurita corr < iris.csv
 
 There are four numerical columns in ``iris.csv``, so the output contains all 4x4 symmetric comparisons:
 
@@ -115,7 +115,7 @@ For example, we can compare ``sepal_length`` with ``petal_length`` and ``petal_w
 
 .. code-block:: text
 
-   hatch corr -c sepal_length petal_length petal_width < iris.csv
+   gurita corr -c sepal_length petal_length petal_width < iris.csv
 
 The output of the above command is shown below:
 
@@ -157,7 +157,7 @@ The example below computes the pairwise correlation between ``sepal_width`` and 
 
 .. code-block:: text
 
-    hatch corr --columns sepal_length sepal_width --method spearman < iris.csv
+    gurita corr --columns sepal_length sepal_width --method spearman < iris.csv
 
 The output of the above command is shown below. Note that the results are similar to, but slightly different from the outputs from the ``pearson`` method
 shown in the simple example above.
@@ -179,7 +179,7 @@ Conveniently, the output of the ``corr`` command can be easily plotted as a :ref
 
 .. code-block:: text
 
-    hatch corr + heatmap -x col1 -y col2 -v corr < iris.csv  
+    gurita corr + heatmap -x col1 -y col2 -v corr < iris.csv  
 
 In this example we compute the correlation of all four numerical columns in ``iris.csv`` and then feed the result of that command into the ``heatmap`` command
 using :ref:`command chaining <command_chain>`.

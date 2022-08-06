@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; hatch  documentation</title>
+  <title>Installation &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-directly-from-source-code">Installing directly from source code</a></li>
@@ -82,7 +81,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -102,46 +101,46 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
-<p>Hatch requires Python 3.6 or greater and relies heavily on the following libraries: <a class="reference external" href="https://numpy.org/">NumPy</a>, <a class="reference external" href="https://www.scipy.org/">SciPy</a>, <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a> (and hence <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>), <a class="reference external" href="https://scikit-learn.org/">Scikit-learn</a>.</p>
-<p>You can install hatch <a class="reference internal" href="#install-src"><span class="std std-ref">directly from source</span></a> code or build and <a class="reference internal" href="#build-docker"><span class="std std-ref">run it from within Docker container</span></a>.</p>
+<p>Gurita requires Python 3.6 or greater and relies heavily on the following libraries: <a class="reference external" href="https://numpy.org/">NumPy</a>, <a class="reference external" href="https://www.scipy.org/">SciPy</a>, <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a> (and hence <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>), <a class="reference external" href="https://scikit-learn.org/">Scikit-learn</a>.</p>
+<p>You can install gurita <a class="reference internal" href="#install-src"><span class="std std-ref">directly from source</span></a> code or build and <a class="reference internal" href="#build-docker"><span class="std std-ref">run it from within Docker container</span></a>.</p>
 <section id="installing-directly-from-source-code">
 <span id="install-src"></span><h2>Installing directly from source code<a class="headerlink" href="#installing-directly-from-source-code" title="Permalink to this headline"></a></h2>
 <p>Clone this repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/bjpop/hatch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/bjpop/gurita
 </pre></div>
 </div>
 <p>Move into the repository directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> hatch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> gurita
 </pre></div>
 </div>
 <p>Python 3 is required for this software.</p>
-<p>Hatch can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code> in a variety of ways:</p>
+<p>Gurita can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code> in a variety of ways:</p>
 <ol class="arabic simple">
 <li><p>Inside a virtual environment:</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv hatch_dev
-<span class="nb">source</span> hatch_dev/bin/activate
-pip install -U /path/to/hatch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 -m venv gurita_dev
+<span class="nb">source</span> gurita_dev/bin/activate
+pip install -U /path/to/gurita
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
 <li><p>Into the global package database for all users:</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U /path/to/hatch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U /path/to/gurita
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
 <li><p>Into the user package database (for the current user only):</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U --user /path/to/hatch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U --user /path/to/gurita
 </pre></div>
 </div>
 </section>
 <section id="building-the-docker-container">
 <span id="build-docker"></span><h2>Building the Docker container<a class="headerlink" href="#building-the-docker-container" title="Permalink to this headline"></a></h2>
-<p>The file <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> contains instructions for building a Docker container for hatch.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> contains instructions for building a Docker container for gurita.</p>
 <p>If you have Docker installed on your computer you can build the container like so:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build -t hatch .
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build -t gurita .
 </pre></div>
 </div>
 </section>

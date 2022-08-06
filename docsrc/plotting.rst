@@ -3,20 +3,20 @@
 Saving and viewing plots
 ************************
 
-Hatch provides several :ref:`plotting commands <plotting_command_list>` for visualising data as plots. 
+Gurita provides several :ref:`plotting commands <plotting_command_list>` for visualising data as plots. 
 
 Plots can be saved to files or viewed interactively.
 
 Plots are saved to a file by default
 ------------------------------------
 
-Hatch's default behaviour for plotting commands is to save the resulting image to a file in PNG format. 
+Gurita's default behaviour for plotting commands is to save the resulting image to a file in PNG format. 
 
 For example, the following command generates a count plot of the ``class`` column from the input file ``titanic.csv`` and saves the resulting plot to a file called ``count.class.png``:
 
 .. code-block:: text
 
-    hatch count -x class < titanic.csv
+    gurita count -x class < titanic.csv
 
 The image below shows the resulting plot:
 
@@ -39,21 +39,21 @@ As a slightly more complex example, consider the command below:
 
 .. code-block:: text
 
-   hatch scatter -x sepal_length -y petal_length --hue species < iris.csv
+   gurita scatter -x sepal_length -y petal_length --hue species < iris.csv
 
-Hatch will save the output plot in a file called ``scatter.sepal_length.petal_length.species.png``. 
+Gurita will save the output plot in a file called ``scatter.sepal_length.petal_length.species.png``. 
 
 .. note::
 
-   Hatch will avoid using the name of a file that already exists when choosing a default output file name for a plot.
+   Gurita will avoid using the name of a file that already exists when choosing a default output file name for a plot.
 
-   For example, if the file ``count.class.png`` already exists in the current directory Hatch will try to
+   For example, if the file ``count.class.png`` already exists in the current directory Gurita will try to
    find a new unique name by appending a number, e.g. ``count.class_1.png``. If that file name exists
    it will increment the number and try again, e.g. ``count.class_2.png``, and so on.
 
    This avoids overwriting an existing file by accident.
 
-   If you don't want this behaviour then you can specify a file name yourself and Hatch will write the
+   If you don't want this behaviour then you can specify a file name yourself and Gurita will write the
    plot to that file regardless of whether it already exists.
 
 Specifying an output file name explicitly
@@ -65,11 +65,11 @@ For example, the following command saves the output plot to a file called ``exam
 
 .. code-block:: text
 
-    hatch count -x class -o example.png < titanic.csv
+    gurita count -x class -o example.png < titanic.csv
 
 .. warning::
 
-   If tell Hatch to save a plot to a specific file name, and that file already exists, Hatch will overwrite the contents of the
+   If tell Gurita to save a plot to a specific file name, and that file already exists, Gurita will overwrite the contents of the
    file with the new plot. This will lose old contents of the file.
 
 .. _format:
@@ -77,14 +77,14 @@ For example, the following command saves the output plot to a file called ``exam
 Output plot graphics file format 
 --------------------------------
 
-By default Hatch will save output plots in the PNG file format. However, this can be overridden with the ``--format {png,jpg,pdf,svg}`` option.
+By default Gurita will save output plots in the PNG file format. However, this can be overridden with the ``--format {png,jpg,pdf,svg}`` option.
 
 Supported file formats:
 =======================
 
-Hatch supports the following file formats when saving plots to file:
+Gurita supports the following file formats when saving plots to file:
 
- * `PNG <https://en.wikipedia.org/wiki/Portable_Network_Graphics>`_: ``--format png`` (this is the default format used by Hatch)
+ * `PNG <https://en.wikipedia.org/wiki/Portable_Network_Graphics>`_: ``--format png`` (this is the default format used by Gurita)
  * `JPEG <https://en.wikipedia.org/wiki/JPEG>`_: ``--format jpg``
  * `PDF <https://en.wikipedia.org/wiki/PDF>`_: ``--format pdf``
  * `SVG <https://en.wikipedia.org/wiki/SVG>`_: ``--format svg``
@@ -93,28 +93,28 @@ For example, the following command saves the output plot in SVG format, to a fil
 
 .. code-block:: text
 
-    hatch count -x class --format svg titanic.csv
+    gurita count -x class --format svg titanic.csv
 
 .. note::
 
-    If you use ``-o`` (or ``--out``) to specify an output file name, Hatch will use that name verbatim and will not append a suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
+    If you use ``-o`` (or ``--out``) to specify an output file name, Gurita will use that name verbatim and will not append a suffix to the file name indicating the file type. Of course you may include a suffix in your own chosen name, however, this suffix does not influence the type of graphics format used. The only way to change the output graphics file format is with the ``--format`` option (otherwise the default ``png`` type is used).
 
 .. _show:
 
 Interactive plots
 -----------------
 
-The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Hatch in an environment with a graphics display.
+The ``--show`` option overrides the default behaviour and causes the plot to be displayed in an interactive window (and not saved to a file). This assumes you are using Gurita in an environment with a graphics display.
 
 This is illustrated below:
 
 .. code-block:: text
 
-    hatch count -x class --show titanic.csv
+    gurita count -x class --show titanic.csv
 
 The plot will appear in an interactive window like so: 
 
-.. image:: ../images/hatch_interactive_plot.png
+.. image:: ../images/gurita_interactive_plot.png
        :width: 600px
        :height: 600px
        :align: center
@@ -126,7 +126,7 @@ Note that interactive plot commands pause the computation in a command chain. Th
 
 .. code-block:: text
 
-    hatch ... + count -x class --show + ... <rest of the command chain>
+    gurita ... + count -x class --show + ... <rest of the command chain>
 
 In this circumstance the command chain will pause while the interactive ``count`` plot is 
 open. The rest of the command chain will resume when the plot is closed. 

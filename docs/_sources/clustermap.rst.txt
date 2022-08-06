@@ -7,5 +7,5 @@ Clustermap showing the relationship between two categorical columns and a numeri
 
 .. code-block:: bash
 
-    hatch clustermap <arguments>
+    gurita clustermap <arguments>
 

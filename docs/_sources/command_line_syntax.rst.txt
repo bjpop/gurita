@@ -1,7 +1,7 @@
 Command line syntax
 *******************
 
-Hatch provides a suite of commands, each carrying out a specific task. 
+Gurita provides a suite of commands, each carrying out a specific task. 
 
 Commands can be :ref:`chained together <command_chain>` in a modular fashion for more complex analysis pipelines.
 
@@ -10,23 +10,23 @@ Commands can be :ref:`chained together <command_chain>` in a modular fashion for
 Commands
 ========
 
-Hatch commands have the following structure:
+Gurita commands have the following structure:
 
 .. code-block:: text
 
-    hatch <command> [arguments]
+    gurita <command> [arguments]
 
 where ``<command>`` is the command name (e.g. ``hist`` or ``pca``), and ``arguments`` is a list of options that control the behaviour of the command. In some cases the ``arguments`` can be empty.
 
 See the :ref:`list of commands <list_of_commands>` for a summary of all the available commands.
 
-For instance, the following invocation of Hatch will plot a histogram of the ``passengers`` column from the file ``flights.csv`` read from standard input:
+For instance, the following invocation of Gurita will plot a histogram of the ``passengers`` column from the file ``flights.csv`` read from standard input:
 
 .. code-block:: text
 
-    hatch hist -x passengers < flights.csv
+    gurita hist -x passengers < flights.csv
 
-In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Hatch.  See the section on :ref:`input and output <input_output>` for more information about input and output files.
+In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Gurita.  See the section on :ref:`input and output <input_output>` for more information about input and output files.
 
 Types of commands
 -----------------
@@ -43,25 +43,25 @@ Commands fall into four types:
 Command chaining
 ================
 
-In more complex cases mulitple commands can be chained together into a pipeline. Hatch uses the plus sign ``+`` to separate each command in the chain: 
+In more complex cases mulitple commands can be chained together into a pipeline. Gurita uses the plus sign ``+`` to separate each command in the chain: 
 
 .. code-block:: text 
 
-    hatch <command_1> + <command_2> + ... + <command_n>
+    gurita <command_1> + <command_2> + ... + <command_n>
 
 Each command has its own optional arguments, so the chaining syntax is more completely characterised as follows:
 
 .. code-block:: text 
 
-    hatch <command_1> [arguments_1] + <command_2> [arguments_2] + ... + <command_n> [arguments_n]
+    gurita <command_1> [arguments_1] + <command_2> [arguments_2] + ... + <command_n> [arguments_n]
 
 The idea with command chaining is to build a *pipeline* of data transformation and/or plotting. This allows you to build complex analytics processes by joining commands together in sequence. 
 
 The most important detail about command chaining is that data flows from left to right in the chain, as illustrated in the following diagram:
 
-.. image:: ../images/hatch_command_chain_data_flow.png
+.. image:: ../images/gurita_command_chain_data_flow.png
        :align: center
-       :alt: Illustration of data flow direction in Hatch command chain 
+       :alt: Illustration of data flow direction in Gurita command chain 
 
 |
 
@@ -71,20 +71,20 @@ Each command in the chain *may* transform the data before passing it along to th
 
    **Motivation for command chaining using +**
 
-   The ``+`` operator in Hatch acts like the pipe operator ``|`` in the Unix shell. The main advantage of the ``+`` operator compared to ``|`` is that data is transferred between consecutive commands efficiently.
+   The ``+`` operator in Gurita acts like the pipe operator ``|`` in the Unix shell. The main advantage of the ``+`` operator compared to ``|`` is that data is transferred between consecutive commands efficiently.
 
-   It is *possible* to join Hatch commands into a pipeline using the ``|`` shell operator, like so:
+   It is *possible* to join Gurita commands into a pipeline using the ``|`` shell operator, like so:
   
     .. code-block:: text
 
-        hatch <command_1> [arguments_1] | hatch <command_2> [arguments_2] 
+        gurita <command_1> [arguments_1] | gurita <command_2> [arguments_2] 
 
-   Note that this requires the Hatch program to be invoked multiple times in the same pipeline.
+   Note that this requires the Gurita program to be invoked multiple times in the same pipeline.
 
    The main downside of using ``|`` pipelines is that it requires the entire dataset to be serialised into a text stream between each
    command. This is redundant, inefficient, and therefore slow, particularly for large datasets. 
 
-   The ``+`` operator lets you compose a pipeline using a single invocation of Hatch and *most importantly* data is passed between
+   The ``+`` operator lets you compose a pipeline using a single invocation of Gurita and *most importantly* data is passed between
    successive commands in the chain efficiently. There is no serialisation to a text stream in between commands. Therefore using ``+`` will
    be much faster than ``|``, especially for complex pipelines and large datasets.
 
@@ -92,11 +92,11 @@ Each command in the chain *may* transform the data before passing it along to th
 Command chaining example
 ------------------------
 
-The following is a more advanced example of command chaining in Hatch, consisting of four commands:
+The following is a more advanced example of command chaining in Gurita, consisting of four commands:
 
 .. code-block:: text 
 
-    cat iris.csv | hatch filter 'species != "virginica"' + \
+    cat iris.csv | gurita filter 'species != "virginica"' + \
                          sample 0.9 + \
                          pca + \
                          scatter -x pc1 -y pc2 --hue species
@@ -107,21 +107,21 @@ Equivalently, the same command can be written in a single line, like so (where b
 
 .. code-block:: text
 
-    cat iris.csv | hatch filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
+    cat iris.csv | gurita filter 'species != "virginica"' + sample 0.9 + pca + scatter -x pc1 -y pc2 --hue species
 
 To understand how it works it is useful to break it down into parts.
 
-To begin with, the contents of the file ``iris.csv`` is piped into the standard input of Hatch:
+To begin with, the contents of the file ``iris.csv`` is piped into the standard input of Gurita:
 
 .. code-block:: text
 
-   cat iris.csv | hatch ... 
+   cat iris.csv | gurita ... 
 
 Note that input redirection would also achieve the same behaviour:
 
 .. code-block:: text
 
-   hatch ... < iris.csv
+   gurita ... < iris.csv
 
 This data is then passed through the chain of commands from left to right. Along the way the data may be transformed, displayed or plotted.
 
@@ -174,15 +174,15 @@ The fourth (and last) command in the chain creates a scatter plot:
 The X and Y axes of the scatter plot are defined by the options ``-x pc1 -y pc2``. Here you can see that the axes are defined to correspond to columns in the data. In this
 case they are ``pc1`` and ``pc2`` respectively, which are new columns that were added to the data by the previous ``pca`` command. The option ``--hue species`` assigns colours
 to points in the scatter plot based on the ``species`` categorical column. In this example 
-Hatch defaults to saving the plot in a file called ``scatter.pc1.pc2.species.png``, however, as with all defaults, this can be overridden.
+Gurita defaults to saving the plot in a file called ``scatter.pc1.pc2.species.png``, however, as with all defaults, this can be overridden.
 
 .. note::
 
    There are a number of things to note about command chains:
 
    * Plotting and summary information commands do not modify the data. They simply perform their respective task on the current data set (such as making a plot) and then pass the same data along unchanged to the next command in the chain.
-   * If the last command in a chain is a transformation Hatch will assume that you want the transformed data to be sent to the standard output, so it will do this automatically for you.
-   * If the last command in a chain is a plotting command, then Hatch will assume that your primary goal was to generate the plot, and therefore it will not automatically send the data to the standard output at the end. You can override
+   * If the last command in a chain is a transformation Gurita will assume that you want the transformed data to be sent to the standard output, so it will do this automatically for you.
+   * If the last command in a chain is a plotting command, then Gurita will assume that your primary goal was to generate the plot, and therefore it will not automatically send the data to the standard output at the end. You can override
      this behaviour by adding an explicit ``out`` command at the end of the chain.
    * You may have more than one plotting command in a chain.
 
@@ -191,24 +191,24 @@ Hatch defaults to saving the plot in a file called ``scatter.pc1.pc2.species.png
 Getting help
 ============
 
-The ``-h`` or ``--help`` command line arguments give an overview of Hatch's command line syntax:
+The ``-h`` or ``--help`` command line arguments give an overview of Gurita's command line syntax:
 
 .. code-block:: text
 
-    hatch -h
+    gurita -h
 
 Help information for each command can be requested with ``-h`` or ``--help``
 after the command name: 
 
 .. code-block:: text 
 
-    hatch <command> -h
+    gurita <command> -h
 
 For example, to get specific help about histograms, use:
 
 .. code-block:: text
 
-    hatch hist -h
+    gurita hist -h
 
 This will display a detailed help message for the ``hist`` command, likewise for all other commands.
 
@@ -217,7 +217,7 @@ This will display a detailed help message for the ``hist`` command, likewise for
 Version number
 ==============
 
-Hatch uses `semantic versioning <https://semver.org/>`_, such that its version number has three parts:
+Gurita uses `semantic versioning <https://semver.org/>`_, such that its version number has three parts:
 
 .. code-block:: text
 
@@ -229,13 +229,13 @@ The minor version number indicates a change in functionality that is backwards c
 
 The patch version number indicates a backwards compatible change that does not change functionality in a significant way. This is usually used for bug fixes.
 
-The ``--version`` (``-v``) command line argument causes Hatch to print its version number.
+The ``--version`` (``-v``) command line argument causes Gurita to print its version number.
 
 .. code-block:: text
 
-    hatch --version 
+    gurita --version 
 
 .. code-block:: text
 
-    hatch -v
+    gurita -v
 

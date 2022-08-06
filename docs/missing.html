@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Missing values &mdash; hatch  documentation</title>
+  <title>Missing values &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -28,8 +28,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> hatch
-            <img src="_static/hatch_logo_small.png" class="logo" alt="Logo"/>
+            <a href="index.html" class="icon icon-home"> gurita
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,7 +40,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Hatch: a command line data analytics and plotting tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Gurita: a command line data analytics and plotting tool</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -87,7 +86,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">hatch</a>
+          <a href="index.html">gurita</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -107,8 +106,8 @@
              
   <section id="missing-values">
 <span id="id1"></span><h1>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline"></a></h1>
-<p>Hatch supports data sets with missing values.</p>
-<p>Hatch uses <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> to read, write and manipulate tabular data, and therefore inherits its behaviour for handling missing values from that library.</p>
+<p>Gurita supports data sets with missing values.</p>
+<p>Gurita uses <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> to read, write and manipulate tabular data, and therefore inherits its behaviour for handling missing values from that library.</p>
 <p>The <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/missing_data.html">working with missing data</a> page in the Pandas documentation contains useful background information on this topic.</p>
 <p>One of the most important consequences is that missing values are stored internally as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
 (standing for <a class="reference external" href="https://en.wikipedia.org/wiki/NaN">not a number</a>, it is a special code that is used to encode undefined or unrepresentable values).</p>
@@ -139,7 +138,7 @@
 <h3>Specifying symbols to use for missing data in input files<a class="headerlink" href="#specifying-symbols-to-use-for-missing-data-in-input-files" title="Permalink to this headline"></a></h3>
 <p>You can override the default symbols used for representing missing data in input files using the <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">in</span></code> command.</p>
 <p>For example, suppose you want to use the symbols <code class="docutils literal notranslate"><span class="pre">-</span></code> (a single dash), <code class="docutils literal notranslate"><span class="pre">NA</span></code> and the empty string as symbols for missing values, then you can specify this as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat example.csv | hatch in --navalues &#39;-&#39; &#39;&#39; &#39;NA&#39;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat example.csv | gurita in --navalues &#39;-&#39; &#39;&#39; &#39;NA&#39;
 </pre></div>
 </div>
 <p>Note than when <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> is used the default missing value symbols no longer apply, and only those symbols given as arguments to <code class="docutils literal notranslate"><span class="pre">--navalues</span></code> will be used to represent missing values.</p>
@@ -147,10 +146,10 @@
 </section>
 <section id="missing-values-in-output-data">
 <h2>Missing values in output data<a class="headerlink" href="#missing-values-in-output-data" title="Permalink to this headline"></a></h2>
-<p>When writing a data set as output, by default Hatch will use empty fields to indicate missing values. However, this can be overridden with the <code class="docutils literal notranslate"><span class="pre">--na</span> <span class="pre">&lt;str&gt;</span></code> argument, where <code class="docutils literal notranslate"><span class="pre">&lt;str&gt;&gt;</span></code> will be used to indicate a missing value.</p>
-<p>For example, suppose that the previous small data set with missing values is stored in a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code>. The following command will feed the contents of that file into the standard input of Hatch, which will then write the file back out to standard output with missing values indicated by
+<p>When writing a data set as output, by default Gurita will use empty fields to indicate missing values. However, this can be overridden with the <code class="docutils literal notranslate"><span class="pre">--na</span> <span class="pre">&lt;str&gt;</span></code> argument, where <code class="docutils literal notranslate"><span class="pre">&lt;str&gt;&gt;</span></code> will be used to indicate a missing value.</p>
+<p>For example, suppose that the previous small data set with missing values is stored in a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code>. The following command will feed the contents of that file into the standard input of Gurita, which will then write the file back out to standard output with missing values indicated by
 underscores:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch out --na &#39;_&#39;
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita out --na &#39;_&#39;
 </pre></div>
 </div>
 <p>The resulting data will be represented like so:</p>
@@ -166,23 +165,23 @@ underscores:</p>
 <p>The <a class="reference internal" href="dropna.html"><span class="doc">dropna</span></a> command allows you to remove rows or columns that contain missing values based on certain criteria.</p>
 <p>Following from previous examples we assume the existence of a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code> that contains some missing values.</p>
 <p>Drop rows that contain at least one missing value:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna
 </pre></div>
 </div>
 <p>Drop rows where <em>all</em> values are missing:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --how all
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --how all
 </pre></div>
 </div>
 <p>Drop rows with missing values in columns <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> or <code class="docutils literal notranslate"><span class="pre">species</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --columns sepal_width species
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --columns sepal_width species
 </pre></div>
 </div>
 <p>Drop columns that contain at least one missing value:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --axis columns
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --axis columns
 </pre></div>
 </div>
 <p>Drop columns where <em>all</em> values are missing:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | hatch dropna --axis columns --how all
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --axis columns --how all
 </pre></div>
 </div>
 </section>

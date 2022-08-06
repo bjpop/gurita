@@ -9,7 +9,7 @@ By default the numerical column is summarised by its mean, but other summary fun
 
 .. code-block:: text
 
-    hatch bar <arguments>
+    gurita bar <arguments>
 
 Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="bar"`` option.
 
@@ -91,7 +91,7 @@ Bar plot the mean ``age`` of passengers for each value of ``class`` in the ``tit
 
 .. code-block:: text
 
-    hatch bar -y age -x class < titanic.csv 
+    gurita bar -y age -x class < titanic.csv 
 
 The output of the above command is written to ``bar.class.age.png``:
 
@@ -113,7 +113,7 @@ arguments:
 
 .. code-block:: text
 
-    hatch bar -h
+    gurita bar -h
 
 .. _bar_column_selection:
 
@@ -148,7 +148,7 @@ where the boxes are plotted horizontally:
 
 .. code-block:: text
 
-    hatch bar -x age -y class --orient h < titanic.csv
+    gurita bar -x age -y class --orient h < titanic.csv
 
 .. image:: ../images/bar.age.class.png
        :width: 600px
@@ -172,7 +172,7 @@ For example, the maximum ``age`` is shown for each value of ``class``:
 
 .. code-block:: text
 
-    hatch bar -y age -x class --estimator max < titanic.csv 
+    gurita bar -y age -x class --estimator max < titanic.csv 
 
 .. image:: ../images/bar.class.age.max.png
        :width: 600px
@@ -193,7 +193,7 @@ For example the mean and standard deviation of ``age`` is shown for each value i
 
 .. code-block:: text
 
-    hatch bar -y age -x class --std < titanic.csv 
+    gurita bar -y age -x class --std < titanic.csv 
 
 .. image:: ../images/bar.class.age.std.png
        :width: 600px
@@ -216,7 +216,7 @@ For example the mean of age and its 98% confidence interval is shown for each va
 
 .. code-block:: text
 
-    hatch bar -y age -x class --ci 98 < titanic.csv 
+    gurita bar -y age -x class --ci 98 < titanic.csv 
 
 .. image:: ../images/bar.class.age.ci.png
        :width: 600px
@@ -242,7 +242,7 @@ In the following example the bar columns of the ``class`` column are displayed i
 
 .. code-block:: text
 
-    hatch bar -y age -x class --order First Second Third < titanic.csv
+    gurita bar -y age -x class --order First Second Third < titanic.csv
 
 .. image:: ../images/bar.class.age.order.png 
        :width: 600px
@@ -267,7 +267,7 @@ In the following example the mean and error of ``age`` is shown for each value i
 
 .. code-block:: text
 
-    hatch bar -y age -x class --hue sex < titanic.csv
+    gurita bar -y age -x class --hue sex < titanic.csv
 
 .. image:: ../images/bar.class.age.sex.png 
        :width: 600px
@@ -286,7 +286,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
 .. code-block:: text
 
-    hatch bar -y age -x class --hue sex --hueorder female male < titanic.csv
+    gurita bar -y age -x class --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/bar.class.age.sex.hueorder.png 
        :width: 600px
@@ -301,7 +301,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
 .. code-block:: text
 
-    hatch bar -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
+    gurita bar -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
 .. image:: ../images/bar.class.age.sex.order.hueorder.png 
        :width: 600px
@@ -330,7 +330,7 @@ For example, you can display a log scale bar plot for the ``age`` column grouped
 
 .. code-block:: text
 
-    hatch bar -y age -x class --logy < titanic.csv 
+    gurita bar -y age -x class --logy < titanic.csv 
 
 .. image:: ../images/bar.class.age.logy.png 
        :width: 600px
@@ -361,7 +361,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: text
 
-    hatch bar -y age -x class --ylim 10 30 < titanic.csv
+    gurita bar -y age -x class --ylim 10 30 < titanic.csv
 
 .. _bar_facets:
 
@@ -383,7 +383,7 @@ The follow command creates a faceted bar plot where the ``sex`` column is used t
 
 .. code-block:: text
 
-    hatch bar -y age -x class --col sex < titanic.csv
+    gurita bar -y age -x class --col sex < titanic.csv
 
 .. image:: ../images/bar.class.age.sex.facet.png 
        :width: 600px
