@@ -1,20 +1,20 @@
-Hatch is a data analytics and plotting program.
+Gurita is a data analytics and plotting program.
 
 Display a help message or the version number and exit:
 
-    hatch [-h|--help] [-v|--version]
+    gurita [-h|--help] [-v|--version]
 
 Display the help message for a command and exit:
 
-    hatch command -h
+    gurita command -h
 
 Run a single command with optional arguments:
 
-    hatch command <args>
+    gurita command <args>
 
 Run a chain of commands from left to right, each separated by '+' character:
 
-    hatch command_1 <args> + ... + command_n <args>
+    gurita command_1 <args> + ... + command_n <args>
 
 Available commands:
 

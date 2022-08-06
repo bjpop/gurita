@@ -3,12 +3,12 @@ from filecmp import cmp
 
 import matplotlib as mpl
 # Use a constant string instead of a UUID in SVG node IDs
-mpl.rcParams['svg.hashsalt'] = "hatch_test"
+mpl.rcParams['svg.hashsalt'] = "gurita_test"
 # Fix the numpy random seed to avoid non-determinism in tests
 import numpy as np
 np.random.seed(19680801)
 
-from hatch.hatch import main_args
+from gurita.gurita import main_args
 
 
 # Test a command and optionally compare its output file, stdout, stderr and exit status to expected values

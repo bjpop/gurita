@@ -1,5 +1,5 @@
 import test.utils
-from hatch.utils import cm_to_inches
+from gurita.utils import cm_to_inches
 import pytest
 
 def test_cm_to_inches_zero():
