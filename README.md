@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/gurita_using_computer.png" width="300" alt="fun image of octopus using a computer">
+  <img src="images/gurita_using_computer.png" width="250" alt="fun image of octopus using a computer">
 </p>
 
 # Gurita: a command line data analytics and plotting tool 
