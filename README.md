@@ -1,8 +1,9 @@
+<p align="center">
+  <img src="images/gurita_using_computer.png" width="300" alt="fun image of octopus using a computer">
+</p>
+
 # Gurita: a command line data analytics and plotting tool 
 
-<p align="center">
-  <img src="images/gurita_using_computer.png" width="200" alt="fun image of octopus using a computer">
-</p>
 
 Gurita is a command line tool for analysing and visualising tabular data in CSV or TSV format.
 
