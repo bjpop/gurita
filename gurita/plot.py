@@ -131,7 +131,7 @@ class BoxPlot(CommandBase, name="box"):
                 showfliers=not(options.nooutliers),
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         if options.strip:
-            graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black")
+            graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black", order=options.order)
         render_plot.render_plot(options, graph, self.name)
         return df
 
