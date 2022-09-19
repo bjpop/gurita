@@ -15,23 +15,21 @@ from gurita.command_base import CommandBase
 import gurita.utils as utils
 from gurita.constants import PROGRAM_NAME
 import gurita.constants as const
+import gurita.args
 
 class Cut(CommandBase, name="cut"):
     description = "Select a subset of columns by name." 
     category = "transformation"
-    
-    def __init__(self):
-        self.options = None
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=True,
+    def __init__(self):
+        super().__init__()
+        self.required.add_argument(
+            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=True,
             help=f'Select only these named columns')
-        parser.add_argument(
+        self.optional.add_argument(
             '-i', '--invert', required=False, action='store_true', default=False,
             help=f'Invert the selection of columns, speified columns are dropped instead of kept')
-        self.options = parser.parse_args(args)
+    
 
     def run(self, df):
         options = self.options
@@ -58,21 +56,18 @@ class Eval(CommandBase, name="eval"):
     category = "transformation" 
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument('expr', metavar='EXPR', type=str, nargs="+",
+        super().__init__()
+        self.parser.add_argument('expr', metavar='EXPR', type=str, nargs="+",
             help='Construct new data columns based on an expression')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
+        eval_str = '\n'.join(options.expr)
         try:
-            eval_str = '\n'.join(options.expr)
             df = df.eval(eval_str)
         except:
-            utils.exit_with_error(f"Bad eval expression: {options.expr}", const.EXIT_COMMAND_LINE_ERROR)
+            utils.exit_with_error(f"Bad eval expression: {eval_str}", const.EXIT_COMMAND_LINE_ERROR)
         return df
 
 
@@ -81,13 +76,10 @@ class FilterRows(CommandBase, name="filter"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument('expr', metavar='EXPR', type=str,
+        super().__init__()
+        self.parser.add_argument('expr', metavar='EXPR', type=str,
             help='Filter rows: only retain rows that make this expression True')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         try:
@@ -102,23 +94,21 @@ class Melt(CommandBase, name="melt"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-i', '--ids', metavar='NAME', nargs="*", type=str, required=False,
+        super().__init__()
+        # XXX surely at least one of the arguments must be required
+        self.optional.add_argument(
+            '-i', '--ids', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select these "identifier" columns to remain unmelted')
-        parser.add_argument(
-            '-v', '--vals', metavar='NAME', nargs="*", type=str, required=False,
+        self.optional.add_argument(
+            '-v', '--vals', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select these "variable" columns to be melted')
-        parser.add_argument(
-            '--varname', metavar='NAME', type=str, required=False, default=const.DEFAULT_MELT_VARNAME,
+        self.optional.add_argument(
+            '--varname', metavar='COLUMN', type=str, required=False, default=const.DEFAULT_MELT_VARNAME,
             help=f'Use this name for the new "variable" column. Default: "%(default)s."')
-        parser.add_argument(
-            '--valname', metavar='NAME', type=str, required=False, default=const.DEFAULT_MELT_VALNAME,
+        self.optional.add_argument(
+            '--valname', metavar='COLUMN', type=str, required=False, default=const.DEFAULT_MELT_VALNAME,
             help=f'Use this name for the new "value" column. Default: "%(default)s."')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -135,20 +125,17 @@ class Pivot(CommandBase, name="pivot"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-i', '--index', metavar='NAME', nargs='+', type=str, required=False,
+        super().__init__()
+        self.optional.add_argument(
+            '-i', '--index', metavar='COLUMN', nargs='+', type=str, required=False,
             help=f'Select these columns as the index')
-        parser.add_argument(
-            '-v', '--vals', metavar='NAME', nargs='+', type=str, required=False,
+        self.optional.add_argument(
+            '-v', '--vals', metavar='COLUMN', nargs='+', type=str, required=False,
             help=f'Column(s) to be used to populate the values in the result')
-        parser.add_argument(
-            '-c', '--cols', metavar='NAME', nargs='+', type=str, required=True,
+        self.required.add_argument(
+            '-c', '--cols', metavar='COLUMN', nargs='+', type=str, required=True,
             help=f'Column(s) to be used to make new columns in the result')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -179,14 +166,11 @@ class SampleRows(CommandBase, name="sample"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.parser.add_argument(
             'num', metavar='NUM', type=float,
             help='Sample rows from the input data, if NUM >= 1 then sample NUM rows, if 0 <= NUM < 1, then sample NUM fraction of rows')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         num = self.options.num
@@ -205,24 +189,21 @@ class SampleRows(CommandBase, name="sample"):
 class Sort(CommandBase, name="sort"):
     description = "Sort based on columns in precedence from left to right." 
     category = "transformation"
-    
-    def __init__(self):
-        self.options = None
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=True,
+    def __init__(self):
+        super().__init__()
+        self.required.add_argument(
+            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=True,
             help=f'Sort the data by these columns in precedence from left to right')
-        parser.add_argument(
+        self.optional.add_argument(
             '--napos', metavar='POS', type=str, required=False, choices=const.ALLOWED_SORT_NAPOS,
             default=const.DEFAULT_SORT_NAPOS,
             help=f'Ordering for missing (NA) values. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--order', metavar='ORDER', type=str, nargs='+', required=False,
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
             help=f'Ordering to use for sort. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. The choices match with the specified columns to use for sorting (-c|--columns). If len(--order) < len(-c|--columns) the remaining columns will default to ascending order.')
-        self.options = parser.parse_args(args)
+    
 
     def run(self, df):
         options = self.options
@@ -243,15 +224,12 @@ class Tail(CommandBase, name="tail"):
     category = "transformation"
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.parser.add_argument(
             'num', metavar='NUM', type=int, nargs='?', 
             default=const.DEFAULT_TAIL_NUM,
             help=f'Number of trailing rows to select. If NUM is negative then select all rows except the first NUM rows. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         return df.tail(self.options.num)
@@ -261,15 +239,12 @@ class Head(CommandBase, name="head"):
     category = "transformation"
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.parser.add_argument(
             'num', metavar='NUM', type=int, nargs='?',
             default=const.DEFAULT_TAIL_NUM,
             help=f'Number of leading rows to select. If NUM is negative then select all rows except the last NUM rows. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         return df.head(self.options.num)
@@ -278,27 +253,24 @@ class Head(CommandBase, name="head"):
 class DropNa(CommandBase, name="dropna"):
     description = "Drop rows or columns containing missing values (NA)" 
     category = "transformation"
-    
-    def __init__(self):
-        self.options = None
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+    def __init__(self):
+        super().__init__()
+        self.optional.add_argument(
             '--axis', metavar='AXIS', type=str, choices=const.ALLOWED_DROPNA_AXIS, required=False,
             default=const.DEFAULT_DROPNA_AXIS,
             help=f'Choose to drop either rows or columns. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--how', metavar='METHOD', type=str, choices=const.ALLOWED_DROPNA_HOW, required=False,
             default=const.DEFAULT_DROPNA_HOW,
             help=f'Require at least one NA or all NA in rows/columns to be dropped. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--thresh', metavar='N', type=int, required=False, 
             help=f'Keep only those rows/columns with at least N non-NA values')
-        parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+        self.optional.add_argument(
+            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
-        self.options = parser.parse_args(args)
+    
 
     def run(self, df):
         options = self.options
@@ -319,29 +291,38 @@ class GroupBy(CommandBase, name="groupby"):
     category = "transformation"
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-f', '--fun', metavar='FUNCTION', type=str, choices=const.ALLOWED_GROUPBY_FUN, required=False,
-            default=const.DEFAULT_GROUPBY_FUN, nargs="+",
-            help=f'Aggregation function(s) to apply to selected columns in group. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
-            '-o', '--on', metavar='NAME', nargs="+", type=str, required=True,
+        super().__init__()
+        self.optional.add_argument(
+            '-f', '--fun', metavar='FUNCTION', type=str, choices=const.ALLOWED_GROUPBY_FUN, required=False, nargs="+",
+            help=f'Aggregation function(s) to apply to selected columns in group. Allowed values: %(choices)s.')
+        self.optional.add_argument(
+            '-v', '--val', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Apply aggregation to these columns')
-        parser.add_argument(
-            '-b', '--by', metavar='NAME', nargs="+", type=str, required=True,
-            help=f'Group data by these columns')
-        self.options = parser.parse_args(args)
+        self.required.add_argument(
+            '-k', '--key', metavar='COLUMN', nargs="+", type=str, required=True,
+            help=f'Group data using these columns as the key')
+
 
     def run(self, df):
         options = self.options
-        utils.validate_columns_error(df, options.on)
-        utils.validate_columns_error(df, options.by)
-        agg_mapping = { column: options.fun for column in options.on }
-        result = df.groupby(options.by, as_index=False).agg(agg_mapping)
-        new_column_names = options.by + [o + "_" + f for o in options.on for f in options.fun]
+        utils.validate_columns_error(df, options.key)
+        agg_mapping = {}
+        if options.val is not None:
+            if options.fun is None:
+                 utils.exit_with_error(f"if --val/-v is defined then --fun/-f must also be defined",
+                                       const.EXIT_COMMAND_LINE_ERROR)
+            else:
+                utils.validate_columns_error(df, options.val)
+                agg_mapping = { column: options.fun for column in options.val }
+                result = df.groupby(options.key, as_index=False).agg(agg_mapping)
+                new_column_names = options.key + [o + "_" + f for o in options.val for f in options.fun]
+        else:
+            if options.fun is None or options.fun == ['size']:
+                result = df.groupby(options.key, as_index=False).size()
+                new_column_names = options.key + ["size"]
+            else:
+                utils.exit_with_error(f"value columns must be specified with --val/-v if --fun is defined as anything but 'size'",
+                const.EXIT_COMMAND_LINE_ERROR)
         result.columns = new_column_names
         return result 
 

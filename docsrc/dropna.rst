@@ -22,174 +22,166 @@ Drop rows or columns from the data that contain missing (NA) values.
      - display help for this command
      - :ref:`help <dropna_help>`
    * - ``--axis {rows,columns}``
-     - select columns to correlate pairwise (default: select all numerical columns)
+     - drop either rows or columns (default: rows)
      - :ref:`axis <dropna_axis>`
    * - ``--thresh N``
-     - keep only those rows/columns with at least N non-NA values
+     - keep only those rows/columns with at least N non-missing values
      - :ref:`thresh <dropna_thresh>`
    * - * ``-c [COLUMN ...]``
        * ``--columns [COLUMN ...]``
-     - consider only these columns when looking for missing (NA) values. 
+     - consider only specified columns when dropping rows 
      - :ref:`columns <dropna_columns>`
    * - ``--how {any,all}``
-     - drop rows/columns containing *any* or *all* missing (NA) values
+     - drop rows/columns containing *any* or *all* missing values
      - :ref:`how <dropna_how>`
 
+.. note::
+
+   For information about how missing data is represented see the documentation on :doc:`missing (NA) values <missing>`.
 
 Simple example
 --------------
 
-Compute the correlation between ``sepal_width`` and ``sepal_length`` from the ``iris.csv`` data set:
+Consider the following contents of a CSV file that has two missing values. In the following examples we will assume that this
+data is stored in a filed called ``missing.csv``.
 
 .. code-block:: text
 
-    gurita corr -c sepal_length sepal_width < iris.csv 
+    sepal_length,sepal_width,petal_length,petal_width,species
+    5.1,3.5,1.4,0.2,
+    4.9,3.0,1.4,0.2,virginica
+    4.7,,1.3,0.2,setosa
 
-The output of the above command is a table with three columns: ``col1``, ``col2`` and ``corr``, such that ``col1`` and ``col2`` show the names of the
-input columns being correlated, and ``corr`` shows their numerical correlation value.
+The first data row is missing a categorical value in the ``species`` column. 
+The third data row is missing a numerical value in the ``sepal_width`` column. 
+
+The following command drops all the rows that contain at least one column with a missing value:
 
 .. code-block:: text
 
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    sepal_width,sepal_length,-0.10936924995064931
-    sepal_length,sepal_width,-0.10936924995064931
-    sepal_width,sepal_width,1.0
+    gurita dropna < missing.csv 
 
-In the above example we specify two columns for comparison and the output is a table with four data rows. This is because each column is compared pairwise with itself and with the other columns symmetrically. 
+The result of the above command is shown below, where only the middle row of the input data remains: 
 
-.. _corr_help:
+.. code-block:: text
+
+    sepal_length,sepal_width,petal_length,petal_width,species
+    4.9,3.0,1.4,0.2,virginica
+
+.. _dropna_help:
 
 Getting help
 ------------
 
-The full set of command line arguments for correlations can be obtained with the ``-h`` or ``--help``
+The full set of command line arguments for ``dropna`` can be obtained with the ``-h`` or ``--help``
 arguments:
 
 .. code-block:: text
 
-    gurita corr -h
+    gurita dropna -h
 
-.. _corr_columns:
+.. _dropna_axis:
 
-Selecting columns to correlate 
-------------------------------
+Choose between dropping rows or columns
+---------------------------------------
+
+.. code-block:: text
+
+    --axis {rows,columns} 
+
+By default ``dropna`` will remove rows from the dataset, however, it can also drop columns instead.
+
+You can choose between dropping rows or columns with the ``--axis`` argument.
+
+The following command drops all the columns that contain at least one column with a missing value:
+
+.. code-block:: text
+
+    gurita dropna --axis columns < missing.csv
+
+The result of the above command is shown below, where ``species`` and ``sepal_width`` columns have been removed because they contained
+rows with missing values:
+
+.. code-block:: text
+
+    sepal_length,petal_length,petal_width
+    5.1,1.4,0.2
+    4.9,1.4,0.2
+    4.7,1.3,0.2
+
+.. _dropna_thresh:
+
+Set a minumum number of non-missing values 
+------------------------------------------
+
+.. code-block:: text
+
+    --thresh N
+
+By default ``dropna`` drops rows or columns that contain at least one missing value.
+
+Or, in other words, it retains only rows or columns that have *no* missing values.
+
+The ``--thresh N`` argument sets a threshold ``N``, such that only rows or columns with at least ``N`` *non-missing*
+values in them will be retained. This can be useful when you want to ensure that a minimum number of data values are present. 
+
+The following example requires at least 5 non-missing values across columns to be present for a row to be retained:
+
+.. code-block:: text
+
+    gurita dropna --thresh 5 < missing.csv 
+
+And the following example requires at least 3 non-missing values across rows to be present for a column to be retained:
+
+.. code-block:: text
+
+    gurita dropna --thresh 3 --axis columns < missing.csv 
+
+.. _dropna_columns:
+
+Consider only specified columns when dropping rows
+--------------------------------------------------
 
 .. code-block::
 
   -c [COLUMN ...], --columns [COLUMN ...]
 
-But default, if no columns are specified explicitly, all numerical columns in the data set will be chosen for comparison.
+By default, when dropping rows, ``dropna`` will look for missing values in all columns. The ``--columns`` option
+lets you specify a subset of columns to consider for missing values.
 
-For example, the following command performs pairise correlation on all numerical columns in the ``iris.csv`` file:
+.. note::
 
-.. code-block:: text
-
-   gurita corr < iris.csv
-
-There are four numerical columns in ``iris.csv``, so the output contains all 4x4 symmetric comparisons:
+   This option does not apply when ``--axis columns`` is also used
 
 .. code-block:: text
 
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    sepal_width,sepal_length,-0.10936924995064931
-    petal_length,sepal_length,0.8717541573048716
-    petal_width,sepal_length,0.8179536333691642
-    sepal_length,sepal_width,-0.10936924995064931
-    sepal_width,sepal_width,1.0
-    petal_length,sepal_width,-0.4205160964011539
-    petal_width,sepal_width,-0.35654408961380507
-    sepal_length,petal_length,0.8717541573048716
-    sepal_width,petal_length,-0.4205160964011539
-    petal_length,petal_length,1.0
-    petal_width,petal_length,0.9627570970509662
-    sepal_length,petal_width,0.8179536333691642
-    sepal_width,petal_width,-0.35654408961380507
-    petal_length,petal_width,0.9627570970509662
-    petal_width,petal_width,1.0
-
-Specific numerical columns can be specified for comparison using ``-c`` (or ``--columns``).
-
-For example, we can compare ``sepal_length`` with ``petal_length`` and ``petal_width`` like so:
-
-.. code-block:: text
-
-   gurita corr -c sepal_length petal_length petal_width < iris.csv
+   gurita dropna --columns species < missing.csv 
 
 The output of the above command is shown below:
 
 .. code-block:: text
 
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    petal_length,sepal_length,0.8717541573048716
-    petal_width,sepal_length,0.8179536333691642
-    sepal_length,petal_length,0.8717541573048716
-    petal_length,petal_length,1.0
-    petal_width,petal_length,0.9627570970509662
-    sepal_length,petal_width,0.8179536333691642
-    petal_length,petal_width,0.9627570970509662
-    petal_width,petal_width,1.0
+    sepal_length,sepal_width,petal_length,petal_width,species
+    4.9,3.0,1.4,0.2,virginica
+    4.7,,1.3,0.2,setosa
 
-.. note::
+Only the first row from the input data has a missing value in the ``species`` column, so only that row is dropped in the above example, all other rows are retained. 
+Note that the third row from the input data is retained even though it contains a missing value, this is because the missing value did not occur in the ``species`` column.
 
-   Non-numerical columns specified as arguments to ``-c`` (``--columns``) are ignored. 
+.. _dropna_how:
 
-.. _corr_method:
-
-Correlation method
-------------------
+Drop rows/columns containing any or all missing values
+------------------------------------------------------
 
 .. code-block::
 
-   --method {pearson,kendall,spearman}  
+    --how {any,all}
 
-Pairwise correlation can be computed in one of three ways:
+By default ``dropna`` will drop rows or columns that have any (at least one) missing value. However, this behaviour can be changed with the
+``--how all`` option, which only drops rows or columns where *all* the values are missing.
 
-1. `pearson <https://en.wikipedia.org/wiki/Pearson_correlation_coefficient>`_
-2. `kendall <https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient>`_
-3. `spearman <https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient>`_
-
-If no method is specified then ``pearson`` will be chosen by defualt.
-
-The example below computes the pairwise correlation between ``sepal_width`` and ``sepal_length`` from the ``iris.csv`` data set using the ``spearman`` method:
+The following example drops rows that are missing all their values:
 
 .. code-block:: text
 
-    gurita corr --columns sepal_length sepal_width --method spearman < iris.csv
-
-The output of the above command is shown below. Note that the results are similar to, but slightly different from the outputs from the ``pearson`` method
-shown in the simple example above.
-
-.. code-block:: text
-
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    sepal_width,sepal_length,-0.15945651848582867
-    sepal_length,sepal_width,-0.15945651848582867
-    sepal_width,sepal_width,1.0
-
-.. _corr_heatmap:
-
-Plotting a heatmap of pairwise correlations
--------------------------------------------
-
-Conveniently, the output of the ``corr`` command can be easily plotted as a :ref:`heatmap <heatmap>` using command chaining, like so:
-
-.. code-block:: text
-
-    gurita corr + heatmap -x col1 -y col2 -v corr < iris.csv  
-
-In this example we compute the correlation of all four numerical columns in ``iris.csv`` and then feed the result of that command into the ``heatmap`` command
-using :ref:`command chaining <command_chain>`.
-
-The X and Y axes of the heatmap are set to the ``col1`` and ``col2`` output columns from ``corr``, and the value shown in the heatmap cells is set to the ``corr`` column.
-
-The output plot resulting from the above command is shown below: 
-
-.. image:: ../images/heatmap.corr.png
-       :width: 400px
-       :height: 400px
-       :align: center
-       :alt: Heatmap showing the pairwise correlation of all numerical columns in the iris.csv file 
+   gurita dropna --how all < missing.csv 

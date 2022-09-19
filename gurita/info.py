@@ -18,14 +18,11 @@ class Describe(CommandBase, name="describe"):
     category = "summary information"
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
-            help=f'Select only these columns (columns)')
-        self.options = parser.parse_args(args)
+            help=f'Select only these columns')
+
 
     def run(self, df):
         options = self.options
@@ -44,20 +41,17 @@ class Pretty(CommandBase, name="pretty"):
     category = "summary information"
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
-            help=f'Select only these columns (columns)')
-        parser.add_argument(
+            help=f'Select only these columns')
+        self.optional.add_argument(
             '--maxrows', metavar='NUM', type=int, required=False, default=const.DEFAULT_PRETTY_MAX_ROWS,
             help=f'Maximum number of rows to pretty print. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--maxcols', metavar='NUM', type=int, required=False, default=const.DEFAULT_PRETTY_MAX_COLS,
             help=f'Maximum number of columns to pretty print. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -75,18 +69,15 @@ class Unique(CommandBase, name="unique"):
     category = "summary information"
     
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-c', '--column', metavar='COLUMN', type=str,
+        super().__init__()
+        self.optional.add_argument(
+            '-c', '--column', metavar='COLUMN', type=str, required=False,
             help=f'Select unique items from this column')
-        parser.add_argument(
+        self.optional.add_argument(
             '--sort', action='store_true',
-            default=False,
+            default=False, required=False,
             help=f'Sort the items in ascending order')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options

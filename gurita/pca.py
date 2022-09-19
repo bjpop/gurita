@@ -24,20 +24,17 @@ class PCA(CommandBase, name="pca"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
-        parser.add_argument(
+        self.optional.add_argument(
             '--pcaprefix', required=False, default=const.DEFAULT_PCA_PREFIX,
             help=f'Column label prefix for principal component axes. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '-n', '--ncomps', type=int, required=False, default=const.DEFAULT_PCA_N_COMPONENTS,
             help=f'Number of principal components to generate. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
     
     def run(self, df):
         options = self.options

@@ -14,7 +14,7 @@ import seaborn as sns
 from gurita.command_base import CommandBase
 import gurita.render_plot as render_plot
 import gurita.io_arguments as io_args 
-import gurita.plot_arguments as plot_args 
+from gurita.plot_arguments import make_plot_arguments, x_argument, y_argument, hue, row, col, order, hue_order, orient, logx, logy, xlim, ylim, dotsize, dotsizerange, dotalpha, dotlinewidth, dotlinecolour, dotstyle, colwrap, dodge, vlines, hlines, strip, nooutliers, estimator
 import gurita.constants as const
 import gurita.utils as utils
 
@@ -24,26 +24,24 @@ class PairPlot(CommandBase, name="pair"):
     category = "plotting"
 
     def __init__(self):
-        pass
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments,
-                plot_args.make_plot_arguments(const.DEFAULT_PAIR_PLOT_WIDTH, const.DEFAULT_PAIR_PLOT_HEIGHT),
-                plot_args.hue, plot_args.hue_order],
-                add_help=False)
-        parser.add_argument(
+        parents = [io_args.io_arguments,
+                   make_plot_arguments(const.DEFAULT_PAIR_PLOT_WIDTH,
+                                                 const.DEFAULT_PAIR_PLOT_HEIGHT)]
+        super().__init__(parents)
+        self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns')
-        parser.add_argument(
-            '--kind',  type=str,
+        self.optional.add_argument(
+            '--kind',  type=str, required=False,
             choices=const.ALLOWED_PAIRPLOT_KINDS, default=const.DEFAULT_PAIR_PLOT_KIND,
             help=f'Kind of plot to use. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
-            '--corner', action='store_true',
+        self.optional.add_argument(
+            '--corner', action='store_true', required=False,
             default=False,
             help=f'Only plot the lower triangle of comparisons')
-        self.options = parser.parse_args(args)
+        hue(self)
+        hue_order(self)
+
 
     def run(self, df):
         options = self.options
@@ -57,26 +55,31 @@ class PairPlot(CommandBase, name="pair"):
         render_plot.render_plot(options, graph, self.name)
         return df
 
-
 class BarPlot(CommandBase, name="bar"):
     description = "Bar plot of categorical feature."
     category = "plotting"
 
     def __init__(self):
-        pass
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-            plot_args.x_argument, plot_args.y_argument, plot_args.estimator,
-            plot_args.hue, plot_args.row, plot_args.col,
-            plot_args.order, plot_args.hue_order, plot_args.orient,
-            plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
-            add_help=False)
-        group = parser.add_mutually_exclusive_group()
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        estimator(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        group = self.optional.add_mutually_exclusive_group()
         group.add_argument('--std', action='store_true', default=False, required=False, help=f'Show standard deviation of numerical feature as error bar')
         group.add_argument('--ci', metavar='NUM', type=float, required=False, nargs='?', const=const.DEFAULT_CI, help=f'Show confidence interval as error bar to estimate uncertainty of point estimate')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -105,17 +108,23 @@ class BoxPlot(CommandBase, name="box"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None 
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-                plot_args.order, plot_args.hue_order, plot_args.orient,
-                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-                plot_args.strip, plot_args.nooutliers],
-           add_help=False)
-        self.options = parser.parse_args(args)
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        strip(self)
+        nooutliers(self)
 
     def run(self, df):
         options = self.options
@@ -141,17 +150,24 @@ class BoxenPlot(CommandBase, name="boxen"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        strip(self)
+        nooutliers(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-                plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-                plot_args.order, plot_args.hue_order, plot_args.orient,
-                plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-                plot_args.strip, plot_args.nooutliers],
-           add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -177,62 +193,61 @@ class Clustermap(CommandBase, name="clustermap"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-                     parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-                         plot_args.x_argument, plot_args.y_argument], add_help=False)
-        parser.add_argument(
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        self.required.add_argument(
             '-v', '--val', metavar='COLUMN', required=True, type=str,
             help=f'Interpret this feature (column of data) as the values of the heatmap')
-        parser.add_argument(
-            '--cmap',  metavar='COLOR_MAP_NAME', type=str,
+        self.optional.add_argument(
+            '--cmap',  metavar='COLOR_MAP_NAME', type=str, required=False,
             help=f'Use this color map, will use Seaborn default if not specified')
-        parser.add_argument(
-            '--log', action='store_true',
+        self.optional.add_argument(
+            '--log', action='store_true', required=False,
             help=f'Use a log scale on the numerical data')
-        parser.add_argument(
+        self.optional.add_argument(
             '--dendroratio', metavar='NUM', type=float, default=const.DEFAULT_DENDRO_RATIO,
-            help=f'Ratio of the figure size devoted to the dendrogram. Default: %(default)s.')
-        parser.add_argument('--rowclust', dest='rowclust', action='store_true',
-            help='Cluster by rows (default).')
-        parser.add_argument('--no-rowclust', dest='rowclust', action='store_false',
-            help='Do not cluster by rows')
-        parser.set_defaults(rowclust=True)
-        parser.add_argument('--colclust', dest='colclust', action='store_true',
-            help='Cluster by columns (default).')
-        parser.add_argument('--no-colclust', dest='colclust', action='store_false',
-            help='Do not cluster by columns')
+            required=False, help=f'Ratio of the figure size devoted to the dendrogram. Default: %(default)s.')
+        self.optional.add_argument('--rowclust', dest='rowclust', action='store_true',
+            required=False, help='Cluster by rows (default).')
+        self.optional.add_argument('--no-rowclust', dest='rowclust', action='store_false',
+            required=False, help='Do not cluster by rows')
+        self.optional.set_defaults(rowclust=True)
+        self.optional.add_argument('--colclust', dest='colclust', action='store_true',
+            required=False, help='Cluster by columns (default).')
+        self.optional.add_argument('--no-colclust', dest='colclust', action='store_false',
+            required=False, help='Do not cluster by columns')
         # clustermap does not allow both zscore and standard_scale to be specified at the same time
-        cluster_normalise_group = parser.add_mutually_exclusive_group()
+        cluster_normalise_group = self.optional.add_mutually_exclusive_group()
         cluster_normalise_group.add_argument('--zscore', required=False, choices=['y', 'x'],
             help='Normalise either across rows (y) or down columns (x) using z-score. Allowed values: %(choices)s.')
         cluster_normalise_group.add_argument('--stdscale', required=False, choices=['y', 'x'],
             help='Normalise either across rows (y) or down columns (x) by subtracting the minimum and dividing by the maximum. Allowed values: %(choices)s.')
-        parser.add_argument('--method', required=False, choices=const.ALLOWED_CLUSTERMAP_METHODS, default=const.DEFAULT_CLUSTERMAP_METHOD,
+        self.optional.add_argument('--method', required=False,
+            choices=const.ALLOWED_CLUSTERMAP_METHODS, default=const.DEFAULT_CLUSTERMAP_METHOD,
             help='Linkage method to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument('--metric', required=False, choices=const.ALLOWED_CLUSTERMAP_METRICS, default=const.DEFAULT_CLUSTERMAP_METRIC,
+        self.optional.add_argument('--metric', required=False,
+            choices=const.ALLOWED_CLUSTERMAP_METRICS, default=const.DEFAULT_CLUSTERMAP_METRIC,
             help='Distance metric to use for calculating clusters. Allowed values: %(choices)s. Default: %(default)s.')
-        parser.add_argument(
-            '--annot', action='store_true',
+        self.optional.add_argument(
+            '--annot', action='store_true', required=False,
             help=f'Display the data value in each cell in the heatmap')
         # See https://docs.python.org/3/library/string.html#formatspec for options on formatting
-        parser.add_argument(
-            '--fmt', type=str, required=False, #default=const.DEFAULT_HEATMAP_STRING_FORMAT,
-            #help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Default: %(default)s.')
+        self.optional.add_argument(
+            '--fmt', type=str, required=False, 
             help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--vmin', type=float, metavar='NUM', required=False,
             help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
-        parser.add_argument(
+        self.optional.add_argument(
             '--vmax', type=float, metavar='NUM', required=False,
             help=f'Maximum anchor value for the colormap, if unset this will be inferred from the dataset')
-        parser.add_argument(
+        self.optional.add_argument(
             '--robust', action='store_true',
             help=f'If --vmin or --vmax absent, use robust quantiles to set colormap range instead of the extreme data values')
-        parser.set_defaults(colclust=True)
-        self.options = parser.parse_args(args)
+        self.optional.set_defaults(colclust=True)
+
 
     def run(self, df):
         options = self.options
@@ -283,24 +298,21 @@ class Heatmap(CommandBase, name="heatmap"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-                     parents=[io_args.io_arguments, plot_args.make_plot_arguments()], add_help=False)
-        parser.add_argument(
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        self.required.add_argument(
             '-x', '--xaxis', metavar='COLUMN', required=True, type=str,
             help=f'Feature to plot along the X axis.')
-        parser.add_argument(
+        self.required.add_argument(
             '-y', '--yaxis', metavar='COLUMN', required=True, type=str,
             help=f'Feature to plot along the Y axis.')
-        parser.add_argument(
+        self.required.add_argument(
             '-v', '--val', metavar='COLUMN', required=True, type=str,
             help=f'Interpret this feature (column of data) as the values of the heatmap')
-        parser.add_argument(
-            '--cmap',  metavar='COLOR_MAP_NAME', type=str,
+        self.optional.add_argument(
+            '--cmap',  metavar='COLOR_MAP_NAME', type=str, required=False,
             help=f'Use this color map, will use Seaborn default if not specified')
-        parser.add_argument(
+        self.optional.add_argument(
             '--annot', type=str, required=False, nargs='?', metavar='FORMAT',
             const=const.DEFAULT_HEATMAP_STRING_FORMAT,
             help=f'Display the data value in each cell in the heatmap. Optional FORMAT argument uses Python format specifcation (default: %(const)s)')
@@ -308,19 +320,19 @@ class Heatmap(CommandBase, name="heatmap"):
         #parser.add_argument(
         #    '--fmt', type=str, required=False, 
         #    help=f'String formatting to be used for displaying cell values using Python format specification, used in conjunction with --annot. Uses Python format specifications.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--vmin', type=float, metavar='NUM', required=False,
             help=f'Minimum anchor value for the colormap, if unset this will be inferred from the dataset')
-        parser.add_argument(
+        self.optional.add_argument(
             '--vmax', type=float, metavar='NUM', required=False,
             help=f'Maximum anchor value for the colormap, if unset this will be inferred from the dataset')
-        parser.add_argument(
-            '--robust', action='store_true', 
+        self.optional.add_argument(
+            '--robust', action='store_true', required=False,
             help=f'If --vmin or --vmax absent, use robust quantiles to set colormap range instead of the extreme data values')
         #parser.add_argument(
         #    '--log', action='store_true',
         #    help=f'Use a log scale on the numerical data')
-        x_order_group = parser.add_mutually_exclusive_group()
+        x_order_group = self.optional.add_mutually_exclusive_group()
         x_order_group.add_argument(
             '--sortx',  type=str, required=False, nargs='?',
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
@@ -328,7 +340,7 @@ class Heatmap(CommandBase, name="heatmap"):
         x_order_group.add_argument(
             '--orderx', metavar='VALUE', type=str, required=False, nargs='+',
             help=f'Order the X axis according to a given list of values, left to right. Unlisted values will appear in arbitrary order.')
-        y_order_group = parser.add_mutually_exclusive_group()
+        y_order_group = self.optional.add_mutually_exclusive_group()
         y_order_group.add_argument(
             '--sorty', type=str, required=False, nargs='?',
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
@@ -336,7 +348,7 @@ class Heatmap(CommandBase, name="heatmap"):
         y_order_group.add_argument(
             '--ordery', metavar='VALUE', type=str, required=False, nargs='+',
             help=f'Order the Y axis according to a given list of values, top to bottom. Unlisted values will appear in arbitrary order.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -392,41 +404,53 @@ class HistogramPlot(CommandBase, name="hist"):
     description = "Histogram of numerical or categorical feature."
     category = "plotting"
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap, plot_args.vlines, plot_args.hlines],
-           add_help=False)
-        parser.add_argument(
+    def __init__(self):
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        vlines(self)
+        hlines(self)
+        self.optional.add_argument(
             '--multiple', required=False, choices=const.ALLOWED_HIST_MULTIPLES,
             help=f"How to display overlapping subsets of data in a histogram. Allowed values: %(choices)s.")
-        parser.add_argument(
+        self.optional.add_argument(
             '--bins', metavar='NUM', required=False, type=int, default=const.DEFAULT_HISTOGRAM_BINS,
             help=f'Number of histogram bins. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--binwidth', metavar='NUM', required=False, type=float,
             help=f'Width of histogram bins, overrides "--bins".')
-        parser.add_argument(
-            '--cumulative', action='store_true',
+        self.optional.add_argument(
+            '--cumulative', action='store_true', required=False,
             help=f'Generate cumulative histogram')
-        parser.add_argument(
-           '--kde', action='store_true',
+        self.optional.add_argument(
+           '--kde', action='store_true', required=False,
             help=f'Plot a kernel density estimate for the histogram and show as a line')
-        parser.add_argument(
+        self.optional.add_argument(
            '--nofill', action='store_true', required=False,
             help=f'Use unfilled histogram bars instead of solid coloured bars')
-        parser.add_argument(
+        self.optional.add_argument(
            '--element', choices=const.ALLOWED_HISTOGRAM_ELEMENTS, default=const.DEFAULT_HISTOGRAM_ELEMENT,
-           help=f'Style of histogram bars. Allowed values: %(choices)s. Default: %(default)s')
-        parser.add_argument(
-           '--stat', choices=const.ALLOWED_HISTOGRAM_STATS, default=const.DEFAULT_HISTOGRAM_STAT, required=False,
+           required=False, help=f'Style of histogram bars. Allowed values: %(choices)s. Default: %(default)s')
+        self.optional.add_argument(
+           '--stat', choices=const.ALLOWED_HISTOGRAM_STATS, default=const.DEFAULT_HISTOGRAM_STAT,
+           required=False,
            help=f'Statistic to use for each bin. Allowed values: %(choices)s. Default: %(default)s')
-        parser.add_argument(
+        self.optional.add_argument(
            '--indnorm', action='store_true', required=False,  
            help=f'For normalised statistics (e.g. percent), normalise each histogram in the plot independently, otherwise normalise over the full dataset')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -480,19 +504,26 @@ class HistogramPlot(CommandBase, name="hist"):
 class LinePlot(CommandBase, name="line"):
     description = "Line plot of numerical feature."
     category = "plotting"
-    
-    def __init__(self):
-        self.options = None
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-               plot_args.vlines, plot_args.hlines],
-           add_help=False)
-        self.options = parser.parse_args(args)
+    def __init__(self):
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        vlines(self)
+        hlines(self)
+    
 
     def run(self, df):
         options = self.options
@@ -522,16 +553,22 @@ class PointPlot(CommandBase, name="point"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
-           add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -554,18 +591,29 @@ class ScatterPlot(CommandBase, name="scatter"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        dotsize(self)
+        dotalpha(self)
+        dotlinewidth(self)
+        dotstyle(self)
+        dotsizerange(self)
+        dotlinecolour(self)
+        vlines(self)
+        hlines(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[ io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-               plot_args.dotsize, plot_args.dotalpha, plot_args.dotlinewidth, plot_args.dotstyle, plot_args.dotsizerange, plot_args.dotlinecolour,
-               plot_args.vlines, plot_args.hlines],
-            add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -603,15 +651,16 @@ class LMPlot(CommandBase, name="lmplot"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        hue_order(self)
+        colwrap(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[ io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.hue_order, plot_args.colwrap],
-            add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -634,17 +683,23 @@ class StripPlot(CommandBase, name="strip"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        dodge(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row,
-               plot_args.col, plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.dodge,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
-            add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -668,16 +723,23 @@ class SwarmPlot(CommandBase, name="swarm"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        dodge(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient, plot_args.dodge, 
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
-            add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -700,17 +762,23 @@ class ViolinPlot(CommandBase, name="violin"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
+        strip(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap,
-               plot_args.strip],
-            add_help=False)
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options
@@ -735,25 +803,29 @@ class CountPlot(CommandBase, name="count"):
     category = "plotting"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.io_arguments, make_plot_arguments()]
+        super().__init__(parents)
+        x_argument(self)
+        y_argument(self)
+        hue(self)
+        row(self)
+        col(self)
+        order(self)
+        hue_order(self)
+        orient(self)
+        logx(self)
+        logy(self)
+        xlim(self)
+        ylim(self)
+        colwrap(self)
 
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[
-               io_args.io_arguments, plot_args.make_plot_arguments(),
-               plot_args.x_argument, plot_args.y_argument, plot_args.hue, plot_args.row, plot_args.col,
-               plot_args.order, plot_args.hue_order, plot_args.orient,
-               plot_args.logx, plot_args.logy, plot_args.xlim, plot_args.ylim, plot_args.colwrap],
-           add_help=False)
-        options = parser.parse_args(args)
+
+    def run(self, df):
+        options = self.options
         if options.xaxis is not None and options.yaxis is not None:
             utils.exit_with_error("You cannot use both -x (--xaxis) and -y (--yaxis) at the same time in a count plot", const.EXIT_COMMAND_LINE_ERROR)
         if options.xaxis is None and options.yaxis is None:
             utils.exit_with_error("A count plot requires either -x (--xaxis) OR -y (--yaxis) to be specified", const.EXIT_COMMAND_LINE_ERROR)
-        self.options = options
-
-    def run(self, df):
-        options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
         facet_kws = { 'legend_out': True }

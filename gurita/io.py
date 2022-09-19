@@ -22,15 +22,13 @@ class In(CommandBase, name="in"):
     category = "input/output"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args=[]):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_sep, io_args.navalues], add_help=True)
-        parser.add_argument('--comment', metavar='CHAR', required=False, type=str,
+        parents = [io_args.file_sep, io_args.navalues] 
+        super().__init__(parents)
+        self.optional.add_argument('--comment', metavar='CHAR', required=False, type=str,
             help=f'If provided, CHAR marks the start of a comment. Text from this CHAR until the end of the line will be ignored.') 
-        parser.add_argument('input', nargs="?", metavar='FILE', type=str, help=f'Read input from a named file. If this argument is absent input will be read from standard input (stdin).')
-        self.options = parser.parse_args(args)
+        self.parser.add_argument('input', nargs="?", metavar='FILE', type=str,
+            help=f'Read input from a named file. If this argument is absent input will be read from standard input (stdin).')
+
 
     def is_stdin(self):
         return self.options.input is None
@@ -76,18 +74,14 @@ class Out(CommandBase, name="out"):
     category = "input/output"
 
     def __init__(self):
-        self.options = None
+        parents = [io_args.file_sep, io_args.na]
+        super().__init__(parents)
+        self.parser.add_argument('out', metavar='FILE', type=str, nargs='?',
+            help=f'Write data to a file. If this argument is absent output will be written to standard output (stdout)')
+
 
     def is_stdout(self):
         return self.options.out is None
-
-    def parse_args(self, args=[]):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>',
-            parents=[io_args.file_sep, io_args.na], add_help=True)
-        parser.add_argument('out', metavar='FILE', type=str, nargs='?',
-            help=f'Write data to a file. If this argument is absent output will be written to standard output (stdout)')
-
-        self.options = parser.parse_args(args)
 
     def run(self, df):
         options = self.options

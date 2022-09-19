@@ -101,14 +101,12 @@ def main_args(cmdline_args):
         # If the first command is not an explict read of input data
         # either from stdin or a file then we add an implicit read from 
         # stdin to the command stream
-        #stdin_reader = gurita.io.Stdin()
         stdin_reader = gurita.io.In()
         stdin_reader.parse_args()
         new_commands = [stdin_reader] + new_commands 
     if (len(original_commands) == 0) or is_last_command_transform_or_input(original_commands):
         # If the last command is a data transformation command or an input command then
         # we add an implicit print to stdout to the command stream
-        #stdout_writer = gurita.io.Stdout()
         stdout_writer = gurita.io.Out()
         stdout_writer.parse_args()
         new_commands = new_commands + [stdout_writer]

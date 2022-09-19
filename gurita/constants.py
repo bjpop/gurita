@@ -88,7 +88,7 @@ ALLOWED_DROPNA_AXIS = ['rows', 'columns']
 ALLOWED_DROPNA_HOW = ['any', 'all']
 ALLOWED_HISTOGRAM_ELEMENTS = ['bars', 'step', 'poly']
 ALLOWED_HISTOGRAM_STATS = ['count', 'frequency', 'probability', 'proportion', 'percent', 'density']
-ALLOWED_GROUPBY_FUN = ['count', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'mode', 'abs', 'prod', 'std', 'var', 'sem', 'skew', 'kurt', 'quantile', 'cumsum', 'cumprod', 'cummax', 'cummin']
+ALLOWED_GROUPBY_FUN = ['size', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'mode', 'abs', 'prod', 'std', 'var', 'sem', 'skew', 'kurt', 'quantile', 'cumsum', 'cumprod', 'cummax', 'cummin']
 ESTIMATOR_FUNS = {'mean': np.mean, 'median': np.median, 'max': np.max, 'min': np.min,
   'sum': np.sum, 'std': np.std, 'var': np.var }
 ALLOWED_ESTIMATORS = list(ESTIMATOR_FUNS.keys())

@@ -23,6 +23,19 @@ class KMeans(CommandBase, name="kmeans"):
     category = "transformation"
 
     def __init__(self):
+        super().__init__()
+        self.optional.add_argument(
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            help=f'Select only these named columns')
+        self.optional.add_argument(
+            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
+            help=f'Column label prefix for cluster axes. Default: %(default)s.')
+        self.optional.add_argument(
+            '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_KMEANS_N_CLUSTERS,
+            help=f'Number of clusters to generate. Default: %(default)s.')
+
+    '''
+    def __init__(self):
         self.options = None
 
     def parse_args(self, args):
@@ -37,6 +50,7 @@ class KMeans(CommandBase, name="kmeans"):
             '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_KMEANS_N_CLUSTERS,
             help=f'Number of clusters to generate. Default: %(default)s.')
         self.options = parser.parse_args(args)
+    '''
     
     def run(self, df):
         options = self.options
@@ -64,6 +78,22 @@ class GMM(CommandBase, name="gmm"):
     category = "transformation"
 
     def __init__(self):
+        super().__init__()
+        self.optional.add_argument(
+            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            help=f'Select only these named columns')
+        self.optional.add_argument(
+            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
+            help=f'Column label prefix for cluster axes. Default: %(default)s.')
+        self.optional.add_argument(
+            '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_GMM_N_CLUSTERS,
+            help=f'Number of clusters to generate. Default: %(default)s.')
+        self.optional.add_argument(
+            '--maxiter', type=int, required=False, default=const.DEFAULT_GMM_MAX_ITER,
+            help=f'Number of expectation maximisation iterations to perform. Default: %(default)s.')
+
+    '''
+    def __init__(self):
         self.options = None
 
     def parse_args(self, args):
@@ -81,6 +111,7 @@ class GMM(CommandBase, name="gmm"):
             '--maxiter', type=int, required=False, default=const.DEFAULT_GMM_MAX_ITER,
             help=f'Number of expectation maximisation iterations to perform. Default: %(default)s.')
         self.options = parser.parse_args(args)
+    '''
 
     
     def run(self, df):

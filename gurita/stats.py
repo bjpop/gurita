@@ -23,14 +23,11 @@ class IsNorm(CommandBase, name="isnorm"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
-        help=f'Select only these columns (columns)')
-        self.options = parser.parse_args(args)
+            help=f'Select only these columns (columns)')
+
 
     def run(self, df):
         options = self.options
@@ -67,16 +64,14 @@ class Correlation(CommandBase, name="corr"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
-        parser.add_argument('--method', required=False, default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
+        self.optional.add_argument('--method', required=False,
+            default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
             help=f'Method for determining correlation. Allowed values: %(choices)s. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -93,17 +88,14 @@ class Zscore(CommandBase, name="zscore"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
-        parser.add_argument(
+        self.optional.add_argument(
             '--suffix', required=False, default=const.DEFAULT_ZSCORE_SUFFIX,
             help=f'Label suffix for new z-score columns. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options
@@ -132,20 +124,17 @@ class Outlier(CommandBase, name="outlier"):
     category = "transformation"
 
     def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
+        super().__init__()
+        self.optional.add_argument(
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
-        parser.add_argument(
+        self.optional.add_argument(
             '--suffix', required=False, default=const.DEFAULT_OUTLIER_COLUMN,
             help=f'Label suffix for new outlier columns. Default: %(default)s.')
-        parser.add_argument(
+        self.optional.add_argument(
             '--iqrscale', metavar='S', required=False, type=float, default=const.DEFAULT_OUTLIER_IQR_SCALE,
             help=f'Scale factor S for determining outliers. x < (Q1 - S*IQR) or x > (Q3 + S*IQR). Larger values return fewer outliers. Default: %(default)s.')
-        self.options = parser.parse_args(args)
+
 
     def run(self, df):
         options = self.options

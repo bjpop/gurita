@@ -79,7 +79,7 @@ Selecting columns to correlate
 
   -c [COLUMN ...], --columns [COLUMN ...]
 
-But default, if no columns are specified explicitly, all numerical columns in the data set will be chosen for comparison.
+By default, if no columns are specified explicitly, all numerical columns in the data set will be chosen for comparison.
 
 For example, the following command performs pairise correlation on all numerical columns in the ``iris.csv`` file:
 

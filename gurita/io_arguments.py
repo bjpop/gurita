@@ -10,7 +10,7 @@ Portability : POSIX
 import argparse
 import gurita.constants as const
 
-io_arguments = argparse.ArgumentParser()
+io_arguments = argparse.ArgumentParser(add_help=False)
 io_arguments_group = io_arguments.add_argument_group('Input and Output', 'input/output related arguments that are provided across all gurita sub-commands') 
 
 io_arguments_group.add_argument(

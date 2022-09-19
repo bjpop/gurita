@@ -3,6 +3,33 @@
 filter
 ======
 
+Filter rows using a logical expression that refers to the values in the columns. 
+
+Rows that evaluate to ``True`` in the expression are retained and all other rows are discarded. 
+
+.. code-block:: text
+
+    gurita filter <arguments>
+
+.. list-table::
+   :widths: 25 20 10
+   :header-rows: 1
+   :class: tight-table
+
+   * - Argument
+     - Description
+     - Reference
+   * - * ``-h``
+       * ``--help``
+     - display help for this command
+     - :ref:`help <filter_help>`
+   * - ``expression``
+     - the expression to evaluate
+     - :ref:`expression <filter_expression>`
+
+Simple example
+--------------
+
 Input rows can be filtered using the ``--filter EXPR`` option, where ``EXPR`` is a logical (boolean) expression that determines which rows are retained. 
 
 Example:
@@ -11,13 +38,33 @@ Example:
 
    gurita hist --filter 'embark_town == "Cherbourg"' -x age titanic.csv
 
-In the example above, the string ``'embark_town == "Cherbourg"'`` specifies the filtering expression. Note that the whole expression is inside quotes; this is necessary to ensure that the whole expression is passed as a single entity
-to Gurita. In this case a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``embark_town`` is equal to the string ``"Cherbourg"``. 
+In the example above, the string ``'embark_town == "Cherbourg"'`` specifies the filtering expression. 
+
+Note that the whole expression is inside quotes; this is necessary to ensure that the whole expression is passed as a single entity
+to Gurita.
+
+In this case a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``embark_town`` is equal to the string ``"Cherbourg"``. 
 
 Columns can be referred to by their name, such as ``embark_town``. Literal categorical values are written as strings inside quotation marks, such as ``"Cherbourg"``.
 
-Filter expression syntax
-------------------------
+.. _filter_help:
+
+Getting help
+------------
+
+The full set of command line arguments for ``filter`` can be obtained with the ``-h`` or ``--help``
+arguments:
+
+.. code-block:: text
+
+    gurita filter -h
+
+
+.. _filter_expression:
+
+
+Expressions
+-----------
 
 Gurita row filtering uses the same syntax as the `Pandas data frame query method <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html>`_, and generally resembles
 Python notation.
