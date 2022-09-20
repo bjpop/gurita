@@ -7,9 +7,15 @@ Filter rows using a logical expression that refers to the values in the columns.
 
 Rows that evaluate to ``True`` in the expression are retained and all other rows are discarded. 
 
+Usage
+-----
+
 .. code-block:: text
 
-    gurita filter <arguments>
+   gurita filter [-h] EXPR  
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -26,6 +32,8 @@ Rows that evaluate to ``True`` in the expression are retained and all other rows
    * - ``expression``
      - the expression to evaluate
      - :ref:`expression <filter_expression>`
+
+The expression argument is required. If it contains spaces then it ought to be surrounded in quotes on the command line.
 
 Simple example
 --------------

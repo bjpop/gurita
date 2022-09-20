@@ -163,27 +163,6 @@ underscores:</p>
 <section id="dropping-rows-or-columns-containing-missing-values">
 <h2>Dropping rows or columns containing missing values<a class="headerlink" href="#dropping-rows-or-columns-containing-missing-values" title="Permalink to this headline"></a></h2>
 <p>The <a class="reference internal" href="dropna.html"><span class="doc">dropna</span></a> command allows you to remove rows or columns that contain missing values based on certain criteria.</p>
-<p>Following from previous examples we assume the existence of a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code> that contains some missing values.</p>
-<p>Drop rows that contain at least one missing value:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna
-</pre></div>
-</div>
-<p>Drop rows where <em>all</em> values are missing:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --how all
-</pre></div>
-</div>
-<p>Drop rows with missing values in columns <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> or <code class="docutils literal notranslate"><span class="pre">species</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --columns sepal_width species
-</pre></div>
-</div>
-<p>Drop columns that contain at least one missing value:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --axis columns
-</pre></div>
-</div>
-<p>Drop columns where <em>all</em> values are missing:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat missing.csv | gurita dropna --axis columns --how all
-</pre></div>
-</div>
 </section>
 </section>
 

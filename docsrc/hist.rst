@@ -5,11 +5,15 @@ hist (histogram)
 
 Plot distributions of selected numerical or categorical columns as histograms.
 
+Usage
+-----
+
 .. code-block:: text
 
-    gurita hist <arguments> 
+    gurita hist [-h] [-x COLUMN] [-y COLUMN] ... other arguments ...
 
-Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated/seaborn.displot.html>`_ library function, using the ``kind="hist"`` option.
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -81,6 +85,10 @@ Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <hist_facets>`
 
+See also
+--------
+
+Histograms are based on Seaborn's `displot <https://seaborn.pydata.org/generated/seaborn.displot.html>`_ library function, using the ``kind="hist"`` option.
 
 .. _hist_example:
 

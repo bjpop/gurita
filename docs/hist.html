@@ -116,10 +116,14 @@
   <section id="hist-histogram">
 <span id="hist"></span><h1>hist (histogram)<a class="headerlink" href="#hist-histogram" title="Permalink to this headline"></a></h1>
 <p>Plot distributions of selected numerical or categorical columns as histograms.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist &lt;arguments&gt;
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist [-h] [-x COLUMN] [-y COLUMN] ... other arguments ...
 </pre></div>
 </div>
-<p>Histograms are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.displot.html">displot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;hist&quot;</span></code> option.</p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given tight-table docutils align-default">
 <colgroup>
 <col style="width: 45%" />
@@ -227,6 +231,11 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p>Histograms are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.displot.html">displot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;hist&quot;</span></code> option.</p>
+</section>
 <section id="simple-examples">
 <span id="hist-example"></span><h2>Simple examples<a class="headerlink" href="#simple-examples" title="Permalink to this headline"></a></h2>
 <p>Plot a histogram of the <code class="docutils literal notranslate"><span class="pre">tip</span></code> amount from the <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> input file:</p>

@@ -5,9 +5,15 @@ dropna
 
 Drop rows or columns from the data that contain missing (NA) values.
 
+Usage
+-----
+
 .. code-block:: bash
 
-    gurita dropna <arguments>
+   gurita dropna [-h] [--axis AXIS] [--how METHOD] [--thresh N] [-c COLUMN [COLUMN ...]] 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10

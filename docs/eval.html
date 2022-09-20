@@ -118,6 +118,229 @@
              
   <section id="eval">
 <span id="id1"></span><h1>eval<a class="headerlink" href="#eval" title="Permalink to this headline"></a></h1>
+<p>Add new columns to the dataset by evaluating an expression.</p>
+<p>On each row the value in the new column is computed using a simple expression language that can refer to the values in other columns on the same row.</p>
+<p>The expression language uses a simple syntax that resembles Python.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Eval is based on the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.eval.html">Pandas eval method on dataframes</a>.</p>
+<p>The documentation on that method says:</p>
+<blockquote>
+<div><p>“This allows eval to run arbitrary code, which can make you vulnerable to code injection if you pass user input to this function.”</p>
+</div></blockquote>
+<p>This is a security risk!</p>
+<p>Do not use <code class="docutils literal notranslate"><span class="pre">eval</span></code> if you do not trust the expression supplied as an argument. For example, do not use <code class="docutils literal notranslate"><span class="pre">eval</span></code> on strings that
+are input from untrusted sources, such as input to web pages.</p>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval [-h] EXPR [EXPR ...]
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#eval-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">expression</span></code></p></td>
+<td><p>the expression to evaluate</p></td>
+<td><p><a class="reference internal" href="#eval-expression"><span class="std std-ref">expression</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset contains information about the lengths and widths of iris sepals and petals for a variety of species.</p>
+<p>We can look at the first few data rows using the <code class="docutils literal notranslate"><span class="pre">head</span></code> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+</pre></div>
+</div>
+<p>Suppose that we want to add a new column to the dataset called <code class="docutils literal notranslate"><span class="pre">sepal_area</span></code> that is computed on each row from <code class="docutils literal notranslate"><span class="pre">sepal_length</span> <span class="pre">*</span> <span class="pre">sepal_height</span> <span class="pre">*</span> <span class="pre">0.5</span></code> (where <code class="docutils literal notranslate"><span class="pre">*</span></code> means multiplication).</p>
+<p>This can be achieved with the <code class="docutils literal notranslate"><span class="pre">eval</span></code> command like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval &#39;sepal_area = sepal_length * sepal_width * 0.5&#39; &lt; iris.csv
+</pre></div>
+</div>
+<p>Note that the whole expression is inside quotation marks.</p>
+<p>In this example we us an expression to compute the value of the new column:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_area = sepal_length * sepal_width * 0.5
+</pre></div>
+</div>
+<p>The syntax of the expression closely resembles that of the Python programming language.</p>
+<p>Note in paricular that a new column is made simply by assigning to it on the left-hand-side of the expression. On the right-hand-side we can refer to the values of other existing
+columns by using their names, such as <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>. We can also refer to numerical constants such as <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p>
+<p>We can see the effect of the above example <code class="docutils literal notranslate"><span class="pre">eval</span></code> statment by viewing the first few rows of the output like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval &#39;sepal_area = sepal_length * sepal_width * 0.5&#39; + head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species,sepal_area
+5.1,3.5,1.4,0.2,setosa,8.924999999999999
+4.9,3.0,1.4,0.2,setosa,7.3500000000000005
+4.7,3.2,1.3,0.2,setosa,7.5200000000000005
+4.6,3.1,1.5,0.2,setosa,7.13
+5.0,3.6,1.4,0.2,setosa,9.0
+</pre></div>
+</div>
+<p>As you can see a new column called <code class="docutils literal notranslate"><span class="pre">sepal_area</span></code> has been added to the data, such that the value on each row is computed from the supplied expression.</p>
+</section>
+<section id="complex-example">
+<h2>Complex example<a class="headerlink" href="#complex-example" title="Permalink to this headline"></a></h2>
+<p>Suppose we have a dataset in a file called <code class="docutils literal notranslate"><span class="pre">points.csv</span></code> with numerical columns <code class="docutils literal notranslate"><span class="pre">x1</span></code>, <code class="docutils literal notranslate"><span class="pre">y1</span></code>, <code class="docutils literal notranslate"><span class="pre">x2</span></code>, <code class="docutils literal notranslate"><span class="pre">y2</span></code>, representing pairs of points in the cartesian plane: <code class="docutils literal notranslate"><span class="pre">(x1,</span> <span class="pre">y1)</span></code> and <code class="docutils literal notranslate"><span class="pre">(x2,</span> <span class="pre">y2)</span></code>.</p>
+<p>A new column called <code class="docutils literal notranslate"><span class="pre">dist</span></code> representing the cartesian distance between the pairs of points can be created with <code class="docutils literal notranslate"><span class="pre">eval</span></code> like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval &#39;dist = sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)&#39; &lt; points.csv
+</pre></div>
+</div>
+<p>Some notable features of this example expression include the use of a mathematical function <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, parentheses for grouping sub-expressions, and the use of various mathematical operators <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code> and <code class="docutils literal notranslate"><span class="pre">**</span></code> (exponentiation).</p>
+<p>A more detailed description of the expression syntax is provided below.</p>
+</section>
+<section id="getting-help">
+<span id="eval-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">eval</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval -h
+</pre></div>
+</div>
+</section>
+<section id="expressions">
+<span id="eval-expression"></span><h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>eval EXPR [EXPR ..]
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">eval</span></code> command accepts one or more expression arguments. Each of these specifies how to create a new column in the data.</p>
+<p>Each expression creates a new column in the dataset. Therefore each expression must specify the name of the new column in the form of an assignment statment:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>new_column_name = expression_right_hand_side
+</pre></div>
+</div>
+<p>If more than one expression is provided multiple columns will be added, one for each expression. Expressions can even refer to new columns that were added on their left.</p>
+<p>In the example below the first expression adds a new column called <code class="docutils literal notranslate"><span class="pre">new1</span></code> (assuming the existence of a column <code class="docutils literal notranslate"><span class="pre">old</span></code> in the input data). The second expression adds another column called <code class="docutils literal notranslate"><span class="pre">new2</span></code> that is computed from the row-wise addition of <code class="docutils literal notranslate"><span class="pre">old</span></code> and <code class="docutils literal notranslate"><span class="pre">new1</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval &#39;new1 = old + 5&#39; &#39;new2 = old + new1&#39; &lt; example.csv
+</pre></div>
+</div>
+<section id="expression-syntax">
+<h3>Expression syntax<a class="headerlink" href="#expression-syntax" title="Permalink to this headline"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">eval</span></code> command is implemented using the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.eval.html">Pandas eval method on dataframes</a>.</p>
+<p>And therefore the syntax of <code class="docutils literal notranslate"><span class="pre">eval</span></code> in Gurita is the same as the syntax of the Pandas <code class="docutils literal notranslate"><span class="pre">eval</span></code> method.</p>
+<p>In essence the <code class="docutils literal notranslate"><span class="pre">eval</span></code> expression syntax is a simplified form of Python.
+The details of which are described in the <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/enhancingperf.html#expression-evaluation-via-eval">Pandas documenation</a>. We give a summary below.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the new column name already exists in the dataset it will be overwritten in the output.</p>
+</div>
+</section>
+<section id="referring-to-column-names">
+<h3>Referring to column names<a class="headerlink" href="#referring-to-column-names" title="Permalink to this headline"></a></h3>
+<p>On each row the value in the new column is computed using a simple expression language that can refer to the values in other columns on the same row.</p>
+<p>Column names can be written as if they are ordinary variables inside the expression.</p>
+<p>In the example from earlier <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> are the names of existing columns in the data, and <code class="docutils literal notranslate"><span class="pre">sepal_area</span></code> is the name
+given to the new column added to the data:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita eval &#39;sepal_area = sepal_length * sepal_width * 0.5&#39; &lt; iris.csv
+</pre></div>
+</div>
+<p>Column names that cannot be written like ordinary Python variables must be written inside back-quotes. For instance, column names can have spaces in them, but Python variable names cannot.</p>
+<p>For example, a column named <code class="docutils literal notranslate"><span class="pre">average</span> <span class="pre">height</span></code> (note the space in the name) would have to be wrtten as <code class="docutils literal notranslate"><span class="pre">`average</span> <span class="pre">height`</span></code>.</p>
+</section>
+<section id="allowed-expressions">
+<h3>Allowed expressions<a class="headerlink" href="#allowed-expressions" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>Parentheses (round brackets for grouping sub-expressions)</p></li>
+<li><dl class="simple">
+<dt>Constants:</dt><dd><ul>
+<li><p>strings</p></li>
+<li><p>floating point numbers</p></li>
+<li><p>integers</p></li>
+<li><p>booleans (True, False)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Arithmetic operations:</dt><dd><ul>
+<li><p>multiplication: <code class="docutils literal notranslate"><span class="pre">*</span></code></p></li>
+<li><p>addition: <code class="docutils literal notranslate"><span class="pre">+</span></code></p></li>
+<li><p>subtraction: <code class="docutils literal notranslate"><span class="pre">-</span></code></p></li>
+<li><p>division: <code class="docutils literal notranslate"><span class="pre">/</span></code></p></li>
+<li><p>exponentiation: <code class="docutils literal notranslate"><span class="pre">**</span></code> (raising to a power)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Comparison operations:</dt><dd><ul>
+<li><p>equality: <code class="docutils literal notranslate"><span class="pre">==</span></code></p></li>
+<li><p>less-than: <code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></li>
+<li><p>less-than-equals: <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></li>
+<li><p>greater-than: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></li>
+<li><p>greater-than-equals: <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Logical operations:</dt><dd><ul>
+<li><p>conjunction: <code class="docutils literal notranslate"><span class="pre">and</span></code></p></li>
+<li><p>disjuntion: <code class="docutils literal notranslate"><span class="pre">or</span></code></p></li>
+<li><p>negation: <code class="docutils literal notranslate"><span class="pre">not</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Mathematical functions (written as <code class="docutils literal notranslate"><span class="pre">fun(arg)</span></code>):</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">sin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cos</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log</span></code> (natural log)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expm1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log1p</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sqrt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sinh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cosh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tanh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arcsin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arccos</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arctan</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arccosh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arcsinh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arctanh</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">abs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arctan2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">log10</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
 </section>
 
 

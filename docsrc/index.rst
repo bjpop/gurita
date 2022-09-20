@@ -28,7 +28,6 @@ A pretty display of the first and last 5 rows of the data can be viewed using th
 
    cat iris.csv | gurita pretty
 
-
 The command generates the following output that is displayed on the terminal:
 
 .. code-block:: bash
@@ -67,6 +66,22 @@ containing the following figure:
        :alt: Box plot showing the distribution of sepal length by species for the iris data set
 
 |
+
+If we wanted to see the median value of ``sepal_length`` for each ``species`` we can do this with the
+following ``groupby`` command:
+
+.. code-block:: text 
+
+   cat iris.csv | gurita groupby --key species --val sepal_length --fun median 
+
+.. code-block:: text 
+
+   species,sepal_length_median
+   setosa,5.0
+   versicolor,5.9
+   virginica,6.5
+
+You can see that the corresponding median values match up with the values shown in the box plot.
 
 Advanced example
 ----------------

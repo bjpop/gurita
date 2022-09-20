@@ -5,11 +5,15 @@ count
 
 Count plots show the frequency of values within categorical columns using bars.
 
+Usage
+-----
+
 .. code-block:: bash
 
-    gurita count <arguments> 
+    gurita count [-h] [-x COLUMN] [-y COLUMN] ... other arguments ...  
 
-Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="count"`` option.
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -62,6 +66,11 @@ Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <count_facets>`
+
+See also
+--------
+
+Count plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="count"`` option.
 
 .. _count_example:
 

@@ -5,11 +5,15 @@ boxen
 
 Boxen plots show the distribution of values in a numerical column optionally grouped by categorical columns.
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita boxen <arguments>
+.. code-block:: text 
 
-Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="boxen"`` option.
+    gurita boxen [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -66,12 +70,17 @@ Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <boxen_facets>`
 
+See also
+--------
+
 Similar functionality to boxen plots are provided by:
 
  * :doc:`Box plots <box/>`
  * :doc:`Violin plots <violin/>`
  * :doc:`Swarm plots <swarm/>` 
  * :doc:`Strip plots <strip/>` 
+
+Boxen plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="boxen"`` option.
 
 Simple example
 --------------

@@ -5,11 +5,15 @@ heatmap
 
 Heatmap showing the relationship between two categorical columns and a numerical column.
 
+Usage
+-----
+
 .. code-block:: text
 
-    gurita heatmap <arguments>
+    gurita heatmap [-h] -x COLUMN -y COLUMN -v COLUMN ... other arguments ...
 
-Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/generated/seaborn.heatmap.html/>`__ library function.
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -61,6 +65,13 @@ Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/genera
    * - ``--ordery VALUE [VALUE ...]``
      - order the Y axis according to a given list of values
      - :ref:`order Y axis by value <heatmap_ordery>`
+
+See also
+--------
+
+:doc:`Cluster maps <clustermap/>` combine heatmaps with clustering.
+
+Heatmap plots are based on Seaborn's `heatmap <https://seaborn.pydata.org/generated/seaborn.heatmap.html/>`__ library function.
 
 .. _heatmap_simple_example:
 

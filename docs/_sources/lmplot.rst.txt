@@ -5,11 +5,15 @@ lmplot
 
 A scatter plot with a fitted linear model (linear regression).
 
+Usage
+-----
+
 .. code-block:: bash
 
-    gurita lmplot <arguments>
+    gurita lmplot [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
 
-Lmplots are based on Seaborn's `lmplot <https://seaborn.pydata.org/generated/seaborn.lmplot.html>`__ library function.
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -47,6 +51,11 @@ Lmplots are based on Seaborn's `lmplot <https://seaborn.pydata.org/generated/sea
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <lmplot_facets>`
+
+See also
+--------
+
+Lmplots are based on Seaborn's `lmplot <https://seaborn.pydata.org/generated/seaborn.lmplot.html>`__ library function.
 
 Simple example
 --------------

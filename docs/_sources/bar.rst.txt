@@ -7,12 +7,15 @@ Bar plots summarise a numerical column as boxes with optional error bars.
 
 By default the numerical column is summarised by its mean, but other summary functions can be chosen.
 
+Usage
+-----
+
 .. code-block:: text
 
-    gurita bar <arguments>
+   usage: gurita bar [-h] [-x COLUMN] [-y COLUMN] ... other arugments ...
 
-Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="bar"`` option.
-
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10 
@@ -80,9 +83,15 @@ Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <bar_facets>`
 
+See also
+--------
+
 Similar functionality to bar plots are provided by:
 
  * :doc:`Point plots <point/>`
+
+Bar plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="bar"`` option.
+
 
 Simple example
 --------------

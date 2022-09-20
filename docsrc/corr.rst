@@ -11,9 +11,15 @@ For a selection of N numerical columns, the output will be a table containing al
 
 For visualisation the output of the ``corr`` command can be fed into the :doc:`heatmap <heatmap>` command. 
 
+Usage
+-----
+
 .. code-block:: bash
 
-    gurita corr <arguments>
+   gurita corr [-h] [-c [COLUMN ...]] [--method {pearson,kendall,spearman}] 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10

@@ -5,11 +5,15 @@ swarm
 
 Swarm plots show the distribution of values in a numerical column optionally grouped by categorical columns.
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita swarm <arguments>
+.. code-block:: text 
 
-Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="swarm"`` option.
+    gurita swarm [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -69,6 +73,8 @@ Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <swarm_facets>`
 
+See also
+--------
 
 Similar functionality to swarm plots are provided by:
 
@@ -76,6 +82,8 @@ Similar functionality to swarm plots are provided by:
  * :doc:`Violin plots <violin/>`
  * :doc:`Strip plots <strip/>` 
  * :doc:`Boxen plots <boxen/>` 
+
+Swarm plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="swarm"`` option.
 
 .. warning::
    Swarm plots can be slow to render on input data sets with large numbers of rows. 

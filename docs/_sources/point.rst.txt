@@ -5,11 +5,15 @@ point
 
 Point plots show the point estimates of the central tendency (mean) of numerical columns with error bars. 
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita point <arguments>
+.. code-block:: text 
 
-Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="point"`` option.
+    gurita point [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -66,9 +70,14 @@ Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <point_facets>`
 
+See also
+--------
+
 Similar functionality to point plots are provided by:
 
  * :doc:`Bar plots <bar/>` 
+
+Point plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="point"`` option.
 
 Simple example
 --------------

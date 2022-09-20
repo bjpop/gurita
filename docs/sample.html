@@ -119,7 +119,17 @@
   <section id="sample">
 <span id="id1"></span><h1>sample<a class="headerlink" href="#sample" title="Permalink to this headline"></a></h1>
 <p>Input rows can be randomly sampled using the <code class="docutils literal notranslate"><span class="pre">--sample</span> <span class="pre">NUM</span></code> argument. If NUM &gt;= 1 then sample NUM rows, otherwise if 0 &lt;= NUM &lt; 1, then sample NUM fraction of rows.</p>
-<p>Example:</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita sample <span class="o">[</span>-h<span class="o">]</span> NUM
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --sample <span class="m">100</span> -x signal fmri.csv
 </pre></div>
 </div>
@@ -138,6 +148,7 @@
 <p>The maximum number of rows you can randomly sample is bounded by the total number of rows in the input file.
 If you ask to randomly sample more than the total number of rows, no sampling will be done, and all the input rows will be used.</p>
 </div>
+</section>
 </section>
 
 

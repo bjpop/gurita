@@ -5,7 +5,15 @@ head
 
 Select a number of rows from the start (top) of the input data set, return the result as a new table.
 
-Compare to the :doc:`tail <tail/>` command that returns rows from the end (bottom) of the data instead of the start.
+Usage
+-----
+
+.. code-block:: text
+
+   gurita head [-h] [NUM]
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -22,6 +30,10 @@ Compare to the :doc:`tail <tail/>` command that returns rows from the end (botto
      - the number of rows to select 
      - :ref:`number of rows <head_num>`
 
+See also
+--------
+
+Compare to the :doc:`tail <tail/>` command that returns rows from the end (bottom) of the data instead of the start.
 
 Simple example
 --------------

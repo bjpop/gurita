@@ -5,9 +5,15 @@ cut
 
 Select and keep or drop specified columns from the data set.
 
+Usage
+-----
+
 .. code-block:: bash
 
-    gurita cut <arguments>
+    gurita cut [-h] -c COLUMN [COLUMN ...] [-i]
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10

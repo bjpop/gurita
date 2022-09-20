@@ -5,11 +5,15 @@ violin
 
 Violin plots show the distribution of values in a numerical column optionally grouped by categorical columns.
 
+Usage
+-----
+
 .. code-block:: text
 
-    gurita violin <arguments>
+    gurita violin [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
 
-Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="violin"`` option.
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -66,12 +70,17 @@ Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generat
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <violin_facets>`
 
+See also
+--------
+
 Similar functionality to violin plots are provided by:
 
  * :doc:`Box plots <box/>`
  * :doc:`Swarm plots <swarm/>`
  * :doc:`Strip plots <strip/>` 
  * :doc:`Boxen plots <boxen/>` 
+
+Violin plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="violin"`` option.
 
 Simple example
 --------------

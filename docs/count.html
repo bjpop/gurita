@@ -116,10 +116,14 @@
   <section id="count">
 <span id="id1"></span><h1>count<a class="headerlink" href="#count" title="Permalink to this headline"></a></h1>
 <p>Count plots show the frequency of values within categorical columns using bars.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita count &lt;arguments&gt;
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita count <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-x COLUMN<span class="o">]</span> <span class="o">[</span>-y COLUMN<span class="o">]</span> ... other arguments ...
 </pre></div>
 </div>
-<p>Count plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;count&quot;</span></code> option.</p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given tight-table docutils align-default">
 <colgroup>
 <col style="width: 45%" />
@@ -203,6 +207,11 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p>Count plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;count&quot;</span></code> option.</p>
+</section>
 <section id="simple-example">
 <span id="count-example"></span><h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Plot a count of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> categorical column from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>

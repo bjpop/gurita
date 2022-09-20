@@ -140,6 +140,18 @@ containing the following figure:</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<p>If we wanted to see the median value of <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> for each <code class="docutils literal notranslate"><span class="pre">species</span></code> we can do this with the
+following <code class="docutils literal notranslate"><span class="pre">groupby</span></code> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita groupby --key species --val sepal_length --fun median
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>species,sepal_length_median
+setosa,5.0
+versicolor,5.9
+virginica,6.5
+</pre></div>
+</div>
+<p>You can see that the corresponding median values match up with the values shown in the box plot.</p>
 </section>
 <section id="advanced-example">
 <h2>Advanced example<a class="headerlink" href="#advanced-example" title="Permalink to this headline"></a></h2>

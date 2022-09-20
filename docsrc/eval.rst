@@ -22,9 +22,15 @@ The expression language uses a simple syntax that resembles Python.
    Do not use ``eval`` if you do not trust the expression supplied as an argument. For example, do not use ``eval`` on strings that
    are input from untrusted sources, such as input to web pages.
 
+Usage
+-----
+
 .. code-block:: text 
 
-    gurita eval <arguments>
+    gurita eval [-h] EXPR [EXPR ...] 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10

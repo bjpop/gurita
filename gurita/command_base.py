@@ -25,8 +25,5 @@ class CommandBase:
         self.optional = self.parser.add_argument_group('optional arguments')
         self.optional.add_argument( '-h', '--help', action='help', default=argparse.SUPPRESS, help='show this help message and exit')
 
-    def parse_args(self, args):
+    def parse_args(self, args=[]):
         self.options = self.parser.parse_args(args)
-
-
-

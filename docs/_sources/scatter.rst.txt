@@ -5,14 +5,15 @@ scatter
 
 Scatter plots show the relationship between two columns as a scatter of data points.
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita scatter <arguments>
+.. code-block:: text 
 
-When one of the two columns being compared is a categorical value the scatter plot is similar to
-:doc:`strip plot <strip/>`.
+    gurita scatter [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
 
-Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html>`_ library function, using the ``kind="scatter"`` option.
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -80,6 +81,14 @@ Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/genera
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <scatter_facets>`
+
+See also
+--------
+
+When one of the two columns being compared is a categorical value the scatter plot is similar to
+:doc:`strip plot <strip/>`.
+
+Scatter plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.relplot.html>`_ library function, using the ``kind="scatter"`` option.
 
 .. _scatter_example:
 

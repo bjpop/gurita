@@ -8,11 +8,15 @@ optionally grouped by categorical columns.
 
 If multiple Y values are provided for each X value then the plot will show an estimate of the central tendency of X and confidence interval for the estimate.
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita line <arguments>
+.. code-block:: text 
 
-Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="line"`` option.
+    gurita line [-h] [-x COLUMN] [-y COLUMN] ... other arguments ...
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -62,6 +66,11 @@ Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated
    * - ``--colwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <line_facets>`
+
+See also
+--------
+
+Line plots are based on Seaborn's `relplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="line"`` option.
 
 Simple example
 --------------

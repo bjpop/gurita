@@ -5,11 +5,15 @@ strip
 
 Strip plots show the distribution of values in a numerical column optionally grouped by categorical columns, where dots are used to show the underlying data points.
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita strip <arguments>
+.. code-block:: text 
 
-Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="strip"`` option.
+    gurita strip [-h] [-x COLUMN] [-y COLUMN] [--hue COLUMN] ... other arguments ...
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -69,12 +73,17 @@ Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generate
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <strip_facets>`
 
+See also
+--------
+
 Similar functionality to strip plots are provided by:
 
  * :doc:`Box plots <box/>`
  * :doc:`Violin plots <violin/>`
  * :doc:`Swarm plots <swarm/>` 
  * :doc:`Boxen plots <boxen/>` 
+
+Strip plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="strip"`` option.
 
 Simple example
 --------------

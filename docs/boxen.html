@@ -116,10 +116,14 @@
   <section id="boxen">
 <span id="id1"></span><h1>boxen<a class="headerlink" href="#boxen" title="Permalink to this headline"></a></h1>
 <p>Boxen plots show the distribution of values in a numerical column optionally grouped by categorical columns.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen &lt;arguments&gt;
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita boxen [-h] [-x COLUMN] [-y COLUMN] ... other arguments ...
 </pre></div>
 </div>
-<p>Boxen plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;boxen&quot;</span></code> option.</p>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
 <table class="colwidths-given tight-table docutils align-default">
 <colgroup>
 <col style="width: 45%" />
@@ -207,6 +211,9 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
 <p>Similar functionality to boxen plots are provided by:</p>
 <blockquote>
 <div><ul class="simple">
@@ -216,6 +223,8 @@
 <li><p><a class="reference internal" href="strip.html"><span class="doc">Strip plots</span></a></p></li>
 </ul>
 </div></blockquote>
+<p>Boxen plots are based on Seaborn’s <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.catplot.html">catplot</a> library function, using the <code class="docutils literal notranslate"><span class="pre">kind=&quot;boxen&quot;</span></code> option.</p>
+</section>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>Boxen plot of the <code class="docutils literal notranslate"><span class="pre">age</span></code> numerical column from the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> input file:</p>

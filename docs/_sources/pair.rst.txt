@@ -11,11 +11,15 @@ categorical columns as well.
 
 A histogram showing the distribution of each column is shown on the diagonal.
 
-Pair plots are based on Seaborn's `pairplot <https://seaborn.pydata.org/generated/seaborn.pairplot.html>`_ library function.
+Usage
+-----
 
 .. code-block:: text
 
-    gurita pair <arguments>
+    gurita pair [-h] [-c [COLUMN ...]] [--kind {scatter,kde,hist,reg}] ... other arguments ...
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -41,6 +45,11 @@ Pair plots are based on Seaborn's `pairplot <https://seaborn.pydata.org/generate
    * - ``--kind {scatter,kde,hist,reg}`` 
      - choose the kind of plot (default: ``scatter``)
      - :ref:`kind <pair_kind>`
+
+See also
+--------
+
+Pair plots are based on Seaborn's `pairplot <https://seaborn.pydata.org/generated/seaborn.pairplot.html>`_ library function.
 
 Simple example
 --------------

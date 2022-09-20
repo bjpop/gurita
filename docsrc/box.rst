@@ -6,11 +6,15 @@ box
 Box (or box-and-whisker) plots show the distribution of values in a numerical column optionally grouped by categorical columns.
 The distribution of a numerical column is displayed using the inter-quartile range, with outliers shown as separate diamond shaped points.
 
-.. code-block:: bash
+Usage
+-----
 
-    gurita box <arguments>
+.. code-block:: text 
 
-Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="box"`` option.
+    gurita box [-h] [-x COLUMN] [-y COLUMN] ... other arguments ... 
+
+Arguments
+---------
 
 .. list-table::
    :widths: 25 20 10
@@ -73,12 +77,17 @@ Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <box_facets>`
 
+See also
+--------
+
 Similar functionality to box plots are provided by:
 
  * :doc:`Violin plots <violin/>`
  * :doc:`Swarm plots <swarm/>`
  * :doc:`Strip plots <strip/>` 
  * :doc:`Boxen plots <boxen/>` 
+
+Box plots are based on Seaborn's `catplot <https://seaborn.pydata.org/generated/seaborn.catplot.html>`_ library function, using the ``kind="box"`` option.
 
 Simple example
 --------------
