@@ -68,6 +68,7 @@ DEFAULT_GROUPBY_FUN = 'count'
 DEFAULT_SEP = ','
 DEFAULT_ESTIMATOR = 'mean'
 DEFAULT_CI = 95
+DEFAULT_SORT_ALGORITHM = 'quicksort'
 
 #ALLOWED_FILETYPES = ['csv', 'tsv', 'CSV', 'TSV']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -92,6 +93,7 @@ ALLOWED_GROUPBY_FUN = ['size', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'pr
 ESTIMATOR_FUNS = {'mean': np.mean, 'median': np.median, 'max': np.max, 'min': np.min,
   'sum': np.sum, 'std': np.std, 'var': np.var }
 ALLOWED_ESTIMATORS = list(ESTIMATOR_FUNS.keys())
+ALLOWED_SORT_ALGORITHMS = ['quicksort', 'mergesort', 'heapsort', 'stable']
 
 
 try:

@@ -196,20 +196,24 @@ class Sort(CommandBase, name="sort"):
             '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=True,
             help=f'Sort the data by these columns in precedence from left to right')
         self.optional.add_argument(
-            '--napos', metavar='POS', type=str, required=False, choices=const.ALLOWED_SORT_NAPOS,
+            '--napos', type=str, required=False, choices=const.ALLOWED_SORT_NAPOS,
             default=const.DEFAULT_SORT_NAPOS,
             help=f'Ordering for missing (NA) values. Allowed values: %(choices)s. Default: %(default)s.')
         self.optional.add_argument(
-            '--order', metavar='ORDER', type=str, nargs='+', required=False,
+            '--order', type=str, nargs='+', required=False,
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
             help=f'Ordering to use for sort. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. The choices match with the specified columns to use for sorting (-c|--columns). If len(--order) < len(-c|--columns) the remaining columns will default to ascending order.')
+        self.optional.add_argument(
+            '--alg', type=str, required=False,
+            choices=const.ALLOWED_SORT_ALGORITHMS, default=const.DEFAULT_SORT_ALGORITHM,
+            help=f'Algorithm to use for sort. Allowed values: %(choices)s. Default: %(default)s. The only stable algorithms are "stable" and "mergesort".')
     
 
     def run(self, df):
         options = self.options
         ordering = get_sort_ordering(options.columns, options.order)
         utils.validate_columns_error(df, options.columns)
-        df = df.sort_values(by=options.columns, na_position=options.napos, ascending=ordering, ignore_index=True)
+        df = df.sort_values(by=options.columns, na_position=options.napos, ascending=ordering, kind=options.alg, ignore_index=True)
         return df
     
 
