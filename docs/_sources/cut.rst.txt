@@ -96,7 +96,7 @@ Selecting columns
 
 .. code-block:: text
 
-    -c NAME [NAME ...], --columns NAME [NAME ...]
+    -c COLUMN [COLUMN ...], --columns COLUMN [COLUMN ...]
 
 The ``cut`` command requires one or more column names to be specified. By default, the named columns are kept and the unnamed columns are discarded. 
 

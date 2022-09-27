@@ -214,8 +214,7 @@ using equality on the values in the key columns.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Groups are based on rows sharing a unique set of values from the <code class="docutils literal notranslate"><span class="pre">--key</span></code> columns. Thus key values are compared and grouped based on their <em>equality</em>.</p>
-<p>It is possible to have a mixture of categorical and numerical columns as keys, but for numerical keys it usually only makes sense
-when those are integers.</p>
+<p>It is possible to have a mixture of categorical, numerical and boolean columns as keys.</p>
 </div>
 <p>As an example, the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> dataset has a <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column with three possible values: <code class="docutils literal notranslate"><span class="pre">Cherbourg</span></code> and <code class="docutils literal notranslate"><span class="pre">Queenstown</span></code> and <code class="docutils literal notranslate"><span class="pre">Southhampton</span></code>.</p>
 <p>The simple example above showed how to compute the size of each of those groups. We can extend this example by grouping on another column.

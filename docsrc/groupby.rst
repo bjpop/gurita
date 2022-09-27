@@ -97,8 +97,7 @@ using equality on the values in the key columns.
 
    Groups are based on rows sharing a unique set of values from the ``--key`` columns. Thus key values are compared and grouped based on their *equality*.
 
-   It is possible to have a mixture of categorical and numerical columns as keys, but for numerical keys it usually only makes sense
-   when those are integers.
+   It is possible to have a mixture of categorical, numerical and boolean columns as keys. 
 
 As an example, the ``titanic.csv`` dataset has a ``embark_town`` column with three possible values: ``Cherbourg`` and ``Queenstown`` and ``Southhampton``.
 

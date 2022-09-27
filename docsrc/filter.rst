@@ -38,20 +38,16 @@ The expression argument is required. If it contains spaces then it ought to be s
 Simple example
 --------------
 
-Input rows can be filtered using the ``--filter EXPR`` option, where ``EXPR`` is a logical (boolean) expression that determines which rows are retained. 
+The following example reads data from ``titanic.csv`` and retains only rows where ``embark_town`` is equal to ``Cherbourg``, all other rows are discarded: 
 
-Example:
+.. code-block:: text
 
-.. code-block:: bash
+   gurita filter 'embark_town == "Cherbourg"' <  titanic.csv 
 
-   gurita hist --filter 'embark_town == "Cherbourg"' -x age titanic.csv
+The string ``'embark_town == "Cherbourg"'`` specifies the filtering expression. 
 
-In the example above, the string ``'embark_town == "Cherbourg"'`` specifies the filtering expression. 
-
-Note that the whole expression is inside quotes; this is necessary to ensure that the whole expression is passed as a single entity
-to Gurita.
-
-In this case a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``embark_town`` is equal to the string ``"Cherbourg"``. 
+Note that the whole expression is inside quotes; this is necessary to ensure that the 
+whole expression is passed as a single entity to Gurita.
 
 Columns can be referred to by their name, such as ``embark_town``. Literal categorical values are written as strings inside quotation marks, such as ``"Cherbourg"``.
 
@@ -67,14 +63,12 @@ arguments:
 
     gurita filter -h
 
-
 .. _filter_expression:
-
 
 Expressions
 -----------
 
-Gurita row filtering uses the same syntax as the `Pandas data frame query method <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html>`_, and generally resembles
+Row filtering uses the same syntax as the `Pandas data frame query method <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html>`_, and generally resembles
 Python notation.
 
 You can refer to column headings (column names) in the input data by name, join multiple sub-expressions together using logical operators ``and`` ``or`` and ``not``, and group sub-expressions with parentheses. 
@@ -84,7 +78,7 @@ Quoting column names with spaces
 
 Features (column names) that contain spaces must be surrounded in back-tick quotes:
 
-.. code-block:: bash
+.. code-block:: text
 
     gurita hist --filter '`top score` > 1000' -x time game.csv 
 
@@ -93,76 +87,88 @@ In the above example, the column (column name) ``top score`` must be surrounded 
 Filtering on numerical columns 
 -------------------------------
 
-Numerical columns can be compared for equality and also ordering. Numerical literals are written using Python syntax.
+Numerical columns can be compared for equality (``==``), inequality (``!=``) and ordering (less than ``<``, greater than ``>``, less than or equals ``<=``, greater than or equals ``>=``). Numerical literals are written using Python syntax.
 
-.. code-block:: bash
+In the example below rows where the ``fare`` column is less than or equal to ``100`` are retained and all others are discarded:
 
-    gurita hist --filter 'fare <= 100' -x age titanic.csv
+.. code-block:: text 
 
-In the example above, a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``fare`` is less than or equal to ``100``. 
+    gurita filter 'fare <= 100' < titanic.csv
 
 Filtering on categorical columns 
 ---------------------------------
 
-Categorical literals (but not booleans) are written as quoted strings.
+Categorical literals (i.e. strings but not booleans) are written as quoted strings.
 
-.. code-block:: bash
+In the example below all rows where ``who`` is not equal to ``child`` 
+are retained. Or, in other words,
+all rows relating to children are discareded and only adults are retained.
 
-    gurita hist --filter 'who != "child"' -x age titanic.csv
+.. code-block:: text
 
-In the example above, a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``who`` is not equal to ``"child"`` (in other words only for adults). 
+    gurita filter 'who != "child"' < titanic.csv
+
+Note that the categorical value ``"child"`` is written inside quotes.
 
 Filtering on boolean columns 
 -----------------------------
 
 Boolean literals are written with a capital first letter, as they are done in Python. Note that boolean literals are not quoted.
 
-.. code-block:: bash
+.. code-block:: text
 
-    gurita hist --filter 'adult_male == True' -x age titanic.csv
+    gurita filter 'adult_male == True' < titanic.csv
 
-In the example above, a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``adult_male`` is ``True``.
+In the example above, only rows where ``adult_male`` is ``True`` are retained.
 
-Note that it is redundant to compare boolean columns to literal truth values. The same result in the above example can be achieved as follows:
+.. note::
 
-.. code-block:: bash
+    It is redundant to compare boolean columns to literal truth values. 
+    
+    Therefore the following two commands have the same behaviour: 
 
-    gurita hist --filter 'adult_male' -x age titanic.csv
+    .. code-block:: text
+    
+        gurita filter 'adult_male == True' < titanic.csv
+    
+    .. code-block:: text
+    
+        gurita filter 'adult_male' < titanic.csv
 
 Boolean columns can be negated with ``not``:
 
-.. code-block:: bash
+.. code-block:: text
  
-    gurita hist --filter 'not adult_male' -x age titanic.csv
+    gurita filter 'not adult_male' < titanic.csv
 
-In the example above, a histogram will be generated for the ``age`` column in ``titanic.csv``, but only for rows where ``adult_male`` is ``False``.
+In the example above only rows where ``adult_male`` is ``False`` will be retained.
 
 Comparing columns
 ------------------
 
 Filter expressions can compare values from different columns, assuming they have a compatible type (for example, numerical columns may only be compared to other numerical columns, and so forth).
 
-.. code-block:: bash
+.. code-block:: text
 
-   gurita hist --filter 'sepal_length > petal_length' -x sepal_width iris.csv
+   gurita filter 'sepal_length > petal_length' < iris.csv
 
-In the example above, a histogram will be generated for the ``sepal_width`` column in ``iris.csv``, but only for rows where the numerical column ``sepal_length`` is greater than the numerical column ``petal_length``.
+In the example above only rows in ``iris.csv`` where ``sepal_length`` is greater than ``petal_length`` will be retained.
 
 Compound filter expressions
 ---------------------------
 
 Multiple filtering crtieria can be combined into one filter expression by combining sub-expressions with boolean operators ``and`` and ``or``.
 
-.. code-block:: bash
+.. code-block:: text
 
-    gurita hist --filter 'smoker == "No" and total_bill > 10' -x tip tips.csv
+    gurita filter 'smoker == "No" and total_bill > 10' < tips.csv
 
-In the example above, a histogram will be generated for the ``tip`` column in ``tips.csv``, but only for rows where the categorical column ``smoker`` is ``"No"`` and the numerical column ``total_bill`` is greater than 10.
+In the example above only rows in ``tips.csv`` where the column ``smoker`` is ``"No"`` and the numerical column ``total_bill`` is greater than 10 will be retained.
 
 If needed, parentheses can be used to group sub-expressions:
 
-.. code-block:: bash
+.. code-block:: text
 
-   gurita hist --filter 'smoker == "No" and (total_bill > 10 or day == "Sun")' -x tip tips.csv
+   gurita filter 'smoker == "No" and (total_bill > 10 or day == "Sun")' < tips.csv
 
 In the above example, the sub-expression inside the parentheses is evaluated first, before the outer sub-expression.

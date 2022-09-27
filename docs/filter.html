@@ -159,15 +159,13 @@
 </section>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
-<p>Input rows can be filtered using the <code class="docutils literal notranslate"><span class="pre">--filter</span> <span class="pre">EXPR</span></code> option, where <code class="docutils literal notranslate"><span class="pre">EXPR</span></code> is a logical (boolean) expression that determines which rows are retained.</p>
-<p>Example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;embark_town == &quot;Cherbourg&quot;&#39;</span> -x age titanic.csv
+<p>The following example reads data from <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> and retains only rows where <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">Cherbourg</span></code>, all other rows are discarded:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;embark_town == &quot;Cherbourg&quot;&#39; &lt;  titanic.csv
 </pre></div>
 </div>
-<p>In the example above, the string <code class="docutils literal notranslate"><span class="pre">'embark_town</span> <span class="pre">==</span> <span class="pre">&quot;Cherbourg&quot;'</span></code> specifies the filtering expression.</p>
-<p>Note that the whole expression is inside quotes; this is necessary to ensure that the whole expression is passed as a single entity
-to Gurita.</p>
-<p>In this case a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> is equal to the string <code class="docutils literal notranslate"><span class="pre">&quot;Cherbourg&quot;</span></code>.</p>
+<p>The string <code class="docutils literal notranslate"><span class="pre">'embark_town</span> <span class="pre">==</span> <span class="pre">&quot;Cherbourg&quot;'</span></code> specifies the filtering expression.</p>
+<p>Note that the whole expression is inside quotes; this is necessary to ensure that the
+whole expression is passed as a single entity to Gurita.</p>
 <p>Columns can be referred to by their name, such as <code class="docutils literal notranslate"><span class="pre">embark_town</span></code>. Literal categorical values are written as strings inside quotation marks, such as <code class="docutils literal notranslate"><span class="pre">&quot;Cherbourg&quot;</span></code>.</p>
 </section>
 <section id="getting-help">
@@ -180,68 +178,78 @@ arguments:</p>
 </section>
 <section id="expressions">
 <span id="filter-expression"></span><h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline"></a></h2>
-<p>Gurita row filtering uses the same syntax as the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html">Pandas data frame query method</a>, and generally resembles
+<p>Row filtering uses the same syntax as the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html">Pandas data frame query method</a>, and generally resembles
 Python notation.</p>
 <p>You can refer to column headings (column names) in the input data by name, join multiple sub-expressions together using logical operators <code class="docutils literal notranslate"><span class="pre">and</span></code> <code class="docutils literal notranslate"><span class="pre">or</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span></code>, and group sub-expressions with parentheses.</p>
 </section>
 <section id="quoting-column-names-with-spaces">
 <h2>Quoting column names with spaces<a class="headerlink" href="#quoting-column-names-with-spaces" title="Permalink to this headline"></a></h2>
 <p>Features (column names) that contain spaces must be surrounded in back-tick quotes:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;`top score` &gt; 1000&#39;</span> -x <span class="nb">time</span> game.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist --filter &#39;`top score` &gt; 1000&#39; -x time game.csv
 </pre></div>
 </div>
 <p>In the above example, the column (column name) <code class="docutils literal notranslate"><span class="pre">top</span> <span class="pre">score</span></code> must be surrounded in back-tick quotes because it contains a whitespace character.</p>
 </section>
 <section id="filtering-on-numerical-columns">
 <h2>Filtering on numerical columns<a class="headerlink" href="#filtering-on-numerical-columns" title="Permalink to this headline"></a></h2>
-<p>Numerical columns can be compared for equality and also ordering. Numerical literals are written using Python syntax.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;fare &lt;= 100&#39;</span> -x age titanic.csv
+<p>Numerical columns can be compared for equality (<code class="docutils literal notranslate"><span class="pre">==</span></code>), inequality (<code class="docutils literal notranslate"><span class="pre">!=</span></code>) and ordering (less than <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, greater than <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, less than or equals <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, greater than or equals <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>). Numerical literals are written using Python syntax.</p>
+<p>In the example below rows where the <code class="docutils literal notranslate"><span class="pre">fare</span></code> column is less than or equal to <code class="docutils literal notranslate"><span class="pre">100</span></code> are retained and all others are discarded:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;fare &lt;= 100&#39; &lt; titanic.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">fare</span></code> is less than or equal to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
 </section>
 <section id="filtering-on-categorical-columns">
 <h2>Filtering on categorical columns<a class="headerlink" href="#filtering-on-categorical-columns" title="Permalink to this headline"></a></h2>
-<p>Categorical literals (but not booleans) are written as quoted strings.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;who != &quot;child&quot;&#39;</span> -x age titanic.csv
+<p>Categorical literals (i.e. strings but not booleans) are written as quoted strings.</p>
+<p>In the example below all rows where <code class="docutils literal notranslate"><span class="pre">who</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">child</span></code>
+are retained. Or, in other words,
+all rows relating to children are discareded and only adults are retained.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;who != &quot;child&quot;&#39; &lt; titanic.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">who</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">&quot;child&quot;</span></code> (in other words only for adults).</p>
+<p>Note that the categorical value <code class="docutils literal notranslate"><span class="pre">&quot;child&quot;</span></code> is written inside quotes.</p>
 </section>
 <section id="filtering-on-boolean-columns">
 <h2>Filtering on boolean columns<a class="headerlink" href="#filtering-on-boolean-columns" title="Permalink to this headline"></a></h2>
 <p>Boolean literals are written with a capital first letter, as they are done in Python. Note that boolean literals are not quoted.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;adult_male == True&#39;</span> -x age titanic.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;adult_male == True&#39; &lt; titanic.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">adult_male</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<p>Note that it is redundant to compare boolean columns to literal truth values. The same result in the above example can be achieved as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;adult_male&#39;</span> -x age titanic.csv
+<p>In the example above, only rows where <code class="docutils literal notranslate"><span class="pre">adult_male</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> are retained.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is redundant to compare boolean columns to literal truth values.</p>
+<p>Therefore the following two commands have the same behaviour:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;adult_male == True&#39; &lt; titanic.csv
 </pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;adult_male&#39; &lt; titanic.csv
+</pre></div>
+</div>
 </div>
 <p>Boolean columns can be negated with <code class="docutils literal notranslate"><span class="pre">not</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;not adult_male&#39;</span> -x age titanic.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;not adult_male&#39; &lt; titanic.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column in <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>, but only for rows where <code class="docutils literal notranslate"><span class="pre">adult_male</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>In the example above only rows where <code class="docutils literal notranslate"><span class="pre">adult_male</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code> will be retained.</p>
 </section>
 <section id="comparing-columns">
 <h2>Comparing columns<a class="headerlink" href="#comparing-columns" title="Permalink to this headline"></a></h2>
 <p>Filter expressions can compare values from different columns, assuming they have a compatible type (for example, numerical columns may only be compared to other numerical columns, and so forth).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;sepal_length &gt; petal_length&#39;</span> -x sepal_width iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;sepal_length &gt; petal_length&#39; &lt; iris.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column in <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, but only for rows where the numerical column <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is greater than the numerical column <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>.</p>
+<p>In the example above only rows in <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> where <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> is greater than <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> will be retained.</p>
 </section>
 <section id="compound-filter-expressions">
 <h2>Compound filter expressions<a class="headerlink" href="#compound-filter-expressions" title="Permalink to this headline"></a></h2>
 <p>Multiple filtering crtieria can be combined into one filter expression by combining sub-expressions with boolean operators <code class="docutils literal notranslate"><span class="pre">and</span></code> and <code class="docutils literal notranslate"><span class="pre">or</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;smoker == &quot;No&quot; and total_bill &gt; 10&#39;</span> -x tip tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;smoker == &quot;No&quot; and total_bill &gt; 10&#39; &lt; tips.csv
 </pre></div>
 </div>
-<p>In the example above, a histogram will be generated for the <code class="docutils literal notranslate"><span class="pre">tip</span></code> column in <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code>, but only for rows where the categorical column <code class="docutils literal notranslate"><span class="pre">smoker</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;No&quot;</span></code> and the numerical column <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> is greater than 10.</p>
+<p>In the example above only rows in <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> where the column <code class="docutils literal notranslate"><span class="pre">smoker</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;No&quot;</span></code> and the numerical column <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> is greater than 10 will be retained.</p>
 <p>If needed, parentheses can be used to group sub-expressions:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita hist --filter <span class="s1">&#39;smoker == &quot;No&quot; and (total_bill &gt; 10 or day == &quot;Sun&quot;)&#39;</span> -x tip tips.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;smoker == &quot;No&quot; and (total_bill &gt; 10 or day == &quot;Sun&quot;)&#39; &lt; tips.csv
 </pre></div>
 </div>
 <p>In the above example, the sub-expression inside the parentheses is evaluated first, before the outer sub-expression.</p>

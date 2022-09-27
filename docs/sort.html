@@ -118,6 +118,303 @@
              
   <section id="sort">
 <span id="id1"></span><h1>sort<a class="headerlink" href="#sort" title="Permalink to this headline"></a></h1>
+<p>Sort rows in the dataset based on the values in specified columns.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort [-h] -c COLUMN [COLUMN ...] [--napos {first,last}]
+            [--order {a,d} [{a,d} ...]]
+            [--alg {quicksort,mergesort,heapsort,stable}]
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#sort-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+</ul>
+</td>
+<td><p>sort data by these columns</p></td>
+<td><p><a class="reference internal" href="#sort-columns"><span class="std std-ref">sort columns</span></a></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">ORDER</span> <span class="pre">[ORDER</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--order</span> <span class="pre">ORDER</span> <span class="pre">[ORDER</span> <span class="pre">...]</span></code></p></li>
+</ul>
+</td>
+<td><p>ascending or descending sort order (default: ascending)</p></td>
+<td><p><a class="reference internal" href="#sort-order"><span class="std std-ref">sort order</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--alg</span> <span class="pre">{quicksort,mergesort,heapsort,stable}</span></code></p></td>
+<td><p>algorithm to use for sort (default: quicksort)</p></td>
+<td><p><a class="reference internal" href="#sort-algorithm"><span class="std std-ref">sort algorithm</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--napos</span> <span class="pre">{first,last}</span></code></p></td>
+<td><p>ordering for missing (NA) values (default: first)</p></td>
+<td><p><a class="reference internal" href="#sort-napos"><span class="std std-ref">NA order</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--columns</span></code>) argument is required, and all other arguments are optional.</p>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>Suppose we are working with the following small data set with 10 data rows that is stored in a file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+</pre></div>
+</div>
+<p>The command below sorts the rows of the data based on the values in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> row in ascending order:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_width &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+6.3,2.5,5.0,1.9,virginica
+6.4,2.8,5.6,2.1,virginica
+5.9,3.0,4.2,1.5,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.3,3.4,5.6,2.4,virginica
+4.8,3.4,1.9,0.2,setosa
+5.2,3.5,1.5,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+</pre></div>
+</div>
+<p>After sorting all rows are in ascending order according to their value in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column.
+Categorical columns are sorted in alpha-numeric order, as is common in most applications.</p>
+<p>For example, sorting on the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> column can be done like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c species &lt; example.csv
+</pre></div>
+</div>
+<p>producing the following output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+4.8,3.4,1.9,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+5.2,3.5,1.5,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+5.9,3.0,4.2,1.5,versicolor
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+6.4,2.8,5.6,2.1,virginica
+</pre></div>
+</div>
+</section>
+<section id="getting-help">
+<span id="sort-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">sort</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -h
+</pre></div>
+</div>
+</section>
+<section id="selecting-columns-to-use-for-sorting">
+<span id="sort-columns"></span><h2>Selecting columns to use for sorting<a class="headerlink" href="#selecting-columns-to-use-for-sorting" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c COLUMN [COLUMN ...], --columns COLUMN [COLUMN ...]
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sort</span></code> command requires one or more columns to be specified.</p>
+<p>Multi-column sorting behaves like most spreadsheet applications, where precedence goes from left to right in the order of the specified columns.</p>
+<p>The following example sorts first on <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> and then on <code class="docutils literal notranslate"><span class="pre">species</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_width species &lt; example.csv
+</pre></div>
+</div>
+<p>The relative order of rows that are tied on equal values of <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> will be determined by the corresponding values in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column.</p>
+<p>The result of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+6.3,2.5,5.0,1.9,virginica
+6.4,2.8,5.6,2.1,virginica
+5.9,3.0,4.2,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,3.2,4.5,1.5,versicolor
+6.3,3.3,4.7,1.6,versicolor
+4.8,3.4,1.9,0.2,setosa
+6.3,3.4,5.6,2.4,virginica
+5.2,3.5,1.5,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+</pre></div>
+</div>
+<p>Observe that the two rows with a <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> of <code class="docutils literal notranslate"><span class="pre">3.2</span></code> are sorted based on <code class="docutils literal notranslate"><span class="pre">species</span></code> such that <code class="docutils literal notranslate"><span class="pre">setosa</span></code> comes before <code class="docutils literal notranslate"><span class="pre">versicolor</span></code>. Likewise, the two rows with a <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> of <code class="docutils literal notranslate"><span class="pre">3.4</span></code> are sorted based on <code class="docutils literal notranslate"><span class="pre">species</span></code> such that <code class="docutils literal notranslate"><span class="pre">setosa</span></code> comes before <code class="docutils literal notranslate"><span class="pre">virginica</span></code>.</p>
+</section>
+<section id="sorting-in-ascending-or-descending-order">
+<span id="sort-order"></span><h2>Sorting in ascending or descending order<a class="headerlink" href="#sorting-in-ascending-or-descending-order" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-o {a,d} [{a,d} ...], --order {a,d} [{a,d} ...]
+</pre></div>
+</div>
+<p>By default rows are sorted in ascending order according to the values in the specified columns. However, this can be changed to descending order using the <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--order</span></code>) argument.  The direction of the ordering is given by the characters <code class="docutils literal notranslate"><span class="pre">a</span></code> (ascending) and <code class="docutils literal notranslate"><span class="pre">d</span></code> (descending).</p>
+<p>The following command sorts the rows in descending order based on the values in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_width --order d &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+5.4,3.9,1.7,0.4,setosa
+5.2,3.5,1.5,0.2,setosa
+6.3,3.4,5.6,2.4,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+5.9,3.0,4.2,1.5,versicolor
+6.4,2.8,5.6,2.1,virginica
+6.3,2.5,5.0,1.9,virginica
+</pre></div>
+</div>
+<p>When sorting on multiple columns the ordering can be specified on a per-column basis.</p>
+<p>The following command sorts rows in descending order based on the values in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column and, when there are equal ties, it sorts in ascending order on values in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_width species --order d a &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+5.4,3.9,1.7,0.4,setosa
+5.2,3.5,1.5,0.2,setosa
+4.8,3.4,1.9,0.2,setosa
+6.3,3.4,5.6,2.4,virginica
+6.3,3.3,4.7,1.6,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,3.2,4.5,1.5,versicolor
+5.9,3.0,4.2,1.5,versicolor
+6.4,2.8,5.6,2.1,virginica
+6.3,2.5,5.0,1.9,virginica
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The columns specified with <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--columns</span></code>) and the ordering specified by <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--order</span></code>) match up pairwise.</p>
+<p>For example, in the scheme below, the order for column <code class="docutils literal notranslate"><span class="pre">C1</span></code> is given by <code class="docutils literal notranslate"><span class="pre">O1</span></code>, and <code class="docutils literal notranslate"><span class="pre">C2</span></code> is ordered by <code class="docutils literal notranslate"><span class="pre">O2</span></code>,  and so forth:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c C1 C2 C3 -o O1 O2 O3
+</pre></div>
+</div>
+<p>Because of this notation and the fact that ordering defaults to ascending, it is only necessary to specify all orderings to the left of
+column <code class="docutils literal notranslate"><span class="pre">CN</span></code>, where <code class="docutils literal notranslate"><span class="pre">CN</span></code> is the rightmost column with non-default ordering. Or in other words, it is redunant to specify
+ascending orderings on the rightmost columns.</p>
+<p>For example the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c C1 C2 C3 -o a d a
+</pre></div>
+</div>
+<p>can be simplified to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c C1 C2 C3 -o a d
+</pre></div>
+</div>
+<p>because the rightmost column defaults to ascending, so there is no need to specify that explicitly.</p>
+</div>
+</section>
+<section id="sorting-algorithm">
+<span id="sort-algorithm"></span><h2>Sorting algorithm<a class="headerlink" href="#sorting-algorithm" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--alg {quicksort,mergesort,heapsort,stable}
+</pre></div>
+</div>
+<p>By default data is sorted using the quicksort algorithm, however it is possible to choose from alternatives:</p>
+<ul class="simple">
+<li><p>quicksort (default)</p></li>
+<li><p>mergesort</p></li>
+<li><p>heapsort</p></li>
+<li><p>stable</p></li>
+</ul>
+<p>For most use cases quicksort is likely to be the best choice, though do note that it can have poor runtime performance on data that is already mostly sorted. Also note that quicksort is not stable, as noted below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Quicksort is <em>not</em> a stable sorting algorithm. This means that when there are ties for equal values, the output rows may not retain the same relative order as the input data.</p>
+<p>However, the sorting algorithm can be changed using the <code class="docutils literal notranslate"><span class="pre">--alg</span></code> option, and the
+<strong>mergesort</strong> and <strong>stable</strong> algorithms are stable.</p>
+</div>
+</section>
+<section id="ordering-of-missing-na-values">
+<span id="sort-napos"></span><h2>Ordering of missing (NA) values<a class="headerlink" href="#ordering-of-missing-na-values" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--napos {first,last}
+</pre></div>
+</div>
+<p>Suppose that the example input data is modifed such that the first and last rows have missing values for <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+,3.5,1.5,0.2,setosa
+</pre></div>
+</div>
+<p>To sort the data on the <code class="docutils literal notranslate"><span class="pre">speal_length</span></code> column, we will need to decide what to do with the two rows with missing values.</p>
+<p>By default Gurita will place rows with missing values at the end of the sorted data, like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_length &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+4.7,3.2,1.3,0.2,setosa
+4.8,3.4,1.9,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+6.3,2.5,5.0,1.9,virginica
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+6.4,2.8,5.6,2.1,virginica
+,3.4,5.6,2.4,virginica
+,3.5,1.5,0.2,setosa
+</pre></div>
+</div>
+<p>Observe that the two rows with missing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> values appear last in the sorted data.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--napos</span></code> argument tells Gurita how to handle rows with missing values in the sorted columns.
+Setting it to <code class="docutils literal notranslate"><span class="pre">first</span></code> will cause rows with missing values in the sorted columns to appear first in the sorted output.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_length --napos first &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+,3.4,5.6,2.4,virginica
+,3.5,1.5,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.8,3.4,1.9,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+6.3,2.5,5.0,1.9,virginica
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+6.4,2.8,5.6,2.1,virginica
+</pre></div>
+</div>
+<p>Observe that the two rows with missing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> values appear first in the sorted data.</p>
+<p>It is also possible to remove rows or columns that contain missing values based on certain criteria using
+the <a class="reference internal" href="dropna.html"><span class="doc">dropna</span></a> command.</p>
+</section>
 </section>
 
 

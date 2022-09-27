@@ -200,7 +200,7 @@ class Sort(CommandBase, name="sort"):
             default=const.DEFAULT_SORT_NAPOS,
             help=f'Ordering for missing (NA) values. Allowed values: %(choices)s. Default: %(default)s.')
         self.optional.add_argument(
-            '--order', type=str, nargs='+', required=False,
+            '-o', '--order', type=str, nargs='+', required=False,
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
             help=f'Ordering to use for sort. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. The choices match with the specified columns to use for sorting (-c|--columns). If len(--order) < len(-c|--columns) the remaining columns will default to ascending order.')
         self.optional.add_argument(
