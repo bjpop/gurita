@@ -86,7 +86,7 @@ Transformation commands
      - Gaussian mixture model clustering
    * - :doc:`head <head>`
      - Select the first N rows in the data
-   * - :doc:`isnorm <isnorm>`
+   * - :doc:`normtest <normtest>`
      - Test whether numerical columns differ from a normal distribution
    * - :doc:`kmeans <kmeans>`
      - k-means clustering

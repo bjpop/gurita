@@ -18,8 +18,8 @@ from gurita.command_base import CommandBase
 import gurita.utils as utils
 import gurita.constants as const
 
-class IsNorm(CommandBase, name="isnorm"):
-    description = "Test whether numerical features differ from a normal distribution."
+class Normtest(CommandBase, name="normtest"):
+    description = "Test whether data in numerical column(s) differs from a normal distribution."
     category = "transformation"
 
     def __init__(self):
@@ -27,6 +27,20 @@ class IsNorm(CommandBase, name="isnorm"):
         self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
+        self.optional.add_argument(
+            '-m', '--method', choices=const.ALLOWED_NORMTEST_METHODS, 
+            default=const.DEFAULT_NORMTEST_METHOD,
+            help=f'Method for testing normality. Allowed values: %(choices)s. Default: %(default)s.')
+        self.optional.add_argument(
+            '-a', '--alpha', metavar='ALPHA', type=float, required=False,
+            default=const.DEFAULT_NORMTEST_ALPHA,
+            help=f'Threshold for significance. If p <= ALPHA then data is not normal. Default: %(default)s.')
+        self.optional.add_argument(
+            '-p', '--pvalue', action='store_true', default=False, 
+            help=f'Include the p-value in the result') 
+        self.optional.add_argument(
+            '-s', '--stat', action='store_true', default=False, 
+            help=f'Include the test statistic in the result') 
 
 
     def run(self, df):
@@ -44,18 +58,32 @@ class IsNorm(CommandBase, name="isnorm"):
         out_columns = []
         out_stats = []
         out_p_values = []
+        out_is_normal = []
 
         # process each column in turn, computing normaltest 
         # we do each column separately so that we can handle NAs independently in each column
         for column in selected_columns:
             this_column = df[column]
             this_notna = this_column.dropna()
-            k2, p_value = scipy.stats.normaltest(this_notna) 
+            k2 = None
+            p_value = None
+            if options.method == 'dagostino':
+                k2, p_value = scipy.stats.normaltest(this_notna) 
+            elif options.method == 'shapiro':
+                k2, p_value = scipy.stats.shapiro(this_notna) 
             out_columns.append(column)
             out_stats.append(k2)
             out_p_values.append(p_value)
+            out_is_normal.append(p_value > options.alpha)
 
-        result_df = pd.DataFrame({'column': out_columns, 'statistic': out_stats, 'p_value': out_p_values})
+        result_dict = {}
+        result_dict['column'] = out_columns
+        result_dict['is_normal'] = out_is_normal
+        if options.pvalue:
+            result_dict['p_value'] = out_p_values 
+        if options.stat:
+            result_dict['stat'] = out_stats 
+        result_df = pd.DataFrame(result_dict)
         return result_df
 
 

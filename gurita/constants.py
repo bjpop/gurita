@@ -69,6 +69,8 @@ DEFAULT_SEP = ','
 DEFAULT_ESTIMATOR = 'mean'
 DEFAULT_CI = 95
 DEFAULT_SORT_ALGORITHM = 'quicksort'
+DEFAULT_NORMTEST_ALPHA = 0.05
+DEFAULT_NORMTEST_METHOD = 'dagostino'
 
 #ALLOWED_FILETYPES = ['csv', 'tsv', 'CSV', 'TSV']
 ALLOWED_PLOT_FORMATS = ['png', 'jpg', 'pdf', 'svg']
@@ -94,6 +96,7 @@ ESTIMATOR_FUNS = {'mean': np.mean, 'median': np.median, 'max': np.max, 'min': np
   'sum': np.sum, 'std': np.std, 'var': np.var }
 ALLOWED_ESTIMATORS = list(ESTIMATOR_FUNS.keys())
 ALLOWED_SORT_ALGORITHMS = ['quicksort', 'mergesort', 'heapsort', 'stable']
+ALLOWED_NORMTEST_METHODS = ['dagostino', 'shapiro']
 
 
 try:

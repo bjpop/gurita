@@ -12,9 +12,9 @@ Data transformation and analysis
    gmm
    groupby
    head
-   isnorm
    kmeans
    melt
+   normtest 
    outlier
    pca
    pivot
