@@ -142,7 +142,7 @@ class Zscore(CommandBase, name="zscore"):
             this_column = df[column]
             this_notna = this_column.dropna()
             this_z = scipy.stats.zscore(this_notna)
-            new_column = column + self.options.suffix
+            new_column = column + "_" + self.options.suffix
             df[new_column] = pd.Series(data=this_z, index=this_notna.index).reindex(df.index)
         return df
 
