@@ -44,9 +44,9 @@ Commands in a chain are separated by the plus sign (+) and data flows from left 
 
 ```bash
 cat iris.csv | gurita filter 'species != "virginica"' + \
-                     sample 0.9 + \
-                     pca + \
-                     scatter -x pc1 -y pc2 --hue species
+                      sample 0.9 + \
+                      pca + \
+                      scatter -x pc1 -y pc2 --hue species
 ```
 
 <p align="center">
