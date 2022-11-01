@@ -90,10 +90,10 @@ The next example illustrates Gurita's ability to :ref:`chain commands <command_c
 
 .. code-block:: bash
 
-    cat iris.csv | gurita filter 'species != "virginica"' + \
-                         sample 0.9 + \
-                         pca + \
-                         scatter -x pc1 -y pc2 --hue species
+    cat iris.csv | gurita filter 'species != "virginica"' \
+                          + sample 0.9 \
+                          + pca \
+                          + scatter -x pc1 -y pc2 --hue species
 
 The above command has been written on mulitple lines for clarity. Note that the backslash ``\`` indicates a line
 break in the command line syntax.

@@ -172,10 +172,10 @@ be much faster than <code class="docutils literal notranslate"><span class="pre"
 <section id="command-chaining-example">
 <h3>Command chaining example<a class="headerlink" href="#command-chaining-example" title="Permalink to this headline"></a></h3>
 <p>The following is a more advanced example of command chaining in Gurita, consisting of four commands:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita filter &#39;species != &quot;virginica&quot;&#39; + \
-                     sample 0.9 + \
-                     pca + \
-                     scatter -x pc1 -y pc2 --hue species
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat iris.csv | gurita filter &#39;species != &quot;virginica&quot;&#39; \
+                      + sample 0.9 \
+                      + pca \
+                      + scatter -x pc1 -y pc2 --hue species
 </pre></div>
 </div>
 <p>The above command is split over multiple lines for clarity, using the backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> to split lines.</p>

@@ -96,10 +96,10 @@ The following is a more advanced example of command chaining in Gurita, consisti
 
 .. code-block:: text 
 
-    cat iris.csv | gurita filter 'species != "virginica"' + \
-                         sample 0.9 + \
-                         pca + \
-                         scatter -x pc1 -y pc2 --hue species
+    cat iris.csv | gurita filter 'species != "virginica"' \
+                          + sample 0.9 \
+                          + pca \
+                          + scatter -x pc1 -y pc2 --hue species
 
 The above command is split over multiple lines for clarity, using the backslash ``\`` to split lines.
 

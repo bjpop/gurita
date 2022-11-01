@@ -156,10 +156,10 @@ virginica,6.5
 <section id="advanced-example">
 <h2>Advanced example<a class="headerlink" href="#advanced-example" title="Permalink to this headline"></a></h2>
 <p>The next example illustrates Gurita’s ability to <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">chain commands</span></a> together:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> gurita filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> + <span class="se">\</span>
-                     sample <span class="m">0</span>.9 + <span class="se">\</span>
-                     pca + <span class="se">\</span>
-                     scatter -x pc1 -y pc2 --hue species
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat iris.csv <span class="p">|</span> gurita filter <span class="s1">&#39;species != &quot;virginica&quot;&#39;</span> <span class="se">\</span>
+                      + sample <span class="m">0</span>.9 <span class="se">\</span>
+                      + pca <span class="se">\</span>
+                      + scatter -x pc1 -y pc2 --hue species
 </pre></div>
 </div>
 <p>The above command has been written on mulitple lines for clarity. Note that the backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> indicates a line
