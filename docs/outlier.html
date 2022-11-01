@@ -181,6 +181,12 @@ the corresponding column is an outlier according to the definition above. This a
 </tbody>
 </table>
 </section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p><a class="reference internal" href="box.html"><span class="doc">Box plots</span></a> also employ the concept of Tukey’s fences for determining outlier values.</p>
+<p><a class="reference internal" href="zscore.html"><span class="doc">Z-scores</span></a> can be used to normalise data based on how many standard deviations it is from the mean. This can also be used as a method
+for identifying outliers.</p>
+</section>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>The following command determines outliers in the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset:</p>
@@ -200,7 +206,6 @@ the corresponding column is an outlier according to the definition above. This a
 5.0,3.6,1.4,0.2,setosa,False
 </pre></div>
 </div>
-<p>Outliers are detected using the interquartile range.</p>
 <p>A new boolean column called <code class="docutils literal notranslate"><span class="pre">sepal_width_outlier</span></code> is added to the dataset, indicating whether the value in the specified column is an outlier.
 This will be <code class="docutils literal notranslate"><span class="pre">True</span></code> if it is an outlier and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
 </section>
@@ -214,12 +219,83 @@ arguments:</p>
 </section>
 <section id="determine-outliers-in-specified-numerical-columns">
 <span id="outlier-columns"></span><h2>Determine outliers in specified numerical columns<a class="headerlink" href="#determine-outliers-in-specified-numerical-columns" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --columns NAME [NAME ...]
+</pre></div>
+</div>
+<p>By default, if no column names are specified, outliers will be detected in all of the numerical columns in the dataset, one at a time.</p>
+<p>For example, the following command detects outliers in each of the numerical columns in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>
+dataset separately (these are: <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier &lt; iris.csv
+</pre></div>
+</div>
+<p>Sometimes it is useful to specify a subset of columns in which to detect outliers. This can be achieved with the <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code> argument.</p>
+<p>In the following example outliers are detected in only the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> columns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier -c sepal_length petal_width &lt; iris.csv
+</pre></div>
+</div>
+<p>By chaining this command with <code class="docutils literal notranslate"><span class="pre">head</span></code> we can inspect the first few rows of the output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier -c sepal_length petal_width + head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species,sepal_length_outlier,petal_width_outlier
+5.1,3.5,1.4,0.2,setosa,False,False
+4.9,3.0,1.4,0.2,setosa,False,False
+4.7,3.2,1.3,0.2,setosa,False,False
+4.6,3.1,1.5,0.2,setosa,False,False
+5.0,3.6,1.4,0.2,setosa,False,False
+</pre></div>
+</div>
+<p>In the above example we can see that outliers are detected in just <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>. Two new boolean columns called
+<code class="docutils literal notranslate"><span class="pre">sepal_length_outlier</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_width_outlier</span></code> are added to the dataset to flag which rows contain outliers for the corresponding input columns.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">outlier</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code>.</p>
+</div>
 </section>
 <section id="choose-a-column-name-suffix-for-new-outlier-columns">
 <span id="outlier-suffix"></span><h2>Choose a column name suffix for new outlier columns<a class="headerlink" href="#choose-a-column-name-suffix-for-new-outlier-columns" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--suffix SUFFIX
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">outlier</span></code> command adds extra boolean columns to the dataset to flag which rows contain outlier values for the corresponding input columns.</p>
+<p>The names of these extra columns are constructed by adding the suffix <code class="docutils literal notranslate"><span class="pre">outlier</span></code> on to the end of the input column names, separated by an underscore.
+This can be changed with the <code class="docutils literal notranslate"><span class="pre">--suffix</span></code> argument.</p>
+<p>The following command specifies that <code class="docutils literal notranslate"><span class="pre">out</span></code> should be used as the suffix for the newly added columns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier --suffix out &lt; iris.csv
+</pre></div>
+</div>
+<p>By chaining this command with <code class="docutils literal notranslate"><span class="pre">head</span></code> we can inspect the first few rows of the output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier --suffix out + head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species,sepal_length_out,sepal_width_out,petal_length_out,petal_width_out
+5.1,3.5,1.4,0.2,setosa,False,False,False,False
+4.9,3.0,1.4,0.2,setosa,False,False,False,False
+4.7,3.2,1.3,0.2,setosa,False,False,False,False
+4.6,3.1,1.5,0.2,setosa,False,False,False,False
+5.0,3.6,1.4,0.2,setosa,False,False,False,False
+</pre></div>
+</div>
 </section>
 <section id="scale-factor-for-determining-outliers">
 <span id="outlier-scale-factor"></span><h2>Scale factor for determining outliers<a class="headerlink" href="#scale-factor-for-determining-outliers" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--iqrscale S
+</pre></div>
+</div>
+<p>As noted earlier, given quartiles Q1 and Q3 and some scaling factor S, a data point x is considered an outlier if either:</p>
+<ul class="simple">
+<li><p>x &lt; (Q1 - S*IQR), or</p></li>
+<li><p>x &gt; (Q3 + S*IQR)</p></li>
+</ul>
+<p>By default the scaling factor S is equal to 1.5, however this can be changed with the <code class="docutils literal notranslate"><span class="pre">--iqrscale</span></code> argument.</p>
+<p>Setting the scaling factor higher means that values must be more extreme before being considered outliers. Setting it lower has the opposite effect.</p>
+<p>The following command specifies a scaling factor of 3:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier --iqrscale 3 &lt; iris.csv
+</pre></div>
+</div>
+<p>The more stringent scaling factor of 3 produces fewer outlier values than the default setting of 1.5.</p>
 </section>
 </section>
 
