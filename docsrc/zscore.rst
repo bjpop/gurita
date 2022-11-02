@@ -12,7 +12,7 @@ Given a set of values, if M is the mean of the set and S is the standard deviati
 
 z-score = (x - M) / S
 
-The z-score is commonly for `normalization <https://en.wikipedia.org/wiki/Normalization_(statistics)>`_ and is particularly useful when the data comes from a normal distrbution.
+The z-score is commonly used for `normalization <https://en.wikipedia.org/wiki/Normalization_(statistics)>`_ and is particularly useful when the data comes from a normal distrbution.
 
 The ``zscore`` command adds a new column to the dataset storing the computed z-scores for the values in the corresponding input column. 
 Z-scores for multiple input columns can be computed (separately) by the same command.
