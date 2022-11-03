@@ -123,7 +123,7 @@
 have a negative z-score. The z-score of a value equal to the mean is zero.</p>
 <p>Given a set of values, if M is the mean of the set and S is the standard deviation of the set then the z-score of some value x is defined to be:</p>
 <p>z-score = (x - M) / S</p>
-<p>The z-score is commonly for <a class="reference external" href="https://en.wikipedia.org/wiki/Normalization_(statistics)">normalization</a> and is particularly useful when the data comes from a normal distrbution.</p>
+<p>The z-score is commonly used for <a class="reference external" href="https://en.wikipedia.org/wiki/Normalization_(statistics)">normalization</a> and is particularly useful when the data comes from a normal distrbution.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">zscore</span></code> command adds a new column to the dataset storing the computed z-scores for the values in the corresponding input column.
 Z-scores for multiple input columns can be computed (separately) by the same command.</p>
 <section id="usage">
@@ -178,10 +178,9 @@ Z-scores for multiple input columns can be computed (separately) by the same com
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
 <p>The following command computes z-scores for the <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> column in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita zscore -c sepal_width &lt; iris.csv
-
-The output is quite long so we can adjust the command to look at only the first few rows using the :doc:`head &lt;head&gt;` command:
 </pre></div>
 </div>
+<p>The output is quite long so we can adjust the command to look at only the first few rows using the <a class="reference internal" href="head.html"><span class="doc">head</span></a> command:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita zscore -c sepal_width + head &lt; iris.csv
 </pre></div>
 </div>

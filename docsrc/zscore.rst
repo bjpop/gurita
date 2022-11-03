@@ -61,7 +61,7 @@ The following command computes z-scores for the ``sepal_width`` column in the ``
 
    gurita zscore -c sepal_width < iris.csv
 
-   The output is quite long so we can adjust the command to look at only the first few rows using the :doc:`head <head>` command:
+The output is quite long so we can adjust the command to look at only the first few rows using the :doc:`head <head>` command:
 
 .. code-block:: text
 

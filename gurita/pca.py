@@ -29,10 +29,10 @@ class PCA(CommandBase, name="pca"):
             '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         self.optional.add_argument(
-            '--pcaprefix', required=False, default=const.DEFAULT_PCA_PREFIX,
+            '--prefix', required=False, default=const.DEFAULT_PCA_PREFIX,
             help=f'Column label prefix for principal component axes. Default: %(default)s.')
         self.optional.add_argument(
-            '-n', '--ncomps', type=int, required=False, default=const.DEFAULT_PCA_N_COMPONENTS,
+            '-n', '--ncomps', metavar='COMPONENTS', type=int, required=False, default=const.DEFAULT_PCA_N_COMPONENTS,
             help=f'Number of principal components to generate. Default: %(default)s.')
 
     
@@ -59,7 +59,7 @@ class PCA(CommandBase, name="pca"):
         pca_transform = pca.fit_transform(standardized_data)
 
         # Build a new dataframe for the PCA transformed data, adding column headings for the new components
-        new_column_headers = [self.options.pcaprefix + str(n) for n in range(1, self.options.ncomps + 1)]
+        new_column_headers = [self.options.prefix + str(n) for n in range(1, self.options.ncomps + 1)]
         pca_components = pd.DataFrame(data=pca_transform, columns=new_column_headers, index=selected_df.index)
 
         return df.join(pca_components)

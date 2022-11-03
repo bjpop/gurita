@@ -118,6 +118,184 @@
              
   <section id="pca">
 <span id="id1"></span><h1>pca<a class="headerlink" href="#pca" title="Permalink to this headline"></a></h1>
+<p>Perform <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">principal component analysis (PCA)</a> on numerical columns in a dataset.</p>
+<p>PCA is a popular dimensionality reduction technique. It transforms data into new coordinates such that most of the variation in the data is described with fewer dimensions than the original data.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pca</span></code> command adds new columns to the dataset representing the computed principal components.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca [-h] [-c NAME [NAME ...]] [--prefix PREFIX] [-n COMPONENTS]
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#pca-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+</ul>
+</td>
+<td><p>apply PCA to these columns</p></td>
+<td><p><a class="reference internal" href="#pca-columns"><span class="std std-ref">PCA columns</span></a></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">COMPONENTS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ncomps</span> <span class="pre">COMPONENTS</span></code></p></li>
+</ul>
+</td>
+<td><p>number of principal components to generate (default: 2)</p></td>
+<td><p><a class="reference internal" href="#pca-ncomps"><span class="std std-ref">number of components</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--prefix</span> <span class="pre">PREFIX</span></code></p></td>
+<td><p>choose a column name prefix for new PCA columns (default: pc)</p></td>
+<td><p><a class="reference internal" href="#pca-prefix"><span class="std std-ref">new column name prefix</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>The following command computes the first two principal components of the numerical columns in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca &lt; iris.csv
+</pre></div>
+</div>
+<p>The output is quite long so we can adjust the command to look at only the first few rows using the <a class="reference internal" href="head.html"><span class="doc">head</span></a> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca + head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species,pc1,pc2
+5.1,3.5,1.4,0.2,setosa,-2.2645417283948928,0.5057039027737834
+4.9,3.0,1.4,0.2,setosa,-2.0864255006161576,-0.6554047293691353
+4.7,3.2,1.3,0.2,setosa,-2.367950449062523,-0.3184773108472487
+4.6,3.1,1.5,0.2,setosa,-2.3041971611520085,-0.5753677125331953
+5.0,3.6,1.4,0.2,setosa,-2.388777493505642,0.6747673967025161
+</pre></div>
+</div>
+<p>Two new columns are added to the output dataset, called <code class="docutils literal notranslate"><span class="pre">pc1</span></code> and <code class="docutils literal notranslate"><span class="pre">pc2</span></code>, representing the first and second principal components
+of the numerical columns in the input data.</p>
+<p>It is useful to visualise the principal components in a <a class="reference internal" href="scatter.html"><span class="doc">scatter plot</span></a>, which can be achieved by chaining
+with the <code class="docutils literal notranslate"><span class="pre">scatter</span></code> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca + scatter -x pc1 -y pc2 &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is written to <code class="docutils literal notranslate"><span class="pre">scatter.pc1.pc2.png</span></code>:</p>
+<a class="reference internal image-reference" href="_images/scatter.pc1.pc2.png"><img alt="Scatter plot showing comparing principal components pc1 and pc2" class="align-center" src="_images/scatter.pc1.pc2.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="getting-help">
+<span id="pca-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">pca</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita pca -h
+</pre></div>
+</div>
+</section>
+<section id="perform-pca-on-specified-columns">
+<span id="pca-columns"></span><h2>Perform PCA on specified columns<a class="headerlink" href="#perform-pca-on-specified-columns" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --columns NAME [NAME ...]
+</pre></div>
+</div>
+<p>By default, if no column names are specified, PCA be performed on all of the numerical columns in the dataset.</p>
+<p>However it is possible to perform PCA on a specific subset of columns via the <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code> argument.</p>
+<p>For example, the following command performs PCA on just the columns <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>,  and <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> (and hence ignores the <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> column):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca -c sepal_length sepal_width petal_length &lt; iris.csv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">pca</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code>.</p>
+</div>
+</section>
+<section id="choose-the-number-of-principal-components-to-generate">
+<span id="pca-ncomps"></span><h2>Choose the number of principal components to generate<a class="headerlink" href="#choose-the-number-of-principal-components-to-generate" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-n COMPONENTS, --ncomps COMPONENTS
+</pre></div>
+</div>
+<p>By default the <code class="docutils literal notranslate"><span class="pre">pca</span></code> command will computer the first two principal components on the input dataset.</p>
+<p>This can be adjusted using the <code class="docutils literal notranslate"><span class="pre">-n/--ncomps</span></code> argument.</p>
+<p>For example, the following command generates the first three principal components of all the numerical columns in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca -n 3 &lt; iris.csv
+</pre></div>
+</div>
+<p>The output is quite long so we can adjust the command to look at only the first few rows using the <a class="reference internal" href="head.html"><span class="doc">head</span></a> command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca -n 3 + head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species,pc1,pc2,pc3
+5.1,3.5,1.4,0.2,setosa,-2.2645417283948928,0.5057039027737834,-0.12194334778175248
+4.9,3.0,1.4,0.2,setosa,-2.0864255006161576,-0.6554047293691353,-0.2272508323992485
+4.7,3.2,1.3,0.2,setosa,-2.367950449062523,-0.3184773108472487,0.05147962364496831
+4.6,3.1,1.5,0.2,setosa,-2.3041971611520085,-0.5753677125331953,0.09886044443740284
+5.0,3.6,1.4,0.2,setosa,-2.388777493505642,0.6747673967025161,0.021427848973115345
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Let N be the number of rows and C be the number of numerical columns considered in a PCA.</p>
+<p>Let M = minimum(N, C).</p>
+<p>The number of principal components must be &lt;= M.</p>
+<p>An error message will be generated if this condition is not met.</p>
+<p>For example, there are 150 rows and 4 numerical columns in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>. Therefore
+a PCA applied to all the numerical columns must not request more than 4
+principal components, because 4 is the minimum(150, 4). Thus the following
+command will generate an error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca -n 5 &lt; iris.csv
+</pre></div>
+</div>
+</div>
+</section>
+<section id="choose-a-column-name-prefix-for-new-pca-columns">
+<span id="pca-prefix"></span><h2>Choose a column name prefix for new PCA columns<a class="headerlink" href="#choose-a-column-name-prefix-for-new-pca-columns" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--prefix PREFIX
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pca</span></code> command adds extra numerical columns to the dataset to store the values for the computed principal components.</p>
+<p>The principal components are integers from 1 upwards (1, 2, 3, …). The names of these extra columns are constructed by adding the preix <code class="docutils literal notranslate"><span class="pre">pca</span></code>
+on to the number of the component, for example <code class="docutils literal notranslate"><span class="pre">pc1</span></code> for the first component, <code class="docutils literal notranslate"><span class="pre">pc2</span></code> for the second component and so on.</p>
+<p>This can be changed with the <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> argument.</p>
+<p>The following command specifies that <code class="docutils literal notranslate"><span class="pre">comp</span></code> should be used as the prefix for the newly added columns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca --prefix comp &lt; iris.csv
+</pre></div>
+</div>
+<p>By chaining this command with <code class="docutils literal notranslate"><span class="pre">head</span></code> we can inspect the first few rows of the output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca --prefix comp + head &lt; iris.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species,comp1,comp2
+5.1,3.5,1.4,0.2,setosa,-2.2645417283948928,0.5057039027737834
+4.9,3.0,1.4,0.2,setosa,-2.0864255006161576,-0.6554047293691353
+4.7,3.2,1.3,0.2,setosa,-2.367950449062523,-0.3184773108472487
+4.6,3.1,1.5,0.2,setosa,-2.3041971611520085,-0.5753677125331953
+5.0,3.6,1.4,0.2,setosa,-2.388777493505642,0.6747673967025161
+</pre></div>
+</div>
+<p>Observe that the two new principal component columns are called <code class="docutils literal notranslate"><span class="pre">comp1</span></code> and <code class="docutils literal notranslate"><span class="pre">comp2</span></code> respectively.</p>
+</section>
 </section>
 
 
