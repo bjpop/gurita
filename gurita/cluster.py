@@ -25,32 +25,15 @@ class KMeans(CommandBase, name="kmeans"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         self.optional.add_argument(
-            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
-            help=f'Column label prefix for cluster axes. Default: %(default)s.')
+            '--name', required=False, default=const.DEFAULT_CLUSTER_COLUMN_NAME,
+            help=f'Column name for cluster labels. Default: %(default)s.')
         self.optional.add_argument(
             '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_KMEANS_N_CLUSTERS,
             help=f'Number of clusters to generate. Default: %(default)s.')
 
-    '''
-    def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
-            help=f'Select only these named columns')
-        parser.add_argument(
-            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
-            help=f'Column label prefix for cluster axes. Default: %(default)s.')
-        parser.add_argument(
-            '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_KMEANS_N_CLUSTERS,
-            help=f'Number of clusters to generate. Default: %(default)s.')
-        self.options = parser.parse_args(args)
-    '''
     
     def run(self, df):
         options = self.options
@@ -65,11 +48,10 @@ class KMeans(CommandBase, name="kmeans"):
 
         # drop rows with missing values in any column
         selected_df = selected_df.dropna()
-
         # Cluster the standardized data
         kmeans = skcluster.KMeans(n_clusters=options.nclusters)
         kmeans_transform = kmeans.fit_predict(selected_df)
-        df[self.options.newcol] = pd.Series(kmeans_transform, index=selected_df.index, dtype=pd.Int64Dtype()).reindex(df.index).astype('category')
+        df[self.options.name] = pd.Series(kmeans_transform, index=selected_df.index).reindex(df.index).astype('category')
         return df
 
 
@@ -80,38 +62,17 @@ class GMM(CommandBase, name="gmm"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         self.optional.add_argument(
-            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
-            help=f'Column label prefix for cluster axes. Default: %(default)s.')
+            '--name', required=False, default=const.DEFAULT_CLUSTER_COLUMN_NAME,
+            help=f'Column name for cluster label. Default: %(default)s.')
         self.optional.add_argument(
             '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_GMM_N_CLUSTERS,
             help=f'Number of clusters to generate. Default: %(default)s.')
         self.optional.add_argument(
             '--maxiter', type=int, required=False, default=const.DEFAULT_GMM_MAX_ITER,
             help=f'Number of expectation maximisation iterations to perform. Default: %(default)s.')
-
-    '''
-    def __init__(self):
-        self.options = None
-
-    def parse_args(self, args):
-        parser = argparse.ArgumentParser(usage=f'{self.name} -h | {self.name} <arguments>', add_help=True)
-        parser.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
-            help=f'Select only these named columns')
-        parser.add_argument(
-            '--newcol', required=False, default=const.DEFAULT_CLUSTER_PREFIX,
-            help=f'Column label prefix for cluster axes. Default: %(default)s.')
-        parser.add_argument(
-            '-n', '--nclusters', type=int, required=False, default=const.DEFAULT_GMM_N_CLUSTERS,
-            help=f'Number of clusters to generate. Default: %(default)s.')
-        parser.add_argument(
-            '--maxiter', type=int, required=False, default=const.DEFAULT_GMM_MAX_ITER,
-            help=f'Number of expectation maximisation iterations to perform. Default: %(default)s.')
-        self.options = parser.parse_args(args)
-    '''
 
     
     def run(self, df):
@@ -131,5 +92,5 @@ class GMM(CommandBase, name="gmm"):
         gmm = GaussianMixture(n_components=options.nclusters, max_iter=options.maxiter)
         gmm_transform = gmm.fit_predict(selected_df)
 
-        df[self.options.newcol] = pd.Series(gmm_transform, index=selected_df.index, dtype=pd.Int64Dtype()).reindex(df.index).astype('category')
+        df[self.options.name] = pd.Series(gmm_transform, index=selected_df.index).reindex(df.index).astype('category')
         return df
