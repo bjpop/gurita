@@ -121,6 +121,7 @@
 <p>Perform <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">principal component analysis (PCA)</a> on numerical columns in a dataset.</p>
 <p>PCA is a popular dimensionality reduction technique. It transforms data into new coordinates such that most of the variation in the data is described with fewer dimensions than the original data.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">pca</span></code> command adds new columns to the dataset representing the computed principal components.</p>
+<p>PCA does not work with missing values, so rows with missing (NA) values in the analysed columns are automatically removed before PCA is applied.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca [-h] [-c NAME [NAME ...]] [--prefix PREFIX] [-n COMPONENTS]
@@ -218,7 +219,7 @@ arguments:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --columns NAME [NAME ...]
 </pre></div>
 </div>
-<p>By default, if no column names are specified, PCA be performed on all of the numerical columns in the dataset.</p>
+<p>By default, if no column names are specified, PCA is performed on all of the numerical columns in the dataset.</p>
 <p>However it is possible to perform PCA on a specific subset of columns via the <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code> argument.</p>
 <p>For example, the following command performs PCA on just the columns <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>,  and <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> (and hence ignores the <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> column):</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca -c sepal_length sepal_width petal_length &lt; iris.csv

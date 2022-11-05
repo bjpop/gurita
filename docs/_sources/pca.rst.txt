@@ -9,6 +9,8 @@ PCA is a popular dimensionality reduction technique. It transforms data into new
 
 The ``pca`` command adds new columns to the dataset representing the computed principal components.
 
+PCA does not work with missing values, so rows with missing (NA) values in the analysed columns are automatically removed before PCA is applied.
+
 Usage
 -----
 
@@ -110,7 +112,7 @@ Perform PCA on specified columns
 
    -c NAME [NAME ...], --columns NAME [NAME ...]
 
-By default, if no column names are specified, PCA be performed on all of the numerical columns in the dataset.
+By default, if no column names are specified, PCA is performed on all of the numerical columns in the dataset.
 
 However it is possible to perform PCA on a specific subset of columns via the ``-c/--columns`` argument.
 

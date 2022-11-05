@@ -101,7 +101,6 @@ Compute z-scores in specified numerical columns
 
    -c NAME [NAME ...], --columns NAME [NAME ...]
 
-
 By default, if no column names are specified, z-scores will be computed in all of the numerical columns in the dataset, one at a time.
 
 For example, the following command computes z-scores in each of the numerical columns in the ``iris.csv``
