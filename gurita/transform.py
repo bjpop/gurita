@@ -95,18 +95,17 @@ class Melt(CommandBase, name="melt"):
 
     def __init__(self):
         super().__init__()
-        # XXX surely at least one of the arguments must be required
         self.optional.add_argument(
-            '-i', '--ids', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-i', '--ids', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select these "identifier" columns to remain unmelted')
         self.optional.add_argument(
-            '-v', '--vals', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-v', '--vals', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select these "variable" columns to be melted')
         self.optional.add_argument(
-            '--varname', metavar='COLUMN', type=str, required=False, default=const.DEFAULT_MELT_VARNAME,
+            '--varname', metavar='NAME', type=str, required=False, default=const.DEFAULT_MELT_VARNAME,
             help=f'Use this name for the new "variable" column. Default: "%(default)s."')
         self.optional.add_argument(
-            '--valname', metavar='COLUMN', type=str, required=False, default=const.DEFAULT_MELT_VALNAME,
+            '--valname', metavar='NAME', type=str, required=False, default=const.DEFAULT_MELT_VALNAME,
             help=f'Use this name for the new "value" column. Default: "%(default)s."')
 
 
