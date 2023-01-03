@@ -118,6 +118,96 @@
              
   <section id="melt">
 <span id="id1"></span><h1>melt<a class="headerlink" href="#melt" title="Permalink to this headline"></a></h1>
+<p>Reshape data from <a class="reference external" href="https://en.wikipedia.org/wiki/Wide_and_narrow_data#Wide">wide format</a> to <a class="reference external" href="https://en.wikipedia.org/wiki/Wide_and_narrow_data#Narrow">narrow format</a>.</p>
+<p>Sometimes wide format is called <em>stacked</em> and narrow format is called <em>un-stacked</em> or <em>long</em>.</p>
+<p>For example here is a small table in <em>wide format</em> representing working hours for two employees on each weekday:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,mon,tue,wed,thu,fri
+Alice,A1,8,8,4,1,4
+Bob,B3,0,0,4,6,0
+</pre></div>
+</div>
+<p>And here is the same data in <em>narrow format</em>, such that the <code class="docutils literal notranslate"><span class="pre">person</span></code> column is retained as an identifier for each data point:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+</pre></div>
+</div>
+<p>Columns from the wide format become stacked in the narrow format. Note how the column headings
+<code class="docutils literal notranslate"><span class="pre">level</span></code>, <code class="docutils literal notranslate"><span class="pre">mon</span></code>, <code class="docutils literal notranslate"><span class="pre">tue</span></code>, <code class="docutils literal notranslate"><span class="pre">wed</span></code>, <code class="docutils literal notranslate"><span class="pre">thur</span></code> and <code class="docutils literal notranslate"><span class="pre">fri</span></code> have become categorical values in
+the <code class="docutils literal notranslate"><span class="pre">variable</span></code> column with their associated values in the <code class="docutils literal notranslate"><span class="pre">value</span></code> column.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt [-h] [-i COLUMN [COLUMN ...]] [-v COLUMN [COLUMN ...]] [--varname NAME] [--valname NAME]
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><span class="xref std std-ref">help</span></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--ids</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+</ul>
+</td>
+<td><p>use these columns as identifiers</p></td>
+<td><p><span class="xref std std-ref">identifier columns</span></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--vals</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+</ul>
+</td>
+<td><p>use these columns as values</p></td>
+<td><p><span class="xref std std-ref">value columns</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--varname</span> <span class="pre">NAME</span></code></p></td>
+<td><p>use this name for the variable column (default: variable)</p></td>
+<td><p><span class="xref std std-ref">variable column name</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--valname</span> <span class="pre">NAME</span></code></p></td>
+<td><p>use this name for the value column (default: value)</p></td>
+<td><p><span class="xref std std-ref">value column name</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p>The inverse of <code class="docutils literal notranslate"><span class="pre">melt</span></code> is provided by the <a class="reference internal" href="pivot.html"><span class="doc">pivot</span></a> command.</p>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+</section>
 </section>
 
 
