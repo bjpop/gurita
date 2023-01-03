@@ -120,7 +120,7 @@
 <span id="gmm"></span><h1>gmm (Gaussian mixture model)<a class="headerlink" href="#gmm-gaussian-mixture-model" title="Permalink to this headline"></a></h1>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Mixture_model#Gaussian_mixture_model">Gaussian mixture model (GMM)</a>  identifies clusters in numerical data
 by finding a mixture of Gaussian probability distributions that best model the data.</p>
-<p>The number of clusters to detect is specified as a parameter.</p>
+<p>The number of clusters to detect is specified as an optional parameter (default is 2).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">gmm</span></code> command adds a new column to the dataset storing the cluster label for the corresponding datapoint on each row.</p>
 <p>Clustering does not work with missing values, so rows with missing (NA) values in the clustered columns are automatically removed before clustering.</p>
 <section id="usage">
@@ -204,7 +204,7 @@ by finding a mixture of Gaussian probability distributions that best model the d
 </div>
 <p>A new categorical column called <code class="docutils literal notranslate"><span class="pre">cluster</span></code> is added to the dataset, this holds the cluster labels for the datapoint on each row.</p>
 <p>Each cluster is labelled using a natural number (0,1,2 …).</p>
-<p>We can get an overview of the new <code class="docutils literal notranslate"><span class="pre">cluster</span></code> by using the <code class="docutils literal notranslate"><span class="pre">describe</span></code> command after clustering:</p>
+<p>We can get an overview of the new <code class="docutils literal notranslate"><span class="pre">cluster</span></code> column by using the <code class="docutils literal notranslate"><span class="pre">describe</span></code> command after clustering:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita gmm + describe -c cluster &lt; iris.csv
 </pre></div>
 </div>
@@ -288,7 +288,6 @@ arguments:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">gmm</span></code> command adds an extra categorical column called <code class="docutils literal notranslate"><span class="pre">cluster</span></code> to the dataset to store the cluster labels for each row.</p>
 <p>The cluster labels are natural numbers (non-negative integers) from 0 upwards (0, 1, 2, …).</p>
-<p>on to the number of the component, for example <code class="docutils literal notranslate"><span class="pre">pc1</span></code> for the first component, <code class="docutils literal notranslate"><span class="pre">pc2</span></code> for the second component and so on.</p>
 <p>The name of the extra column can be changed with the <code class="docutils literal notranslate"><span class="pre">--name</span></code> argument.</p>
 <p>The following command specifies that <code class="docutils literal notranslate"><span class="pre">group</span></code> should be used as the prefix for the newly added columns:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita gmm --name group &lt; iris.csv

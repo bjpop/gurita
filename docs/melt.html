@@ -172,7 +172,7 @@ the <code class="docutils literal notranslate"><span class="pre">variable</span>
 </ul>
 </td>
 <td><p>display help for this command</p></td>
-<td><p><span class="xref std std-ref">help</span></p></td>
+<td><p><a class="reference internal" href="#melt-help"><span class="std std-ref">help</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
@@ -180,7 +180,7 @@ the <code class="docutils literal notranslate"><span class="pre">variable</span>
 </ul>
 </td>
 <td><p>use these columns as identifiers</p></td>
-<td><p><span class="xref std std-ref">identifier columns</span></p></td>
+<td><p><a class="reference internal" href="#melt-identifier-columns"><span class="std std-ref">identifier columns</span></a></p></td>
 </tr>
 <tr class="row-even"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
@@ -188,15 +188,15 @@ the <code class="docutils literal notranslate"><span class="pre">variable</span>
 </ul>
 </td>
 <td><p>use these columns as values</p></td>
-<td><p><span class="xref std std-ref">value columns</span></p></td>
+<td><p><a class="reference internal" href="#melt-value-columns"><span class="std std-ref">value columns</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--varname</span> <span class="pre">NAME</span></code></p></td>
 <td><p>use this name for the variable column (default: variable)</p></td>
-<td><p><span class="xref std std-ref">variable column name</span></p></td>
+<td><p><a class="reference internal" href="#melt-variable-name"><span class="std std-ref">variable column name</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--valname</span> <span class="pre">NAME</span></code></p></td>
 <td><p>use this name for the value column (default: value)</p></td>
-<td><p><span class="xref std std-ref">value column name</span></p></td>
+<td><p><a class="reference internal" href="#melt-value-name"><span class="std std-ref">value column name</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -207,6 +207,242 @@ the <code class="docutils literal notranslate"><span class="pre">variable</span>
 </section>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>Suppose the following data is stored in a file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+</pre></div>
+</div>
+<p>This is an example of data in “wide format”.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">melt</span></code> command can convert the data into “long format”.</p>
+<p>In the simplest form, each column heading is treated as a variable, and each corresponding datum is treated as a value.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command has 45 data rows. We can use <code class="docutils literal notranslate"><span class="pre">head</span></code> to look at the first 15 rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt + head 15 &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>variable,value
+person,Alice
+person,Bob
+person,Wei
+person,Imani
+person,Diego
+level,A1
+level,B3
+level,B1
+level,A2
+level,C2
+sun,0
+sun,4
+sun,0
+sun,0
+sun,3
+</pre></div>
+</div>
+<p>In this example the melted data consists entirely of variable-value pairs. However, this is not normally the most useful view of the data.
+More often we want to melt only some of the columns into variable-value pairs, and preserve other columns unchanged to act as a kind of unique identifier for each row (otherwise
+known as a key or an index).</p>
+<p>For example, the following command retains the <code class="docutils literal notranslate"><span class="pre">person</span></code> column as an index for the rows, and melts the remaining columns into variable-value pairs:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person &lt; example.csv
+</pre></div>
+</div>
+<p>The output of this command is quite long, so for the sake of illustration, we will update the command to consider only the first 15 rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person + head 15 &lt; example.csv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+Alice,level,A1
+Bob,level,B3
+Wei,level,B1
+Imani,level,A2
+Diego,level,C2
+Alice,sun,0
+Bob,sun,4
+Wei,sun,0
+Imani,sun,0
+Diego,sun,3
+Alice,mon,8
+Bob,mon,0
+Wei,mon,0
+Imani,mon,8
+Diego,mon,7
+</pre></div>
+</div>
+<p>Now the <code class="docutils literal notranslate"><span class="pre">person</span></code> column is retained and acts as a kind of index for the rows.</p>
+</section>
+<section id="getting-help">
+<span id="melt-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">melt</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -h
+</pre></div>
+</div>
+</section>
+<section id="specifying-columns-to-act-as-identifiers">
+<span id="melt-identifier-columns"></span><h2>Specifying columns to act as identifiers<a class="headerlink" href="#specifying-columns-to-act-as-identifiers" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-i COLUMN [COLUMN ...]
+--ids COLUMN [COLUMN ...]
+</pre></div>
+</div>
+<p>By default <code class="docutils literal notranslate"><span class="pre">melt</span></code> will transform a data set into a collection of variable-value pairs. However, most of the time we want the transformed data to retain some columns to
+act as identifiers for the rows.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-i/--ids</span></code> argument allows you to specify one or more <em>identifier</em> columns.</p>
+<p>For example, all columns are melted <em>except</em> <code class="docutils literal notranslate"><span class="pre">person</span></code>, which is retained unchanged, and acts as an identifier for the output rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person &lt; example.csv
+</pre></div>
+</div>
+<p>The output of this command is quite long, so for the sake of illustration, we will update the command to consider only the first 15 rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person + head 15 &lt; example.csv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+Alice,level,A1
+Bob,level,B3
+Wei,level,B1
+Imani,level,A2
+Diego,level,C2
+Alice,sun,0
+Bob,sun,4
+Wei,sun,0
+Imani,sun,0
+Diego,sun,3
+Alice,mon,8
+Bob,mon,0
+Wei,mon,0
+Imani,mon,8
+Diego,mon,7
+</pre></div>
+</div>
+<p>It is possible to specify more than one column as an identifier. For example, in the following command, the columns <code class="docutils literal notranslate"><span class="pre">person</span></code> and <code class="docutils literal notranslate"><span class="pre">level</span></code> are both used as identifiers:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person level &lt; example.csv
+</pre></div>
+</div>
+<p>Again, the output of this command is long, so we can update the command to look at the first 15 rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person level + head 15 &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,variable,value
+Alice,A1,sun,0
+Bob,B3,sun,4
+Wei,B1,sun,0
+Imani,A2,sun,0
+Diego,C2,sun,3
+Alice,A1,mon,8
+Bob,B3,mon,0
+Wei,B1,mon,0
+Imani,A2,mon,8
+Diego,C2,mon,7
+Alice,A1,tue,8
+Bob,B3,tue,0
+Wei,B1,tue,8
+Imani,A2,tue,8
+Diego,C2,tue,7
+</pre></div>
+</div>
+<p>Now, only the columns representing the days of the week are melted into variable-value pairs, whereas the <code class="docutils literal notranslate"><span class="pre">person</span></code> and <code class="docutils literal notranslate"><span class="pre">level</span></code> columns are retained in the output.</p>
+</section>
+<section id="specifying-columns-to-melt">
+<span id="melt-value-columns"></span><h2>Specifying columns to melt<a class="headerlink" href="#specifying-columns-to-melt" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-v COLUMN [COLUMN ...]
+--vals COLUMN [COLUMN ...]
+</pre></div>
+</div>
+<p>By default <code class="docutils literal notranslate"><span class="pre">melt</span></code> will convert all columns into variable-value pairs, except those specified as <a class="reference internal" href="#melt-identifier-columns"><span class="std std-ref">identifiers</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-v/--vals</span></code> argument allows you to specify a subset of columns to be melted. In this circumstance any column not mentioned in this subset or as an identifier will be
+excluded from the output.</p>
+<p>For example, the following command melts just the columns <code class="docutils literal notranslate"><span class="pre">level</span></code>, <code class="docutils literal notranslate"><span class="pre">sat</span></code>, and <code class="docutils literal notranslate"><span class="pre">sun</span></code>, and uses <code class="docutils literal notranslate"><span class="pre">person</span></code> as an identifer. All other columns are dropped.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person -v level sat sun &lt; example.csv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+Alice,level,A1
+Bob,level,B3
+Wei,level,B1
+Imani,level,A2
+Diego,level,C2
+Alice,sat,3
+Bob,sat,3
+Wei,sat,3
+Imani,sat,0
+Diego,sat,4
+Alice,sun,0
+Bob,sun,4
+Wei,sun,0
+Imani,sun,0
+Diego,sun,3
+</pre></div>
+</div>
+</section>
+<section id="choose-a-name-for-the-variable-column">
+<span id="melt-variable-name"></span><h2>Choose a name for the variable column<a class="headerlink" href="#choose-a-name-for-the-variable-column" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--varname NAME
+</pre></div>
+</div>
+<p>By default the output column for melted variables is called <code class="docutils literal notranslate"><span class="pre">variable</span></code>. However this behaviour can be changed by the <code class="docutils literal notranslate"><span class="pre">--varname</span></code> argument.</p>
+<p>For example, the following command melts all columns in the the data and sets the output variable column to <code class="docutils literal notranslate"><span class="pre">key</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt --varname key &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is long, so for the sake of illustration we can update the command to output just the first 10 rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt --varname key + head 10 &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>key,value
+person,Alice
+person,Bob
+person,Wei
+person,Imani
+person,Diego
+level,A1
+level,B3
+level,B1
+level,A2
+level,C2
+</pre></div>
+</div>
+<p>Note that the leftmost column is now called <code class="docutils literal notranslate"><span class="pre">key</span></code> instead of <code class="docutils literal notranslate"><span class="pre">variable</span></code>.</p>
+</section>
+<section id="choose-a-name-for-the-value-column">
+<span id="melt-value-name"></span><h2>Choose a name for the value column<a class="headerlink" href="#choose-a-name-for-the-value-column" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--valname NAME
+</pre></div>
+</div>
+<p>By default the output column for melted values is called <code class="docutils literal notranslate"><span class="pre">value</span></code>. However this behaviour can be changed by the <code class="docutils literal notranslate"><span class="pre">--valname</span></code> argument.</p>
+<p>For example, the following command melts all columns in the the data and sets the output value column to <code class="docutils literal notranslate"><span class="pre">data</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt --valname data &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is long, so for the sake of illustration we can update the command to output just the first 10 rows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt --valname data + head 10 &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>variable,data
+person,Alice
+person,Bob
+person,Wei
+person,Imani
+person,Diego
+level,A1
+level,B3
+level,B1
+level,A2
+level,C2
+</pre></div>
+</div>
+<p>Note that the rightmost column is now called <code class="docutils literal notranslate"><span class="pre">data</span></code> instead of <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<p>Of course it is possible to change both the variable and value column names at the same time, as the following example demonstrates:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt --varname key --valname data + head 10 &lt; example.csv
+</pre></div>
+</div>
 </section>
 </section>
 

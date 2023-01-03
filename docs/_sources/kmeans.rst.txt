@@ -6,7 +6,7 @@ kmeans
 The `k-means clustering algorithm <https://en.wikipedia.org/wiki/K-means_clustering>`_  identifies clusters in numerical data 
 where individual data points are assigned to the cluster with the nearest mean (cluster centroid).
 
-The number of clusters to detect is specified as a parameter.
+The number of clusters to detect is specified as an optional parameter (default is 2).
 
 The ``kmeans`` command adds a new column to the dataset storing the cluster label for the corresponding datapoint on each row.  
 
@@ -81,7 +81,7 @@ A new categorical column called ``cluster`` is added to the dataset, this holds 
 
 Each cluster is labelled using a natural number (0,1,2 ...).
 
-We can get an overview of the new ``cluster`` by using the ``describe`` command after clustering:
+We can get an overview of the new ``cluster`` column by using the ``describe`` command after clustering:
 
 .. code-block:: text
 
@@ -205,8 +205,6 @@ Choose a name for the new cluster label column
 The ``kmeans`` command adds an extra categorical column called ``cluster`` to the dataset to store the cluster labels for each row. 
 
 The cluster labels are natural numbers (non-negative integers) from 0 upwards (0, 1, 2, ...).
-
-on to the number of the component, for example ``pc1`` for the first component, ``pc2`` for the second component and so on.
 
 The name of the extra column can be changed with the ``--name`` argument.
 

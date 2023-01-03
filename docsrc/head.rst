@@ -54,7 +54,7 @@ In the following document we assume the existence of an input file called ``exam
     4.4,2.9,1.4,0.2,setosa
     4.9,3.1,1.5,0.1,setosa
 
-Select the first 5 rows from ``example.csv`` :
+Select the first 5 rows from ``example.csv``:
 
 .. code-block:: text 
 
