@@ -279,7 +279,6 @@ class DropNa(CommandBase, name="dropna"):
             help=f'Choose to drop either rows or columns. Allowed values: %(choices)s. Default: %(default)s.')
         self.optional.add_argument(
             '--how', metavar='METHOD', type=str, choices=const.ALLOWED_DROPNA_HOW, required=False,
-            #default=const.DEFAULT_DROPNA_HOW,
             help=f'Require at least one NA or all NA in rows/columns to be dropped. Allowed values: %(choices)s. Default: %(default)s.')
         self.optional.add_argument(
             '--thresh', metavar='N', type=int, required=False, 
@@ -305,7 +304,6 @@ class DropNa(CommandBase, name="dropna"):
             kwargs['thresh'] = options.thresh 
         if subset is not None:
             kwargs['subset'] = subset 
-        #df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
         df = df.dropna(axis=axis, **kwargs)
         return df
 
