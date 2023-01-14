@@ -10,6 +10,7 @@ Portability : POSIX
 import pkg_resources
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas
 
 PROGRAM_NAME = "gurita"
 
@@ -91,7 +92,8 @@ ALLOWED_DROPNA_AXIS = ['rows', 'columns']
 ALLOWED_DROPNA_HOW = ['any', 'all']
 ALLOWED_HISTOGRAM_ELEMENTS = ['bars', 'step', 'poly']
 ALLOWED_HISTOGRAM_STATS = ['count', 'frequency', 'probability', 'proportion', 'percent', 'density']
-ALLOWED_GROUPBY_FUN = ['size', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'prod', 'std', 'var', 'sem', 'skew', 'quantile']
+ALLOWED_GROUPBY_FUN = ['sample', 'first', 'size', 'sum', 'mean', 'mad', 'median', 'min', 'max', 'prod', 'std', 'var', 'sem', 'skew', 'quantile']
+ALLOWED_PIVOT_FUN = ALLOWED_GROUPBY_FUN 
 ESTIMATOR_FUNS = {'mean': np.mean, 'median': np.median, 'max': np.max, 'min': np.min,
   'sum': np.sum, 'std': np.std, 'var': np.var }
 ALLOWED_ESTIMATORS = list(ESTIMATOR_FUNS.keys())

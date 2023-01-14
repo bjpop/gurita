@@ -125,15 +125,18 @@ class Pivot(CommandBase, name="pivot"):
 
     def __init__(self):
         super().__init__()
-        self.optional.add_argument(
-            '-i', '--index', metavar='COLUMN', nargs='+', type=str, required=False,
+        self.required.add_argument(
+            '-c', '--cols', metavar='COLUMN', nargs='+', type=str, required=True,
+            help=f'Column(s) to be used to make new columns in the result')
+        self.required.add_argument(
+            '-i', '--index', metavar='COLUMN', nargs='+', type=str, required=True,
             help=f'Select these columns as the index')
         self.optional.add_argument(
             '-v', '--vals', metavar='COLUMN', nargs='+', type=str, required=False,
             help=f'Column(s) to be used to populate the values in the result')
-        self.required.add_argument(
-            '-c', '--cols', metavar='COLUMN', nargs='+', type=str, required=True,
-            help=f'Column(s) to be used to make new columns in the result')
+        self.optional.add_argument(
+            '-f', '--fun', metavar='FUNCTION', type=str, choices=const.ALLOWED_PIVOT_FUN, required=False, nargs="+",
+            help=f'Aggregation function(s) to apply to when multiple values are associated with a given index/column after pivoting. Allowed values: %(choices)s.')
 
 
     def run(self, df):
@@ -150,7 +153,18 @@ class Pivot(CommandBase, name="pivot"):
             utils.validate_columns_error(df, options.cols)
             if len(options.cols) == 1:
                 options.cols = options.cols[0]
-        df = df.pivot(index=options.index, columns=options.cols, values=options.vals).reset_index()
+        if options.fun and type(options.fun) == list:
+            if len(options.fun) == 1:
+                options.fun = options.fun[0]
+        if options.fun and options.fun == 'sample':
+            aggfunc = lambda x: x.sample()
+        else:
+            aggfunc = options.fun
+
+        if aggfunc is None:
+            df = df.pivot(index=options.index, columns=options.cols, values=options.vals).reset_index()
+        else:
+            df = df.pivot_table(index=options.index, columns=options.cols, values=options.vals, aggfunc=aggfunc).reset_index()
         # Flatten a multi-index column index if one is created
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.to_flat_index().map(combine_index_names)
@@ -265,7 +279,7 @@ class DropNa(CommandBase, name="dropna"):
             help=f'Choose to drop either rows or columns. Allowed values: %(choices)s. Default: %(default)s.')
         self.optional.add_argument(
             '--how', metavar='METHOD', type=str, choices=const.ALLOWED_DROPNA_HOW, required=False,
-            default=const.DEFAULT_DROPNA_HOW,
+            #default=const.DEFAULT_DROPNA_HOW,
             help=f'Require at least one NA or all NA in rows/columns to be dropped. Allowed values: %(choices)s. Default: %(default)s.')
         self.optional.add_argument(
             '--thresh', metavar='N', type=int, required=False, 
@@ -273,10 +287,10 @@ class DropNa(CommandBase, name="dropna"):
         self.optional.add_argument(
             '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
-    
 
     def run(self, df):
         options = self.options
+        subset = None
         if options.axis == 'rows':
             axis = 'index'
             subset = options.columns
@@ -284,8 +298,15 @@ class DropNa(CommandBase, name="dropna"):
                 utils.validate_columns_error(df, subset)
         else:
             axis = options.axis
-            subset = None
-        df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
+        kwargs = {}
+        if options.how is not None:
+            kwargs['how'] = options.how 
+        if options.thresh is not None:
+            kwargs['thresh'] = options.thresh 
+        if subset is not None:
+            kwargs['subset'] = subset 
+        #df = df.dropna(axis=axis, how=options.how, thresh=options.thresh, subset=subset)
+        df = df.dropna(axis=axis, **kwargs)
         return df
 
 
