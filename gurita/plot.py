@@ -11,6 +11,7 @@ import sys
 import argparse
 import logging
 import seaborn as sns
+import matplotlib.pyplot as plt
 from gurita.command_base import CommandBase
 import gurita.render_plot as render_plot
 import gurita.io_arguments as io_args 
@@ -394,6 +395,8 @@ class Heatmap(CommandBase, name="heatmap"):
             order_map = { item: pos for (pos, item) in enumerate(self.options.ordery) }
             max_index = len(self.options.ordery)
             pivot_data.sort_index(axis=0, inplace=True, key=lambda index: index.map(lambda label: order_map.get(str(label), max_index)))
+        width_inches, height_inches, _aspect = utils.plot_dimensions_inches(options.width, options.height) 
+        fig, ax = plt.subplots(figsize=(width_inches, height_inches))
         graph = sns.heatmap(data=pivot_data, cmap=self.options.cmap, robust=self.options.robust,
                     vmin=self.options.vmin, vmax=self.options.vmax, **kwargs)
         render_plot.render_plot(options, graph, self.name)
@@ -412,7 +415,6 @@ class HistogramPlot(CommandBase, name="hist"):
         hue(self)
         row(self)
         col(self)
-        order(self)
         hue_order(self)
         orient(self)
         logx(self)
@@ -834,7 +836,7 @@ class CountPlot(CommandBase, name="count"):
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
                 height=height_inches, aspect=aspect, hue=options.hue,
-                order=options.order, hue_order=options.hueorder,
+                order=options.order, hue_order=options.hueorder, 
                 orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df

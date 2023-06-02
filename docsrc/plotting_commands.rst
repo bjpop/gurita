@@ -1,5 +1,5 @@
-Plotting 
-********
+Plotting commands
+*****************
 
 .. toctree::
    :maxdepth: 1

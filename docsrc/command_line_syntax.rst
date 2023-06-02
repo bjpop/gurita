@@ -26,7 +26,7 @@ For instance, the following invocation of Gurita will plot a histogram of the ``
 
     gurita hist -x passengers < flights.csv
 
-In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Gurita.  See the section on :ref:`input and output <input_output>` for more information about input and output files.
+In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Gurita. See the section on :ref:`input and output <input_output>` for more information about input and output files.
 
 Types of commands
 -----------------

@@ -23,12 +23,12 @@ setup(
     description=('Plot and analyse tabular data on the comand line.'),
     long_description=(LONG_DESCRIPTION),
     install_requires=[
-        "numpy==1.22.2",
-        "scipy==1.8.0",
-        "pandas==1.5.2",
-        "seaborn==0.11.2",
-        "matplotlib==3.4.2",
-        "numexpr==2.7.3",
-        "scikit-learn==0.24.2",
+        "numpy",
+        "scipy",
+        "pandas",
+        "seaborn",
+        "matplotlib",
+        "numexpr",
+        "scikit-learn",
     ]
 )

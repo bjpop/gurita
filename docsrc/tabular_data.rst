@@ -1,4 +1,4 @@
-.. _input_output: 
+.. _tabular_data: 
 
 Tabular input and output data
 *****************************
