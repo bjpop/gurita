@@ -1,5 +1,3 @@
-.. _plotting: 
-
 Saving and viewing plots
 ************************
 
