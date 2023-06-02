@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tabular input and output data &mdash; gurita  documentation</title>
+  <title>Input and output &mdash; gurita  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Reading input data" href="input.html" />
-    <link rel="prev" title="List of commands" href="list_of_commands.html" /> 
+    <link rel="next" title="Tabular input and output data" href="tabular_data.html" />
+    <link rel="prev" title="Command line syntax" href="command_line_syntax.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,6 +29,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> gurita
+            <img src="_static/gurita_using_computer.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -48,21 +49,15 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tabular input and output data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input and output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tabular_data.html">Tabular input and output data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Reading input data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Writing output data</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Commands</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="io_commands.html">Input and output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_commands.html">Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transformation_commands.html">Data transformation and analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="summary_commands.html">Summary information</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
@@ -85,7 +80,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Tabular input and output data</li>
+      <li>Input and output</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/input_output.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,28 +90,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tabular-input-and-output-data">
-<span id="input-output"></span><h1>Tabular input and output data<a class="headerlink" href="#tabular-input-and-output-data" title="Permalink to this headline"></a></h1>
-<p>Gurita reads and writes data in tabular data format.</p>
-<p>By default it will use <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> format, where a comma is used as the field separator. However, upon request, it allows alternative field separators to be used.
-For example, <a class="reference external" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> files are supported by setting the field separator to a tab character (\t).</p>
-<p>Input data is read from a named file or the standard input (stdin). Data can be written to a named file or standard output (stdout).</p>
-<p>Rows in the input file are considered to be “observations” and columns are considered to be “features” (or variables).
-That is, each data row is a discrete observation of some thing (a data point), and each observation is described by the values of its columns.
-The names of the columns are given in the first row of the input file (the heading row).</p>
-<p>Below is a small example of the kind of input data accepted by Gurita. In this case it is in CSV format with five columns, one heading row and three data rows.
-The first row contains the names of each column. The remaining three rows are data rows,
-where each row has a value associated with each column:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
-5.1,3.5,1.4,0.2,setosa
-4.9,3.0,1.4,0.2,virginica
-4.7,3.2,1.3,0.2,setosa
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Gurita requires that the input data is <strong>rectangular</strong> in shape. In other words, every row must contain the same number of columns.
-<a class="reference internal" href="missing.html#missing-values"><span class="std std-ref">Missing values</span></a> are allowed, and are indicated by leaving a particular entry blank (empty) or marking it with a special value.</p>
+  <section id="input-and-output">
+<span id="input-output"></span><h1>Input and output<a class="headerlink" href="#input-and-output" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tabular_data.html">Tabular input and output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+</ul>
 </div>
 </section>
 
@@ -124,8 +105,8 @@ where each row has a value associated with each column:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="list_of_commands.html" class="btn btn-neutral float-left" title="List of commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="input.html" class="btn btn-neutral float-right" title="Reading input data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="command_line_syntax.html" class="btn btn-neutral float-left" title="Command line syntax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tabular_data.html" class="btn btn-neutral float-right" title="Tabular input and output data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

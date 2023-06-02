@@ -18,9 +18,7 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="sample" href="sample.html" />
-    <link rel="prev" title="pca" href="pca.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,6 +27,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> gurita
+            <img src="_static/gurita_using_computer.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -48,41 +47,10 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Commands</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="io_commands.html">Input and output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_commands.html">Plotting</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="transformation_commands.html">Data transformation and analysis</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="corr.html">corr</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cut.html">cut</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dropna.html">dropna</a></li>
-<li class="toctree-l2"><a class="reference internal" href="eval.html">eval</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filter.html">filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gmm.html">gmm (Gaussian mixture model)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="groupby.html">groupby</a></li>
-<li class="toctree-l2"><a class="reference internal" href="head.html">head</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kmeans.html">kmeans</a></li>
-<li class="toctree-l2"><a class="reference internal" href="melt.html">melt</a></li>
-<li class="toctree-l2"><a class="reference internal" href="normtest.html">normtest</a></li>
-<li class="toctree-l2"><a class="reference internal" href="outlier.html">outlier</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pca.html">pca</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pivot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample.html">sample</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sort.html">sort</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tail.html">tail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zscore.html">zscore</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="summary_commands.html">Summary information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
@@ -105,7 +73,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="transformation_commands.html">Data transformation and analysis</a> &raquo;</li>
       <li>pivot</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/pivot.rst.txt" rel="nofollow"> View page source</a>
@@ -118,15 +85,403 @@
              
   <section id="pivot">
 <span id="id1"></span><h1>pivot<a class="headerlink" href="#pivot" title="Permalink to this headline"></a></h1>
+<p>Reshape data from <a class="reference external" href="https://en.wikipedia.org/wiki/Wide_and_narrow_data#Narrow">narrow format</a> to <a class="reference external" href="https://en.wikipedia.org/wiki/Wide_and_narrow_data#Wide">wide format</a>.</p>
+<p>Sometimes wide format is called <em>stacked</em> and narrow format is called <em>unstacked</em> or <em>long</em>.</p>
+<p>For example here is a small table in <em>narrow format</em> representing working hours for two employees on each weekday, where employees are also associated with a level:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,feature,val
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+</pre></div>
+</div>
+<p>And here is the same data in <em>wide format</em>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,mon,tue,wed,thu,fri
+Alice,A1,8,8,4,1,4
+Bob,B3,0,0,4,6,0
+</pre></div>
+</div>
+<p>In this particular example the <code class="docutils literal notranslate"><span class="pre">person</span></code> column has been used as an index for the output rows, and the values in the <code class="docutils literal notranslate"><span class="pre">feature</span></code>
+column have been unstacked into column headings, with values from the <code class="docutils literal notranslate"><span class="pre">val</span></code> column populating the rows.</p>
+<p>An alternative wide representation of the same dataset is shown below, where the <code class="docutils literal notranslate"><span class="pre">feature</span></code> column
+has been used as an index of the output rows, and the values in the <code class="docutils literal notranslate"><span class="pre">person</span></code> column have been
+unstacked into new column headings. As before the values from the <code class="docutils literal notranslate"><span class="pre">val</span></code> column populate the rows.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>feature,Alice,Bob
+fri,4,0
+level,A1,B3
+mon,8,0
+thu,1,6
+tue,8,0
+wed,4,4
+</pre></div>
+</div>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot [-h] -c COLUMN [COLUMN ...] -i COLUMN [COLUMN ...]
+             [-v COLUMN [COLUMN ...]] [-f FUNCTION [FUNCTION ...]]
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#pivot-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--index</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+</ul>
+</td>
+<td><p>use these columns as the index (required)</p></td>
+<td><p><a class="reference internal" href="#pivot-index-columns"><span class="std std-ref">index columns</span></a></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--cols</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+</ul>
+</td>
+<td><p>unstack these columns (required)</p></td>
+<td><p><a class="reference internal" href="#pivot-columns"><span class="std std-ref">pivot columns</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--vals</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+</ul>
+</td>
+<td><p>populate the rows from these columns</p></td>
+<td><p><a class="reference internal" href="#pivot-value-columns"><span class="std std-ref">value columns</span></a></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">FUNCTION</span> <span class="pre">[FUNCTION</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--fun</span> <span class="pre">FUNCTION</span> <span class="pre">[FUNCTION</span> <span class="pre">...]</span></code></p></li>
+</ul>
+</td>
+<td><p>Aggregation function</p></td>
+<td><p><a class="reference internal" href="#pivot-fun"><span class="std std-ref">aggregating function</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="melt.html"><span class="doc">melt</span></a> is the inverse of <code class="docutils literal notranslate"><span class="pre">pivot</span></code>.</p></li>
+<li><p><a class="reference internal" href="groupby.html"><span class="doc">groupby</span></a> also provides a way to aggregate rows based on a key.</p></li>
+</ul>
+</section>
+<section id="getting-help">
+<span id="pivot-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">pivot</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -h
+</pre></div>
+</div>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h2>
+<p>Suppose the following data is stored in a file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,feature,val
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+</pre></div>
+</div>
+<p>This is an example of data in “narrow format” (or “unstacked” or “long”).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pivot</span></code> command can convert the data into “wide format”, as demonstrated in the following example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i person -c feature -v val &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,fri,level,mon,thu,tue,wed
+Alice,4,A1,8,1,8,4
+Bob,0,B3,0,6,0,4
+</pre></div>
+</div>
+<p>In this example the <code class="docutils literal notranslate"><span class="pre">person</span></code> column is used as the index of the output data; it acts like a key for the new rows. There are two distinct values for <code class="docutils literal notranslate"><span class="pre">person</span></code> (<code class="docutils literal notranslate"><span class="pre">Alice</span></code> and <code class="docutils literal notranslate"><span class="pre">Bob</span></code>), so there are two rows in the output data.</p>
+<p>The remaining new columns in the output data are derived from the values in the <code class="docutils literal notranslate"><span class="pre">feature</span></code> column (<code class="docutils literal notranslate"><span class="pre">fri</span></code>, <code class="docutils literal notranslate"><span class="pre">level</span></code>, <code class="docutils literal notranslate"><span class="pre">mon</span></code>, <code class="docutils literal notranslate"><span class="pre">thu</span></code>, <code class="docutils literal notranslate"><span class="pre">tue</span></code>, <code class="docutils literal notranslate"><span class="pre">wed</span></code>). You’ll note that the new columns have been generated in an arbitrary order, however,
+usually this is not important because the order of the columns in the data rarely matters.</p>
+<p>The values in the corresponding rows are determined from the <code class="docutils literal notranslate"><span class="pre">val</span></code> column. For instance, in the original data set, given <code class="docutils literal notranslate"><span class="pre">Alice</span></code> as a key, <code class="docutils literal notranslate"><span class="pre">level</span></code> is associated uniqely with the value <code class="docutils literal notranslate"><span class="pre">A1</span></code>. Therefore, in the output data, the row for <code class="docutils literal notranslate"><span class="pre">Alice</span></code> in the <code class="docutils literal notranslate"><span class="pre">level</span></code> column contains <code class="docutils literal notranslate"><span class="pre">A1</span></code>.</p>
+<p>As an alternative example, we could pivot the data in a different way, by using the <code class="docutils literal notranslate"><span class="pre">feature</span></code> column as the index, and unstacking the <code class="docutils literal notranslate"><span class="pre">person</span></code> column:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i feature -c person -v val &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>feature,Alice,Bob
+fri,4,0
+level,A1,B3
+mon,8,0
+thu,1,6
+tue,8,0
+wed,4,4
+</pre></div>
+</div>
+<p>In this example there are six values in the <code class="docutils literal notranslate"><span class="pre">feature</span></code> column, so there are correspondingly six rows in the output. Also, the two unique values in the <code class="docutils literal notranslate"><span class="pre">person</span></code> column have been unstacked into two new columns in the output.</p>
+<p>These two examples show that <code class="docutils literal notranslate"><span class="pre">pivot</span></code> provides a mechanism to structure and view the same dataset in multiple ways.</p>
+<p>The inverse of <code class="docutils literal notranslate"><span class="pre">pivot</span></code> is <code class="docutils literal notranslate"><span class="pre">melt</span></code>. For example the following commands show how to invert the
+pivoted data in wide format back to an equivalent of the input long format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i person -c feature -v val + melt -i person -v mon tue wed thu fri level --varname feature --valname val &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,feature,val
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+Alice,level,A1
+Bob,level,B3
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i feature -c person -v val + melt -i feature -v Alice Bob --varname person --valname val &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>feature,person,val
+fri,Alice,4
+level,Alice,A1
+mon,Alice,8
+thu,Alice,1
+tue,Alice,8
+wed,Alice,4
+fri,Bob,0
+level,Bob,B3
+mon,Bob,0
+thu,Bob,6
+tue,Bob,0
+wed,Bob,4
+</pre></div>
+</div>
+<p>Note that in both examples using <code class="docutils literal notranslate"><span class="pre">pivot</span></code> followed by <code class="docutils literal notranslate"><span class="pre">melt</span></code> the output data is not in
+<em>exactly</em> the same order as the origial input data. Some of the rows and columns have been
+reordered. However, the data is semantically equivalent to the original data because row and column
+ordering does not normally matter. Regardless of structure, the data represents the same information.</p>
+</section>
+<section id="missing-data">
+<span id="pivot-missing-data"></span><h2>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline"></a></h2>
+<p>Consider the following modified version of the data set from above, where the row <code class="docutils literal notranslate"><span class="pre">Alice,level,A1</span></code> has been removed. In this new dataset <code class="docutils literal notranslate"><span class="pre">Bob</span></code> has an associated <code class="docutils literal notranslate"><span class="pre">level</span></code> by <code class="docutils literal notranslate"><span class="pre">Alice</span></code> does not.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,feature,val
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+</pre></div>
+</div>
+<p>We can pivot the data as before with the following command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i person -c feature -v val &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,fri,level,mon,thu,tue,wed
+Alice,4,,8,1,8,4
+Bob,0,B3,0,6,0,4
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">level</span></code> column exists, as before, in the output. This is because <code class="docutils literal notranslate"><span class="pre">level</span></code> appears in the input <code class="docutils literal notranslate"><span class="pre">feature</span></code> column.</p>
+<p>Even though <code class="docutils literal notranslate"><span class="pre">level</span></code> is only defined for <code class="docutils literal notranslate"><span class="pre">Bob</span></code>, all output rows must have this column. Since <code class="docutils literal notranslate"><span class="pre">level</span></code> is not defined for <code class="docutils literal notranslate"><span class="pre">Alice</span></code> in the input data, the only
+reasonable thing to do is make this cell empty in the output.</p>
+<p>There are many other ways that the dataset could have a missing <code class="docutils literal notranslate"><span class="pre">level</span></code> value for <code class="docutils literal notranslate"><span class="pre">Alice</span></code>.
+For example, the data could contain the following row:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Alice,level,
+</pre></div>
+</div>
+<p>In all such cases the output of the <code class="docutils literal notranslate"><span class="pre">pivot</span></code> command would be the same thing, to account for
+the missing <code class="docutils literal notranslate"><span class="pre">level</span></code> associated with <code class="docutils literal notranslate"><span class="pre">Alice</span></code>. Similarly for other missing data.</p>
+<p>Missing data can be removed from the dataset using the <a class="reference internal" href="dropna.html"><span class="doc">dropna</span></a> command.</p>
+</section>
+<section id="specifying-columns-to-act-as-an-index">
+<span id="pivot-index-columns"></span><h2>Specifying columns to act as an index<a class="headerlink" href="#specifying-columns-to-act-as-an-index" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-i COLUMN [COLUMN ...]
+--index COLUMN [COLUMN ...]
+</pre></div>
+</div>
+<p>When unstacking a dataset the <code class="docutils literal notranslate"><span class="pre">pivot</span></code> command groups data together into output rows
+using an <em>index</em> (or a key), computed from one or more input columns. This is a required
+argument.</p>
+<p>Suppose we have the following dataset in long format stored in a file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,variable,value
+Alice,A1,sun,0
+Bob,B3,sun,4
+Wei,B1,sun,0
+Imani,A2,sun,0
+Diego,C2,sun,3
+Alice,A1,mon,8
+Bob,B3,mon,0
+Wei,B1,mon,0
+Imani,A2,mon,8
+Diego,C2,mon,7
+Alice,A1,tue,8
+Bob,B3,tue,0
+Wei,B1,tue,8
+Imani,A2,tue,8
+Diego,C2,tue,7
+</pre></div>
+</div>
+<p>One way to convert the data into wide format is to group data into output rows based on an index from the <code class="docutils literal notranslate"><span class="pre">person</span></code> and <code class="docutils literal notranslate"><span class="pre">level</span></code> columns, with the <code class="docutils literal notranslate"><span class="pre">variable</span></code> column unstacked into new output columns, and the output rows populated by the <code class="docutils literal notranslate"><span class="pre">value</span></code> column:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i person level -c variable -v value &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,mon,sun,tue
+Alice,A1,8,0,8
+Bob,B3,0,4,0
+Diego,C2,7,3,7
+Imani,A2,8,0,8
+Wei,B1,0,0,8
+</pre></div>
+</div>
+<p>In this case we can see that the output rows are indexed by a key formed from the <code class="docutils literal notranslate"><span class="pre">person</span></code> and <code class="docutils literal notranslate"><span class="pre">level</span></code> input columns. For instance all entries for <code class="docutils literal notranslate"><span class="pre">Alice</span></code> and <code class="docutils literal notranslate"><span class="pre">A1</span></code> are grouped together.</p>
+<p>In a more contrived example, we could form an index from the <code class="docutils literal notranslate"><span class="pre">level</span></code> and <code class="docutils literal notranslate"><span class="pre">variable</span></code> input columns and unstack the <code class="docutils literal notranslate"><span class="pre">person</span></code> column, like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i level variable -c person -v value &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>level,variable,Alice,Bob,Diego,Imani,Wei
+A1,mon,8.0,,,,
+A1,sun,0.0,,,,
+A1,tue,8.0,,,,
+A2,mon,,,,8.0,
+A2,sun,,,,0.0,
+A2,tue,,,,8.0,
+B1,mon,,,,,0.0
+B1,sun,,,,,0.0
+B1,tue,,,,,8.0
+B3,mon,,0.0,,,
+B3,sun,,4.0,,,
+B3,tue,,0.0,,,
+C2,mon,,,7.0,,
+C2,sun,,,3.0,,
+C2,tue,,,7.0,,
+</pre></div>
+</div>
+</section>
+<section id="specifying-columns-to-pivot">
+<span id="pivot-columns"></span><h2>Specifying columns to pivot<a class="headerlink" href="#specifying-columns-to-pivot" title="Permalink to this headline"></a></h2>
+</section>
+<section id="pivot-value-columns">
+<span id="id2"></span><h2>Specifying columns to pivot<a class="headerlink" href="#pivot-value-columns" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-v COLUMN [COLUMN ...]
+--vals COLUMN [COLUMN ...]
+</pre></div>
+</div>
+</section>
+<section id="aggregating-multiple-values">
+<span id="pivot-fun"></span><h2>Aggregating multiple values<a class="headerlink" href="#aggregating-multiple-values" title="Permalink to this headline"></a></h2>
+<p>Suppose <code class="docutils literal notranslate"><span class="pre">Alice</span></code> has <em>two</em> values associated with <code class="docutils literal notranslate"><span class="pre">level</span></code> (<code class="docutils literal notranslate"><span class="pre">B2</span></code> and <code class="docutils literal notranslate"><span class="pre">A1</span></code>), where previously
+there was only one:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,feature,val
+Alice,level,B2
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+</pre></div>
+</div>
+<p>We can try to pivot the data as before:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i person -c feature -v val &lt; example.csv
+</pre></div>
+</div>
+<p>However, this generates an error:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ERROR: Error: Index contains duplicate entries, cannot reshape; exiting
+</pre></div>
+</div>
+<p>The problem is that the output data must have a single cell corresponding to the <code class="docutils literal notranslate"><span class="pre">level</span></code> associated with <code class="docutils literal notranslate"><span class="pre">Alice</span></code>. However, in this data set there are <em>two</em> <code class="docutils literal notranslate"><span class="pre">level</span></code> values for <code class="docutils literal notranslate"><span class="pre">Alice</span></code>, and <code class="docutils literal notranslate"><span class="pre">pivot</span></code>
+does not know how to resolve this multiplicity.</p>
+<p>This situation can be resolved by specifying an <a class="reference internal" href="#pivot-fun"><span class="std std-ref">aggregating function</span></a> to map multiple values into a single result.</p>
+<p>For example, we could use <code class="docutils literal notranslate"><span class="pre">-f</span> <span class="pre">sample</span></code> to pick a random value from the collection of possibilities:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pivot -i person -c feature -v val -f sample &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,fri,level,mon,thu,tue,wed
+Alice,4,A1,8,1,8,4
+Bob,0,B3,0,6,0,4
+</pre></div>
+</div>
+<p>Note that the output may differ each time the command is run because it chooses a <code class="docutils literal notranslate"><span class="pre">level</span></code> value for <code class="docutils literal notranslate"><span class="pre">Alice</span></code> at random.</p>
+<p>The behaviour of the aggregating function for <code class="docutils literal notranslate"><span class="pre">pivot</span></code> is similar to that of the <a class="reference internal" href="groupby.html"><span class="doc">groupby</span></a> command.</p>
+<section id="allowed-aggregation-functions">
+<h3>Allowed aggregation functions<a class="headerlink" href="#allowed-aggregation-functions" title="Permalink to this headline"></a></h3>
+<p>The following aggregating functions can be used with <code class="docutils literal notranslate"><span class="pre">-f/--fun</span></code>:</p>
+<ul class="simple">
+<li><p>sample (randomly choose one of the possible values)</p></li>
+<li><p>size (size of the group)</p></li>
+<li><p>sum</p></li>
+<li><p>mean</p></li>
+<li><p>mad (mean absolute deviation)</p></li>
+<li><p>median</p></li>
+<li><p>min</p></li>
+<li><p>max</p></li>
+<li><p>prod</p></li>
+<li><p>std (standard deviation)</p></li>
+<li><p>var (variance)</p></li>
+<li><p>sem (standard error of the mean)</p></li>
+<li><p>skew</p></li>
+<li><p>quantile (50% quantile)</p></li>
+</ul>
+</section>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pca.html" class="btn btn-neutral float-left" title="pca" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sample.html" class="btn btn-neutral float-right" title="sample" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

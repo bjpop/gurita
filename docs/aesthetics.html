@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Facets" href="facets.html" />
-    <link rel="prev" title="Saving and viewing plots" href="plotting.html" /> 
+    <link rel="prev" title="Saving and viewing plots" href="save_view_plots.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,6 +29,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> gurita
+            <img src="_static/gurita_using_computer.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -48,33 +49,30 @@
 <p class="caption" role="heading"><span class="caption-text">General behaviour</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="command_line_syntax.html">Command line syntax</a></li>
-<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Plot aesthetics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#title">Title</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#width">Width</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#height">Height</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#x-axis-label">X axis label</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#y-axis-label">Y axis label</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#no-legend">No legend</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#no-x-axis-tick-labels">No X axis tick labels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#no-y-axis-tick-labels">No y axis tick labels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#style">Style</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#context">Context</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="plotting.html">Plotting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="save_view_plots.html">Saving and viewing plots</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Plot aesthetics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#width">Width</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aesthetics-height">Height</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#title">Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#x-axis-label">X axis label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#y-axis-label">Y axis label</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#style">Style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#context">Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#no-legend">No legend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#turn-off-x-axis-tick-labels">Turn off X axis tick labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#turn-off-y-axis-tick-labels">Turn off Y axis tick labels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rotate-tick-labels-on-the-x-axis">Rotate tick labels on the X axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rotate-tick-labels-on-the-y-axis">Rotate tick labels on the Y axis</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="facets.html">Facets</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Commands</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="io_commands.html">Input and output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_commands.html">Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transformation_commands.html">Data transformation and analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="summary_commands.html">Summary information</a></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
@@ -97,6 +95,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="plotting.html">Plotting</a> &raquo;</li>
       <li>Plot aesthetics</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/aesthetics.rst.txt" rel="nofollow"> View page source</a>
@@ -108,64 +107,229 @@
            <div itemprop="articleBody">
              
   <section id="plot-aesthetics">
-<h1>Plot aesthetics<a class="headerlink" href="#plot-aesthetics" title="Permalink to this headline"></a></h1>
-<section id="title">
-<span id="id1"></span><h2>Title<a class="headerlink" href="#title" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--width SIZE
-</pre></div>
-</div>
+<span id="aesthetics"></span><h1>Plot aesthetics<a class="headerlink" href="#plot-aesthetics" title="Permalink to this headline"></a></h1>
+<p>Gurita tries to use sensible default values for parameters that control the appearance of output plots. However, these can be overridden by optional command line arguments.</p>
+<p>Each plot command accepts a <code class="docutils literal notranslate"><span class="pre">-h/--help</span></code> argument that will cause Gurita to display more information about how to control the visual appearance of the output.</p>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--width</span></code></p></td>
+<td><p>width of the plot in cm</p></td>
+<td><p><a class="reference internal" href="#aesthetics-width"><span class="std std-ref">width</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--height</span></code></p></td>
+<td><p>height of the plot in cm</p></td>
+<td><p><a class="reference internal" href="#aesthetics-height"><span class="std std-ref">height</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--title</span></code></p></td>
+<td><p>plot title</p></td>
+<td><p><a class="reference internal" href="#aesthetics-title"><span class="std std-ref">title</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--xlabel</span></code></p></td>
+<td><p>X axis label</p></td>
+<td><p><a class="reference internal" href="#aesthetics-xlabel"><span class="std std-ref">X axis label</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--ylabel</span></code></p></td>
+<td><p>Y axis label</p></td>
+<td><p><a class="reference internal" href="#aesthetics-ylabel"><span class="std std-ref">Y axis label</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--plotstyle</span> <span class="pre">{darkgrid,whitegrid,dark,white,ticks}</span></code></p></td>
+<td><p>Change the aesthetic style of the plot</p></td>
+<td><p><a class="reference internal" href="#aesthetics-plotstyle"><span class="std std-ref">plot style</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--context</span> <span class="pre">{paper,notebook,talk,poster}</span></code></p></td>
+<td><p>Change the aesthetic context of the plot</p></td>
+<td><p><a class="reference internal" href="#aesthetics-context"><span class="std std-ref">plot context</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--nolegend</span></code></p></td>
+<td><p>Do not display a plot legend</p></td>
+<td><p><a class="reference internal" href="#aesthetics-nolegend"><span class="std std-ref">no legend</span></a></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--nxtl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--noxticklabels</span></code></p></li>
+</ul>
+</td>
+<td><p>Turn off Y axis tick labels</p></td>
+<td><p><a class="reference internal" href="#aesthetics-noxticklabels"><span class="std std-ref">no X axis tick labels</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--nytl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--noyticklabels</span></code></p></li>
+</ul>
+</td>
+<td><p>Turn off X axis tick labels</p></td>
+<td><p><a class="reference internal" href="#aesthetics-noyticklabels"><span class="std std-ref">no Y axis tick labels</span></a></p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--rxtl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rotxticklabels</span></code></p></li>
+</ul>
+</td>
+<td><p>Rotate tick labels on the X axis by angle</p></td>
+<td><p><a class="reference internal" href="#aesthetics-rotxticklabels"><span class="std std-ref">rotate X tick labels</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--rytl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rotyticklabels</span></code></p></li>
+</ul>
+</td>
+<td><p>Rotate tick labels on the Y axis by angle</p></td>
+<td><p><a class="reference internal" href="#aesthetics-rotyticklabels"><span class="std std-ref">rotate Y tick labels</span></a></p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="width">
-<span id="id2"></span><h2>Width<a class="headerlink" href="#width" title="Permalink to this headline"></a></h2>
+<span id="aesthetics-width"></span><h2>Width<a class="headerlink" href="#width" title="Permalink to this headline"></a></h2>
+<p>Set the width of the plot in cm. By default plots are 20cm wide.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--width SIZE
 </pre></div>
 </div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --width 40 ...
+</pre></div>
+</div>
 </section>
-<section id="height">
-<span id="id3"></span><h2>Height<a class="headerlink" href="#height" title="Permalink to this headline"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--width SIZE
+<section id="aesthetics-height">
+<span id="height"></span><span id="id1"></span><h2>Height<a class="headerlink" href="#aesthetics-height" title="Permalink to this headline"></a></h2>
+<p>Set the height of the plot in cm. By default plots are 20cm high.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--height SIZE
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --height 10 ...
+</pre></div>
+</div>
+</section>
+<section id="title">
+<span id="aesthetics-title"></span><h2>Title<a class="headerlink" href="#title" title="Permalink to this headline"></a></h2>
+<p>Set the title text of the plot. By default plots do not have a title text.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--title TEXT
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --title &quot;An example plot title&quot; ...
 </pre></div>
 </div>
 </section>
 <section id="x-axis-label">
-<span id="xlabel"></span><h2>X axis label<a class="headerlink" href="#x-axis-label" title="Permalink to this headline"></a></h2>
+<span id="aesthetics-xlabel"></span><h2>X axis label<a class="headerlink" href="#x-axis-label" title="Permalink to this headline"></a></h2>
+<p>Set the label of the X axis. The default X axis label depends on the type of plot. In many cases
+it is derived from the input data.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--xlabel STR
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --xlabel &quot;An example X axis label&quot; ...
 </pre></div>
 </div>
 </section>
 <section id="y-axis-label">
-<span id="ylabel"></span><h2>Y axis label<a class="headerlink" href="#y-axis-label" title="Permalink to this headline"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--xlabel STR
+<span id="aesthetics-ylabel"></span><h2>Y axis label<a class="headerlink" href="#y-axis-label" title="Permalink to this headline"></a></h2>
+<p>Set the label of the Y axis. The default Y axis label depends on the type of plot. In many cases
+it is derived from the input data.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--ylabel STR
 </pre></div>
 </div>
-</section>
-<section id="no-legend">
-<span id="nolegend"></span><h2>No legend<a class="headerlink" href="#no-legend" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--nolegend
-</pre></div>
-</div>
-</section>
-<section id="no-x-axis-tick-labels">
-<span id="noxticklabels"></span><h2>No X axis tick labels<a class="headerlink" href="#no-x-axis-tick-labels" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--noxticklabels
-</pre></div>
-</div>
-</section>
-<section id="no-y-axis-tick-labels">
-<span id="noyticklabels"></span><h2>No y axis tick labels<a class="headerlink" href="#no-y-axis-tick-labels" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--noyticklabels
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --ylabel &quot;An example Y axis label&quot; ...
 </pre></div>
 </div>
 </section>
 <section id="style">
-<span id="plotstyle"></span><h2>Style<a class="headerlink" href="#style" title="Permalink to this headline"></a></h2>
+<span id="aesthetics-plotstyle"></span><h2>Style<a class="headerlink" href="#style" title="Permalink to this headline"></a></h2>
+<p>Set the visual style of the plot. By default the <code class="docutils literal notranslate"><span class="pre">darkgrid</span></code> style is used.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--plotstyle {darkgrid,whitegrid,dark,white,ticks}
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --plotstyle whitegrid ...
 </pre></div>
 </div>
 </section>
 <section id="context">
-<span id="id4"></span><h2>Context<a class="headerlink" href="#context" title="Permalink to this headline"></a></h2>
+<span id="aesthetics-context"></span><h2>Context<a class="headerlink" href="#context" title="Permalink to this headline"></a></h2>
+<p>Set the visual context for the plot. By default the <code class="docutils literal notranslate"><span class="pre">notebook</span></code> context is used.</p>
+<p>Contexts are
+a convenient way to adjust various visualisation parameters to suit different
+common scenarios where plots are displayed. For example, the <code class="docutils literal notranslate"><span class="pre">poster</span></code> context will use larger
+text sizes for labels for easier reading at a distance.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--context {paper,notebook,talk,poster}
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --context poster ...
+</pre></div>
+</div>
+</section>
+<section id="no-legend">
+<span id="aesthetics-nolegend"></span><h2>No legend<a class="headerlink" href="#no-legend" title="Permalink to this headline"></a></h2>
+<p>Many plots display a legend either on top of the plot or next to the plot. This argument
+turns the legend off so it won’t be displayed.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--nolegend
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --nolegend ...
+</pre></div>
+</div>
+</section>
+<section id="turn-off-x-axis-tick-labels">
+<span id="aesthetics-noxticklabels"></span><h2>Turn off X axis tick labels<a class="headerlink" href="#turn-off-x-axis-tick-labels" title="Permalink to this headline"></a></h2>
+<p>By default the X axis will show data labels next to axis tick marks
+(note that not all plots have tick marks). This arugment turns off tick labels so that they won’t be displayed.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--nxtl, --noxticklabels
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --noxticklabels ...
+</pre></div>
+</div>
+</section>
+<section id="turn-off-y-axis-tick-labels">
+<span id="aesthetics-noyticklabels"></span><h2>Turn off Y axis tick labels<a class="headerlink" href="#turn-off-y-axis-tick-labels" title="Permalink to this headline"></a></h2>
+<p>By default the Y axis will show data labels next to axis tick marks
+(note that not all plots have tick marks). This arugment turns off tick labels so that they won’t be displayed.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--nytl, --noyticklabels
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --noyticklabels ...
+</pre></div>
+</div>
+</section>
+<section id="rotate-tick-labels-on-the-x-axis">
+<span id="aesthetics-rotxticklabels"></span><h2>Rotate tick labels on the X axis<a class="headerlink" href="#rotate-tick-labels-on-the-x-axis" title="Permalink to this headline"></a></h2>
+<p>Adjust the angle in degrees that tick labels are displayed on the X axis (note that not all plots have tick labales). This can be useful when the default tick labels overlap each other.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--rxtl, --rotxticklabels
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --rotxticklabels 90 ...
+</pre></div>
+</div>
+</section>
+<section id="rotate-tick-labels-on-the-y-axis">
+<span id="aesthetics-rotyticklabels"></span><h2>Rotate tick labels on the Y axis<a class="headerlink" href="#rotate-tick-labels-on-the-y-axis" title="Permalink to this headline"></a></h2>
+<p>Adjust the angle in degrees that tick labels are displayed on the X axis (note that not all plots have tick labales). This can be useful when the default tick labels overlap each other.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--rytl, --rotyticklabels
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita box --rotyticklabels 90 ...
 </pre></div>
 </div>
 </section>
@@ -175,7 +339,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="plotting.html" class="btn btn-neutral float-left" title="Saving and viewing plots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="save_view_plots.html" class="btn btn-neutral float-left" title="Saving and viewing plots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="facets.html" class="btn btn-neutral float-right" title="Facets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

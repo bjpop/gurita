@@ -146,24 +146,10 @@ Command chaining allows complex transformations to be combined together and make
    :hidden:
 
    command_line_syntax 
-   list_of_commands 
    input_output 
-   input
-   output
    missing
    plotting 
-   aesthetics 
-   facets 
-
-.. toctree::
-   :titlesonly:
-   :hidden:
-   :caption: Commands 
-
-   io_commands
-   plotting_commands
-   transformation_commands
-   summary_commands
+   list_of_commands 
 
 .. toctree::
    :hidden:

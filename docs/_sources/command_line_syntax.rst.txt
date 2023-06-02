@@ -20,13 +20,33 @@ where ``<command>`` is the command name (e.g. ``hist`` or ``pca``), and ``argume
 
 See the :ref:`list of commands <list_of_commands>` for a summary of all the available commands.
 
+Example command
+---------------
+
 For instance, the following invocation of Gurita will plot a histogram of the ``passengers`` column from the file ``flights.csv`` read from standard input:
 
 .. code-block:: text
 
     gurita hist -x passengers < flights.csv
 
-In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Gurita.  See the section on :ref:`input and output <input_output>` for more information about input and output files.
+In the above example ``hist -x passengers`` is a single command. ``hist`` is the name of the command for plotting histograms, and ``-x passengers`` is an argument that tells the command to use the ``passengers`` column for the X axis. The notation ``< flights.csv`` redirects the contents of the ``flights.csv`` file into the standard input of Gurita. See the section on :ref:`input and output <input_output>` for more information about input and output files.
+
+The same outcome can be achieved equivalently by the following invocation:
+
+.. code-block:: text
+
+    cat flights.csv | gurita hist -x passengers
+
+In the above example the contents of ``flights.csv`` is piped into the standard input of Gurita using the Unix pipe operator. Despite the different notation, this has the same effect as the previous example.
+
+A somewhat lesser-known fact is that the original example with redirection can also be written as follows, where the redirection is written to the left of the Gurita command:
+
+.. code-block:: text
+
+    < flights.csv gurita hist -x passengers
+
+Despite the different notation, this has exactly the same effect as the original version.
+
 
 Types of commands
 -----------------
@@ -84,7 +104,7 @@ Each command in the chain *may* transform the data before passing it along to th
    The main downside of using ``|`` pipelines is that it requires the entire dataset to be serialised into a text stream between each
    command. This is redundant, inefficient, and therefore slow, particularly for large datasets. 
 
-   The ``+`` operator lets you compose a pipeline using a single invocation of Gurita and *most importantly* data is passed between
+   The ``+`` operator lets you compose a pipeline using a single invocation of Gurita and, *most importantly*, data is passed between
    successive commands in the chain efficiently. There is no serialisation to a text stream in between commands. Therefore using ``+`` will
    be much faster than ``|``, especially for complex pipelines and large datasets.
 

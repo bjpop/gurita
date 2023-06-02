@@ -262,6 +262,7 @@ Allowed aggregation functions
 
 The following aggregating functions can be used with ``--fun``:
 
+* sample (randomly choose one of the possible values)
 * size (size of the group)
 * sum
 * mean

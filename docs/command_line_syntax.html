@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="List of commands" href="list_of_commands.html" />
+    <link rel="next" title="Input and output" href="input_output.html" />
     <link rel="prev" title="Example input data" href="example_input_data.html" /> 
 </head>
 
@@ -29,6 +29,7 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
             <a href="index.html" class="icon icon-home"> gurita
+            <img src="_static/gurita_using_computer.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -49,6 +50,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Command line syntax</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-command">Example command</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#types-of-commands">Types of commands</a></li>
 </ul>
 </li>
@@ -60,21 +62,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#version-number">Version number</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input_output.html">Tabular input and output data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input.html">Reading input data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Writing output data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_output.html">Input and output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="missing.html">Missing values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting.html">Saving and viewing plots</a></li>
-<li class="toctree-l1"><a class="reference internal" href="aesthetics.html">Plot aesthetics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="facets.html">Facets</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Commands</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="io_commands.html">Input and output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_commands.html">Plotting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transformation_commands.html">Data transformation and analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="summary_commands.html">Summary information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list_of_commands.html">List of commands</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
@@ -119,11 +110,24 @@
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">&lt;command&gt;</span></code> is the command name (e.g. <code class="docutils literal notranslate"><span class="pre">hist</span></code> or <code class="docutils literal notranslate"><span class="pre">pca</span></code>), and <code class="docutils literal notranslate"><span class="pre">arguments</span></code> is a list of options that control the behaviour of the command. In some cases the <code class="docutils literal notranslate"><span class="pre">arguments</span></code> can be empty.</p>
 <p>See the <a class="reference internal" href="list_of_commands.html#list-of-commands"><span class="std std-ref">list of commands</span></a> for a summary of all the available commands.</p>
+<section id="example-command">
+<h3>Example command<a class="headerlink" href="#example-command" title="Permalink to this headline"></a></h3>
 <p>For instance, the following invocation of Gurita will plot a histogram of the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column from the file <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> read from standard input:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x passengers &lt; flights.csv
 </pre></div>
 </div>
-<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">-x</span> <span class="pre">passengers</span></code> is a single command. <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the name of the command for plotting histograms, and <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> is an argument that tells the command to use the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column for the X axis. The notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">flights.csv</span></code> redirects the contents of the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> file into the standard input of Gurita.  See the section on <a class="reference internal" href="input_output.html#input-output"><span class="std std-ref">input and output</span></a> for more information about input and output files.</p>
+<p>In the above example <code class="docutils literal notranslate"><span class="pre">hist</span> <span class="pre">-x</span> <span class="pre">passengers</span></code> is a single command. <code class="docutils literal notranslate"><span class="pre">hist</span></code> is the name of the command for plotting histograms, and <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">passengers</span></code> is an argument that tells the command to use the <code class="docutils literal notranslate"><span class="pre">passengers</span></code> column for the X axis. The notation <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">flights.csv</span></code> redirects the contents of the <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> file into the standard input of Gurita. See the section on <a class="reference internal" href="input_output.html#input-output"><span class="std std-ref">input and output</span></a> for more information about input and output files.</p>
+<p>The same outcome can be achieved equivalently by the following invocation:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat flights.csv | gurita hist -x passengers
+</pre></div>
+</div>
+<p>In the above example the contents of <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> is piped into the standard input of Gurita using the Unix pipe operator. Despite the different notation, this has the same effect as the previous example.</p>
+<p>A somewhat lesser-known fact is that the original example with redirection can also be written as follows, where the redirection is written to the left of the Gurita command:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt; flights.csv gurita hist -x passengers
+</pre></div>
+</div>
+<p>Despite the different notation, this has exactly the same effect as the original version.</p>
+</section>
 <section id="types-of-commands">
 <h3>Types of commands<a class="headerlink" href="#types-of-commands" title="Permalink to this headline"></a></h3>
 <p>Commands fall into four types:</p>
@@ -165,7 +169,7 @@
 <p>Note that this requires the Gurita program to be invoked multiple times in the same pipeline.</p>
 <p>The main downside of using <code class="docutils literal notranslate"><span class="pre">|</span></code> pipelines is that it requires the entire dataset to be serialised into a text stream between each
 command. This is redundant, inefficient, and therefore slow, particularly for large datasets.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator lets you compose a pipeline using a single invocation of Gurita and <em>most importantly</em> data is passed between
+<p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> operator lets you compose a pipeline using a single invocation of Gurita and, <em>most importantly</em>, data is passed between
 successive commands in the chain efficiently. There is no serialisation to a text stream in between commands. Therefore using <code class="docutils literal notranslate"><span class="pre">+</span></code> will
 be much faster than <code class="docutils literal notranslate"><span class="pre">|</span></code>, especially for complex pipelines and large datasets.</p>
 </div>
@@ -282,7 +286,7 @@ after the command name:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="example_input_data.html" class="btn btn-neutral float-left" title="Example input data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="list_of_commands.html" class="btn btn-neutral float-right" title="List of commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="input_output.html" class="btn btn-neutral float-right" title="Input and output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

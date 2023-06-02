@@ -7,7 +7,7 @@ Reshape data from `wide format <https://en.wikipedia.org/wiki/Wide_and_narrow_da
 
 Sometimes wide format is called *stacked* and narrow format is called *un-stacked* or *long*.
 
-For example here is a small table in *wide format* representing working hours for two employees on each weekday:
+For example here is a small table in *wide format* representing working hours for two employees on each weekday, where employees are also associated with a level:
 
 .. code-block:: text
 
@@ -132,9 +132,9 @@ The output of the above command is as follows:
 
 In this example the melted data consists entirely of variable-value pairs. However, this is not normally the most useful view of the data. 
 More often we want to melt only some of the columns into variable-value pairs, and preserve other columns unchanged to act as a kind of unique identifier for each row (otherwise
-known as a key or an index).
+known as a key).
 
-For example, the following command retains the ``person`` column as an index for the rows, and melts the remaining columns into variable-value pairs:
+For example, the following command retains the ``person`` column as an identifier for the rows, and melts the remaining columns into variable-value pairs:
 
 .. code-block:: text
 
@@ -165,7 +165,7 @@ The output of this command is quite long, so for the sake of illustration, we wi
     Imani,mon,8
     Diego,mon,7
 
-Now the ``person`` column is retained and acts as a kind of index for the rows.
+Now the ``person`` column is retained and acts as a kind of identifier for the rows.
 
 .. _melt_help:
 
