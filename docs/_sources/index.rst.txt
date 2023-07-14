@@ -8,7 +8,7 @@ Gurita: a command line data analytics and plotting tool
 
 Gurita is a command line tool for transforming, analysing, and visualising tabular data in CSV or TSV format.
 
-At its core Gurita provides a suite of commands, each of which carries out a common data analytics or plotting task.
+At its core Gurita provides a :ref:`suite of commands <list_of_commands>`, each of which carries out a common data analytics or plotting task.
 Additionally, Gurita allows commands to be :ref:`chained together <command_chain>` into flexible analysis pipelines.
 
 It is designed to be fast and convenient, and is particularly suited to data exploration tasks. Input files with large numbers of rows (> millions) are readily supported.

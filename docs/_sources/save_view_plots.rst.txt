@@ -1,5 +1,3 @@
-.. _plotting: 
-
 Saving and viewing plots
 ************************
 
@@ -69,7 +67,7 @@ For example, the following command saves the output plot to a file called ``exam
 
 .. warning::
 
-   If tell Gurita to save a plot to a specific file name, and that file already exists, Gurita will overwrite the contents of the
+   If you tell Gurita to save a plot to a specific file name, and that file already exists, Gurita will overwrite the contents of the
    file with the new plot. This will lose old contents of the file.
 
 .. _format:

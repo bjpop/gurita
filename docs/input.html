@@ -119,7 +119,7 @@ For example, if you wanted to generate a count plot of the <code class="docutils
 <code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">&lt;str&gt;</span></code> option as noted below.</p>
 </section>
 <section id="specifying-the-field-separator">
-<h2>Specifying the field separator<a class="headerlink" href="#specifying-the-field-separator" title="Permalink to this headline"></a></h2>
+<span id="input-field-separator"></span><h2>Specifying the field separator<a class="headerlink" href="#specifying-the-field-separator" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">in</span></code> command lets you specify the field separator explicitly. This will override any default behaviour that Gurita would otherwise have when choosing what separator to use.</p>
 <p>Using a comma as the field separator:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;,&#39; ...
@@ -196,7 +196,7 @@ not apply when reading from standard input implicitly (as noted below).</p>
 </div>
 </section>
 <section id="implicit-csv-input-from-standard-input-stdin">
-<h2>Implicit CSV input from standard input (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
+<span id="input-implicit-csv-stdin"></span><h2>Implicit CSV input from standard input (stdin)<a class="headerlink" href="#implicit-csv-input-from-standard-input-stdin" title="Permalink to this headline"></a></h2>
 <p>For convenience, if you don’t use the <code class="docutils literal notranslate"><span class="pre">in</span></code> command explicitly Gurita will assume you wanted to read from standard input in CSV format.</p>
 <p>Therefore:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in + &lt;rest of command&gt;

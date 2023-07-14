@@ -1,7 +1,7 @@
 Command line syntax
 *******************
 
-Gurita provides a suite of commands, each carrying out a specific task. 
+Gurita provides a :ref:`suite of commands <list_of_commands>`, each carrying out a specific task. 
 
 Commands can be :ref:`chained together <command_chain>` in a modular fashion for more complex analysis pipelines.
 
@@ -55,8 +55,8 @@ Commands fall into four types:
 
 1. :ref:`input/output <input_output_command_list>`: reading and writing data
 2. :ref:`plotting <plotting_command_list>`: visualising data as plots
-3. :ref:`transformation <transformation_command_list>`: manipulating and analysing the data
-4. :ref:`summary information <summary_command_list>`: getting an overview of the data 
+3. :ref:`transformation and analysis <transformation_command_list>`: manipulating and analysing data
+4. :ref:`summary information <summary_command_list>`: getting an overview of data 
 
 .. _command_chain:
 

@@ -28,6 +28,8 @@ In the above example data is read from the input file and then passed along the 
 When reading input from a named file (and not from standard input) Gurita will look at the file extension and assume CSV format if the extension is ``.csv`` and TSV format if the extension is ``.tsv``. This behaviour can be overridden with the
 ``--sep <str>`` option as noted below.
 
+.. _input_field_separator:
+
 Specifying the field separator 
 ------------------------------
 
@@ -138,6 +140,7 @@ As before, this can be overridden by ``in --sep <str>``, as illustrated in the e
    Note that this restriction is only a concern when using the ``in`` command to read from standard input, and does
    not apply when reading from standard input implicitly (as noted below).
 
+.. _input_implicit_csv_stdin:
 
 Implicit CSV input from standard input (stdin)
 ----------------------------------------------
