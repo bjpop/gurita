@@ -100,25 +100,15 @@ def hue(self, required=False):
 #    '--hue',  metavar='COLUMN', type=str, required=False, 
 #    help=f'Name of feature to use for colouring/grouping the plotted data.')
 
-def row(self, required=False):
+def frow(self, required=False):
     target(self, required).add_argument(
-        '-r', '--row', metavar='COLUMN', type=str, required=required, 
+        '--frow', metavar='COLUMN', type=str, required=required, 
         help=f'Name of feature to use for facet rows.')
 
-#row = argparse.ArgumentParser(add_help=False)
-#row.add_argument(
-#    '-r', '--row', metavar='COLUMN', type=str, required=False, 
-#    help=f'Name of feature to use for facet rows.')
-
-def col(self, required=False):
+def fcol(self, required=False):
     target(self, required).add_argument(
-        '-c', '--col', metavar='COLUMN', type=str, required=required,
+        '--fcol', metavar='COLUMN', type=str, required=required,
         help=f'Name of feature to use for facet columns.')
-
-# col = argparse.ArgumentParser(add_help=False)
-# col.add_argument(
-#     '-c', '--col', metavar='COLUMN', type=str, required=False, 
-#     help=f'Name of feature to use for facet columns.')
 
 def order(self, required=False):
     target(self, required).add_argument(
@@ -250,9 +240,9 @@ def dotstyle(self, required=False):
 #    '--dotstyle', metavar='COLUMN', type=str, required=False, 
 #    help=f'Name of categorical feature to use for plotted dot marker style.')
 
-def colwrap(self, required=False):
+def fcolwrap(self, required=False):
     target(self, required).add_argument(
-        '--colwrap',  metavar='INT', type=int, required=required,
+        '--fcolwrap',  metavar='INT', type=int, required=required,
         help=f'Wrap the facet column at this width, to span multiple rows.')
 
 #colwrap = argparse.ArgumentParser(add_help=False)

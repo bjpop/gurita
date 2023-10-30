@@ -61,15 +61,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <strip_range>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <strip_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <strip_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <strip_facets>`
 
@@ -345,9 +343,9 @@ Facets
 
 .. code-block:: 
 
- --row COLUMN [COLUMN ...], -r COLUMN [COLUMN ...]
- --col COLUMN [COLUMN ...], -c COLUMN [COLUMN ...]
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Strip plots can be further divided into facets, generating a matrix of strip plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -356,7 +354,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 .. code-block:: bash
 
-    gurita strip -y age -x class --col sex < titanic.csv
+    gurita strip -y age -x class --fcol sex < titanic.csv
 
 .. image:: ../images/strip.class.age.sex.facet.png
        :width: 600px

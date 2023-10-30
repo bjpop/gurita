@@ -71,15 +71,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <bar_range>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <bar_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <bar_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <bar_facets>`
 
@@ -379,9 +377,9 @@ Facets
 
 .. code-block:: 
 
- --row COLUMN, -r COLUMN
- --col COLUMN, -c COLUMN
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Bar plots can be further divided into facets, generating a matrix of bar plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -392,7 +390,7 @@ The follow command creates a faceted bar plot where the ``sex`` column is used t
 
 .. code-block:: text
 
-    gurita bar -y age -x class --col sex < titanic.csv
+    gurita bar -y age -x class --fcol sex < titanic.csv
 
 .. image:: ../images/bar.class.age.sex.facet.png 
        :width: 600px

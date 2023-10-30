@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from gurita.command_base import CommandBase
 import gurita.render_plot as render_plot
 import gurita.io_arguments as io_args 
-from gurita.plot_arguments import make_plot_arguments, x_argument, y_argument, hue, row, col, order, hue_order, orient, logx, logy, xlim, ylim, dotsize, dotsizerange, dotalpha, dotlinewidth, dotlinecolour, dotstyle, colwrap, dodge, vlines, hlines, strip, nooutliers, estimator
+from gurita.plot_arguments import make_plot_arguments, x_argument, y_argument, hue, frow, fcol, order, hue_order, orient, logx, logy, xlim, ylim, dotsize, dotsizerange, dotalpha, dotlinewidth, dotlinecolour, dotstyle, fcolwrap, dodge, vlines, hlines, strip, nooutliers, estimator
 import gurita.constants as const
 import gurita.utils as utils
 
@@ -67,8 +67,8 @@ class BarPlot(CommandBase, name="bar"):
         y_argument(self)
         estimator(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -76,7 +76,7 @@ class BarPlot(CommandBase, name="bar"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         group = self.optional.add_mutually_exclusive_group()
         group.add_argument('--std', action='store_true', default=False, required=False, help=f'Show standard deviation of numerical feature as error bar')
         group.add_argument('--ci', metavar='NUM', type=float, required=False, nargs='?', const=const.DEFAULT_CI, help=f'Show confidence interval as error bar to estimate uncertainty of point estimate')
@@ -96,10 +96,10 @@ class BarPlot(CommandBase, name="bar"):
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, estimator=estimator_fun,
                 ci=error_indicator,
-                col=options.col, row=options.row,
+                col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -114,8 +114,8 @@ class BoxPlot(CommandBase, name="box"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -123,7 +123,7 @@ class BoxPlot(CommandBase, name="box"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         strip(self)
         nooutliers(self)
 
@@ -135,11 +135,11 @@ class BoxPlot(CommandBase, name="box"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 showfliers=not(options.nooutliers),
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         if options.strip:
             graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black", order=options.order)
         render_plot.render_plot(options, graph, self.name)
@@ -156,8 +156,8 @@ class BoxenPlot(CommandBase, name="boxen"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -165,7 +165,7 @@ class BoxenPlot(CommandBase, name="boxen"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         strip(self)
         nooutliers(self)
 
@@ -178,11 +178,11 @@ class BoxenPlot(CommandBase, name="boxen"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 showfliers=not(options.nooutliers),
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         if options.strip:
             graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black")
         render_plot.render_plot(options, graph, self.name)
@@ -413,15 +413,15 @@ class HistogramPlot(CommandBase, name="hist"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         hue_order(self)
         orient(self)
         logx(self)
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         vlines(self)
         hlines(self)
         self.optional.add_argument(
@@ -484,13 +484,13 @@ class HistogramPlot(CommandBase, name="hist"):
             kwargs.pop('element', None)
             kwargs.pop('fill', None)
         graph = sns.displot(kind='hist', data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 cumulative=options.cumulative,
                 hue_order=options.hueorder,
                 stat=options.stat,
                 common_norm=not(options.indnorm),
-                facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         if options.vlines is not None:
             for ax in graph.axes.ravel():
                 for pos in options.vlines:
@@ -513,8 +513,8 @@ class LinePlot(CommandBase, name="line"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -522,7 +522,7 @@ class LinePlot(CommandBase, name="line"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         vlines(self)
         hlines(self)
     
@@ -535,9 +535,9 @@ class LinePlot(CommandBase, name="line"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.relplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
-                hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         if options.vlines is not None:
             for ax in graph.axes.ravel():
                 for pos in options.vlines:
@@ -560,8 +560,8 @@ class PointPlot(CommandBase, name="point"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -569,7 +569,7 @@ class PointPlot(CommandBase, name="point"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
 
 
     def run(self, df):
@@ -580,10 +580,10 @@ class PointPlot(CommandBase, name="point"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -598,15 +598,15 @@ class ScatterPlot(CommandBase, name="scatter"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         logx(self)
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         dotsize(self)
         dotalpha(self)
         dotlinewidth(self)
@@ -632,10 +632,10 @@ class ScatterPlot(CommandBase, name="scatter"):
         if options.dotsizerange is not None:
             sizes=tuple(options.dotsizerange)
         graph = sns.relplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 style=options.dotstyle, sizes=sizes, size=options.dotsize, alpha=options.dotalpha,
-                hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                hue_order=options.hueorder, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         if options.vlines is not None:
             for ax in graph.axes.ravel():
                 for pos in options.vlines:
@@ -658,10 +658,10 @@ class LMPlot(CommandBase, name="lmplot"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         hue_order(self)
-        colwrap(self)
+        fcolwrap(self)
 
 
     def run(self, df):
@@ -673,9 +673,9 @@ class LMPlot(CommandBase, name="lmplot"):
         kwargs = {}
         scatter_kws = {}
         graph = sns.lmplot(data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
-                hue_order=options.hueorder, scatter_kws=scatter_kws, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                hue_order=options.hueorder, scatter_kws=scatter_kws, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -690,8 +690,8 @@ class StripPlot(CommandBase, name="strip"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -700,7 +700,7 @@ class StripPlot(CommandBase, name="strip"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
 
 
     def run(self, df):
@@ -711,11 +711,11 @@ class StripPlot(CommandBase, name="strip"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
                 dodge = options.dodge,
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -730,8 +730,8 @@ class SwarmPlot(CommandBase, name="swarm"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -740,7 +740,7 @@ class SwarmPlot(CommandBase, name="swarm"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
 
 
     def run(self, df):
@@ -751,10 +751,10 @@ class SwarmPlot(CommandBase, name="swarm"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder, dodge=options.dodge,
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df
 
@@ -769,8 +769,8 @@ class ViolinPlot(CommandBase, name="violin"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -778,7 +778,7 @@ class ViolinPlot(CommandBase, name="violin"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
         strip(self)
 
 
@@ -790,10 +790,10 @@ class ViolinPlot(CommandBase, name="violin"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         if options.strip:
             graph.map_dataframe(sns.stripplot, data=df, x=options.xaxis, y=options.yaxis, alpha=0.8, color="black", order=options.order)
         render_plot.render_plot(options, graph, self.name) 
@@ -810,8 +810,8 @@ class CountPlot(CommandBase, name="count"):
         x_argument(self)
         y_argument(self)
         hue(self)
-        row(self)
-        col(self)
+        frow(self)
+        fcol(self)
         order(self)
         hue_order(self)
         orient(self)
@@ -819,7 +819,7 @@ class CountPlot(CommandBase, name="count"):
         logy(self)
         xlim(self)
         ylim(self)
-        colwrap(self)
+        fcolwrap(self)
 
 
     def run(self, df):
@@ -834,9 +834,9 @@ class CountPlot(CommandBase, name="count"):
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
-                x=options.xaxis, y=options.yaxis, col=options.col, row=options.row,
+                x=options.xaxis, y=options.yaxis, col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder, 
-                orient=options.orient, facet_kws=facet_kws, col_wrap=options.colwrap, **kwargs)
+                orient=options.orient, facet_kws=facet_kws, col_wrap=options.fcolwrap, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df

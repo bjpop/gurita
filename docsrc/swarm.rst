@@ -61,15 +61,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <swarm_range>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <swarm_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <swarm_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <swarm_facets>`
 
@@ -353,9 +351,9 @@ Facets
 
 .. code-block:: 
 
- --row COLUMN, -r COLUMN
- --col COLUMN, -c COLUMN
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Swarm plots can be further divided into facets, generating a matrix of swarm plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -366,7 +364,7 @@ The follow command creates a faceted swarm plot where the ``sex`` column is used
 
 .. code-block:: bash
 
-    gurita swarm -y age -x class --col sex < titanic.csv
+    gurita swarm -y age -x class --fcol sex < titanic.csv
 
 .. image:: ../images/swarm.class.age.sex.facets.png 
        :width: 600px
