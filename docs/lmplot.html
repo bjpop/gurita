@@ -171,23 +171,15 @@
 <td><p>order of hue columns</p></td>
 <td><p><a class="reference internal" href="line.html#line-hueorder"><span class="std std-ref">hue order</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
-</ul>
-</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--frow</span> <span class="pre">COLUMN</span></code></p></td>
 <td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#lmplot-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
-</ul>
-</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--fcol</span> <span class="pre">COLUMN</span></code></p></td>
 <td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#lmplot-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--fcolwrap</span> <span class="pre">INT</span></code></p></td>
 <td><p>wrap the facet column at this width, to span multiple rows</p></td>
 <td><p><a class="reference internal" href="#lmplot-facets"><span class="std std-ref">facet wrap</span></a></p></td>
 </tr>
@@ -245,16 +237,16 @@ the hue groups in the legend.</p>
 </section>
 <section id="facets">
 <span id="lmplot-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span>
-<span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span>
-<span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">frow</span> <span class="n">COLUMN</span>
+<span class="o">--</span><span class="n">fcol</span> <span class="n">COLUMN</span>
+<span class="o">--</span><span class="n">fcolwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Lmplots can be further divided into facets, generating a matrix of plots, where a numerical value is
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
 <p>For example the following command produces an lmplot comparing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> with <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, such that facet column is determined by the value of the <code class="docutils literal notranslate"><span class="pre">species</span></code> column.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot -x sepal_length -y petal_length --col species &lt; iris.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita lmplot -x sepal_length -y petal_length --fcol species &lt; iris.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/lmplot.sepal_length.petal_length.species.facets.png"><img alt="lmplot comparing sepal_length and petal_length, with species determining the facet column" class="align-center" src="_images/lmplot.sepal_length.petal_length.species.facets.png" style="width: 600px; height: 300px;" /></a>

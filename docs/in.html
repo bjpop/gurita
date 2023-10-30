@@ -63,6 +63,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#specify-the-field-separator">Specify the field separator</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#specify-the-missing-value-markers">Specify the missing value markers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#allow-comments-in-the-input-data">Allow comments in the input data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optional-input-file">Optional input file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reading-input-inside-a-command-chain">Reading input inside a command chain</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="out.html">out</a></li>
@@ -111,7 +113,7 @@
 <p>Read input data from a named file or standard input.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita <span class="k">in</span> <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--sep STR<span class="o">]</span> <span class="o">[</span>--navalues STR <span class="o">[</span>STR ...<span class="o">]]</span> <span class="o">[</span>--comment CHAR<span class="o">]</span> <span class="o">[</span>FILE<span class="o">]</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in [-h] [--sep STR] [--navalues STR [STR ...]] [--comment CHAR] [FILE]
 </pre></div>
 </div>
 </section>
@@ -151,8 +153,8 @@
 <td><p><a class="reference internal" href="#in-comment"><span class="std std-ref">comment</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[FILE]</span></code></p></td>
-<td><p>Optional list of file names</p></td>
-<td><p><span class="xref std std-ref">files</span></p></td>
+<td><p>Optional input file name</p></td>
+<td><p><a class="reference internal" href="#in-file"><span class="std std-ref">file name</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -230,9 +232,65 @@ arguments:</p>
 </section>
 <section id="allow-comments-in-the-input-data">
 <span id="in-comment"></span><h2>Allow comments in the input data<a class="headerlink" href="#allow-comments-in-the-input-data" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">comment</span> <span class="n">CHAR</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--comment CHAR
 </pre></div>
 </div>
+<p>By default Gurita does not allow comments inside input files, however this behaviour can be changed with the <code class="docutils literal notranslate"><span class="pre">--comment</span></code> option. It takes a single character argument that specifies the start of a comment. Comments are assumed to begin with this character and run until the end of the line.</p>
+<p>Comment text (including the starting character) is discarded by Gurita (and thus ignored).</p>
+<p>This allows the input data file to contain notes that may be useful for other purposes, but are not treated as data values.</p>
+<p>For example, consider a CSV file with the following contents:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># this is a comment line
+name,age
+# this is another comment line
+Fred,42
+Wilma,36
+</pre></div>
+</div>
+<p>The first and third rows contain comments.</p>
+<p>The following command tells Gurita to read <code class="docutils literal notranslate"><span class="pre">example.csv</span></code> and discard the comment lines that start with a hash character:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --comment &#39;#&#39; example.csv
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the input data contains comments but you don’t specify <code class="docutils literal notranslate"><span class="pre">in</span> <span class="pre">--comment</span> <span class="pre">...</span></code> then it will be incorrectly parsed.</p>
+</div>
+</section>
+<section id="optional-input-file">
+<span id="in-file"></span><h2>Optional input file<a class="headerlink" href="#optional-input-file" title="Permalink to this headline"></a></h2>
+<p>As its last argument, the <code class="docutils literal notranslate"><span class="pre">in</span></code> command takes an optional input file name.</p>
+<p>If no file is listed then Gurita will read input from standard input. Otherwise it will try to read
+from the named file.</p>
+<p>For example, the following command reads input from a named CSV file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in example.csv
+</pre></div>
+</div>
+<p>The following command reads input from a TSV file called <code class="docutils literal notranslate"><span class="pre">example.tsv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;\t&#39; example.tsv
+</pre></div>
+</div>
+<p>In the following command, no file name is supplied as an argument to <code class="docutils literal notranslate"><span class="pre">in</span></code>. In this case Gurita will read input from the standard input, where the contents of <code class="docutils literal notranslate"><span class="pre">example.tsv</span></code> using input redirection:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in --sep &#39;\t&#39; &lt; example.tsv
+</pre></div>
+</div>
+<p>The same thing as the above command can also be achieved using a pipe:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cat example.tsv | gurita in --sep &#39;\t&#39;
+</pre></div>
+</div>
+<p>More generally this allows Gurita to be used within a more complex shell pipeline:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;shell commands&gt; | gurita in --sep &#39;\t&#39; ... | &lt;shell commands&gt;
+</pre></div>
+</div>
+</section>
+<section id="reading-input-inside-a-command-chain">
+<span id="in-chain"></span><h2>Reading input inside a command chain<a class="headerlink" href="#reading-input-inside-a-command-chain" title="Permalink to this headline"></a></h2>
+<p>Gurita allows you to use <code class="docutils literal notranslate"><span class="pre">in</span></code> multiple times within a <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a>, for example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita in iris.csv + &lt;commands_1&gt; + in tips.csv + &lt;commands_2&gt;
+</pre></div>
+</div>
+<p>If an invocation of <code class="docutils literal notranslate"><span class="pre">in</span></code> is not at the start of a chain then it discards any input coming from the left side of the chain and replaces it with the contents of the new file.</p>
+<p>In the example above, the contents of <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> are passed into <code class="docutils literal notranslate"><span class="pre">&lt;commands_1&gt;</span></code>, where it could be plotted or transformed. The next invocation of <code class="docutils literal notranslate"><span class="pre">in</span></code> reads the contents of <code class="docutils literal notranslate"><span class="pre">tips.csv</span></code> and passes this data on to <code class="docutils literal notranslate"><span class="pre">&lt;commands_2&gt;</span></code>. Note carefully that any data coming out of <code class="docutils literal notranslate"><span class="pre">&lt;commands_1&gt;</span></code> is discarded.</p>
+<p>One important limitation is that it is only possible to read input from standard input at most once in a command chain. Furthermore, standard input can only be read at the start of command chain (in the leftmost position).</p>
 </section>
 </section>
 

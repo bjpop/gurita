@@ -93,6 +93,29 @@
              
   <section id="facets">
 <h1>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h1>
+<p>Many of Gurita’s plots support facets.</p>
+<p>Facets consist of multiple sub-plots aligned in columns and/or
+rows with the same set of axes, each showing a subset of the data.</p>
+<p>The subsets of data shown in the sub-plots are split according to the values of
+categorical columns.</p>
+<p>For example, the following box plot uses facets to split into two sub-plots based on the value of
+the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column using the <code class="docutils literal notranslate"><span class="pre">--fcol</span></code> argument:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --fcol sex &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/box.class.age.sex.facet.png"><img alt="Box plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets" class="align-center" src="_images/box.class.age.sex.facet.png" style="width: 600px; height: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In the above example the <code class="docutils literal notranslate"><span class="pre">--fcol</span> <span class="pre">sex</span></code> argument causes a colum-wise facet plot to be generated. Subsets of the data are defined based on the values in the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column, which can be either <code class="docutils literal notranslate"><span class="pre">male</span></code> or <code class="docutils literal notranslate"><span class="pre">female</span></code>.</p>
+<p>It is also possible to generate the facets row-wise, using <code class="docutils literal notranslate"><span class="pre">--frow</span> <span class="pre">sex</span></code> instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --frow sex &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/box.class.age.sex.facet.row.png"><img alt="Box plot showing the mean of age for each class in the titanic data set grouped by class , using sex to determine the plot facets, displayed row-wise" class="align-center" src="_images/box.class.age.sex.facet.row.png" style="width: 300px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 
 

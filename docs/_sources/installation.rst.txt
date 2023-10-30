@@ -3,7 +3,7 @@ Installation
 
 Gurita requires Python 3.6 or greater and relies heavily on the following libraries: `NumPy <https://numpy.org/>`_, `SciPy <https://www.scipy.org/>`_, `Pandas <https://pandas.pydata.org/>`_, `Seaborn <https://seaborn.pydata.org/>`_ (and hence `Matplotlib <https://matplotlib.org/>`_), `Scikit-learn <https://scikit-learn.org/>`_.
 
-You can install gurita :ref:`directly from source <install_src>` code or build and :ref:`run it from within Docker container <build_docker>`.
+You can install gurita :ref:`directly from source <install_src>` code.
 
 .. _install_src:
 
@@ -45,16 +45,3 @@ Gurita can be installed using ``pip`` in a variety of ways:
 .. code-block:: bash
 
     pip install -U --user /path/to/gurita
-
-.. _build_docker:
-
-Building the Docker container
-=============================
-
-The file ``Dockerfile`` contains instructions for building a Docker container for gurita.
-
-If you have Docker installed on your computer you can build the container like so:
-
-.. code-block:: bash
-
-    docker build -t gurita .

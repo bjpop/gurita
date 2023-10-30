@@ -8,7 +8,7 @@ Read input data from a named file or standard input.
 Usage
 -----
 
-.. code-block:: bash
+.. code-block:: text 
 
    gurita in [-h] [--sep STR] [--navalues STR [STR ...]] [--comment CHAR] [FILE] 
 
@@ -37,8 +37,8 @@ Arguments
      - If provided, CHAR marks the start of comment lines
      - :ref:`comment <in_comment>`
    * - ``[FILE]``
-     - Optional list of file names 
-     - :ref:`files <in_files>`
+     - Optional input file name 
+     - :ref:`file name <in_file>`
 
 See also
 --------
@@ -150,8 +150,91 @@ Note than when ``--navalues`` is used the default missing value symbols no longe
 Allow comments in the input data
 --------------------------------
 
-.. code-block::
+.. code-block:: text
 
     --comment CHAR
 
+By default Gurita does not allow comments inside input files, however this behaviour can be changed with the ``--comment`` option. It takes a single character argument that specifies the start of a comment. Comments are assumed to begin with this character and run until the end of the line.
 
+Comment text (including the starting character) is discarded by Gurita (and thus ignored).
+
+This allows the input data file to contain notes that may be useful for other purposes, but are not treated as data values.
+
+For example, consider a CSV file with the following contents:
+
+.. code-block:: text
+
+    # this is a comment line
+    name,age
+    # this is another comment line
+    Fred,42
+    Wilma,36
+
+The first and third rows contain comments.
+
+The following command tells Gurita to read ``example.csv`` and discard the comment lines that start with a hash character: 
+
+.. code-block:: text
+
+    gurita in --comment '#' example.csv
+
+.. warning:: 
+
+   If the input data contains comments but you don't specify ``in --comment ...`` then it will be incorrectly parsed.
+
+.. _in_file:
+
+Optional input file
+-------------------
+
+As its last argument, the ``in`` command takes an optional input file name.
+
+If no file is listed then Gurita will read input from standard input. Otherwise it will try to read
+from the named file.
+
+For example, the following command reads input from a named CSV file called ``example.csv``:
+
+.. code-block:: text
+
+   gurita in example.csv
+
+The following command reads input from a TSV file called ``example.tsv``:
+
+.. code-block:: text
+
+   gurita in --sep '\t' example.tsv
+
+In the following command, no file name is supplied as an argument to ``in``. In this case Gurita will read input from the standard input, where the contents of ``example.tsv`` using input redirection: 
+
+.. code-block:: text
+
+   gurita in --sep '\t' < example.tsv
+
+The same thing as the above command can also be achieved using a pipe:
+
+.. code-block:: text
+
+   cat example.tsv | gurita in --sep '\t'
+
+More generally this allows Gurita to be used within a more complex shell pipeline:
+
+.. code-block:: text
+
+   <shell commands> | gurita in --sep '\t' ... | <shell commands>
+
+.. _in_chain:
+
+Reading input inside a command chain
+------------------------------------
+
+Gurita allows you to use ``in`` multiple times within a :ref:`command chain<command_chain>`, for example:
+
+.. code-block:: text
+
+   gurita in iris.csv + <commands_1> + in tips.csv + <commands_2>
+
+If an invocation of ``in`` is not at the start of a chain then it discards any input coming from the left side of the chain and replaces it with the contents of the new file.
+
+In the example above, the contents of ``iris.csv`` are passed into ``<commands_1>``, where it could be plotted or transformed. The next invocation of ``in`` reads the contents of ``tips.csv`` and passes this data on to ``<commands_2>``. Note carefully that any data coming out of ``<commands_1>`` is discarded.   
+
+One important limitation is that it is only possible to read input from standard input at most once in a command chain. Furthermore, standard input can only be read at the start of command chain (in the leftmost position). 

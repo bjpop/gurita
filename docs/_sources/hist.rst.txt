@@ -73,15 +73,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <hist_range>`
-   * - * ``-r COLUMN``
-       * ``--row COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <hist_facets>`
-   * - * ``-c COLUMN``
-       * ``--col COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <hist_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <hist_facets>`
 
@@ -530,9 +528,9 @@ Facets
 
 .. code-block:: 
 
- -r COLUMN, --row COLUMN  
- -c COLUMN, --col COLUMN
- --colwrap INT
+ --frow COLUMN  
+ --fcol COLUMN
+ --fcolwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of histograms, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -541,7 +539,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 .. code-block:: text
 
-    gurita hist -x tip --col day < tips.csv 
+    gurita hist -x tip --fcol day < tips.csv 
 
 .. image:: ../images/hist.tip.day.png 
        :width: 600px

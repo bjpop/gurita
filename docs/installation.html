@@ -45,7 +45,6 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-directly-from-source-code">Installing directly from source code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-the-docker-container">Building the Docker container</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="example_input_data.html">Example input data</a></li>
@@ -92,7 +91,7 @@
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h1>
 <p>Gurita requires Python 3.6 or greater and relies heavily on the following libraries: <a class="reference external" href="https://numpy.org/">NumPy</a>, <a class="reference external" href="https://www.scipy.org/">SciPy</a>, <a class="reference external" href="https://pandas.pydata.org/">Pandas</a>, <a class="reference external" href="https://seaborn.pydata.org/">Seaborn</a> (and hence <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>), <a class="reference external" href="https://scikit-learn.org/">Scikit-learn</a>.</p>
-<p>You can install gurita <a class="reference internal" href="#install-src"><span class="std std-ref">directly from source</span></a> code or build and <a class="reference internal" href="#build-docker"><span class="std std-ref">run it from within Docker container</span></a>.</p>
+<p>You can install gurita <a class="reference internal" href="#install-src"><span class="std std-ref">directly from source</span></a> code.</p>
 <section id="installing-directly-from-source-code">
 <span id="install-src"></span><h2>Installing directly from source code<a class="headerlink" href="#installing-directly-from-source-code" title="Permalink to this headline"></a></h2>
 <p>Clone this repository:</p>
@@ -123,14 +122,6 @@ pip install -U /path/to/gurita
 <li><p>Into the user package database (for the current user only):</p></li>
 </ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U --user /path/to/gurita
-</pre></div>
-</div>
-</section>
-<section id="building-the-docker-container">
-<span id="build-docker"></span><h2>Building the Docker container<a class="headerlink" href="#building-the-docker-container" title="Permalink to this headline"></a></h2>
-<p>The file <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> contains instructions for building a Docker container for gurita.</p>
-<p>If you have Docker installed on your computer you can build the container like so:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build -t gurita .
 </pre></div>
 </div>
 </section>

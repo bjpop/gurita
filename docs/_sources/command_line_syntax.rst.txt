@@ -39,15 +39,6 @@ The same outcome can be achieved equivalently by the following invocation:
 
 In the above example the contents of ``flights.csv`` is piped into the standard input of Gurita using the Unix pipe operator. Despite the different notation, this has the same effect as the previous example.
 
-A somewhat lesser-known fact is that the original example with redirection can also be written as follows, where the redirection is written to the left of the Gurita command:
-
-.. code-block:: text
-
-    < flights.csv gurita hist -x passengers
-
-Despite the different notation, this has exactly the same effect as the original version.
-
-
 Types of commands
 -----------------
 
@@ -85,7 +76,9 @@ The most important detail about command chaining is that data flows from left to
 
 |
 
-Each command in the chain *may* transform the data before passing it along to the next command.
+Each command in the chain *may* transform the data before passing it along to the next command. Some commands, notably the plotting ones, pass the data along unchanged.
+
+In the above diagram data\ :sub:`0` is the initial input to the Gurita, data\ :sub:`1` is the output from command\ :sub:`1`, and so on, and lastly, data\ :sub:`n` is the final output from the last command in the chain. 
 
 .. note::
 

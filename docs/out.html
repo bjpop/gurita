@@ -55,7 +55,18 @@
 <li class="toctree-l1 current"><a class="reference internal" href="list_of_commands.html">List of commands</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="list_of_commands.html#reading-and-writing-data-from-to-files">Reading and writing data from/to files</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="in.html">in</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">out</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">out</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simple-example">Simple example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specify-the-field-separator">Specify the field separator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specify-the-missing-value-markers">Specify the missing value markers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optional-output-file">Optional output file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-output-inside-a-command-chain">Writing output inside a command chain</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="list_of_commands.html#plotting">Plotting</a></li>
@@ -98,6 +109,134 @@
              
   <section id="out">
 <span id="id1"></span><h1>out<a class="headerlink" href="#out" title="Permalink to this headline"></a></h1>
+<p>Write output data to a named file or standard output.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita out [--sep STR] [--na STR] [-h] [FILE]
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#out-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--sep</span> <span class="pre">STR</span></code></p></td>
+<td><p>Specify the field separator</p></td>
+<td><p><a class="reference internal" href="#out-sep"><span class="std std-ref">sep</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[--na</span> <span class="pre">STR]</span></code></p></td>
+<td><p>Specify missing value marker</p></td>
+<td><p><a class="reference internal" href="#out-na"><span class="std std-ref">na marker</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[FILE]</span></code></p></td>
+<td><p>Optional output file name</p></td>
+<td><p><a class="reference internal" href="#out-file"><span class="std std-ref">file name</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p>The <a class="reference internal" href="in.html"><span class="doc">in</span></a> command reads data in from named files or the standard input.</p>
+<p>Please also consult the <a class="reference internal" href="input_output.html"><span class="doc">input and output</span></a> documentation for a more detailed discussion on working with files and standard input/output.</p>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>Read the contents of <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> as an input CSV file and write the output to <code class="docutils literal notranslate"><span class="pre">iris.tsv</span></code> in TSV format</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita out --sep &#39;\t&#39; iris.tsv &lt; iris.csv
+</pre></div>
+</div>
+</section>
+<section id="getting-help">
+<span id="out-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">out</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita out -h
+</pre></div>
+</div>
+</section>
+<section id="specify-the-field-separator">
+<span id="out-sep"></span><h2>Specify the field separator<a class="headerlink" href="#specify-the-field-separator" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">sep</span> <span class="n">STR</span>
+</pre></div>
+</div>
+<p>See also <a class="reference internal" href="input.html#input-field-separator"><span class="std std-ref">specifying the field separator</span></a> in the input and output documentation.</p>
+<p>By default Gurita assumes that the field separator for input data is a comma, and thus input data defaults to CSV format.</p>
+<p>This can be overridden by the <code class="docutils literal notranslate"><span class="pre">--sep</span></code> argument.</p>
+<p>For example, setting <code class="docutils literal notranslate"><span class="pre">--sep</span></code> to a tab character will allow TSV data to be read instead:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita out --sep &#39;\t&#39; example.tsv &lt; example.csv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended to surround the separator string in single quotes to make sure it is treated as a literal string and not interpreted to have special meaning by the shell.</p>
+</div>
+<p>Separators longer than 1 character and different from ‘s+’ will be interpreted as regular expressions. This feature should be used with caution because it is prone to incorrectly handle quoted data.</p>
+</section>
+<section id="specify-the-missing-value-markers">
+<span id="out-na"></span><h2>Specify the missing value markers<a class="headerlink" href="#specify-the-missing-value-markers" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">na</span> <span class="n">STR</span>
+</pre></div>
+</div>
+<p>See also the <a class="reference internal" href="missing.html#missing-values"><span class="std std-ref">missing values</span></a> documentation.</p>
+<p>By default missing values will be written as empty fields in the output data. This can be overwritten with the <code class="docutils literal notranslate"><span class="pre">--na</span> <span class="pre">STR</span></code> where <code class="docutils literal notranslate"><span class="pre">STR</span></code> indicates the text to be used for missing values.</p>
+<p>For example, suppose you want to use <code class="docutils literal notranslate"><span class="pre">NA</span></code> for missing values, then you can specify this as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita out --na &#39;NA&#39; &lt; example.csv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended to surround the missing value string in single quotes to make sure it is treated as a literal string and not interpreted to have special meaning by the shell.</p>
+</div>
+</section>
+<section id="optional-output-file">
+<span id="out-file"></span><h2>Optional output file<a class="headerlink" href="#optional-output-file" title="Permalink to this headline"></a></h2>
+<p>As its last argument, the <code class="docutils literal notranslate"><span class="pre">out</span></code> command takes an optional output file name.</p>
+<p>If no file name is specified then Gurita will write output to standard output. Otherwise it will try to write to the named file.</p>
+<p>For example, the following command writes output to a named CSV file called <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... + out example.csv
+</pre></div>
+</div>
+<p>The following command writes outut to a TSV file called <code class="docutils literal notranslate"><span class="pre">example.tsv</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... + out --sep &#39;\t&#39; example.tsv
+</pre></div>
+</div>
+<p>In the following command, no file name is supplied as an argument to <code class="docutils literal notranslate"><span class="pre">out</span></code>. In this case Gurita will write output to the standard output.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita ... + out --sep &#39;\t&#39;
+</pre></div>
+</div>
+</section>
+<section id="writing-output-inside-a-command-chain">
+<h2>Writing output inside a command chain<a class="headerlink" href="#writing-output-inside-a-command-chain" title="Permalink to this headline"></a></h2>
+<p>Gurita allows you to use <code class="docutils literal notranslate"><span class="pre">out</span></code> multiple times within a <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chain</span></a>, for example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita &lt;command_1&gt; + out example_1.csv + &lt;command_2&gt; + out example_2.csv
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">out</span></code> is used within a command chain it receives data from the left hand side of the chain, writes the data to a file or standard output, and then passes the data along to the right hand side of the chain.</p>
+<p>In the example above, <code class="docutils literal notranslate"><span class="pre">&lt;command_1&gt;</span></code> passes data to the first <code class="docutils literal notranslate"><span class="pre">out</span></code> command, which writes the
+data to the file called <code class="docutils literal notranslate"><span class="pre">example_1.csv</span></code>. The same data is then passed along unchanged to <code class="docutils literal notranslate"><span class="pre">&lt;command_2&gt;</span></code>, the output of which is then passed to the second <code class="docutils literal notranslate"><span class="pre">out</span></code> command, which writes the data to
+the file called <code class="docutils literal notranslate"><span class="pre">example_2.csv</span></code>.</p>
+<p>Gurita allows you to use <code class="docutils literal notranslate"><span class="pre">out</span></code> to write to standard output (stdout) more than once in the same command chain. In this circumstance each output will be appended together into the same standard output stream in order from left to right. This is on contrast to the <code class="docutils literal notranslate"><span class="pre">in</span></code> command which only allows to read from standard input stdin) once.</p>
+</section>
 </section>
 
 

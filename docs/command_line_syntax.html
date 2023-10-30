@@ -122,11 +122,6 @@
 </pre></div>
 </div>
 <p>In the above example the contents of <code class="docutils literal notranslate"><span class="pre">flights.csv</span></code> is piped into the standard input of Gurita using the Unix pipe operator. Despite the different notation, this has the same effect as the previous example.</p>
-<p>A somewhat lesser-known fact is that the original example with redirection can also be written as follows, where the redirection is written to the left of the Gurita command:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt; flights.csv gurita hist -x passengers
-</pre></div>
-</div>
-<p>Despite the different notation, this has exactly the same effect as the original version.</p>
 </section>
 <section id="types-of-commands">
 <h3>Types of commands<a class="headerlink" href="#types-of-commands" title="Permalink to this headline"></a></h3>
@@ -155,7 +150,8 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Each command in the chain <em>may</em> transform the data before passing it along to the next command.</p>
+<p>Each command in the chain <em>may</em> transform the data before passing it along to the next command. Some commands, notably the plotting ones, pass the data along unchanged.</p>
+<p>In the above diagram data<sub>0</sub> is the initial input to the Gurita, data<sub>1</sub> is the output from command<sub>1</sub>, and so on, and lastly, data<sub>n</sub> is the final output from the last command in the chain.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Motivation for command chaining using +</strong></p>

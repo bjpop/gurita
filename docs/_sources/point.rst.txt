@@ -58,15 +58,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <point_range>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <point_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <point_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <point_facets>`
 
@@ -297,9 +295,9 @@ Facets
 
 .. code-block:: 
 
- --row COLUMN, -r COLUMN 
- --col COLUMN, -c COLUMN 
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Point plots can be further divided into facets, generating a matrix of point plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -308,7 +306,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
 .. code-block:: bash
 
-    gurita point -y age -x class --col sex < titanic.csv
+    gurita point -y age -x class --fcol sex < titanic.csv
 
 .. image:: ../images/point.class.age.sex.facets.png 
        :width: 600px

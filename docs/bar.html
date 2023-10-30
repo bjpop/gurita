@@ -216,23 +216,15 @@ Default: v.</p></td>
 <td><p>range limit Y axis</p></td>
 <td><p><a class="reference internal" href="#bar-range"><span class="std std-ref">limit Y axis</span></a></p></td>
 </tr>
-<tr class="row-even"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--row</span> <span class="pre">COLUMN</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">COLUMN</span></code></p></li>
-</ul>
-</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--frow</span> <span class="pre">COLUMN</span></code></p></td>
 <td><p>column to use for facet rows</p></td>
 <td><p><a class="reference internal" href="#bar-facets"><span class="std std-ref">facet rows</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span></code></p></li>
-</ul>
-</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--fcol</span> <span class="pre">COLUMN</span></code></p></td>
 <td><p>column to use for facet columns</p></td>
 <td><p><a class="reference internal" href="#bar-facets"><span class="std std-ref">facet columns</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--colwrap</span> <span class="pre">INT</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--fcolwrap</span> <span class="pre">INT</span></code></p></td>
 <td><p>wrap the facet column at this width, to span multiple rows</p></td>
 <td><p><a class="reference internal" href="#bar-facets"><span class="std std-ref">facet wrap</span></a></p></td>
 </tr>
@@ -423,16 +415,16 @@ data is displayed on the Y-axis (<code class="docutils literal notranslate"><spa
 </section>
 <section id="facets">
 <span id="bar-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">row</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">-</span><span class="n">r</span> <span class="n">COLUMN</span>
-<span class="o">--</span><span class="n">col</span> <span class="n">COLUMN</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span> <span class="n">COLUMN</span>
-<span class="o">--</span><span class="n">colwrap</span> <span class="n">INT</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">frow</span> <span class="n">COLUMN</span>
+<span class="o">--</span><span class="n">fcol</span> <span class="n">COLUMN</span>
+<span class="o">--</span><span class="n">fcolwrap</span> <span class="n">INT</span>
 </pre></div>
 </div>
 <p>Bar plots can be further divided into facets, generating a matrix of bar plots, where a numerical value is
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
 <p>The follow command creates a faceted bar plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column is used to determine the facet columns:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --col sex &lt; titanic.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --fcol sex &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/bar.class.age.sex.facet.png"><img alt="Bar plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets" class="align-center" src="_images/bar.class.age.sex.facet.png" style="width: 600px; height: 300px;" /></a>

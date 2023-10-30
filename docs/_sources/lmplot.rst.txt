@@ -40,15 +40,13 @@ Arguments
    * - ``--hueorder VALUE [VALUE ...]``
      - order of hue columns
      - :ref:`hue order <line_hueorder>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows
      - :ref:`facet rows <lmplot_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns
      - :ref:`facet columns <lmplot_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <lmplot_facets>`
 
@@ -139,9 +137,9 @@ Facets
 
 .. code-block::
 
- -r COLUMN, --row COLUMN
- -c COLUMN, --col COLUMN
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Lmplots can be further divided into facets, generating a matrix of plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -152,7 +150,7 @@ For example the following command produces an lmplot comparing ``sepal_length`` 
 
 .. code-block:: bash
 
-    gurita lmplot -x sepal_length -y petal_length --col species < iris.csv 
+    gurita lmplot -x sepal_length -y petal_length --fcol species < iris.csv 
 
 .. image:: ../images/lmplot.sepal_length.petal_length.species.facets.png 
        :width: 600px

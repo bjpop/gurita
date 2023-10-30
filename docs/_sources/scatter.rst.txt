@@ -70,15 +70,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <scatter_range>`
-   * - * ``-r COLUMN``
-       * ``--row COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <scatter_facets>`
-   * - * ``-c COLUMN``
-       * ``--col COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <scatter_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <scatter_facets>`
 
@@ -364,9 +362,9 @@ Facets
 
 .. code-block:: 
 
- -r COLUMN, --row COLUMN  
- -c COLUMN, --col COLUMN
- --colwrap INT
+ --frow COLUMN  
+ --fcol COLUMN
+ --fcolwrap INT
 
 Scatter plots can be further divided into facets, generating a matrix of scatter plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -377,7 +375,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
 .. code-block:: bash
 
-    gurita scatter -x total_bill -y tip --col smoker < tips.csv
+    gurita scatter -x total_bill -y tip --fcol smoker < tips.csv
 
 .. image:: ../images/scatter.total_bill.tip.smoker.png  
        :width: 600px

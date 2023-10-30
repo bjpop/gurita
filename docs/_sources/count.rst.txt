@@ -55,15 +55,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <count_range>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows
      - :ref:`facet rows <count_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns
      - :ref:`facet columns <count_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <count_facets>`
 
@@ -291,9 +289,9 @@ Facets
 
 .. code-block:: 
 
- -r COLUMN, --row COLUMN
- -c COLUMN, --col COLUMN
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Count plots can be further divided into facets, generating a matrix of count plots. 
 
@@ -303,7 +301,7 @@ The follow command creates a faceted bar plot where the ``sex`` column is used t
 
 .. code-block:: bash
 
-    gurita count -x embark_town --col sex < titanic.csv 
+    gurita count -x embark_town --fcol sex < titanic.csv 
 
 .. image:: ../images/count.embark_town.sex.png 
        :width: 600px

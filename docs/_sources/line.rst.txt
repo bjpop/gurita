@@ -55,15 +55,13 @@ Arguments
    * - ``--ylim BOUND BOUND``
      - range limit Y axis 
      - :ref:`limit Y axis <line_range>`
-   * - * ``--row COLUMN``
-       * ``-r COLUMN``
+   * - ``--frow COLUMN``
      - column to use for facet rows 
      - :ref:`facet rows <line_facets>`
-   * - * ``--col COLUMN``
-       * ``-c COLUMN``
+   * - ``--fcol COLUMN``
      - column to use for facet columns 
      - :ref:`facet columns <line_facets>`
-   * - ``--colwrap INT``
+   * - ``--fcolwrap INT``
      - wrap the facet column at this width, to span multiple rows
      - :ref:`facet wrap <line_facets>`
 
@@ -224,9 +222,9 @@ Facets
 
 .. code-block:: 
 
- --row COLUMN, -r COLUMN 
- --col COLUMN, -c COLUMN 
- --colwrap INT
+ --frow COLUMN
+ --fcol COLUMN
+ --fcolwrap INT
 
 Line plots can be further divided into facets, generating a matrix of line plots, where a numerical value is
 further categorised by up to 2 more categorical columns.
@@ -237,7 +235,7 @@ The following command creates a faceted line plot where the ``event`` column is 
 
 .. code-block:: bash
 
-    gurita line -x timepoint -y signal --col event < fmri.csv 
+    gurita line -x timepoint -y signal --fcol event < fmri.csv 
 
 .. image:: ../images/line.timepoint.signal.event.facet.png 
        :width: 600px
