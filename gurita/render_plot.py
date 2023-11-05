@@ -73,8 +73,8 @@ def make_output_filename(options, kind):
         y_str = utils.output_field(options, 'yaxis')
         x_str = utils.output_field(options, 'xaxis')
         hue_str = utils.output_field(options, 'hue')
-        row_str = utils.output_field(options, 'row')
-        col_str = utils.output_field(options, 'col')
+        row_str = utils.output_field(options, 'frow')
+        col_str = utils.output_field(options, 'fcol')
         path = Path('.'.join([kind] + x_str + y_str +
                              hue_str + row_str + col_str + extension))
         return utils.make_unique_numbered_filepath(path)

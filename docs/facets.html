@@ -95,7 +95,7 @@
 <h1>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h1>
 <p>Many of Gurita’s plots support facets.</p>
 <p>Facets consist of multiple sub-plots aligned in columns and/or
-rows with the same set of axes, each showing a subset of the data.</p>
+rows with uniform axes, each showing a subset of the data.</p>
 <p>The subsets of data shown in the sub-plots are split according to the values of
 categorical columns.</p>
 <p>For example, the following box plot uses facets to split into two sub-plots based on the value of
@@ -107,12 +107,27 @@ the <code class="docutils literal notranslate"><span class="pre">sex</span></cod
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<p>The output of the above command is saved into a file called <code class="docutils literal notranslate"><span class="pre">box.class.age.sex.png</span></code>.</p>
 <p>In the above example the <code class="docutils literal notranslate"><span class="pre">--fcol</span> <span class="pre">sex</span></code> argument causes a colum-wise facet plot to be generated. Subsets of the data are defined based on the values in the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column, which can be either <code class="docutils literal notranslate"><span class="pre">male</span></code> or <code class="docutils literal notranslate"><span class="pre">female</span></code>.</p>
 <p>It is also possible to generate the facets row-wise, using <code class="docutils literal notranslate"><span class="pre">--frow</span> <span class="pre">sex</span></code> instead:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --frow sex &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/box.class.age.sex.facet.row.png"><img alt="Box plot showing the mean of age for each class in the titanic data set grouped by class , using sex to determine the plot facets, displayed row-wise" class="align-center" src="_images/box.class.age.sex.facet.row.png" style="width: 300px; height: 600px;" /></a>
+<p>There were seven decks for passengers on the Titanic, labelled A to G. The following box plot uses facets to split into two sub-plots column-wise based on deck:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --fcol deck &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/box.class.age.deck.png"><img alt="Box plot showing the mean of age for each class in the titanic data set grouped by class , using deck to determine the plot facets, displayed column-wise" class="align-center" src="_images/box.class.age.deck.png" style="width: 600px; height: 200px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The width of the number of columns in a facet plot can be controlled using the <code class="docutils literal notranslate"><span class="pre">--fcolwrap</span> <span class="pre">INT</span></code> argument. This limits the maximum number of facet columns to <code class="docutils literal notranslate"><span class="pre">INT</span></code> in each row. When a facet row is longer than <code class="docutils literal notranslate"><span class="pre">INT</span></code> it will wrap around to the next row.</p>
+<p>The following command shows the effect of <code class="docutils literal notranslate"><span class="pre">--fcolwrap</span> <span class="pre">4</span></code> on the previous command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita box -y age -x class --fcol deck --fcolwrap <span class="m">4</span> &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/box.class.age.deck.fcolwrap4.png"><img alt="Box plot showing the mean of age for each class in the titanic data set grouped by class , using deck to determine the plot facets, displayed column-wise, with fcolwrap set to 4" class="align-center" src="_images/box.class.age.deck.fcolwrap4.png" style="width: 600px; height: 600px;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
