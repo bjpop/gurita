@@ -83,6 +83,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -163,7 +164,7 @@ distribution.</p>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
 </ul>
 </td>
 <td><p>test these numerical columns</p></td>
@@ -242,10 +243,10 @@ arguments:</p>
 <section id="choose-columns-to-test-for-normality">
 <span id="normtest-columns"></span><h2>Choose columns to test for normality<a class="headerlink" href="#choose-columns-to-test-for-normality" title="Permalink to this headline"></a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c COLUMN [COLUMN...]
---column COLUMN [COLUMN...]
+--col COLUMN [COLUMN...]
 </pre></div>
 </div>
-<p>By default <code class="docutils literal notranslate"><span class="pre">normtest</span></code> will test all numerical columns for normality, however the <code class="docutils literal notranslate"><span class="pre">--column/-c</span></code> option allows you to test only specific columns.</p>
+<p>By default <code class="docutils literal notranslate"><span class="pre">normtest</span></code> will test all numerical columns for normality, however the <code class="docutils literal notranslate"><span class="pre">--col/-c</span></code> option allows you to test only specific columns.</p>
 <p>For example the following command tests only the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> column from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> dataset:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita normtest -c sepal_length &lt; iris.csv
 </pre></div>
@@ -265,7 +266,7 @@ sepal_length,True
 petal_length,False
 </pre></div>
 </div>
-<p>Note that non-numerical columns are ignored, even if they are specified using <code class="docutils literal notranslate"><span class="pre">--column/-c</span></code>.
+<p>Note that non-numerical columns are ignored, even if they are specified using <code class="docutils literal notranslate"><span class="pre">--col/-c</span></code>.
 For example the following command tries to test of the categorical <code class="docutils literal notranslate"><span class="pre">species</span></code> column is normal:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita normtest -c species &lt; iris.csv
 </pre></div>

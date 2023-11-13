@@ -83,6 +83,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -170,7 +171,7 @@ the corresponding column is an outlier according to the definition above. This a
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
 </ul>
 </td>
 <td><p>determine outliers in specified numerical columns</p></td>
@@ -225,7 +226,7 @@ arguments:</p>
 </section>
 <section id="determine-outliers-in-specified-numerical-columns">
 <span id="outlier-columns"></span><h2>Determine outliers in specified numerical columns<a class="headerlink" href="#determine-outliers-in-specified-numerical-columns" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --columns NAME [NAME ...]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --col NAME [NAME ...]
 </pre></div>
 </div>
 <p>By default, if no column names are specified, outliers will be detected in all of the numerical columns in the dataset, one at a time.</p>
@@ -234,7 +235,7 @@ dataset separately (these are: <code class="docutils literal notranslate"><span 
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier &lt; iris.csv
 </pre></div>
 </div>
-<p>Sometimes it is useful to specify a subset of columns in which to detect outliers. This can be achieved with the <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code> argument.</p>
+<p>Sometimes it is useful to specify a subset of columns in which to detect outliers. This can be achieved with the <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code> argument.</p>
 <p>In the following example outliers are detected in only the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> columns:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita outlier -c sepal_length petal_width &lt; iris.csv
 </pre></div>
@@ -256,7 +257,7 @@ dataset separately (these are: <code class="docutils literal notranslate"><span 
 <code class="docutils literal notranslate"><span class="pre">sepal_length_outlier</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_width_outlier</span></code> are added to the dataset to flag which rows contain outliers for the corresponding input columns.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">outlier</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code>.</p>
+<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">outlier</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code>.</p>
 </div>
 </section>
 <section id="choose-a-column-name-suffix-for-new-outlier-columns">

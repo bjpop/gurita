@@ -82,6 +82,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -159,7 +160,7 @@
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
 </ul>
 </td>
 <td><p>select columns to correlate pairwise (default: select all numerical columns)</p></td>
@@ -202,7 +203,7 @@ arguments:</p>
 </section>
 <section id="selecting-columns-to-correlate">
 <span id="corr-columns"></span><h2>Selecting columns to correlate<a class="headerlink" href="#selecting-columns-to-correlate" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">columns</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">col</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>By default, if no columns are specified explicitly, all numerical columns in the data set will be chosen for comparison.</p>
@@ -230,7 +231,7 @@ petal_length,petal_width,0.9627570970509662
 petal_width,petal_width,1.0
 </pre></div>
 </div>
-<p>Specific numerical columns can be specified for comparison using <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--columns</span></code>).</p>
+<p>Specific numerical columns can be specified for comparison using <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--col</span></code>).</p>
 <p>For example, we can compare <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> with <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> like so:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita corr -c sepal_length petal_length petal_width &lt; iris.csv
 </pre></div>
@@ -250,7 +251,7 @@ petal_width,petal_width,1.0
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Non-numerical columns specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--columns</span></code>) are ignored.</p>
+<p>Non-numerical columns specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--col</span></code>) are ignored.</p>
 </div>
 </section>
 <section id="correlation-method">
@@ -266,7 +267,7 @@ petal_width,petal_width,1.0
 </ol>
 <p>If no method is specified then <code class="docutils literal notranslate"><span class="pre">pearson</span></code> will be chosen by defualt.</p>
 <p>The example below computes the pairwise correlation between <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> and <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> from the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> data set using the <code class="docutils literal notranslate"><span class="pre">spearman</span></code> method:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita corr --columns sepal_length sepal_width --method spearman &lt; iris.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita corr --col sepal_length sepal_width --method spearman &lt; iris.csv
 </pre></div>
 </div>
 <p>The output of the above command is shown below. Note that the results are similar to, but slightly different from the outputs from the <code class="docutils literal notranslate"><span class="pre">pearson</span></code> method

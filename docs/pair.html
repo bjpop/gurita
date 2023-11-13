@@ -154,7 +154,7 @@ categorical columns as well.</p>
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
 </ul>
 </td>
 <td><p>select columns to compare</p></td>
@@ -184,7 +184,7 @@ categorical columns as well.</p>
 <p>The following example generates a pair plot comparing all the numerical columns in the <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code> data set.</p>
 <p>Note that there are four numerical columns in this data set (<code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>) and one categorical column (<code class="docutils literal notranslate"><span class="pre">species</span></code>).
 By default, if no column names are specified in a pair plot, all the numerical columns will be compared (and catergorical columns are ignored).
-This behaviour can be overridden with the <code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--columns</span></code> <a class="reference internal" href="#pair-columns"><span class="std std-ref">argument</span></a>.</p>
+This behaviour can be overridden with the <code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--col</span></code> <a class="reference internal" href="#pair-columns"><span class="std std-ref">argument</span></a>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair &lt; iris.csv
 </pre></div>
 </div>
@@ -204,11 +204,11 @@ arguments:</p>
 </section>
 <section id="selecting-columns-to-compare">
 <span id="pair-columns"></span><h2>Selecting columns to compare<a class="headerlink" href="#selecting-columns-to-compare" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c [COLUMN ...], --columns [COLUMN ...]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c [COLUMN ...], --col [COLUMN ...]
 </pre></div>
 </div>
 <p>By default, if no column names are specified in a pair plot, all the numerical columns will be compared (and catergorical columns are ignored).
-This behaviour can be overridden with the <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--columns</span></code>) argument.</p>
+This behaviour can be overridden with the <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--col</span></code>) argument.</p>
 <p>The following example generates a pair plot comparing the <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, and <code class="docutils literal notranslate"><span class="pre">species</span></code> columns. Note that <code class="docutils literal notranslate"><span class="pre">species</span></code> is
 a categorical column, and it would not be plotted by default.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pair -c sepal_length petal_length species &lt; iris.csv

@@ -83,6 +83,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -160,7 +161,7 @@ where individual data points are assigned to the cluster with the nearest mean (
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
 </ul>
 </td>
 <td><p>apply clustering to specified numerical columns</p></td>
@@ -246,18 +247,18 @@ arguments:</p>
 </section>
 <section id="cluster-data-from-specified-numerical-columns">
 <span id="kmeans-columns"></span><h2>Cluster data from specified numerical columns<a class="headerlink" href="#cluster-data-from-specified-numerical-columns" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --columns NAME [NAME ...]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --col NAME [NAME ...]
 </pre></div>
 </div>
 <p>By default, if no column names are specified, clustering is performed on all of the numerical columns in the dataset.</p>
-<p>However it is possible to perform clustering on a specific subset of columns via the <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code> argument.</p>
+<p>However it is possible to perform clustering on a specific subset of columns via the <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code> argument.</p>
 <p>For example, the following command performs k-means clustering on just the columns <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>,  and <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> (and hence ignores the <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> column):</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita kmeans -c sepal_length sepal_width petal_length &lt; iris.csv
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">kmeans</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code>.</p>
+<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">kmeans</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code>.</p>
 </div>
 </section>
 <section id="choose-number-of-clusters-to-identify">

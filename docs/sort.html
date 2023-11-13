@@ -83,6 +83,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -158,7 +159,7 @@
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
 </ul>
 </td>
 <td><p>sort data by these columns</p></td>
@@ -182,7 +183,7 @@
 </tr>
 </tbody>
 </table>
-<p>The <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--columns</span></code>) argument is required, and all other arguments are optional.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--col</span></code>) argument is required, and all other arguments are optional.</p>
 </section>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
@@ -249,7 +250,7 @@ arguments:</p>
 </section>
 <section id="selecting-columns-to-use-for-sorting">
 <span id="sort-columns"></span><h2>Selecting columns to use for sorting<a class="headerlink" href="#selecting-columns-to-use-for-sorting" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c COLUMN [COLUMN ...], --columns COLUMN [COLUMN ...]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c COLUMN [COLUMN ...], --col COLUMN [COLUMN ...]
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">sort</span></code> command requires one or more columns to be specified.</p>
@@ -320,7 +321,7 @@ arguments:</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The columns specified with <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--columns</span></code>) and the ordering specified by <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--order</span></code>) match up pairwise.</p>
+<p>The columns specified with <code class="docutils literal notranslate"><span class="pre">-c</span></code> (or <code class="docutils literal notranslate"><span class="pre">--col</span></code>) and the ordering specified by <code class="docutils literal notranslate"><span class="pre">-o</span></code> (or <code class="docutils literal notranslate"><span class="pre">--order</span></code>) match up pairwise.</p>
 <p>For example, in the scheme below, the order for column <code class="docutils literal notranslate"><span class="pre">C1</span></code> is given by <code class="docutils literal notranslate"><span class="pre">O1</span></code>, and <code class="docutils literal notranslate"><span class="pre">C2</span></code> is ordered by <code class="docutils literal notranslate"><span class="pre">O2</span></code>,  and so forth:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c C1 C2 C3 -o O1 O2 O3
 </pre></div>

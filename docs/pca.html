@@ -82,6 +82,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -158,7 +159,7 @@
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">COLUMN</span> <span class="pre">[COLUMN...]</span></code></p></li>
 </ul>
 </td>
 <td><p>apply PCA to these columns</p></td>
@@ -221,18 +222,18 @@ arguments:</p>
 </section>
 <section id="perform-pca-on-specified-columns">
 <span id="pca-columns"></span><h2>Perform PCA on specified columns<a class="headerlink" href="#perform-pca-on-specified-columns" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --columns NAME [NAME ...]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c NAME [NAME ...], --col NAME [NAME ...]
 </pre></div>
 </div>
 <p>By default, if no column names are specified, PCA is performed on all of the numerical columns in the dataset.</p>
-<p>However it is possible to perform PCA on a specific subset of columns via the <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code> argument.</p>
+<p>However it is possible to perform PCA on a specific subset of columns via the <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code> argument.</p>
 <p>For example, the following command performs PCA on just the columns <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>,  and <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> (and hence ignores the <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> column):</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pca -c sepal_length sepal_width petal_length &lt; iris.csv
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">pca</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--columns</span></code>.</p>
+<p>Non-numeric columns will be ignored by <code class="docutils literal notranslate"><span class="pre">pca</span></code> even if they are specified as arguments to <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code>.</p>
 </div>
 </section>
 <section id="choose-the-number-of-principal-components-to-generate">

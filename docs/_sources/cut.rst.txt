@@ -28,7 +28,7 @@ Arguments
      - display help for this command
      - :ref:`help <cut_help>`
    * - * ``-c [COLUMN ...]``
-       * ``--columns [COLUMN ...]``
+       * ``--col [COLUMN ...]``
      - select columns
      - :ref:`select columns <cut_columns>`
    * - * ``-i``
@@ -96,7 +96,7 @@ Selecting columns
 
 .. code-block:: text
 
-    -c COLUMN [COLUMN ...], --columns COLUMN [COLUMN ...]
+    -c COLUMN [COLUMN ...], --col COLUMN [COLUMN ...]
 
 The ``cut`` command requires one or more column names to be specified. By default, the named columns are kept and the unnamed columns are discarded. 
 
@@ -107,7 +107,7 @@ Note that this behaviour is inverted with the ``-i`` (``--invert``) option is sp
 Drop selected columns
 ---------------------
 
-The columns specified by ``-c`` (``--columns``) are dropped when the ``-i`` (``--invert``) option is specified.
+The columns specified by ``-c`` (``--col``) are dropped when the ``-i`` (``--invert``) option is specified.
 
 For example, the command below drops the columns ``sepal_length`` and ``species`` and keeps all other columns from the data set in ``example.csv``:
 

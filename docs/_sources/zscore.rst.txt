@@ -40,7 +40,7 @@ Arguments
      - display help for this command
      - :ref:`help <zscore_help>`
    * - * ``-c COLUMN [COLUMN...]``
-       * ``--columns COLUMN [COLUMN...]``
+       * ``--col COLUMN [COLUMN...]``
      - determine z-scores in specified numerical columns
      - :ref:`z-score columns <zscore_columns>`
    * - ``--suffix SUFFIX``
@@ -99,7 +99,7 @@ Compute z-scores in specified numerical columns
 
 .. code-block:: text
 
-   -c NAME [NAME ...], --columns NAME [NAME ...]
+   -c NAME [NAME ...], --col NAME [NAME ...]
 
 By default, if no column names are specified, z-scores will be computed in all of the numerical columns in the dataset, one at a time.
 
@@ -110,7 +110,7 @@ dataset separately (these are: ``sepal_length``, ``sepal_width``, ``petal_length
 
    gurita zscore < iris.csv
 
-Sometimes it is useful to specify a subset of columns in which to compute z-scores. This can be achieved with the ``-c/--columns`` argument.
+Sometimes it is useful to specify a subset of columns in which to compute z-scores. This can be achieved with the ``-c/--col`` argument.
 
 In the following example z-scores are computed in only the ``sepal_length`` and ``petal_width`` columns:
 
@@ -143,7 +143,7 @@ are also all identical.
 
 .. note::
 
-   Non-numeric columns will be ignored by ``zscore`` even if they are specified as arguments to ``-c/--columns``.
+   Non-numeric columns will be ignored by ``zscore`` even if they are specified as arguments to ``-c/--col``.
 
 .. _zscore_suffix:
 

@@ -58,11 +58,15 @@
 <li class="toctree-l2"><a class="reference internal" href="list_of_commands.html#transformation-and-analysis">Transformation and analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="list_of_commands.html#summary-information">Summary information</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">describe</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#summary-information-for-transformed-input-data">Summary information for transformed input data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simple-example">Simple example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-specific-columns-to-describe">Select specific columns to describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage-in-a-command-chain">Usage in a command chain</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="pretty.html">pretty</a></li>
-<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 </ul>
 </li>
 </ul>
@@ -102,17 +106,76 @@
              
   <section id="describe">
 <span id="id1"></span><h1>describe<a class="headerlink" href="#describe" title="Permalink to this headline"></a></h1>
-<p>Input data can be summarised with the <code class="docutils literal notranslate"><span class="pre">describe</span></code> command</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita describe &lt;arguments&gt;
+<p>Print a high level summary of the columns in a dataset to standard output (stdout).</p>
+<p>The summary includes the following information:</p>
+<ul class="simple">
+<li><p>count: the number of non-empty data values observed for the column</p></li>
+</ul>
+<p>For categorical columns:</p>
+<ul class="simple">
+<li><p>unique: the number of unique values observed for the column</p></li>
+<li><p>top: the most frequently observed value</p></li>
+<li><p>freq: the frequency (count) of the most frequently observed value</p></li>
+</ul>
+<p>For numerical columns:</p>
+<ul class="simple">
+<li><p>mean: the mean (average)</p></li>
+<li><p>std: the standard deviation</p></li>
+<li><p>min: the minimum observed value</p></li>
+<li><p>25%: the 25th percentile</p></li>
+<li><p>50%: the 50th percentile</p></li>
+<li><p>75%: the 75th percentile</p></li>
+<li><p>max: the maximum observed value</p></li>
+</ul>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita describe <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-c <span class="o">[</span>COLUMN ...<span class="o">]]</span>
 </pre></div>
 </div>
-<p>This produces a summary table of columns in the input data.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita describe &lt; titanic.csv
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#describe-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+</ul>
+</td>
+<td><p>select columns to describe (default is all columns)</p></td>
+<td><p><a class="reference internal" href="#describe-columns"><span class="std std-ref">columns</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>Describe all the columns in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita describe &lt; titanic.csv
 </pre></div>
 </div>
-<p>The output for the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch  \
-count   891.000000  891.000000   891  714.000000  891.000000  891.000000
+<p>The output for the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch
+count   891.000000  891.000000   891  714.000000  891.000000  891.000000  \
 unique         NaN         NaN     2         NaN         NaN         NaN
 top            NaN         NaN  male         NaN         NaN         NaN
 freq           NaN         NaN   577         NaN         NaN         NaN
@@ -124,8 +187,8 @@ min       0.000000    1.000000   NaN    0.420000    0.000000    0.000000
 75%       1.000000    3.000000   NaN   38.000000    1.000000    0.000000
 max       1.000000    3.000000   NaN   80.000000    8.000000    6.000000
 
-              fare embarked  class  who adult_male deck  embark_town alive  \
-count   891.000000      889    891  891        891  203          889   891
+              fare embarked  class  who adult_male deck  embark_town alive
+count   891.000000      889    891  891        891  203          889   891  \
 unique         NaN        3      3    3          2    7            3     2
 top            NaN        S  Third  man       True    C  Southampton    no
 freq           NaN      644    491  537        537   59          644   549
@@ -149,36 +212,26 @@ min      NaN
 50%      NaN
 75%      NaN
 max      NaN
-
-rows: 891, cols: 15
 </pre></div>
 </div>
-<p>The summary includes the following information:</p>
-<ul class="simple">
-<li><p>count: the number of non-empty data values observed for the column</p></li>
-</ul>
-<p>For categorical columns:</p>
-<ul class="simple">
-<li><p>unique: the number of unique values observed for the column</p></li>
-<li><p>top: the most frequently observed value</p></li>
-<li><p>freq: the frequency (count) of the most frequently observed value</p></li>
-</ul>
-<p>For numerical columns:</p>
-<ul class="simple">
-<li><p>mean: the mean (average)</p></li>
-<li><p>std: the standard deviation</p></li>
-<li><p>min: the minimum observed value</p></li>
-<li><p>25%: the 25th percentile</p></li>
-<li><p>50%: the 50th percentile</p></li>
-<li><p>75%: the 75th percentile</p></li>
-<li><p>max: the maximum observed value</p></li>
-</ul>
-<p>The number of rows and columns in the input data is shown at the end. In this case there are 891 rows and 15 columns in
-the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file.</p>
-<section id="summary-information-for-transformed-input-data">
-<span id="info-trans"></span><h2>Summary information for transformed input data<a class="headerlink" href="#summary-information-for-transformed-input-data" title="Permalink to this headline"></a></h2>
+</section>
+<section id="getting-help">
+<span id="describe-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">describe</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita describe -h
+</pre></div>
+</div>
+</section>
+<section id="select-specific-columns-to-describe">
+<span id="describe-columns"></span><h2>Select specific columns to describe<a class="headerlink" href="#select-specific-columns-to-describe" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">col</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>By default <code class="docutils literal notranslate"><span class="pre">describe</span></code> prints information about all columns in a dataset.</p>
+<p>Alternatively, a subset of the columns can be selected using the <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code> argument.</p>
 <p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> columns in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita describe --columns age class &lt; titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita describe --col age class &lt; titanic.csv
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
@@ -194,12 +247,18 @@ min       0.420000    NaN
 50%      28.000000    NaN
 75%      38.000000    NaN
 max      80.000000    NaN
-
-rows: 891, cols: 2
 </pre></div>
 </div>
-<p>Similarly it is possible to get summary information for data after <code class="docutils literal notranslate"><span class="pre">--filter</span></code>, <code class="docutils literal notranslate"><span class="pre">--eval</span></code>, and <code class="docutils literal notranslate"><span class="pre">--sample</span></code> have been applied to the data.
-In all cases the summary shows that state of the data after the transformations have been applied.</p>
+</section>
+<section id="usage-in-a-command-chain">
+<h2>Usage in a command chain<a class="headerlink" href="#usage-in-a-command-chain" title="Permalink to this headline"></a></h2>
+<p>When used in a command chain the <code class="docutils literal notranslate"><span class="pre">describe</span></code> command passes on its input data to the rest of the chain unchanged.</p>
+<p>For example, the following command shows <code class="docutils literal notranslate"><span class="pre">describe</span></code> followed by a <code class="docutils literal notranslate"><span class="pre">box</span></code> plot:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita describe + box -x sex -y age &lt; titanic.csv
+</pre></div>
+</div>
+<p>This command will first run <code class="docutils literal notranslate"><span class="pre">describe</span></code> to display a summary of the data on the output, and then it will run <code class="docutils literal notranslate"><span class="pre">box</span></code> to generate a plot on the same input data.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">describe</span></code> just passes the data along from left to right the <code class="docutils literal notranslate"><span class="pre">box</span></code> command receives the same data as its input that was read from the file.</p>
 </section>
 </section>
 

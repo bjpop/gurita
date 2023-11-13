@@ -34,7 +34,7 @@ Arguments
      - display help for this command
      - :ref:`help <corr_help>`
    * - * ``-c [COLUMN ...]``
-       * ``--columns [COLUMN ...]``
+       * ``--col [COLUMN ...]``
      - select columns to correlate pairwise (default: select all numerical columns) 
      - :ref:`columns <corr_columns>`
    * - * ``--method {pearson,kendall,spearman}``
@@ -83,7 +83,7 @@ Selecting columns to correlate
 
 .. code-block::
 
-  -c [COLUMN ...], --columns [COLUMN ...]
+  -c [COLUMN ...], --col [COLUMN ...]
 
 By default, if no columns are specified explicitly, all numerical columns in the data set will be chosen for comparison.
 
@@ -115,7 +115,7 @@ There are four numerical columns in ``iris.csv``, so the output contains all 4x4
     petal_length,petal_width,0.9627570970509662
     petal_width,petal_width,1.0
 
-Specific numerical columns can be specified for comparison using ``-c`` (or ``--columns``).
+Specific numerical columns can be specified for comparison using ``-c`` (or ``--col``).
 
 For example, we can compare ``sepal_length`` with ``petal_length`` and ``petal_width`` like so:
 
@@ -140,7 +140,7 @@ The output of the above command is shown below:
 
 .. note::
 
-   Non-numerical columns specified as arguments to ``-c`` (``--columns``) are ignored. 
+   Non-numerical columns specified as arguments to ``-c`` (``--col``) are ignored. 
 
 .. _corr_method:
 
@@ -163,7 +163,7 @@ The example below computes the pairwise correlation between ``sepal_width`` and 
 
 .. code-block:: text
 
-    gurita corr --columns sepal_length sepal_width --method spearman < iris.csv
+    gurita corr --col sepal_length sepal_width --method spearman < iris.csv
 
 The output of the above command is shown below. Note that the results are similar to, but slightly different from the outputs from the ``pearson`` method
 shown in the simple example above.

@@ -83,6 +83,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -164,7 +165,7 @@
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
 </ul>
 </td>
 <td><p>consider only specified columns when dropping rows</p></td>
@@ -251,16 +252,16 @@ values in them will be retained. This can be useful when you want to ensure that
 </section>
 <section id="consider-only-specified-columns-when-dropping-rows">
 <span id="dropna-columns"></span><h2>Consider only specified columns when dropping rows<a class="headerlink" href="#consider-only-specified-columns-when-dropping-rows" title="Permalink to this headline"></a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">columns</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">col</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>By default, when dropping rows, <code class="docutils literal notranslate"><span class="pre">dropna</span></code> will look for missing values in all columns. The <code class="docutils literal notranslate"><span class="pre">--columns</span></code> option
+<p>By default, when dropping rows, <code class="docutils literal notranslate"><span class="pre">dropna</span></code> will look for missing values in all columns. The <code class="docutils literal notranslate"><span class="pre">--col</span></code> option
 lets you specify a subset of columns to consider for missing values.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This option does not apply when <code class="docutils literal notranslate"><span class="pre">--axis</span> <span class="pre">columns</span></code> is also used</p>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita dropna --columns species &lt; missing.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita dropna --col species &lt; missing.csv
 </pre></div>
 </div>
 <p>The output of the above command is shown below:</p>

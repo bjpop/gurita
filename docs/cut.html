@@ -81,6 +81,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sample.html">sample</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sort.html">sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tail.html">tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unique.html">unique</a></li>
 <li class="toctree-l3"><a class="reference internal" href="zscore.html">zscore</a></li>
 </ul>
 </li>
@@ -154,7 +155,7 @@
 </tr>
 <tr class="row-odd"><td><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--columns</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
 </ul>
 </td>
 <td><p>select columns</p></td>
@@ -216,7 +217,7 @@ arguments:</p>
 </section>
 <section id="selecting-columns">
 <span id="cut-columns"></span><h2>Selecting columns<a class="headerlink" href="#selecting-columns" title="Permalink to this headline"></a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c COLUMN [COLUMN ...], --columns COLUMN [COLUMN ...]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-c COLUMN [COLUMN ...], --col COLUMN [COLUMN ...]
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">cut</span></code> command requires one or more column names to be specified. By default, the named columns are kept and the unnamed columns are discarded.</p>
@@ -224,7 +225,7 @@ arguments:</p>
 </section>
 <section id="drop-selected-columns">
 <span id="cut-invert"></span><h2>Drop selected columns<a class="headerlink" href="#drop-selected-columns" title="Permalink to this headline"></a></h2>
-<p>The columns specified by <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--columns</span></code>) are dropped when the <code class="docutils literal notranslate"><span class="pre">-i</span></code> (<code class="docutils literal notranslate"><span class="pre">--invert</span></code>) option is specified.</p>
+<p>The columns specified by <code class="docutils literal notranslate"><span class="pre">-c</span></code> (<code class="docutils literal notranslate"><span class="pre">--col</span></code>) are dropped when the <code class="docutils literal notranslate"><span class="pre">-i</span></code> (<code class="docutils literal notranslate"><span class="pre">--invert</span></code>) option is specified.</p>
 <p>For example, the command below drops the columns <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and <code class="docutils literal notranslate"><span class="pre">species</span></code> and keeps all other columns from the data set in <code class="docutils literal notranslate"><span class="pre">example.csv</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita cut -c sepal_length species -i &lt; example.csv
 </pre></div>
