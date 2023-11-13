@@ -34,7 +34,7 @@ Arguments
      - keep only those rows/columns with at least N non-missing values
      - :ref:`thresh <dropna_thresh>`
    * - * ``-c [COLUMN ...]``
-       * ``--columns [COLUMN ...]``
+       * ``--col [COLUMN ...]``
      - consider only specified columns when dropping rows 
      - :ref:`columns <dropna_columns>`
    * - ``--how {any,all}``
@@ -150,9 +150,9 @@ Consider only specified columns when dropping rows
 
 .. code-block::
 
-  -c [COLUMN ...], --columns [COLUMN ...]
+  -c [COLUMN ...], --col [COLUMN ...]
 
-By default, when dropping rows, ``dropna`` will look for missing values in all columns. The ``--columns`` option
+By default, when dropping rows, ``dropna`` will look for missing values in all columns. The ``--col`` option
 lets you specify a subset of columns to consider for missing values.
 
 .. note::
@@ -161,7 +161,7 @@ lets you specify a subset of columns to consider for missing values.
 
 .. code-block:: text
 
-   gurita dropna --columns species < missing.csv 
+   gurita dropna --col species < missing.csv 
 
 The output of the above command is shown below:
 

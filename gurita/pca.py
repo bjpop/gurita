@@ -26,7 +26,7 @@ class PCA(CommandBase, name="pca"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            '-c', '--col', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         self.optional.add_argument(
             '--prefix', required=False, default=const.DEFAULT_PCA_PREFIX,
@@ -40,9 +40,9 @@ class PCA(CommandBase, name="pca"):
         options = self.options
         selected_df = df
 
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            selected_df = df[options.col]
 
         # select only numeric columns for the PCA
         selected_df = selected_df.select_dtypes(include=np.number)

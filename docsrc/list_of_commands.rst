@@ -63,6 +63,7 @@ Transformation and analysis
    sample
    sort
    tail
+   unique
    zscore
 
 .. _summary_command_list:
@@ -75,4 +76,3 @@ Summary information
 
    describe 
    pretty
-   unique

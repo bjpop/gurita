@@ -20,7 +20,7 @@ class Describe(CommandBase, name="describe"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns')
 
 
@@ -28,9 +28,9 @@ class Describe(CommandBase, name="describe"):
         options = self.options
         rows, cols = df.shape
         pd.set_option('display.max_columns', None)
-        if options.columns:
-            utils.validate_columns_error(df, options.columns)
-            print(df[options.columns].describe(include='all'))
+        if options.col:
+            utils.validate_columns_error(df, options.col)
+            print(df[options.col].describe(include='all'))
         else:
             print(df.describe(include='all'))
         return df
@@ -43,7 +43,7 @@ class Pretty(CommandBase, name="pretty"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns')
         self.optional.add_argument(
             '--maxrows', metavar='NUM', type=int, required=False, default=const.DEFAULT_PRETTY_MAX_ROWS,
@@ -56,33 +56,33 @@ class Pretty(CommandBase, name="pretty"):
     def run(self, df):
         options = self.options
         selected_df = df
-        if options.columns:
-            utils.validate_columns_error(df, options.columns)
-        print(selected_df.to_string(columns=options.columns, header=True, max_rows=options.maxrows, max_cols=options.maxcols, show_dimensions=False, index=False))
+        if options.col:
+            utils.validate_columns_error(df, options.col)
+        print(selected_df.to_string(columns=options.col, header=True, max_rows=options.maxrows, max_cols=options.maxcols, show_dimensions=False, index=False))
         nrows, ncols = df.shape
         print(f"\n[{nrows} rows x {ncols} columns]")
         return df
 
 
-class Unique(CommandBase, name="unique"):
-    description = "Print the unique values from a column."
-    category = "summary information"
-    
-    def __init__(self):
-        super().__init__()
-        self.optional.add_argument(
-            '-c', '--column', metavar='COLUMN', type=str, required=False,
-            help=f'Select unique items from this column')
-        self.optional.add_argument(
-            '--sort', action='store_true',
-            default=False, required=False,
-            help=f'Sort the items in ascending order')
-
-
-    def run(self, df):
-        options = self.options
-        utils.check_df_has_columns(df, [options.column])
-        this_unique = df[options.column].unique()
-        if options.sort:
-            this_unique.sort()
-        print("\n".join(this_unique))
+#class Unique(CommandBase, name="unique"):
+#    description = "Get the unique values from a column."
+#    category = "transformation"
+#    
+#    def __init__(self):
+#        super().__init__()
+#        self.optional.add_argument(
+#            '-c', '--col', metavar='COLUMN', type=str, required=True,
+#            help=f'Select unique items from this column')
+#        self.optional.add_argument(
+#            '--sort', action='store_true',
+#            default=False, required=False,
+#            help=f'Sort the items in ascending order')
+#
+#
+#    def run(self, df):
+#        options = self.options
+#        utils.check_df_has_columns(df, [options.col])
+#        this_unique = df[options.col].unique()
+#        new_column_name = '_'.join([options.col, 'unique'])
+#        unique_df = pd.DataFrame({new_column_name: this_unique})
+#        return unique_df 

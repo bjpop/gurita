@@ -25,7 +25,7 @@ class Normtest(CommandBase, name="normtest"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
         self.optional.add_argument(
             '-m', '--method', choices=const.ALLOWED_NORMTEST_METHODS, 
@@ -47,9 +47,9 @@ class Normtest(CommandBase, name="normtest"):
         options = self.options
         selected_df = df
 
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            selected_df = df[options.col]
 
         # select only the numeric columns
         selected_df = selected_df.select_dtypes(include=np.number)
@@ -94,7 +94,7 @@ class Correlation(CommandBase, name="corr"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns (columns)')
         self.optional.add_argument('--method', required=False,
             default=const.DEFAULT_CORR_METHOD, choices=const.ALLOWED_CORR_METHODS,
@@ -103,9 +103,9 @@ class Correlation(CommandBase, name="corr"):
 
     def run(self, df):
         options = self.options
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            df = df[options.col]
         corr_df_wide = df.corr(method=options.method).reset_index()
         corr_df_long = pd.melt(corr_df_wide, id_vars='index')
         return corr_df_long.rename(columns={"index": "col1", "variable": "col2", "value": "corr"})
@@ -118,7 +118,7 @@ class Zscore(CommandBase, name="zscore"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            '-c', '--col', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
         self.optional.add_argument(
             '--suffix', required=False, default=const.DEFAULT_ZSCORE_SUFFIX,
@@ -129,9 +129,9 @@ class Zscore(CommandBase, name="zscore"):
         options = self.options
         selected_df = df
         # optionally choose user specified columns
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            selected_df = df[options.col]
 
         # select only the numeric columns
         selected_df = selected_df.select_dtypes(include=np.number)
@@ -154,7 +154,7 @@ class Outlier(CommandBase, name="outlier"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='NAME', nargs="+", type=str, required=False,
+            '-c', '--col', metavar='NAME', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
         self.optional.add_argument(
             '--suffix', required=False, default=const.DEFAULT_OUTLIER_COLUMN,
@@ -168,9 +168,9 @@ class Outlier(CommandBase, name="outlier"):
         options = self.options
         selected_df = df
         # optionally choose user specified columns
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            selected_df = df[options.col]
 
         # select only the numeric columns
         selected_df = selected_df.select_dtypes(include=np.number)
@@ -195,8 +195,8 @@ class Outlier(CommandBase, name="outlier"):
 # rather than one at a time
 
 def stdev(df, options):
-    if options.columns is not None:
-        columns = options.columns
+    if options.col is not None:
+        columns = options.col
         utils.check_df_has_columns(df, columns)
     else:
         numeric_df = df.select_dtypes(include=np.number)

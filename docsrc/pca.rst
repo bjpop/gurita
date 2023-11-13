@@ -34,7 +34,7 @@ Arguments
      - display help for this command
      - :ref:`help <pca_help>`
    * - * ``-c COLUMN [COLUMN...]``
-       * ``--columns COLUMN [COLUMN...]``
+       * ``--col COLUMN [COLUMN...]``
      - apply PCA to these columns 
      - :ref:`PCA columns <pca_columns>`
    * - * ``-n COMPONENTS``
@@ -110,11 +110,11 @@ Perform PCA on specified columns
 
 .. code-block:: text
 
-   -c NAME [NAME ...], --columns NAME [NAME ...]
+   -c NAME [NAME ...], --col NAME [NAME ...]
 
 By default, if no column names are specified, PCA is performed on all of the numerical columns in the dataset.
 
-However it is possible to perform PCA on a specific subset of columns via the ``-c/--columns`` argument.
+However it is possible to perform PCA on a specific subset of columns via the ``-c/--col`` argument.
 
 For example, the following command performs PCA on just the columns ``sepal_length``, ``sepal_width``,  and ``petal_length`` (and hence ignores the ``petal_width`` column):
 
@@ -124,7 +124,7 @@ For example, the following command performs PCA on just the columns ``sepal_leng
 
 .. note::
 
-   Non-numeric columns will be ignored by ``pca`` even if they are specified as arguments to ``-c/--columns``.
+   Non-numeric columns will be ignored by ``pca`` even if they are specified as arguments to ``-c/--col``.
 
 .. _pca_ncomps:
 

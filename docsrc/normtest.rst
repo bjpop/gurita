@@ -38,7 +38,7 @@ Arguments
      - display help for this command
      - :ref:`help <normtest_help>`
    * - * ``-c COLUMN [COLUMN...]``
-       * ``--columns COLUMN [COLUMN...]``
+       * ``--col COLUMN [COLUMN...]``
      - test these numerical columns 
      - :ref:`test specific columns <normtest_columns>`
    * - * ``-a ALPHA``
@@ -114,9 +114,9 @@ Choose columns to test for normality
 .. code-block:: text
 
    -c COLUMN [COLUMN...]
-   --column COLUMN [COLUMN...]
+   --col COLUMN [COLUMN...]
 
-By default ``normtest`` will test all numerical columns for normality, however the ``--column/-c`` option allows you to test only specific columns.
+By default ``normtest`` will test all numerical columns for normality, however the ``--col/-c`` option allows you to test only specific columns.
 
 For example the following command tests only the ``sepal_length`` column from the ``iris.csv`` dataset:
 
@@ -145,7 +145,7 @@ The output of the above command is as follows:
    sepal_length,True
    petal_length,False
 
-Note that non-numerical columns are ignored, even if they are specified using ``--column/-c``.
+Note that non-numerical columns are ignored, even if they are specified using ``--col/-c``.
 For example the following command tries to test of the categorical ``species`` column is normal:
 
 .. code-block:: text

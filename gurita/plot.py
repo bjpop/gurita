@@ -30,7 +30,7 @@ class PairPlot(CommandBase, name="pair"):
                                                  const.DEFAULT_PAIR_PLOT_HEIGHT)]
         super().__init__(parents)
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="*", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="*", type=str, required=False,
             help=f'Select only these columns')
         self.optional.add_argument(
             '--kind',  type=str, required=False,
@@ -51,7 +51,7 @@ class PairPlot(CommandBase, name="pair"):
         sns.set_context(options.context)
         kwargs = {}
         graph = sns.pairplot(data=df, height=height_inches, aspect=aspect,
-                vars=options.columns, kind=options.kind, hue=options.hue, hue_order=options.hueorder,
+                vars=options.col, kind=options.kind, hue=options.hue, hue_order=options.hueorder,
                 corner=options.corner, **kwargs)
         render_plot.render_plot(options, graph, self.name)
         return df

@@ -33,7 +33,7 @@ Arguments
      - display help for this command
      - :ref:`help <pair_help>`
    * - * ``-c [COLUMN ...]``
-       * ``--columns [COLUMN ...]``
+       * ``--col [COLUMN ...]``
      - select columns to compare 
      - :ref:`columns <pair_columns>`
    * - ``--hue COLUMN``
@@ -58,7 +58,7 @@ The following example generates a pair plot comparing all the numerical columns 
 
 Note that there are four numerical columns in this data set (``sepal_width``, ``sepal_length``, ``petal_length``, ``petal_width``) and one categorical column (``species``).
 By default, if no column names are specified in a pair plot, all the numerical columns will be compared (and catergorical columns are ignored).
-This behaviour can be overridden with the ``-c, --columns`` :ref:`argument <pair_columns>`.
+This behaviour can be overridden with the ``-c, --col`` :ref:`argument <pair_columns>`.
 
 .. code-block:: text 
 
@@ -93,11 +93,11 @@ Selecting columns to compare
 
 .. code-block:: text
 
-    -c [COLUMN ...], --columns [COLUMN ...]
+    -c [COLUMN ...], --col [COLUMN ...]
 
 
 By default, if no column names are specified in a pair plot, all the numerical columns will be compared (and catergorical columns are ignored).
-This behaviour can be overridden with the ``-c`` (or ``--columns``) argument.
+This behaviour can be overridden with the ``-c`` (or ``--col``) argument.
 
 The following example generates a pair plot comparing the ``sepal_length``, ``petal_length``, and ``species`` columns. Note that ``species`` is
 a categorical column, and it would not be plotted by default.

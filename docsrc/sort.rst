@@ -30,7 +30,7 @@ Arguments
      - display help for this command
      - :ref:`help <sort_help>`
    * - * ``-c COLUMN [COLUMN...]``
-       * ``--columns COLUMN [COLUMN...]``
+       * ``--col COLUMN [COLUMN...]``
      - sort data by these columns 
      - :ref:`sort columns <sort_columns>`
    * - * ``-o ORDER [ORDER ...]``
@@ -44,7 +44,7 @@ Arguments
      - ordering for missing (NA) values (default: first)
      - :ref:`NA order <sort_napos>`
 
-The ``-c`` (``--columns``) argument is required, and all other arguments are optional. 
+The ``-c`` (``--col``) argument is required, and all other arguments are optional. 
 
 Simple example
 --------------
@@ -132,7 +132,7 @@ Selecting columns to use for sorting
 
 .. code-block:: text
 
-   -c COLUMN [COLUMN ...], --columns COLUMN [COLUMN ...]
+   -c COLUMN [COLUMN ...], --col COLUMN [COLUMN ...]
 
 The ``sort`` command requires one or more columns to be specified.
 
@@ -223,7 +223,7 @@ The output of the above command is as follows:
 
 .. note::
 
-   The columns specified with ``-c`` (or ``--columns``) and the ordering specified by ``-o`` (or ``--order``) match up pairwise.
+   The columns specified with ``-c`` (or ``--col``) and the ordering specified by ``-o`` (or ``--order``) match up pairwise.
 
    For example, in the scheme below, the order for column ``C1`` is given by ``O1``, and ``C2`` is ordered by ``O2``,  and so forth:
 

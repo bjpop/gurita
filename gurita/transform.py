@@ -24,7 +24,7 @@ class Cut(CommandBase, name="cut"):
     def __init__(self):
         super().__init__()
         self.required.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=True,
+            '-c', '--col', metavar='COLUMN', nargs="+", type=str, required=True,
             help=f'Select only these named columns')
         self.optional.add_argument(
             '-i', '--invert', required=False, action='store_true', default=False,
@@ -33,12 +33,12 @@ class Cut(CommandBase, name="cut"):
 
     def run(self, df):
         options = self.options
-        if options.columns is not None:
-            columns = options.columns
+        if options.col is not None:
+            columns = options.col
             valid_columns, invalid_columns = utils.validate_columns(df, columns)
             if valid_columns:
                 if options.invert:
-                    df = df.drop(options.columns, axis=1)
+                    df = df.drop(options.col, axis=1)
                 else:
                     df = df[valid_columns]
             else:
@@ -206,7 +206,7 @@ class Sort(CommandBase, name="sort"):
     def __init__(self):
         super().__init__()
         self.required.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=True,
+            '-c', '--col', metavar='COLUMN', nargs="+", type=str, required=True,
             help=f'Sort the data by these columns in precedence from left to right')
         self.optional.add_argument(
             '--napos', type=str, required=False, choices=const.ALLOWED_SORT_NAPOS,
@@ -215,7 +215,7 @@ class Sort(CommandBase, name="sort"):
         self.optional.add_argument(
             '-o', '--order', type=str, nargs='+', required=False,
             choices=const.ALLOWED_SORT_ORDER, default=const.DEFAULT_SORT_ORDER,
-            help=f'Ordering to use for sort. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. The choices match with the specified columns to use for sorting (-c|--columns). If len(--order) < len(-c|--columns) the remaining columns will default to ascending order.')
+            help=f'Ordering to use for sort. Allowed values: %(choices)s. a=ascending, d=descending. Default: %(default)s. The choices match with the specified columns to use for sorting (-c|--col). If len(--order) < len(-c|--col) the remaining columns will default to ascending order.')
         self.optional.add_argument(
             '--alg', type=str, required=False,
             choices=const.ALLOWED_SORT_ALGORITHMS, default=const.DEFAULT_SORT_ALGORITHM,
@@ -224,9 +224,9 @@ class Sort(CommandBase, name="sort"):
 
     def run(self, df):
         options = self.options
-        ordering = get_sort_ordering(options.columns, options.order)
-        utils.validate_columns_error(df, options.columns)
-        df = df.sort_values(by=options.columns, na_position=options.napos, ascending=ordering, kind=options.alg, ignore_index=True)
+        ordering = get_sort_ordering(options.col, options.order)
+        utils.validate_columns_error(df, options.col)
+        df = df.sort_values(by=options.col, na_position=options.napos, ascending=ordering, kind=options.alg, ignore_index=True)
         return df
     
 
@@ -284,7 +284,7 @@ class DropNa(CommandBase, name="dropna"):
             '--thresh', metavar='N', type=int, required=False, 
             help=f'Keep only those rows/columns with at least N non-NA values')
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns. Only applies if --axis is "rows"')
 
     def run(self, df):
@@ -292,7 +292,7 @@ class DropNa(CommandBase, name="dropna"):
         subset = None
         if options.axis == 'rows':
             axis = 'index'
-            subset = options.columns
+            subset = options.col
             if subset is not None:
                 utils.validate_columns_error(df, subset)
         else:
@@ -347,6 +347,26 @@ class GroupBy(CommandBase, name="groupby"):
                 const.EXIT_COMMAND_LINE_ERROR)
         result.columns = new_column_names
         return result 
+
+
+class Unique(CommandBase, name="unique"):
+    description = "Get the unique values from a column."
+    category = "transformation"
+
+    def __init__(self):
+        super().__init__()
+        self.optional.add_argument(
+            '-c', '--col', metavar='COLUMN', type=str, required=True,
+            help=f'Select unique items from this column')
+    
+    def run(self, df):
+        options = self.options
+        utils.check_df_has_columns(df, [options.col])
+        this_unique = df[options.col].unique()
+        new_column_name = '_'.join([options.col, 'unique'])
+        unique_df = pd.DataFrame({new_column_name: this_unique})
+        return unique_df 
+
 
 #class Transpose(CommandBase, name="transpose"):
 #    description = "Transpose the data." 

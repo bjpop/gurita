@@ -25,7 +25,7 @@ class KMeans(CommandBase, name="kmeans"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         self.optional.add_argument(
             '--name', required=False, default=const.DEFAULT_CLUSTER_COLUMN_NAME,
@@ -39,9 +39,9 @@ class KMeans(CommandBase, name="kmeans"):
         options = self.options
         selected_df = df
 
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            selected_df = df[options.col]
 
         # select only numeric columns for the cluster 
         selected_df = selected_df.select_dtypes(include=np.number)
@@ -62,7 +62,7 @@ class GMM(CommandBase, name="gmm"):
     def __init__(self):
         super().__init__()
         self.optional.add_argument(
-            '-c', '--columns', metavar='COLUMN', nargs="+", type=str, required=False,
+            '-c', '--col', metavar='COLUMN', nargs="+", type=str, required=False,
             help=f'Select only these named columns')
         self.optional.add_argument(
             '--name', required=False, default=const.DEFAULT_CLUSTER_COLUMN_NAME,
@@ -79,9 +79,9 @@ class GMM(CommandBase, name="gmm"):
         options = self.options
         selected_df = df
 
-        if options.columns is not None:
-            utils.validate_columns_error(df, options.columns)
-            selected_df = df[options.columns]
+        if options.col is not None:
+            utils.validate_columns_error(df, options.col)
+            selected_df = df[options.col]
 
         # select only numeric columns for the cluster 
         selected_df = selected_df.select_dtypes(include=np.number)
