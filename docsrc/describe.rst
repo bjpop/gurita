@@ -3,7 +3,7 @@
 describe
 ========
 
-Print a high level summary of the columns in a dataset to standard output (stdout).
+Print summary statistics of the columns in a dataset to standard output (stdout).
 
 The summary includes the following information:
 
@@ -24,7 +24,6 @@ For numerical columns:
 * 50%: the 50th percentile
 * 75%: the 75th percentile
 * max: the maximum observed value
-
 
 Usage
 -----
@@ -52,6 +51,12 @@ Arguments
        * ``--col [COLUMN ...]``
      - select columns to describe (default is all columns) 
      - :ref:`columns <describe_columns>`
+
+See also
+--------
+
+The :doc:`pretty <pretty/>` command prints a fragment of the dataset in an aligned tabular format to standard output. 
+
 
 Simple example
 --------------
@@ -167,3 +172,9 @@ For example, the following command shows ``describe`` followed by a ``box`` plot
 This command will first run ``describe`` to display a summary of the data on the output, and then it will run ``box`` to generate a plot on the same input data. 
 
 Because ``describe`` just passes the data along from left to right the ``box`` command receives the same data as its input that was read from the file.
+
+It is also worth noting that ``describe`` can be used after other transformations have been applied to the data. For example, the data can be filtered first, and then the result of filtering can be fed into ``describe``:
+
+.. code-block:: text
+
+   gurita filter 'age >= 30' + describe < titanic.csv
