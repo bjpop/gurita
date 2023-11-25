@@ -60,6 +60,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">describe</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simple-example">Simple example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#select-specific-columns-to-describe">Select specific columns to describe</a></li>
@@ -106,7 +107,7 @@
              
   <section id="describe">
 <span id="id1"></span><h1>describe<a class="headerlink" href="#describe" title="Permalink to this headline"></a></h1>
-<p>Print a high level summary of the columns in a dataset to standard output (stdout).</p>
+<p>Print summary statistics of the columns in a dataset to standard output (stdout).</p>
 <p>The summary includes the following information:</p>
 <ul class="simple">
 <li><p>count: the number of non-empty data values observed for the column</p></li>
@@ -166,6 +167,10 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p>The <a class="reference internal" href="pretty.html"><span class="doc">pretty</span></a> command prints a fragment of the dataset in an aligned tabular format to standard output.</p>
 </section>
 <section id="simple-example">
 <h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
@@ -259,6 +264,10 @@ max      80.000000    NaN
 </div>
 <p>This command will first run <code class="docutils literal notranslate"><span class="pre">describe</span></code> to display a summary of the data on the output, and then it will run <code class="docutils literal notranslate"><span class="pre">box</span></code> to generate a plot on the same input data.</p>
 <p>Because <code class="docutils literal notranslate"><span class="pre">describe</span></code> just passes the data along from left to right the <code class="docutils literal notranslate"><span class="pre">box</span></code> command receives the same data as its input that was read from the file.</p>
+<p>It is also worth noting that <code class="docutils literal notranslate"><span class="pre">describe</span></code> can be used after other transformations have been applied to the data. For example, the data can be filtered first, and then the result of filtering can be fed into <code class="docutils literal notranslate"><span class="pre">describe</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;age &gt;= 30&#39; + describe &lt; titanic.csv
+</pre></div>
+</div>
 </section>
 </section>
 

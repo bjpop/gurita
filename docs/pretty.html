@@ -58,7 +58,17 @@
 <li class="toctree-l2"><a class="reference internal" href="list_of_commands.html#transformation-and-analysis">Transformation and analysis</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="list_of_commands.html#summary-information">Summary information</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="describe.html">describe</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pretty</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pretty</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arguments">Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#see-also">See also</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simple-example">Simple example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-specific-columns-to-display">Select specific columns to display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limiting-the-maximum-number-of-rows-and-columns-to-display">Limiting the maximum number of rows and columns to display</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage-in-a-command-chain">Usage in a command chain</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -98,6 +108,180 @@
              
   <section id="pretty">
 <span id="id1"></span><h1>pretty<a class="headerlink" href="#pretty" title="Permalink to this headline"></a></h1>
+<p>Pretty print a fragment of the dataset in an aligned tabular format to standard output.</p>
+<p>When the table is large only the first and last few rows and columns of data are shown.</p>
+<p>The size of the dataset in number of rows and columns is also displayed at the end.</p>
+<p>This is useful for getting a quick overview of the dataset.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita pretty <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-c <span class="o">[</span>COLUMN ...<span class="o">]]</span> <span class="o">[</span>--maxrows NUM<span class="o">]</span> <span class="o">[</span>--maxcols NUM<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="arguments">
+<h2>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline"></a></h2>
+<table class="colwidths-given tight-table docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 36%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Argument</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--help</span></code></p></li>
+</ul>
+</td>
+<td><p>display help for this command</p></td>
+<td><p><a class="reference internal" href="#pretty-help"><span class="std std-ref">help</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--col</span> <span class="pre">[COLUMN</span> <span class="pre">...]</span></code></p></li>
+</ul>
+</td>
+<td><p>select columns for display</p></td>
+<td><p><a class="reference internal" href="describe.html#describe-columns"><span class="std std-ref">columns</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--maxrows</span> <span class="pre">NUM</span></code></p></td>
+<td><p>display at most this many rows of data (default 10)</p></td>
+<td><p><a class="reference internal" href="#pretty-maxrows"><span class="std std-ref">maximum rows</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--maxcols</span> <span class="pre">NUM</span></code></p></td>
+<td><p>display at most this many columns of data (default 10)</p></td>
+<td><p><a class="reference internal" href="#pretty-maxcols"><span class="std std-ref">maximum columns</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline"></a></h2>
+<p>The <a class="reference internal" href="describe.html"><span class="doc">describe</span></a> command prints summary statistics of the columns in a dataset to standard output (stdout).</p>
+</section>
+<section id="simple-example">
+<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline"></a></h2>
+<p>Make a pretty display of the data in the <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pretty &lt; titanic.csv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>survived  pclass    sex  age  sibsp  ...  adult_male  deck embark_town alive alone
+       0       3   male 22.0      1  ...        True   NaN Southampton    no False
+       1       1 female 38.0      1  ...       False     C   Cherbourg   yes False
+       1       3 female 26.0      0  ...       False   NaN Southampton   yes  True
+       1       1 female 35.0      1  ...       False     C Southampton   yes False
+       0       3   male 35.0      0  ...        True   NaN Southampton    no  True
+     ...     ...    ...  ...    ...  ...         ...   ...         ...   ...   ...
+       0       2   male 27.0      0  ...        True   NaN Southampton    no  True
+       1       1 female 19.0      0  ...       False     B Southampton   yes  True
+       0       3 female  NaN      1  ...       False   NaN Southampton    no False
+       1       1   male 26.0      0  ...        True     C   Cherbourg   yes  True
+       0       3   male 32.0      0  ...        True   NaN  Queenstown    no  True
+
+[891 rows x 15 columns]
+</pre></div>
+</div>
+</section>
+<section id="getting-help">
+<span id="pretty-help"></span><h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h2>
+<p>The full set of command line arguments for <code class="docutils literal notranslate"><span class="pre">pretty</span></code> can be obtained with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>
+arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pretty -h
+</pre></div>
+</div>
+</section>
+<section id="select-specific-columns-to-display">
+<span id="pretty-columns"></span><h2>Select specific columns to display<a class="headerlink" href="#select-specific-columns-to-display" title="Permalink to this headline"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">c</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">],</span> <span class="o">--</span><span class="n">col</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>By default <code class="docutils literal notranslate"><span class="pre">pretty</span></code> shows information about all columns in a dataset up to the limit imposed by
+the <code class="docutils literal notranslate"><span class="pre">--maxcols</span></code> parameter, which defaults to 10.</p>
+<p>Alternatively, a subset of the columns can be selected using the <code class="docutils literal notranslate"><span class="pre">-c/--col</span></code> argument.</p>
+<p>As an example, The following commmand only shows summary information for the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> columns in the file <code class="docutils literal notranslate"><span class="pre">titanic.csv</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita pretty --col age class &lt; titanic.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> age  class
+<span class="m">22</span>.0  Third
+<span class="m">38</span>.0  First
+<span class="m">26</span>.0  Third
+<span class="m">35</span>.0  First
+<span class="m">35</span>.0  Third
+ ...    ...
+<span class="m">27</span>.0 Second
+<span class="m">19</span>.0  First
+ NaN  Third
+<span class="m">26</span>.0  First
+<span class="m">32</span>.0  Third
+
+<span class="o">[</span><span class="m">891</span> rows x <span class="m">15</span> columns<span class="o">]</span>
+</pre></div>
+</div>
+<p>Note that only the <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">class</span></code> columns are shown. However, the size of the dataset reported at the bottom of the display reflects the entire dataset, not just the columns that are shown.</p>
+</section>
+<section id="limiting-the-maximum-number-of-rows-and-columns-to-display">
+<span id="pretty-maxcols"></span><span id="pretty-maxrows"></span><h2>Limiting the maximum number of rows and columns to display<a class="headerlink" href="#limiting-the-maximum-number-of-rows-and-columns-to-display" title="Permalink to this headline"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--maxrows NUM
+--maxcols NUM
+</pre></div>
+</div>
+<p>By default the <code class="docutils literal notranslate"><span class="pre">pretty</span></code> command will display a maximum of 10 rows and columns. If the dataset is larger than this size then the first 5 and last 5 rows and columns will be shown, and the intervening columns will be elided and shown with ellipses.</p>
+<p>These defaults can be overridden by <code class="docutils literal notranslate"><span class="pre">--maxrows</span></code> and <code class="docutils literal notranslate"><span class="pre">--maxcols</span></code> respectively.</p>
+<p>For example, the following command sets the maximum number of rows to 20 and maximum number of columns to 6:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pretty --maxrows 20 --maxcols 6 &lt; titanic.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> survived  pclass    sex  ...  embark_town  alive  alone
+        0       3   male  ...  Southampton     no  False
+        1       1 female  ...    Cherbourg    yes  False
+        1       3 female  ...  Southampton    yes   True
+        1       1 female  ...  Southampton    yes  False
+        0       3   male  ...  Southampton     no   True
+        0       3   male  ...   Queenstown     no   True
+        0       1   male  ...  Southampton     no   True
+        0       3   male  ...  Southampton     no  False
+        1       3 female  ...  Southampton    yes  False
+        1       2 female  ...    Cherbourg    yes  False
+      ...     ...    ...  ...          ...    ...    ...
+        0       3   male  ...  Southampton     no   True
+        0       3 female  ...  Southampton     no   True
+        0       2   male  ...  Southampton     no   True
+        0       3   male  ...  Southampton     no   True
+        0       3 female  ...   Queenstown     no  False
+        0       2   male  ...  Southampton     no   True
+        1       1 female  ...  Southampton    yes   True
+        0       3 female  ...  Southampton     no  False
+        1       1   male  ...    Cherbourg    yes   True
+        0       3   male  ...   Queenstown     no   True
+
+[891 rows x 15 columns]
+</pre></div>
+</div>
+</section>
+<section id="usage-in-a-command-chain">
+<h2>Usage in a command chain<a class="headerlink" href="#usage-in-a-command-chain" title="Permalink to this headline"></a></h2>
+<p>When used in a command chain the <code class="docutils literal notranslate"><span class="pre">pretty</span></code> command passes on its input data to the rest of the chain unchanged.</p>
+<p>For example, the following command shows <code class="docutils literal notranslate"><span class="pre">pretty</span></code> followed by a <code class="docutils literal notranslate"><span class="pre">box</span></code> plot:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita pretty + box -x sex -y age &lt; titanic.csv
+</pre></div>
+</div>
+<p>This command will first run <code class="docutils literal notranslate"><span class="pre">pretty</span></code> to display the data on the output, and then it will run <code class="docutils literal notranslate"><span class="pre">box</span></code> to generate a plot on the same input data.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">pretty</span></code> just passes the data along from left to right the <code class="docutils literal notranslate"><span class="pre">box</span></code> command receives the same data as its input that was read from the file.</p>
+<p>It is also worth noting that <code class="docutils literal notranslate"><span class="pre">pretty</span></code> can be used after other transformations have been applied t
+o the data. For example, the data can be filtered first, and then the result of filtering can be fed
+into <code class="docutils literal notranslate"><span class="pre">pretty</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;age &gt;= 30&#39; + pretty &lt; titanic.csv
+</pre></div>
+</div>
+</section>
 </section>
 
 
