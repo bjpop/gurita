@@ -78,24 +78,28 @@ class BarPlot(CommandBase, name="bar"):
         ylim(self)
         fcolwrap(self)
         group = self.optional.add_mutually_exclusive_group()
-        group.add_argument('--std', action='store_true', default=False, required=False, help=f'Show standard deviation of numerical feature as error bar')
-        group.add_argument('--ci', metavar='NUM', type=float, required=False, nargs='?', const=const.DEFAULT_CI, help=f'Show confidence interval as error bar to estimate uncertainty of point estimate')
+        group.add_argument('--sd', metavar='NUM', type=float, required=False, nargs='?', const=const.DEFAULT_SE, help=f'Show standard deviation of numerical feature as error bar. Defaults to: +/- {const.DEFAULT_SE} standard errors from the mean')
+        group.add_argument('--ci', metavar='NUM', type=float, required=False, nargs='?', const=const.DEFAULT_CI, help=f'Show confidence interval as error bar to estimate uncertainty of point estimate. Defaults to a {const.DEFAULT_CI} %% confidence interval')
 
 
     def run(self, df):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         estimator_fun = utils.make_estimator(options.estimator)
-        error_indicator = options.ci
-        if options.std:
-            error_indicator = 'sd' 
+        error_indicator = None
+        if options.ci:
+            error_indicator = ('ci', options.ci)
+        elif options.sd:
+            error_indicator = ('sd', options.sd)
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
                 x=options.xaxis, y=options.yaxis, estimator=estimator_fun,
-                ci=error_indicator,
+                #ci=error_indicator,
+                errorbar=error_indicator,
                 col=options.fcol, row=options.frow,
                 height=height_inches, aspect=aspect, hue=options.hue,
                 order=options.order, hue_order=options.hueorder,
@@ -131,7 +135,8 @@ class BoxPlot(CommandBase, name="box"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
@@ -174,7 +179,8 @@ class BoxenPlot(CommandBase, name="boxen"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
@@ -458,7 +464,8 @@ class HistogramPlot(CommandBase, name="hist"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         if options.bins:
@@ -531,7 +538,8 @@ class LinePlot(CommandBase, name="line"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.relplot(kind=self.name, data=df,
@@ -576,7 +584,8 @@ class PointPlot(CommandBase, name="point"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
@@ -622,7 +631,8 @@ class ScatterPlot(CommandBase, name="scatter"):
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         if options.dotlinewidth is not None:
             kwargs['linewidth'] = options.dotlinewidth
@@ -669,7 +679,8 @@ class LMPlot(CommandBase, name="lmplot"):
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         scatter_kws = {}
         graph = sns.lmplot(data=df,
@@ -707,7 +718,8 @@ class StripPlot(CommandBase, name="strip"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
@@ -747,7 +759,8 @@ class SwarmPlot(CommandBase, name="swarm"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
@@ -786,7 +799,8 @@ class ViolinPlot(CommandBase, name="violin"):
         options = self.options
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
@@ -830,7 +844,8 @@ class CountPlot(CommandBase, name="count"):
             utils.exit_with_error("A count plot requires either -x (--xaxis) OR -y (--yaxis) to be specified", const.EXIT_COMMAND_LINE_ERROR)
         sns.set_style(options.plotstyle)
         sns.set_context(options.context)
-        facet_kws = { 'legend_out': True }
+        #facet_kws = { 'legend_out': True }
+        facet_kws = {}
         kwargs = {}
         _width, height_inches, aspect = utils.plot_dimensions_inches(options.width, options.height) 
         graph = sns.catplot(kind=self.name, data=df,
