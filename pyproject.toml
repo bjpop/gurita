@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["gurita"]
+
+[project]
+name = "gurita"
+version = "0.9.0"
+description = "Plot, transform and analyse tabular data on the comand line."
+authors = [
+  { name = "Bernie Pope", email = "bjpope@unimelb.edu.au" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.11"
+dependencies = [
+  "numpy",
+  "scipy",
+  "pandas",
+  "seaborn==0.13.*",
+  "matplotlib",
+  "numexpr",
+  "scikit-learn",
+]
+keywords = ["data", "CSV", "TSV", "tabular", "analytics", "plotting", "transformation"]
+
+[project.scripts]
+gurita = "gurita.gurita:main"
+
+
+[project.urls]
+"Homepage" = "https://github.com/bjpop/gurita"
+"Bug Tracker" = "https://github.com/bjpop/gurita/issues"
+docs = "https://bjpop.github.io/gurita/index.html"
+documentation = "https://bjpop.github.io/gurita/index.html"

@@ -41,7 +41,7 @@ Arguments
      - controlling the order of the plotted boxen 
      - :ref:`order <boxen_order>`
    * - ``--hue COLUMN``
-     - group columns by hue
+     - colour and/or group columns by hue 
      - :ref:`hue <boxen_hue>`
    * - ``--hueorder VALUE [VALUE...]``
      - order of hue columns
@@ -91,7 +91,7 @@ Boxen plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 The output of the above command is written to ``boxen.age.png``:
 
-.. image:: ../images/boxen.age.png 
+.. image:: ../docs/_images/boxen.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -108,7 +108,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 The output of the above command is written to ``boxen.class.age.png``:
 
-.. image:: ../images/boxen.class.age.png 
+.. image:: ../docs/_images/boxen.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -131,7 +131,7 @@ arguments:
 .. _boxen_column_selection:
 
 Selecting columns to plot
---------------------------
+-------------------------
 
 .. code-block:: 
 
@@ -163,7 +163,7 @@ where the boxes are plotted horizontally:
 
     gurita boxen -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/boxen.age.class.png
+.. image:: ../docs/_images/boxen.age.class.png
        :width: 600px
        :height: 600px
        :align: center
@@ -189,7 +189,7 @@ In the following example the boxen columns of the ``class`` column are displayed
 
     gurita boxen -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/boxen.age.class.order.png 
+.. image:: ../docs/_images/boxen.age.class.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -199,14 +199,28 @@ In the following example the boxen columns of the ``class`` column are displayed
 
 .. _boxen_hue:
 
-Grouping columns with hue 
---------------------------
+Colour and/or group columns with hue
+------------------------------------
 
 .. code-block:: 
 
   --hue COLUMN [COLUMN ...]
 
-The data can be further grouped by an additional categorical column with the ``--hue`` argument.
+Each box can be coloured and optionally subdivided into additional categories with the ``--hue`` argument.
+     
+The following example generates a boxen plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:
+
+.. code-block:: bash
+
+    gurita boxen -y age -x class --hue class < titanic.csv
+
+.. image:: ../docs/_images/boxen.class.age.hue.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Boxen plot showing the distribution of age for each class in the titanic data set, coloured by class 
+
+|
 
 In the following example the distribution of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
@@ -214,7 +228,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
     gurita boxen -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/boxen.class.age.sex.png 
+.. image:: ../docs/_images/boxen.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -233,7 +247,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita boxen -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/boxen.age.class.sex.hueorder.png 
+.. image:: ../docs/_images/boxen.age.class.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -248,7 +262,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita boxen -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/boxen.age.class.sex.order.hueorder.png 
+.. image:: ../docs/_images/boxen.age.class.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -275,7 +289,15 @@ For example, you can display a log scale boxen plot for the ``age`` column group
 
 .. code-block:: bash
 
-    gurita boxen -y age -x class --logy -- titanic.csv 
+    gurita boxen -y age -x class --logy < titanic.csv 
+
+.. image:: ../docs/_images/boxen.class.age.logy.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Boxen plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
+
+|
 
 .. _boxen_range:
 
@@ -298,7 +320,16 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
 .. code-block:: bash
 
-    gurita boxen -y age -x class --ylim 10 30 -- titanic.csv
+    gurita boxen -y age -x class --ylim 10 30 < titanic.csv
+
+.. image:: ../docs/_images/boxen.class.age.limy.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Boxen plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
+
+|
+
 
 .. _boxen_facets:
 
@@ -315,3 +346,18 @@ Boxen plots can be further divided into facets, generating a matrix of boxen plo
 further categorised by up to 2 more categorical columns.
 
 See the :doc:`facet documentation <facets/>` for more information on this feature.
+
+The following command creates a faceted boxen plot where the ``sex`` column is used to determine the facet columns:
+     
+.. code-block:: bash
+   
+    gurita boxen -y age -x class --fcol sex < titanic.csv
+     
+.. image:: ../docs/_images/boxen.class.age.sex.facet.png
+       :width: 600px
+       :height: 300px
+       :align: center
+       :alt: Boxen plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets
+     
+|  
+

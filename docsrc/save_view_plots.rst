@@ -18,7 +18,7 @@ For example, the following command generates a count plot of the ``class`` colum
 
 The image below shows the resulting plot:
 
-.. image:: ../images/count.class.png
+.. image:: ../docs/_images/count.class.png
        :width: 600px
        :height: 600px
        :align: center
@@ -112,7 +112,7 @@ This is illustrated below:
 
 The plot will appear in an interactive window like so: 
 
-.. image:: ../images/gurita_interactive_plot.png
+.. image:: ../docs/_images/gurita_interactive_plot.png
        :width: 600px
        :height: 600px
        :align: center

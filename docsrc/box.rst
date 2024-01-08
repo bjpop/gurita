@@ -48,7 +48,7 @@ Arguments
      - control the order of the plotted boxes 
      - :ref:`order <box_order>`
    * - ``--hue COLUMN``
-     - group columns by hue
+     - colour and/or group columns by hue 
      - :ref:`hue <box_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
      - order of hue columns
@@ -98,7 +98,7 @@ Box plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 The output of the above command is written to ``box.age.png``:
 
-.. image:: ../images/box.age.png
+.. image:: ../docs/_images/box.age.png
        :width: 600px
        :height: 600px
        :align: center
@@ -115,7 +115,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 The output of the above command is written to ``box.class.age.png``:
 
-.. image:: ../images/box.class.age.png 
+.. image:: ../docs/_images/box.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -170,7 +170,7 @@ where the boxes are plotted horizontally:
 
     gurita box -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/box.age.class.png
+.. image:: ../docs/_images/box.age.class.png
        :width: 600px
        :height: 600px
        :align: center
@@ -192,7 +192,7 @@ displayed at the same time.
 
     gurita box -y age -x class --nooutliers < titanic.csv 
 
-.. image:: ../images/box.class.age.nooutliers.png 
+.. image:: ../docs/_images/box.class.age.nooutliers.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -213,7 +213,7 @@ Individual data points can be overlaid on top of the box plot using the ``--stri
 
 Note that in the example above we also turn off the display of outlier points with ``--nooutliers``.
 
-.. image:: ../images/box.class.age.strip.png 
+.. image:: ../docs/_images/box.class.age.strip.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -239,7 +239,7 @@ In the following example the box columns of the ``class`` column are displayed i
 
     gurita box -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/box.class.age.order.png
+.. image:: ../docs/_images/box.class.age.order.png
        :width: 600px
        :height: 600px
        :align: center
@@ -249,14 +249,28 @@ In the following example the box columns of the ``class`` column are displayed i
 
 .. _box_hue:
 
-Grouping columns with hue 
---------------------------
+Colour and/or group columns with hue
+------------------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical column with the ``--hue`` argument.
+Each box can be coloured and optionally subdivided into additional categories with the ``--hue`` argument.
+   
+The following example generates a box plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:
+
+.. code-block:: bash
+
+    gurita box -y age -x class --hue class < titanic.csv
+
+.. image:: ../docs/_images/box.class.age.sex.hue.png 
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
+
+|
 
 In the following example the distribution of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
@@ -264,7 +278,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
     gurita box -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/box.class.age.sex.png 
+.. image:: ../docs/_images/box.class.age.sex.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -283,7 +297,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita box -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/box.class.age.sex.hueorder.png 
+.. image:: ../docs/_images/box.class.age.sex.hueorder.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -298,7 +312,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita box -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/box.class.age.sex.order.hueorder.png 
+.. image:: ../docs/_images/box.class.age.sex.order.hueorder.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -327,7 +341,7 @@ For example, you can display a log scale box plot for the ``age`` column grouped
 
     gurita box -y age -x class --logy < titanic.csv 
 
-.. image:: ../images/box.class.age.logy.png 
+.. image:: ../docs/_images/box.class.age.logy.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -358,6 +372,14 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     gurita box -y age -x class --ylim 10 30 < titanic.csv
 
+.. image:: ../docs/_images/box.class.age.limy.png 
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
+
+|
+
 .. _box_facets:
 
 Facets
@@ -380,7 +402,7 @@ The following command creates a faceted box plot where the ``sex`` column is use
 
     gurita box -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/box.class.age.sex.facet.png
+.. image:: ../docs/_images/box.class.age.sex.facet.png
        :width: 600px
        :height: 300px
        :align: center
