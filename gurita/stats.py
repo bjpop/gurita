@@ -106,7 +106,7 @@ class Correlation(CommandBase, name="corr"):
         if options.col is not None:
             utils.validate_columns_error(df, options.col)
             df = df[options.col]
-        corr_df_wide = df.corr(method=options.method).reset_index()
+        corr_df_wide = df.corr(method=options.method, numeric_only=True).reset_index()
         corr_df_long = pd.melt(corr_df_wide, id_vars='index')
         return corr_df_long.rename(columns={"index": "col1", "variable": "col2", "value": "corr"})
 
