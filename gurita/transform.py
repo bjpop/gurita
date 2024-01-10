@@ -336,11 +336,11 @@ class GroupBy(CommandBase, name="groupby"):
             else:
                 utils.validate_columns_error(df, options.val)
                 agg_mapping = { column: options.fun for column in options.val }
-                result = df.groupby(options.key, as_index=False).agg(agg_mapping)
+                result = df.groupby(options.key, as_index=False, observed=True).agg(agg_mapping)
                 new_column_names = options.key + [o + "_" + f for o in options.val for f in options.fun]
         else:
             if options.fun is None or options.fun == ['size']:
-                result = df.groupby(options.key, as_index=False).size()
+                result = df.groupby(options.key, as_index=False, observed=True).size()
                 new_column_names = options.key + ["size"]
             else:
                 utils.exit_with_error(f"value columns must be specified with --val/-v if --fun is defined as anything but 'size'",
