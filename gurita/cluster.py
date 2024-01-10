@@ -49,7 +49,8 @@ class KMeans(CommandBase, name="kmeans"):
         # drop rows with missing values in any column
         selected_df = selected_df.dropna()
         # Cluster the standardized data
-        kmeans = skcluster.KMeans(n_clusters=options.nclusters)
+        # XXX consider making n_init a command line parameter
+        kmeans = skcluster.KMeans(n_clusters=options.nclusters, n_init='auto')
         kmeans_transform = kmeans.fit_predict(selected_df)
         df[self.options.name] = pd.Series(kmeans_transform, index=selected_df.index).reindex(df.index).astype('category')
         return df
