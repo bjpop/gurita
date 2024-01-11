@@ -30,7 +30,7 @@ The default output plot file name is chosen using the following information:
 
  * The type of plot being generated (e.g. hist, scatter, count, etc). 
  * The name(s) of the columns that have been selected for plotting on the axes.
- * Optionally the names of columns that have been selected for grouping (specifically ``--hue`` and ``--row`` and ``--col`` for facet plots).
+ * Optionally the names of columns that have been selected for grouping (specifically ``--hue`` and ``--frow`` and ``--fcol`` for facet plots).
  * The file name extension is based on the format of the output file. By default this is ``png``, but it can be overridden with the ``--format`` option. 
 
 As a slightly more complex example, consider the command below:
