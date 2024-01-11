@@ -62,7 +62,6 @@ See also
 :doc:`Z-scores <zscore/>` can be used to normalise data based on how many standard deviations it is from the mean. This can also be used as a method
 for identifying outliers.
 
-
 Simple example
 --------------
 
@@ -80,14 +79,8 @@ The output is quite long so we can adjust the command to look at only the first 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,sepal_width_outlier
-    5.1,3.5,1.4,0.2,setosa,False
-    4.9,3.0,1.4,0.2,setosa,False
-    4.7,3.2,1.3,0.2,setosa,False
-    4.6,3.1,1.5,0.2,setosa,False
-    5.0,3.6,1.4,0.2,setosa,False
+.. literalinclude:: example_outputs/iris.outlier.sepal_width.head.txt
+   :language: none
 
 A new boolean column called ``sepal_width_outlier`` is added to the dataset, indicating whether the value in the specified column is an outlier.
 This will be ``True`` if it is an outlier and ``False`` otherwise.
@@ -138,17 +131,10 @@ By chaining this command with ``head`` we can inspect the first few rows of the 
 
 The output of the above command is as follows:
 
-.. code-block:: text
+.. literalinclude:: example_outputs/iris.outlier.sepal_width.petal_width.txt
+   :language: none
 
-   sepal_length,sepal_width,petal_length,petal_width,species,sepal_length_outlier,petal_width_outlier
-   5.1,3.5,1.4,0.2,setosa,False,False
-   4.9,3.0,1.4,0.2,setosa,False,False
-   4.7,3.2,1.3,0.2,setosa,False,False
-   4.6,3.1,1.5,0.2,setosa,False,False
-   5.0,3.6,1.4,0.2,setosa,False,False
-
-In the above example we can see that outliers are detected in just ``sepal_length`` and ``petal_width``. Two new boolean columns called
-``sepal_length_outlier`` and ``petal_width_outlier`` are added to the dataset to flag which rows contain outliers for the corresponding input columns.
+Two new boolean columns called ``sepal_length_outlier`` and ``petal_width_outlier`` are added to the dataset to flag which rows contain outliers for the corresponding input columns.
 
 .. note::
 
@@ -182,14 +168,8 @@ By chaining this command with ``head`` we can inspect the first few rows of the 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   sepal_length,sepal_width,petal_length,petal_width,species,sepal_length_out,sepal_width_out,petal_length_out,petal_width_out
-   5.1,3.5,1.4,0.2,setosa,False,False,False,False
-   4.9,3.0,1.4,0.2,setosa,False,False,False,False
-   4.7,3.2,1.3,0.2,setosa,False,False,False,False
-   4.6,3.1,1.5,0.2,setosa,False,False,False,False
-   5.0,3.6,1.4,0.2,setosa,False,False,False,False
+.. literalinclude:: example_outputs/iris.outlier.suffix.out.head.txt
+   :language: none
 
 .. _outlier_scale_factor:
 

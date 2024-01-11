@@ -38,7 +38,7 @@ Arguments
      - order of the plotted columns  
      - :ref:`order <count_order>`
    * - ``--hue COLUMN`` 
-     - group columns by hue 
+     - colour and/or group columns by hue 
      - :ref:`hue <count_hue>`
    * - ``--hueorder VALUE [VALUE ...]`` 
      - order of hue columns
@@ -83,7 +83,7 @@ Plot a count of the ``embark_town`` categorical column from the ``titanic.csv`` 
 
 The output of the above command is written to ``count.embark_town.png``:
 
-.. image:: ../images/count.embark_town.png
+.. image:: ../docs/_images/count.embark_town.png
        :width: 600px
        :height: 600px
        :align: center
@@ -136,7 +136,7 @@ For comparison, the following command uses ``-y embark_town`` to plot a histogra
 
     gurita count -y embark_town < titanic.csv
 
-.. image:: ../images/count.embark_town.y.png
+.. image:: ../docs/_images/count.embark_town.y.png
        :width: 600px
        :height: 600px
        :align: center
@@ -162,7 +162,7 @@ In the following example the counts of the ``embark_town`` column are displayed 
 
     gurita count -x embark_town --order Cherbourg Queenstown Southampton < titanic.csv
 
-.. image:: ../images/count.embark_town.order.png 
+.. image:: ../docs/_images/count.embark_town.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -179,7 +179,21 @@ Grouping columns with hue
 
   --hue COLUMN
 
-The column being counted can be grouped based on another categorical column using the ``--hue`` argument.
+The column being counted can be coloured and/or grouped based on another categorical column using the ``--hue`` argument.
+
+In the following example the counts of the ``embark_town`` are coloured separately: 
+   
+.. code-block:: bash
+
+    gurita count -x embark_town --hue embark_town < titanic.csv  
+
+.. image:: ../docs/_images/count.embark_town.hue.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, coloured separately
+
+|
 
 In the following example the counts of the ``embark_town`` column are grouped by the ``class`` column from the titanic data set:
 
@@ -187,7 +201,7 @@ In the following example the counts of the ``embark_town`` column are grouped by
 
     gurita count -x embark_town --hue class < titanic.csv  
 
-.. image:: ../images/count.embark_town.class.png 
+.. image:: ../docs/_images/count.embark_town.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -206,7 +220,7 @@ In the following example the ``class`` values are displayed in the order of ``Fi
 
     gurita count -x embark_town --hue class --hueorder First Second Third < titanic.csv  
 
-.. image:: ../images/count.embark_town.class.hueorder.png 
+.. image:: ../docs/_images/count.embark_town.class.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -222,7 +236,7 @@ the ``embark_town`` and ``class`` categorical columns:
     gurita count -x embark_town --hue class --order Cherbourg Queenstown Southampton \
                 --hueorder First Second Third < titanic.csv
 
-.. image:: ../images/count.embark_town.class.order.hueorder.png 
+.. image:: ../docs/_images/count.embark_town.class.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -252,7 +266,7 @@ data is displayed on the X-axis (``-x``), therefore the ``--logy`` argument shou
 
     gurita count -x embark_town --logy < titanic.csv  
 
-.. image:: ../images/count.embark_town.logy.png
+.. image:: ../docs/_images/count.embark_town.logy.png
        :width: 600px
        :height: 600px
        :align: center
@@ -282,6 +296,12 @@ data is displayed on the X-axis (``-x``), therefore the ``--ylim`` argument shou
 
     gurita count -x embark_town --ylim 100 300 < titanic.csv
 
+.. image:: ../docs/_images/count.embark_town.limy.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Count plot showing the count of embarm_town in the titanic data set, with Y axis limited in range 
+
 .. _count_facets:
 
 Facets
@@ -303,7 +323,7 @@ The follow command creates a faceted bar plot where the ``sex`` column is used t
 
     gurita count -x embark_town --fcol sex < titanic.csv 
 
-.. image:: ../images/count.embark_town.sex.png 
+.. image:: ../docs/_images/count.embark_town.sex.png 
        :width: 600px
        :height: 300px
        :align: center

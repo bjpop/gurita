@@ -76,13 +76,8 @@ The following example tests all the numerical columns in ``iris.csv`` independen
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-   column,is_normal
-   sepal_length,True
-   sepal_width,True
-   petal_length,False
-   petal_width,False
+.. literalinclude:: example_outputs/iris.normtest.txt
+   :language: none 
 
 The output contains two columns:
 
@@ -126,10 +121,8 @@ For example the following command tests only the ``sepal_length`` column from th
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   column,is_normal
-   sepal_length,True
+.. literalinclude:: example_outputs/iris.normtest.sepal_length.txt
+   :language: none
 
 Multiple specific columns can be tested as the following example demonstrates:
 
@@ -139,11 +132,8 @@ Multiple specific columns can be tested as the following example demonstrates:
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   column,is_normal
-   sepal_length,True
-   petal_length,False
+.. literalinclude:: example_outputs/iris.normtest.sepal_length.petal_length.txt
+   :language: none
 
 Note that non-numerical columns are ignored, even if they are specified using ``--col/-c``.
 For example the following command tries to test of the categorical ``species`` column is normal:
@@ -155,9 +145,8 @@ For example the following command tries to test of the categorical ``species`` c
 It is not logical to make this test, so the output of the command is just an empty dataset, with
 only a header row and no data rows:
 
-.. code-block:: text
-
-    column,is_normal 
+.. literalinclude:: example_outputs/iris.normtest.species.txt
+   :language: none
 
 .. _normtest_threshold:
 
@@ -195,13 +184,8 @@ The value of the ``alpha`` threshold can be adjusted using the ``-a/--alpha`` ar
 
 The above command produces the following output:
 
-.. code-block:: text
-
-   column,is_normal
-   sepal_length,False
-   sepal_width,True
-   petal_length,False
-   petal_width,False
+.. literalinclude:: example_outputs/iris.normtest.alpha.txt
+   :language: none
 
 Note that the ``sepal_length`` column is no longer considered normally distributed when alpha is 0.06 (previously it was considered normal when alpha was equal to the defualt of 0.05). This suggests that the our confidence of ``sepal_length`` being normally distributed is not as strong as it is for
 ``sepal_width``.
@@ -227,13 +211,8 @@ This behaviour can be changed with ``-p/--pvalue``, which causes the p-value to 
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-    column,is_normal,p_value,stat
-    sepal_length,True,0.05682424941067306,5.735584236235733
-    sepal_width,True,0.1672407178723714,3.576642160069695
-    petal_length,False,8.677871269019617e-49,221.33178660723647
-    petal_width,False,1.991810150572055e-30,136.77701788227716
+.. literalinclude:: example_outputs/iris.normtest.pvalue.stat.txt
+   :language: none
 
 .. _normtest_method:
 
@@ -257,13 +236,8 @@ The following example illustrates the use of the Shapiro-Wilk test:
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-    column,is_normal
-    sepal_length,False
-    sepal_width,True
-    petal_length,False
-    petal_width,False
+.. literalinclude:: example_outputs/iris.normtest.method.shapiro.txt
+   :language: none
     
 In this case we can see that under default parameters the ``sepal_length`` column is not considered normally distributed, whereas it was 
 using the D'Agostino's K^2 test.

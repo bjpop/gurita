@@ -54,13 +54,8 @@ Compute the correlation between ``sepal_width`` and ``sepal_length`` from the ``
 The output of the above command is a table with three columns: ``col1``, ``col2`` and ``corr``, such that ``col1`` and ``col2`` show the names of the
 input columns being correlated, and ``corr`` shows their numerical correlation value.
 
-.. code-block:: text
-
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    sepal_width,sepal_length,-0.10936924995064931
-    sepal_length,sepal_width,-0.10936924995064931
-    sepal_width,sepal_width,1.0
+.. literalinclude:: example_outputs/iris.corr.sepal_length.sepal_width.txt  
+   :language: none
 
 In the above example we specify two columns for comparison and the output is a table with four data rows. This is because each column is compared pairwise with itself and with the other columns symmetrically. 
 
@@ -95,25 +90,8 @@ For example, the following command performs pairise correlation on all numerical
 
 There are four numerical columns in ``iris.csv``, so the output contains all 4x4 symmetric comparisons:
 
-.. code-block:: text
-
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    sepal_width,sepal_length,-0.10936924995064931
-    petal_length,sepal_length,0.8717541573048716
-    petal_width,sepal_length,0.8179536333691642
-    sepal_length,sepal_width,-0.10936924995064931
-    sepal_width,sepal_width,1.0
-    petal_length,sepal_width,-0.4205160964011539
-    petal_width,sepal_width,-0.35654408961380507
-    sepal_length,petal_length,0.8717541573048716
-    sepal_width,petal_length,-0.4205160964011539
-    petal_length,petal_length,1.0
-    petal_width,petal_length,0.9627570970509662
-    sepal_length,petal_width,0.8179536333691642
-    sepal_width,petal_width,-0.35654408961380507
-    petal_length,petal_width,0.9627570970509662
-    petal_width,petal_width,1.0
+.. literalinclude:: example_outputs/iris.corr.txt  
+   :language: none
 
 Specific numerical columns can be specified for comparison using ``-c`` (or ``--col``).
 
@@ -125,18 +103,8 @@ For example, we can compare ``sepal_length`` with ``petal_length`` and ``petal_w
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    petal_length,sepal_length,0.8717541573048716
-    petal_width,sepal_length,0.8179536333691642
-    sepal_length,petal_length,0.8717541573048716
-    petal_length,petal_length,1.0
-    petal_width,petal_length,0.9627570970509662
-    sepal_length,petal_width,0.8179536333691642
-    petal_length,petal_width,0.9627570970509662
-    petal_width,petal_width,1.0
+.. literalinclude:: example_outputs/iris.sepal_length.petal_length.petal_width.txt
+   :language: none
 
 .. note::
 
@@ -168,13 +136,8 @@ The example below computes the pairwise correlation between ``sepal_width`` and 
 The output of the above command is shown below. Note that the results are similar to, but slightly different from the outputs from the ``pearson`` method
 shown in the simple example above.
 
-.. code-block:: text
-
-    col1,col2,corr
-    sepal_length,sepal_length,1.0
-    sepal_width,sepal_length,-0.15945651848582867
-    sepal_length,sepal_width,-0.15945651848582867
-    sepal_width,sepal_width,1.0
+.. literalinclude:: example_outputs/iris.corr.sepal_length.sepal_width.spearman.txt
+   :language: none
 
 .. _corr_heatmap:
 
@@ -194,7 +157,7 @@ The X and Y axes of the heatmap are set to the ``col1`` and ``col2`` output colu
 
 The output plot resulting from the above command is shown below: 
 
-.. image:: ../images/heatmap.corr.png
+.. image:: ../docs/_images/iris.corr.heatmap.png
        :width: 400px
        :height: 400px
        :align: center

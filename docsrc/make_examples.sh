@@ -246,7 +246,7 @@ run_example \
 
 run_example \
  'gurita box -y age -x class --hue class < titanic.csv' \
- 'gurita box -y age -x class --hue class --out "${IMG_OUT_DIR}/box.class.age.sex.hue.png" < "${DATA_DIR}/titanic.csv"'
+ 'gurita box -y age -x class --hue class --out "${IMG_OUT_DIR}/box.class.age.hue.png" < "${DATA_DIR}/titanic.csv"'
 	
 ################################################################################
 
@@ -582,13 +582,1361 @@ run_example \
 ################################################################################
 
 run_example \
+ 'gurita line -x timepoint -y signal < fmri.csv' \
+ 'gurita line -x timepoint -y signal --out "${IMG_OUT_DIR}/line.timepoint.signal.png" < "${DATA_DIR}/fmri.csv"'
 	
 ################################################################################
 
 run_example \
+ 'gurita line -x timepoint -y signal --hue event < fmri.csv' \
+ 'gurita line -x timepoint -y signal --hue event --out "${IMG_OUT_DIR}/line.timepoint.signal.event.png" < "${DATA_DIR}/fmri.csv"'
 	
 ################################################################################
 
 run_example \
+ 'gurita line -x timepoint -y signal --hue event --hueorder cue stim < fmri.csv' \
+ 'gurita line -x timepoint -y signal --hue event --hueorder cue stim --out "${IMG_OUT_DIR}/line.timepoint.signal.event.hue.png" < "${DATA_DIR}/fmri.csv"'
 	
+################################################################################
+
+run_example \
+ 'gurita line -x timepoint -y signal --logx < fmri.csv' \
+ 'gurita line -x timepoint -y signal --logx --out "${IMG_OUT_DIR}/line.timepoint.signal.logx.png" < "${DATA_DIR}/fmri.csv"'
+ 
+################################################################################
+
+run_example \
+ 'gurita line -x timepoint -y signal --xlim 5 15.5 < fmri.csv' \
+ 'gurita line -x timepoint -y signal --xlim 5 15.5 --out "${IMG_OUT_DIR}/line.timepoint.signal.xlim.png" < "${DATA_DIR}/fmri.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita line -x timepoint -y signal --fcol event < fmri.csv' \
+ 'gurita line -x timepoint -y signal --fcol event --out "${IMG_OUT_DIR}/line.timepoint.signal.event.facet.png" < "${DATA_DIR}/fmri.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita lmplot -x sepal_length -y petal_length < iris.csv' \
+ 'gurita lmplot -x sepal_length -y petal_length --out "${IMG_OUT_DIR}/lmplot.sepal_length.petal_length.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita lmplot -x sepal_length -y petal_length --hue species < iris.csv' \
+ 'gurita lmplot -x sepal_length -y petal_length --hue species --out "${IMG_OUT_DIR}/lmplot.sepal_length.petal_length.species.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita lmplot -x sepal_length -y petal_length --fcol species < iris.csv' \
+ 'gurita lmplot -x sepal_length -y petal_length --fcol species --out "${IMG_OUT_DIR}/lmplot.sepal_length.petal_length.species.facets.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair < iris.csv' \
+ 'gurita pair --out "${IMG_OUT_DIR}/pair.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair -c sepal_length petal_length species < iris.csv' \
+ 'gurita pair -c sepal_length petal_length species --out "${IMG_OUT_DIR}/pair.columns.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair -c sepal_length petal_length species --rxtl 90 < iris.csv' \
+ 'gurita pair -c sepal_length petal_length species --rxtl 90 --out "${IMG_OUT_DIR}/pair.columns.rxtl.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair --hue species < iris.csv' \
+ 'gurita pair --hue species --out "${IMG_OUT_DIR}/pair.species.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair --corner < iris.csv' \
+ 'gurita pair --corner --out "${IMG_OUT_DIR}/pair.corner.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair --kind kde < iris.csv' \
+ 'gurita pair --kind kde --out "${IMG_OUT_DIR}/pair.kde.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair --kind hist < iris.csv' \
+ 'gurita pair --kind hist --out "${IMG_OUT_DIR}/pair.hist.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita pair --kind reg < iris.csv' \
+ 'gurita pair --kind reg --out "${IMG_OUT_DIR}/pair.reg.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class < titanic.csv' \
+ 'gurita point -y age -x class --out "${IMG_OUT_DIR}/point.class.age.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -x age -y class --orient h < titanic.csv' \
+ 'gurita point -x age -y class --orient h --out "${IMG_OUT_DIR}/point.age.class.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --order First Second Third < titanic.csv' \
+ 'gurita point -y age -x class --order First Second Third --out "${IMG_OUT_DIR}/point.class.age.order.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --hue sex < titanic.csv' \
+ 'gurita point -y age -x class --hue sex --out "${IMG_OUT_DIR}/point.class.age.sex.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --hue sex --hueorder female male < titanic.csv' \
+ 'gurita point -y age -x class --hue sex --hueorder female male --out "${IMG_OUT_DIR}/point.class.age.sex.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv' \
+ 'gurita point -y age -x class --order First Second Third --hue sex --hueorder female male --out "${IMG_OUT_DIR}/point.class.age.sex.order.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --logy < titanic.csv' \
+ 'gurita point -y age -x class --logy --out "${IMG_OUT_DIR}/point.class.age.logx.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --ylim 10 30 < titanic.csv' \
+ 'gurita point -y age -x class --ylim 10 30 --out "${IMG_OUT_DIR}/point.class.age.ylim.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita point -y age -x class --fcol sex < titanic.csv' \
+ 'gurita point -y age -x class --fcol sex --out "${IMG_OUT_DIR}/point.class.age.sex.facets.png" < "${DATA_DIR}/titanic.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --out "${IMG_OUT_DIR}/scatter.total_bill.tip.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x day -y tip < tips.csv' \
+ 'gurita scatter -x day -y tip --out "${IMG_OUT_DIR}/scatter.day.tip.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --hue day < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --hue day --out "${IMG_OUT_DIR}/scatter.total_bill.tip.day.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --hue size < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --hue size --out "${IMG_OUT_DIR}/scatter.total_bill.tip.size.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --hue day --dotstyle sex < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --hue day --dotstyle sex --out "${IMG_OUT_DIR}/scatter.total_bill.tip.day.dotstyle.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x sepal_length -y sepal_width --dotsize petal_length < iris.csv' \
+ 'gurita scatter -x sepal_length -y sepal_width --dotsize petal_length --out "${IMG_OUT_DIR}/scatter.sepal_length.sepal_width.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange 10 200 < iris.csv' \
+ 'gurita scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange 10 200 --out "${IMG_OUT_DIR}/scatter.sepal_length.sepal_width.sizerange.png" < "${DATA_DIR}/iris.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black --out "${IMG_OUT_DIR}/scatter.total_bill.tip.alpha.width.colour.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --logx < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --logx --out "${IMG_OUT_DIR}/scatter.total_bill.tip.logx.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --xlim 20 40 < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --xlim 20 40 --out "${IMG_OUT_DIR}/scatter.total_bill.tip.xlim.png" < "${DATA_DIR}/tips.csv"'
+	
+################################################################################
+
+run_example \
+ 'gurita scatter -x total_bill -y tip --fcol smoker < tips.csv' \
+ 'gurita scatter -x total_bill -y tip --fcol smoker --out "${IMG_OUT_DIR}/scatter.total_bill.tip.smoker.png" < "${DATA_DIR}/tips.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age < titanic.csv' \
+ 'gurita strip -y age --out "${IMG_OUT_DIR}/strip.age.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class < titanic.csv' \
+ 'gurita strip -y age -x class --out "${IMG_OUT_DIR}/strip.class.age.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -x age -y class --orient h < titanic.csv' \
+ 'gurita strip -x age -y class --orient h --out "${IMG_OUT_DIR}/strip.age.class.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --order First Second Third < titanic.csv' \
+ 'gurita strip -y age -x class --order First Second Third --out "${IMG_OUT_DIR}/strip.class.age.order.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --hue sex < titanic.csv' \
+ 'gurita strip -y age -x class --hue sex --out "${IMG_OUT_DIR}/strip.class.age.sex.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --hue sex --dodge < titanic.csv' \
+ 'gurita strip -y age -x class --hue sex --dodge --out "${IMG_OUT_DIR}/strip.class.age.sex.dodge.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --hue sex --hueorder female male < titanic.csv' \
+ 'gurita strip -y age -x class --hue sex --hueorder female male --out "${IMG_OUT_DIR}/strip.class.age.sex.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv' \
+ 'gurita strip -y age -x class --order First Second Third --hue sex --hueorder female male --out "${IMG_OUT_DIR}/strip.class.age.sex.order.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --logy < titanic.csv' \
+ 'gurita strip -y age -x class --logy --out "${IMG_OUT_DIR}/strip.class.age.logy.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --ylim 10 30 < titanic.csv' \
+ 'gurita strip -y age -x class --ylim 10 30 --out "${IMG_OUT_DIR}/strip.class.age.ylim.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --fcol sex < titanic.csv' \
+ 'gurita strip -y age -x class --fcol sex --out "${IMG_OUT_DIR}/strip.class.age.sex.facet.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita strip -y age -x class --hue class < titanic.csv' \
+ 'gurita strip -y age -x class --hue class --out "${IMG_OUT_DIR}/strip.class.age.hue.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age < titanic.csv' \
+ 'gurita swarm -y age --out "${IMG_OUT_DIR}/swarm.age.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class < titanic.csv' \
+ 'gurita swarm -y age -x class --out "${IMG_OUT_DIR}/swarm.class.age.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -x age -y class --orient h < titanic.csv' \
+ 'gurita swarm -x age -y class --orient h --out "${IMG_OUT_DIR}/swarm.age.class.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --order First Second Third < titanic.csv' \
+ 'gurita swarm -y age -x class --order First Second Third --out "${IMG_OUT_DIR}/swarm.class.age.order.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --hue sex < titanic.csv' \
+ 'gurita swarm -y age -x class --hue sex --out "${IMG_OUT_DIR}/swarm.class.age.sex.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --hue sex --dodge < titanic.csv' \
+ 'gurita swarm -y age -x class --hue sex --dodge --out "${IMG_OUT_DIR}/swarm.class.age.sex.dodge.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --hue sex --hueorder female male < titanic.csv' \
+ 'gurita swarm -y age -x class --hue sex --hueorder female male --out "${IMG_OUT_DIR}/swarm.class.age.sex.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv' \
+ 'gurita swarm -y age -x class --order First Second Third --hue sex --hueorder female male --out "${IMG_OUT_DIR}/swarm.class.age.sex.order.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --logy < titanic.csv' \
+ 'gurita swarm -y age -x class --logy --out "${IMG_OUT_DIR}/swarm.class.age.logy.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --ylim 10 30 < titanic.csv' \
+ 'gurita swarm -y age -x class --ylim 10 30 --out "${IMG_OUT_DIR}/swarm.class.age.logy.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --fcol sex < titanic.csv' \
+ 'gurita swarm -y age -x class --fcol sex --out "${IMG_OUT_DIR}/swarm.class.age.sex.facets.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita swarm -y age -x class --hue class < titanic.csv' \
+ 'gurita swarm -y age -x class --hue class --out "${IMG_OUT_DIR}/swarm.class.age.hue.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age < titanic.csv' \
+ 'gurita violin -y age --out "${IMG_OUT_DIR}/violin.age.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class < titanic.csv' \
+ 'gurita violin -y age -x class --out "${IMG_OUT_DIR}/violin.class.age.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -x age -y class --orient h < titanic.csv' \
+ 'gurita violin -x age -y class --orient h --out "${IMG_OUT_DIR}/violin.age.class.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --order First Second Third < titanic.csv' \
+ 'gurita violin -y age -x class --order First Second Third --out "${IMG_OUT_DIR}/violin.class.age.order.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --hue sex < titanic.csv' \
+ 'gurita violin -y age -x class --hue sex --out "${IMG_OUT_DIR}/violin.class.age.sex.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --hue sex --hueorder female male < titanic.csv' \
+ 'gurita violin -y age -x class --hue sex --hueorder female male --out "${IMG_OUT_DIR}/violin.class.age.sex.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv' \
+ 'gurita violin -y age -x class --order First Second Third --hue sex --hueorder female male --out "${IMG_OUT_DIR}/violin.class.age.sex.order.hueorder.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --logy < titanic.csv' \
+ 'gurita violin -y age -x class --logy --out "${IMG_OUT_DIR}/violin.class.age.logy.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --ylim 10 30 < titanic.csv' \
+ 'gurita violin -y age -x class --ylim 10 30 --out "${IMG_OUT_DIR}/violin.class.age.limy.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --fcol sex < titanic.csv' \
+ 'gurita violin -y age -x class --fcol sex --out "${IMG_OUT_DIR}/violin.class.age.sex.facet.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita violin -y age -x class --hue class < titanic.csv' \
+ 'gurita violin -y age -x class --hue class --out "${IMG_OUT_DIR}/violin.class.age.hue.png" < "${DATA_DIR}/titanic.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita corr -c sepal_length sepal_width < iris.csv' \
+ 'gurita corr -c sepal_length sepal_width < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.corr.sepal_length.sepal_width.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita corr < iris.csv' \
+ 'gurita corr < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.corr.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita corr -c sepal_length petal_length petal_width < iris.csv' \
+ 'gurita corr -c sepal_length petal_length petal_width < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.sepal_length.petal_length.petal_width.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita corr --col sepal_length sepal_width --method spearman < iris.csv' \
+ 'gurita corr --col sepal_length sepal_width --method spearman < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.corr.sepal_length.sepal_width.spearman.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita corr + heatmap -x col1 -y col2 -v corr < iris.csv' \
+ 'gurita corr + heatmap -x col1 -y col2 -v corr --out "${IMG_OUT_DIR}/iris.corr.heatmap.png" < "${DATA_DIR}/iris.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita cut -c sepal_length species < example.csv' \
+ 'gurita cut -c sepal_length species > "${FILE_OUT_DIR}/example.cut.sepal_length.species.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita cut -c sepal_length species --invert < example.csv' \
+ 'gurita cut -c sepal_length species --invert > "${FILE_OUT_DIR}/example.cut.invert.sepal_length.species.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita dropna < missing.csv' \
+ 'gurita dropna > "${FILE_OUT_DIR}/missing.dropna.txt" <<EOF 
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,
+4.9,3.0,1.4,0.2,virginica
+4.7,,1.3,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita dropna --axis columns < missing.csv' \
+ 'gurita dropna --axis columns > "${FILE_OUT_DIR}/missing.dropna.axis.txt" <<EOF 
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,
+4.9,3.0,1.4,0.2,virginica
+4.7,,1.3,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita dropna --col species < missing.csv' \
+ 'gurita dropna --col species > "${FILE_OUT_DIR}/missing.dropna.species.txt" <<EOF 
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,
+4.9,3.0,1.4,0.2,virginica
+4.7,,1.3,0.2,setosa
+EOF'
+ 
+
+################################################################################
+
+run_example \
+ "gurita eval 'sepal_area = sepal_length * sepal_width * 0.5' + head < iris.csv" \
+ "gurita eval 'sepal_area = sepal_length * sepal_width * 0.5' + head < ${DATA_DIR}/iris.csv > ${FILE_OUT_DIR}/iris.eval.head.txt"
+
+################################################################################
+
+run_example \
+ "gurita eval 'dist = sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)' < points.csv" \
+ "gurita eval 'dist = sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)' > ${FILE_OUT_DIR}/points.eval.sqrt.txt <<EOF
+x1,y1,x2,y2
+0,0,3,4
+10,0,10,0
+18,12,-4,55
+EOF"
+
+################################################################################
+
+run_example \
+ 'gurita gmm + head < iris.csv' \
+ 'gurita gmm + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.gmm.head.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita gmm + describe -c cluster < iris.csv' \
+ 'gurita gmm + describe -c cluster < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.gmm.describe.cluster.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita gmm + box -x cluster -y petal_length < iris.csv' \
+ 'gurita gmm + box -x cluster -y petal_length --out "${IMG_OUT_DIR}/box.cluster.petal_length.png" < "${DATA_DIR}/iris.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita gmm -n 3 + groupby -k cluster < iris.csv' \
+ 'gurita gmm -n 3 + groupby -k cluster < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.gmm.groupby.cluster.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita gmm --name grouping + head < iris.csv' \
+ 'gurita gmm --name grouping + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.gmm.name.head.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town < titanic.csv' \
+ 'gurita groupby --key embark_town < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town class < titanic.csv' \
+ 'gurita groupby --key embark_town class < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.class.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town class sex < titanic.csv' \
+ 'gurita groupby --key embark_town class sex < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.class.sex.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town --val age --fun mean < titanic.csv' \
+ 'gurita groupby --key embark_town --val age --fun mean < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.age.mean.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town --val age --fun mean max min < titanic.csv' \
+ 'gurita groupby --key embark_town --val age --fun mean max min < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.age.mean.max.min.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town --val age fare --fun mean max min < titanic.csv' \
+ 'gurita groupby --key embark_town --val age fare --fun mean max min < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.age.fare.mean.max.min.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita groupby --key embark_town class --val age fare --fun mean max min < titanic.csv' \
+ 'gurita groupby --key embark_town class --val age fare --fun mean max min < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.groupby.embark_town.class.age.fare.mean.max.min.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita head 5 < example.csv' \
+ 'gurita head 5 > "${FILE_OUT_DIR}/example.head.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita head 5 + tail 3 < example.csv' \
+ 'gurita head 5 + tail 3 > "${FILE_OUT_DIR}/example.head.tail.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita head 1 < example.csv' \
+ 'gurita head 1 > "${FILE_OUT_DIR}/example.head.1.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita head -3 < example.csv' \
+ 'gurita head -3 > "${FILE_OUT_DIR}/example.head.negative.3.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita kmeans + head < iris.csv' \
+ 'gurita kmeans + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.kmeans.head.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita kmeans + describe -c cluster < iris.csv' \
+ 'gurita kmeans + describe -c cluster < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.kmeans.describe.cluster.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita kmeans + box -x cluster -y petal_length < iris.csv' \
+ 'gurita kmeans + box -x cluster -y petal_length --out "${IMG_OUT_DIR}/box.cluster.petal_length.png" < "${DATA_DIR}/iris.csv"'
+
+################################################################################
+
+run_example \
+ 'gurita kmeans -n 3 + groupby -k cluster < iris.csv' \
+ 'gurita kmeans -n 3 + groupby -k cluster < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.kmeans.groupby.cluster.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita kmeans --name grouping + head < iris.csv' \
+ 'gurita kmeans --name grouping + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.kmeans.name.head.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita melt + head 15 < example.csv' \
+ 'gurita melt + head 15 > "${FILE_OUT_DIR}/example.melt.head.15.txt" <<EOF
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita melt -i person + head 15 < example.csv' \
+ 'gurita melt -i person + head 15 > "${FILE_OUT_DIR}/example.melt.index.person.head.15.txt" <<EOF
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita melt -i person level + head 15 < example.csv' \
+ 'gurita melt -i person level + head 15 > "${FILE_OUT_DIR}/example.melt.index.person.level.head.15.txt" <<EOF
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+
+################################################################################
+
+run_example \
+ 'gurita melt -i person -v level sat sun < example.csv' \
+ 'gurita melt -i person -v level sat sun > "${FILE_OUT_DIR}/example.melt.person.level.sat.sun.txt" << EOF
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita melt --varname key + head 10 < example.csv' \
+ 'gurita melt --varname key + head 10 > "${FILE_OUT_DIR}/example.melt.varname.key.head.10.txt" <<EOF 
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita melt --valname data + head 10 < example.csv' \
+ 'gurita melt --valname data + head 10 > "${FILE_OUT_DIR}/example.melt.valname.data.head.10.txt" <<EOF
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita melt --varname key --valname data + head 10 < example.csv' \
+ 'gurita melt --varname key --valname data + head 10 > "${FILE_OUT_DIR}/example.melt.varname.key.valname.data.head.10.txt" <<EOF
+person,level,sun,mon,tue,wed,thu,fri,sat
+Alice,A1,0,8,8,4,1,4,3
+Bob,B3,4,0,0,4,6,0,3
+Wei,B1,0,0,8,8,8,4,3
+Imani,A2,0,8,8,8,4,5,0
+Diego,C2,3,7,7,2,1,1,4
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita normtest < iris.csv' \
+ 'gurita normtest < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita normtest -c sepal_length < iris.csv' \
+ 'gurita normtest -c sepal_length < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.sepal_length.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita normtest -c sepal_length petal_length < iris.csv' \
+ 'gurita normtest -c sepal_length petal_length < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.sepal_length.petal_length.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita normtest -c species < iris.csv' \
+ 'gurita normtest -c species < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.species.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita normtest --alpha 0.06 < iris.csv' \
+ 'gurita normtest --alpha 0.06 < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.alpha.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita normtest --pvalue --stat < iris.csv' \
+ 'gurita normtest --pvalue --stat < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.pvalue.stat.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita normtest --method shapiro < iris.csv' \
+ 'gurita normtest --method shapiro < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.normtest.method.shapiro.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita outlier -c sepal_width + head < iris.csv' \
+ 'gurita outlier -c sepal_width + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.outlier.sepal_width.head.txt"' 
+
+
+################################################################################
+
+run_example \
+ 'gurita outlier -c sepal_length petal_width + head < iris.csv' \
+ 'gurita outlier -c sepal_length petal_width + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.outlier.sepal_width.petal_width.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita outlier --suffix out + head < iris.csv' \
+ 'gurita outlier --suffix out + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.outlier.suffix.out.head.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita pca + head < iris.csv' \
+ 'gurita pca + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.pca.head.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita pca + scatter -x pc1 -y pc2 < iris.csv' \
+ 'gurita pca + scatter -x pc1 -y pc2 --out "${IMG_OUT_DIR}/scatter.pc1.pc2.png" < "${DATA_DIR}/iris.csv"' 
+
+################################################################################
+
+run_example \
+ 'gurita pca -n 3 + head < iris.csv' \
+ 'gurita pca -n 3 + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.pca.n.3.head.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita pca --prefix comp + head < iris.csv' \
+ 'gurita pca --prefix comp + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.pca.prefix.comp.head.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i person -c feature -v val < example.csv' \
+ 'gurita pivot -i person -c feature -v val > "${FILE_OUT_DIR}/example.pivot.person.feature.val.txt" <<EOF
+person,feature,val
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+EOF'
+
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i feature -c person -v val < example.csv' \
+ 'gurita pivot -i feature -c person -v val > "${FILE_OUT_DIR}/example.pivot.feature.person.val.txt" <<EOF
+person,feature,val
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i person -c feature -v val + melt -i person -v mon tue wed thu fri level --varname feature --valname val < example.csv' \
+ 'gurita pivot -i person -c feature -v val + melt -i person -v mon tue wed thu fri level --varname feature --valname val > "${FILE_OUT_DIR}/example.pivot.person.feature.val.melt.txt" <<EOF
+person,feature,val
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i feature -c person -v val + melt -i feature -v Alice Bob --varname person --valname val < example.csv' \
+ 'gurita pivot -i feature -c person -v val + melt -i feature -v Alice Bob --varname person --valname val > "${FILE_OUT_DIR}/example.pivot.person.feature.val.melt.alice.bob.txt" <<EOF
+person,feature,val
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i person -c feature -v val < missing.csv' \
+ 'gurita pivot -i person -c feature -v val > "${FILE_OUT_DIR}/example.pivot.person.feature.val.missing.txt" <<EOF
+person,feature,val
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i person level -c variable -v value < example.csv' \
+ 'gurita pivot -i person level -c variable -v value > "${FILE_OUT_DIR}/example.pivot.person.level.variable.value.txt" <<EOF
+person,level,variable,value
+Alice,A1,sun,0
+Bob,B3,sun,4
+Wei,B1,sun,0
+Imani,A2,sun,0
+Diego,C2,sun,3
+Alice,A1,mon,8
+Bob,B3,mon,0
+Wei,B1,mon,0
+Imani,A2,mon,8
+Diego,C2,mon,7
+Alice,A1,tue,8
+Bob,B3,tue,0
+Wei,B1,tue,8
+Imani,A2,tue,8
+Diego,C2,tue,7
+EOF'
+
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i level variable -c person -v value < example.csv' \
+ 'gurita pivot -i level variable -c person -v value > "${FILE_OUT_DIR}/example.pivot.level.variable.person.value.txt" <<EOF
+person,level,variable,value
+Alice,A1,sun,0
+Bob,B3,sun,4
+Wei,B1,sun,0
+Imani,A2,sun,0
+Diego,C2,sun,3
+Alice,A1,mon,8
+Bob,B3,mon,0
+Wei,B1,mon,0
+Imani,A2,mon,8
+Diego,C2,mon,7
+Alice,A1,tue,8
+Bob,B3,tue,0
+Wei,B1,tue,8
+Imani,A2,tue,8
+Diego,C2,tue,7
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita pivot -i person -c feature -v val -f sample < example.csv' \
+ 'gurita pivot -i person -c feature -v val -f sample > "${FILE_OUT_DIR}/example.pivot.person.feature.val.sample.txt" <<EOF 
+person,feature,val
+Alice,level,B2
+Alice,level,A1
+Bob,level,B3
+Alice,mon,8
+Bob,mon,0
+Alice,tue,8
+Bob,tue,0
+Alice,wed,4
+Bob,wed,4
+Alice,thu,1
+Bob,thu,6
+Alice,fri,4
+Bob,fri,0
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sample 10 < iris.csv' \
+ 'gurita sample 10 < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.sample.10.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita sample 0.05 < iris.csv' \
+ 'gurita sample 0.05 < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.sample.05.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c sepal_width < example.csv' \
+ 'gurita sort -c sepal_width > "${FILE_OUT_DIR}/example.sort.sepal_width.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c species < example.csv' \
+ 'gurita sort -c species > "${FILE_OUT_DIR}/example.sort.species.txt" <<EOF 
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c sepal_width species < example.csv' \
+ 'gurita sort -c sepal_width species > "${FILE_OUT_DIR}/example.sort.sepal_width.species.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c sepal_width --order d < example.csv' \
+ 'gurita sort -c sepal_width --order d > "${FILE_OUT_DIR}/example.sort.sepal_width.order.d.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c sepal_width species --order d a < example.csv' \
+ 'gurita sort -c sepal_width species --order d a > "${FILE_OUT_DIR}/example.sort.sepal_width.species.order.d.a.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+6.3,3.4,5.6,2.4,virginica
+6.3,2.5,5.0,1.9,virginica
+4.8,3.4,1.9,0.2,setosa
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+4.7,3.2,1.3,0.2,setosa
+6.4,2.8,5.6,2.1,virginica
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+5.2,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c sepal_length < missing.csv' \
+ 'gurita sort -c sepal_length > "${FILE_OUT_DIR}/example.sort.sepal_width.missing.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+4.7,3.2,1.3,0.2,setosa
+4.8,3.4,1.9,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+6.3,2.5,5.0,1.9,virginica
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+6.4,2.8,5.6,2.1,virginica
+,3.4,5.6,2.4,virginica
+,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita sort -c sepal_length --napos first < missing.csv' \
+ 'gurita sort -c sepal_length --napos first > "${FILE_OUT_DIR}/example.sort.sepal_length.napos.first.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+4.7,3.2,1.3,0.2,setosa
+4.8,3.4,1.9,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+5.9,3.0,4.2,1.5,versicolor
+6.3,2.5,5.0,1.9,virginica
+6.3,3.3,4.7,1.6,versicolor
+6.4,3.2,4.5,1.5,versicolor
+6.4,2.8,5.6,2.1,virginica
+,3.4,5.6,2.4,virginica
+,3.5,1.5,0.2,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita tail 5 < example.csv' \
+ 'gurita tail 5 > "${FILE_OUT_DIR}/example.tail.5.txt" <<EOF 
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita tail 5 + head 3 < example.csv' \
+ 'gurita tail 5 + head 3 > "${FILE_OUT_DIR}/example.tail.5.head.3.txt" <<EOF  
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita tail 1 < example.csv' \
+ 'gurita tail 1 > "${FILE_OUT_DIR}/example.tail.1.txt" <<EOF 
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita tail -3 < example.csv' \
+ 'gurita tail -3 > "${FILE_OUT_DIR}/example.tail.neg.3.txt" <<EOF
+sepal_length,sepal_width,petal_length,petal_width,species
+5.1,3.5,1.4,0.2,setosa
+4.9,3.0,1.4,0.2,setosa
+4.7,3.2,1.3,0.2,setosa
+4.6,3.1,1.5,0.2,setosa
+5.0,3.6,1.4,0.2,setosa
+5.4,3.9,1.7,0.4,setosa
+4.6,3.4,1.4,0.3,setosa
+5.0,3.4,1.5,0.2,setosa
+4.4,2.9,1.4,0.2,setosa
+4.9,3.1,1.5,0.1,setosa
+EOF'
+
+################################################################################
+
+run_example \
+ 'gurita unique -c species < iris.csv' \
+ 'gurita unique -c species < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.unique.species.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita unique -c species + sort -c species_unique --order d < iris.csv' \
+ 'gurita unique -c species + sort -c species_unique --order d < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.unique.species.sort.species_unique.order.d.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita unique -c class < titanic.csv' \
+ 'gurita unique -c class < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.unique.class.txt"'
+
+################################################################################
+
+run_example \
+ 'gurita zscore -c sepal_width + head < iris.csv' \
+ 'gurita zscore -c sepal_width + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.zscore.sepal_width.head.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita zscore -c sepal_length petal_width + head < iris.csv' \
+ 'gurita zscore -c sepal_length petal_width + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.zscore.sepal_length.petal_width.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita zscore --suffix z + head < iris.csv' \
+ 'gurita zscore --suffix z + head < "${DATA_DIR}/iris.csv" > "${FILE_OUT_DIR}/iris.zscore.suffix.z.head.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita describe < titanic.csv' \
+ 'gurita describe < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.describe.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita describe --col age class < titanic.csv' \
+ 'gurita describe --col age class < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.describe.age.txt"' 
+
+################################################################################
+
+run_example \
+ "gurita filter 'age >= 30' + describe < titanic.csv" \
+ "gurita filter 'age >= 30' + describe < ${DATA_DIR}/titanic.csv > ${FILE_OUT_DIR}/titanic.filter.30.describe.txt"
+
+################################################################################
+
+run_example \
+ 'gurita pretty < titanic.csv' \
+ 'gurita pretty < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.pretty.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita pretty --col age class < titanic.csv' \
+ 'gurita pretty --col age class < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.pretty.age.class.txt"' 
+
+################################################################################
+
+run_example \
+ 'gurita pretty --maxrows 20 --maxcols 6 < titanic.csv' \
+ 'gurita pretty --maxrows 20 --maxcols 6 < "${DATA_DIR}/titanic.csv" > "${FILE_OUT_DIR}/titanic.pretty.maxrows.20.maxcols.6.txt"' 
+
+################################################################################
+
+run_example \
+ "gurita filter 'age >= 30' + pretty < titanic.csv" \
+ "gurita filter 'age >= 30' + pretty < ${DATA_DIR}/titanic.csv > ${FILE_OUT_DIR}/titanic.filter.30.pretty.txt"
+
+################################################################################
+
+run_example \
+
 ################################################################################

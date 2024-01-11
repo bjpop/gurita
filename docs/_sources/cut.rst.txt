@@ -63,19 +63,8 @@ We can select and keep just the ``sepal_length`` and ``species`` columns and dis
 
 The output of the above command is shown below. Observe that only the two selected columns remain in the data set.
 
-.. code-block:: text
-
-    sepal_length,species
-    6.3,virginica
-    6.4,virginica
-    5.4,setosa
-    4.5,setosa
-    6.1,versicolor
-    5.6,versicolor
-    6.5,virginica
-    5.7,versicolor
-    6.7,virginica
-    5.8,versicolor
+.. literalinclude:: example_outputs/example.cut.sepal_length.species.txt
+   :language: none
 
 .. _cut_help:
 
@@ -113,20 +102,9 @@ For example, the command below drops the columns ``sepal_length`` and ``species`
 
 .. code-block:: text
 
-    gurita cut -c sepal_length species -i < example.csv
+    gurita cut -c sepal_length species --invert < example.csv
 
 The output of the command is shown below. Note that the columns retained are the inverse of the ones from the simple example above. 
 
-.. code-block:: text
-
-    sepal_width,petal_length,petal_width
-    3.4,5.6,2.4
-    3.1,5.5,1.8
-    3.9,1.3,0.4
-    2.3,1.3,0.3
-    2.9,4.7,1.4
-    2.7,4.2,1.3
-    3.0,5.2,2.0
-    2.6,3.5,1.0
-    3.1,5.6,2.4
-    2.6,4.0,1.2
+.. literalinclude:: example_outputs/example.cut.invert.sepal_length.species.txt
+   :language: none

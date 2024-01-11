@@ -41,7 +41,7 @@ Arguments
      - controlling the order of the plotted violins 
      - :ref:`order <violin_order>`
    * - ``--hue COLUMN``
-     - group columns by hue
+     - colour and/or group columns by hue 
      - :ref:`hue <violin_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
      - order of hue columns
@@ -91,7 +91,7 @@ Violin plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 The output of the above command is written to ``violin.age.png``:
 
-.. image:: ../images/violin.age.png 
+.. image:: ../docs/_images/violin.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -108,7 +108,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 The output of the above command is written to ``violin.class.age.png``:
 
-.. image:: ../images/violin.class.age.png 
+.. image:: ../docs/_images/violin.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -163,7 +163,7 @@ where the boxes are plotted horizontally:
 
     gurita violin -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/violin.age.class.png 
+.. image:: ../docs/_images/violin.age.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -189,7 +189,7 @@ In the following example the violin columns of the ``class`` column are displaye
 
     gurita violin -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/violin.class.age.order.png 
+.. image:: ../docs/_images/violin.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -199,14 +199,29 @@ In the following example the violin columns of the ``class`` column are displaye
 
 .. _violin_hue:
 
-Grouping columns with hue 
---------------------------
+Colour and/or group columns with hue
+------------------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical column with the ``--hue`` argument.
+Each violin can be coloured and optionally subdivided into additional categories with the ``--hue`` argument.
+     
+The following example generates a violin plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:
+   
+.. code-block:: bash
+     
+    gurita violin -y age -x class --hue class < titanic.csv
+     
+.. image:: ../docs/_images/violin.class.age.hue.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and coloured by class
+     
+|    
+
 
 In the following example the distribution of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
@@ -214,7 +229,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
     gurita violin -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/violin.class.age.sex.png 
+.. image:: ../docs/_images/violin.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -233,7 +248,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita violin -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/violin.class.age.sex.hueorder.png 
+.. image:: ../docs/_images/violin.class.age.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -248,7 +263,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita violin -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/violin.class.age.sex.order.hueorder.png 
+.. image:: ../docs/_images/violin.class.age.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -277,6 +292,14 @@ For example, you can display a log scale violin plot for the ``age`` column grou
 
     gurita violin -y age -x class --logy < titanic.csv 
 
+.. image:: ../docs/_images/violin.class.age.logy.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Violin plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
+
+|
+
 .. _violin_range:
 
 Axis range limits
@@ -300,6 +323,14 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     gurita violin -y age -x class --ylim 10 30 < titanic.csv
 
+.. image:: ../docs/_images/violin.class.age.limy.png
+       :width: 700px
+       :height: 600px
+       :align: center
+       :alt: Violin plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale
+   
+|    
+
 .. _violin_facets:
 
 Facets
@@ -322,7 +353,7 @@ The following command creates a faceted violin plot where the ``sex`` column is 
 
     gurita violin -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/violin.class.age.sex.facet.png 
+.. image:: ../docs/_images/violin.class.age.sex.facet.png 
        :width: 600px
        :height: 300px
        :align: center

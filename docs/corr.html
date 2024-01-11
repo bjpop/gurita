@@ -184,7 +184,7 @@
 </div>
 <p>The output of the above command is a table with three columns: <code class="docutils literal notranslate"><span class="pre">col1</span></code>, <code class="docutils literal notranslate"><span class="pre">col2</span></code> and <code class="docutils literal notranslate"><span class="pre">corr</span></code>, such that <code class="docutils literal notranslate"><span class="pre">col1</span></code> and <code class="docutils literal notranslate"><span class="pre">col2</span></code> show the names of the
 input columns being correlated, and <code class="docutils literal notranslate"><span class="pre">corr</span></code> shows their numerical correlation value.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
 sepal_length,sepal_length,1.0
 sepal_width,sepal_length,-0.10936924995064931
 sepal_length,sepal_width,-0.10936924995064931
@@ -212,7 +212,7 @@ arguments:</p>
 </pre></div>
 </div>
 <p>There are four numerical columns in <code class="docutils literal notranslate"><span class="pre">iris.csv</span></code>, so the output contains all 4x4 symmetric comparisons:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
 sepal_length,sepal_length,1.0
 sepal_width,sepal_length,-0.10936924995064931
 petal_length,sepal_length,0.8717541573048716
@@ -237,7 +237,7 @@ petal_width,petal_width,1.0
 </pre></div>
 </div>
 <p>The output of the above command is shown below:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
 sepal_length,sepal_length,1.0
 petal_length,sepal_length,0.8717541573048716
 petal_width,sepal_length,0.8179536333691642
@@ -272,7 +272,7 @@ petal_width,petal_width,1.0
 </div>
 <p>The output of the above command is shown below. Note that the results are similar to, but slightly different from the outputs from the <code class="docutils literal notranslate"><span class="pre">pearson</span></code> method
 shown in the simple example above.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>col1,col2,corr
 sepal_length,sepal_length,1.0
 sepal_width,sepal_length,-0.15945651848582867
 sepal_length,sepal_width,-0.15945651848582867
@@ -290,7 +290,7 @@ sepal_width,sepal_width,1.0
 using <a class="reference internal" href="command_line_syntax.html#command-chain"><span class="std std-ref">command chaining</span></a>.</p>
 <p>The X and Y axes of the heatmap are set to the <code class="docutils literal notranslate"><span class="pre">col1</span></code> and <code class="docutils literal notranslate"><span class="pre">col2</span></code> output columns from <code class="docutils literal notranslate"><span class="pre">corr</span></code>, and the value shown in the heatmap cells is set to the <code class="docutils literal notranslate"><span class="pre">corr</span></code> column.</p>
 <p>The output plot resulting from the above command is shown below:</p>
-<a class="reference internal image-reference" href="_images/heatmap.corr.png"><img alt="Heatmap showing the pairwise correlation of all numerical columns in the iris.csv file" class="align-center" src="_images/heatmap.corr.png" style="width: 400px; height: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/iris.corr.heatmap.png"><img alt="Heatmap showing the pairwise correlation of all numerical columns in the iris.csv file" class="align-center" src="_images/iris.corr.heatmap.png" style="width: 400px; height: 400px;" /></a>
 </section>
 </section>
 

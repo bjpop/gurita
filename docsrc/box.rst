@@ -264,11 +264,11 @@ The following example generates a box plot showing the distribution of the age o
 
     gurita box -y age -x class --hue class < titanic.csv
 
-.. image:: ../docs/_images/box.class.age.sex.hue.png 
+.. image:: ../docs/_images/box.class.age.hue.png 
        :width: 700px
        :height: 600px
        :align: center
-       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and sex 
+       :alt: Box plot showing the distribution of age for each class in the titanic data set, grouped by class and coloured by class 
 
 |
 

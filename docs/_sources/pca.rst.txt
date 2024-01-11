@@ -62,14 +62,8 @@ The output is quite long so we can adjust the command to look at only the first 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   sepal_length,sepal_width,petal_length,petal_width,species,pc1,pc2
-   5.1,3.5,1.4,0.2,setosa,-2.2645417283948928,0.5057039027737834
-   4.9,3.0,1.4,0.2,setosa,-2.0864255006161576,-0.6554047293691353
-   4.7,3.2,1.3,0.2,setosa,-2.367950449062523,-0.3184773108472487
-   4.6,3.1,1.5,0.2,setosa,-2.3041971611520085,-0.5753677125331953
-   5.0,3.6,1.4,0.2,setosa,-2.388777493505642,0.6747673967025161
+.. literalinclude:: example_outputs/iris.pca.head.txt
+   :language: none
 
 Two new columns are added to the output dataset, called ``pc1`` and ``pc2``, representing the first and second principal components
 of the numerical columns in the input data.
@@ -83,7 +77,7 @@ with the ``scatter`` command:
 
 The output of the above command is written to ``scatter.pc1.pc2.png``:
 
-.. image:: ../images/scatter.pc1.pc2.png
+.. image:: ../docs/_images/scatter.pc1.pc2.png
        :width: 600px
        :height: 600px
        :align: center
@@ -153,14 +147,8 @@ The output is quite long so we can adjust the command to look at only the first 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   sepal_length,sepal_width,petal_length,petal_width,species,pc1,pc2,pc3
-   5.1,3.5,1.4,0.2,setosa,-2.2645417283948928,0.5057039027737834,-0.12194334778175248
-   4.9,3.0,1.4,0.2,setosa,-2.0864255006161576,-0.6554047293691353,-0.2272508323992485
-   4.7,3.2,1.3,0.2,setosa,-2.367950449062523,-0.3184773108472487,0.05147962364496831
-   4.6,3.1,1.5,0.2,setosa,-2.3041971611520085,-0.5753677125331953,0.09886044443740284
-   5.0,3.6,1.4,0.2,setosa,-2.388777493505642,0.6747673967025161,0.021427848973115345
+.. literalinclude:: example_outputs/iris.pca.n.3.head.txt
+   :language: none
 
 .. note::
  
@@ -211,13 +199,7 @@ By chaining this command with ``head`` we can inspect the first few rows of the 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,comp1,comp2
-    5.1,3.5,1.4,0.2,setosa,-2.2645417283948928,0.5057039027737834
-    4.9,3.0,1.4,0.2,setosa,-2.0864255006161576,-0.6554047293691353
-    4.7,3.2,1.3,0.2,setosa,-2.367950449062523,-0.3184773108472487
-    4.6,3.1,1.5,0.2,setosa,-2.3041971611520085,-0.5753677125331953
-    5.0,3.6,1.4,0.2,setosa,-2.388777493505642,0.6747673967025161
+.. literalinclude:: example_outputs/iris.pca.prefix.comp.head.txt
+   :language: none
 
 Observe that the two new principal component columns are called ``comp1`` and ``comp2`` respectively.

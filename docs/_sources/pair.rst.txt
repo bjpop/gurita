@@ -66,7 +66,7 @@ This behaviour can be overridden with the ``-c, --col`` :ref:`argument <pair_col
 
 The output of the above command is written to ``pair.png``:
 
-.. image:: ../images/pair.png
+.. image:: ../docs/_images/pair.png
        :width: 600px
        :height: 600px
        :align: center
@@ -95,7 +95,6 @@ Selecting columns to compare
 
     -c [COLUMN ...], --col [COLUMN ...]
 
-
 By default, if no column names are specified in a pair plot, all the numerical columns will be compared (and catergorical columns are ignored).
 This behaviour can be overridden with the ``-c`` (or ``--col``) argument.
 
@@ -106,7 +105,7 @@ a categorical column, and it would not be plotted by default.
 
     gurita pair -c sepal_length petal_length species < iris.csv 
 
-.. image:: ../images/pair.columns.png
+.. image:: ../docs/_images/pair.columns.png
        :width: 600px
        :height: 600px
        :align: center
@@ -121,7 +120,7 @@ by rotating the X axis tick labels by 90 degrees using ``--rxtl 90``:
 
     gurita pair -c sepal_length petal_length species --rxtl 90 < iris.csv 
 
-.. image:: ../images/pair.columns.rxtl.png
+.. image:: ../docs/_images/pair.columns.rxtl.png
        :width: 600px
        :height: 600px
        :align: center
@@ -146,7 +145,7 @@ In the example below, no column names are specified, so only the numerical colum
 
     gurita pair --hue species < iris.csv 
 
-.. image:: ../images/pair.species.png 
+.. image:: ../docs/_images/pair.species.png 
        :width: 600px
        :height: 500px
        :align: center
@@ -170,7 +169,7 @@ of the plot are reflected mirror images. An alternative is to plot only the bott
 
     gurita pair --corner < iris.csv
 
-.. image:: ../images/pair.corner.png
+.. image:: ../docs/_images/pair.corner.png
        :width: 600px
        :height: 600px
        :align: center
@@ -201,7 +200,7 @@ The example below shows a pair plot using ``kde`` (kernel density estimate) as t
 
     gurita pair --kind kde < iris.csv
 
-.. image:: ../images/pair.kde.png
+.. image:: ../docs/_images/pair.kde.png
        :width: 600px
        :height: 600px
        :align: center
@@ -215,7 +214,7 @@ The example below shows a pair plot using ``hist`` (histogram) as the method of 
 
     gurita pair --kind hist < iris.csv
 
-.. image:: ../images/pair.hist.png
+.. image:: ../docs/_images/pair.hist.png
        :width: 600px
        :height: 600px
        :align: center
@@ -229,7 +228,7 @@ The example below shows a pair plot using ``reg`` (regression) as the method of 
 
     gurita pair --kind reg < iris.csv
 
-.. image:: ../images/pair.reg.png
+.. image:: ../docs/_images/pair.reg.png
        :width: 600px
        :height: 600px
        :align: center

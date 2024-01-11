@@ -179,44 +179,44 @@
 </pre></div>
 </div>
 <p>The output for the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch
-count   891.000000  891.000000   891  714.000000  891.000000  891.000000  \
-unique         NaN         NaN     2         NaN         NaN         NaN
-top            NaN         NaN  male         NaN         NaN         NaN
-freq           NaN         NaN   577         NaN         NaN         NaN
-mean      0.383838    2.308642   NaN   29.699118    0.523008    0.381594
-std       0.486592    0.836071   NaN   14.526497    1.102743    0.806057
-min       0.000000    1.000000   NaN    0.420000    0.000000    0.000000
-25%       0.000000    2.000000   NaN   20.125000    0.000000    0.000000
-50%       0.000000    3.000000   NaN   28.000000    0.000000    0.000000
-75%       1.000000    3.000000   NaN   38.000000    1.000000    0.000000
-max       1.000000    3.000000   NaN   80.000000    8.000000    6.000000
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch  \
+count   891.000000  891.000000   891  714.000000  891.000000  891.000000   
+unique         NaN         NaN     2         NaN         NaN         NaN   
+top            NaN         NaN  male         NaN         NaN         NaN   
+freq           NaN         NaN   577         NaN         NaN         NaN   
+mean      0.383838    2.308642   NaN   29.699118    0.523008    0.381594   
+std       0.486592    0.836071   NaN   14.526497    1.102743    0.806057   
+min       0.000000    1.000000   NaN    0.420000    0.000000    0.000000   
+25%       0.000000    2.000000   NaN   20.125000    0.000000    0.000000   
+50%       0.000000    3.000000   NaN   28.000000    0.000000    0.000000   
+75%       1.000000    3.000000   NaN   38.000000    1.000000    0.000000   
+max       1.000000    3.000000   NaN   80.000000    8.000000    6.000000   
 
-              fare embarked  class  who adult_male deck  embark_town alive
-count   891.000000      889    891  891        891  203          889   891  \
-unique         NaN        3      3    3          2    7            3     2
-top            NaN        S  Third  man       True    C  Southampton    no
-freq           NaN      644    491  537        537   59          644   549
-mean     32.204208      NaN    NaN  NaN        NaN  NaN          NaN   NaN
-std      49.693429      NaN    NaN  NaN        NaN  NaN          NaN   NaN
-min       0.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN
-25%       7.910400      NaN    NaN  NaN        NaN  NaN          NaN   NaN
-50%      14.454200      NaN    NaN  NaN        NaN  NaN          NaN   NaN
-75%      31.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN
-max     512.329200      NaN    NaN  NaN        NaN  NaN          NaN   NaN
+              fare embarked  class  who adult_male deck  embark_town alive  \
+count   891.000000      889    891  891        891  203          889   891   
+unique         NaN        3      3    3          2    7            3     2   
+top            NaN        S  Third  man       True    C  Southampton    no   
+freq           NaN      644    491  537        537   59          644   549   
+mean     32.204208      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+std      49.693429      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+min       0.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+25%       7.910400      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+50%      14.454200      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+75%      31.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+max     512.329200      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
 
-       alone
-count    891
-unique     2
-top     True
-freq     537
-mean     NaN
-std      NaN
-min      NaN
-25%      NaN
-50%      NaN
-75%      NaN
-max      NaN
+       alone  
+count    891  
+unique     2  
+top     True  
+freq     537  
+mean     NaN  
+std      NaN  
+min      NaN  
+25%      NaN  
+50%      NaN  
+75%      NaN  
+max      NaN  
 </pre></div>
 </div>
 </section>
@@ -240,7 +240,7 @@ arguments:</p>
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>               age  class
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>               age  class
 count   714.000000    891
 unique         NaN      3
 top            NaN  Third
@@ -268,6 +268,48 @@ max      80.000000    NaN
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita filter &#39;age &gt;= 30&#39; + describe &lt; titanic.csv
 </pre></div>
 </div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>          survived      pclass   sex         age       sibsp       parch  \
+count   330.000000  330.000000   330  330.000000  330.000000  330.000000   
+unique         NaN         NaN     2         NaN         NaN         NaN   
+top            NaN         NaN  male         NaN         NaN         NaN   
+freq           NaN         NaN   216         NaN         NaN         NaN   
+mean      0.406061    1.948485   NaN   41.948485    0.339394    0.357576   
+std       0.491842    0.861405   NaN   10.259568    0.545743    0.918910   
+min       0.000000    1.000000   NaN   30.000000    0.000000    0.000000   
+25%       0.000000    1.000000   NaN   34.000000    0.000000    0.000000   
+50%       0.000000    2.000000   NaN   39.000000    0.000000    0.000000   
+75%       1.000000    3.000000   NaN   48.000000    1.000000    0.000000   
+max       1.000000    3.000000   NaN   80.000000    3.000000    6.000000   
+
+              fare embarked  class  who adult_male deck  embark_town alive  \
+count   330.000000      328    330  330        330  119          328   330   
+unique         NaN        3      3    2          2    6            3     2   
+top            NaN        S  First  man       True    C  Southampton    no   
+freq           NaN      252    131  216        216   34          252   196   
+mean     41.079331      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+std      61.533893      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+min       0.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+25%       9.521875      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+50%      25.929200      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+75%      52.000000      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+max     512.329200      NaN    NaN  NaN        NaN  NaN          NaN   NaN   
+
+       alone  
+count    330  
+unique     2  
+top     True  
+freq     202  
+mean     NaN  
+std      NaN  
+min      NaN  
+25%      NaN  
+50%      NaN  
+75%      NaN  
+max      NaN  
+</pre></div>
+</div>
+<p>Notice that the minimal value of <code class="docutils literal notranslate"><span class="pre">age</span></code> is now 30.</p>
 </section>
 </section>
 

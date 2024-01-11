@@ -77,7 +77,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#selecting-columns-to-plot">Selecting columns to plot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controlling-the-order-of-the-violins">Controlling the order of the violins</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#grouping-columns-with-hue">Grouping columns with hue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colour-and-or-group-columns-with-hue">Colour and/or group columns with hue</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#log-scale">Log scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#axis-range-limits">Axis range limits</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#facets">Facets</a></li>
@@ -175,7 +175,7 @@
 <td><p><a class="reference internal" href="#violin-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
-<td><p>group columns by hue</p></td>
+<td><p>colour and/or group columns by hue</p></td>
 <td><p><a class="reference internal" href="#violin-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
@@ -301,12 +301,20 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="grouping-columns-with-hue">
-<span id="violin-hue"></span><h2>Grouping columns with hue<a class="headerlink" href="#grouping-columns-with-hue" title="Permalink to this headline"></a></h2>
+<section id="colour-and-or-group-columns-with-hue">
+<span id="violin-hue"></span><h2>Colour and/or group columns with hue<a class="headerlink" href="#colour-and-or-group-columns-with-hue" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The data can be further grouped by an additional categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>Each violin can be coloured and optionally subdivided into additional categories with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>The following example generates a violin plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita violin -y age -x class --hue class &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/violin.class.age.hue.png"><img alt="Violin plot showing the distribution of age for each class in the titanic data set, grouped by class and coloured by class" class="align-center" src="_images/violin.class.age.hue.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita violin -y age -x class --hue sex &lt; titanic.csv
 </pre></div>
@@ -348,6 +356,10 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--logy<
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita violin -y age -x class --logy &lt; titanic.csv
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="_images/violin.class.age.logy.png"><img alt="Violin plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale" class="align-center" src="_images/violin.class.age.logy.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 <section id="axis-range-limits">
 <span id="violin-range"></span><h2>Axis range limits<a class="headerlink" href="#axis-range-limits" title="Permalink to this headline"></a></h2>
@@ -363,6 +375,10 @@ Note carefully that the numerical
 data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the distribution:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita violin -y age -x class --ylim 10 30 &lt; titanic.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/violin.class.age.limy.png"><img alt="Violin plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale" class="align-center" src="_images/violin.class.age.limy.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="facets">

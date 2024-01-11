@@ -68,14 +68,8 @@ The output is quite long so we can adjust the command to look at only the first 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,cluster
-    5.1,3.5,1.4,0.2,setosa,0
-    4.9,3.0,1.4,0.2,setosa,0
-    4.7,3.2,1.3,0.2,setosa,0
-    4.6,3.1,1.5,0.2,setosa,0
-    5.0,3.6,1.4,0.2,setosa,0
+.. literalinclude:: example_outputs/iris.kmeans.head.txt
+   :language: none
 
 A new categorical column called ``cluster`` is added to the dataset, this holds the cluster labels for the datapoint on each row.  
 
@@ -89,13 +83,8 @@ We can get an overview of the new ``cluster`` column by using the ``describe`` c
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-            cluster
-    count       150
-    unique        2
-    top           0
-    freq         97
+.. literalinclude:: example_outputs/iris.kmeans.describe.cluster.txt
+   :language: none
 
 We can see that there are 150 data points (150 rows) and 2 unique values in the ``cluster`` column (these are the labels 0 and 1). The most frequent
 label is 0 which occurs 97 times (and thus the label 1 must occur 150-97=53 times).
@@ -115,7 +104,7 @@ For example we might like to make a box plot comparing the ``petal_length`` acro
 
 The output of the above command is written to ``box.cluster.petal_length.png``:
 
-.. image:: ../images/box.cluster.petal_length.png
+.. image:: ../docs/_images/box.cluster.petal_length.png
        :width: 600px
        :height: 600px
        :align: center
@@ -184,14 +173,10 @@ We can check the number of values in each cluster using the ``grouby`` command:
 
 The output of the above command is shown below:
 
-.. code-block:: text
+.. literalinclude:: example_outputs/iris.kmeans.groupby.cluster.txt
+   :language: none
 
-   cluster,size
-   0,50
-   1,62
-   2,38
-
-We can observe three clusters labelled 0,1,2 with 50,62,38 members respectively.
+We can observe three clusters labelled 0,1,2 with 39,61,50 members respectively.
 
 .. _kmeans_name:
 
@@ -208,27 +193,21 @@ The cluster labels are natural numbers (non-negative integers) from 0 upwards (0
 
 The name of the extra column can be changed with the ``--name`` argument.
 
-The following command specifies that ``group`` should be used as the prefix for the newly added columns:
+The following command specifies that ``grouping`` should be used as the prefix for the newly added columns:
 
 .. code-block:: text
 
-   gurita kmeans --name group < iris.csv
+   gurita kmeans --name grouping < iris.csv
 
 By chaining this command with ``head`` we can inspect the first few rows of the output:
 
 .. code-block:: text
 
-   gurita kmeans --name group + head < iris.csv
+   gurita kmeans --name grouping + head < iris.csv
 
 The output of the above command is as follows:
 
-.. code-block:: text
+.. literalinclude:: example_outputs/iris.kmeans.name.head.txt
+   :language: none
 
-    sepal_length,sepal_width,petal_length,petal_width,species,group
-    5.1,3.5,1.4,0.2,setosa,1
-    4.9,3.0,1.4,0.2,setosa,1
-    4.7,3.2,1.3,0.2,setosa,1
-    4.6,3.1,1.5,0.2,setosa,1
-    5.0,3.6,1.4,0.2,setosa,1
-
-Observe that the new cluster label column is called ``group``.
+Observe that the new cluster label column is called ``grouping``.

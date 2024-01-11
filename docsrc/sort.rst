@@ -73,19 +73,8 @@ The command below sorts the rows of the data based on the values in the ``sepal_
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    6.3,2.5,5.0,1.9,virginica
-    6.4,2.8,5.6,2.1,virginica
-    5.9,3.0,4.2,1.5,versicolor
-    6.4,3.2,4.5,1.5,versicolor
-    4.7,3.2,1.3,0.2,setosa
-    6.3,3.3,4.7,1.6,versicolor
-    6.3,3.4,5.6,2.4,virginica
-    4.8,3.4,1.9,0.2,setosa
-    5.2,3.5,1.5,0.2,setosa
-    5.4,3.9,1.7,0.4,setosa
+.. literalinclude:: example_outputs/example.sort.sepal_width.txt
+   :language: none
 
 After sorting all rows are in ascending order according to their value in the ``sepal_width`` column.  
 Categorical columns are sorted in alpha-numeric order, as is common in most applications.
@@ -98,20 +87,8 @@ For example, sorting on the categorical ``species`` column can be done like so:
 
 producing the following output:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    4.8,3.4,1.9,0.2,setosa
-    4.7,3.2,1.3,0.2,setosa
-    5.4,3.9,1.7,0.4,setosa
-    5.2,3.5,1.5,0.2,setosa
-    6.3,3.3,4.7,1.6,versicolor
-    6.4,3.2,4.5,1.5,versicolor
-    5.9,3.0,4.2,1.5,versicolor
-    6.3,3.4,5.6,2.4,virginica
-    6.3,2.5,5.0,1.9,virginica
-    6.4,2.8,5.6,2.1,virginica
-
+.. literalinclude:: example_outputs/example.sort.species.txt
+   :language: none
 
 .. _sort_help:
 
@@ -148,19 +125,8 @@ The relative order of rows that are tied on equal values of ``sepal_width`` will
 
 The result of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    6.3,2.5,5.0,1.9,virginica
-    6.4,2.8,5.6,2.1,virginica
-    5.9,3.0,4.2,1.5,versicolor
-    4.7,3.2,1.3,0.2,setosa
-    6.4,3.2,4.5,1.5,versicolor
-    6.3,3.3,4.7,1.6,versicolor
-    4.8,3.4,1.9,0.2,setosa
-    6.3,3.4,5.6,2.4,virginica
-    5.2,3.5,1.5,0.2,setosa
-    5.4,3.9,1.7,0.4,setosa
+.. literalinclude:: example_outputs/example.sort.sepal_width.species.txt
+   :language: none
 
 Observe that the two rows with a ``sepal_length`` of ``3.2`` are sorted based on ``species`` such that ``setosa`` comes before ``versicolor``. Likewise, the two rows with a ``sepal_length`` of ``3.4`` are sorted based on ``species`` such that ``setosa`` comes before ``virginica``.
 
@@ -183,19 +149,8 @@ The following command sorts the rows in descending order based on the values in 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    5.4,3.9,1.7,0.4,setosa
-    5.2,3.5,1.5,0.2,setosa
-    6.3,3.4,5.6,2.4,virginica
-    4.8,3.4,1.9,0.2,setosa
-    6.3,3.3,4.7,1.6,versicolor
-    6.4,3.2,4.5,1.5,versicolor
-    4.7,3.2,1.3,0.2,setosa
-    5.9,3.0,4.2,1.5,versicolor
-    6.4,2.8,5.6,2.1,virginica
-    6.3,2.5,5.0,1.9,virginica
+.. literalinclude:: example_outputs/example.sort.sepal_width.order.d.txt
+   :language: none
 
 When sorting on multiple columns the ordering can be specified on a per-column basis.
 
@@ -207,19 +162,8 @@ The following command sorts rows in descending order based on the values in the 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    5.4,3.9,1.7,0.4,setosa
-    5.2,3.5,1.5,0.2,setosa
-    4.8,3.4,1.9,0.2,setosa
-    6.3,3.4,5.6,2.4,virginica
-    6.3,3.3,4.7,1.6,versicolor
-    4.7,3.2,1.3,0.2,setosa
-    6.4,3.2,4.5,1.5,versicolor
-    5.9,3.0,4.2,1.5,versicolor
-    6.4,2.8,5.6,2.1,virginica
-    6.3,2.5,5.0,1.9,virginica
+.. literalinclude:: example_outputs/example.sort.sepal_width.species.order.d.a.txt
+   :language: none
 
 .. note::
 
@@ -283,7 +227,7 @@ Ordering of missing (NA) values
 
    --napos {first,last}
 
-Suppose that the example input data is modifed such that the first and last rows have missing values for ``sepal_length``:
+Suppose that the example input data is modifed such that the first and last rows have missing values for ``sepal_length`` and stored in a file called ``missing.csv``:
 
 .. code-block:: text
 
@@ -305,23 +249,12 @@ By default Gurita will place rows with missing values at the end of the sorted d
 
 .. code-block:: text
 
-   gurita sort -c sepal_length < example.csv 
+   gurita sort -c sepal_length < missing.csv 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   sepal_length,sepal_width,petal_length,petal_width,species
-   4.7,3.2,1.3,0.2,setosa
-   4.8,3.4,1.9,0.2,setosa
-   5.4,3.9,1.7,0.4,setosa
-   5.9,3.0,4.2,1.5,versicolor
-   6.3,2.5,5.0,1.9,virginica
-   6.3,3.3,4.7,1.6,versicolor
-   6.4,3.2,4.5,1.5,versicolor
-   6.4,2.8,5.6,2.1,virginica
-   ,3.4,5.6,2.4,virginica
-   ,3.5,1.5,0.2,setosa
+.. literalinclude:: example_outputs/example.sort.sepal_width.missing.txt
+   :language: none
 
 Observe that the two rows with missing ``sepal_length`` values appear last in the sorted data.
 
@@ -330,23 +263,12 @@ Setting it to ``first`` will cause rows with missing values in the sorted column
 
 .. code-block:: text
 
-   gurita sort -c sepal_length --napos first < example.csv
+   gurita sort -c sepal_length --napos first < missing.csv
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    ,3.4,5.6,2.4,virginica
-    ,3.5,1.5,0.2,setosa
-    4.7,3.2,1.3,0.2,setosa
-    4.8,3.4,1.9,0.2,setosa
-    5.4,3.9,1.7,0.4,setosa
-    5.9,3.0,4.2,1.5,versicolor
-    6.3,2.5,5.0,1.9,virginica
-    6.3,3.3,4.7,1.6,versicolor
-    6.4,3.2,4.5,1.5,versicolor
-    6.4,2.8,5.6,2.1,virginica
+.. literalinclude:: example_outputs/example.sort.sepal_length.napos.first.txt
+   :language: none
 
 Observe that the two rows with missing ``sepal_length`` values appear first in the sorted data.
 

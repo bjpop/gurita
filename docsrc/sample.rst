@@ -35,21 +35,31 @@ Arguments
 Simple example
 --------------
 
-The example below randomly samples 100 rows from the ``fmri.csv`` dataset:
+The example below randomly samples 10 rows from the ``iris.csv`` dataset:
 
 .. code-block:: text
 
-   gurita sample 100 < fmri.csv
+   gurita sample 10 < iris.csv
 
-The example below randomly samples 0.1 (as close as possible to, but no greater than, one tenth) of the rows from the ``fmri.csv`` dataset:
+The output of the above command is as follows: 
+
+.. literalinclude:: example_outputs/iris.sample.10.txt
+   :language: none
+
+The example below randomly samples 0.05 (20%) of the rows from the ``iris.csv`` dataset:
 
 .. code-block:: text
 
-   gurita sample 0.1 < fmri.csv
+   gurita sample 0.05 < iris.csv
+
+The output of the above command is as follows: 
+
+.. literalinclude:: example_outputs/iris.sample.05.txt
+   :language: none
 
 .. note::
 
-   Due to the randomisation of sampling, mulitple runs of the exact same command may yield different results.
+   Due to the randomisation of sampling, mulitple runs of the same command may pick different rows. 
 
 .. _sample_help:
 

@@ -69,14 +69,8 @@ The output is quite long so we can adjust the command to look at only the first 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,sepal_width_zscore
-    5.1,3.5,1.4,0.2,setosa,1.0320572244889565
-    4.9,3.0,1.4,0.2,setosa,-0.12495760117130933
-    4.7,3.2,1.3,0.2,setosa,0.3378483290927974
-    4.6,3.1,1.5,0.2,setosa,0.10644536396074403
-    5.0,3.6,1.4,0.2,setosa,1.2634601896210098
+.. literalinclude:: example_outputs/iris.zscore.sepal_width.head.txt
+   :language: none
 
 A new numerical column called ``sepal_width_zscore`` is added to the dataset, this holds the computed z-scores for the corresponding values in the ``sepal_width`` column.
 
@@ -126,14 +120,8 @@ By chaining this command with ``head`` we can inspect the first few rows of the 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,sepal_length_zscore,petal_width_zscore
-    5.1,3.5,1.4,0.2,setosa,-0.9006811702978088,-1.3129767272601454
-    4.9,3.0,1.4,0.2,setosa,-1.1430169111851105,-1.3129767272601454
-    4.7,3.2,1.3,0.2,setosa,-1.3853526520724133,-1.3129767272601454
-    4.6,3.1,1.5,0.2,setosa,-1.5065205225160652,-1.3129767272601454
-    5.0,3.6,1.4,0.2,setosa,-1.0218490407414595,-1.3129767272601454
+.. literalinclude:: example_outputs/iris.zscore.sepal_length.petal_width.txt
+   :language: none
 
 In the above example we can see that z-scores are computed in just ``sepal_length`` and ``petal_width``. Two new numerical columns called
 ``sepal_length_zscore`` and ``petal_width_zscore`` are added to the dataset.
@@ -173,11 +161,5 @@ By chaining this command with ``head`` we can inspect the first few rows of the 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,sepal_length_z,sepal_width_z,petal_length_z,petal_width_z
-    5.1,3.5,1.4,0.2,setosa,-0.9006811702978088,1.0320572244889565,-1.3412724047598314,-1.3129767272601454
-    4.9,3.0,1.4,0.2,setosa,-1.1430169111851105,-0.12495760117130933,-1.3412724047598314,-1.3129767272601454
-    4.7,3.2,1.3,0.2,setosa,-1.3853526520724133,0.3378483290927974,-1.3981381087490836,-1.3129767272601454
-    4.6,3.1,1.5,0.2,setosa,-1.5065205225160652,0.10644536396074403,-1.284406700770579,-1.3129767272601454
-    5.0,3.6,1.4,0.2,setosa,-1.0218490407414595,1.2634601896210098,-1.3412724047598314,-1.3129767272601454
+.. literalinclude:: example_outputs/iris.zscore.suffix.z.head.txt
+   :language: none

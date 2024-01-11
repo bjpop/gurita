@@ -62,14 +62,8 @@ Select the last 5 rows from ``example.csv`` :
 
 The output of the above command is:
 
-.. code-block:: text 
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    5.4,3.9,1.7,0.4,setosa
-    4.6,3.4,1.4,0.3,setosa
-    5.0,3.4,1.5,0.2,setosa
-    4.4,2.9,1.4,0.2,setosa
-    4.9,3.1,1.5,0.1,setosa
+.. literalinclude:: example_outputs/example.tail.5.txt
+   :language: none
 
 Note that there are 5 data rows in the above result *plus* one header row.
 
@@ -81,13 +75,8 @@ For example the following command uses ``tail`` to select the last 5 rows from t
 
     gurita tail 5 + head 3 < example.csv
 
-.. code-block:: text 
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    5.4,3.9,1.7,0.4,setosa
-    4.6,3.4,1.4,0.3,setosa
-    5.0,3.4,1.5,0.2,setosa
-
+.. literalinclude:: example_outputs/example.tail.5.head.3.txt
+   :language: none
 
 .. _tail_help:
 
@@ -120,10 +109,8 @@ Select the first 1 rows from ``example.csv``:
 
 The output of the above command is:
 
-.. code-block:: text 
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    4.9,3.1,1.5,0.1,setosa
+.. literalinclude:: example_outputs/example.tail.1.txt
+   :language: none
 
 Select all but the first 3 lines from ``example.csv``. Note that this yields the last 7 data rows of the data because there are 10 data rows in total and the first 3 are removed.
 
@@ -133,13 +120,5 @@ Select all but the first 3 lines from ``example.csv``. Note that this yields the
 
 The output of the above command is:
 
-.. code-block:: text 
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    4.6,3.1,1.5,0.2,setosa
-    5.0,3.6,1.4,0.2,setosa
-    5.4,3.9,1.7,0.4,setosa
-    4.6,3.4,1.4,0.3,setosa
-    5.0,3.4,1.5,0.2,setosa
-    4.4,2.9,1.4,0.2,setosa
-    4.9,3.1,1.5,0.1,setosa
+.. literalinclude:: example_outputs/example.tail.neg.3.txt
+   :language: none

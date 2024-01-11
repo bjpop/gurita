@@ -191,7 +191,7 @@ Both <code class="docutils literal notranslate"><span class="pre">--val</span></
 </div>
 <p>All rows in the dataset that have the same value in the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column are grouped together.</p>
 <p>There are 3 unique towns in that column, so the output has 3 corresponding data rows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,size
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,size
 Cherbourg,168
 Queenstown,77
 Southampton,644
@@ -229,7 +229,7 @@ towns:</p>
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,class,size
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,class,size
 Cherbourg,First,85
 Cherbourg,Second,17
 Cherbourg,Third,66
@@ -247,7 +247,7 @@ Southampton,Third,353
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,class,sex,size
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,class,sex,size
 Cherbourg,First,female,43
 Cherbourg,First,male,42
 Cherbourg,Second,female,7
@@ -295,7 +295,7 @@ It is not possible to supply only one of these without the other.</p>
 </pre></div>
 </div>
 <p>The output of the above command is as follows, with the new aggregated column called <code class="docutils literal notranslate"><span class="pre">age_mean</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,age_mean
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,age_mean
 Cherbourg,30.81476923076923
 Queenstown,28.089285714285715
 Southampton,29.44539711191336
@@ -308,7 +308,7 @@ new column names are created using the name of the <code class="docutils literal
 </pre></div>
 </div>
 <p>The output of the above command is as follows, with extra columns <code class="docutils literal notranslate"><span class="pre">age_max</span></code> and <code class="docutils literal notranslate"><span class="pre">age_min</span></code>:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,age_mean,age_max,age_min
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,age_mean,age_max,age_min
 Cherbourg,30.81476923076923,71.0,0.42
 Queenstown,28.089285714285715,70.5,2.0
 Southampton,29.44539711191336,80.0,0.67
@@ -321,7 +321,7 @@ Southampton,29.44539711191336,80.0,0.67
 </div>
 <p>In this scenario each <code class="docutils literal notranslate"><span class="pre">--val</span></code> column is aggregated by each <code class="docutils literal notranslate"><span class="pre">--fun</span></code> function. In the above example 2 columns are aggregated by
 3 functions, yielding 6 additional output columns for each group:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,age_mean,age_max,age_min,fare_mean,fare_max,fare_min
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,age_mean,age_max,age_min,fare_mean,fare_max,fare_min
 Cherbourg,30.81476923076923,71.0,0.42,59.95414404761905,512.3292,4.0125
 Queenstown,28.089285714285715,70.5,2.0,13.27602987012987,90.0,6.75
 Southampton,29.44539711191336,80.0,0.67,27.079811801242233,263.0,0.0
@@ -332,7 +332,7 @@ Southampton,29.44539711191336,80.0,0.67,27.079811801242233,263.0,0.0
 </pre></div>
 </div>
 <p>The above command yields the following output:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>embark_town,class,age_mean,age_max,age_min,fare_mean,fare_max,fare_min
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>embark_town,class,age_mean,age_max,age_min,fare_mean,fare_max,fare_min
 Cherbourg,First,38.027027027027025,71.0,16.0,104.71852941176472,512.3292,26.55
 Cherbourg,Second,22.766666666666666,36.0,1.0,25.358335294117648,41.5792,12.0
 Cherbourg,Third,20.741951219512195,45.5,0.42,11.214083333333333,22.3583,4.0125

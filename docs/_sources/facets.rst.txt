@@ -16,7 +16,7 @@ the ``sex`` column using the ``--fcol`` argument:
 
     gurita box -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/box.class.age.sex.facet.png
+.. image:: ../docs/_images/box.class.age.sex.facet.png
        :width: 600px
        :height: 300px
        :align: center
@@ -34,11 +34,13 @@ It is also possible to generate the facets row-wise, using ``--frow sex`` instea
 
     gurita box -y age -x class --frow sex < titanic.csv
 
-.. image:: ../images/box.class.age.sex.facet.row.png
+.. image:: ../docs/_images/box.class.age.sex.facet.row.png
        :width: 300px
        :height: 600px
        :align: center
        :alt: Box plot showing the mean of age for each class in the titanic data set grouped by class , using sex to determine the plot facets, displayed row-wise
+
+|
 
 There were seven decks for passengers on the Titanic, labelled A to G. The following box plot uses facets to split into two sub-plots column-wise based on deck: 
 
@@ -46,7 +48,7 @@ There were seven decks for passengers on the Titanic, labelled A to G. The follo
 
     gurita box -y age -x class --fcol deck < titanic.csv
 
-.. image:: ../images/box.class.age.deck.png
+.. image:: ../docs/_images/box.class.age.deck.png
        :width: 600px
        :height: 200px
        :align: center
@@ -62,7 +64,7 @@ The following command shows the effect of ``--fcolwrap 4`` on the previous comma
 
     gurita box -y age -x class --fcol deck --fcolwrap 4 < titanic.csv
 
-.. image:: ../images/box.class.age.deck.fcolwrap4.png
+.. image:: ../docs/_images/box.class.age.deck.fcolwrap4.png
        :width: 600px
        :height: 600px
        :align: center

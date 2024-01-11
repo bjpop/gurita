@@ -67,6 +67,7 @@ A more realistic example is to chain the output into another command, such as `h
 The output of the above command is as follows:
 
 .. literalinclude:: example_outputs/iris_head.txt
+   :language: none
 
 Note that for simple cases of reading data from a single CSV file, the same effect can be achieved by the following command:
 

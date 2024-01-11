@@ -69,10 +69,8 @@ The following command drops all the rows that contain at least one column with a
 
 The result of the above command is shown below, where only the middle row of the input data remains: 
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    4.9,3.0,1.4,0.2,virginica
+.. literalinclude:: example_outputs/missing.dropna.txt
+   :language: none
 
 .. _dropna_help:
 
@@ -108,12 +106,8 @@ The following command drops all the columns that contain at least one column wit
 The result of the above command is shown below, where ``species`` and ``sepal_width`` columns have been removed because they contained
 rows with missing values:
 
-.. code-block:: text
-
-    sepal_length,petal_length,petal_width
-    5.1,1.4,0.2
-    4.9,1.4,0.2
-    4.7,1.3,0.2
+.. literalinclude:: example_outputs/missing.dropna.axis.txt
+   :language: none
 
 .. _dropna_thresh:
 
@@ -165,11 +159,8 @@ lets you specify a subset of columns to consider for missing values.
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species
-    4.9,3.0,1.4,0.2,virginica
-    4.7,,1.3,0.2,setosa
+.. literalinclude:: example_outputs/missing.dropna.species.txt
+   :language: none
 
 Only the first row from the input data has a missing value in the ``species`` column, so only that row is dropped in the above example, all other rows are retained. 
 Note that the third row from the input data is retained even though it contains a missing value, this is because the missing value did not occur in the ``species`` column.

@@ -285,10 +285,9 @@ arguments:</p>
 <p>Histograms can be plotted for both numerical columns and for categorical columns. Numerical data is binned
 and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
 column for each categorical value in the specified column.</p>
-<p>You can select the column that you want to plot as a histogram using the <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) or <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>)
-arguments.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">-x</span></code> (<code class="docutils literal notranslate"><span class="pre">--xaxis</span></code>) is chosen the histogram columns will be plotted vertically.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">-y</span></code> (<code class="docutils literal notranslate"><span class="pre">--yaxis</span></code>) is chosen the histogram columns will be plotted horizontally.</p>
+<p>You can select the column that you want to plot as a histogram using the <code class="docutils literal notranslate"><span class="pre">-x/--xaxis</span></code> or <code class="docutils literal notranslate"><span class="pre">-y/--yaxis</span></code> arguments.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">-x</span></code> is chosen the histogram columns will be plotted vertically.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">-y</span></code> is chosen the histogram columns will be plotted horizontally.</p>
 <p>If both <code class="docutils literal notranslate"><span class="pre">-x</span></code> and <code class="docutils literal notranslate"><span class="pre">-y</span></code> are both specified then a heatmap will be plotted.</p>
 <p>See <a class="reference internal" href="#hist-example"><span class="std std-ref">the example</span></a> above for a vertical axis plot.
 For comparison, the following command uses <code class="docutils literal notranslate"><span class="pre">-y</span> <span class="pre">tip</span></code> to plot a histogram of <code class="docutils literal notranslate"><span class="pre">tip</span></code> horizontally:</p>
@@ -504,6 +503,10 @@ This behaviour can be changed by <code class="docutils literal notranslate"><spa
 <p>The range of displayed numerical distributions can be restricted with <code class="docutils literal notranslate"><span class="pre">--xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">--ylim</span></code>. Each of these flags takes two numerical values as arguments that represent the lower and upper bounds of the range to be displayed.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita hist -x tip --xlim 3 8 &lt; tips.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/hist.tip.xlim.png"><img alt="Histogram plot showing the distribution of tip amounts for the tips data set with the X asix limited in range from 3 to 8" class="align-center" src="_images/hist.tip.xlim.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="facets">

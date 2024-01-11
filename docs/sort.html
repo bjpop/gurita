@@ -206,7 +206,7 @@
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 6.3,2.5,5.0,1.9,virginica
 6.4,2.8,5.6,2.1,virginica
 5.9,3.0,4.2,1.5,versicolor
@@ -226,7 +226,7 @@ Categorical columns are sorted in alpha-numeric order, as is common in most appl
 </pre></div>
 </div>
 <p>producing the following output:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 4.8,3.4,1.9,0.2,setosa
 4.7,3.2,1.3,0.2,setosa
 5.4,3.9,1.7,0.4,setosa
@@ -261,7 +261,7 @@ arguments:</p>
 </div>
 <p>The relative order of rows that are tied on equal values of <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> will be determined by the corresponding values in the <code class="docutils literal notranslate"><span class="pre">species</span></code> column.</p>
 <p>The result of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 6.3,2.5,5.0,1.9,virginica
 6.4,2.8,5.6,2.1,virginica
 5.9,3.0,4.2,1.5,versicolor
@@ -287,7 +287,7 @@ arguments:</p>
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 5.4,3.9,1.7,0.4,setosa
 5.2,3.5,1.5,0.2,setosa
 6.3,3.4,5.6,2.4,virginica
@@ -306,7 +306,7 @@ arguments:</p>
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 5.4,3.9,1.7,0.4,setosa
 5.2,3.5,1.5,0.2,setosa
 4.8,3.4,1.9,0.2,setosa
@@ -365,7 +365,7 @@ ascending orderings on the rightmost columns.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>--napos {first,last}
 </pre></div>
 </div>
-<p>Suppose that the example input data is modifed such that the first and last rows have missing values for <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>:</p>
+<p>Suppose that the example input data is modifed such that the first and last rows have missing values for <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> and stored in a file called <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code>:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 ,3.4,5.6,2.4,virginica
 6.3,2.5,5.0,1.9,virginica
@@ -381,11 +381,11 @@ ascending orderings on the rightmost columns.</p>
 </div>
 <p>To sort the data on the <code class="docutils literal notranslate"><span class="pre">speal_length</span></code> column, we will need to decide what to do with the two rows with missing values.</p>
 <p>By default Gurita will place rows with missing values at the end of the sorted data, like so:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_length &lt; example.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_length &lt; missing.csv
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 4.7,3.2,1.3,0.2,setosa
 4.8,3.4,1.9,0.2,setosa
 5.4,3.9,1.7,0.4,setosa
@@ -401,11 +401,11 @@ ascending orderings on the rightmost columns.</p>
 <p>Observe that the two rows with missing <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> values appear last in the sorted data.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--napos</span></code> argument tells Gurita how to handle rows with missing values in the sorted columns.
 Setting it to <code class="docutils literal notranslate"><span class="pre">first</span></code> will cause rows with missing values in the sorted columns to appear first in the sorted output.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_length --napos first &lt; example.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita sort -c sepal_length --napos first &lt; missing.csv
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sepal_length,sepal_width,petal_length,petal_width,species
 ,3.4,5.6,2.4,virginica
 ,3.5,1.5,0.2,setosa
 4.7,3.2,1.3,0.2,setosa

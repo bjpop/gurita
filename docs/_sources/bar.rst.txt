@@ -44,7 +44,7 @@ Arguments
    * - ``--estimator {mean, median, max, min, sum, std, var}``
      - Function to compute point estimate of numerical column
      - :ref:`estimator <bar_estimator>`
-   * - ``--std``
+   * - ``--sd [NUM]``
      - show standard deviation of numerical column as error bar 
      - :ref:`standard deviation error bar <standard_deviation>`
    * - ``--ci [NUM]``
@@ -54,7 +54,7 @@ Arguments
      - controlling the order of the plotted bars
      - :ref:`order <bar_order>`
    * - ``--hue COLUMN``
-     - group columns by hue
+     - colour and/or group columns by hue
      - :ref:`hue <bar_hue>`
    * - ``--hueorder VALUE [VALUE ...]``
      - order of hue columns
@@ -102,7 +102,7 @@ Bar plot the mean ``age`` of passengers for each value of ``class`` in the ``tit
 
 The output of the above command is written to ``bar.class.age.png``:
 
-.. image:: ../images/bar.class.age.png
+.. image:: ../docs/_images/bar.class.age.png
        :width: 600px
        :height: 600px
        :align: center
@@ -157,7 +157,7 @@ where the boxes are plotted horizontally:
 
     gurita bar -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/bar.age.class.png
+.. image:: ../docs/_images/bar.age.class.png
        :width: 600px
        :height: 600px
        :align: center
@@ -181,7 +181,7 @@ For example, the maximum ``age`` is shown for each value of ``class``:
 
     gurita bar -y age -x class --estimator max < titanic.csv 
 
-.. image:: ../images/bar.class.age.max.png
+.. image:: ../docs/_images/bar.class.age.max.png
        :width: 600px
        :height: 600px
        :align: center
@@ -194,15 +194,17 @@ For example, the maximum ``age`` is shown for each value of ``class``:
 Standard deviaiton
 ------------------
 
-The standard deviation of the numerical column can be shown as an error bar with the ``--std`` argument.
+The standard deviation of the numerical column can be shown as an error bar with the ``--sd`` argument.
 
 For example the mean and standard deviation of ``age`` is shown for each value in the ``class`` column:
 
+By default, if ``--sd`` is specified without a numerical argument, then +/- 1 standard deviation from the mean is shown, but this can be changed by supplying a specific numeric value.
+
 .. code-block:: text
 
-    gurita bar -y age -x class --std < titanic.csv 
+    gurita bar -y age -x class --sd < titanic.csv 
 
-.. image:: ../images/bar.class.age.std.png
+.. image:: ../docs/_images/bar.class.age.std.png
        :width: 600px
        :height: 600px
        :align: center
@@ -225,7 +227,7 @@ For example the mean of age and its 98% confidence interval is shown for each va
 
     gurita bar -y age -x class --ci 98 < titanic.csv 
 
-.. image:: ../images/bar.class.age.ci.png
+.. image:: ../docs/_images/bar.class.age.ci.png
        :width: 600px
        :height: 600px
        :align: center
@@ -251,7 +253,7 @@ In the following example the bar columns of the ``class`` column are displayed i
 
     gurita bar -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/bar.class.age.order.png 
+.. image:: ../docs/_images/bar.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -261,14 +263,28 @@ In the following example the bar columns of the ``class`` column are displayed i
 
 .. _bar_hue:
 
-Grouping columns with hue 
---------------------------
+Colour and/or group columns with hue 
+------------------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical column with the ``--hue`` argument.
+Each bar can be coloured and optionally subdivided into additional categories with the ``--hue`` argument.
+
+The following example generates a bar plot showing the mean age of titanic passengers across the three different ticket classes, where each class is coloured differently:
+
+.. code-block:: text
+
+    gurita bar -y age -x class --hue class < titanic.csv
+
+.. image:: ../docs/_images/bar.class.age.sex.hue.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Bar plot showing the mean of age for each class in the titanic data set, grouped by class and sex 
+
+|
 
 In the following example the mean and error of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
@@ -276,7 +292,7 @@ In the following example the mean and error of ``age`` is shown for each value i
 
     gurita bar -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/bar.class.age.sex.png 
+.. image:: ../docs/_images/bar.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -295,7 +311,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita bar -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/bar.class.age.sex.hueorder.png 
+.. image:: ../docs/_images/bar.class.age.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -310,7 +326,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita bar -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/bar.class.age.sex.order.hueorder.png 
+.. image:: ../docs/_images/bar.class.age.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -339,7 +355,7 @@ For example, you can display a log scale bar plot for the ``age`` column grouped
 
     gurita bar -y age -x class --logy < titanic.csv 
 
-.. image:: ../images/bar.class.age.logy.png 
+.. image:: ../docs/_images/bar.class.age.logy.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -370,6 +386,14 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     gurita bar -y age -x class --ylim 10 30 < titanic.csv
 
+.. image:: ../docs/_images/bar.class.age.ylim.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Bar plot showing the mean of age for each class in the titanic data set, with the Y axis limited to between 10 to 30
+
+|
+
 .. _bar_facets:
 
 Facets
@@ -392,7 +416,7 @@ The follow command creates a faceted bar plot where the ``sex`` column is used t
 
     gurita bar -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/bar.class.age.sex.facet.png 
+.. image:: ../docs/_images/bar.class.age.sex.facet.png 
        :width: 600px
        :height: 300px
        :align: center

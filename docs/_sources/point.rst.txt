@@ -88,7 +88,7 @@ Point plot showing the mean ``age`` for passengers on the titanic by passenger `
 
 The output of the above command is written to ``point.class.age.png``:
 
-.. image:: ../images/point.class.age.png 
+.. image:: ../docs/_images/point.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -143,7 +143,7 @@ where the boxes are plotted horizontally:
 
     gurita point -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/point.age.class.png 
+.. image:: ../docs/_images/point.age.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -169,7 +169,7 @@ In the following example the point columns of the ``class`` column are displayed
 
     gurita point -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/point.class.age.order.png 
+.. image:: ../docs/_images/point.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -194,7 +194,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
     gurita point -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/point.class.age.sex.png 
+.. image:: ../docs/_images/point.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -213,7 +213,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita point -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/point.class.age.sex.hueorder.png 
+.. image:: ../docs/_images/point.class.age.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -228,7 +228,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita point -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/point.class.age.sex.order.hueorder.png 
+.. image:: ../docs/_images/point.class.age.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -257,7 +257,7 @@ For example, you can display a log scale point plot for the ``age`` column group
 
     gurita point -y age -x class --logy < titanic.csv 
 
-.. image:: ../images/point.class.age.logx.png
+.. image:: ../docs/_images/point.class.age.logx.png
        :width: 600px
        :height: 600px
        :align: center
@@ -288,6 +288,14 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     gurita point -y age -x class --ylim 10 30 < titanic.csv
 
+.. image:: ../docs/_images/point.class.age.ylim.png
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Point plot showing the mean of age and error for each class in the titanic data set, with the Y axis range limited 
+
+|
+
 .. _point_facets:
 
 Facets
@@ -308,7 +316,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
     gurita point -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/point.class.age.sex.facets.png 
+.. image:: ../docs/_images/point.class.age.sex.facets.png 
        :width: 600px
        :height: 300px
        :align: center

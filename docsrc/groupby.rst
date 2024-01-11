@@ -57,12 +57,8 @@ All rows in the dataset that have the same value in the ``embark_town`` column a
 
 There are 3 unique towns in that column, so the output has 3 corresponding data rows:
 
-.. code-block:: text
-
-    embark_town,size
-    Cherbourg,168
-    Queenstown,77
-    Southampton,644
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.txt
+   :language: none
 
 By default the size of the groups is computed and included in the output as an extra column.
 
@@ -111,18 +107,8 @@ towns:
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   embark_town,class,size
-   Cherbourg,First,85
-   Cherbourg,Second,17
-   Cherbourg,Third,66
-   Queenstown,First,2
-   Queenstown,Second,3
-   Queenstown,Third,72
-   Southampton,First,127
-   Southampton,Second,164
-   Southampton,Third,353
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.class.txt
+   :language: none
 
 Now there are nine groups in the result - we have three unique towns, and each of those towns boarded passengers from three unique ticket classes.
 
@@ -134,27 +120,8 @@ We can extend this even further by using ``sex`` as another key column:
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   embark_town,class,sex,size
-   Cherbourg,First,female,43
-   Cherbourg,First,male,42
-   Cherbourg,Second,female,7
-   Cherbourg,Second,male,10
-   Cherbourg,Third,female,23
-   Cherbourg,Third,male,43
-   Queenstown,First,female,1
-   Queenstown,First,male,1
-   Queenstown,Second,female,2
-   Queenstown,Second,male,1
-   Queenstown,Third,female,33
-   Queenstown,Third,male,39
-   Southampton,First,female,48
-   Southampton,First,male,79
-   Southampton,Second,female,67
-   Southampton,Second,male,97
-   Southampton,Third,female,88
-   Southampton,Third,male,265
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.class.sex.txt
+   :language: none
 
 Missing values in the key columns
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -193,12 +160,8 @@ For example, we could group rows in ``titanic.csv`` by the ``embark_town`` colum
 
 The output of the above command is as follows, with the new aggregated column called ``age_mean``:
 
-.. code-block:: text
-
-    embark_town,age_mean
-    Cherbourg,30.81476923076923
-    Queenstown,28.089285714285715
-    Southampton,29.44539711191336
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.age.mean.txt
+   :language: none
 
 As demonstrated in this example, when aggregating data within groups,
 new column names are created using the name of the ``--val`` column concatenated with the ``--fun`` name, and separated by an underscore.
@@ -211,12 +174,8 @@ Extending this further, we could also compute the maximum and minimum age of pas
 
 The output of the above command is as follows, with extra columns ``age_max`` and ``age_min``:
 
-.. code-block:: text
-
-    embark_town,age_mean,age_max,age_min
-    Cherbourg,30.81476923076923,71.0,0.42
-    Queenstown,28.089285714285715,70.5,2.0
-    Southampton,29.44539711191336,80.0,0.67
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.age.mean.max.min.txt
+   :language: none
 
 And yes, there are some unusual fractional ages in the dataset - the minimum age of Cherbourg passengers really is 0.42.
 
@@ -229,12 +188,8 @@ It is also possible to specify multiple columns for aggregation:
 In this scenario each ``--val`` column is aggregated by each ``--fun`` function. In the above example 2 columns are aggregated by
 3 functions, yielding 6 additional output columns for each group:
 
-.. code-block:: text
-
-   embark_town,age_mean,age_max,age_min,fare_mean,fare_max,fare_min
-   Cherbourg,30.81476923076923,71.0,0.42,59.95414404761905,512.3292,4.0125
-   Queenstown,28.089285714285715,70.5,2.0,13.27602987012987,90.0,6.75
-   Southampton,29.44539711191336,80.0,0.67,27.079811801242233,263.0,0.0
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.age.fare.mean.max.min.txt
+   :language: none
 
 It is also possible to group on multiple columns and aggregate on multiple other columns at the same time, for example:
 
@@ -244,18 +199,8 @@ It is also possible to group on multiple columns and aggregate on multiple other
 
 The above command yields the following output:
 
-.. code-block:: text
-
-    embark_town,class,age_mean,age_max,age_min,fare_mean,fare_max,fare_min
-    Cherbourg,First,38.027027027027025,71.0,16.0,104.71852941176472,512.3292,26.55
-    Cherbourg,Second,22.766666666666666,36.0,1.0,25.358335294117648,41.5792,12.0
-    Cherbourg,Third,20.741951219512195,45.5,0.42,11.214083333333333,22.3583,4.0125
-    Queenstown,First,38.5,44.0,33.0,90.0,90.0,90.0
-    Queenstown,Second,43.5,57.0,30.0,12.35,12.35,12.35
-    Queenstown,Third,25.9375,70.5,2.0,11.183393055555555,29.125,6.75
-    Southampton,First,38.15203703703704,80.0,0.92,70.3648622047244,263.0,0.0
-    Southampton,Second,30.38673076923077,70.0,0.67,20.327439024390245,73.5,0.0
-    Southampton,Third,25.69655172413793,74.0,1.0,14.64408300283286,69.55,0.0
+.. literalinclude:: example_outputs/titanic.groupby.embark_town.class.age.fare.mean.max.min.txt
+   :language: none
 
 Allowed aggregation functions 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

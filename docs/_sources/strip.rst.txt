@@ -41,7 +41,7 @@ Arguments
      - controlling the order of the plotted strips 
      - :ref:`order <strip_order>`
    * - ``--hue COLUMN``
-     - group columns by hue
+     - colour and/or group columns by hue 
      - :ref:`hue <strip_hue>`
    * - ``--dodge``
      - separate hue levels along the categorical axis  
@@ -94,7 +94,7 @@ Strip plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 The output of the above command is written to ``strip.age.png``:
 
-.. image:: ../images/strip.age.png 
+.. image:: ../docs/_images/strip.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -111,7 +111,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 The output of the above command is written to ``strip.class.age.png``:
 
-.. image:: ../images/strip.class.age.png 
+.. image:: ../docs/_images/strip.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -166,7 +166,7 @@ where the boxes are plotted horizontally:
 
     gurita strip -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/strip.age.class.png 
+.. image:: ../docs/_images/strip.age.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -192,7 +192,7 @@ In the following example the strip columns of the ``class`` column are displayed
 
     gurita strip -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/strip.class.age.order.png 
+.. image:: ../docs/_images/strip.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -202,14 +202,28 @@ In the following example the strip columns of the ``class`` column are displayed
 
 .. _strip_hue:
 
-Grouping columns with hue 
---------------------------
+Colour and/or group columns with hue
+------------------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical column with the ``--hue`` argument.
+Each box can be coloured and optionally subdivided into additional categories with the ``--hue`` argument.
+     
+The following example generates a strip plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:
+       
+.. code-block:: bash 
+     
+    gurita strip -y age -x class --hue class < titanic.csv
+     
+.. image:: ../docs/_images/strip.class.age.hue.png
+       :width: 700px
+       :height: 600px 
+       :align: center
+       :alt: Strip plot showing the distribution of age for each class in the titanic data set, grouped by class and coloured by class 
+
+|
 
 In the following example the distribution of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
@@ -217,7 +231,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
     gurita strip -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/strip.class.age.sex.png 
+.. image:: ../docs/_images/strip.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -236,7 +250,7 @@ The ``--dodge`` argument will separate hue levels along the categorical axis, ra
 
     gurita strip -y age -x class --hue sex --dodge < titanic.csv
 
-.. image:: ../images/strip.class.age.sex.dodge.png 
+.. image:: ../docs/_images/strip.class.age.sex.dodge.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -255,7 +269,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita strip -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/strip.class.age.sex.hueorder.png 
+.. image:: ../docs/_images/strip.class.age.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -270,7 +284,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita strip -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/strip.class.age.sex.order.hueorder.png 
+.. image:: ../docs/_images/strip.class.age.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -299,7 +313,7 @@ For example, you can display a log scale strip plot for the ``age`` column group
 
     gurita strip -y age -x class --logy < titanic.csv 
 
-.. image:: ../images/strip.class.age.logy.png 
+.. image:: ../docs/_images/strip.class.age.logy.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -330,7 +344,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     gurita strip -y age -x class --ylim 10 30 < titanic.csv
 
-.. image:: ../images/strip.class.age.ylim.png 
+.. image:: ../docs/_images/strip.class.age.ylim.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -356,7 +370,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
     gurita strip -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/strip.class.age.sex.facet.png
+.. image:: ../docs/_images/strip.class.age.sex.facet.png
        :width: 600px
        :height: 300px 
        :align: center

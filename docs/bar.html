@@ -66,7 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#standard-deviaiton">Standard deviaiton</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#confidence-interval">Confidence interval</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controlling-the-order-of-the-bars">Controlling the order of the bars</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#grouping-columns-with-hue">Grouping columns with hue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colour-and-or-group-columns-with-hue">Colour and/or group columns with hue</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#log-scale">Log scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#axis-range-limits">Axis range limits</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#facets">Facets</a></li>
@@ -180,7 +180,7 @@ Default: v.</p></td>
 <td><p>Function to compute point estimate of numerical column</p></td>
 <td><p><a class="reference internal" href="#bar-estimator"><span class="std std-ref">estimator</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--std</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--sd</span> <span class="pre">[NUM]</span></code></p></td>
 <td><p>show standard deviation of numerical column as error bar</p></td>
 <td><p><a class="reference internal" href="#standard-deviation"><span class="std std-ref">standard deviation error bar</span></a></p></td>
 </tr>
@@ -193,7 +193,7 @@ Default: v.</p></td>
 <td><p><a class="reference internal" href="#bar-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
-<td><p>group columns by hue</p></td>
+<td><p>colour and/or group columns by hue</p></td>
 <td><p><a class="reference internal" href="#bar-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
@@ -306,9 +306,10 @@ can be chosen using the <code class="docutils literal notranslate"><span class="
 </section>
 <section id="standard-deviaiton">
 <span id="standard-deviation"></span><h2>Standard deviaiton<a class="headerlink" href="#standard-deviaiton" title="Permalink to this headline"></a></h2>
-<p>The standard deviation of the numerical column can be shown as an error bar with the <code class="docutils literal notranslate"><span class="pre">--std</span></code> argument.</p>
+<p>The standard deviation of the numerical column can be shown as an error bar with the <code class="docutils literal notranslate"><span class="pre">--sd</span></code> argument.</p>
 <p>For example the mean and standard deviation of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --std &lt; titanic.csv
+<p>By default, if <code class="docutils literal notranslate"><span class="pre">--sd</span></code> is specified without a numerical argument, then +/- 1 standard deviation from the mean is shown, but this can be changed by supplying a specific numeric value.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --sd &lt; titanic.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/bar.class.age.std.png"><img alt="Bar plot showing the mean of age for each class in the titanic data set" class="align-center" src="_images/bar.class.age.std.png" style="width: 600px; height: 600px;" /></a>
@@ -345,12 +346,20 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="grouping-columns-with-hue">
-<span id="bar-hue"></span><h2>Grouping columns with hue<a class="headerlink" href="#grouping-columns-with-hue" title="Permalink to this headline"></a></h2>
+<section id="colour-and-or-group-columns-with-hue">
+<span id="bar-hue"></span><h2>Colour and/or group columns with hue<a class="headerlink" href="#colour-and-or-group-columns-with-hue" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The data can be further grouped by an additional categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>Each bar can be coloured and optionally subdivided into additional categories with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>The following example generates a bar plot showing the mean age of titanic passengers across the three different ticket classes, where each class is coloured differently:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --hue class &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/bar.class.age.sex.hue.png"><img alt="Bar plot showing the mean of age for each class in the titanic data set, grouped by class and sex" class="align-center" src="_images/bar.class.age.sex.hue.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>In the following example the mean and error of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --hue sex &lt; titanic.csv
 </pre></div>
@@ -411,6 +420,10 @@ Note carefully that the numerical
 data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the mean:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita bar -y age -x class --ylim 10 30 &lt; titanic.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/bar.class.age.ylim.png"><img alt="Bar plot showing the mean of age for each class in the titanic data set, with the Y axis limited to between 10 to 30" class="align-center" src="_images/bar.class.age.ylim.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="facets">

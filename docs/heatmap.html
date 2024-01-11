@@ -261,7 +261,7 @@ If your data is not in this format it may be possible to transform it into this 
 </pre></div>
 </div>
 <p>The colour map used in the heatmap can be set explicitly using <code class="docutils literal notranslate"><span class="pre">--cmap</span></code> with the name of the colour map as its argument.</p>
-<p>Gurita uses <a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html/">Matlplotlib’s colour map names</a> (because Gurita uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/</p>
+<p>Gurita uses <a class="reference external" href="https://matplotlib.org/stable/gallery/color/colormap_reference.html/">Matlplotlib’s colour map names</a> (because Gurita uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib).</p>
 <p>The example below uses the <code class="docutils literal notranslate"><span class="pre">YlOrRd</span></code> (yellow-orange-red) colour map:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --cmap YlOrRd &lt; flights.csv
 </pre></div>
@@ -299,7 +299,7 @@ a decimal integer.</p>
 It is possible to set one or both bounds at the same time.</p>
 <p>In the example below the lower bound is set to 250 and the upper bound is set to 550. Values outside these bounds are clamped to the bounding values.</p>
 <p>We observe that in this example data set it wasn’t until the early 1950s that the number of passengers per flight exceeded 250, hence the predominance of black cells in the top part of the plot.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --vmin 250 --vmax 550  &lt; flights.csv
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita heatmap -y year -x month -v passengers --vmin 250 --vmax 550 &lt; flights.csv
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/heatmap.month.year.vmin.vmax.png"><img alt="Heatmap showing the number of passengers by month and year in the flights.csv data set, with the minimum and maximum range of values specified." class="align-center" src="_images/heatmap.month.year.vmin.vmax.png" style="width: 600px; height: 600px;" /></a>

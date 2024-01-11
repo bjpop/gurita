@@ -43,12 +43,8 @@ Get the unique values in the ``species`` column in the ``iris.csv`` file:
 
 The output of the above command is:
 
-.. code-block:: text
-
-   species_unique
-   setosa
-   versicolor
-   virginica
+.. literalinclude:: example_outputs/iris.unique.species.txt
+   :language: none
 
 The output is a new table with one column called ``species_unique``. The rows in the new column list all the unique values from the ``species`` column in the input data. 
 
@@ -64,12 +60,8 @@ The following example passes the output of ``unique`` is the ``sort`` command, w
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   species_unique
-   virginica
-   versicolor
-   setosa
+.. literalinclude:: example_outputs/iris.unique.species.sort.species_unique.order.d.txt
+   :language: none
 
 The above output shows the same unique values as the original example, the only difference is that the values are shown in a different order. 
 
@@ -108,11 +100,5 @@ For example, the following command generates the unique values in the ``class`` 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   class_unique
-   Third
-   First
-   Second
-
-
+.. literalinclude:: example_outputs/titanic.unique.class.txt
+   :language: none

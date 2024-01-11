@@ -31,6 +31,7 @@ A pretty display of the first and last 5 rows of the data can be viewed using th
 The command generates the following output that is displayed on the terminal:
 
 .. literalinclude:: example_outputs/iris_pretty.txt 
+   :language: none
 
 The following command generates a box plot from ``iris.csv``, such that the Y-axis
 represents the ``sepal_length`` numerical column, and the X-axis is grouped by the ``species`` categorical column.
@@ -60,6 +61,7 @@ following ``groupby`` command:
    cat iris.csv | gurita groupby --key species --val sepal_length --fun median 
 
 .. literalinclude:: example_outputs/iris_groupby_species_sepal_length_median.txt
+   :language: none
 
 You can see that the corresponding median values match up with the values shown in the box plot.
 

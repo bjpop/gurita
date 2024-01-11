@@ -140,11 +140,8 @@ The ``pivot`` command can convert the data into "wide format", as demonstrated i
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   person,fri,level,mon,thu,tue,wed
-   Alice,4,A1,8,1,8,4
-   Bob,0,B3,0,6,0,4
+.. literalinclude:: example_outputs/example.pivot.person.feature.val.txt
+   :language: none
 
 In this example the ``person`` column is used as the index of the output data; it acts like a key for the new rows. There are two distinct values for ``person`` (``Alice`` and ``Bob``), so there are two rows in the output data.
 
@@ -161,15 +158,8 @@ As an alternative example, we could pivot the data in a different way, by using 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    feature,Alice,Bob
-    fri,4,0
-    level,A1,B3
-    mon,8,0
-    thu,1,6
-    tue,8,0
-    wed,4,4
+.. literalinclude:: example_outputs/example.pivot.feature.person.val.txt
+   :language: none
 
 In this example there are six values in the ``feature`` column, so there are correspondingly six rows in the output. Also, the two unique values in the ``person`` column have been unstacked into two new columns in the output. 
 
@@ -184,21 +174,8 @@ pivoted data in wide format back to an equivalent of the input long format:
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    person,feature,val
-    Alice,mon,8
-    Bob,mon,0
-    Alice,tue,8
-    Bob,tue,0
-    Alice,wed,4
-    Bob,wed,4
-    Alice,thu,1
-    Bob,thu,6
-    Alice,fri,4
-    Bob,fri,0
-    Alice,level,A1
-    Bob,level,B3
+.. literalinclude:: example_outputs/example.pivot.person.feature.val.melt.txt
+   :language: none
 
 .. code-block:: text
 
@@ -206,21 +183,8 @@ The output of the above command is as follows:
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   feature,person,val
-   fri,Alice,4
-   level,Alice,A1
-   mon,Alice,8
-   thu,Alice,1
-   tue,Alice,8
-   wed,Alice,4
-   fri,Bob,0
-   level,Bob,B3
-   mon,Bob,0
-   thu,Bob,6
-   tue,Bob,0
-   wed,Bob,4
+.. literalinclude:: example_outputs/example.pivot.person.feature.val.melt.alice.bob.txt
+   :language: none
 
 Note that in both examples using ``pivot`` followed by ``melt`` the output data is not in 
 *exactly* the same order as the origial input data. Some of the rows and columns have been 
@@ -249,19 +213,16 @@ Consider the following modified version of the data set from above, where the ro
    Alice,fri,4
    Bob,fri,0
 
-We can pivot the data as before with the following command:
+We can pivot the data as before with the following command (suppose the input file is now called ``missing.csv``):
 
 .. code-block:: text
 
-    gurita pivot -i person -c feature -v val < example.csv
+    gurita pivot -i person -c feature -v val < missing.csv
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-   person,fri,level,mon,thu,tue,wed
-   Alice,4,,8,1,8,4
-   Bob,0,B3,0,6,0,4
+.. literalinclude:: example_outputs/example.pivot.person.feature.val.missing.txt
+   :language: none
 
 The ``level`` column exists, as before, in the output. This is because ``level`` appears in the input ``feature`` column.
 
@@ -281,14 +242,20 @@ the missing ``level`` associated with ``Alice``. Similarly for other missing dat
 Missing data can be removed from the dataset using the :doc:`dropna <dropna>` command.
 
 .. _pivot_index_columns:
+.. _pivot_columns:
+.. _pivot_value_columns:
 
-Specifying columns to act as an index 
--------------------------------------
+Reshaping data
+--------------
 
 .. code-block:: text
 
     -i COLUMN [COLUMN ...]
     --index COLUMN [COLUMN ...]
+    -c COLUMN [COLUMN ...]
+    --cols COLUMN [COLUMN ...]
+    -v COLUMN [COLUMN ...]
+    --vals COLUMN [COLUMN ...]
 
 When unstacking a dataset the ``pivot`` command groups data together into output rows 
 using an *index* (or a key), computed from one or more input columns. This is a required
@@ -323,14 +290,8 @@ One way to convert the data into wide format is to group data into output rows b
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    person,level,mon,sun,tue
-    Alice,A1,8,0,8
-    Bob,B3,0,4,0
-    Diego,C2,7,3,7
-    Imani,A2,8,0,8
-    Wei,B1,0,0,8
+.. literalinclude:: example_outputs/example.pivot.person.level.variable.value.txt
+   :language: none
 
 In this case we can see that the output rows are indexed by a key formed from the ``person`` and ``level`` input columns. For instance all entries for ``Alice`` and ``A1`` are grouped together.
 
@@ -342,39 +303,8 @@ In a more contrived example, we could form an index from the ``level`` and ``var
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-    level,variable,Alice,Bob,Diego,Imani,Wei
-    A1,mon,8.0,,,,
-    A1,sun,0.0,,,,
-    A1,tue,8.0,,,,
-    A2,mon,,,,8.0,
-    A2,sun,,,,0.0,
-    A2,tue,,,,8.0,
-    B1,mon,,,,,0.0
-    B1,sun,,,,,0.0
-    B1,tue,,,,,8.0
-    B3,mon,,0.0,,,
-    B3,sun,,4.0,,,
-    B3,tue,,0.0,,,
-    C2,mon,,,7.0,,
-    C2,sun,,,3.0,,
-    C2,tue,,,7.0,,
-
-.. _pivot_columns:
-
-Specifying columns to pivot
----------------------------
-
-.. _pivot_value_columns:
-
-Specifying columns to pivot
----------------------------
-
-.. code-block:: text
-
-    -v COLUMN [COLUMN ...]
-    --vals COLUMN [COLUMN ...]
+.. literalinclude:: example_outputs/example.pivot.level.variable.person.value.txt
+   :language: none
 
 .. _pivot_fun:
 
@@ -426,11 +356,8 @@ For example, we could use ``-f sample`` to pick a random value from the collecti
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    person,fri,level,mon,thu,tue,wed
-    Alice,4,A1,8,1,8,4
-    Bob,0,B3,0,6,0,4
+.. literalinclude:: example_outputs/example.pivot.person.feature.val.sample.txt
+   :language: none
 
 Note that the output may differ each time the command is run because it chooses a ``level`` value for ``Alice`` at random.
 

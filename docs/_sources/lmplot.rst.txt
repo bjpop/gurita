@@ -66,7 +66,7 @@ A lmplot showing the relationship between ``sepal_length`` and ``petal_length`` 
 
 The output of the above command is written to ``lmplot.sepal_length.petal_length.png``.
 
-.. image:: ../images/lmplot.sepal_length.petal_length.png
+.. image:: ../docs/_images/lmplot.sepal_length.petal_length.png
        :width: 600px
        :height: 600px
        :align: center
@@ -119,7 +119,7 @@ grouped by their corresponding categorical ``day`` value, and a linear model is 
 
     gurita lmplot -x sepal_length -y petal_length --hue species < iris.csv
 
-.. image:: ../images/lmplot.sepal_length.petal_length.species.png 
+.. image:: ../docs/_images/lmplot.sepal_length.petal_length.species.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -152,7 +152,7 @@ For example the following command produces an lmplot comparing ``sepal_length`` 
 
     gurita lmplot -x sepal_length -y petal_length --fcol species < iris.csv 
 
-.. image:: ../images/lmplot.sepal_length.petal_length.species.facets.png 
+.. image:: ../docs/_images/lmplot.sepal_length.petal_length.species.facets.png 
        :width: 600px
        :height: 300px
        :align: center

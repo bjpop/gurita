@@ -70,7 +70,7 @@ The idea with command chaining is to build a *pipeline* of data transformation a
 
 The most important detail about command chaining is that data flows from left to right in the chain, as illustrated in the following diagram:
 
-.. image:: ../images/gurita_command_chain_data_flow.png
+.. image:: ../docs/_images/gurita_command_chain_data_flow.png
        :align: center
        :alt: Illustration of data flow direction in Gurita command chain 
 

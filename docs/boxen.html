@@ -65,7 +65,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#selecting-columns-to-plot">Selecting columns to plot</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controlling-the-order-of-the-boxes">Controlling the order of the boxes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#grouping-columns-with-hue">Grouping columns with hue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#colour-and-or-group-columns-with-hue">Colour and/or group columns with hue</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#log-scale">Log scale</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#axis-range-limits">Axis range limits</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#facets">Facets</a></li>
@@ -175,7 +175,7 @@
 <td><p><a class="reference internal" href="#boxen-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
-<td><p>group columns by hue</p></td>
+<td><p>colour and/or group columns by hue</p></td>
 <td><p><a class="reference internal" href="#boxen-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE...]</span></code></p></td>
@@ -301,12 +301,20 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="grouping-columns-with-hue">
-<span id="boxen-hue"></span><h2>Grouping columns with hue<a class="headerlink" href="#grouping-columns-with-hue" title="Permalink to this headline"></a></h2>
+<section id="colour-and-or-group-columns-with-hue">
+<span id="boxen-hue"></span><h2>Colour and/or group columns with hue<a class="headerlink" href="#colour-and-or-group-columns-with-hue" title="Permalink to this headline"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span> <span class="p">[</span><span class="n">COLUMN</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>The data can be further grouped by an additional categorical column with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>Each box can be coloured and optionally subdivided into additional categories with the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>The following example generates a boxen plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --hue class &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/boxen.class.age.hue.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set, coloured by class" class="align-center" src="_images/boxen.class.age.hue.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>In the following example the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is shown for each value in the <code class="docutils literal notranslate"><span class="pre">class</span></code> column, and further sub-divided by the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --hue sex &lt; titanic.csv
 </pre></div>
@@ -345,8 +353,12 @@ the order of both the <code class="docutils literal notranslate"><span class="pr
 <p>It only makes sense to log-scale the numerical axis (and not the categorical axis). Therefore, <code class="docutils literal notranslate"><span class="pre">--logx</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-x</span></code>, and
 conversely, <code class="docutils literal notranslate"><span class="pre">--logy</span></code> should be used when numerical columns are selected with <code class="docutils literal notranslate"><span class="pre">-y</span></code>.</p>
 <p>For example, you can display a log scale boxen plot for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so. Note carefully that the numerical data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--logy</span></code> argument should be used to log-scale the numerical distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --logy -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --logy &lt; titanic.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/boxen.class.age.logy.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale" class="align-center" src="_images/boxen.class.age.logy.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="axis-range-limits">
@@ -361,8 +373,12 @@ conversely, <code class="docutils literal notranslate"><span class="pre">--ylim<
 <p>For example, you can display range-limited range for the <code class="docutils literal notranslate"><span class="pre">age</span></code> column grouped by <code class="docutils literal notranslate"><span class="pre">class</span></code> (when the distribution of <code class="docutils literal notranslate"><span class="pre">age</span></code> is displayed on the Y axis) like so.
 Note carefully that the numerical
 data is displayed on the Y-axis (<code class="docutils literal notranslate"><span class="pre">-y</span></code>), therefore the <code class="docutils literal notranslate"><span class="pre">--ylim</span></code> argument should be used to range-limit the distribution:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> -- titanic.csv
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --ylim <span class="m">10</span> <span class="m">30</span> &lt; titanic.csv
 </pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/boxen.class.age.limy.png"><img alt="Boxen plot showing the distribution of age for each class in the titanic data set, with Y axis in log scale" class="align-center" src="_images/boxen.class.age.limy.png" style="width: 700px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </section>
 <section id="facets">
@@ -375,6 +391,14 @@ data is displayed on the Y-axis (<code class="docutils literal notranslate"><spa
 <p>Boxen plots can be further divided into facets, generating a matrix of boxen plots, where a numerical value is
 further categorised by up to 2 more categorical columns.</p>
 <p>See the <a class="reference internal" href="facets.html"><span class="doc">facet documentation</span></a> for more information on this feature.</p>
+<p>The following command creates a faceted boxen plot where the <code class="docutils literal notranslate"><span class="pre">sex</span></code> column is used to determine the facet columns:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita boxen -y age -x class --fcol sex &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/boxen.class.age.sex.facet.png"><img alt="Boxen plot showing the mean of age for each class in the titanic data set grouped by class, using sex to determine the plot facets" class="align-center" src="_images/boxen.class.age.sex.facet.png" style="width: 600px; height: 300px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
 </section>
 

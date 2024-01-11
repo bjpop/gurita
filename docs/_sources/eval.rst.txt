@@ -99,14 +99,8 @@ We can see the effect of the above example ``eval`` statment by viewing the firs
 
 The output of the above command is shown below:
 
-.. code-block:: text
-
-    sepal_length,sepal_width,petal_length,petal_width,species,sepal_area
-    5.1,3.5,1.4,0.2,setosa,8.924999999999999
-    4.9,3.0,1.4,0.2,setosa,7.3500000000000005
-    4.7,3.2,1.3,0.2,setosa,7.5200000000000005
-    4.6,3.1,1.5,0.2,setosa,7.13
-    5.0,3.6,1.4,0.2,setosa,9.0
+.. literalinclude:: example_outputs/iris.eval.head.txt
+   :language: none
 
 As you can see a new column called ``sepal_area`` has been added to the data, such that the value on each row is computed from the supplied expression.
 
@@ -115,6 +109,14 @@ Complex example
 
 Suppose we have a dataset in a file called ``points.csv`` with numerical columns ``x1``, ``y1``, ``x2``, ``y2``, representing pairs of points in the cartesian plane: ``(x1, y1)`` and ``(x2, y2)``.
 
+.. code-block:: text
+    
+   x1,y1,x2,y2
+   0,0,3,4
+   10,0,10,0
+   18,12,-4,55
+
+
 A new column called ``dist`` representing the cartesian distance between the pairs of points can be created with ``eval`` like so:
 
 .. code-block:: text
@@ -122,6 +124,11 @@ A new column called ``dist`` representing the cartesian distance between the pai
      gurita eval 'dist = sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)' < points.csv 
 
 Some notable features of this example expression include the use of a mathematical function ``sqrt``, parentheses for grouping sub-expressions, and the use of various mathematical operators ``+``, ``-`` and ``**`` (exponentiation).
+
+The output of the above command is the new table below, which has the extra columns called ``dist``:
+
+.. literalinclude:: example_outputs/points.eval.sqrt.txt
+   :language: none
 
 A more detailed description of the expression syntax is provided below.
 
@@ -189,7 +196,6 @@ given to the new column added to the data:
 .. code-block:: text
 
    gurita eval 'sepal_area = sepal_length * sepal_width * 0.5' < iris.csv
-
 
 Column names that cannot be written like ordinary Python variables must be written inside back-quotes. For instance, column names can have spaces in them, but Python variable names cannot.
 

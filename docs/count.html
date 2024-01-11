@@ -171,7 +171,7 @@
 <td><p><a class="reference internal" href="#count-order"><span class="std std-ref">order</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hue</span> <span class="pre">COLUMN</span></code></p></td>
-<td><p>group columns by hue</p></td>
+<td><p>colour and/or group columns by hue</p></td>
 <td><p><a class="reference internal" href="#count-hue"><span class="std std-ref">hue</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--hueorder</span> <span class="pre">VALUE</span> <span class="pre">[VALUE</span> <span class="pre">...]</span></code></p></td>
@@ -281,7 +281,15 @@ This can be overridden with the <code class="docutils literal notranslate"><span
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">hue</span> <span class="n">COLUMN</span>
 </pre></div>
 </div>
-<p>The column being counted can be grouped based on another categorical column using the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>The column being counted can be coloured and/or grouped based on another categorical column using the <code class="docutils literal notranslate"><span class="pre">--hue</span></code> argument.</p>
+<p>In the following example the counts of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> are coloured separately:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita count -x embark_town --hue embark_town &lt; titanic.csv
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/count.embark_town.hue.png"><img alt="Count plot showing the frequency of the categorical values in the embark_town column from the titanic.csv file, coloured separately" class="align-center" src="_images/count.embark_town.hue.png" style="width: 600px; height: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>In the following example the counts of the <code class="docutils literal notranslate"><span class="pre">embark_town</span></code> column are grouped by the <code class="docutils literal notranslate"><span class="pre">class</span></code> column from the titanic data set:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita count -x embark_town --hue class &lt; titanic.csv
 </pre></div>
@@ -344,6 +352,7 @@ data is displayed on the X-axis (<code class="docutils literal notranslate"><spa
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gurita count -x embark_town --ylim <span class="m">100</span> <span class="m">300</span> &lt; titanic.csv
 </pre></div>
 </div>
+<a class="reference internal image-reference" href="_images/count.embark_town.limy.png"><img alt="Count plot showing the count of embarm_town in the titanic data set, with Y axis limited in range" class="align-center" src="_images/count.embark_town.limy.png" style="width: 700px; height: 600px;" /></a>
 </section>
 <section id="facets">
 <span id="count-facets"></span><h2>Facets<a class="headerlink" href="#facets" title="Permalink to this headline"></a></h2>

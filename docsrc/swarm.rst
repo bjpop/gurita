@@ -41,7 +41,7 @@ Arguments
      - controlling the order of the plotted swarms 
      - :ref:`order <swarm_order>`
    * - ``--hue COLUMN``
-     - group columns by hue
+     - colour and/or group columns by hue 
      - :ref:`hue <swarm_hue>`
    * - ``--dodge``
      - separate hue levels along the categorical axis
@@ -100,7 +100,7 @@ Swarm plot of the ``age`` numerical column from the ``titanic.csv`` input file:
 
 The output of the above command is written to ``swarm.age.png``:
 
-.. image:: ../images/swarm.age.png 
+.. image:: ../docs/_images/swarm.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -117,7 +117,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
 The output of the above command is written to ``swarm.class.age.png``:
 
-.. image:: ../images/swarm.class.age.png 
+.. image:: ../docs/_images/swarm.class.age.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -172,7 +172,7 @@ where the boxes are plotted horizontally:
 
     gurita swarm -x age -y class --orient h < titanic.csv
 
-.. image:: ../images/swarm.age.class.png 
+.. image:: ../docs/_images/swarm.age.class.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -198,7 +198,7 @@ In the following example the swarm columns of the ``class`` column are displayed
 
     gurita swarm -y age -x class --order First Second Third < titanic.csv
 
-.. image:: ../images/swarm.class.age.order.png 
+.. image:: ../docs/_images/swarm.class.age.order.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -208,14 +208,28 @@ In the following example the swarm columns of the ``class`` column are displayed
 
 .. _swarm_hue:
 
-Grouping columns with hue 
---------------------------
+Colour and/or group columns with hue
+------------------------------------
 
 .. code-block:: 
 
   --hue COLUMN
 
-The data can be further grouped by an additional categorical column with the ``--hue`` argument.
+Each swrm can be coloured and optionally subdivided into additional categories with the ``--hue`` argument.
+     
+The following example generates a swarm plot showing the distribution of the age of titanic passengers across the three different ticket classes, where each class is coloured differently:
+       
+.. code-block:: bash 
+     
+    gurita swarm -y age -x class --hue class < titanic.csv
+     
+.. image:: ../docs/_images/swarm.class.age.hue.png
+       :width: 700px
+       :height: 600px 
+       :align: center
+       :alt: Swarm plot showing the distribution of age for each class in the titanic data set, grouped by class and coloured by class
+     
+|    
 
 In the following example the distribution of ``age`` is shown for each value in the ``class`` column, and further sub-divided by the ``sex`` column:
 
@@ -223,7 +237,7 @@ In the following example the distribution of ``age`` is shown for each value in 
 
     gurita swarm -y age -x class --hue sex < titanic.csv
 
-.. image:: ../images/swarm.class.age.sex.png 
+.. image:: ../docs/_images/swarm.class.age.sex.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -242,7 +256,7 @@ The ``--dodge`` argument will separate hue levels along the categorical axis, ra
 
     gurita swarm -y age -x class --hue sex --dodge < titanic.csv
 
-.. image:: ../images/swarm.class.age.sex.dodge.png 
+.. image:: ../docs/_images/swarm.class.age.sex.dodge.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -261,7 +275,7 @@ In the following example the ``sex`` values are displayed in the order of ``fema
 
     gurita swarm -y age -x class --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/swarm.class.age.sex.hueorder.png 
+.. image:: ../docs/_images/swarm.class.age.sex.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -276,7 +290,7 @@ the order of both the ``class`` and ``sex`` categorical columns:
 
     gurita swarm -y age -x class --order First Second Third --hue sex --hueorder female male < titanic.csv
 
-.. image:: ../images/swarm.class.age.sex.order.hueorder.png 
+.. image:: ../docs/_images/swarm.class.age.sex.order.hueorder.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -305,7 +319,7 @@ For example, you can display a log scale swarm plot for the ``age`` column group
 
     gurita swarm -y age -x class --logy < titanic.csv 
 
-.. image:: ../images/swarm.class.age.logy.png 
+.. image:: ../docs/_images/swarm.class.age.logy.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -336,7 +350,7 @@ data is displayed on the Y-axis (``-y``), therefore the ``--ylim`` argument shou
 
     gurita swarm -y age -x class --ylim 10 30 < titanic.csv
 
-.. image:: ../images/swarm.class.age.ylim.png 
+.. image:: ../docs/_images/swarm.class.age.ylim.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -366,7 +380,7 @@ The follow command creates a faceted swarm plot where the ``sex`` column is used
 
     gurita swarm -y age -x class --fcol sex < titanic.csv
 
-.. image:: ../images/swarm.class.age.sex.facets.png 
+.. image:: ../docs/_images/swarm.class.age.sex.facets.png 
        :width: 600px
        :height: 300px
        :align: center

@@ -87,7 +87,7 @@ in the ``flights.csv`` data set:
 
 The output of the above command is written to ``heatmap.month.year.png``:
 
-.. image:: ../images/heatmap.month.year.png 
+.. image:: ../docs/_images/heatmap.month.year.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -126,7 +126,7 @@ The example below shows the same heatmap :ref:`the simple example above <heatmap
 
     gurita heatmap -y month -x year -v passengers < flights.csv
 
-.. image:: ../images/heatmap.year.month.png 
+.. image:: ../docs/_images/heatmap.year.month.png 
        :width: 600px
        :height: 500px
        :align: center
@@ -145,7 +145,7 @@ Colour map
 
 The colour map used in the heatmap can be set explicitly using ``--cmap`` with the name of the colour map as its argument.
 
-Gurita uses `Matlplotlib's colour map names <https://matplotlib.org/stable/gallery/color/colormap_reference.html/>`_ (because Gurita uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib)/ 
+Gurita uses `Matlplotlib's colour map names <https://matplotlib.org/stable/gallery/color/colormap_reference.html/>`_ (because Gurita uses Seaborn to draw that heatmap, and Seaborn is built on top of Matplotlib).
 
 The example below uses the ``YlOrRd`` (yellow-orange-red) colour map:
 
@@ -153,7 +153,7 @@ The example below uses the ``YlOrRd`` (yellow-orange-red) colour map:
 
     gurita heatmap -y year -x month -v passengers --cmap YlOrRd < flights.csv  
 
-.. image:: ../images/heatmap.month.year.cmap.png 
+.. image:: ../docs/_images/heatmap.month.year.cmap.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -186,7 +186,7 @@ For real numbers (floating point) you may want to use a format like ``.2g`` whic
 
     gurita heatmap -y year -x month -v passengers --annot < flights.csv  
 
-.. image:: ../images/heatmap.month.year.annot.png 
+.. image:: ../docs/_images/heatmap.month.year.annot.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -216,9 +216,9 @@ We observe that in this example data set it wasn't until the early 1950s that th
 
 .. code-block:: text
 
-   gurita heatmap -y year -x month -v passengers --vmin 250 --vmax 550  < flights.csv
+   gurita heatmap -y year -x month -v passengers --vmin 250 --vmax 550 < flights.csv
 
-.. image:: ../images/heatmap.month.year.vmin.vmax.png 
+.. image:: ../docs/_images/heatmap.month.year.vmin.vmax.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -233,7 +233,7 @@ Note that ``--robust`` may not be used at the same time as ``--vmin`` and/or ``-
 
    gurita heatmap -y year -x month -v passengers --robust < flights.csv
 
-.. image:: ../images/heatmap.month.year.robust.png 
+.. image:: ../docs/_images/heatmap.month.year.robust.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -275,7 +275,7 @@ The example below generates a heatmap with the values on the Y axes displayed in
 
    gurita heatmap -y year -x month -v passengers --sorty d < flights.csv
 
-.. image:: ../images/heatmap.month.year.sorty.png
+.. image:: ../docs/_images/heatmap.month.year.sorty.png
        :width: 600px
        :height: 600px
        :align: center
@@ -289,7 +289,7 @@ The example below generates a heatmap with the first four values on the X axis s
 
    gurita heatmap -y year -x month -v passengers --orderx January February March April < flights.csv
 
-.. image:: ../images/heatmap.month.year.orderx.png
+.. image:: ../docs/_images/heatmap.month.year.orderx.png
        :width: 600px
        :height: 600px
        :align: center

@@ -111,24 +111,8 @@ The output of the above command has 45 data rows. We can use ``head`` to look at
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    variable,value
-    person,Alice
-    person,Bob
-    person,Wei
-    person,Imani
-    person,Diego
-    level,A1
-    level,B3
-    level,B1
-    level,A2
-    level,C2
-    sun,0
-    sun,4
-    sun,0
-    sun,0
-    sun,3
+.. literalinclude:: example_outputs/example.melt.head.15.txt
+   :language: none
 
 In this example the melted data consists entirely of variable-value pairs. However, this is not normally the most useful view of the data. 
 More often we want to melt only some of the columns into variable-value pairs, and preserve other columns unchanged to act as a kind of unique identifier for each row (otherwise
@@ -146,24 +130,8 @@ The output of this command is quite long, so for the sake of illustration, we wi
 
     gurita melt -i person + head 15 < example.csv
 
-.. code-block:: text
-
-    person,variable,value
-    Alice,level,A1
-    Bob,level,B3
-    Wei,level,B1
-    Imani,level,A2
-    Diego,level,C2
-    Alice,sun,0
-    Bob,sun,4
-    Wei,sun,0
-    Imani,sun,0
-    Diego,sun,3
-    Alice,mon,8
-    Bob,mon,0
-    Wei,mon,0
-    Imani,mon,8
-    Diego,mon,7
+.. literalinclude:: example_outputs/example.melt.index.person.head.15.txt
+   :language: none
 
 Now the ``person`` column is retained and acts as a kind of identifier for the rows.
 
@@ -206,24 +174,8 @@ The output of this command is quite long, so for the sake of illustration, we wi
 
     gurita melt -i person + head 15 < example.csv
 
-.. code-block:: text
-
-    person,variable,value
-    Alice,level,A1
-    Bob,level,B3
-    Wei,level,B1
-    Imani,level,A2
-    Diego,level,C2
-    Alice,sun,0
-    Bob,sun,4
-    Wei,sun,0
-    Imani,sun,0
-    Diego,sun,3
-    Alice,mon,8
-    Bob,mon,0
-    Wei,mon,0
-    Imani,mon,8
-    Diego,mon,7
+.. literalinclude:: example_outputs/example.melt.index.person.head.15.txt
+   :language: none
 
 It is possible to specify more than one column as an identifier. For example, in the following command, the columns ``person`` and ``level`` are both used as identifiers:
 
@@ -239,24 +191,8 @@ Again, the output of this command is long, so we can update the command to look 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    person,level,variable,value
-    Alice,A1,sun,0
-    Bob,B3,sun,4
-    Wei,B1,sun,0
-    Imani,A2,sun,0
-    Diego,C2,sun,3
-    Alice,A1,mon,8
-    Bob,B3,mon,0
-    Wei,B1,mon,0
-    Imani,A2,mon,8
-    Diego,C2,mon,7
-    Alice,A1,tue,8
-    Bob,B3,tue,0
-    Wei,B1,tue,8
-    Imani,A2,tue,8
-    Diego,C2,tue,7
+.. literalinclude:: example_outputs/example.melt.index.person.level.head.15.txt
+   :language: none
 
 Now, only the columns representing the days of the week are melted into variable-value pairs, whereas the ``person`` and ``level`` columns are retained in the output.
 
@@ -281,24 +217,8 @@ For example, the following command melts just the columns ``level``, ``sat``, an
 
    gurita melt -i person -v level sat sun < example.csv
 
-.. code-block:: text
-
-    person,variable,value
-    Alice,level,A1
-    Bob,level,B3
-    Wei,level,B1
-    Imani,level,A2
-    Diego,level,C2
-    Alice,sat,3
-    Bob,sat,3
-    Wei,sat,3
-    Imani,sat,0
-    Diego,sat,4
-    Alice,sun,0
-    Bob,sun,4
-    Wei,sun,0
-    Imani,sun,0
-    Diego,sun,3
+.. literalinclude:: example_outputs/example.melt.person.level.sat.sun.txt
+   :language: none
 
 .. _melt_variable_name:
 
@@ -325,19 +245,8 @@ The output of the above command is long, so for the sake of illustration we can 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    key,value
-    person,Alice
-    person,Bob
-    person,Wei
-    person,Imani
-    person,Diego
-    level,A1
-    level,B3
-    level,B1
-    level,A2
-    level,C2
+.. literalinclude:: example_outputs/example.melt.varname.key.head.10.txt
+   :language: none
 
 Note that the leftmost column is now called ``key`` instead of ``variable``.
 
@@ -366,19 +275,8 @@ The output of the above command is long, so for the sake of illustration we can 
 
 The output of the above command is as follows:
 
-.. code-block:: text
-
-    variable,data
-    person,Alice
-    person,Bob
-    person,Wei
-    person,Imani
-    person,Diego
-    level,A1
-    level,B3
-    level,B1
-    level,A2
-    level,C2
+.. literalinclude:: example_outputs/example.melt.valname.data.head.10.txt
+   :language: none
 
 Note that the rightmost column is now called ``data`` instead of ``value``.
 
@@ -387,3 +285,8 @@ Of course it is possible to change both the variable and value column names at t
 .. code-block:: text
 
    gurita melt --varname key --valname data + head 10 < example.csv
+
+The output of the above command is as follows:
+
+.. literalinclude:: example_outputs/example.melt.varname.key.valname.data.head.10.txt
+   :language: none

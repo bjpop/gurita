@@ -235,7 +235,7 @@ Diego,C2,3,7,7,2,1,1,4
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>variable,value
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>variable,value
 person,Alice
 person,Bob
 person,Wei
@@ -264,7 +264,7 @@ known as a key).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person + head 15 &lt; example.csv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>person,variable,value
 Alice,level,A1
 Bob,level,B3
 Wei,level,B1
@@ -309,7 +309,7 @@ act as identifiers for the rows.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person + head 15 &lt; example.csv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>person,variable,value
 Alice,level,A1
 Bob,level,B3
 Wei,level,B1
@@ -336,7 +336,7 @@ Diego,mon,7
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,level,variable,value
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>person,level,variable,value
 Alice,A1,sun,0
 Bob,B3,sun,4
 Wei,B1,sun,0
@@ -369,7 +369,7 @@ excluded from the output.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt -i person -v level sat sun &lt; example.csv
 </pre></div>
 </div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>person,variable,value
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>person,variable,value
 Alice,level,A1
 Bob,level,B3
 Wei,level,B1
@@ -403,7 +403,7 @@ Diego,sun,3
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>key,value
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>key,value
 person,Alice
 person,Bob
 person,Wei
@@ -433,7 +433,7 @@ level,C2
 </pre></div>
 </div>
 <p>The output of the above command is as follows:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>variable,data
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>variable,data
 person,Alice
 person,Bob
 person,Wei
@@ -449,6 +449,20 @@ level,C2
 <p>Note that the rightmost column is now called <code class="docutils literal notranslate"><span class="pre">data</span></code> instead of <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
 <p>Of course it is possible to change both the variable and value column names at the same time, as the following example demonstrates:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>gurita melt --varname key --valname data + head 10 &lt; example.csv
+</pre></div>
+</div>
+<p>The output of the above command is as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>key,data
+person,Alice
+person,Bob
+person,Wei
+person,Imani
+person,Diego
+level,A1
+level,B3
+level,B1
+level,A2
+level,C2
 </pre></div>
 </div>
 </section>

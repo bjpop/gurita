@@ -101,7 +101,7 @@ Plot a histogram of the ``tip`` amount from the ``tips.csv`` input file:
 
 The output of the above command is written to ``hist.tip.png``:
 
-.. image:: ../images/hist.tip.png
+.. image:: ../docs/_images/hist.tip.png
        :width: 600px
        :height: 600px
        :align: center
@@ -117,7 +117,7 @@ Plot a count of the different categorical values in the ``day`` column:
 
 The output of the above command is written to ``hist.day.png``:
 
-.. image:: ../images/hist.day.png
+.. image:: ../docs/_images/hist.day.png
        :width: 600px
        :height: 600px
        :align: center
@@ -153,12 +153,11 @@ Histograms can be plotted for both numerical columns and for categorical columns
 and the histogram shows the counts of data points per bin. Catergorical data is shown as a count plot with a
 column for each categorical value in the specified column.
 
-You can select the column that you want to plot as a histogram using the ``-x`` (``--xaxis``) or ``-y`` (``--yaxis``)
-arguments.
+You can select the column that you want to plot as a histogram using the ``-x/--xaxis`` or ``-y/--yaxis`` arguments.
 
-If ``-x`` (``--xaxis``) is chosen the histogram columns will be plotted vertically.
+If ``-x`` is chosen the histogram columns will be plotted vertically.
 
-If ``-y`` (``--yaxis``) is chosen the histogram columns will be plotted horizontally.
+If ``-y`` is chosen the histogram columns will be plotted horizontally.
 
 If both ``-x`` and ``-y`` are both specified then a heatmap will be plotted.
 
@@ -169,7 +168,7 @@ For comparison, the following command uses ``-y tip`` to plot a histogram of ``t
 
     gurita hist -y tip < tips.csv
 
-.. image:: ../images/hist.tip.y.png 
+.. image:: ../docs/_images/hist.tip.y.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -190,7 +189,7 @@ In the following example the distribution of ``tip`` is compared to the distribu
 
     gurita hist -x tip -y total_bill < tips.csv 
 
-.. image:: ../images/hist.tip.total_bill.png 
+.. image:: ../docs/_images/hist.tip.total_bill.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -215,7 +214,7 @@ argument like so:
 
     gurita hist -x tip --bins 5 < tips.csv
 
-.. image:: ../images/hist.tip.bins5.png 
+.. image:: ../docs/_images/hist.tip.bins5.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -238,7 +237,7 @@ argument like so:
 
     gurita hist -x tip --binwidth 3 < tips.csv
 
-.. image:: ../images/hist.tip.binwidth3.png 
+.. image:: ../docs/_images/hist.tip.binwidth3.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -259,7 +258,7 @@ Cumulative histograms can be plotted with the ``--cumulative`` argument.
 
     gurita hist -x tip --cumulative < tips.csv
 
-.. image:: ../images/hist.tip.cumulative.png 
+.. image:: ../docs/_images/hist.tip.cumulative.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -286,7 +285,7 @@ subset is plotted as its own histogram, layered on top of each other:
 
     gurita hist -x tip --hue smoker < tips.csv  
 
-.. image:: ../images/hist.tip.smoker.png 
+.. image:: ../docs/_images/hist.tip.smoker.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -305,7 +304,7 @@ two histograms stacked on top of each other:
 
     gurita hist -x tip --hue smoker --multiple stack < tips.csv  
 
-.. image:: ../images/hist.tip.smoker.stacked.png 
+.. image:: ../docs/_images/hist.tip.smoker.stacked.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -321,7 +320,7 @@ The following example shows the effect of ``--multiple dodge``, where categorica
 
     gurita hist -x tip --hue smoker --multiple dodge < tips.csv  
 
-.. image:: ../images/hist.tip.smoker.dodge.png 
+.. image:: ../docs/_images/hist.tip.smoker.dodge.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -335,7 +334,7 @@ The following example shows the effect of ``--multiple fill``, where counts are 
 
     gurita hist -x tip --hue smoker --multiple fill < tips.csv  
 
-.. image:: ../images/hist.tip.smoker.fill.png 
+.. image:: ../docs/_images/hist.tip.smoker.fill.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -355,7 +354,7 @@ argument
 
     gurita hist -x tip --stat proportion < tips.csv
 
-.. image:: ../images/hist.tip.proportion.png 
+.. image:: ../docs/_images/hist.tip.proportion.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -386,7 +385,7 @@ In the example below the default normalisation occurs, across the entire dataset
 
     gurita hist -x tip --hue smoker --stat proportion --multiple dodge < tips.csv 
 
-.. image:: ../images/hist.tip.proportion.smoker.png 
+.. image:: ../docs/_images/hist.tip.proportion.smoker.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -400,7 +399,7 @@ And now the same command as above, but with the ``--indnorm`` argument supplied,
 
     gurita hist -x tip --hue smoker --stat proportion --multiple dodge --indnorm < tips.csv 
 
-.. image:: ../images/hist.tip.proportion.smoker.indnorm.png 
+.. image:: ../docs/_images/hist.tip.proportion.smoker.indnorm.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -419,7 +418,7 @@ A `kernel density estimate <https://en.wikipedia.org/wiki/Kernel_density_estimat
 
     gurita hist -x tip --kde < tips.csv
 
-.. image:: ../images/hist.tip.kde.png 
+.. image:: ../docs/_images/hist.tip.kde.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -438,7 +437,7 @@ By default histogram bars are shown with solid filled bars. This can be changed 
 
     gurita hist -x tip --nofill < tips.csv
 
-.. image:: ../images/hist.tip.nofill.png
+.. image:: ../docs/_images/hist.tip.nofill.png
        :width: 600px
        :height: 600px
        :align: center
@@ -459,7 +458,7 @@ The example below shows the ``step`` visual style.
 
     gurita hist -x tip --element step < tips.csv
 
-.. image:: ../images/hist.tip.step.png
+.. image:: ../docs/_images/hist.tip.step.png
        :width: 600px
        :height: 600px
        :align: center
@@ -473,7 +472,7 @@ The example below shows the ``poly`` (polygon) visual style, with vertices in th
 
     gurita hist -x tip --element poly < tips.csv
 
-.. image:: ../images/hist.tip.poly.png
+.. image:: ../docs/_images/hist.tip.poly.png
        :width: 600px
        :height: 600px
        :align: center
@@ -497,7 +496,7 @@ The distribution of numerical values can be displayed in log (base 10) scale wit
 
     gurita hist -x tip --logy < tips.csv 
 
-.. image:: ../images/hist.tip.logy.png 
+.. image:: ../docs/_images/hist.tip.logy.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -521,6 +520,14 @@ The range of displayed numerical distributions can be restricted with ``--xlim``
 
     gurita hist -x tip --xlim 3 8 < tips.csv 
 
+.. image:: ../docs/_images/hist.tip.xlim.png 
+       :width: 600px
+       :height: 600px
+       :align: center
+       :alt: Histogram plot showing the distribution of tip amounts for the tips data set with the X asix limited in range from 3 to 8 
+
+|
+
 .. _hist_facets:
 
 Facets
@@ -541,7 +548,7 @@ See the :doc:`facet documentation <facets/>` for more information on this featur
 
     gurita hist -x tip --fcol day < tips.csv 
 
-.. image:: ../images/hist.tip.day.png 
+.. image:: ../docs/_images/hist.tip.day.png 
        :width: 600px
        :height: 300px
        :align: center

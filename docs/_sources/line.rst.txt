@@ -81,7 +81,7 @@ A line plot showing the relationship between ``timepoint`` on the X axis and ``s
 
 The output of the above command is written to ``line.timepoint.signal.png``.
 
-.. image:: ../images/line.timepoint.signal.png 
+.. image:: ../docs/_images/line.timepoint.signal.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -130,7 +130,7 @@ In the following example ``signal`` is plotted against ``timepoint`` for the two
 
     gurita line -x timepoint -y signal --hue event < fmri.csv
 
-.. image:: ../images/line.timepoint.signal.event.png 
+.. image:: ../docs/_images/line.timepoint.signal.event.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -149,7 +149,7 @@ In the following example the classes of ``event`` are displayed in the order ``c
 
         gurita line -x timepoint -y signal --hue event --hueorder cue stim < fmri.csv
 
-.. image:: ../images/line.timepoint.signal.event.hue.png 
+.. image:: ../docs/_images/line.timepoint.signal.event.hue.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -178,7 +178,7 @@ For example, the X axis can be plotted in log scale like so:
 
    gurita line -x timepoint -y signal --logx < fmri.csv
 
-.. image:: ../images/line.timepoint.signal.logx.png
+.. image:: ../docs/_images/line.timepoint.signal.logx.png
        :width: 600px
        :height: 600px
        :align: center
@@ -207,7 +207,7 @@ For example, you can display range-limited range for the ``timepoint`` column li
 
     gurita line -x timepoint -y signal --xlim 5 15.5 < fmri.csv 
 
-.. image:: ../images/line.timepoint.signal.xlim.png 
+.. image:: ../docs/_images/line.timepoint.signal.xlim.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -237,7 +237,7 @@ The following command creates a faceted line plot where the ``event`` column is 
 
     gurita line -x timepoint -y signal --fcol event < fmri.csv 
 
-.. image:: ../images/line.timepoint.signal.event.facet.png 
+.. image:: ../docs/_images/line.timepoint.signal.event.facet.png 
        :width: 600px
        :height: 300px 
        :align: center

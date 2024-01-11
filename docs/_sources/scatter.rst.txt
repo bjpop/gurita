@@ -101,7 +101,7 @@ Scatter plot of the ``tip`` numerical column compared to the ``total_bill`` nume
 
 The output of the above command is written to ``scatter.total_bill.tip.png``:
 
-.. image:: ../images/scatter.total_bill.tip.png 
+.. image:: ../docs/_images/scatter.total_bill.tip.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -139,7 +139,7 @@ Scatter plots can also be used to compare a numerical column against a categoric
 
     gurita scatter -x day -y tip < tips.csv
 
-.. image:: ../images/scatter.day.tip.png 
+.. image:: ../docs/_images/scatter.day.tip.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -169,7 +169,7 @@ coloured by their corresponding categorical ``day`` value:
 
     gurita scatter -x total_bill -y tip --hue day < tips.csv 
 
-.. image:: ../images/scatter.total_bill.tip.day.png 
+.. image:: ../docs/_images/scatter.total_bill.tip.day.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -185,7 +185,7 @@ argument:
 
     gurita scatter -x total_bill -y tip --hue size < tips.csv 
 
-.. image:: ../images/scatter.total_bill.tip.size.png 
+.. image:: ../docs/_images/scatter.total_bill.tip.size.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -215,7 +215,7 @@ The ``--dotstyle`` argument lets you change the shape of dots based on a categor
 
     gurita scatter -x total_bill -y tip --hue day --dotstyle sex < tips.csv
 
-.. image:: ../images/scatter.total_bill.tip.day.dotstyle.png 
+.. image:: ../docs/_images/scatter.total_bill.tip.day.dotstyle.png 
        :width: 700px
        :height: 600px
        :align: center
@@ -247,7 +247,7 @@ plot is scaled according to the ``petal_length`` column.
 
     gurita scatter -x sepal_length -y sepal_width --dotsize petal_length < iris.csv  
 
-.. image:: ../images/scatter.sepal_length.sepal_width.png 
+.. image:: ../docs/_images/scatter.sepal_length.sepal_width.png 
        :width: 600px 
        :height: 500px 
        :align: center
@@ -261,7 +261,7 @@ The range of dot sizes can be adjusted with ``--dotsizerange LOW HIGH``.
 
     gurita scatter -x sepal_length -y sepal_width --dotsize petal_length --dotsizerange 10 200 < iris.csv
 
-.. image:: ../images/scatter.sepal_length.sepal_width.sizerange.png 
+.. image:: ../docs/_images/scatter.sepal_length.sepal_width.sizerange.png 
        :width: 600px 
        :height: 500px 
        :align: center
@@ -295,7 +295,7 @@ In the following example, the dot alpha is set to 1 (fully opaque), the border l
 
     gurita scatter -x total_bill -y tip --dotalpha 1 --dotlinewidth 0.5 --dotlinecolour black < tips.csv
 
-.. image:: ../images/scatter.total_bill.tip.alpha.width.colour.png 
+.. image:: ../docs/_images/scatter.total_bill.tip.alpha.width.colour.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -321,7 +321,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
     gurita scatter -x total_bill -y tip --logx < tips.csv 
 
-.. image:: ../images/scatter.total_bill.tip.logx.png  
+.. image:: ../docs/_images/scatter.total_bill.tip.logx.png  
        :width: 600px
        :height: 600px
        :align: center
@@ -347,7 +347,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
     gurita scatter -x total_bill -y tip --xlim 20 40 < tips.csv 
 
-.. image:: ../images/scatter.total_bill.tip.xlim.png 
+.. image:: ../docs/_images/scatter.total_bill.tip.xlim.png 
        :width: 600px
        :height: 600px
        :align: center
@@ -377,7 +377,7 @@ For example the following command produces a scatter plot comparing ``total_bill
 
     gurita scatter -x total_bill -y tip --fcol smoker < tips.csv
 
-.. image:: ../images/scatter.total_bill.tip.smoker.png  
+.. image:: ../docs/_images/scatter.total_bill.tip.smoker.png  
        :width: 600px
        :height: 300px
        :align: center
