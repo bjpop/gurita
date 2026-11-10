@@ -23,6 +23,7 @@ import gurita.pca
 import gurita.info
 import gurita.stats
 import gurita.cluster
+import gurita.astype
 
 #import matplotlib as mpl
 ## Use a constant string instead of a UUID in SVG node IDs

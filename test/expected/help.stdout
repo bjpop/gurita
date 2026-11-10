@@ -24,6 +24,8 @@ Available commands:
     in                  Read CSV/TSV data from a named input file or standard input
     out                 Write the dataset to a file or standard output in CSV/TSV format
 
+astype              Force column type conversions
+
     plotting
     --------
 
@@ -42,6 +44,8 @@ Available commands:
     strip               Plot distrbution of numerical column using dotted strip.
     swarm               Plot distrbution of numerical column using dot swarm.
     violin              Plot distrbution of numerical column using violin.
+
+astype              Force column type conversions
 
     transformation
     --------------
@@ -66,6 +70,8 @@ Available commands:
     unique              Get the unique values from a column.
     zscore              Compute Z-score for numerical columns
 
+astype              Force column type conversions
+
     summary information
     -------------------
 
@@ -73,4 +79,6 @@ Available commands:
     dtype               Show the data type of every column, or specified columns.
     info                Show a concise summary of the dataset including rows, columns, non-null counts, and dtypes.
     pretty              Pretty print a fragment of the data set.
+
+astype              Force column type conversions
 
