@@ -7,7 +7,7 @@ Maintainer  : bjpope@unimelb.edu.au
 Portability : POSIX
 '''
 
-import pkg_resources
+import importlib.metadata
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas
@@ -102,7 +102,8 @@ ALLOWED_SORT_ALGORITHMS = ['quicksort', 'mergesort', 'heapsort', 'stable']
 ALLOWED_NORMTEST_METHODS = ['dagostino', 'shapiro']
 
 
+# Retrieve package version using modern importlib.metadata
 try:
-    PROGRAM_VERSION = pkg_resources.require(PROGRAM_NAME)[0].version
-except pkg_resources.DistributionNotFound:
+    PROGRAM_VERSION = importlib.metadata.version(PROGRAM_NAME)
+except importlib.metadata.PackageNotFoundError:
     PROGRAM_VERSION = "undefined_version"
